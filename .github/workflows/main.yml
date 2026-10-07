@@ -20,23 +20,14 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
-
       - name: Build APK
+        working-directory: project
         run: |
-          PROJECT_DIR=$(find project -type f \( -name "settings.gradle" -o -name "settings.gradle.kts" \) -print -quit)
-          if [ -z "$PROJECT_DIR" ]; then
-            echo "Gradle project not found"
-            exit 1
-          fi
-          cd "$(dirname "$PROJECT_DIR")"
-          gradle assembleDebug
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
-      - name: Save APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: OYES-APK
-          path: 'project/**/build/outputs/apk/debug/*.apk'
+          path: project/**/build/outputs/apk/debug/*.apk
