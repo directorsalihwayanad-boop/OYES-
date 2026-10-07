@@ -10,8 +10,10 @@ jobs:
     steps:
       - name: Download project
         uses: actions/checkout@v4
+
       - name: Extract project
         run: unzip -q OYES_First_Base_Platform_v2.zip -d project
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -24,13 +26,17 @@ jobs:
           gradle-version: '8.9'
 
       - name: Build APK
-      run: |
-            PROJECT_DIR=$(find project -type f \( -name "settings.gradle" -o -name "settings.gradle.kts" \) -print -quit | xargs dirname)
-            cd "$PROJECT_DIR"
-            gradle assembleDebug
+        run: |
+          PROJECT_DIR=$(find project -type f \( -name "settings.gradle" -o -name "settings.gradle.kts" \) -print -quit)
+          if [ -z "$PROJECT_DIR" ]; then
+            echo "Gradle project not found"
+            exit 1
+          fi
+          cd "$(dirname "$PROJECT_DIR")"
+          gradle assembleDebug
 
       - name: Save APK
         uses: actions/upload-artifact@v4
         with:
           name: OYES-APK
-          path: '**/build/outputs/apk/debug/*.apk'
+          path: 'project/**/build/outputs/apk/debug/*.apk'
