@@ -11,9 +11,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract OYES English project
+      - name: Extract OYES project
         run: |
-          unzip -q OYES_ENGLISH_ALIGNED.zip -d project
+          mkdir -p project
+          unzip -q OYES_ENGLISH_ALIGNED*.zip -d project
+
+      - name: Find Gradle project
+        run: |
+          echo "Searching for Gradle wrapper..."
+          find project -name gradlew -type f -print
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -22,8 +28,19 @@ jobs:
           java-version: '17'
 
       - name: Build APK
-        working-directory: project
         run: |
+          GRADLEW=$(find project -name gradlew -type f | head -n 1)
+
+          if [ -z "$GRADLEW" ]; then
+            echo "ERROR: gradlew was not found inside the extracted OYES project."
+            echo "Gradle files found:"
+            find project -maxdepth 4 -type f | head -100
+            exit 1
+          fi
+
+          PROJECT_DIR=$(dirname "$GRADLEW")
+          cd "$PROJECT_DIR"
+
           chmod +x gradlew
           ./gradlew assembleDebug
 
@@ -31,4 +48,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: OYES-APK
-          path: project/**/build/outputs/apk/debug/*.apk
+          path: |
+            project/**/build/outputs/apk/debug/*.apk
