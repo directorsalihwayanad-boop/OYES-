@@ -1,3 +1,4 @@
+
 name: Build OYES APK
 
 on:
@@ -14,6 +15,12 @@ jobs:
       - name: Extract project
         run: unzip -q OYES_ENGLISH_ALIGNED.zip -d project
 
+      - name: Find Android project
+        run: |
+          PROJECT_DIR=$(find project -type f -name gradlew -print -quit | xargs dirname)
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+          echo "Android project found at: $PROJECT_DIR"
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -21,13 +28,13 @@ jobs:
           java-version: '17'
 
       - name: Build APK
-        working-directory: project
         run: |
+          cd "$PROJECT_DIR"
           chmod +x gradlew
           ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: OYES-APK
-          path: project/**/build/outputs/apk/debug/*.apk
+          name: OYES-English-APK
+          path: "**/app/build/outputs/apk/debug/app-debug.apk"
