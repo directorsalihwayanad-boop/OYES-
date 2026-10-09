@@ -1,6 +1,6 @@
 name: Build OYES APK
 
-'on':
+on:
   workflow_dispatch:
 
 jobs:
@@ -11,31 +11,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Find and extract OYES ZIP
+        run: |
+          set -eu
+          mkdir -p project
+          ARCHIVE=$(find . -maxdepth 2 -type f -name 'OYES_NEXT_BUILD_46_FOLDERS*.zip' | head -n 1)
+          if [ -z "$ARCHIVE" ]; then
+            echo "ERROR: OYES ZIP file was not found."
+            find . -maxdepth 2 -type f
+            exit 1
+          fi
+          echo "Extracting: $ARCHIVE"
+          unzip -q "$ARCHIVE" -d project
+
+      - name: Find Gradle wrapper
+        run: |
+          GRADLEW=$(find project -type f -name gradlew | head -n 1)
+          if [ -z "$GRADLEW" ]; then
+            echo "ERROR: gradlew was not found."
+            find project -maxdepth 4 -type f | head -100
+            exit 1
+          fi
+          echo "GRADLEW=$GRADLEW" >> "$GITHUB_ENV"
+          echo "Gradle wrapper found: $GRADLEW"
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Extract OYES project
-        run: |
-          mkdir -p project
-          unzip -q OYES_NEXT_BUILD_46_FOLDERS.zip -d project
-
-      - name: Find Gradle project
-        run: |
-          find project -name gradlew -type f -print
-
       - name: Build APK
         run: |
-          GRADLEW=$(find project -name gradlew -type f | head -n 1)
-          if [ -z "$GRADLEW" ]; then
-            echo "ERROR: Gradle wrapper not found"
-            exit 1
-          fi
-          PROJECT_DIR=$(dirname "$GRADLEW")
-          cd "$PROJECT_DIR"
-          chmod +x gradlew
+          chmod +x "$GRADLEW"
+          cd "$(dirname "$GRADLEW")"
           ./gradlew assembleDebug
 
       - name: Upload APK
@@ -43,3 +52,4 @@ jobs:
         with:
           name: OYES-APK
           path: project/**/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
