@@ -1,47 +1,46 @@
 name: Build OYES APK
+
 on:
-workflow_dispatch:
+  workflow_dispatch:
+
 jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  - name: Extract OYES project
-    run: |
-      mkdir -p project
-      unzip -q OYES_NEXT_BUILD_46_FOLDERS.zip -d project
+      - name: Extract OYES project
+        run: |
+          mkdir -p project
+          unzip -q OYES_NEXT_BUILD_46_FOLDERS.zip -d project
 
-  - name: Find Gradle project
-    run: |
-      find project -name gradlew -type f -print
+      - name: Find Gradle project
+        run: |
+          find project -name gradlew -type f -print
 
-  - name: Set up Java
-    uses: actions/setup-java@v4
-    with:
-      distribution: temurin
-      java-version: '17'
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
-  - name: Build APK
-    run: |
-      GRADLEW=$(find project -name gradlew -type f | head -n 1)
+      - name: Build APK
+        run: |
+          GRADLEW=$(find project -name gradlew -type f | head -n 1)
+          if [ -z "$GRADLEW" ]; then
+            echo "ERROR: gradlew was not found."
+            find project -maxdepth 5 -type f | head -100
+            exit 1
+          fi
+          PROJECT_DIR=$(dirname "$GRADLEW")
+          cd "$PROJECT_DIR"
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
-      if [ -z "$GRADLEW" ]; then
-        echo "ERROR: gradlew was not found."
-        find project -maxdepth 5 -type f | head -100
-        exit 1
-      fi
-
-      PROJECT_DIR=$(dirname "$GRADLEW")
-      cd "$PROJECT_DIR"
-      chmod +x gradlew
-      ./gradlew assembleDebug
-
-  - name: Upload APK
-    uses: actions/upload-artifact@v4
-    with:
-      name: OYES-APK
-      path: project/**/build/outputs/apk/debug/*.apk
-      if-no-files-found: error
-
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: OYES-APK
+          path: project/**/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
