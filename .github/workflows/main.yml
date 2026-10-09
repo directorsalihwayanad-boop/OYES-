@@ -1,7 +1,6 @@
-
 name: Build OYES APK
 
-"on":
+'on':
   workflow_dispatch:
 
 jobs:
