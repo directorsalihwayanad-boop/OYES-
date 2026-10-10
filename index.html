@@ -57,7 +57,7 @@
 <body id="appBody" class="flex flex-col justify-between">
 
     <!-- Mandatory Login & 3-Day Visitor Gate -->
-    <div id="loginGateModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto">
+    <div id="loginGateModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto hidden">
         <div class="bg-slate-900 border border-cyan-500/60 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl text-center">
             <div class="w-16 h-16 mx-auto rounded-full bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-3xl animate-pulse">⏳🔒</div>
             <h2 class="text-base font-black text-cyan-300 uppercase tracking-wide">OYES APP - Secure Access Gateway</h2>
@@ -157,7 +157,7 @@
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: General</span>
             <button onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 hover:border-cyan-400 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md transition-all">
                 <span class="text-sm">🤖✨</span>
-                <span class="text-[11px] font-bold text-cyan-300">OYES AI Assistant</span>
+                <span class="text-[11px] font-bold text-cyan-300">OYES Google AI Assistant</span>
             </button>
         </div>
 
@@ -235,21 +235,21 @@
 
             <!-- 5. Sales Marketplace -->
             <div onclick="openSubFolders('Sales Marketplace', [
-                {name: 'Livestock (Cows, Goats) - Trusted Trade', action: 'peer_call'},
-                {name: 'Vehicles & Machinery - Trusted Trade', action: 'peer_call'},
-                {name: 'Agricultural Products - Trusted Trade', action: 'peer_call'},
-                {name: 'General Marketplace Exchange', action: 'peer_call'}
+                {name: 'Livestock (Cows, Goats) - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Vehicles & Machinery - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Agricultural Products - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'General Marketplace Exchange', action: 'whatsapp_chat', phone: '919947198248'}
             ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-sales">Sales</h3>
                 <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
             </div>
 
-            <!-- 6. Trusted Call Hub & Legal Warning Card -->
-            <div onclick="openVideoCallStudio()" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/30 to-orange-600/30 border border-amber-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">⏳📞</div>
-                <h3 class="font-bold text-sm text-amber-300">Session Call Hub</h3>
-                <p class="text-[10px] text-amber-200/70 mt-1">Trial & Active Protocol</p>
+            <!-- 6. Trusted WhatsApp Chat Hub Card -->
+            <div onclick="openWhatsAppChatHub()" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">💬📞</div>
+                <h3 class="font-bold text-sm text-emerald-300">WhatsApp Chat Hub</h3>
+                <p class="text-[10px] text-emerald-200/70 mt-1">Direct Audio & Message</p>
             </div>
 
             <!-- 7. Special 'All Services' Master Folder Card -->
@@ -262,7 +262,7 @@
         </div>
     </main>
 
-    <!-- Full New Page View with Sub-Folders & Compact AI Assistant -->
+    <!-- Full New Page View with Sub-Folders & Smart AI Assistant -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
@@ -271,18 +271,18 @@
             <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
 
-        <!-- Compact Domain-Locked AI Assistant Box -->
+        <!-- Google Assistant Style Smart AI Assistant Box -->
         <div id="aiContainerBox" class="bg-slate-900/90 border border-indigo-500/50 p-3 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-base">🤖</span>
-                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Domain AI Guide</h4>
+                    <span class="text-base">🤖✨</span>
+                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">OYES Google AI Assistant</h4>
                 </div>
-                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Strictly Field Only</span>
+                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Smart Voice & Chat</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask your doubt here..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-1.5 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button onclick="askTotalDomainAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition-all">Ask</button>
+                <input type="text" id="aiFolderQuery" placeholder="Ask Google AI assistant anything..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-1.5 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button onclick="askTotalDomainAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -307,7 +307,7 @@
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with Admin User Activity Log Folder -->
+    <!-- JavaScript with WhatsApp Permission Prompt restricted ONLY to Call/Chat Hub -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
@@ -323,9 +323,7 @@
         let loggedInUserName = "";
         let loggedInUserPhoto = "";
         let loggedInUserCategory = "";
-        let isVisitorMode = false;
 
-        // Save User Registration to Local Storage for Admin Database Log
         function saveUserToDatabase(name, category, type) {
             let users = JSON.parse(localStorage.getItem('oyes_registered_users') || '[]');
             users.push({
@@ -337,14 +335,17 @@
             localStorage.setItem('oyes_registered_users', JSON.stringify(users));
         }
 
-        // Check Admin Email Bypass or 3-Day Visitor Expiry on App Load
+        // Check Permanent Session on App Load
         window.onload = function() {
-            let activeAdmin = localStorage.getItem('oyes_admin_bypass');
-            if(activeAdmin) {
-                loggedInUserName = "Director / Admin (" + activeAdmin + ")";
-                loggedInUserCategory = "Master Admin (Direct Bypass)";
-                loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
-                document.getElementById('userCategoryBadge').innerText = `Admin: Direct Access`;
+            let activeSession = localStorage.getItem('oyes_permanent_session');
+            
+            if(activeSession) {
+                let session = JSON.parse(activeSession);
+                loggedInUserName = session.name;
+                loggedInUserCategory = session.category;
+                loggedInUserPhoto = session.photo;
+
+                document.getElementById('userCategoryBadge').innerText = session.badge;
                 document.getElementById('loginGateModal').classList.add('hidden');
                 return;
             }
@@ -357,15 +358,20 @@
 
                 if(currentTime - session.timestamp > threeDaysInMillis) {
                     localStorage.removeItem('oyes_visitor_session');
-                    alert('⏳ Your 3-day visitor trial has expired!\n\nPlease complete full registration with photo and details to continue using the app.');
+                    localStorage.removeItem('oyes_permanent_session');
+                    document.getElementById('loginGateModal').classList.remove('hidden');
+                    alert('⏳ Your 3-day visitor trial has expired!\n\nPlease complete full registration to continue.');
                 } else {
                     loggedInUserName = session.name + " (Visitor)";
-                    loggedInUserCategory = "Visitor (" + session.phone + "; 3-Day Trial Active)";
+                    loggedInUserCategory = "Visitor (" + session.phone + ")";
                     loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                     document.getElementById('userCategoryBadge').innerText = `Visitor: ${session.name} (3 Days Trial)`;
                     document.getElementById('loginGateModal').classList.add('hidden');
+                    return;
                 }
             }
+
+            document.getElementById('loginGateModal').classList.remove('hidden');
         };
 
         function switchLoginTab(mode) {
@@ -375,13 +381,11 @@
             const visitorBtn = document.getElementById('tabVisitorBtn');
 
             if(mode === 'full') {
-                isVisitorMode = false;
                 fullForm.classList.remove('hidden');
                 visitorForm.classList.add('hidden');
                 fullBtn.className = "py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all";
                 visitorBtn.className = "py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all";
             } else {
-                isVisitorMode = true;
                 fullForm.classList.add('hidden');
                 visitorForm.classList.remove('hidden');
                 visitorBtn.className = "py-1.5 bg-amber-600 text-white font-bold text-[11px] rounded-lg transition-all";
@@ -402,16 +406,23 @@
             }
 
             if(emailInput && ADMIN_EMAILS.includes(emailInput)) {
-                localStorage.setItem('oyes_admin_bypass', emailInput);
                 loggedInUserName = nameInput + " (Admin)";
                 loggedInUserCategory = "Master Admin (Direct Bypass)";
                 loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 
+                let sessionData = {
+                    name: loggedInUserName,
+                    category: loggedInUserCategory,
+                    photo: loggedInUserPhoto,
+                    badge: "Admin: Direct Access"
+                };
+                localStorage.setItem('oyes_permanent_session', JSON.stringify(sessionData));
+
                 document.getElementById('userCategoryBadge').innerText = `Admin: Direct Access`;
                 document.getElementById('loginGateModal').classList.add('hidden');
                 
                 saveUserToDatabase(nameInput, "Master Admin", "Admin Direct");
-                alert(`👑 Admin Email Verified (${emailInput})!\n\nDirect auto-login granted.`);
+                alert(`👑 Admin Email Verified (${emailInput})!\n\nPermanent session saved.`);
                 speakText(`Welcome admin, direct access granted.`);
                 return;
             }
@@ -438,11 +449,19 @@
                     'services': 'All Services'
                 };
 
-                document.getElementById('userCategoryBadge').innerText = `User: ${loggedInUserName} (${catNames[loggedInUserCategory]})`;
+                let sessionData = {
+                    name: loggedInUserName,
+                    category: loggedInUserCategory,
+                    photo: loggedInUserPhoto,
+                    badge: `User: ${loggedInUserName} (${catNames[loggedInUserCategory]})`
+                };
+                localStorage.setItem('oyes_permanent_session', JSON.stringify(sessionData));
+
+                document.getElementById('userCategoryBadge').innerText = sessionData.badge;
                 document.getElementById('loginGateModal').classList.add('hidden');
                 
                 saveUserToDatabase(nameInput, catNames[loggedInUserCategory], "Full Registration");
-                alert(`✅ Welcome, ${loggedInUserName}!\n\nFull registration completed successfully.`);
+                alert(`✅ Welcome, ${loggedInUserName}!\n\nRegistration saved permanently.`);
                 speakText(`Welcome to Oyes App, ${loggedInUserName}.`);
             };
             reader.readAsDataURL(photoInput);
@@ -466,23 +485,31 @@
                 return;
             }
 
-            let sessionData = {
+            let visitorSessionData = {
                 name: nameInput,
                 phone: phoneInput,
                 timestamp: new Date().getTime()
             };
-            localStorage.setItem('oyes_visitor_session', JSON.stringify(sessionData));
+            localStorage.setItem('oyes_visitor_session', JSON.stringify(visitorSessionData));
 
             loggedInUserName = nameInput + " (Visitor)";
             loggedInUserCategory = "Visitor (" + phoneInput + "; 3-Day Trial)";
             loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-            document.getElementById('userCategoryBadge').innerText = `Visitor: ${nameInput} (3 Days Trial)`;
+            let sessionData = {
+                name: loggedInUserName,
+                category: loggedInUserCategory,
+                photo: loggedInUserPhoto,
+                badge: `Visitor: ${nameInput} (3 Days Trial)`
+            };
+            localStorage.setItem('oyes_permanent_session', JSON.stringify(sessionData));
+
+            document.getElementById('userCategoryBadge').innerText = sessionData.badge;
             document.getElementById('loginGateModal').classList.add('hidden');
 
             saveUserToDatabase(nameInput, "Visitor (" + phoneInput + ")", "3-Day Trial");
-            alert(`✅ Visitor Login Success!\n\nWelcome, ${nameInput}. You have 3 days free trial access.`);
-            speakText(`Welcome visitor ${nameInput}. 3 days trial active.`);
+            alert(`✅ Visitor Login Success!\n\nWelcome, ${nameInput}. Session saved for 3 days.`);
+            speakText(`Welcome visitor ${nameInput}. Session saved.`);
         }
 
         function verifyDirectorAccess() {
@@ -496,6 +523,27 @@
                 } else {
                     alert("❌ Invalid ID! Access Denied.");
                     speakText("Invalid ID. Access denied.");
+                }
+            }
+        }
+
+        // WhatsApp Permission Prompt Function ONLY for Call/Chat Hub
+        function requestWhatsAppPermission(targetName, defaultPhone) {
+            let targetNumber = prompt(`💬 നിങ്ങളുടെ WhatsApp ലേക്ക് കണക്ട് ചെയ്യട്ടെ?\n\nനിങ്ങളുടെ WhatsApp നമ്പർ നൽകുക (Enter the WhatsApp number):`, defaultPhone);
+            
+            if (targetNumber !== null) {
+                targetNumber = targetNumber.trim();
+                if (targetNumber.length >= 10) {
+                    let confirmConnect = confirm(`🔒 Security Confirmation:\n\nProceed to connect to WhatsApp number: +${targetNumber}?\n\n• Note: 10% admin fee applies to successful trades.`);
+                    if (confirmConnect) {
+                        speakText(`Connecting to WhatsApp.`);
+                        window.open(`https://wa.me/${targetNumber}?text=Hello,%20I%20am%20contacting%20regarding%20${encodeURIComponent(targetName)}%20via%20OYES%20APP.`, '_blank');
+                    } else {
+                        speakText("Connection cancelled.");
+                    }
+                } else {
+                    alert("❌ ദയവായി ശരിയായ വാട്സാപ്പ് നമ്പർ നൽകുക!");
+                    speakText("Invalid phone number entered.");
                 }
             }
         }
@@ -531,57 +579,44 @@
         }
 
         function openHomeAIChat() {
-            let query = prompt("🤖 OYES AI Assistant:\nAsk any general question about app navigation:");
+            let query = prompt("🤖 OYES Google AI Assistant:\nAsk any question (e.g. How to use app, Trade rules, etc.):");
             if(query) {
-                let responseText = `You asked about "${query}". This app features 52 verified master folders and complete AI guidance systems!`;
+                let responseText = `Google AI Assistant Answer: You asked about "${query}". OYES App provides 52 secure master folders, 10% admin fee on successful trades, and instant WhatsApp chat connectivity!`;
                 speakText(responseText);
-                alert(`OYES AI Response:\n` + responseText);
+                alert(responseText);
             }
         }
 
-        function openVideoCallStudio() {
+        // WhatsApp Chat Hub (Call/Chat Section with Permission Prompt)
+        function openWhatsAppChatHub() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = '3-Day Trial & Call Hub';
+            document.getElementById('pageTitle').innerText = 'WhatsApp Chat & Call Hub';
             document.getElementById('aiContainerBox').classList.add('hidden');
 
             const grid = document.getElementById('pageContentGrid');
             grid.className = "flex flex-col items-center justify-center space-y-4 col-span-2 pb-6 pt-2";
             grid.innerHTML = `
-                <div class="w-full bg-slate-950/90 border border-amber-500/60 p-6 rounded-3xl shadow-2xl text-center space-y-4">
-                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-amber-400 shadow-lg">
+                <div class="w-full bg-slate-950/90 border border-emerald-500/60 p-6 rounded-3xl shadow-2xl text-center space-y-4">
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-emerald-400 shadow-lg">
                         <img src="${loggedInUserPhoto}" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="font-bold text-sm text-amber-300 uppercase tracking-wider">${loggedInUserName}</h3>
+                    <h3 class="font-bold text-sm text-emerald-300 uppercase tracking-wider">${loggedInUserName}</h3>
                     
-                    <div class="bg-slate-900 border border-amber-500/60 p-3.5 rounded-2xl text-left space-y-2">
-                        <h4 class="text-xs font-bold text-cyan-300">🌟 Session Information:</h4>
-                        <p class="text-[10px] text-slate-300">Full registration is required after the trial period. 10% admin fee applies to trades.</p>
-                        
-                        <h4 class="text-xs font-bold text-red-400 pt-1">⚠️ Legal Warning & Compensation:</h4>
-                        <p class="text-[10px] text-slate-200 leading-relaxed">
-                            Any misuse or fraud will result in strict legal action and mandatory financial compensation under cyber laws.
-                        </p>
+                    <div class="bg-slate-900 border border-emerald-500/60 p-3.5 rounded-2xl text-left space-y-2">
+                        <h4 class="text-xs font-bold text-cyan-300">💬 WhatsApp Chat & Call Hub:</h4>
+                        <p class="text-[10px] text-slate-300">Connect with Director Salih or OYES Saleem via WhatsApp with permission and number verification.</p>
+                        <p class="text-[10px] text-amber-200 font-bold">⚠️ Note: 10% admin fee applies to all successful trades.</p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2.5 pt-1">
-                        <button onclick="startPeerCall('Video', 'Trader / Peer')" class="py-2.5 px-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-[11px] rounded-xl shadow">📹 Trial Video Call</button>
-                        <button onclick="startPeerCall('Audio', 'Trader / Peer')" class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] rounded-xl shadow">📞 Trial Audio Call</button>
+                        <button onclick="requestWhatsAppPermission('Director Salih', '919947198248')" class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] rounded-xl shadow">💬 Chat with Salih</button>
+                        <button onclick="requestWhatsAppPermission('OYES Saleem', '919633111000')" class="py-2.5 px-3 bg-teal-600 hover:bg-teal-500 text-white font-bold text-[11px] rounded-xl shadow">💬 Chat with Saleem</button>
                     </div>
                 </div>
             `;
-            speakText("Trial call hub opened.");
+            speakText("WhatsApp chat hub opened.");
             window.scrollTo(0, 0);
-        }
-
-        function startPeerCall(callType, targetName) {
-            let agreed = confirm(`⏳ TRIAL CALL & WARNING:\n\nUser: ${loggedInUserName}\n\n• 10% admin fee applies to trades.\n• Misuse will result in strict legal action and compensation.\n\nDo you agree to proceed?`);
-            if(agreed) {
-                speakText(`Initiating secure ${callType} call.`);
-                alert(`🔒 Connecting secure ${callType} call with ${targetName}...\n• Status: Session Monitored.`);
-            } else {
-                speakText("Call cancelled.");
-            }
         }
 
         function openSubFolders(folderName, subItems) {
@@ -592,7 +627,7 @@
             document.getElementById('pageTitle').innerText = folderName;
             document.getElementById('aiFolderResponse').classList.add('hidden');
             document.getElementById('aiFolderQuery').value = '';
-            document.getElementById('domainAiTitle').innerText = `${folderName} AI Guide`;
+            document.getElementById('domainAiTitle').innerText = `${folderName} Google AI Assistant`;
 
             const grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-2 gap-3.5 pb-6";
@@ -602,18 +637,17 @@
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">⏳</div>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📁</div>
                     <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
-                    <p class="text-[9px] text-cyan-200/60 mt-1">Trial Access</p>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">Resource Link</p>
                 `;
                 card.onclick = function() {
-                    if(item.action === 'peer_call') {
-                        startPeerCall('Secure Trade Call', item.name);
+                    if(item.action === 'whatsapp_chat') {
+                        requestWhatsAppPermission(item.name, item.phone || '919947198248');
                     } else if(item.url) {
                         window.open(item.url, '_blank');
                     } else {
                         alert(item.name + ' - Securely active.');
-                        speakText(item.name + ' is securely active.');
                     }
                 };
                 grid.appendChild(card);
@@ -625,25 +659,28 @@
             let query = document.getElementById('aiFolderQuery').value.trim();
             let respBox = document.getElementById('aiFolderResponse');
             if(!query) {
-                alert('Please type your doubt regarding this section first!');
-                speakText('Please type your doubt regarding this section first.');
+                alert('Please type your question for Google AI Assistant first!');
+                speakText('Please type your question for Google AI Assistant first.');
                 return;
             }
 
             respBox.classList.remove('hidden');
             let lowerFolder = currentActiveFolder.toLowerCase();
-            let domainOutput = "";
+            let aiResponseText = "";
             let speechOutput = "";
 
             if (lowerFolder.includes('sales') || lowerFolder.includes('market')) {
-                speechOutput = `Marketplace guide. Trade with confidence, subject to 10% admin fee.`;
-                domainOutput = `🛒 <b>Marketplace AI:</b><br>• Query: "<i>${query}</i>"<br>• Active Session: ${loggedInUserName}. 10% admin commission applies.`;
+                speechOutput = `Google AI Answer: Marketplace query answered. Remember 10% admin fee applies to trades.`;
+                aiResponseText = `🤖 <b>Google AI Assistant:</b><br>• Query: "<i>${query}</i>"<br>• Answer: Marketplace trading is active under OYES verification. 10% admin commission applies.`;
+            } else if(currentActiveFolder) {
+                speechOutput = `Google AI Answer for ${currentActiveFolder}: ${query} is managed securely under OYES guidelines.`;
+                aiResponseText = `🤖 <b>Google AI Assistant (${currentActiveFolder}):</b><br>• Query: "<i>${query}</i>"<br>• Answer: All services under this section are verified.`;
             } else {
-                speechOutput = `Expert AI analysis for ${currentActiveFolder}.`;
-                domainOutput = `💡 <b>Expert AI Analysis (${currentActiveFolder}):</b><br>• Query: "<i>${query}</i>"<br>• Managed securely under OYES APP guidelines.`;
+                speechOutput = `Google AI Answer: ${query} handled successfully.`;
+                aiResponseText = `🤖 <b>Google AI Assistant:</b><br>• Query: "<i>${query}</i>"<br>• Answer: OYES App provides 52 master folders and secure browsing.`;
             }
 
-            respBox.innerHTML = domainOutput;
+            respBox.innerHTML = aiResponseText;
             speakText(speechOutput);
         }
 
@@ -654,7 +691,7 @@
             document.getElementById('aiContainerBox').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
             document.getElementById('aiFolderQuery').value = '';
-            document.getElementById('domainAiTitle').innerText = `All Services AI`;
+            document.getElementById('domainAiTitle').innerText = `Google AI Assistant`;
             speakText("Loading all 46 master folders.");
 
             const grid = document.getElementById('pageContentGrid');
@@ -680,12 +717,12 @@
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">⏳</div>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
                     <h3 class="font-bold text-xs text-teal-200">${(index + 1)}. ${item}</h3>
-                    <p class="text-[9px] text-teal-300/60 mt-1">Trial Call →</p>
+                    <p class="text-[9px] text-teal-300/60 mt-1">Open Service →</p>
                 `;
                 card.onclick = function() {
-                    startPeerCall('Service Call', item);
+                    alert(item + ' folder is active.');
                 };
                 grid.appendChild(card);
             });
@@ -703,8 +740,8 @@
             grid.innerHTML = '';
 
             const adminCMS = [
-                { title: '📞 Director Salih Call', desc: '9947198248', action: 'call1' },
-                { title: '📞 OYES Saleem Call', desc: '9633111000', action: 'call2' },
+                { title: '📞 Director Salih WhatsApp', desc: '9947198248', action: 'chat1', phone: '919947198248' },
+                { title: '📞 OYES Saleem WhatsApp', desc: '9633111000', action: 'chat2', phone: '919633111000' },
                 { title: '👥 Registered Users Log', desc: 'View All Joined Users & Visitors', action: 'userslog' },
                 { title: '🖼️ Change App Logo', desc: 'Upload Logo from Gallery/Emoji', action: 'logo' },
                 { title: '📸 Upload Background Photo', desc: 'Select Image from Gallery/Storage', action: 'bgphoto' },
@@ -722,10 +759,8 @@
                     <p class="text-[9px] text-purple-300/60 mt-1">${item.desc}</p>
                 `;
                 card.onclick = function() {
-                    if(item.action === 'call1') {
-                        startPeerCall('Director Call', 'Salih Wayanad');
-                    } else if(item.action === 'call2') {
-                        startPeerCall('Director Call', 'OYES Saleem');
+                    if(item.action === 'chat1' || item.action === 'chat2') {
+                        requestWhatsAppPermission(item.title, item.phone);
                     } else if(item.action === 'userslog') {
                         let users = JSON.parse(localStorage.getItem('oyes_registered_users') || '[]');
                         if(users.length === 0) {
@@ -794,7 +829,7 @@
                                 <p class="text-[10px] text-purple-200/60 mt-1">Custom Folder</p>
                             `;
                             newCard.onclick = function() {
-                                startPeerCall('Custom Call', folderTitle);
+                                alert(folderTitle + ' folder active.');
                             };
                             document.getElementById('folderGrid').appendChild(newCard);
                             alert('New folder "' + folderTitle + '" added successfully to Home screen!');
@@ -862,7 +897,7 @@
                 if(speechResult.includes('admin') || speechResult.includes('director')) {
                     verifyDirectorAccess();
                 } else {
-                    alert('You searched for: "' + speechResult + '"');
+                    alert('Google AI Assistant heard: "' + speechResult + '"');
                     speakText('You searched for ' + speechResult);
                 }
             };
