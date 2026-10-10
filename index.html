@@ -56,87 +56,14 @@
 </head>
 <body id="appBody" class="flex flex-col justify-between">
 
-    <!-- Mandatory Login & 3-Day Visitor Gate -->
-    <div id="loginGateModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto hidden">
-        <div class="bg-slate-900 border border-cyan-500/60 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl text-center">
-            <div class="w-16 h-16 mx-auto rounded-full bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-3xl animate-pulse">⏳🔒</div>
-            <h2 class="text-base font-black text-cyan-300 uppercase tracking-wide">OYES APP - Secure Access Gateway</h2>
-            
-            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 text-left space-y-1.5 max-h-32 overflow-y-auto text-[11px] text-slate-200 leading-relaxed">
-                <p class="font-bold text-cyan-300">🌟 100% Trust & 10% Admin Fee:</p>
-                <p>10% of trade revenue/profit goes to the OYES Admin Panel. Any misuse, fraud, or harassment will lead to strict legal actions and financial compensation.</p>
-                <p class="font-bold text-amber-400">⏱️ Visitor Policy:</p>
-                <p>Visitor login has a strict 3-day trial period. Full registration is required to continue afterwards.</p>
-            </div>
-
-            <!-- Tab Switcher (Full Registration vs Visitor) -->
-            <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
-                <button onclick="switchLoginTab('full')" id="tabFullBtn" class="py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all">Full Registration</button>
-                <button onclick="switchLoginTab('visitor')" id="tabVisitorBtn" class="py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all">3-Day Visitor</button>
-            </div>
-
-            <!-- Full Registration Form -->
-            <div id="fullLoginForm" class="space-y-3 text-left">
-                <input type="text" id="userNameInput" placeholder="Enter Your Full Name..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
-                
-                <input type="email" id="userEmailInput" placeholder="Enter Email (Admin bypass supported)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
-
-                <div class="space-y-1">
-                    <label class="text-[10px] text-cyan-300 font-semibold">Select Your Category:</label>
-                    <select id="userCategorySelect" class="w-full bg-slate-950 text-cyan-300 font-semibold px-3 py-2 rounded-xl border border-cyan-500/50 text-xs focus:outline-none">
-                        <option value="business">💼 Business / Merchant</option>
-                        <option value="buyer">🛒 Buying Products / Customer</option>
-                        <option value="job">👨‍💻 Job & Career Search</option>
-                        <option value="services">🌐 All Other Services</option>
-                    </select>
-                </div>
-
-                <div class="space-y-1">
-                    <label class="text-[10px] text-cyan-300 font-semibold">Mandatory Photo Upload:</label>
-                    <input type="file" id="userPhotoInput" accept="image/*" class="w-full bg-slate-950 text-slate-300 text-[10px] px-3 py-2 rounded-xl border border-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-cyan-600 file:text-white hover:file:bg-cyan-500">
-                </div>
-
-                <label class="flex items-start gap-2.5 cursor-pointer pt-1">
-                    <input type="checkbox" id="legalCheckbox" class="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-0">
-                    <span class="text-[11px] text-slate-300 leading-tight">I agree to photo upload, category selection, 10% admin fee, and legal terms</span>
-                </label>
-
-                <button onclick="completeLoginGate()" class="w-full py-3 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">
-                    ✅ Enter with Photo Verification
-                </button>
-            </div>
-
-            <!-- Visitor Login Form (3 Days Trial) -->
-            <div id="visitorLoginForm" class="hidden space-y-3 text-left">
-                <input type="text" id="visitorNameInput" placeholder="Enter Your Name..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
-                <input type="tel" id="visitorPhoneInput" placeholder="Enter Phone Number (e.g. 9876543210)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
-                
-                <div class="bg-amber-950/60 border border-amber-500/50 p-2.5 rounded-xl text-[10px] text-amber-200">
-                    ⚠️ Note: Visitor login is valid for <b>3 days trial</b> only. Full registration is required afterwards.
-                </div>
-
-                <label class="flex items-start gap-2.5 cursor-pointer pt-1">
-                    <input type="checkbox" id="visitorLegalCheckbox" class="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-0">
-                    <span class="text-[11px] text-slate-300 leading-tight">I agree to the 3-day visitor terms and 10% admin fee policy</span>
-                </label>
-
-                <button onclick="completeVisitorLogin()" class="w-full py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">
-                    ⏳ Enter as 3-Day Visitor
-                </button>
-            </div>
-
-            <p class="text-[9px] text-slate-400">OYES Security & Trial Gateway</p>
-        </div>
-    </div>
-
     <!-- Header Section -->
     <header class="p-3 text-center bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
         <div class="flex justify-between items-center max-w-md mx-auto px-1 mb-1">
             <div class="flex items-center gap-1.5">
-                <div id="headerLogoContainer" ondblclick="verifyDirectorAccess()" class="cursor-pointer flex items-center justify-center" title="Restricted Admin Area">
+                <div id="headerLogoContainer" ondblclick="verifyDirectorAccess()" class="cursor-pointer flex items-center justify-center" title="Double Click for Admin Settings">
                     <span id="headerLogoIcon" class="text-xl">🌟</span>
                 </div>
-                <h1 id="headerMainTitle" ondblclick="verifyDirectorAccess()" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 cursor-pointer" title="Restricted Admin Area">
+                <h1 id="headerMainTitle" ondblclick="verifyDirectorAccess()" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 cursor-pointer" title="Double Click for Admin Settings">
                     OYES APP
                 </h1>
             </div>
@@ -162,7 +89,7 @@
         
         <!-- Compact Home AI Assistant Button -->
         <div class="flex justify-between items-center px-1">
-            <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: General</span>
+            <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
             <button onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 hover:border-cyan-400 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md transition-all">
                 <span class="text-sm">🤖✨</span>
                 <span id="aiBtnText" class="text-[11px] font-bold text-cyan-300">OYES Google AI Assistant</span>
@@ -253,11 +180,16 @@
                 <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
             </div>
 
-            <!-- 6. Trusted WhatsApp Chat Hub Card -->
-            <div onclick="openWhatsAppChatHub()" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+            <!-- 6. WhatsApp & Call Hub Folder Card -->
+            <div onclick="openSubFolders('WhatsApp & Call Hub', [
+                {name: 'Chat with Director Salih', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Chat with OYES Saleem', action: 'whatsapp_chat', phone: '919633111000'},
+                {name: 'Direct Audio Inquiry', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Support & Trade Helpline', action: 'whatsapp_chat', phone: '919633111000'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">💬📞</div>
-                <h3 class="font-bold text-sm text-emerald-300">WhatsApp Chat Hub</h3>
-                <p class="text-[10px] text-emerald-200/70 mt-1">Direct Audio & Message</p>
+                <h3 class="font-bold text-sm text-emerald-300">WhatsApp & Call</h3>
+                <p class="text-[10px] text-emerald-200/70 mt-1">Direct Chat & Hub</p>
             </div>
 
             <!-- 7. Special 'All Services' Master Folder Card -->
@@ -320,19 +252,8 @@
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
-        const DIRECTOR_ID = "salih9947";
-        const ADMIN_EMAILS = [
-            "platformoyes@gmail.com",
-            "salihwayanad@gmail.com",
-            "oyessaleem@gmail.com"
-        ];
-
         let currentActiveFolder = "";
-        let loggedInUserName = "";
-        let loggedInUserPhoto = "";
-        let loggedInUserCategory = "";
 
-        // Multi-language translation dictionary for 5 Languages
         const langData = {
             en: {
                 subtitle: '"A World at Your Fingertips — The Digital Companion of Trust & Development!"',
@@ -349,8 +270,8 @@
                 techSub: '100% Free Tools',
                 salesTitle: 'Sales',
                 salesSub: '10% Admin Fee & Trade',
-                chatHubTitle: 'WhatsApp Chat Hub',
-                chatHubSub: 'Direct Audio & Message',
+                chatHubTitle: 'WhatsApp & Call',
+                chatHubSub: 'Direct Chat & Hub',
                 allTitle: 'All Other Services',
                 allSub: 'Remaining 46 Master Folders',
                 installBtn: '📲 Install App',
@@ -371,8 +292,8 @@
                 techSub: '100% സൗജന്യ ടൂളുകൾ',
                 salesTitle: 'കച്ചവടം (Sales)',
                 salesSub: '10% അഡ്മിൻ ഫീസും ട്രേഡും',
-                chatHubTitle: 'വാട്സാപ്പ് ചാറ്റ് ഹബ്',
-                chatHubSub: 'ഡയറക്റ്റ് ഓഡിയോയും മെസ്സേജും',
+                chatHubTitle: 'വാട്സാപ്പ് & കോൾ',
+                chatHubSub: 'ഡയറക്റ്റ് ചാറ്റും ഹബ്ബും',
                 allTitle: 'മറ്റ് സേവനങ്ങൾ',
                 allSub: 'ബാക്കി 46 പ്രധാന ഫോൾഡറുകൾ',
                 installBtn: '📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക',
@@ -393,8 +314,8 @@
                 techSub: '100% இலவச கருவிகள்',
                 salesTitle: 'வியாபாரம்',
                 salesSub: '10% நிர்வாக கட்டணம் & வர்த்தகம்',
-                chatHubTitle: 'வாட்ஸ்அப் அரட்டை மையம்',
-                chatHubSub: 'நேரடி ஆடியோ & செய்தி',
+                chatHubTitle: 'வாட்ஸ்அப் & அழைப்பு',
+                chatHubSub: 'நேரடி அரட்டை மையம்',
                 allTitle: 'மற்ற சேவைகள்',
                 allSub: 'மீதமுள்ள 46 கோப்புறைகள்',
                 installBtn: '📲 செயலியை நிறுவு',
@@ -415,8 +336,8 @@
                 techSub: '100% ಉಚಿತ ಉಪಕರಣಗಳು',
                 salesTitle: 'ಮಾರಾಟ',
                 salesSub: '10% ನಿರ್ವಾಹಕ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
-                chatHubTitle: 'ವಾಟ್ಸಾಪ್ ಚಾಟ್ ಹಬ್',
-                chatHubSub: 'ನೇರ ಆಡಿಯೋ ಮತ್ತು ಸಂದೇಶ',
+                chatHubTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ',
+                chatHubSub: 'ನೇರ ಚಾಟ್ ಹಬ್',
                 allTitle: 'ಇತರ ಸೇವೆಗಳು',
                 allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
                 installBtn: '📲 ಅಪ್ಲಿಕೇಶನ್ ಸ್ಥಾಪಿಸಿ',
@@ -437,8 +358,8 @@
                 techSub: '100% मुफ्त टूल',
                 salesTitle: 'व्यापार (Sales)',
                 salesSub: '10% एडमिन शुल्क और ट्रेड',
-                chatHubTitle: 'व्हाट्सएप चैट हब',
-                chatHubSub: 'प्रत्यक्ष ऑडियो और संदेश',
+                chatHubTitle: 'व्हाट्सएप और कॉल',
+                chatHubSub: 'प्रत्यक्ष चैट और हब',
                 allTitle: 'अन्य सभी सेवाएं',
                 allSub: 'शेष 46 मास्टर फ़ोल्डर',
                 installBtn: '📲 ऐप इंस्टॉल करें',
@@ -476,134 +397,69 @@
             let savedLang = localStorage.getItem('oyes_app_lang') || 'en';
             document.getElementById('langSelector').value = savedLang;
             changeAppLanguage(savedLang);
-
-            let activeSession = localStorage.getItem('oyes_permanent_session');
-            if(activeSession) {
-                let session = JSON.parse(activeSession);
-                loggedInUserName = session.name;
-                loggedInUserCategory = session.category;
-                loggedInUserPhoto = session.photo;
-                document.getElementById('userCategoryBadge').innerText = session.badge;
-                document.getElementById('loginGateModal').classList.add('hidden');
-                return;
-            }
-            document.getElementById('loginGateModal').classList.remove('hidden');
         };
 
-        function switchLoginTab(mode) {
-            const fullForm = document.getElementById('fullLoginForm');
-            const visitorForm = document.getElementById('visitorLoginForm');
-            const fullBtn = document.getElementById('tabFullBtn');
-            const visitorBtn = document.getElementById('tabVisitorBtn');
+        // Director Code Verification -> Opens Admin Settings Automatically
+        function verifyDirectorAccess() {
+            let enteredId = prompt("🔐 Enter Director ID / Secret Code to Access Admin Settings:");
+            if (enteredId === "salih9947") {
+                alert("✅ Director Access Verified Successfully!");
+                openSettingsPage();
+            } else if(enteredId) {
+                alert("❌ Invalid ID! Access Denied.");
+            }
+        }
 
-            if(mode === 'full') {
-                fullForm.classList.remove('hidden');
-                visitorForm.classList.add('hidden');
-                fullBtn.className = "py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all";
-                visitorBtn.className = "py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all";
+        function requestWhatsAppPermission(targetName, defaultPhone) {
+            let targetNumber = prompt(`💬 നിങ്ങളുടെ WhatsApp ലേക്ക് കണക്ട് ചെയ്യട്ടെ?\n\nനിങ്ങളുടെ WhatsApp നമ്പർ നൽകുക:`, defaultPhone);
+            if (targetNumber) {
+                window.open(`https://wa.me/${targetNumber.trim()}?text=Hello,%20I%20am%20contacting%20regarding%20${encodeURIComponent(targetName)}%20via%20OYES%20APP.`, '_blank');
+            }
+        }
+
+        function installAppPrompt() {
+            alert('📲 To install OYES APP to your Home Screen:\n\n1. Tap the three dots (⋮) at top right of Chrome.\n2. Select "Add to Home screen" or "Install app".');
+        }
+
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({ title: 'OYES APP', url: window.location.href }).catch(() => {});
             } else {
-                fullForm.classList.add('hidden');
-                visitorForm.classList.remove('hidden');
-                visitorBtn.className = "py-1.5 bg-amber-600 text-white font-bold text-[11px] rounded-lg transition-all";
-                fullBtn.className = "py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all";
+                navigator.clipboard.writeText(window.location.href);
+                alert('🔗 App link copied to clipboard!');
             }
         }
 
-        function completeLoginGate() {
-            let nameInput = document.getElementById('userNameInput').value.trim();
-            let emailInput = document.getElementById('userEmailInput').value.trim().toLowerCase();
-            let categorySelect = document.getElementById('userCategorySelect').value;
-            let photoInput = document.getElementById('userPhotoInput').files[0];
-            let isChecked = document.getElementById('legalCheckbox').checked;
-
-            if(!nameInput) { alert('Please enter your full name!'); return; }
-
-            if(emailInput && ADMIN_EMAILS.includes(emailInput)) {
-                loggedInUserName = nameInput + " (Admin)";
-                loggedInUserCategory = "Master Admin (Direct Bypass)";
-                loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
-                let sessionData = { name: loggedInUserName, category: loggedInUserCategory, photo: loggedInUserPhoto, badge: "Admin: Direct Access" };
-                localStorage.setItem('oyes_permanent_session', JSON.stringify(sessionData));
-                document.getElementById('userCategoryBadge').innerText = `Admin: Direct Access`;
-                document.getElementById('loginGateModal').classList.add('hidden');
-                alert(`👑 Admin Email Verified!`);
-                return;
+        function openHomeAIChat() {
+            let query = prompt("🤖 OYES Google AI Assistant:\nAsk any question:");
+            if(query) {
+                alert(`Google AI Answer: You asked about "${query}". OYES App provides 52 secure master folders and direct WhatsApp connectivity!`);
             }
-
-            if(!photoInput) { alert('⚠️ Photo is mandatory!'); return; }
-            if(!isChecked) { alert('You must agree to the terms!'); return; }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                loggedInUserPhoto = e.target.result;
-                loggedInUserName = nameInput;
-                loggedInUserCategory = categorySelect;
-                let sessionData = { name: loggedInUserName, category: loggedInUserCategory, photo: loggedInUserPhoto, badge: `User: ${loggedInUserName}` };
-                localStorage.setItem('oyes_permanent_session', JSON.stringify(sessionData));
-                document.getElementById('userCategoryBadge').innerText = sessionData.badge;
-                document.getElementById('loginGateModal').classList.add('hidden');
-                alert(`✅ Welcome, ${loggedInUserName}!`);
-            };
-            reader.readAsDataURL(photoInput);
-        }
-
-        function completeVisitorLogin() {
-            let nameInput = document.getElementById('visitorNameInput').value.trim();
-            let phoneInput = document.getElementById('visitorPhoneInput').value.trim();
-            let isChecked = document.getElementById('visitorLegalCheckbox').checked;
-
-            if(!nameInput || phoneInput.length < 10 || !isChecked) {
-                alert('Please fill all details correctly!');
-                return;
-            }
-
-            loggedInUserName = nameInput + " (Visitor)";
-            loggedInUserCategory = "Visitor (" + phoneInput + ")";
-            loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-            let sessionData = { name: loggedInUserName, category: loggedInUserCategory, photo: loggedInUserPhoto, badge: `Visitor: ${nameInput}` };
-            localStorage.setItem('oyes_permanent_session', JSON.stringify(sessionData));
-            document.getElementById('userCategoryBadge').innerText = sessionData.badge;
-            document.getElementById('loginGateModal').classList.add('hidden');
-            alert(`✅ Visitor Login Success!`);
         }
 
         function openSettingsPage() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = '⚙️ OYES App Settings';
+            document.getElementById('pageTitle').innerText = '⚙️ OYES Admin Settings';
             document.getElementById('aiContainerBox').classList.add('hidden');
 
             const grid = document.getElementById('pageContentGrid');
             grid.className = "flex flex-col space-y-3 col-span-2 pb-6 pt-2";
             grid.innerHTML = `
                 <div class="bg-slate-950/90 border border-cyan-500/60 p-5 rounded-3xl shadow-xl space-y-4">
-                    <h3 class="font-bold text-sm text-cyan-300">👤 User Profile & Session Info</h3>
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-1.5">
-                        <p><b>Name:</b> ${loggedInUserName || 'Not Available'}</p>
-                        <p><b>Category:</b> ${loggedInUserCategory || 'General'}</p>
-                    </div>
-                    <h3 class="font-bold text-sm text-cyan-300 pt-2">🌐 App Preferences</h3>
+                    <h3 class="font-bold text-sm text-cyan-300">👑 Director / Admin Control Panel</h3>
                     <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span>Admin Fee Policy:</span>
-                            <span class="text-amber-400 font-bold">10% on Trades</span>
-                        </div>
+                        <p><b>Status:</b> <span class="text-emerald-400 font-bold">Verified Admin Mode</span></p>
+                        <p><b>Directors:</b> Salih Wayanad & OYES Saleem</p>
+                        <p><b>Admin Fee Policy:</b> <span class="text-amber-400 font-bold">10% on Trades</span></p>
                     </div>
-                    <h3 class="font-bold text-sm text-rose-400 pt-2">⚠️ Data Management</h3>
-                    <button onclick="clearAppSession()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl shadow transition-all">
-                        🗑️ Reset Login / Logout Session
-                    </button>
+                    <div class="bg-cyan-950/50 border border-cyan-500/40 p-3 rounded-xl text-xs space-y-1">
+                        <p class="font-bold text-cyan-300">🛡️ Security Features:</p>
+                        <p class="text-[10px] text-slate-300">Anti-screenshot, anti-copy and secure web view protection are fully enabled across the app.</p>
+                    </div>
                 </div>
             `;
             window.scrollTo(0, 0);
-        }
-
-        function clearAppSession() {
-            if(confirm("Are you sure you want to log out and clear your session?")) {
-                localStorage.removeItem('oyes_permanent_session');
-                localStorage.removeItem('oyes_visitor_session');
-                location.reload();
-            }
         }
 
         function openSubFolders(folderName, subItems) {
@@ -630,8 +486,7 @@
                 `;
                 card.onclick = function() {
                     if(item.action === 'whatsapp_chat') {
-                        let num = prompt("Enter WhatsApp number:", item.phone || '919947198248');
-                        if(num) window.open(`https://wa.me/${num}?text=Hello`, '_blank');
+                        requestWhatsAppPermission(item.name, item.phone || '919947198248');
                     } else if(item.url) {
                         window.open(item.url, '_blank');
                     }
@@ -639,6 +494,14 @@
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
+        }
+
+        function askTotalDomainAI() {
+            let query = document.getElementById('aiFolderQuery').value.trim();
+            let respBox = document.getElementById('aiFolderResponse');
+            if(!query) { alert('Please enter your question!'); return; }
+            respBox.classList.remove('hidden');
+            respBox.innerHTML = `🤖 <b>Google AI Assistant:</b><br>• Query: "<i>${query}</i>"<br>• Answer: Handled successfully under OYES guidelines.`;
         }
 
         function openAllFoldersPage() {
@@ -721,23 +584,6 @@
             document.getElementById('homeView').classList.remove('hidden');
             window.scrollTo(0, 0);
         }
-
-        function askTotalDomainAI() {
-            let query = document.getElementById('aiFolderQuery').value.trim();
-            let respBox = document.getElementById('aiFolderResponse');
-            if(!query) { alert('Please enter your question!'); return; }
-            respBox.classList.remove('hidden');
-            respBox.innerHTML = `🤖 <b>Google AI Assistant:</b><br>• Query: "<i>${query}</i>"<br>• Answer: Handled successfully under OYES guidelines.`;
-        }
-
-        function openWhatsAppChatHub() {
-            alert("WhatsApp Chat Hub is active.");
-        }
-
-        function installAppPrompt() { alert("Use browser menu to Install App."); }
-        function shareApp() { alert("App link copied."); }
-        function openHomeAIChat() { let q = prompt("Ask AI:"); if(q) alert("AI Answer: " + q); }
-        function triggerVoiceAssistant() { alert("Voice assistant active."); }
     </script>
 </body>
 </html>
