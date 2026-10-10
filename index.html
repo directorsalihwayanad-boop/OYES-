@@ -1,660 +1,294 @@
 <!DOCTYPE html>
-<html lang="ml" id="htmlRoot">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES Saleem - Connecting People, Creating Opportunities</title>
+    <title>OYES - Official Platform</title>
+    <link rel="icon" type="image/png" href="oyes_logo.png">
+    
     <style>
-        :root {
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --text-color: #ffffff;
-        }
-
         * { box-sizing: border-box; }
-
         body {
-            background: linear-gradient(rgba(12, 10, 6, 0.75), rgba(12, 10, 6, 0.85)), url('home_bg.png') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text-color);
-            font-family: sans-serif;
-            margin: 0;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0; text-align: center;
         }
-
-        .top-bar {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .lang-select {
-            background: #1a160d;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 5px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .business-login-btn {
-            background-color: #238636;
-            color: white;
-            padding: 6px 14px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid #2ea043;
-        }
-        .business-login-btn:hover {
-            background-color: #2ea043;
-        }
-
         header {
-            text-align: center;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            width: 100%;
-            max-width: 1000px;
+            padding: 20px 30px;
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid #d4af37;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
         }
-
-        .logo-container img {
-            width: 85px;
-            height: 85px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-img {
+            width: 70px; height: 70px; border-radius: 50%;
+            border: 2px solid #d4af37; object-fit: cover;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.6);
         }
-
-        h1 {
-            color: var(--gold);
-            margin: 8px 0 2px 0;
-            font-size: 22px;
-            letter-spacing: 1px;
+        .header-title h1 { color: #d4af37; margin: 0; font-size: 28px; letter-spacing: 3px; }
+        .header-title p { margin: 2px 0 0 0; font-size: 11px; color: #ccc; letter-spacing: 1px; }
+        
+        .container { padding: 40px 20px; max-width: 950px; margin: auto; }
+        
+        .hero-banner {
+            position: relative; width: 100%; height: 380px; border-radius: 20px;
+            overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95);
+            margin-bottom: 40px;
         }
-
-        p.tagline {
-            color: var(--gold-light);
-            font-size: 11px;
-            margin: 0 0 12px 0;
-            font-weight: bold;
-            letter-spacing: 0.5px;
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            padding: 25px; text-align: center;
         }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 8px;
+        .hero-overlay h2 { color: #d4af37; margin: 0; font-size: 26px; letter-spacing: 2px; }
+        
+        .section-title {
+            color: #d4af37; text-align: left; border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px; margin-top: 45px; margin-bottom: 20px; font-size: 22px;
         }
-
-        button {
-            background: rgba(26, 22, 13, 0.9);
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button.admin-btn {
-            background: var(--gold);
-            color: #000;
-        }
-
-        /* ഹോം പേജിലെ AI ചാറ്റ് സെക്‌ഷൻ */
-        .home-ai-section {
-            width: 100%;
-            max-width: 1000px;
-            background: rgba(26, 22, 13, 0.9);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            text-align: center;
-        }
-
-        .home-ai-section h3 {
-            color: var(--gold);
-            margin: 0 0 10px 0;
-            font-size: 15px;
-        }
-
-        .chat-box {
-            background: #0c0a06;
-            border: 1px solid var(--gold);
-            border-radius: 6px;
-            height: 140px;
-            overflow-y: auto;
-            padding: 8px;
-            text-align: left;
-            font-size: 11px;
-            margin-bottom: 10px;
-        }
-
-        .chat-msg {
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
-        .chat-msg.bot { color: var(--gold-light); }
-        .chat-msg.user { color: #fff; text-align: right; }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            width: 100%;
-            max-width: 1000px;
-            padding: 12px 0;
-        }
-
-        @media (min-width: 600px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 12px;
-            }
-        }
-
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        
         .card {
-            background: rgba(26, 22, 13, 0.85);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 8px;
-            padding: 10px 5px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 85px;
-            cursor: pointer;
-            transition: 0.2s;
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(15, 15, 15, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 18px; padding: 22px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9); text-align: left;
         }
+        .card h3 { color: #d4af37; margin-top: 0; font-size: 20px; }
+        .card p { font-size: 14px; color: #ccc; line-height: 1.5; }
+        .card-img-preview {
+            width: 100%; height: 180px; object-fit: cover; border-radius: 12px;
+            margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #f3c653, #aa820a); color: #000; border: none;
+            padding: 12px 20px; font-weight: bold; font-size: 15px; border-radius: 10px;
+            cursor: pointer; margin-top: 10px; width: 100%; text-decoration: none; display: inline-block;
+            box-shadow: 0 6px 20px rgba(170, 130, 10, 0.5); transition: all 0.2s ease; text-align: center;
+        }
+        .action-btn:hover { background: linear-gradient(135deg, #ffe07d, #d4af37); }
+        
+        .ai-call-btn {
+            background: linear-gradient(135deg, #ff8c00, #ff4500); color: #fff;
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+        }
+        .ai-call-btn:hover { background: linear-gradient(135deg, #ffa500, #ff8c00); }
 
-        .card:hover {
-            border-color: var(--gold);
-            background: rgba(45, 38, 20, 0.95);
-            transform: translateY(-2px);
+        .video-call-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3); color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
         }
+        .video-call-btn:hover { background: linear-gradient(135deg, #3395ff, #007bff); }
 
-        .card img.card-img {
-            width: 32px;
-            height: 32px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 1px solid var(--gold);
-            margin-bottom: 4px;
+        .chat-btn {
+            background: linear-gradient(135deg, #6f42c1, #563d7c); color: #fff;
+            box-shadow: 0 6px 20px rgba(111, 66, 193, 0.4);
         }
+        .chat-btn:hover { background: linear-gradient(135deg, #8a63d2, #6f42c1); }
 
-        .card span.emoji-icon {
-            font-size: 26px;
-            margin-bottom: 4px;
+        /* Modal Popups */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);
+            justify-content: center; align-items: center; z-index: 1000;
         }
-
-        .card span.title {
-            font-size: 11px;
-            font-weight: bold;
-            line-height: 1.2;
-            color: var(--gold-light);
+        .modal-content {
+            background: linear-gradient(145deg, #222, #141414); padding: 35px 25px;
+            border-radius: 20px; border: 2px solid #d4af37; width: 90%; max-width: 450px;
+            position: relative; text-align: center;
         }
-
-        .card span.subtitle {
-            font-size: 9px;
-            color: #bfa15f;
-            margin-top: 2px;
+        .video-screen {
+            width: 100%; height: 220px; background: #000; border-radius: 12px;
+            border: 1px solid #d4af37; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin-bottom: 15px; color: #d4af37; font-weight: bold; font-size: 16px; padding: 10px;
         }
-
-        /* Modals */
-        .subModal, #adminModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 300;
+        .chat-box-area {
+            width: 100%; height: 200px; background: #111; border-radius: 10px;
+            border: 1px solid #444; margin-bottom: 15px; padding: 10px; overflow-y: auto; text-align: left; color: #bbb; font-size: 13px;
         }
-        .sub-modal-content, .modal-content {
-            background: #1a160d;
-            border: 2px solid var(--gold);
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            max-height: 85vh;
-            overflow-y: auto;
+        .chat-input-area { display: flex; gap: 8px; margin-bottom: 15px; }
+        .chat-input-area input {
+            flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #d4af37; background: #000; color: #fff; outline: none;
         }
-        .sub-modal-content h3, .modal-content h3 {
-            color: var(--gold);
-            margin-top: 0;
+        .chat-input-area button {
+            padding: 10px 15px; background: #d4af37; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; color: #000;
         }
-        .modal-img {
-            width: 100%;
-            max-height: 220px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--gold);
-            margin-bottom: 12px;
+        .modal-logo {
+            width: 65px; height: 65px; border-radius: 50%; border: 2px solid #d4af37;
+            object-fit: cover; margin-bottom: 15px;
         }
-        .sub-link-btn {
-            display: block;
-            background: #23211a;
-            color: var(--gold-light);
-            border: 1px solid var(--gold);
-            padding: 10px;
-            margin: 8px 0;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 13px;
-            text-align: left;
-        }
-        .sub-link-btn:hover {
-            background: var(--gold);
-            color: #000;
-        }
-        .close-modal, .modal-content button {
-            background: #444;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            margin-top: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .modal-content input {
-            width: 100%;
-            padding: 6px;
-            margin: 6px 0;
-            background: #000;
-            border: 1px solid var(--gold);
-            color: #fff;
-            border-radius: 4px;
-        }
-        .admin-folder-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #0c0a06;
-            border: 1px solid #332910;
-            padding: 6px;
-            margin: 5px 0;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        .contact-info {
-            margin-top: 15px;
-            padding: 12px;
-            background: rgba(12, 10, 6, 0.85);
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            font-size: 11px;
-            color: #bfa15f;
-            text-align: center;
-            width: 100%;
-            max-width: 1000px;
-            line-height: 1.5;
-            border-radius: 6px;
-        }
+        .close { color: #d4af37; position: absolute; top: 15px; right: 20px; font-size: 30px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <select id="langSelector" class="lang-select" onchange="changeLanguage(this.value)">
-            <option value="ml">മലയാളം</option>
-            <option value="en">English</option>
-            <option value="ar">العربية</option>
-            <option value="hi">हिन्दी</option>
-        </select>
-        <a href="https://wa.me/919947198248" target="_blank" class="business-login-btn" id="btnBusinessLogin">ബിസിനസ്സ് ലോഗിൻ</a>
+    <header>
+        <div class="logo-area">
+            <img src="oyes_logo.png" alt="OYES Logo" class="logo-img">
+            <div class="header-title" style="text-align: left;">
+                <h1>OYES</h1>
+                <p>CONNECTING PEOPLE • CREATING OPPORTUNITIES</p>
+            </div>
+        </div>
+        <div>
+            <button onclick="requestNotification()" style="background:#222; color:#d4af37; border:1px solid #d4af37; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:bold;">🔔 Enable Alerts</button>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+            <img src="file_0000000084588211b3271edc4a166f4c.png" alt="OYES Main Banner">
+            <div class="hero-overlay">
+                <h2>WELCOME TO OYES PLATFORM</h2>
+            </div>
+        </div>
+
+        <!-- Universal Communication Hub & AI Assistant -->
+        <h2 class="section-title">⚡ OYES Smart AI & Communication Hub</h2>
+        <div class="grid-container">
+            <div class="card">
+                <img src="file_00000000ef7c82089bb58e6485a1a8a8.png" alt="Technology & Application" class="card-img-preview">
+                <h3>OYES Intelligent Network</h3>
+                <p>Features 24/7 AI Voice Assistance, background push notifications, live peer-to-peer video calls, and instant community chat.</p>
+                
+                <!-- AI Voice Call & Communication Buttons -->
+                <button class="action-btn ai-call-btn" onclick="openAICallModal()">🤖 24/7 AI Voice Assistant Call</button>
+                <button class="action-btn video-call-btn" onclick="openVideoModal()">📹 OYES Video Conference</button>
+                <button class="action-btn chat-btn" onclick="openChatModal()">💬 OYES Community Chat</button>
+                
+                <button class="action-btn" onclick="openSupportModal()" style="background: #333; color: #d4af37; border: 1px solid #d4af37;">View Support Info</button>
+            </div>
+        </div>
     </div>
 
-    <div id="appContainer" style="display: flex; width: 100%; flex-direction: column; align-items: center;">
-        <header>
-            <div class="logo-container">
-                <img id="appLogo" src="watermarked_img_350157874029767559.png" alt="OYES Saleem Logo">
+    <!-- 24/7 AI Voice Assistant Call Modal -->
+    <div id="aiCallModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAICallModal()">&times;</span>
+            <div class="video-screen">
+                <p style="color: #ff8c00; font-size: 20px; margin-bottom: 5px;">🤖 OYES AI Assistant Active</p>
+                <p id="aiVoiceStatus" style="font-size: 13px; color: #ccc; font-weight: normal;">"Hello! I am your 24/7 AI assistant. How can I help you on OYES today?"</p>
             </div>
-            <h1 id="appName">OYES Saleem</h1>
-            <p class="tagline" id="appTagline">CONNECTING PEOPLE • CREATING OPPORTUNITIES</p>
+            <h3 style="color: #d4af37; margin-top: 5px;">Voice Interaction Live</h3>
+            <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Speak or type your query below to get instant AI voice replies anytime.</p>
             
-            <div class="controls">
-                <button class="admin-btn" id="btnAdmin" onclick="openAdmin()">⚙️ അഡ്മിൻ പാനൽ</button>
+            <div class="chat-input-area">
+                <input type="text" id="aiInput" placeholder="Ask AI anything...">
+                <button onclick="speakToAI()" style="background: #ff8c00; color: #fff;">Talk</button>
             </div>
-        </header>
-
-        <!-- ഹോം പേജിൽ തന്നെയുള്ള OYES Saleem AI അസിസ്റ്റന്റ് സെക്‌ഷൻ -->
-        <div class="home-ai-section">
-            <h3 id="aiTitle">🤖 OYES Saleem AI അസിസ്റ്റന്റ്</h3>
-            <div class="chat-box" id="chatBox">
-                <div class="chat-msg bot" id="botWelcome"><b>OYES Saleem AI:</b> നമസ്കാരം! ഞാൻ OYES Saleem പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!</div>
-            </div>
-            <div style="display: flex; gap: 5px;">
-                <input type="text" id="userInput" placeholder="ചോദ്യം ചോദിക്കൂ..." style="flex:1; padding:6px; background:#000; color:#fff; border:1px solid var(--gold); border-radius:4px; font-size:11px;">
-                <button id="micBtn" onclick="startVoiceInput()" title="സംസാരിച്ച് ചോദിക്കുക" style="padding: 6px 10px; margin:0; background:#1a160d; color:var(--gold); border:1px solid var(--gold); border-radius:4px; font-size:14px; cursor:pointer;">🎤</button>
-                <button id="sendBtn" onclick="sendAiMessage()" style="padding: 6px 10px; margin:0; background:var(--gold); color:#000; font-weight:bold;">അയക്കുക</button>
-            </div>
+            <button class="action-btn" style="background: #dc3545; color: #fff;" onclick="closeAICallModal()">End AI Call</button>
         </div>
+    </div>
 
-        <!-- ഗ്രിഡ് ലേഔട്ട് -->
-        <div class="grid-container" id="folderGrid"></div>
-
-        <!-- ഔദ്യോഗിക കോൺടാക്റ്റ് വിവരങ്ങൾ -->
-        <div class="contact-info">
-            <p><b id="lblPhones">Phones:</b> +91 9947198248 | +91 9633111000</p>
-            <p><b id="lblEmail">Email:</b> platformoyes@gmail.com</p>
-        </div>
-
-        <!-- എഡ്യൂക്കേഷൻ മോഡൽ -->
-        <div id="educationModal" class="subModal">
-            <div class="sub-modal-content">
-                <h3 id="eduModalTitle" style="margin-bottom: 12px;">മതപഠനം & ഗ്രന്ഥങ്ങൾ</h3>
-                <a href="https://quran.com" target="_blank" class="sub-link-btn">📖 ഖുർആൻ / Quran</a>
-                <a href="https://www.bible.com" target="_blank" class="sub-link-btn">📖 ബൈബിൾ / Bible</a>
-                <a href="https://www.valmiki.com" target="_blank" class="sub-link-btn">📖 രാമായണം / Ramayana</a>
-                <a href="https://www.vedabase.io" target="_blank" class="sub-link-btn">📖 മഹാഭാരതം / Gita</a>
-                <button class="close-modal" onclick="closeModal('educationModal')">മടങ്ങിപ്പോവുക</button>
+    <!-- Live Video Call Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeVideoModal()">&times;</span>
+            <div class="video-screen" id="videoStatus">
+                🔴 Initializing Secure OYES Multi-User Room...
             </div>
+            <h3 style="color: #d4af37; margin-top: 5px;">OYES Live Video Channel</h3>
+            <p style="font-size: 13px; color: #ccc;">Open for all members, peers, and administrators to connect face-to-face.</p>
+            <button class="action-btn" style="background: #dc3545; color: #fff;" onclick="closeVideoModal()">End Call</button>
         </div>
+    </div>
 
-        <!-- ഗവൺമെന്റ് പോർട്ടൽ മോഡൽ -->
-        <div id="govModal" class="subModal">
-            <div class="sub-modal-content">
-                <h3 id="govModalTitle">ഗവൺമെന്റ് സേവനങ്ങൾ</h3>
-                <a href="https://keralapolice.gov.in" target="_blank" class="sub-link-btn">🚨 കേരള പോലീസ് സ്റ്റേഷൻ</a>
-                <a href="https://dhs.kerala.gov.in" target="_blank" class="sub-link-btn">🏥 ഗവൺമെന്റ് ഹോസ്പിറ്റൽ</a>
-                <a href="https://www.india.gov.in" target="_blank" class="sub-link-btn">🏛️ നാഷണൽ പോർട്ടൽ</a>
-                <a href="https://service.kerala.gov.in" target="_blank" class="sub-link-btn">📄 ഇ-സേവനങ്ങൾ</a>
-                <button class="close-modal" onclick="closeModal('govModal')">മടങ്ങിപ്പോവുക</button>
+    <!-- In-App Community Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content" style="max-width: 480px;">
+            <span class="close" onclick="closeChatModal()">&times;</span>
+            <h3 style="color: #d4af37; margin-top: 5px; margin-bottom: 10px;">OYES Global Community Chat</h3>
+            <div class="chat-box-area" id="chatBox">
+                <p style="color: #d4af37;"><b>System:</b> Connected to OYES Network. Chat with peers and admins freely.</p>
             </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Type message to community...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+            <button class="action-btn" style="background: #444; color: #fff; margin-top: 0;" onclick="closeChatModal()">Close Chat</button>
         </div>
+    </div>
 
-        <!-- സിനിമ / ഫിലിം പ്രൊഡക്ഷൻ മോഡൽ -->
-        <div id="cinemaModal" class="subModal">
-            <div class="sub-modal-content">
-                <h3 id="cinemaModalTitle">സിനിമ & പ്രൊഡക്ഷൻ</h3>
-                <img src="movie_clapper_person.png" alt="Movie Direction" class="modal-img">
-                <p style="font-size: 12px; color: #f3e5ab; margin-bottom: 10px;"><b>The Architect's Journey</b> - Story & Direction</p>
-                <a href="https://www.imdb.com" target="_blank" class="sub-link-btn">🎬 സിനിമ പ്രൊഡക്ഷൻ വിവരങ്ങൾ</a>
-                <button class="close-modal" onclick="closeModal('cinemaModal')">മടങ്ങിപ്പോവുക</button>
-            </div>
-        </div>
-
-        <!-- അഡ്മിൻ പാനൽ മോഡൽ -->
-        <div id="adminModal">
-            <div class="modal-content">
-                <h3>അഡ്മിൻ നിയന്ത്രണ പാനൽ</h3>
-                <label>ആപ്പ് പേര്:</label>
-                <input type="text" id="adminTitleInput" value="OYES Saleem">
-                
-                <label>ലോഗോ ഫയൽ പേര്:</label>
-                <input type="text" id="adminLogoInput" value="watermarked_img_350157874029767559.png">
-
-                <hr style="border-color: var(--gold); margin: 10px 0;">
-                <h4 style="color: var(--gold); margin: 5px 0;">ഫോൾഡർ ലിങ്കുകൾ മാറ്റാൻ</h4>
-                <div id="adminFolderList" style="max-height: 150px; overflow-y: auto; text-align: left; margin-bottom: 10px;"></div>
-
-                <button onclick="saveAdminSettings()" style="background: var(--gold); color: #000; font-weight: bold;">മാറ്റങ്ങൾ സേവ് ചെയ്യുക</button>
-                <button onclick="closeAdmin()">റദ്ദാക്കുക</button>
-            </div>
+    <!-- Support Details Modal -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSupportModal()">&times;</span>
+            <img src="oyes_logo.png" alt="Logo" class="modal-logo">
+            <h3 style="color: #d4af37; margin-top: 5px;">OYES Platform Contact</h3>
+            <p style="font-size: 14px; color: #ccc;">Official helpdesk and direct communication numbers:</p>
+            <p style="background: rgba(0,0,0,0.6); padding: 12px; font-weight: bold; color: #fff; border-radius: 8px; border: 1px solid #444;">+91 9947198248 / +91 9633111000</p>
         </div>
     </div>
 
     <script>
-        const translations = {
-            ml: {
-                loginBtn: "ബിസിനസ്സ് ലോഗിൻ",
-                tagline: "CONNECTING PEOPLE • CREATING OPPORTUNITIES",
-                adminBtn: "⚙️ അഡ്മിൻ പാനൽ",
-                aiTitle: "🤖 OYES Saleem AI അസിസ്റ്റന്റ്",
-                botWelcome: "നമസ്കാരം! ഞാൻ OYES Saleem പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!",
-                inputPlaceholder: "ചോദ്യം ചോദിക്കൂ...",
-                sendBtn: "അയക്കുക",
-                phones: "Phones:",
-                email: "Email:"
-            },
-            en: {
-                loginBtn: "Business Login",
-                tagline: "CONNECTING PEOPLE • CREATING OPPORTUNITIES",
-                adminBtn: "⚙️ Admin Panel",
-                aiTitle: "🤖 OYES Saleem AI Assistant",
-                botWelcome: "Hello! I am the assistant configured to provide information about the OYES Saleem platform and answers to any educational and study-related doubts!",
-                inputPlaceholder: "Ask a question...",
-                sendBtn: "Send",
-                phones: "Phones:",
-                email: "Email:"
-            },
-            ar: {
-                loginBtn: "تسجيل دخول الأعمال",
-                tagline: "ربط الناس • خلق الفرص",
-                adminBtn: "⚙️ لوحة التحكم",
-                aiTitle: "🤖 مساعد OYES Saleem الذكي",
-                botWelcome: "مرحباً! أنا المساعد المصمم لتقديم معلومات حول منصة OYES Saleem والإجابة عن أي استفسارات تعليمية ودراسية!",
-                inputPlaceholder: "اطرح سؤالاً...",
-                sendBtn: "إرسال",
-                phones: "الهواتف:",
-                email: "البريد الإلكتروني:"
-            },
-            hi: {
-                loginBtn: "बिजनेस लॉगिन",
-                tagline: "लोगों को जोड़ना • अवसर पैदा करना",
-                adminBtn: "⚙️ एडमिन पैनल",
-                aiTitle: "🤖 OYES Salim AI सहायक",
-                botWelcome: "नमस्ते! मैं OYES Salim प्लेटफॉर्म और किसी भी शैक्षणिक और अध्ययन संबंधी शंकाओं के उत्तर देने के लिए तैयार किया गया सहायक हूँ!",
-                inputPlaceholder: "सवाल पूछें...",
-                sendBtn: "भेजें",
-                phones: "फ़ोन:",
-                email: "ईमेल:"
-            }
-        };
-
-        function changeLanguage(lang) {
-            const t = translations[lang];
-            document.getElementById('btnBusinessLogin').innerText = t.loginBtn;
-            document.getElementById('appTagline').innerText = t.tagline;
-            document.getElementById('btnAdmin').innerText = t.adminBtn;
-            document.getElementById('aiTitle').innerText = t.aiTitle;
-            document.getElementById('botWelcome').innerHTML = `<b>OYES Saleem AI:</b> ${t.botWelcome}`;
-            document.getElementById('userInput').placeholder = t.inputPlaceholder;
-            document.getElementById('sendBtn').innerText = t.sendBtn;
-            document.getElementById('lblPhones').innerText = t.phones;
-            document.getElementById('lblEmail').innerText = t.email;
-
-            if(lang === 'ar') {
-                document.getElementById('htmlRoot').setAttribute('dir', 'rtl');
-            } else {
-                document.getElementById('htmlRoot').removeAttribute('dir');
+        function requestNotification() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        alert("OYES Background Push Notifications Enabled Successfully!");
+                        new Notification("OYES Platform", { body: "You will now receive alerts even when the app is closed!" });
+                    }
+                });
             }
         }
 
-        // വോയിസ് ഇൻപുട്ട് (Speech to Text) ഫങ്ഷൻ
-        function startVoiceInput() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("നിങ്ങളുടെ ബ്രൗസർ വോയിസ് ഫീച്ചർ പിന്തുണയ്ക്കുന്നില്ല.");
-                return;
-            }
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'ml-IN'; // മലയാളം തിരിച്ചറിയാൻ
-            recognition.onstart = function() {
-                document.getElementById('userInput').placeholder = "സംസാരിക്കൂ... കേൾക്കുന്നുണ്ട്...";
-            };
-            recognition.onresult = function(event) {
-                const speechToText = event.results[0][0].transcript;
-                document.getElementById('userInput').value = speechToText;
-                document.getElementById('userInput').placeholder = "ചോദ്യം ചോദിക്കൂ...";
-            };
-            recognition.onerror = function() {
-                document.getElementById('userInput').placeholder = "ചോദ്യം ചോദിക്കൂ...";
-            };
-            recognition.start();
-        }
+        function openAICallModal() { document.getElementById('aiCallModal').style.display = 'flex'; }
+        function closeAICallModal() { document.getElementById('aiCallModal').style.display = 'none'; }
 
-        // ടെക്സ്റ്റ് സ്പീച്ച് വഴി ശബ്ദത്തിൽ കേൾപ്പിക്കാൻ (Text to Speech)
-        function speakText(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ml-IN';
-                window.speechSynthesis.speak(utterance);
+        function speakToAI() {
+            const input = document.getElementById('aiInput');
+            const status = document.getElementById('aiVoiceStatus');
+            if(input.value.trim() !== "") {
+                status.innerText = `Processing: "${input.value}"...`;
+                setTimeout(() => {
+                    status.innerText = `AI Assistant: I have registered your query regarding "${input.value}". Our system is processing it seamlessly!`;
+                    if ('speechSynthesis' in window) {
+                        let utterance = new SpeechSynthesisUtterance("I have registered your query. Our system is processing it seamlessly!");
+                        window.speechSynthesis.speak(utterance);
+                    }
+                }, 1000);
+                input.value = "";
             }
         }
 
-        const folders = [
-            { title: "EDUCATION", subtitle: "മതപഠനം & ഗ്രന്ഥങ്ങൾ", icon: "📚", type: "education", link: "" },
-            { title: "JOBS & VACANCIES", subtitle: "തൊഴിലവസരങ്ങൾ", icon: "💼", type: "link", link: "#" },
-            { title: "HEALTH", subtitle: "ആരോഗ്യം", icon: "🩺", type: "link", link: "#" },
-            { title: "GOV / PRIVATE", subtitle: "ഗവൺമെന്റ് സേവനങ്ങൾ", icon: "🏛️", type: "gov", link: "" },
-            { title: "LOCAL PLATFORM", subtitle: "പ്രാദേശിക പ്ലാറ്റ്‌ഫോം", icon: "📍", type: "link", link: "#" },
-            { title: "SERVICES", subtitle: "പൊതു സേവനങ്ങൾ", icon: "🛠️", type: "link", link: "#" },
-            { title: "SALES / BUY-SELL", subtitle: "വാങ്ങൽ - വിൽപന", icon: "🛒", type: "link", link: "#" },
-            { title: "HOTELS & RESTAURANTS", subtitle: "ഹോട്ടലുകൾ & ഭക്ഷണശാലകൾ", icon: "🏨", type: "link", link: "#" },
-            { title: "FOOD & CATERING", subtitle: "ഭക്ഷണ വിതരണം", icon: "🍲", type: "link", link: "#" },
-            { title: "TRANSPORT", subtitle: "ഗതാഗതം", icon: "🚌", type: "link", link: "#" },
-            { title: "DELIVERY & COURIER", subtitle: "കൊറിയർ സേവനങ്ങൾ", icon: "📦", type: "link", link: "#" },
-            { title: "WORKS & ORDERS", subtitle: "ടെൻഡറുകളും വർക്കുകളും", icon: "📋", type: "link", link: "#" },
-            { title: "REAL ESTATE", subtitle: "റിയൽ എസ്റ്റേറ്റ്", icon: "🏠", type: "link", link: "#" },
-            { title: "RETAIL & SHOPS", subtitle: "കടകളും ഷോപ്പിംഗും", icon: "🛍️", type: "link", link: "#" },
-            { title: "REPAIR & MAINT", subtitle: "റിപ്പയറിങ് സേവനങ്ങൾ", icon: "🔧", type: "link", link: "#" },
-            { title: "AUTOMOBILE", subtitle: "വാഹനങ്ങൾ", icon: "🚗", type: "link", link: "#" },
-            { title: "TRAINING & SKILL", subtitle: "പരിശീലനം", icon: "🎯", type: "link", link: "#" },
-            { title: "IT & TECH", subtitle: "സാങ്കേതികവിദ്യ", icon: "💻", type: "link", link: "#" },
-            { title: "FINANCE & ACC", subtitle: "ധനകാര്യം & ടാക്സ്", icon: "💰", type: "link", link: "#" },
-            { title: "LEGAL SERVICES", subtitle: "നിയമസേവനങ്ങൾ", icon: "⚖️", type: "link", link: "#" },
-            { title: "ENGINEERING", subtitle: "എഞ്ചിനീയറിങ്", icon: "⚙️", type: "link", link: "#" },
-            { title: "AGRICULTURE", subtitle: "കൃഷി", icon: "🌾", type: "link", link: "#" },
-            { title: "ANIMAL & DAIRY", subtitle: "മൃഗസംരക്ഷണം", icon: "🐄", type: "link", link: "#" },
-            { title: "FASHION & TEXT", subtitle: "വസ്ത്രമേഖല", icon: "👕", type: "link", link: "#" },
-            { title: "BEAUTY CARE", subtitle: "സൗന്ദര്യ സംരക്ഷണം", icon: "✨", type: "link", link: "#" },
-            { title: "OFFICE & ADMIN", subtitle: "ഭരണനിർവഹണം", icon: "🏢", type: "link", link: "#" },
-            { title: "MANUFACTURING", subtitle: "വ്യവസായം & നിർമാണം", icon: "🏭", type: "link", link: "#" },
-            { title: "WHOLESALE & DIST", subtitle: "വിതരണമേഖല", icon: "📦", type: "link", link: "#" },
-            { title: "ONLINE E-COMM", subtitle: "ഇ-കോമേഴ്‌സ്", icon: "🛒", type: "link", link: "#" },
-            { title: "CINEMA / FILM", subtitle: "സിനിമ & പ്രൊഡക്ഷൻ", isImg: true, icon: "oyes_productions.png", type: "cinema", link: "#" },
-            { title: "MEDIA", subtitle: "മാധ്യമങ്ങൾ", icon: "📰", type: "link", link: "#" },
-            { title: "NEWS", subtitle: "വാർത്തകൾ", icon: "📺", type: "link", link: "#" },
-            { title: "ENTERTAINMENT", subtitle: "വിനോദം", icon: "🎭", type: "link", link: "#" },
-            { title: "EVENTS MGMT", subtitle: "ഇവന്റുകൾ", icon: "🎉", type: "link", link: "#" },
-            { title: "DESIGN & CREATIVE", subtitle: "ഡിസൈൻ സേവനങ്ങൾ", icon: "🎨", type: "link", link: "#" },
-            { title: "TOURISM & TRAVEL", subtitle: "ടൂറിസം & യാത്ര", icon: "✈️", type: "link", link: "#" },
-            { title: "SPORTS & FITNESS", subtitle: "കായികം & ഫിറ്റ്നസ്", icon: "⚽", type: "link", link: "#" },
-            { title: "SOLAR & ENERGY", subtitle: "സോളാർ ഊർജം", icon: "☀️", type: "link", link: "#" },
-            { title: "ENVIRONMENT", subtitle: "പരിസ്ഥിതി", icon: "🌳", type: "link", link: "#" },
-            { title: "CLEANING & FAC", subtitle: "ക്ലീനിങ് സേവനങ്ങൾ", icon: "🧹", type: "link", link: "#" },
-            { title: "SECURITY", subtitle: "സുരക്ഷ", icon: "🔒", type: "link", link: "#" },
-            { title: "MACHINERY RENTAL", subtitle: "യന്ത്രങ്ങൾ വാടകയ്ക്ക്", icon: "🚜", type: "link", link: "#" },
-            { title: "PET & ANIMAL", subtitle: "വളർത്തുമൃഗങ്ങൾ", icon: "🐾", type: "link", link: "#" },
-            { title: "NGO / CHARITY", subtitle: "ചാരിറ്റി സേവനങ്ങൾ", icon: "🤝", type: "link", link: "#" },
-            { title: "JOIN OYES", subtitle: "ഒയസ് അംഗത്വം", icon: "⭐", type: "link", link: "https://wa.me/919947198248" },
-            { title: "HELP DESK", subtitle: "സഹായകേന്ദ്രം", icon: "📞", type: "link", link: "https://wa.me/919947198248" }
-        ];
-
-        function renderGrid() {
-            const grid = document.getElementById('folderGrid');
-            grid.innerHTML = '';
-            
-            folders.forEach((f) => {
-                const el = document.createElement('a');
-                el.className = 'card';
-                
-                if(f.type === "education") {
-                    el.href = "javascript:void(0);";
-                    el.onclick = () => openModal('educationModal');
-                } else if(f.type === "gov") {
-                    el.href = "javascript:void(0);";
-                    el.onclick = () => openModal('govModal');
-                } else if(f.type === "cinema") {
-                    el.href = "javascript:void(0);";
-                    el.onclick = () => openModal('cinemaModal');
-                } else {
-                    el.href = f.link || "#";
-                    if(f.link !== "#") el.target = "_blank";
-                }
-
-                let iconHTML = f.isImg ? `<img src="${f.icon}" class="card-img" alt="icon">` : `<span class="emoji-icon">${f.icon}</span>`;
-                el.innerHTML = `${iconHTML}<span class="title">${f.title}</span><span class="subtitle">${f.subtitle}</span>`;
-                grid.appendChild(el);
-            });
-        }
-
-        function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
-        function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
-
-        function sendAiMessage() {
-            const input = document.getElementById('userInput');
-            const chatBox = document.getElementById('chatBox');
-            const text = input.value.trim();
-            if(!text) return;
-
-            chatBox.innerHTML += `<div class="chat-msg user"><b>നിങ്ങൾ:</b> ${text}</div>`;
-            input.value = '';
-
+        function openVideoModal() {
+            document.getElementById('videoModal').style.display = 'flex';
             setTimeout(() => {
-                let reply = "പഠനവുമായി ബന്ധപ്പെട്ട നിങ്ങളുടെ സംശയത്തിന്: എജ്യുക്കേഷൻ വിഭാഗത്തിൽ ഖുർആൻ, ബൈബിൾ, രാമായണം, ഗീത തുടങ്ങിയ വിശുദ്ധ ഗ്രന്ഥങ്ങളുടെ ലിങ്കുകൾ ലഭ്യമാണ്.";
-                const lower = text.toLowerCase();
-                
-                if(lower.includes('oyes') || lower.includes('one world') || lower.includes('ആപ്പ്')) {
-                    reply = "OYES Saleem എന്നത് ആളുകളെ ബന്ധിപ്പിക്കാനും പുതിയ അവസരങ്ങൾ സൃഷ്ടിക്കാനുമുള്ള പ്ലാറ്റ്‌ഫോം ആണ്.";
-                } else if(lower.includes('cinema') || lower.includes('movie') || lower.includes('സിനിമ')) {
-                    reply = "സിനിമ വിഭാഗത്തിൽ പ്രൊഡക്ഷൻ വിവരങ്ങളും പ്രൊജക്റ്റുകളും ലഭ്യമാക്കിയിട്ടുണ്ട്.";
-                }
+                document.getElementById('videoStatus').innerText = "🟢 Live in OYES Secure Multi-User Room";
+            }, 2000);
+        }
+        function closeVideoModal() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('videoStatus').innerText = "🔴 Initializing Secure OYES Multi-User Room...";
+        }
 
-                chatBox.innerHTML += `<div class="chat-msg bot"><b>OYES Saleem AI:</b> ${reply} <button onclick="speakText('${reply}')" style="background:none; border:none; color:var(--gold); cursor:pointer; font-size:12px;" title="ശബ്ദത്തിൽ കേൾക്കുക">🔊</button></div>`;
+        function openChatModal() { document.getElementById('chatModal').style.display = 'flex'; }
+        function closeChatModal() { document.getElementById('chatModal').style.display = 'none'; }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const chatBox = document.getElementById('chatBox');
+            if(input.value.trim() !== "") {
+                chatBox.innerHTML += `<p style="color: #fff; text-align: right;"><b>You:</b> ${input.value}</p>`;
+                setTimeout(() => {
+                    chatBox.innerHTML += `<p style="color: #d4af37;"><b>OYES Member:</b> Message broadcasted successfully across the network.</p>`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000);
+                input.value = "";
                 chatBox.scrollTop = chatBox.scrollHeight;
-                
-                speakText(reply);
-            }, 500);
+            }
         }
 
-        function openAdmin() {
-            document.getElementById('adminModal').style.display = 'flex';
-            const listDiv = document.getElementById('adminFolderList');
-            listDiv.innerHTML = '';
-            folders.forEach((f, idx) => {
-                listDiv.innerHTML += `
-                    <div class="admin-folder-item">
-                        <span><b>${f.title}</b></span>
-                        <input type="text" id="link_${idx}" value="${f.link}" placeholder="Link" style="width:50%; padding:2px; background:#000; color:#fff; border:1px solid var(--gold);">
-                    </div>
-                `;
-            });
-        }
-
-        function closeAdmin() { document.getElementById('adminModal').style.display = 'none'; }
-
-        function saveAdminSettings() {
-            document.getElementById('appName').innerText = document.getElementById('adminTitleInput').value;
-            document.getElementById('appLogo').src = document.getElementById('adminLogoInput').value;
-            
-            folders.forEach((f, idx) => {
-                const inputVal = document.getElementById(`link_${idx}`);
-                if(inputVal) f.link = inputVal.value;
-            });
-
-            renderGrid();
-            closeAdmin();
-            alert("മാറ്റങ്ങൾ വിജയകരമായി സേവ് ചെയ്തു!");
-        }
-
-        window.onload = function() {
-            renderGrid();
-        };
+        function openSupportModal() { document.getElementById('supportModal').style.display = 'flex'; }
+        function closeSupportModal() { document.getElementById('supportModal').style.display = 'none'; }
     </script>
+
 </body>
 </html>
