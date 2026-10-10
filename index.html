@@ -3,110 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES - One World Many Opportunities</title>
+    <title>OYES - One World, Many Opportunities</title>
     <style>
+        :root {
+            --bg-color: #0c0a06;
+            --card-bg: #1a160d;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-color: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: sans-serif;
             margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117;
-            color: #ffffff;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
             position: relative;
+            min-height: 100vh;
         }
-        /* ബിസിനസ്സ് ലോഗിൻ ബട്ടൺ മുകളിൽ ഒരു സൈഡിൽ നൽകാൻ */
+
         .business-login-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background-color: #238636;
             color: white;
-            padding: 10px 18px;
+            padding: 6px 14px;
             text-decoration: none;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            transition: background-color 0.3s;
+            border: 1px solid #2ea043;
+            z-index: 100;
         }
         .business-login-btn:hover {
             background-color: #2ea043;
         }
-        .container {
-            max-width: 600px;
-            padding: 20px;
+
+        header {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #332910;
+            width: 100%;
+            max-width: 1000px;
         }
-        .logo-img {
-            width: 180px;
-            height: 180px;
+
+        .logo-container img {
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid #ffcc00;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            margin-bottom: 20px;
-            animation: fadeIn 2s ease-in-out;
+            border: 2px solid var(--gold);
         }
+
         h1 {
-            font-size: 2.5rem;
-            margin: 10px 0;
-            color: #ffcc00;
+            color: var(--gold);
+            margin: 5px 0;
+            font-size: 20px;
         }
-        p {
-            font-size: 1.1rem;
-            color: #cccccc;
-            margin-bottom: 30px;
+
+        p.tagline {
+            color: #bfa15f;
+            font-size: 11px;
+            margin: 0 0 10px 0;
         }
-        .menu {
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        button {
+            background: #1a160d;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button.admin-btn {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 10px 0;
+        }
+
+        @media (min-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #4a3b18;
+            border-radius: 8px;
+            padding: 10px 5px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+            min-height: 85px;
+            cursor: pointer;
         }
-        .menu-btn {
-            background-color: #1f6feb;
-            color: white;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+
+        .card:active {
+            background: #332910;
+        }
+
+        .card img.card-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            margin-bottom: 4px;
+            border-radius: 4px;
+        }
+
+        .card span.title {
+            font-size: 11px;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
+            line-height: 1.2;
+            color: var(--gold-light);
         }
-        .menu-btn:hover {
-            background-color: #388bfd;
-            transform: scale(1.05);
+
+        .card span.subtitle {
+            font-size: 9px;
+            color: #bfa15f;
+            margin-top: 2px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+
+        /* Modals */
+        .subModal, #adminModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+        }
+        .sub-modal-content, .modal-content {
+            background: #1a160d;
+            border: 2px solid var(--gold);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .sub-modal-content h3, .modal-content h3 {
+            color: var(--gold);
+            margin-top: 0;
+        }
+        .sub-link-btn {
+            display: block;
+            background: #23211a;
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+            padding: 10px;
+            margin: 8px 0;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .sub-link-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+        .close-modal, .modal-content button {
+            background: #444;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 6px;
+            margin: 6px 0;
+            background: #000;
+            border: 1px solid var(--gold);
+            color: #fff;
+            border-radius: 4px;
+        }
+        .admin-folder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0c0a06;
+            border: 1px solid #332910;
+            padding: 6px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ഷോപ്പ് ഉടമകൾക്കും ബിസിനസുകാർക്കുമുള്ള ലോഗിൻ ബട്ടൺ -->
-    <a href="#" class="business-login-btn">ബിസിനസ്സ് ലോഗിൻ</a>
+    <a href="https://wa.me/919072410161" target="_blank" class="business-login-btn">ബിസിനസ്സ് ലോഗിൻ</a>
 
-    <div class="container">
-        <!-- പരുന്തിന്റെ ഒറിജിനൽ ലോഗോ -->
-        <img src="watermarked_img_350157874029767559.png" alt="OYES Logo" class="logo-img">[span_1](start_span)[span_1](end_span)
-        
-        <h1>OYES</h1>
-        <p>ONE WORLD • MANY OPPORTUNITIES</p>
+    <div id="appContainer" style="display: flex; width: 100%; flex-direction: column; align-items: center;">
+        <header>
+            <div class="logo-container">
+                <img id="appLogo" src="watermarked_img_350157874029767559.png" alt="OYES Logo">
+            </div>
+            <h1 id="appName">OYES</h1>
+            <p class="tagline">ONE WORLD • MANY OPPORTUNITIES</p>
+            
+            <div class="controls">
+                <button class="admin-btn" onclick="openAdmin()">⚙️ അഡ്മിൻ പാനൽ</button>
+            </div>
+        </header>
 
-        <div class="menu">
-            <a href="#" class="menu-btn">ഹോം (Home)</a>
-            <a href="#" class="menu-btn">പ്രൊജക്റ്റുകൾ (Projects)</a>
-            <a href="#" class="menu-btn">ഓഡിഷൻ / കാസ്റ്റിംഗ് (Casting)</a>
-            <a href="#" class="menu-btn">ബന്ധപ്പെടാൻ (Contact)</a>
+        <!-- ഗ്രിഡ് ലേഔട്ട് -->
+        <div class="grid-container" id="folderGrid"></div>
+
+        <!-- എഡ്യൂക്കേഷൻ മോഡൽ (വിശുദ്ധ ഗ്രന്ഥങ്ങൾ) -->
+        <div id="educationModal" class="subModal">
+            <div class="sub-modal-content">
+                <h3>വിശുദ്ധ ഗ്രന്ഥങ്ങളും വിദ്യാഭ്യാസവും</h3>
+                <a href="https://quran.com" target="_blank" class="sub-link-btn">📖 ഖുർആൻ (Quran)</a>
+                <a href="https://www.bible.com" target="_blank" class="sub-link-btn">📖 ബൈബിൾ (Bible)</a>
+                <a href="https://www.valmiki.com" target="_blank" class="sub-link-btn">📖 രാമായണം (Ramayana)</a>
+                <a href="https://www.vedabase.io" target="_blank" class="sub-link-btn">📖 മഹാഭാരതം / ഗീത</a>
+                <button class="close-modal" onclick="closeModal('educationModal')">മടങ്ങിപ്പോവുക</button>
+            </div>
+        </div>
+
+        <!-- ഗവൺമെന്റ് പോർട്ടൽ മോഡൽ -->
+        <div id="govModal" class="subModal">
+            <div class="sub-modal-content">
+                <h3>ഗവൺമെന്റ് പോർട്ടലുകൾ</h3>
+                <a href="https://www.india.gov.in" target="_blank" class="sub-link-btn">🏛️ നാഷണൽ പോർട്ടൽ (India.gov.in)</a>
+                <a href="https://keralapolice.gov.in" target="_blank" class="sub-link-btn">🚨 കേരള പോലീസ് (Kerala Police)</a>
+                <a href="https://service.kerala.gov.in" target="_blank" class="sub-link-btn">📄 ഇ-സേവനങ്ങൾ (e-Services)</a>
+                <a href="https://uidai.gov.in" target="_blank" class="sub-link-btn">🆔 ആധാർ സേവനങ്ങൾ (Aadhaar)</a>
+                <a href="https://www.passportindia.gov.in" target="_blank" class="sub-link-btn">🛂 പാസ്‌പോർട്ട് സേവനങ്ങൾ (Passport)</a>
+                <button class="close-modal" onclick="closeModal('govModal')">മടങ്ങിപ്പോവുക</button>
+            </div>
+        </div>
+
+        <!-- അഡ്മിൻ പാനൽ മോഡൽ -->
+        <div id="adminModal">
+            <div class="modal-content">
+                <h3>അഡ്മിൻ നിയന്ത്രണ പാനൽ</h3>
+                <label>ആപ്പ് പേര്:</label>
+                <input type="text" id="adminTitleInput" value="OYES">
+                
+                <label>ലോഗോ ഫയൽ പേര്:</label>
+                <input type="text" id="adminLogoInput" value="watermarked_img_350157874029767559.png">
+
+                <hr style="border-color: var(--gold); margin: 10px 0;">
+                <h4 style="color: var(--gold); margin: 5px 0;">ഫോൾഡർ ലിങ്കുകൾ മാറ്റാൻ</h4>
+                <div id="adminFolderList" style="max-height: 150px; overflow-y: auto; text-align: left; margin-bottom: 10px;"></div>
+
+                <button onclick="saveAdminSettings()" style="background: var(--gold); color: #000; font-weight: bold;">മാറ്റങ്ങൾ സേവ് ചെയ്യുക</button>
+                <button onclick="closeAdmin()">റദ്ദാക്കുക</button>
+            </div>
         </div>
     </div>
 
+    <script>
+        const folders = [
+            { title: "EDUCATION", subtitle: "വിദ്യാഭ്യാസം & ഗ്രന്ഥങ്ങൾ", img: "oyes_icon.png", type: "education", link: "" },
+            { title: "JOBS & VACANCIES", subtitle: "തൊഴിലവസരങ്ങൾ", img: "oyes_productions.png", type: "link", link: "https://www.ncs.gov.in" },
+            { title: "HEALTH", subtitle: "ആരോഗ്യം", img: "oyes_icon.png", type: "link", link: "https://www.who.int" },
+            { title: "GOV / PRIVATE", subtitle: "ഗവൺമെന്റ് സേവനങ്ങൾ", img: "watermarked_img_350157874029767559.png", type: "gov", link: "" },
+            { title: "LOCAL PLATFORM", subtitle: "പ്രാദേശിക പ്ലാറ്റ്‌ഫോം", img: "oyes_icon.png", type: "link", link: "https://lsgkerala.gov.in" },
+            { title: "SERVICES", subtitle: "പൊതു സേവനങ്ങൾ", img: "oyes_productions.png", type: "link", link: "https://service.kerala.gov.in" },
+            { title: "SALES / BUY-SELL", subtitle: "വാങ്ങൽ - വിൽപന", img: "oyes_icon.png", type: "link", link: "https://www.olx.in" },
+            { title: "HOTELS & RESTAURANTS", subtitle: "ഹോട്ടലുകൾ & ഭക്ഷണശാലകൾ", img: "oyes_icon.png", type: "link", link: "https://www.zomato.com" },
+            { title: "FOOD & CATERING", subtitle: "ഭക്ഷണ വിതരണം", img: "oyes_icon.png", type: "link", link: "https://www.swiggy.com" },
+            { title: "TRANSPORT", subtitle: "ഗതാഗതം", img: "oyes_icon.png", type: "link", link: "https://ksrtc.kerala.gov.in" },
+            { title: "DELIVERY & COURIER", subtitle: "കൊറിയർ സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.indiapost.gov.in" },
+            { title: "WORKS & ORDERS", subtitle: "ടെൻഡറുകളും വർക്കുകളും", img: "oyes_icon.png", type: "link", link: "https://etenders.kerala.gov.in" },
+            { title: "REAL ESTATE", subtitle: "റിയൽ എസ്റ്റേറ്റ്", img: "oyes_icon.png", type: "link", link: "https://www.magicbricks.com" },
+            { title: "RETAIL & SHOPS", subtitle: "കടകളും ഷോപ്പിംഗും", img: "oyes_icon.png", type: "link", link: "https://www.amazon.in" },
+            { title: "REPAIR & MAINT", subtitle: "റിപ്പയറിങ് സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.urbancompany.com" },
+            { title: "AUTOMOBILE", subtitle: "വാഹനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.cardekho.com" },
+            { title: "TRAINING & SKILL", subtitle: "പരിശീലനം", img: "oyes_icon.png", type: "link", link: "https://www.skillindia.gov.in" },
+            { title: "IT & TECH", subtitle: "സാങ്കേതികവിദ്യ", img: "oyes_icon.png", type: "link", link: "https://technopark.org" },
+            { title: "FINANCE & ACC", subtitle: "ധനകാര്യം & ടാക്സ്", img: "oyes_icon.png", type: "link", link: "https://www.cleartax.in" },
+            { title: "LEGAL SERVICES", subtitle: "നിയമസേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://districts.ecourts.gov.in" },
+            { title: "ENGINEERING", subtitle: "എഞ്ചിനീയറിങ്", img: "oyes_icon.png", type: "link", link: "https://www.ieindia.org" },
+            { title: "AGRICULTURE", subtitle: "കൃഷി", img: "oyes_icon.png", type: "link", link: "https://keralaagriculture.gov.in" },
+            { title: "ANIMAL & DAIRY", subtitle: "മൃഗസംരക്ഷണം", img: "oyes_icon.png", type: "link", link: "https://ahd.kerala.gov.in" },
+            { title: "FASHION & TEXT", subtitle: "വസ്ത്രമേഖല", img: "oyes_icon.png", type: "link", link: "https://www.myntra.com" },
+            { title: "BEAUTY CARE", subtitle: "സൗന്ദര്യ സംരക്ഷണം", img: "oyes_icon.png", type: "link", link: "https://www.nykaa.com" },
+            { title: "OFFICE & ADMIN", subtitle: "ഭരണനിർവഹണം", img: "oyes_icon.png", type: "link", link: "https://www.india.gov.in" },
+            { title: "MANUFACTURING", subtitle: "വ്യവസായം & നിർമാണം", img: "oyes_icon.png", type: "link", link: "https://msme.gov.in" },
+            { title: "WHOLESALE & DIST", subtitle: "വിതരണമേഖല", img: "oyes_icon.png", type: "link", link: "https://www.indiamart.com" },
+            { title: "ONLINE E-COMM", subtitle: "ഇ-കോമേഴ്‌സ്", img: "oyes_icon.png", type: "link", link: "https://www.flipkart.com" },
+            { title: "CINEMA / FILM", subtitle: "സിനിമ & പ്രൊഡക്ഷൻ", img: "movie_clapper_person.png", type: "link", link: "https://www.imdb.com" },
+            { title: "MEDIA", subtitle: "മാധ്യമങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.manoramaonline.com" },
+            { title: "NEWS", subtitle: "വാർത്തകൾ", img: "oyes_icon.png", type: "link", link: "https://www.mathrubhumi.com" },
+            { title: "ENTERTAINMENT", subtitle: "വിനോദം", img: "oyes_icon.png", type: "link", link: "https://www.youtube.com" },
+            { title: "EVENTS MGMT", subtitle: "ഇവന്റുകൾ", img: "oyes_icon.png", type: "link", link: "https://in.bookmyshow.com" },
+            { title: "DESIGN & CREATIVE", subtitle: "ഡിസൈൻ സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.behance.net" },
+            { title: "TOURISM & TRAVEL", subtitle: "ടൂറിസം & യാത്ര", img: "oyes_icon.png", type: "link", link: "https://www.keralatourism.org" },
+            { title: "SPORTS & FITNESS", subtitle: "കായികം & ഫിറ്റ്നസ്", img: "oyes_icon.png", type: "link", link: "https://www.espncricinfo.com" },
+            { title: "SOLAR & ENERGY", subtitle: "സോളാർ ഊർജം", img: "oyes_icon.png", type: "link", link: "https://www.uraan.org" },
+            { title: "ENVIRONMENT", subtitle: "പരിസ്ഥിതി", img: "oyes_icon.png", type: "link", link: "https://env.gov.in" },
+            { title: "CLEANING & FAC", subtitle: "ക്ലീനിങ് സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.urbancompany.com" },
+            { title: "SECURITY", subtitle: "സുരക്ഷ", img: "oyes_icon.png", type: "link", link: "https://keralapolice.gov.in" },
+            { title: "MACHINERY RENTAL", subtitle: "യന്ത്രങ്ങൾ വാടകയ്ക്ക്", img: "oyes_icon.png", type: "link", link: "https://www.indiamart.com" },
+            { title: "PET & ANIMAL", subtitle: "വളർത്തുമൃഗങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.petfinder.com" },
+            { title: "NGO / CHARITY", subtitle: "ചാരിറ്റി സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.unicef.org" },
+            { title: "JOIN OYES", subtitle: "ഒയസ് അംഗത്വം", img: "watermarked_img_350157874029767559.png", type: "link", link: "https://wa.me/919072410161" },
+            { title: "HELP DESK", subtitle: "സഹായകേന്ദ്രം", img: "oyes_icon.png", type: "link", link: "https://wa.me/919072410161" }
+        ];
+
+        function renderGrid() {
+            const grid = document.getElementById('folderGrid');
+            grid.innerHTML = '';
+            
+            folders.forEach((f, index) => {
+                const el = document.createElement('a');
+                el.className = 'card';
+                
+                if(f.type === "education") {
+                    el.href = "javascript:void(0);";
+                    el.onclick = () => openModal('educationModal');
+                } else if(f.type === "gov") {
+                    el.href = "javascript:void(0);";
+                    el.onclick = () => openModal('govModal');
+                } else {
+                    el.href = f.link || "#";
+                    el.target = "_blank";
+                }
+
+                el.innerHTML = `<img src="${f.img}" class="card-img" alt="icon"><span class="title">${f.title}</span><span class="subtitle">${f.subtitle}</span>`;
+                grid.appendChild(el);
+            });
+        }
+
+        function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+
+        function openAdmin() {
+            document.getElementById('adminModal').style.display = 'flex';
+            const listDiv = document.getElementById('adminFolderList');
+            listDiv.innerHTML = '';
+            folders.forEach((f, idx) => {
+                listDiv.innerHTML += `
+                    <div class="admin-folder-item">
+                        <span><b>${f.title}</b></span>
+                        <input type="text" id="link_${idx}" value="${f.link}" placeholder="Link" style="width:50%; padding:2px; background:#000; color:#fff; border:1px solid var(--gold);">
+                    </div>
+                `;
+            });
+        }
+
+        function closeAdmin() { document.getElementById('adminModal').style.display = 'none'; }
+
+        function saveAdminSettings() {
+            document.getElementById('appName').innerText = document.getElementById('adminTitleInput').value;
+            document.getElementById('appLogo').src = document.getElementById('adminLogoInput').value;
+            
+            folders.forEach((f, idx) => {
+                const inputVal = document.getElementById(`link_${idx}`);
+                if(inputVal) f.link = inputVal.value;
+            });
+
+            renderGrid();
+            closeAdmin();
+            alert("മാറ്റങ്ങൾ വിജയകരമായി സേവ് ചെയ്തു!");
+        }
+
+        window.onload = function() {
+            renderGrid();
+        };
+    </script>
 </body>
 </html>
