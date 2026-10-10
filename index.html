@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OYES - One World, Many Opportunities</title>
+    <style>
+        :root {
+            --bg-color: #0c0a06;
+            --card-bg: #1a160d;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-color: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: sans-serif;
+            margin: 0;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Login Screen */
+        #loginScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+        .login-box {
+            background: var(--card-bg);
+            border: 2px solid var(--gold);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 320px;
+            text-align: center;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            background: #000;
+            border: 1px solid var(--gold);
+            color: #fff;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* App Container */
+        #appContainer {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #332910;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+        }
+
+        h1 {
+            color: var(--gold);
+            margin: 5px 0;
+            font-size: 20px;
+        }
+
+        p.tagline {
+            color: #bfa15f;
+            font-size: 11px;
+            margin: 0 0 10px 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        select, button {
+            background: #1a160d;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button.admin-btn {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 10px 0;
+        }
+
+        @media (min-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #4a3b18;
+            border-radius: 8px;
+            padding: 10px 5px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 85px;
+        }
+
+        .card:active {
+            background: #332910;
+        }
+
+        .card img.card-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            margin-bottom: 4px;
+            border-radius: 4px;
+        }
+
+        .card span.title {
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 1.1;
+            color: var(--gold-light);
+        }
+
+        .card span.subtitle {
+            font-size: 9px;
+            color: #bfa15f;
+            margin-top: 2px;
+        }
+
+        /* Admin Modal */
+        #adminModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-content {
+            background: #1a160d;
+            border: 2px solid var(--gold);
+            padding: 15px;
+            border-radius: 8px;
+            width: 85%;
+            max-width: 350px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 6px;
+            margin: 6px 0;
+            background: #000;
+            border: 1px solid var(--gold);
+            color: #fff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <h2 style="color: var(--gold); margin-top:0;">OYES Login</h2>
+            <p style="font-size: 12px; color: #bfa15f;">തുടരാൻ നിങ്ങളുടെ ഫോൺ നമ്പറോ ഇമെയിലോ നൽകുക</p>
+            <input type="text" id="userInput" placeholder="Phone / Email">
+            <button onclick="handleLogin()" style="width:100%; background:var(--gold); color:#000;">Login</button>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="appContainer">
+        <header>
+            <div class="logo-container">
+                <img id="appLogo" src="oyes_logo.png" alt="OYES Logo">
+            </div>
+            <h1 id="appName">OYES</h1>
+            <p class="tagline">ONE WORLD • MANY OPPORTUNITIES</p>
+            
+            <div class="controls">
+                <select id="langSelector" onchange="renderGrid()">
+                    <option value="ml">മലയാളം</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="en" selected>English</option>
+                    <option value="ar">العربية</option>
+                </select>
+                <button class="admin-btn" onclick="openAdmin()">⚙️ Admin</button>
+            </div>
+        </header>
+
+        <!-- 46 Folders Grid -->
+        <div class="grid-container" id="folderGrid"></div>
+
+        <!-- Admin Panel Modal -->
+        <div id="adminModal">
+            <div class="modal-content">
+                <h3>Admin Settings</h3>
+                <label>Logo Name:</label>
+                <input type="text" id="adminLogoInput" value="oyes_logo.png">
+                <label>App Title:</label>
+                <input type="text" id="adminTitleInput" value="OYES">
+                <br><br>
+                <button onclick="saveAdminSettings()">Save</button>
+                <button style="background:#444; color:#fff;" onclick="closeAdmin()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const val = document.getElementById('userInput').value.trim();
+            if(val !== "") {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'flex';
+                renderGrid();
+            } else {
+                alert("ദയവായി വിവരങ്ങൾ നൽകുക!");
+            }
+        }
+
+        const folders = [
+            { title: "EDUCATION", subtitles: { ml: "വിദ്യാഭ്യാസം", ta: "கல்வி", hi: "शिक्षा", en: "Education", ar: "تعليم" }, img: "oyes_icon.png", link: "https://quran.com" },
+            { title: "JOBS & VACANCIES", subtitles: { ml: "ജോലികളും ഒഴിവുകളും", ta: "வேலைவாய்ப்புகள்", hi: "नौकरी", en: "Jobs & Vacancies", ar: "الوظائف" }, img: "oyes_productions.png", link: "#" },
+            { title: "HEALTH", subtitles: { ml: "ആരോഗ്യം", ta: "சுகாதாரம்", hi: "स्वास्थ्य", en: "Health", ar: "صحة" }, img: "oyes_icon.png", link: "#" },
+            { title: "GOV / PRIVATE", subtitles: { ml: "സർക്കാർ-സ്വകാര്യ സേവനങ്ങൾ", ta: "அரசு சேவைகள்", hi: "सरकारी सेवाएं", en: "Gov / Private", ar: "الخدمات" }, img: "oyes_logo.png", link: "https://www.india.gov.in" },
+            { title: "LOCAL PLATFORM", subtitles: { ml: "പ്രാദേശിക പ്ലാറ്റ്‌ഫോം", ta: "உள்ளூர் தளம்", hi: "स्थानीय मंच", en: "Local Platform", ar: "منصة محلية" }, img: "oyes_icon.png", link: "#" },
+            { title: "SERVICES", subtitles: { ml: "സേവനങ്ങൾ", ta: "சேவைகள்", hi: "सेवाएं", en: "Services", ar: "خدمات" }, img: "oyes_productions.png", link: "#" },
+            { title: "SALES / BUY-SELL", subtitles: { ml: "വാങ്ങൽ-വിൽപന", ta: "விற்பனை", hi: "खरीदना-बेचना", en: "Sales / Buy-Sell", ar: "بيع وشراء" }, img: "oyes_icon.png", link: "#" },
+            { title: "HOTELS & RESTAURANTS", subtitles: { ml: "ഹോട്ടലുകൾ", ta: "உணவகங்கள்", hi: "होटल", en: "Hotels & Rest", ar: "فنادق ومطاعم" }, img: "oyes_icon.png", link: "#" },
+            { title: "FOOD & CATERING", subtitles: { ml: "ഭക്ഷണവും കാറ്ററിങ്ങും", ta: "உணவு", hi: "भोजन", en: "Food & Catering", ar: "طعام" }, img: "oyes_icon.png", link: "#" },
+            { title: "TRANSPORT", subtitles: { ml: "ഗതാഗതവും ചരക്കുനീക്കവും", ta: "போக்குவரத்து", hi: "परिवहन", en: "Transport", ar: "النقل" }, img: "oyes_icon.png", link: "#" },
+            { title: "DELIVERY & COURIER", subtitles: { ml: "ഡെലിവറിയും കൊറിയറും", ta: "டெலிவரி", hi: "डिलीवरी", en: "Delivery", ar: "التوصيل" }, img: "oyes_icon.png", link: "#" },
+            { title: "WORKS & ORDERS", subtitles: { ml: "ജോലികളും വർക്ക് ഓർഡറുകളും", ta: "பணிகள்", hi: "कार्य", en: "Works & Orders", ar: "أعمال" }, img: "oyes_icon.png", link: "#" },
+            { title: "REAL ESTATE", subtitles: { ml: "റിയൽ എസ്റ്റേറ്റ്", ta: "ரியல் எஸ்டேட்", hi: "रियल एस्टेट", en: "Real Estate", ar: "عقارات" }, img: "oyes_icon.png", link: "#" },
+            { title: "RETAIL & SHOPS", subtitles: { ml: "റീട്ടയിൽ കടകളും ഷോപ്പുകളും", ta: "கடைகள்", hi: "दुकानें", en: "Retail & Shops", ar: "متاجر" }, img: "oyes_icon.png", link: "#" },
+            { title: "REPAIR & MAINT", subtitles: { ml: "റിപ്പയറും പരിപാലനവും", ta: "பராமரிப்பு", hi: "मरम्मत", en: "Repair & Maint", ar: "صيانة" }, img: "oyes_icon.png", link: "#" },
+            { title: "AUTOMOBILE", subtitles: { ml: "ഓട്ടോമൊബൈൽ", ta: "தானுந்துகள்", hi: "ऑटोमोबाइल", en: "Automobile", ar: "سيارات" }, img: "oyes_icon.png", link: "#" },
+            { title: "TRAINING & SKILL", subtitles: { ml: "പരിശീലനവും നൈപുണ്യവും", ta: "பயிற்சி", hi: "प्रशिक्षण", en: "Training & Skill", ar: "تدريب" }, img: "oyes_icon.png", link: "#" },
+            { title: "IT & TECH", subtitles: { ml: "ഐ.ടി.യും സാങ്കേതികവിദ്യയും", hi: "तकनीकी", en: "IT & Tech", ar: "تكنولوجيا" }, img: "oyes_icon.png", link: "#" },
+            { title: "FINANCE & ACC", subtitles: { ml: "ധനകാര്യവും അക്കൗണ്ടിങ്ങും", ta: "நிதி", hi: "वित्त", en: "Finance & Acc", ar: "مالية" }, img: "oyes_icon.png", link: "#" },
+            { title: "LEGAL SERVICES", subtitles: { ml: "നിയമസേവനങ്ങൾ", ta: "சட்ட சேவைகள்", hi: "कानूनी", en: "Legal Services", ar: "خدمات قانونية" }, img: "oyes_icon.png", link: "#" },
+            { title: "ENGINEERING", subtitles: { ml: "എഞ്ചിനീയറിങ് സേവനങ്ങൾ", ta: "பொறியியல்", hi: "इंजीनियरिंग", en: "Engineering", ar: "هندسة" }, img: "oyes_icon.png", link: "#" },
+            { title: "AGRICULTURE", subtitles: { ml: "കൃഷിയും കർഷകസേവനങ്ങളും", ta: "விவசாயம்", hi: "कृषि", en: "Agriculture", ar: "زراعة" }, img: "oyes_icon.png", link: "#" },
+            { title: "ANIMAL & DAIRY", subtitles: { ml: "മൃഗസംരക്ഷണവും ക്ഷീരമേഖലയും", hi: "पशुपालन", en: "Animal & Dairy", ar: "ثروة حيوانية" }, img: "oyes_icon.png", link: "#" },
+            { title: "FASHION & TEXT", subtitles: { ml: "ഫാഷനും ടെക്സ്റ്റൽസും", hi: "फैशन", en: "Fashion & Text", ar: "أزياء" }, img: "oyes_icon.png", link: "#" },
+            { title: "BEAUTY CARE", subtitles: { ml: "സൗന്ദര്യവും പരിചരണവും", hi: "सौंदर्य", en: "Beauty Care", ar: "عناية" }, img: "oyes_icon.png", link: "#" },
+            { title: "OFFICE & ADMIN", subtitles: { ml: "ഓഫീസും ഭരണനിർവഹണവും", hi: "कार्यालय", en: "Office & Admin", ar: "إدارة" }, img: "oyes_icon.png", link: "#" },
+            { title: "MANUFACTURING", subtitles: { ml: "നിർമാണവും വ്യവസായവും", hi: "विनिर्माण", en: "Manufacturing", ar: "تصنيع" }, img: "oyes_icon.png", link: "#" },
+            { title: "WHOLESALE & DIST", subtitles: { ml: "മുഖ്യവ്യാപാരവും വിതരണവും", hi: "थोक", en: "Wholesale & Dist", ar: "توزيع" }, img: "oyes_icon.png", link: "#" },
+            { title: "ONLINE E-COMM", subtitles: { ml: "ഓൺലൈൻ വ്യാപാരവും ഇ-കോമേഴ്‌സും", hi: "ई-कॉमर्स", en: "Online E-Comm", ar: "تجارة إلكترونية" }, img: "oyes_icon.png", link: "#" },
+            { title: "CINEMA / FILM", subtitles: { ml: "സിനിമയും ചലച്ചിത്രമേഖലയും", ta: "சினிமா", hi: "सिनेमा", en: "Cinema / Film", ar: "سينما" }, img: "movie_clapper_person.png", link: "#" },
+            { title: "MEDIA", subtitles: { ml: "മാധ്യമങ്ങൾ", ta: "ஊடகம்", hi: "मीडिया", en: "Media", ar: "إعلام" }, img: "oyes_icon.png", link: "#" },
+            { title: "NEWS", subtitles: { ml: "വാർത്തകൾ", ta: "செய்திகள்", hi: "समाचार", en: "News", ar: "أخبار" }, img: "oyes_icon.png", link: "#" },
+            { title: "ENTERTAINMENT", subtitles: { ml: "വിനോദം", ta: "பொழுதுபோக்கு", hi: "मनोरंजन", en: "Entertainment", ar: "ترفيه" }, img: "oyes_icon.png", link: "#" },
+            { title: "EVENTS MGMT", subtitles: { ml: "ഇവന്റുകളും മാനേജ്‌മെന്റും", hi: "इवेंट", en: "Events Mgmt", ar: "فعاليات" }, img: "oyes_icon.png", link: "#" },
+            { title: "DESIGN & CREATIVE", subtitles: { ml: "ഡിസൈനും ക്രിയേറ്റീവ് സേവനങ്ങളും", hi: "डिजाइन", en: "Design & Creative", ar: "تصميم" }, img: "oyes_icon.png", link: "#" },
+            { title: "TOURISM & TRAVEL", subtitles: { ml: "ടൂറിസവും യാത്രയും", hi: "पर्यटन", en: "Tourism & Travel", ar: "سياحة" }, img: "oyes_icon.png", link: "#" },
+            { title: "SPORTS & FITNESS", subtitles: { ml: "കായികവും ഫിറ്റ്നസും", hi: "खेल", en: "Sports & Fitness", ar: "رياضة" }, img: "oyes_icon.png", link: "#" },
+            { title: "SOLAR & ENERGY", subtitles: { ml: "സോളാറും പുനരുപയോഗ ഊർജവും", hi: "सौर ऊर्जा", en: "Solar & Energy", ar: "طاقة شمسية" }, img: "oyes_icon.png", link: "#" },
+            { title: "ENVIRONMENT", subtitles: { ml: "പരിസ്ഥിതിയും മാലിന്യസംസ്കരണവും", hi: "पर्यावरण", en: "Environment", ar: "بيئة" }, img: "oyes_icon.png", link: "#" },
+            { title: "CLEANING & FAC", subtitles: { ml: "ക്ലീനിങ്ങും സൗകര്യപരിപാലനവും", hi: "सफाई", en: "Cleaning & Fac", ar: "تنظيف" }, img: "oyes_icon.png", link: "#" },
+            { title: "SECURITY", subtitles: { ml: "സുരക്ഷാസേവനങ്ങൾ", ta: "பாதுகாப்பு", hi: "सुरक्षा", en: "Security", ar: "أمن" }, img: "oyes_icon.png", link: "#" },
+            { title: "MACHINERY RENTAL", subtitles: { ml: "യന്ത്രങ്ങളും ഉപകരണങ്ങളും", hi: "मशीनरी", en: "Machinery Rental", ar: "تأجير آلات" }, img: "oyes_icon.png", link: "#" },
+            { title: "PET & ANIMAL", subtitles: { ml: "വളർത്തുമൃഗങ്ങളും സേവനങ്ങളും", hi: "पालतू", en: "Pet & Animal", ar: "حيوانات أليفة" }, img: "oyes_icon.png", link: "#" },
+            { title: "NGO / CHARITY", subtitles: { ml: "എൻ.ജി.ഒ., ചാരിറ്റി, സമൂഹസേവനം", hi: "एनजीओ", en: "NGO / Charity", ar: "جمعيات خيرية" }, img: "oyes_icon.png", link: "#" },
+            { title: "JOIN OYES", subtitles: { ml: "ഒയസ് അംഗത്വവും", ta: "உறுப்பினர்", hi: "सदस्यता", en: "Join Oyes", ar: "انضم إلينا" }, img: "oyes_logo.png", link: "#" },
+            { title: "HELP DESK", subtitles: { ml: "സഹായകേന്ദ്രം", ta: "உதவி மையம்", hi: "सहायता", en: "Help Desk", ar: "مكتب المساعدة" }, img: "oyes_icon.png", link: "#" }
+        ];
+
+        function renderGrid() {
+            const lang = document.getElementById('langSelector').value;
+            const grid = document.getElementById('folder
