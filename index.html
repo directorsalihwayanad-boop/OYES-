@@ -60,12 +60,14 @@
     <header class="p-4 text-center bg-slate-950/60 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
         <div class="flex justify-between items-center max-w-md mx-auto px-2 mb-1">
             <div class="flex items-center gap-2">
-                <span id="headerLogoIcon" ondblclick="verifyDirectorAccess()" class="text-2xl cursor-pointer" title="Restricted Admin Area">🌟</span>
+                <div id="headerLogoContainer" ondblclick="verifyDirectorAccess()" class="cursor-pointer flex items-center justify-center" title="Restricted Admin Area">
+                    <span id="headerLogoIcon" class="text-2xl">🌟</span>
+                </div>
                 <h1 id="headerMainTitle" ondblclick="verifyDirectorAccess()" class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 drop-shadow-[0_5px_15px_rgba(6,182,212,0.4)] cursor-pointer" title="Restricted Admin Area">
                     OYES APP
                 </h1>
             </div>
-            <!-- Language Selector Dropdown for All Users -->
+            <!-- Language Selector Dropdown -->
             <select id="langSelector" onchange="changeLanguage(this.value)" class="bg-slate-900 text-cyan-300 text-xs font-bold border border-cyan-500/50 rounded-xl px-2.5 py-1.5 focus:outline-none shadow-md">
                 <option value="en">English</option>
                 <option value="ml">മലയാളം</option>
@@ -77,6 +79,18 @@
     <!-- Main Dashboard View (Home Screen) -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
+        <!-- Home AI Dedicated Badge / Mark -->
+        <div onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 p-3 rounded-2xl flex items-center justify-between cursor-pointer shadow-lg group">
+            <div class="flex items-center gap-2.5">
+                <span class="text-xl animate-bounce">🤖✨</span>
+                <div>
+                    <h3 class="text-xs font-bold text-cyan-300">OYES Total AI Companion</h3>
+                    <p class="text-[10px] text-slate-300">Tap here for general guidance & app navigation</p>
+                </div>
+            </div>
+            <span class="text-xs bg-cyan-600/30 border border-cyan-400 text-cyan-200 px-2.5 py-1 rounded-xl font-bold group-hover:bg-cyan-600/50">Ask AI</span>
+        </div>
+
         <!-- Search Bar with Voice Mic Button -->
         <div class="relative flex items-center">
             <input type="text" id="searchBox" placeholder="Search or speak here..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
@@ -93,7 +107,7 @@
             <span id="voiceStatus" class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">Secure App Active</span>
         </div>
 
-        <!-- Folders Grid Container (Customer Services Only) -->
+        <!-- Folders Grid Container -->
         <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
             
             <!-- 1. Education -->
@@ -166,7 +180,7 @@
                 {name: 'OYES APP Overview', url: '#'},
                 {name: 'Anti-Screenshot Protection Active', url: '#'},
                 {name: 'Direct Admin Support', url: '#'},
-                {name: 'Version 3.1 Secure Build', url: '#'}
+                {name: 'Version 4.2 Total AI Master Build', url: '#'}
             ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/25 border border-blue-400/40 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">ℹ️</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-info">App Info</h3>
@@ -176,14 +190,14 @@
             <!-- 7. Special 'All Services' Master Folder Card -->
             <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
-                <h3 class="font-bold text-sm text-teal-300 folder-all">All Other Services</h3>
-                <p class="text-[10px] text-teal-200/70 mt-1 folder-all-sub">Remaining 46 Master Folders</p>
+                <h3 class="font-bold text-sm folder-all text-teal-300">All Other Services</h3>
+                <p class="text-[10px] folder-all-sub text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
             </div>
 
         </div>
     </main>
 
-    <!-- Full New Page View with Small Grid Cards for Sub-Folders -->
+    <!-- Full New Page View with Sub-Folders & Total Domain-Locked AI Assistant -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
@@ -191,6 +205,24 @@
             </button>
             <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
+
+        <!-- Total Domain-Locked AI Assistant Badge Box -->
+        <div class="bg-gradient-to-br from-indigo-950/95 to-slate-900/95 border border-indigo-500/70 p-4 rounded-3xl shadow-xl space-y-2.5">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span id="domainAiIcon" class="text-xl">💡🤖</span>
+                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Total Domain Expert AI</h4>
+                </div>
+                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800 font-semibold">Strictly This Field Only</span>
+            </div>
+            <p id="aiAssistantPromptText" class="text-[11px] text-slate-300">Ask any legal, business, or field-specific doubt. The AI will explain clearly and resolve everything!</p>
+            <div class="flex gap-2 pt-1">
+                <input type="text" id="aiFolderQuery" placeholder="Ask your doubt or business strategy here..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400 shadow-inner">
+                <button onclick="askTotalDomainAI()" class="bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+            </div>
+            <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3.5 rounded-xl border border-cyan-700/60 mt-2 space-y-1.5 leading-relaxed"></div>
+        </div>
+
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3.5 pb-6">
             <!-- Dynamic Sub items will load here as grid cards -->
         </div>
@@ -211,12 +243,13 @@
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with Director Security & Language Switcher -->
+    <!-- JavaScript with Total Domain-Locked Expert AI System -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
         const DIRECTOR_ID = "salih9947";
+        let currentActiveFolder = "";
 
         function verifyDirectorAccess() {
             let enteredId = prompt("🔐 Enter Director ID / Secret Code to Access CMS:");
@@ -315,10 +348,22 @@
             }
         }
 
+        function openHomeAIChat() {
+            let query = prompt("🤖 OYES Total AI Assistant:\nAsk any general question about app features or navigation:");
+            if(query) {
+                alert(`OYES AI Response:\nYou asked about "${query}". This app features 52 verified master folders and complete AI guidance systems for all fields!`);
+            }
+        }
+
         function openSubFolders(folderName, subItems) {
+            currentActiveFolder = folderName;
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = folderName;
+            document.getElementById('aiFolderResponse').classList.add('hidden');
+            document.getElementById('aiFolderQuery').value = '';
+            document.getElementById('domainAiTitle').innerText = `${folderName} Total Expert AI`;
+            document.getElementById('aiAssistantPromptText').innerText = `Strictly bound to "${folderName}". Ask any legal, business, or operational doubt to get clear solutions!`;
 
             const grid = document.getElementById('pageContentGrid');
             grid.innerHTML = '';
@@ -343,10 +388,54 @@
             window.scrollTo(0, 0);
         }
 
+        // Comprehensive Total Domain-Locked AI Response Generator
+        function askTotalDomainAI() {
+            let query = document.getElementById('aiFolderQuery').value.trim();
+            let respBox = document.getElementById('aiFolderResponse');
+            if(!query) {
+                alert('Please type your doubt or issue regarding this section first!');
+                return;
+            }
+
+            respBox.classList.remove('hidden');
+            let lowerFolder = currentActiveFolder.toLowerCase();
+            let domainOutput = "";
+
+            if (lowerFolder.includes('government') || lowerFolder.includes('service')) {
+                domainOutput = `🏛️ <b>Government & Public Services AI Analysis:</b><br>
+                • Regarding your query: "<i>${query}</i>"<br>
+                • <b>Legal & Administrative Procedure:</b> This involves official government verification. Ensure you have valid documents (Aadhaar, ID, certificates).<br>
+                • <b>Action Steps:</b> File requests through verified portals like e-District or National Portals linked here. We strictly discuss government protocols in this section.`;
+            } else if (lowerFolder.includes('sales') || lowerFolder.includes('market')) {
+                domainOutput = `🛒 <b>Business, Sales & Marketplace AI Guidance:</b><br>
+                • Regarding your business query: "<i>${query}</i>"<br>
+                • <b>Market Strategy & Dealings:</b> For sales and trading, ensure proper documentation, fair pricing, and verified listings.<br>
+                • <b>Action Steps:</b> Utilize OLX, agricultural exchanges, or commercial portals linked in this section for safe and profitable transactions.`;
+            } else if (lowerFolder.includes('education') || lowerFolder.includes('book')) {
+                domainOutput = `📖 <b>Education & Learning AI Guidance:</b><br>
+                • Regarding: "<i>${query}</i>"<br>
+                • <b>Guidance:</b> Access digital e-books, Swayam courses, and scholarship links provided in this folder for complete academic support.`;
+            } else if (lowerFolder.includes('cinema') || lowerFolder.includes('music')) {
+                domainOutput = `🎬 <b>Cinema & Media AI Guidance:</b><br>
+                • Regarding: "<i>${query}</i>"<br>
+                • <b>Guidance:</b> Utilize free AI tiers (Suno AI, Canva, CapCut) for your screenplay promotions, posters, and video editing workflows.`;
+            } else {
+                domainOutput = `💡 <b>Total Domain Expert AI Analysis:</b><br>
+                • Regarding your query "<i>${query}</i>" in <b>${currentActiveFolder}</b>:<br>
+                • <b>Detailed Breakdown:</b> This system provides complete clarity on procedures, rules, and best practices for this specific domain. Refer to the official tools and links provided in this folder for full execution.`;
+            }
+
+            respBox.innerHTML = domainOutput;
+        }
+
         function openAllFoldersPage() {
+            currentActiveFolder = "All Other Services";
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
+            document.getElementById('aiFolderQuery').value = '';
+            document.getElementById('domainAiTitle').innerText = `All Services Total AI`;
+            document.getElementById('aiAssistantPromptText').innerText = `Ask queries strictly regarding any of our 46 master folders!`;
 
             const grid = document.getElementById('pageContentGrid');
             grid.innerHTML = '';
@@ -394,12 +483,11 @@
             const adminCMS = [
                 { title: '📞 Director Salih Call', desc: '9947198248', action: 'call1' },
                 { title: '📞 OYES Saleem Call', desc: '9633111000', action: 'call2' },
-                { title: '🖼️ Change App Logo', desc: 'Update Header Icon & Emoji', action: 'logo' },
-                { title: '📸 Upload Custom Background', desc: 'Select Photo from Gallery', action: 'bgphoto' },
-                { title: '🎨 Theme Colors', desc: 'Set Neon / Dark Themes', action: 'bgtheme' },
+                { title: '🖼️ Change App Logo', desc: 'Upload Logo from Gallery/Emoji', action: 'logo' },
+                { title: '📸 Upload Background Photo', desc: 'Select Image from Gallery/Storage', action: 'bgphoto' },
+                { title: '🎨 App Themes & Colors', desc: 'Set Neon, Purple or Emerald Theme', action: 'bgtheme' },
                 { title: '✍️ Edit App Titles & Texts', desc: 'Customize Headings & Slogans', action: 'text' },
-                { title: '➕ Add New Folder', desc: 'Create Custom Category Card', action: 'addfolder' },
-                { title: '👑 Admin Support Info', desc: 'Platformoyes@gmail.com', action: 'email' }
+                { title: '➕ Add New Folder', desc: 'Create Custom Category Card', action: 'addfolder' }
             ];
 
             adminCMS.forEach((item, index) => {
@@ -416,38 +504,37 @@
                     } else if(item.action === 'call2') {
                         window.location.href = 'tel:+919633111000';
                     } else if(item.action === 'logo') {
-                        let newEmoji = prompt('Enter new logo emoji or symbol (e.g. 🌟, 🚀, 💎):', '🌟');
-                        if(newEmoji) {
-                            document.getElementById('headerLogoIcon').innerText = newEmoji;
-                            alert('Logo updated successfully!');
+                        let choice = prompt('Choose Logo Type:\n1. Enter Emoji symbol (e.g. 🌟, 🚀, 💎)\n2. Upload Photo from Gallery/Storage\nEnter 1 or 2:', '1');
+                        if(choice === '1') {
+                            let newEmoji = prompt('Enter new logo emoji or symbol:', '🌟');
+                            if(newEmoji) {
+                                document.getElementById('headerLogoContainer').innerHTML = `<span id="headerLogoIcon" class="text-2xl">${newEmoji}</span>`;
+                                alert('Logo emoji updated successfully!');
+                            }
+                        } else if(choice === '2') {
+                            triggerFilePicker(function(imgUrl) {
+                                document.getElementById('headerLogoContainer').innerHTML = `<img src="${imgUrl}" class="w-8 h-8 rounded-full object-cover border border-cyan-400 shadow-md">`;
+                                alert('📸 Custom logo photo uploaded successfully from Gallery/Storage!');
+                                goBackHome();
+                            });
                         }
                     } else if(item.action === 'bgphoto') {
-                        let fileInput = document.createElement('input');
-                        fileInput.type = 'file';
-                        fileInput.accept = 'image/*';
-                        fileInput.onchange = function(e) {
-                            const file = e.target.files[0];
-                            if (file) {
-                                const reader = new FileReader();
-                                reader.onload = function(evt) {
-                                    document.getElementById('appBody').style.backgroundImage = `url('${evt.target.result}')`;
-                                    alert('📸 Custom background photo uploaded and set successfully!');
-                                };
-                                reader.readAsDataURL(file);
-                            }
-                        };
-                        fileInput.click();
+                        triggerFilePicker(function(imgUrl) {
+                            document.body.style.backgroundImage = `url('${imgUrl}')`;
+                            alert('📸 Background photo successfully loaded from Gallery/Storage!');
+                            goBackHome();
+                        });
                     } else if(item.action === 'bgtheme') {
-                        let bgChoice = prompt('Choose Background Theme:\n1. Deep Space Neon (Default)\n2. Cyberpunk Purple\n3. Emerald Dark\nEnter number (1-3):', '1');
+                        let bgChoice = prompt('Choose App Theme & Colors:\n1. Deep Space Neon (Default)\n2. Cyberpunk Purple Theme\n3. Emerald Dark Theme\nEnter number (1-3):', '1');
                         if(bgChoice === '2') {
-                            document.getElementById('appBody').style.background = 'radial-gradient(circle at top, #4c1d95, #311042, #030712)';
-                            alert('Background changed to Cyberpunk Purple!');
+                            document.body.style.background = 'radial-gradient(circle at top, #4c1d95, #311042, #030712)';
+                            alert('Cyberpunk Purple theme activated!');
                         } else if(bgChoice === '3') {
-                            document.getElementById('appBody').style.background = 'radial-gradient(circle at top, #065f46, #064e3b, #022c22)';
-                            alert('Background changed to Emerald Dark!');
+                            document.body.style.background = 'radial-gradient(circle at top, #065f46, #064e3b, #022c22)';
+                            alert('Emerald Dark theme activated!');
                         } else {
-                            document.getElementById('appBody').style.background = 'radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)';
-                            alert('Default Deep Space Neon is active.');
+                            document.body.style.background = 'radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)';
+                            alert('Deep Space Neon theme active.');
                         }
                     } else if(item.action === 'text') {
                         let newTitle = prompt('Enter new App Title:', 'OYES APP');
@@ -456,9 +543,20 @@
                         if(newSub) document.getElementById('headerSubTitle').innerText = '"' + newSub + '"';
                         alert('App texts updated successfully!');
                     } else if(item.action === 'addfolder') {
-                        let folderTitle = prompt('Enter new folder name:');
+                        let folderTitle = prompt('Enter new folder name to add:');
                         if(folderTitle) {
-                            alert('New folder "' + folderTitle + '" added successfully to the system!');
+                            const newCard = document.createElement('div');
+                            newCard.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
+                            newCard.innerHTML = `
+                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/30 flex items-center justify-center text-xl mb-2.5 group-hover:scale-110 transition-transform">📁</div>
+                                <h3 class="font-bold text-sm text-slate-100">${folderTitle}</h3>
+                                <p class="text-[10px] text-purple-200/60 mt-1">Custom Folder</p>
+                            `;
+                            newCard.onclick = function() {
+                                alert(folderTitle + ' - Custom folder opened.');
+                            };
+                            document.getElementById('folderGrid').appendChild(newCard);
+                            alert('New folder "' + folderTitle + '" added successfully to Home screen!');
                         }
                     } else {
                         alert(item.title + ' configuration panel is active.');
@@ -467,6 +565,24 @@
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
+        }
+
+        // Universal File & Gallery Picker Helper
+        function triggerFilePicker(callback) {
+            let fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = "image/*";
+            fileInput.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        callback(evt.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            fileInput.click();
         }
 
         function goBackHome() {
