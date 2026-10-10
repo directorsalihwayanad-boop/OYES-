@@ -56,7 +56,78 @@
 </head>
 <body id="appBody" class="flex flex-col justify-between">
 
-    <!-- Header Section (Double click logo for Director/Admin entry) -->
+    <!-- Mandatory Login & 3-Day Visitor Gate -->
+    <div id="loginGateModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-900 border border-cyan-500/60 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-3xl animate-pulse">⏳🔒</div>
+            <h2 class="text-base font-black text-cyan-300 uppercase tracking-wide">OYES APP - സുരക്ഷിത പ്രവേശനം</h2>
+            
+            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 text-left space-y-1.5 max-h-32 overflow-y-auto text-[11px] text-slate-200 leading-relaxed">
+                <p class="font-bold text-cyan-300">🌟 100% വിശ്വസ്തത & 10% അഡ്മിൻ ഫീസ്:</p>
+                <p>കച്ചവടങ്ങളിൽ നിന്ന് ലഭിക്കുന്ന ലാഭത്തിന്റെ 10% അഡ്മിൻ പാനലിന് നൽകണം. ദുരുപയോഗം ചെയ്താൽ കർശന നിയമനടപടിയും നഷ്ടപരിഹാരവും ഉണ്ടാകും.</p>
+                <p class="font-bold text-amber-400">⏱️ വിസിറ്റർ നിബന്ധന:</p>
+                <p>വിസിറ്റർ ലോഗിൻ ചെയ്യുന്നവർക്ക് 3 ദിവസത്തെ കാലാവധി മാത്രമേ ഉണ്ടാകൂ. അതിനുശേഷം ഫുൾ രജിസ്ട്രേഷൻ ചെയ്യേണ്ടതാണ്.</p>
+            </div>
+
+            <!-- Tab Switcher (Full Registration vs Visitor) -->
+            <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+                <button onclick="switchLoginTab('full')" id="tabFullBtn" class="py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all">ഫുൾ രജിസ്ട്രേഷൻ</button>
+                <button onclick="switchLoginTab('visitor')" id="tabVisitorBtn" class="py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all">3 ദിവസത്തെ വിസിറ്റർ</button>
+            </div>
+
+            <!-- Full Registration Form -->
+            <div id="fullLoginForm" class="space-y-3 text-left">
+                <input type="text" id="userNameInput" placeholder="നിങ്ങളുടെ മുഴുവൻ പേര് (Full Name)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+                
+                <div class="space-y-1">
+                    <label class="text-[10px] text-cyan-300 font-semibold">കാറ്റഗറി തിരഞ്ഞെടുക്കുക:</label>
+                    <select id="userCategorySelect" class="w-full bg-slate-950 text-cyan-300 font-semibold px-3 py-2 rounded-xl border border-cyan-500/50 text-xs focus:outline-none">
+                        <option value="business">💼 ബിസിനസ്സ് / കച്ചവടക്കാരൻ</option>
+                        <option value="buyer">🛒 സാധനങ്ങൾ വാങ്ങാൻ</option>
+                        <option value="job">👨‍💻 ജോലി ആവശ്യത്തിന്</option>
+                        <option value="services">🌐 മറ്റ് പൊതു സേവനങ്ങൾ</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] text-cyan-300 font-semibold">ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക:</label>
+                    <input type="file" id="userPhotoInput" accept="image/*" class="w-full bg-slate-950 text-slate-300 text-[10px] px-3 py-2 rounded-xl border border-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-cyan-600 file:text-white hover:file:bg-cyan-500">
+                </div>
+
+                <label class="flex items-start gap-2.5 cursor-pointer pt-1">
+                    <input type="checkbox" id="legalCheckbox" class="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-0">
+                    <span class="text-[11px] text-slate-300 leading-tight">ഫോട്ടോ, കാറ്റഗറി, നിബന്ധനകൾ എന്നിവ അംഗീകരിക്കുന്നു</span>
+                </label>
+
+                <button onclick="completeLoginGate()" class="w-full py-3 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">
+                    ✅ ഫോട്ടോ സഹിതം പ്രവേശിക്കുക
+                </button>
+            </div>
+
+            <!-- Visitor Login Form (3 Days Trial) -->
+            <div id="visitorLoginForm" class="hidden space-y-3 text-left">
+                <input type="text" id="visitorNameInput" placeholder="നിങ്ങളുടെ പേര് (Name)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+                <input type="tel" id="visitorPhoneInput" placeholder="ഫോൺ നമ്പർ (Phone Number e.g. 9876543210)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+                
+                <div class="bg-amber-950/60 border border-amber-500/50 p-2.5 rounded-xl text-[10px] text-amber-200">
+                    ⚠️ ശ്രദ്ധിക്കുക: ഈ വിസിറ്റർ ലോഗിന് <b>3 ദിവസത്തെ കാലാവധി</b> മാത്രമാണുള്ളത്. അതിനുശേഷം തുടരാൻ ഫുൾ രജിസ്ട്രേഷൻ ആവശ്യമാണ്.
+                </div>
+
+                <label class="flex items-start gap-2.5 cursor-pointer pt-1">
+                    <input type="checkbox" id="visitorLegalCheckbox" class="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-0">
+                    <span class="text-[11px] text-slate-300 leading-tight">3 ദിവസത്തെ വിസിറ്റർ നിബന്ധനകൾ അംഗീകരിക്കുന്നു</span>
+                </label>
+
+                <button onclick="completeVisitorLogin()" class="w-full py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">
+                    ⏳ 3 ദിവസത്തേക്ക് പ്രവേശിക്കുക
+                </button>
+            </div>
+
+            <p class="text-[9px] text-slate-400">OYES Security & Trial Gateway</p>
+        </div>
+    </div>
+
+    <!-- Header Section -->
     <header class="p-4 text-center bg-slate-950/60 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
         <div class="flex justify-between items-center max-w-md mx-auto px-2 mb-1">
             <div class="flex items-center gap-2">
@@ -79,16 +150,13 @@
     <!-- Main Dashboard View (Home Screen) -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
-        <!-- Home AI Dedicated Badge / Mark -->
-        <div onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 p-3 rounded-2xl flex items-center justify-between cursor-pointer shadow-lg group">
-            <div class="flex items-center gap-2.5">
-                <span class="text-xl animate-bounce">🤖✨</span>
-                <div>
-                    <h3 class="text-xs font-bold text-cyan-300">OYES Total AI Companion</h3>
-                    <p class="text-[10px] text-slate-300">Tap here for general guidance & app navigation</p>
-                </div>
-            </div>
-            <span class="text-xs bg-cyan-600/30 border border-cyan-400 text-cyan-200 px-2.5 py-1 rounded-xl font-bold group-hover:bg-cyan-600/50">Ask AI</span>
+        <!-- Compact Home AI Assistant Button -->
+        <div class="flex justify-between items-center px-1">
+            <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: General</span>
+            <button onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 hover:border-cyan-400 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md transition-all">
+                <span class="text-sm">🤖✨</span>
+                <span class="text-[11px] font-bold text-cyan-300">OYES AI Assistant</span>
+            </button>
         </div>
 
         <!-- Search Bar with Voice Mic Button -->
@@ -104,7 +172,7 @@
             <h2 id="homeSectionTitle" class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
             </h2>
-            <span id="voiceStatus" class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">Secure App Active</span>
+            <span id="voiceStatus" class="text-[10px] text-emerald-300 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full font-semibold">Active Session</span>
         </div>
 
         <!-- Folders Grid Container -->
@@ -165,26 +233,21 @@
 
             <!-- 5. Sales Marketplace -->
             <div onclick="openSubFolders('Sales Marketplace', [
-                {name: 'Livestock (Cows, Goats) - Free List', url: 'https://www.olx.in/'},
-                {name: 'Vehicles & Machinery', url: 'https://www.olx.in/'},
-                {name: 'Agricultural Products Sale', url: 'https://keralaagriculture.gov.in/'},
-                {name: 'General Marketplace & Exchange', url: 'https://www.olx.in/'}
+                {name: 'Livestock (Cows, Goats) - Trusted Trade', action: 'peer_call'},
+                {name: 'Vehicles & Machinery - Trusted Trade', action: 'peer_call'},
+                {name: 'Agricultural Products - Trusted Trade', action: 'peer_call'},
+                {name: 'General Marketplace Exchange', action: 'peer_call'}
             ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-sales">Sales</h3>
-                <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">Marketplace</p>
+                <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
             </div>
 
-            <!-- 6. App Info Card -->
-            <div onclick="openSubFolders('App Information', [
-                {name: 'OYES APP Overview', url: '#'},
-                {name: 'Anti-Screenshot Protection Active', url: '#'},
-                {name: 'Direct Admin Support', url: '#'},
-                {name: 'Version 4.2 Total AI Master Build', url: '#'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/25 border border-blue-400/40 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">ℹ️</div>
-                <h3 class="font-bold text-sm text-slate-100 folder-info">App Info</h3>
-                <p class="text-[10px] text-blue-200/60 mt-1 folder-info-sub">Security & Details</p>
+            <!-- 6. Trusted Call Hub & Legal Warning Card -->
+            <div onclick="openVideoCallStudio()" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/30 to-orange-600/30 border border-amber-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">⏳📞</div>
+                <h3 class="font-bold text-sm text-amber-300">Session Call Hub</h3>
+                <p class="text-[10px] text-amber-200/70 mt-1">Trial & Active Protocol</p>
             </div>
 
             <!-- 7. Special 'All Services' Master Folder Card -->
@@ -197,7 +260,7 @@
         </div>
     </main>
 
-    <!-- Full New Page View with Sub-Folders & Total Domain-Locked AI Assistant -->
+    <!-- Full New Page View with Sub-Folders & Compact AI Assistant -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
@@ -206,21 +269,20 @@
             <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
 
-        <!-- Total Domain-Locked AI Assistant Badge Box -->
-        <div class="bg-gradient-to-br from-indigo-950/95 to-slate-900/95 border border-indigo-500/70 p-4 rounded-3xl shadow-xl space-y-2.5">
+        <!-- Compact Domain-Locked AI Assistant Box -->
+        <div id="aiContainerBox" class="bg-slate-900/90 border border-indigo-500/50 p-3 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span id="domainAiIcon" class="text-xl">💡🤖</span>
-                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Total Domain Expert AI</h4>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-base">🤖</span>
+                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Domain AI Guide</h4>
                 </div>
-                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800 font-semibold">Strictly This Field Only</span>
+                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Strictly Field Only</span>
             </div>
-            <p id="aiAssistantPromptText" class="text-[11px] text-slate-300">Ask any legal, business, or field-specific doubt. The AI will explain clearly and resolve everything!</p>
-            <div class="flex gap-2 pt-1">
-                <input type="text" id="aiFolderQuery" placeholder="Ask your doubt or business strategy here..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400 shadow-inner">
-                <button onclick="askTotalDomainAI()" class="bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+            <div class="flex gap-2">
+                <input type="text" id="aiFolderQuery" placeholder="Ask your doubt here..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-1.5 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button onclick="askTotalDomainAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition-all">Ask</button>
             </div>
-            <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3.5 rounded-xl border border-cyan-700/60 mt-2 space-y-1.5 leading-relaxed"></div>
+            <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
 
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3.5 pb-6">
@@ -243,13 +305,139 @@
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with Total Domain-Locked Expert AI System -->
+    <!-- JavaScript with 3-Day Visitor Expiry Logic -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
         const DIRECTOR_ID = "salih9947";
         let currentActiveFolder = "";
+        let loggedInUserName = "";
+        let loggedInUserPhoto = "";
+        let loggedInUserCategory = "";
+        let isVisitorMode = false;
+
+        // Check 3-Day Visitor Expiry on App Load
+        window.onload = function() {
+            let visitorData = localStorage.getItem('oyes_visitor_session');
+            if(visitorData) {
+                let session = JSON.parse(visitorData);
+                let currentTime = new Date().getTime();
+                let threeDaysInMillis = 3 * 24 * 60 * 60 * 1000; // 3 Days in milliseconds
+
+                if(currentTime - session.timestamp > threeDaysInMillis) {
+                    // Expired after 3 days
+                    localStorage.removeItem('oyes_visitor_session');
+                    alert('⏳ നിങ്ങളുടെ 3 ദിവസത്തെ വിസിറ്റർ കാലാവധി കഴിഞ്ഞിരിക്കുന്നു!\n\nതുടർന്ന് ആപ്പ് ഉപയോഗിക്കാൻ ദയവായി ഫോട്ടോയും വിവരങ്ങളും നൽകി ഫുൾ രജിസ്ട്രേഷൻ ചെയ്യുക.');
+                } else {
+                    // Active Visitor Session
+                    loggedInUserName = session.name + " (Visitor)";
+                    loggedInUserCategory = "Visitor (" + session.phone + "; 3-Day Trial Active)";
+                    loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                    document.getElementById('userCategoryBadge').innerText = `Visitor: ${session.name} (3 Days Trial)`;
+                    document.getElementById('loginGateModal').classList.add('hidden');
+                }
+            }
+        };
+
+        function switchLoginTab(mode) {
+            const fullForm = document.getElementById('fullLoginForm');
+            const visitorForm = document.getElementById('visitorLoginForm');
+            const fullBtn = document.getElementById('tabFullBtn');
+            const visitorBtn = document.getElementById('tabVisitorBtn');
+
+            if(mode === 'full') {
+                isVisitorMode = false;
+                fullForm.classList.remove('hidden');
+                visitorForm.classList.add('hidden');
+                fullBtn.className = "py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all";
+                visitorBtn.className = "py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all";
+            } else {
+                isVisitorMode = true;
+                fullForm.classList.add('hidden');
+                visitorForm.classList.remove('hidden');
+                visitorBtn.className = "py-1.5 bg-amber-600 text-white font-bold text-[11px] rounded-lg transition-all";
+                fullBtn.className = "py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all";
+            }
+        }
+
+        function completeLoginGate() {
+            let nameInput = document.getElementById('userNameInput').value.trim();
+            let categorySelect = document.getElementById('userCategorySelect').value;
+            let photoInput = document.getElementById('userPhotoInput').files[0];
+            let isChecked = document.getElementById('legalCheckbox').checked;
+
+            if(!nameInput) {
+                alert('ദയവായി നിങ്ങളുടെ പേര് നൽകുക!');
+                return;
+            }
+            if(!photoInput) {
+                alert('⚠️ ഫോട്ടോ നിർബന്ധമാണ്! ദയവായി നിങ്ങളുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക.');
+                return;
+            }
+            if(!isChecked) {
+                alert('തുടരുന്നതിനായി ദയവായി നിബന്ധനകൾ അംഗീകരിച്ച് ടിക്ക് ചെയ്യുക!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                loggedInUserPhoto = e.target.result;
+                loggedInUserName = nameInput;
+                loggedInUserCategory = categorySelect;
+
+                let catNames = {
+                    'business': '💼 ബിസിനസ്സ് / കച്ചവടം',
+                    'buyer': '🛒 സാധനങ്ങൾ വാങ്ങാൻ',
+                    'job': '👨‍💻 ജോലി ആവശ്യം',
+                    'services': '🌐 പൊതു സേവനങ്ങൾ'
+                };
+
+                document.getElementById('userCategoryBadge').innerText = `User: ${loggedInUserName} (${catNames[loggedInUserCategory]})`;
+                document.getElementById('loginGateModal').classList.add('hidden');
+                
+                alert(`✅ സ്വാഗതം, ${loggedInUserName}!\n\nഫുൾ രജിസ്ട്രേഷൻ വിജയകരമായി പൂർത്തിയായി.`);
+                speakText(`Welcome to Oyes App, ${loggedInUserName}.`);
+            };
+            reader.readAsDataURL(photoInput);
+        }
+
+        function completeVisitorLogin() {
+            let nameInput = document.getElementById('visitorNameInput').value.trim();
+            let phoneInput = document.getElementById('visitorPhoneInput').value.trim();
+            let isChecked = document.getElementById('visitorLegalCheckbox').checked;
+
+            if(!nameInput) {
+                alert('ദയവായി നിങ്ങളുടെ പേര് നൽകുക!');
+                return;
+            }
+            if(!phoneInput || phoneInput.length < 10) {
+                alert('ദയവായി നിങ്ങളുടെ ശരിയായ ഫോൺ നമ്പർ നൽകുക!');
+                return;
+            }
+            if(!isChecked) {
+                alert('തുടരുന്നതിനായി ദയവായി നിബന്ധനകൾ അംഗീകരിച്ച് ടിക്ക് ചെയ്യുക!');
+                return;
+            }
+
+            // Save visitor session with current timestamp
+            let sessionData = {
+                name: nameInput,
+                phone: phoneInput,
+                timestamp: new Date().getTime()
+            };
+            localStorage.setItem('oyes_visitor_session', JSON.stringify(sessionData));
+
+            loggedInUserName = nameInput + " (Visitor)";
+            loggedInUserCategory = "Visitor (" + phoneInput + "; 3-Day Trial)";
+            loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+            document.getElementById('userCategoryBadge').innerText = `Visitor: ${nameInput} (3 Days Trial)`;
+            document.getElementById('loginGateModal').classList.add('hidden');
+
+            alert(`✅ വിസിറ്റർ ലോഗിൻ വിജയം!\n\nസ്വാഗതം, ${nameInput}. നിങ്ങൾക്ക് 3 ദിവസത്തേക്ക് ആപ്പ് സൗജന്യമായി ഉപയോഗിക്കാം.`);
+            speakText(`Welcome visitor ${nameInput}. 3 days trial active.`);
+        }
 
         function verifyDirectorAccess() {
             let enteredId = prompt("🔐 Enter Director ID / Secret Code to Access CMS:");
@@ -257,9 +445,11 @@
                 enteredId = enteredId.trim();
                 if (enteredId === DIRECTOR_ID) {
                     alert("✅ Director Access Verified Successfully!");
+                    speakText("Director access verified successfully.");
                     openAdminPanel();
                 } else {
                     alert("❌ Invalid ID! Access Denied.");
+                    speakText("Invalid ID. Access denied.");
                 }
             }
         }
@@ -325,6 +515,7 @@
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
                 utterance.rate = 0.95;
+                utterance.pitch = 1.0;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -349,9 +540,56 @@
         }
 
         function openHomeAIChat() {
-            let query = prompt("🤖 OYES Total AI Assistant:\nAsk any general question about app features or navigation:");
+            let query = prompt("🤖 OYES AI Assistant:\nAsk any general question about app navigation:");
             if(query) {
-                alert(`OYES AI Response:\nYou asked about "${query}". This app features 52 verified master folders and complete AI guidance systems for all fields!`);
+                let responseText = `You asked about "${query}". This app features 52 verified master folders and complete AI guidance systems!`;
+                speakText(responseText);
+                alert(`OYES AI Response:\n` + responseText);
+            }
+        }
+
+        function openVideoCallStudio() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = '3-Day Trial & Call Hub';
+            document.getElementById('aiContainerBox').classList.add('hidden');
+
+            const grid = document.getElementById('pageContentGrid');
+            grid.className = "flex flex-col items-center justify-center space-y-4 col-span-2 pb-6 pt-2";
+            grid.innerHTML = `
+                <div class="w-full bg-slate-950/90 border border-amber-500/60 p-6 rounded-3xl shadow-2xl text-center space-y-4">
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-amber-400 shadow-lg">
+                        <img src="${loggedInUserPhoto}" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-sm text-amber-300 uppercase tracking-wider">${loggedInUserName}</h3>
+                    
+                    <div class="bg-slate-900 border border-amber-500/60 p-3.5 rounded-2xl text-left space-y-2">
+                        <h4 class="text-xs font-bold text-cyan-300">🌟 ട്രയൽ സെഷൻ വിവരങ്ങൾ:</h4>
+                        <p class="text-[10px] text-slate-300">വിസിറ്റർ ട്രയൽ കാലാവധിക്ക് ശേഷം തുടരാൻ ഫുൾ രജിസ്ട്രേഷൻ ആവശ്യമാണ്. 10% അഡ്മിൻ ഫീസ് ബാധകമാണ്.</p>
+                        
+                        <h4 class="text-xs font-bold text-red-400 pt-1">⚠️ കർശന മുന്നറിയിപ്പ് & നഷ്ടപരിഹാരം:</h4>
+                        <p class="text-[10px] text-slate-200 leading-relaxed">
+                            ആപ്പ് ദുരുപയോഗം ചെയ്താൽ നൽകിയിട്ടുള്ള വിവരങ്ങൾ വെച്ച് സൈബർ സെൽ മുഖേന കടുത്ത നിയമനടപടിയും നഷ്ടപരിഹാരവും ഈടാക്കും.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5 pt-1">
+                        <button onclick="startPeerCall('Video', 'Trader / Peer')" class="py-2.5 px-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-[11px] rounded-xl shadow">📹 Trial Video Call</button>
+                        <button onclick="startPeerCall('Audio', 'Trader / Peer')" class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] rounded-xl shadow">📞 Trial Audio Call</button>
+                    </div>
+                </div>
+            `;
+            speakText("Trial call hub opened.");
+            window.scrollTo(0, 0);
+        }
+
+        function startPeerCall(callType, targetName) {
+            let agreed = confirm(`⏳ TRIAL CALL & WARNING:\n\nUser: ${loggedInUserName}\n\n• 10% admin fee applies to trades.\n• Misuse will result in strict legal action and compensation.\n\nDo you agree to proceed?`);
+            if(agreed) {
+                speakText(`Initiating secure ${callType} call.`);
+                alert(`🔒 Connecting secure ${callType} call with ${targetName}...\n• Status: Session Monitored.`);
+            } else {
+                speakText("Call cancelled.");
             }
         }
 
@@ -359,28 +597,32 @@
             currentActiveFolder = folderName;
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('aiContainerBox').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = folderName;
             document.getElementById('aiFolderResponse').classList.add('hidden');
             document.getElementById('aiFolderQuery').value = '';
-            document.getElementById('domainAiTitle').innerText = `${folderName} Total Expert AI`;
-            document.getElementById('aiAssistantPromptText').innerText = `Strictly bound to "${folderName}". Ask any legal, business, or operational doubt to get clear solutions!`;
+            document.getElementById('domainAiTitle').innerText = `${folderName} AI Guide`;
 
             const grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
 
             subItems.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">⏳</div>
                     <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
-                    <p class="text-[9px] text-cyan-200/60 mt-1">Click to open link</p>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">Trial Access</p>
                 `;
                 card.onclick = function() {
-                    if(item.url !== '#') {
+                    if(item.action === 'peer_call') {
+                        startPeerCall('Secure Trade Call', item.name);
+                    } else if(item.url) {
                         window.open(item.url, '_blank');
                     } else {
                         alert(item.name + ' - Securely active.');
+                        speakText(item.name + ' is securely active.');
                     }
                 };
                 grid.appendChild(card);
@@ -388,56 +630,44 @@
             window.scrollTo(0, 0);
         }
 
-        // Comprehensive Total Domain-Locked AI Response Generator
         function askTotalDomainAI() {
             let query = document.getElementById('aiFolderQuery').value.trim();
             let respBox = document.getElementById('aiFolderResponse');
             if(!query) {
-                alert('Please type your doubt or issue regarding this section first!');
+                alert('Please type your doubt regarding this section first!');
+                speakText('Please type your doubt regarding this section first.');
                 return;
             }
 
             respBox.classList.remove('hidden');
             let lowerFolder = currentActiveFolder.toLowerCase();
             let domainOutput = "";
+            let speechOutput = "";
 
-            if (lowerFolder.includes('government') || lowerFolder.includes('service')) {
-                domainOutput = `🏛️ <b>Government & Public Services AI Analysis:</b><br>
-                • Regarding your query: "<i>${query}</i>"<br>
-                • <b>Legal & Administrative Procedure:</b> This involves official government verification. Ensure you have valid documents (Aadhaar, ID, certificates).<br>
-                • <b>Action Steps:</b> File requests through verified portals like e-District or National Portals linked here. We strictly discuss government protocols in this section.`;
-            } else if (lowerFolder.includes('sales') || lowerFolder.includes('market')) {
-                domainOutput = `🛒 <b>Business, Sales & Marketplace AI Guidance:</b><br>
-                • Regarding your business query: "<i>${query}</i>"<br>
-                • <b>Market Strategy & Dealings:</b> For sales and trading, ensure proper documentation, fair pricing, and verified listings.<br>
-                • <b>Action Steps:</b> Utilize OLX, agricultural exchanges, or commercial portals linked in this section for safe and profitable transactions.`;
-            } else if (lowerFolder.includes('education') || lowerFolder.includes('book')) {
-                domainOutput = `📖 <b>Education & Learning AI Guidance:</b><br>
-                • Regarding: "<i>${query}</i>"<br>
-                • <b>Guidance:</b> Access digital e-books, Swayam courses, and scholarship links provided in this folder for complete academic support.`;
-            } else if (lowerFolder.includes('cinema') || lowerFolder.includes('music')) {
-                domainOutput = `🎬 <b>Cinema & Media AI Guidance:</b><br>
-                • Regarding: "<i>${query}</i>"<br>
-                • <b>Guidance:</b> Utilize free AI tiers (Suno AI, Canva, CapCut) for your screenplay promotions, posters, and video editing workflows.`;
+            if (lowerFolder.includes('sales') || lowerFolder.includes('market')) {
+                speechOutput = `Marketplace guide. Trade with confidence, subject to 10% admin fee.`;
+                domainOutput = `🛒 <b>Marketplace AI:</b><br>• Query: "<i>${query}</i>"<br>• Active Session: ${loggedInUserName}. 10% admin commission applies.`;
             } else {
-                domainOutput = `💡 <b>Total Domain Expert AI Analysis:</b><br>
-                • Regarding your query "<i>${query}</i>" in <b>${currentActiveFolder}</b>:<br>
-                • <b>Detailed Breakdown:</b> This system provides complete clarity on procedures, rules, and best practices for this specific domain. Refer to the official tools and links provided in this folder for full execution.`;
+                speechOutput = `Expert AI analysis for ${currentActiveFolder}.`;
+                domainOutput = `💡 <b>Expert AI Analysis (${currentActiveFolder}):</b><br>• Query: "<i>${query}</i>"<br>• Managed securely under OYES APP guidelines.`;
             }
 
             respBox.innerHTML = domainOutput;
+            speakText(speechOutput);
         }
 
         function openAllFoldersPage() {
             currentActiveFolder = "All Other Services";
-            document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('aiContainerBox').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
             document.getElementById('aiFolderQuery').value = '';
-            document.getElementById('domainAiTitle').innerText = `All Services Total AI`;
-            document.getElementById('aiAssistantPromptText').innerText = `Ask queries strictly regarding any of our 46 master folders!`;
+            document.getElementById('domainAiTitle').innerText = `All Services AI`;
+            speakText("Loading all 46 master folders.");
 
             const grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
 
             const allFolders = [
@@ -459,25 +689,26 @@
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">⏳</div>
                     <h3 class="font-bold text-xs text-teal-200">${(index + 1)}. ${item}</h3>
-                    <p class="text-[9px] text-teal-300/60 mt-1">Open Folder →</p>
+                    <p class="text-[9px] text-teal-300/60 mt-1">Trial Call →</p>
                 `;
                 card.onclick = function() {
-                    alert(item + ' - Loading folder...');
+                    startPeerCall('Service Call', item);
                 };
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
         }
 
-        // Hidden Director CMS Dashboard
         function openAdminPanel() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('aiContainerBox').classList.add('hidden');
             document.getElementById('pageTitle').innerText = 'Director CMS & Customization Panel';
 
             const grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
 
             const adminCMS = [
@@ -500,9 +731,9 @@
                 `;
                 card.onclick = function() {
                     if(item.action === 'call1') {
-                        window.location.href = 'tel:+919947198248';
+                        startPeerCall('Director Call', 'Salih Wayanad');
                     } else if(item.action === 'call2') {
-                        window.location.href = 'tel:+919633111000';
+                        startPeerCall('Director Call', 'OYES Saleem');
                     } else if(item.action === 'logo') {
                         let choice = prompt('Choose Logo Type:\n1. Enter Emoji symbol (e.g. 🌟, 🚀, 💎)\n2. Upload Photo from Gallery/Storage\nEnter 1 or 2:', '1');
                         if(choice === '1') {
@@ -510,11 +741,13 @@
                             if(newEmoji) {
                                 document.getElementById('headerLogoContainer').innerHTML = `<span id="headerLogoIcon" class="text-2xl">${newEmoji}</span>`;
                                 alert('Logo emoji updated successfully!');
+                                speakText('Logo updated successfully.');
                             }
                         } else if(choice === '2') {
                             triggerFilePicker(function(imgUrl) {
                                 document.getElementById('headerLogoContainer').innerHTML = `<img src="${imgUrl}" class="w-8 h-8 rounded-full object-cover border border-cyan-400 shadow-md">`;
                                 alert('📸 Custom logo photo uploaded successfully from Gallery/Storage!');
+                                speakText('Custom logo photo uploaded successfully.');
                                 goBackHome();
                             });
                         }
@@ -522,6 +755,7 @@
                         triggerFilePicker(function(imgUrl) {
                             document.body.style.backgroundImage = `url('${imgUrl}')`;
                             alert('📸 Background photo successfully loaded from Gallery/Storage!');
+                            speakText('Background photo loaded successfully.');
                             goBackHome();
                         });
                     } else if(item.action === 'bgtheme') {
@@ -529,12 +763,15 @@
                         if(bgChoice === '2') {
                             document.body.style.background = 'radial-gradient(circle at top, #4c1d95, #311042, #030712)';
                             alert('Cyberpunk Purple theme activated!');
+                            speakText('Cyberpunk Purple theme activated.');
                         } else if(bgChoice === '3') {
                             document.body.style.background = 'radial-gradient(circle at top, #065f46, #064e3b, #022c22)';
                             alert('Emerald Dark theme activated!');
+                            speakText('Emerald Dark theme activated.');
                         } else {
                             document.body.style.background = 'radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)';
                             alert('Deep Space Neon theme active.');
+                            speakText('Deep Space Neon theme active.');
                         }
                     } else if(item.action === 'text') {
                         let newTitle = prompt('Enter new App Title:', 'OYES APP');
@@ -542,6 +779,7 @@
                         if(newTitle) document.getElementById('headerMainTitle').innerText = newTitle;
                         if(newSub) document.getElementById('headerSubTitle').innerText = '"' + newSub + '"';
                         alert('App texts updated successfully!');
+                        speakText('App texts updated successfully.');
                     } else if(item.action === 'addfolder') {
                         let folderTitle = prompt('Enter new folder name to add:');
                         if(folderTitle) {
@@ -553,10 +791,11 @@
                                 <p class="text-[10px] text-purple-200/60 mt-1">Custom Folder</p>
                             `;
                             newCard.onclick = function() {
-                                alert(folderTitle + ' - Custom folder opened.');
+                                startPeerCall('Custom Call', folderTitle);
                             };
                             document.getElementById('folderGrid').appendChild(newCard);
                             alert('New folder "' + folderTitle + '" added successfully to Home screen!');
+                            speakText('New folder added successfully.');
                         }
                     } else {
                         alert(item.title + ' configuration panel is active.');
@@ -567,7 +806,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Universal File & Gallery Picker Helper
         function triggerFilePicker(callback) {
             let fileInput = document.createElement('input');
             fileInput.type = 'file';
@@ -597,6 +835,7 @@
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
                 statusLabel.innerText = 'Not supported';
                 alert('Speech recognition is not supported in this browser.');
+                speakText('Speech recognition is not supported in this browser.');
                 return;
             }
 
@@ -621,6 +860,7 @@
                     verifyDirectorAccess();
                 } else {
                     alert('You searched for: "' + speechResult + '"');
+                    speakText('You searched for ' + speechResult);
                 }
             };
 
