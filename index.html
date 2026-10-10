@@ -77,8 +77,8 @@
         
         <!-- Search Bar with Voice Mic Button -->
         <div class="relative flex items-center">
-            <input type="text" id="searchBox" placeholder="Search across all folders..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
-            <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all" title="Open Voice Assistant">
+            <input type="text" id="searchBox" placeholder="Search or speak here..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
+            <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all animate-pulse" title="Open Voice Assistant">
                 🎤
             </button>
         </div>
@@ -88,7 +88,7 @@
             <h2 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
             </h2>
-            <span class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">English Default</span>
+            <span id="voiceStatus" class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">Share & Voice Active</span>
         </div>
 
         <!-- Folders Grid Container -->
@@ -147,7 +147,7 @@
             <div onclick="openAdminPanel()" class="card-glow p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.4)]">📞</div>
                 <h3 class="font-bold text-sm text-fuchsia-300">Admin Panel & Direct Call</h3>
-                <p class="text-[10px] text-fuchsia-200/70 mt-1">Director Salih Wayanad & OYES Saleem (9633111000, 9947198248)</p>
+                <p class="text-[10px] text-fuchsia-200/70 mt-1">Director Salih Wayanad (9633111000) & OYES Saleem (9947198248)</p>
             </div>
 
         </div>
@@ -166,17 +166,22 @@
         </div>
     </div>
 
-    <!-- Footer Section with Install App Action Button -->
+    <!-- Footer Section with Install & Share Action Buttons -->
     <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2">
-        <button onclick="installAppPrompt()" class="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
-            📲 Install OYES APP to Home Screen
-        </button>
-        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad & OYES Saleem</p>
-        <p class="mt-0.5">Email: <a href="mailto:Platformoyes@gmail.com" class="text-cyan-400 underline">Platformoyes@gmail.com</a> | Phones: 9633111000, 9947198248</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="installAppPrompt()" class="py-2.5 px-3 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">
+                📲 Install App
+            </button>
+            <button onclick="shareApp()" class="py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">
+                🔗 Share App
+            </button>
+        </div>
+        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad (9633111000) & OYES Saleem (9947198248)</p>
+        <p class="mt-0.5">Email: <a href="mailto:Platformoyes@gmail.com" class="text-cyan-400 underline">Platformoyes@gmail.com</a></p>
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with English Default & Language Switcher -->
+    <!-- JavaScript with Install & Share Functions -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
@@ -194,6 +199,21 @@
         function installAppPrompt() {
             speakText('App installation instructions');
             alert('📲 To install OYES APP to your Home Screen:\n\n1. Tap the three dots (⋮) at the top right of your Chrome browser.\n2. Select "Add to Home screen" or "Install app".\n3. Enjoy instant access like a native app!');
+        }
+
+        // Share App Functionality
+        function shareApp() {
+            speakText('Sharing OYES App');
+            if (navigator.share) {
+                navigator.share({
+                    title: 'OYES APP',
+                    text: 'Check out OYES APP - A World at Your Fingertips!',
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('🔗 App link copied to clipboard! You can paste and share it anywhere.');
+            }
         }
 
         function openSubFolders(folderName, subItems) {
@@ -346,7 +366,11 @@
         }
 
         function triggerVoiceAssistant() {
+            const statusLabel = document.getElementById('voiceStatus');
+            
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                statusLabel.innerText = 'Voice not supported';
+                alert('Speech recognition is not supported in this browser.');
                 openAdminPanel();
                 return;
             }
@@ -358,13 +382,17 @@
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
 
-            recognition.start();
+            recognition.onstart = function() {
+                statusLabel.innerText = 'Listening... Speak now';
+                speakText('Listening, please speak.');
+            };
 
             recognition.onresult = function(event) {
                 const speechResult = event.results[0][0].transcript.toLowerCase();
                 document.getElementById('searchBox').value = speechResult;
+                statusLabel.innerText = 'Heard: ' + speechResult;
                 
-                if(speechResult.includes('admin') || speechResult.includes('call')) {
+                if(speechResult.includes('admin') || speechResult.includes('call') || speechResult.includes('salih') || speechResult.includes('saleem')) {
                     openAdminPanel();
                 } else {
                     alert('You searched for: "' + speechResult + '"');
@@ -372,8 +400,21 @@
             };
 
             recognition.onerror = function(event) {
-                openAdminPanel();
+                statusLabel.innerText = 'Voice Error / Denied';
+                alert('Microphone permission or network error.');
             };
+
+            recognition.onend = function() {
+                if(statusLabel.innerText === 'Listening... Speak now') {
+                    statusLabel.innerText = 'Share & Voice Active';
+                }
+            };
+
+            try {
+                recognition.start();
+            } catch (e) {
+                recognition.stop();
+            }
         }
     </script>
 </body>
