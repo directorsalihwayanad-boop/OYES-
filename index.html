@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES Salim - Connecting People, Creating Opportunities</title>
+    <title>OYES Saleem - Connecting People, Creating Opportunities</title>
     <style>
         :root {
             --gold: #d4af37;
@@ -330,9 +330,9 @@
     <div id="appContainer" style="display: flex; width: 100%; flex-direction: column; align-items: center;">
         <header>
             <div class="logo-container">
-                <img id="appLogo" src="watermarked_img_350157874029767559.png" alt="OYES Salim Logo">
+                <img id="appLogo" src="watermarked_img_350157874029767559.png" alt="OYES Saleem Logo">
             </div>
-            <h1 id="appName">OYES Salim</h1>
+            <h1 id="appName">OYES Saleem</h1>
             <p class="tagline" id="appTagline">CONNECTING PEOPLE • CREATING OPPORTUNITIES</p>
             
             <div class="controls">
@@ -340,14 +340,15 @@
             </div>
         </header>
 
-        <!-- ഹോം പേജിൽ തന്നെയുള്ള OYES AI അസിസ്റ്റന്റ് സെക്‌ഷൻ -->
+        <!-- ഹോം പേജിൽ തന്നെയുള്ള OYES Saleem AI അസിസ്റ്റന്റ് സെക്‌ഷൻ -->
         <div class="home-ai-section">
-            <h3 id="aiTitle">🤖 OYES Salim AI അസിസ്റ്റന്റ്</h3>
+            <h3 id="aiTitle">🤖 OYES Saleem AI അസിസ്റ്റന്റ്</h3>
             <div class="chat-box" id="chatBox">
-                <div class="chat-msg bot" id="botWelcome"><b>OYES Salim AI:</b> നമസ്കാരം! ഞാൻ OYES Salim പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!</div>
+                <div class="chat-msg bot" id="botWelcome"><b>OYES Saleem AI:</b> നമസ്കാരം! ഞാൻ OYES Saleem പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!</div>
             </div>
             <div style="display: flex; gap: 5px;">
                 <input type="text" id="userInput" placeholder="ചോദ്യം ചോദിക്കൂ..." style="flex:1; padding:6px; background:#000; color:#fff; border:1px solid var(--gold); border-radius:4px; font-size:11px;">
+                <button id="micBtn" onclick="startVoiceInput()" title="സംസാരിച്ച് ചോദിക്കുക" style="padding: 6px 10px; margin:0; background:#1a160d; color:var(--gold); border:1px solid var(--gold); border-radius:4px; font-size:14px; cursor:pointer;">🎤</button>
                 <button id="sendBtn" onclick="sendAiMessage()" style="padding: 6px 10px; margin:0; background:var(--gold); color:#000; font-weight:bold;">അയക്കുക</button>
             </div>
         </div>
@@ -401,7 +402,7 @@
             <div class="modal-content">
                 <h3>അഡ്മിൻ നിയന്ത്രണ പാനൽ</h3>
                 <label>ആപ്പ് പേര്:</label>
-                <input type="text" id="adminTitleInput" value="OYES Salim">
+                <input type="text" id="adminTitleInput" value="OYES Saleem">
                 
                 <label>ലോഗോ ഫയൽ പേര്:</label>
                 <input type="text" id="adminLogoInput" value="watermarked_img_350157874029767559.png">
@@ -422,8 +423,8 @@
                 loginBtn: "ബിസിനസ്സ് ലോഗിൻ",
                 tagline: "CONNECTING PEOPLE • CREATING OPPORTUNITIES",
                 adminBtn: "⚙️ അഡ്മിൻ പാനൽ",
-                aiTitle: "🤖 OYES Salim AI അസിസ്റ്റന്റ്",
-                botWelcome: "നമസ്കാരം! ഞാൻ OYES Salim പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!",
+                aiTitle: "🤖 OYES Saleem AI അസിസ്റ്റന്റ്",
+                botWelcome: "നമസ്കാരം! ഞാൻ OYES Saleem പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!",
                 inputPlaceholder: "ചോദ്യം ചോദിക്കൂ...",
                 sendBtn: "അയക്കുക",
                 phones: "Phones:",
@@ -433,8 +434,8 @@
                 loginBtn: "Business Login",
                 tagline: "CONNECTING PEOPLE • CREATING OPPORTUNITIES",
                 adminBtn: "⚙️ Admin Panel",
-                aiTitle: "🤖 OYES Salim AI Assistant",
-                botWelcome: "Hello! I am the assistant configured to provide information about the OYES Salim platform and answers to any educational and study-related doubts!",
+                aiTitle: "🤖 OYES Saleem AI Assistant",
+                botWelcome: "Hello! I am the assistant configured to provide information about the OYES Saleem platform and answers to any educational and study-related doubts!",
                 inputPlaceholder: "Ask a question...",
                 sendBtn: "Send",
                 phones: "Phones:",
@@ -444,8 +445,8 @@
                 loginBtn: "تسجيل دخول الأعمال",
                 tagline: "ربط الناس • خلق الفرص",
                 adminBtn: "⚙️ لوحة التحكم",
-                aiTitle: "🤖 مساعد OYES Salim الذكي",
-                botWelcome: "مرحباً! أنا المساعد المصمم لتقديم معلومات حول منصة OYES Salim والإجابة عن أي استفسارات تعليمية ودراسية!",
+                aiTitle: "🤖 مساعد OYES Saleem الذكي",
+                botWelcome: "مرحباً! أنا المساعد المصمم لتقديم معلومات حول منصة OYES Saleem والإجابة عن أي استفسارات تعليمية ودراسية!",
                 inputPlaceholder: "اطرح سؤالاً...",
                 sendBtn: "إرسال",
                 phones: "الهواتف:",
@@ -470,7 +471,7 @@
             document.getElementById('appTagline').innerText = t.tagline;
             document.getElementById('btnAdmin').innerText = t.adminBtn;
             document.getElementById('aiTitle').innerText = t.aiTitle;
-            document.getElementById('botWelcome').innerHTML = `<b>OYES Salim AI:</b> ${t.botWelcome}`;
+            document.getElementById('botWelcome').innerHTML = `<b>OYES Saleem AI:</b> ${t.botWelcome}`;
             document.getElementById('userInput').placeholder = t.inputPlaceholder;
             document.getElementById('sendBtn').innerText = t.sendBtn;
             document.getElementById('lblPhones').innerText = t.phones;
@@ -480,6 +481,38 @@
                 document.getElementById('htmlRoot').setAttribute('dir', 'rtl');
             } else {
                 document.getElementById('htmlRoot').removeAttribute('dir');
+            }
+        }
+
+        // വോയിസ് ഇൻപുട്ട് (Speech to Text) ഫങ്ഷൻ
+        function startVoiceInput() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("നിങ്ങളുടെ ബ്രൗസർ വോയിസ് ഫീച്ചർ പിന്തുണയ്ക്കുന്നില്ല.");
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ml-IN'; // മലയാളം തിരിച്ചറിയാൻ
+            recognition.onstart = function() {
+                document.getElementById('userInput').placeholder = "സംസാരിക്കൂ... കേൾക്കുന്നുണ്ട്...";
+            };
+            recognition.onresult = function(event) {
+                const speechToText = event.results[0][0].transcript;
+                document.getElementById('userInput').value = speechToText;
+                document.getElementById('userInput').placeholder = "ചോദ്യം ചോദിക്കൂ...";
+            };
+            recognition.onerror = function() {
+                document.getElementById('userInput').placeholder = "ചോദ്യം ചോദിക്കൂ...";
+            };
+            recognition.start();
+        }
+
+        // ടെക്സ്റ്റ് സ്പീച്ച് വഴി ശബ്ദത്തിൽ കേൾപ്പിക്കാൻ (Text to Speech)
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ml-IN';
+                window.speechSynthesis.speak(utterance);
             }
         }
 
@@ -577,13 +610,15 @@
                 const lower = text.toLowerCase();
                 
                 if(lower.includes('oyes') || lower.includes('one world') || lower.includes('ആപ്പ്')) {
-                    reply = "OYES Salim എന്നത് ആളുകളെ ബന്ധിപ്പിക്കാനും പുതിയ അവസരങ്ങൾ സൃഷ്ടിക്കാനുമുള്ള പ്ലാറ്റ്‌ഫോം ആണ്.";
+                    reply = "OYES Saleem എന്നത് ആളുകളെ ബന്ധിപ്പിക്കാനും പുതിയ അവസരങ്ങൾ സൃഷ്ടിക്കാനുമുള്ള പ്ലാറ്റ്‌ഫോം ആണ്.";
                 } else if(lower.includes('cinema') || lower.includes('movie') || lower.includes('സിനിമ')) {
                     reply = "സിനിമ വിഭാഗത്തിൽ പ്രൊഡക്ഷൻ വിവരങ്ങളും പ്രൊജക്റ്റുകളും ലഭ്യമാക്കിയിട്ടുണ്ട്.";
                 }
 
-                chatBox.innerHTML += `<div class="chat-msg bot"><b>OYES Salim AI:</b> ${reply}</div>`;
+                chatBox.innerHTML += `<div class="chat-msg bot"><b>OYES Saleem AI:</b> ${reply} <button onclick="speakText('${reply}')" style="background:none; border:none; color:var(--gold); cursor:pointer; font-size:12px;" title="ശബ്ദത്തിൽ കേൾക്കുക">🔊</button></div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
+                
+                speakText(reply);
             }, 500);
         }
 
