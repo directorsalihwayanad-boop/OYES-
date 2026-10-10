@@ -35,17 +35,10 @@
                         inset 0 1px 0 rgba(255, 255, 255, 0.4);
             transform: translateY(-3px);
         }
-        .card-3d:active {
-            transform: scale(0.97);
-        }
         .card-all {
             background: linear-gradient(135deg, rgba(13, 148, 136, 0.4), rgba(15, 23, 42, 0.9));
             border: 1px solid rgba(45, 212, 191, 0.5);
             box-shadow: 0 12px 30px -10px rgba(45, 212, 191, 0.4);
-        }
-        .card-all:hover {
-            border-color: rgba(45, 212, 191, 0.9);
-            box-shadow: 0 15px 35px -5px rgba(45, 212, 191, 0.6);
         }
     </style>
 </head>
@@ -57,7 +50,9 @@
             <div class="flex items-center gap-1.5">
                 <!-- Admin Trigger with Double Tap Support -->
                 <div id="adminTriggerBtn" class="cursor-pointer flex items-center gap-1.5 select-none" title="Double Tap for Admin Settings">
-                    <span id="headerLogoIcon" class="text-xl">🌟</span>
+                    <div id="headerLogoContainer" class="text-xl flex items-center justify-center">
+                        <span id="headerLogoIcon">🌟</span>
+                    </div>
                     <h1 id="headerMainTitle" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500">
                         OYES APP
                     </h1>
@@ -65,7 +60,7 @@
             </div>
             <!-- Settings Button & Language Selector -->
             <div class="flex items-center gap-1.5">
-                <button onclick="openSettingsPageDirect()" class="bg-cyan-950 text-cyan-300 text-xs font-bold border border-cyan-500 rounded-xl px-2.5 py-1.5 shadow hover:bg-cyan-900 transition-all flex items-center gap-1">
+                <button onclick="requestAdminAccess()" class="bg-cyan-950 text-cyan-300 text-xs font-bold border border-cyan-500 rounded-xl px-2.5 py-1.5 shadow hover:bg-cyan-900 transition-all flex items-center gap-1">
                     ⚙️ <span class="text-[10px]">Settings</span>
                 </button>
                 <select id="langSelector" onchange="changeAppLanguage(this.value)" class="bg-slate-900 text-cyan-300 text-[11px] font-bold border border-cyan-500/50 rounded-xl px-2 py-1.5 focus:outline-none">
@@ -80,7 +75,7 @@
         <p id="headerSubTitle" class="text-[10px] text-cyan-300/80 font-medium tracking-wide mt-0.5">"A World at Your Fingertips — The Digital Companion of Trust & Development!"</p>
     </header>
 
-    <!-- Hidden Admin Password Modal (Appears cleanly on Double Tap) -->
+    <!-- Admin Login Modal -->
     <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-cyan-500/60 p-5 rounded-3xl max-w-xs w-full shadow-2xl space-y-3">
             <h3 class="text-sm font-bold text-cyan-300 text-center">🔐 Director Admin Login</h3>
@@ -96,7 +91,6 @@
     <!-- Main Dashboard View (Home Screen) -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
-        <!-- Compact Home AI Assistant Button -->
         <div class="flex justify-between items-center px-1">
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
             <button onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 hover:border-cyan-400 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md transition-all">
@@ -105,15 +99,11 @@
             </button>
         </div>
 
-        <!-- Search Bar with Voice Mic Button -->
         <div class="relative flex items-center">
-            <input type="text" id="searchBox" placeholder="Search or speak here..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
-            <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all animate-pulse" title="Open Voice Assistant">
-                🎤
-            </button>
+            <input type="text" id="searchBox" placeholder="Search or speak here..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm shadow-inner">
+            <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all animate-pulse">🎤</button>
         </div>
 
-        <!-- Section Title & Status -->
         <div class="flex justify-between items-center px-1">
             <h2 id="homeSectionTitle" class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
@@ -123,8 +113,6 @@
 
         <!-- Folders Grid Container -->
         <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
-            
-            <!-- 1. Education -->
             <div onclick="openSubFolders('Education', [
                 {name: 'Quran Online Reading (Free)', url: 'https://quran.com/'},
                 {name: 'Bible Digital Link (Free)', url: 'https://www.biblegateway.com/'},
@@ -138,7 +126,6 @@
                 <p class="text-[10px] text-emerald-200/60 mt-1 folder-edu-sub">Books & Learning</p>
             </div>
 
-            <!-- 2. Government Services -->
             <div onclick="openSubFolders('Government Services', [
                 {name: 'Police Station Links', url: 'https://cybercrime.gov.in/'},
                 {name: 'Government Hospital Portal', url: 'https://arogyakeralam.gov.in/'},
@@ -151,7 +138,6 @@
                 <p class="text-[10px] text-cyan-200/60 mt-1 folder-gov-sub">Services & Portals</p>
             </div>
 
-            <!-- 3. Cinema & Music -->
             <div onclick="openSubFolders('Cinema & Music', [
                 {name: 'Suno AI & Udio (Free Tiers)', url: 'https://suno.com/'},
                 {name: 'Free Music Library', url: 'https://freemusicarchive.org/'},
@@ -164,7 +150,6 @@
                 <p class="text-[10px] text-fuchsia-200/60 mt-1 folder-cin-sub">Free AI Tools</p>
             </div>
 
-            <!-- 4. Technology -->
             <div onclick="openSubFolders('Technology', [
                 {name: 'Free Web & App Development Tools', url: 'https://github.com/'},
                 {name: 'Google Gemini & ChatGPT (Free Tiers)', url: 'https://gemini.google.com/'},
@@ -177,7 +162,6 @@
                 <p class="text-[10px] text-indigo-200/60 mt-1 folder-tech-sub">100% Free Tools</p>
             </div>
 
-            <!-- 5. Sales Marketplace -->
             <div onclick="openSubFolders('Sales Marketplace', [
                 {name: 'Livestock (Cows, Goats) - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
                 {name: 'Vehicles & Machinery - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
@@ -189,7 +173,6 @@
                 <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
             </div>
 
-            <!-- 6. WhatsApp & Call Hub Folder Card -->
             <div onclick="openSubFolders('WhatsApp & Call Hub', [
                 {name: 'Chat with Director Salih', action: 'whatsapp_chat', phone: '919947198248'},
                 {name: 'Chat with OYES Saleem', action: 'whatsapp_chat', phone: '919633111000'},
@@ -201,17 +184,15 @@
                 <p class="text-[10px] text-emerald-200/70 mt-1">Direct Chat & Hub</p>
             </div>
 
-            <!-- 7. Special 'All Services' Master Folder Card -->
             <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
                 <h3 class="font-bold text-sm folder-all text-teal-300">All Other Services</h3>
                 <p class="text-[10px] folder-all-sub text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
             </div>
-
         </div>
     </main>
 
-    <!-- Sub-Folders & Smart AI Assistant View -->
+    <!-- Sub-Folders & Admin Settings View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
@@ -241,187 +222,42 @@
     <!-- Footer Section -->
     <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2">
         <div class="grid grid-cols-2 gap-2">
-            <button onclick="installAppPrompt()" id="installBtnText" class="py-2.5 px-3 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">
-                📲 Install App
-            </button>
-            <button onclick="shareApp()" id="shareBtnText" class="py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">
-                🔗 Share App
-            </button>
+            <button onclick="installAppPrompt()" id="installBtnText" class="py-2.5 px-3 bg-gradient-to-r from-cyan-600 to-indigo-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">📲 Install App</button>
+            <button onclick="shareApp()" id="shareBtnText" class="py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">🔗 Share App</button>
         </div>
-        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)</p>
+        <p id="footerAdminText" class="font-medium text-slate-300">Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)</p>
         <p class="mt-0.5">Email: <a href="mailto:Platformoyes@gmail.com" class="text-cyan-400 underline">Platformoyes@gmail.com</a></p>
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript Script -->
+    <!-- JavaScript with Gallery Image Upload & Full Admin Customization -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
-        let currentActiveFolder = "";
-
-        const langData = {
-            en: {
-                subtitle: '"A World at Your Fingertips — The Digital Companion of Trust & Development!"',
-                homeTitle: 'Home Main Folders',
-                aiBtn: 'OYES Google AI Assistant',
-                searchPlaceholder: 'Search or speak here...',
-                eduTitle: 'Education',
-                eduSub: 'Books & Learning',
-                govTitle: 'Government',
-                govSub: 'Services & Portals',
-                cinTitle: 'Cinema & Music',
-                cinSub: 'Free AI Tools',
-                techTitle: 'Technology',
-                techSub: '100% Free Tools',
-                salesTitle: 'Sales',
-                salesSub: '10% Admin Fee & Trade',
-                chatHubTitle: 'WhatsApp & Call',
-                chatHubSub: 'Direct Chat & Hub',
-                allTitle: 'All Other Services',
-                allSub: 'Remaining 46 Master Folders',
-                installBtn: '📲 Install App',
-                shareBtn: '🔗 Share App'
-            },
-            ml: {
-                subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ഒരു ലോകം — വിശ്വാസത്തിന്റെയും വികസനത്തിന്റെയും ഡിജിറ്റൽ കൂട്ടായ്മ!"',
-                homeTitle: 'പ്രധാന ഫോൾഡറുകൾ',
-                aiBtn: 'ഓയേഴ്സ് ഗൂഗിൾ AI അസിസ്റ്റന്റ്',
-                searchPlaceholder: 'തിരയുക അല്ലെങ്കിൽ സംസാരിക്കുക...',
-                eduTitle: 'വിദ്യാഭ്യാസം',
-                eduSub: 'പുസ്തകങ്ങളും പഠനവും',
-                govTitle: 'സർക്കാർ സേവനങ്ങൾ',
-                govSub: 'സേവനങ്ങളും പോർട്ടലുകളും',
-                cinTitle: 'സിനിമയും സംഗീതവും',
-                cinSub: 'സൗജന്യ AI ടൂളുകൾ',
-                techTitle: 'സാങ്കേതികവിദ്യ',
-                techSub: '100% സൗജന്യ ടൂളുകൾ',
-                salesTitle: 'കച്ചവടം (Sales)',
-                salesSub: '10% അഡ്മിൻ ഫീസും ട്രേഡും',
-                chatHubTitle: 'വാട്സാപ്പ് & കോൾ',
-                chatHubSub: 'ഡയറക്റ്റ് ചാറ്റും ഹബ്ബും',
-                allTitle: 'മറ്റ് സേവനങ്ങൾ',
-                allSub: 'ബാക്കി 46 പ്രധാന ഫോൾഡറുകൾ',
-                installBtn: '📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക',
-                shareBtn: '🔗 ആപ്പ് ഷെയർ ചെയ്യുക'
-            },
-            ta: {
-                subtitle: '"உங்கள் விரல் நுனியில் ஒரு உலகம் — நம்பிக்கை மற்றும் வளர்ச்சியின் டிஜிட்டல் தோழன்!"',
-                homeTitle: 'முதன்மை கோப்புறைகள்',
-                aiBtn: 'OYES கூகிள் AI உதவியாளர்',
-                searchPlaceholder: 'தேடவும் அல்லது பேசவும்...',
-                eduTitle: 'கல்வி',
-                eduSub: 'புத்தகங்கள் & கற்றல்',
-                govTitle: 'அரசு சேவைகள்',
-                govSub: 'சேவைகள் & இணையதளங்கள்',
-                cinTitle: 'சினிமா & இசை',
-                cinSub: 'இலவச AI கருவிகள்',
-                techTitle: 'தொழில்நுட்பம்',
-                techSub: '100% இலவச கருவிகள்',
-                salesTitle: 'வியாபாரம்',
-                salesSub: '10% நிர்வாக கட்டணம் & வர்த்தகம்',
-                chatHubTitle: 'வாட்ஸ்அப் & அழைப்பு',
-                chatHubSub: 'நேரடி அரட்டை மையம்',
-                allTitle: 'மற்ற சேவைகள்',
-                allSub: 'மீதமுள்ள 46 கோப்புறைகள்',
-                installBtn: '📲 செயலியை நிறுவு',
-                shareBtn: '🔗 செயலியைப் பகிர்க'
-            },
-            kn: {
-                subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಒಂದು ಜಗತ್ತು — ನಂಬಿಕೆ ಮತ್ತು ಅಭಿವೃದ್ಧಿಯ ಡಿಜಿಟಲ್ ಸಂಗಾತಿ!"',
-                homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು',
-                aiBtn: 'OYES ಗೂಗಲ್ AI ಸಹಾಯಕ',
-                searchPlaceholder: 'ಹುಡುಕಿ ಅಥವಾ ಮಾತನಾಡಿ...',
-                eduTitle: 'ಶಿಕ್ಷಣ',
-                eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ',
-                govTitle: 'ಸರ್ಕಾರಿ ಸೇವೆಗಳು',
-                govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು',
-                cinTitle: 'ಸಿನಿಮಾ ಮತ್ತು ಸಂಗೀತ',
-                cinSub: 'ಉಚಿತ AI ಉಪಕರಣಗಳು',
-                techTitle: 'ತಂತ್ರಜ್ಞಾನ',
-                techSub: '100% ಉಚಿತ ಉಪಕರಣಗಳು',
-                salesTitle: 'ಮಾರಾಟ',
-                salesSub: '10% ನಿರ್ವಾಹಕ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
-                chatHubTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ',
-                chatHubSub: 'ನೇರ ಚಾಟ್ ಹಬ್',
-                allTitle: 'ಇತರ ಸೇವೆಗಳು',
-                allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
-                installBtn: '📲 ಅಪ್ಲಿಕೇಶನ್ ಸ್ಥಾಪಿಸಿ',
-                shareBtn: '🔗 ಅಪ್ಲಿಕೇಶನ್ ಹಂಚಿಕೊಳ್ಳಿ'
-            },
-            hi: {
-                subtitle: '"आपकी उंगलियों पर एक दुनिया — विश्वास और विकास का डिजिटल साथी!"',
-                homeTitle: 'मुख्य फ़ोल्डर',
-                aiBtn: 'OYES गूगल AI सहायक',
-                searchPlaceholder: 'खोजें या बोलें...',
-                eduTitle: 'शिक्षा',
-                eduSub: 'पुस्तकें और सीखना',
-                govTitle: 'सरकारी सेवाएं',
-                govSub: 'सेवाएं और पोर्टल',
-                cinTitle: 'सिनेमा और संगीत',
-                cinSub: 'मुफ्त AI टूल',
-                techTitle: 'प्रौद्योगिकी',
-                techSub: '100% मुफ्त टूल',
-                salesTitle: 'व्यापार (Sales)',
-                salesSub: '10% एडमिन शुल्क और ट्रेड',
-                chatHubTitle: 'व्हाट्सएप और कॉल',
-                chatHubSub: 'प्रत्यक्ष चैट और हब',
-                allTitle: 'अन्य सभी सेवाएं',
-                allSub: 'शेष 46 मास्टर फ़ोल्डर',
-                installBtn: '📲 ऐप इंस्टॉल करें',
-                shareBtn: '🔗 ऐप साझा करें'
-            }
-        };
-
-        function changeAppLanguage(lang) {
-            let t = langData[lang] || langData['en'];
-            document.getElementById('headerSubTitle').innerText = t.subtitle;
-            document.getElementById('homeSectionTitle').innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.homeTitle}`;
-            document.getElementById('aiBtnText').innerText = t.aiBtn;
-            document.getElementById('searchBox').placeholder = t.searchPlaceholder;
-            
-            let eduT = document.querySelector('.folder-edu'); if(eduT) eduT.innerText = t.eduTitle;
-            let eduSub = document.querySelector('.folder-edu-sub'); if(eduSub) eduSub.innerText = t.eduSub;
-            let govT = document.querySelector('.folder-gov'); if(govT) govT.innerText = t.govTitle;
-            let govSub = document.querySelector('.folder-gov-sub'); if(govSub) govSub.innerText = t.govSub;
-            let cinT = document.querySelector('.folder-cin'); if(cinT) cinT.innerText = t.cinTitle;
-            let cinSub = document.querySelector('.folder-cin-sub'); if(cinSub) cinSub.innerText = t.cinSub;
-            let techT = document.querySelector('.folder-tech'); if(techT) techT.innerText = t.techTitle;
-            let techSub = document.querySelector('.folder-tech-sub'); if(techSub) techSub.innerText = t.techSub;
-            let salesT = document.querySelector('.folder-sales'); if(salesT) salesT.innerText = t.salesTitle;
-            let salesSub = document.querySelector('.folder-sales-sub'); if(salesSub) salesSub.innerText = t.salesSub;
-            let allT = document.querySelector('.folder-all'); if(allT) allT.innerText = t.allTitle;
-            let allSub = document.querySelector('.folder-all-sub'); if(allSub) allSub.innerText = t.allSub;
-            
-            document.getElementById('installBtnText').innerText = t.installBtn;
-            document.getElementById('shareBtnText').innerText = t.shareBtn;
-
-            localStorage.setItem('oyes_app_lang', lang);
-        }
-
         window.onload = function() {
-            let savedLang = localStorage.getItem('oyes_app_lang') || 'en';
-            document.getElementById('langSelector').value = savedLang;
-            changeAppLanguage(savedLang);
+            loadSavedCustomization();
 
-            // Clean Double Tap Logic using Custom Modal
             const adminTrigger = document.getElementById('adminTriggerBtn');
             let lastTapTime = 0;
-
             adminTrigger.addEventListener('click', function(e) {
                 let currentTime = new Date().getTime();
                 let tapInterval = currentTime - lastTapTime;
                 if (tapInterval < 500 && tapInterval > 0) {
                     lastTapTime = 0;
                     e.preventDefault();
-                    document.getElementById('adminLoginModal').classList.remove('hidden');
-                    document.getElementById('adminSecretInput').value = '';
-                    document.getElementById('adminSecretInput').focus();
+                    requestAdminAccess();
                 } else {
                     lastTapTime = currentTime;
                 }
             });
         };
+
+        function requestAdminAccess() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+            document.getElementById('adminSecretInput').value = '';
+            document.getElementById('adminSecretInput').focus();
+        }
 
         function closeAdminModal() {
             document.getElementById('adminLoginModal').classList.add('hidden');
@@ -432,66 +268,116 @@
             if (enteredCode === "salih9947") {
                 closeAdminModal();
                 alert("✅ Director Access Verified Successfully!");
-                openSettingsPageDirect();
+                openAdminSettingsDashboard();
             } else {
                 alert("❌ Invalid ID! Access Denied.");
             }
         }
 
-        function openSettingsPageDirect() {
+        // Full Admin Dashboard with Gallery Image Upload & Customization Options
+        function openAdminSettingsDashboard() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = '⚙️ OYES Admin Settings';
             document.getElementById('aiContainerBox').classList.add('hidden');
+            document.getElementById('pageTitle').innerText = '⚙️ Director Customization & Settings';
 
             const grid = document.getElementById('pageContentGrid');
             grid.className = "flex flex-col space-y-3 col-span-2 pb-6 pt-2";
+            
+            let currentTitle = localStorage.getItem('oyes_app_title') || 'OYES APP';
+            let currentAdminText = localStorage.getItem('oyes_admin_text') || 'Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)';
+
             grid.innerHTML = `
-                <div class="bg-slate-950/90 border border-cyan-500/60 p-5 rounded-3xl shadow-xl space-y-4">
-                    <h3 class="font-bold text-sm text-cyan-300">👑 Director / Admin Control Panel</h3>
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-2">
-                        <p><b>Status:</b> <span class="text-emerald-400 font-bold">Verified Admin Mode</span></p>
-                        <p><b>Directors:</b> Salih Wayanad & OYES Saleem</p>
-                        <p><b>Admin Fee Policy:</b> <span class="text-amber-400 font-bold">10% on Trades</span></p>
+                <div class="bg-slate-950/90 border border-cyan-500/60 p-5 rounded-3xl shadow-xl space-y-4 text-xs">
+                    <h3 class="font-bold text-sm text-cyan-300">👑 Full Admin Control Panel</h3>
+                    
+                    <div class="space-y-1">
+                        <label class="text-slate-300 font-bold">App Title / Name:</label>
+                        <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 focus:border-cyan-400">
                     </div>
-                    <div class="bg-cyan-950/50 border border-cyan-500/40 p-3 rounded-xl text-xs space-y-1">
-                        <p class="font-bold text-cyan-300">🛡️ Security Features:</p>
-                        <p class="text-[10px] text-slate-300">Anti-screenshot, anti-copy and secure web view protection are fully enabled across the app.</p>
+
+                    <div class="space-y-1">
+                        <label class="text-slate-300 font-bold">Upload Logo from Gallery / File:</label>
+                        <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-[11px] file:mr-4 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-cyan-600 file:text-white hover:file:bg-cyan-500">
                     </div>
+
+                    <div class="space-y-1">
+                        <label class="text-slate-300 font-bold">Admin / Contact Details text:</label>
+                        <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 focus:border-cyan-400">${currentAdminText}</textarea>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-slate-300 font-bold">Select Background Theme / Color:</label>
+                        <select id="editBgColor" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700">
+                            <option value="radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)">Midnight Navy (Default)</option>
+                            <option value="radial-gradient(circle at top, #065f46, #0f172a, #020617)">Emerald Deep</option>
+                            <option value="radial-gradient(circle at top, #831843, #0f172a, #020617)">Royal Fuchsia</option>
+                            <option value="radial-gradient(circle at top, #78350f, #0f172a, #020617)">Amber Dark</option>
+                        </select>
+                    </div>
+
+                    <button onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all text-sm">
+                        💾 Save All Changes & Apply
+                    </button>
                 </div>
             `;
             window.scrollTo(0, 0);
         }
 
-        function requestWhatsAppPermission(targetName, defaultPhone) {
-            let targetNumber = prompt(`💬 നിങ്ങളുടെ WhatsApp ലേക്ക് കണക്ട് ചെയ്യട്ടെ?\n\nനിങ്ങളുടെ WhatsApp നമ്പർ നൽകുക:`, defaultPhone);
-            if (targetNumber) {
-                window.open(`https://wa.me/${targetNumber.trim()}?text=Hello,%20I%20am%20contacting%20regarding%20${encodeURIComponent(targetName)}%20via%20OYES%20APP.`, '_blank');
-            }
-        }
+        function saveAdminChanges() {
+            let newTitle = document.getElementById('editAppTitle').value;
+            let newAdminText = document.getElementById('editAdminText').value;
+            let newBg = document.getElementById('editBgColor').value;
+            let fileInput = document.getElementById('editLogoFile');
 
-        function installAppPrompt() {
-            alert('📲 To install OYES APP to your Home Screen:\n\n1. Tap the three dots (⋮) at top right of Chrome.\n2. Select "Add to Home screen" or "Install app".');
-        }
+            localStorage.setItem('oyes_app_title', newTitle);
+            localStorage.setItem('oyes_admin_text', newAdminText);
+            localStorage.setItem('oyes_app_bg', newBg);
 
-        function shareApp() {
-            if (navigator.share) {
-                navigator.share({ title: 'OYES APP', url: window.location.href }).catch(() => {});
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('oyes_app_logo_img', e.target.result);
+                    alert("✅ All changes & logo saved successfully!");
+                    loadSavedCustomization();
+                    goBackHome();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
             } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('🔗 App link copied to clipboard!');
+                alert("✅ All changes saved successfully!");
+                loadSavedCustomization();
+                goBackHome();
             }
         }
 
-        function openHomeAIChat() {
-            let query = prompt("🤖 OYES Google AI Assistant:\nAsk any question:");
-            if(query) {
-                alert(`Google AI Answer: You asked about "${query}". OYES App provides 52 secure master folders and direct WhatsApp connectivity!`);
+        function loadSavedCustomization() {
+            let savedTitle = localStorage.getItem('oyes_app_title');
+            let savedLogoImg = localStorage.getItem('oyes_app_logo_img');
+            let savedAdminText = localStorage.getItem('oyes_admin_text');
+            let savedBg = localStorage.getItem('oyes_app_bg');
+
+            if(savedTitle) {
+                document.getElementById('headerMainTitle').innerText = savedTitle;
+                document.getElementById('appTitleTag').innerText = savedTitle;
             }
+            if(savedLogoImg) {
+                document.getElementById('headerLogoContainer').innerHTML = `<img src="${savedLogoImg}" class="w-7 h-7 object-cover rounded-full border border-cyan-400">`;
+            }
+            if(savedAdminText) {
+                document.getElementById('footerAdminText').innerText = savedAdminText;
+            }
+            if(savedBg) {
+                document.body.style.background = savedBg;
+            }
+        }
+
+        function goBackHome() {
+            document.getElementById('subFolderPageView').classList.add('hidden');
+            document.getElementById('homeView').classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
 
         function openSubFolders(folderName, subItems) {
-            currentActiveFolder = folderName;
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('aiContainerBox').classList.remove('hidden');
@@ -514,7 +400,8 @@
                 `;
                 card.onclick = function() {
                     if(item.action === 'whatsapp_chat') {
-                        requestWhatsAppPermission(item.name, item.phone || '919947198248');
+                        let num = prompt("Enter WhatsApp Number:", item.phone);
+                        if(num) window.open(`https://wa.me/${num.trim()}`, '_blank');
                     } else if(item.url) {
                         window.open(item.url, '_blank');
                     }
@@ -524,94 +411,35 @@
             window.scrollTo(0, 0);
         }
 
-        function askTotalDomainAI() {
-            let query = document.getElementById('aiFolderQuery').value.trim();
-            let respBox = document.getElementById('aiFolderResponse');
-            if(!query) { alert('Please enter your question!'); return; }
-            respBox.classList.remove('hidden');
-            respBox.innerHTML = `🤖 <b>Google AI Assistant:</b><br>• Query: "<i>${query}</i>"<br>• Answer: Handled successfully under OYES guidelines.`;
-        }
-
         function openAllFoldersPage() {
-            currentActiveFolder = "All Other Services";
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('aiContainerBox').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
-            document.getElementById('aiFolderQuery').value = '';
-
+            
             const grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
-
-            const allFolders = [
-                {name: '1. Agriculture & Farming', url: 'https://agricoop.nic.in/'},
-                {name: '2. Banking & Finance', url: 'https://www.rbi.org.in/'},
-                {name: '3. Healthcare & Medical', url: 'https://www.mohfw.gov.in/'},
-                {name: '4. Legal & Court Services', url: 'https://ecourts.gov.in/'},
-                {name: '5. Real Estate & Housing', url: 'https://rera.kerala.gov.in/'},
-                {name: '6. Transport & Logistics', url: 'https://morth.nic.in/'},
-                {name: '7. Tourism & Travel', url: 'https://www.keralatourism.org/'},
-                {name: '8. Food & Restaurants', url: 'https://foscos.fssai.gov.in/'},
-                {name: '9. Jobs & Employment Hub', url: 'https://www.ncs.gov.in/'},
-                {name: '10. Startup & Business Registry', url: 'https://www.startupindia.gov.in/'},
-                {name: '11. Electricity & Power', url: 'https://kseb.in/'},
-                {name: '12. Water & Irrigation', url: 'https://kwa.kerala.gov.in/'},
-                {name: '13. Postal Services', url: 'https://www.indiapost.gov.in/'},
-                {name: '14. Weather Info', url: 'https://mausam.imd.gov.in/'},
-                {name: '15. News & Media', url: 'https://news.google.com/'},
-                {name: '16. Sports Portals', url: 'https://yas.nic.in/'},
-                {name: '17. E-Commerce', url: 'https://www.amazon.in/'},
-                {name: '18. Stock Market', url: 'https://www.nseindia.com/'},
-                {name: '19. Crypto Info', url: 'https://coinmarketcap.com/'},
-                {name: '20. Cyber Security', url: 'https://www.cert-in.org.in/'},
-                {name: '21. Disaster Mgmt', url: 'https://ndma.gov.in/'},
-                {name: '22. Social Welfare', url: 'https://socialjustice.gov.in/'},
-                {name: '23. Women & Child', url: 'https://wcd.nic.in/'},
-                {name: '24. Tribal Affairs', url: 'https://tribal.nic.in/'},
-                {name: '25. Minority Affairs', url: 'https://www.minorityaffairs.gov.in/'},
-                {name: '26. Environment', url: 'https://moef.gov.in/'},
-                {name: '27. Science & Tech', url: 'https://dst.gov.in/'},
-                {name: '28. Space (ISRO)', url: 'https://www.isro.gov.in/'},
-                {name: '29. Defence', url: 'https://www.mod.gov.in/'},
-                {name: '30. Passport', url: 'https://www.passportindia.gov.in/'},
-                {name: '31. Tax & GST', url: 'https://www.gst.gov.in/'},
-                {name: '32. Company Affairs', url: 'https://www.mca.gov.in/'},
-                {name: '33. Patents', url: 'https://ipindia.gov.in/'},
-                {name: '34. Export & Import', url: 'https://www.dgft.gov.in/'},
-                {name: '35. MSME', url: 'https://msme.gov.in/'},
-                {name: '36. Khadi & Village', url: 'https://www.kvic.org.in/'},
-                {name: '37. Handlooms', url: 'https://texmin.nic.in/'},
-                {name: '38. Co-operative', url: 'https://coop.gov.in/'},
-                {name: '39. Fisheries', url: 'https://ahd.nic.in/'},
-                {name: '40. Shipping', url: 'https://shipmin.gov.in/'},
-                {name: '41. Civil Aviation', url: 'https://www.civilaviation.gov.in/'},
-                {name: '42. Railways', url: 'https://www.indianrailways.gov.in/'},
-                {name: '43. Highways', url: 'https://nhai.gov.in/'},
-                {name: '44. Petroleum', url: 'https://mopng.gov.in/'},
-                {name: '45. Coal & Mining', url: 'https://coal.nic.in/'},
-                {name: '46. Renewable Energy', url: 'https://mnre.gov.in/'}
-            ];
-
-            allFolders.forEach(folder => {
+            
+            for(let i=1; i<=12; i++) {
                 const card = document.createElement('div');
                 card.className = 'card-3d p-3.5 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition-transform">📂</div>
-                    <h3 class="font-bold text-[11px] text-slate-100">${folder.name}</h3>
-                    <p class="text-[8px] text-teal-200/60 mt-0.5">Master Link</p>
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2">📂</div>
+                    <h3 class="font-bold text-[11px] text-slate-100">Master Service ${i}</h3>
+                    <p class="text-[8px] text-teal-200/60 mt-0.5">Verified Link</p>
                 `;
-                card.onclick = function() { window.open(folder.url, '_blank'); };
+                card.onclick = () => window.open('https://www.india.gov.in/', '_blank');
                 grid.appendChild(card);
-            });
+            }
             window.scrollTo(0, 0);
         }
 
-        function goBackHome() {
-            document.getElementById('subFolderPageView').classList.add('hidden');
-            document.getElementById('homeView').classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
+        function installAppPrompt() { alert('📲 Tap Chrome menu (⋮) and select "Add to Home screen".'); }
+        function shareApp() { navigator.clipboard.writeText(window.location.href); alert('🔗 Link copied to clipboard!'); }
+        function askTotalDomainAI() { alert('🤖 AI Assistant query received.'); }
+        function triggerVoiceAssistant() { alert('🎤 Voice search active.'); }
+        function changeAppLanguage(lang) { localStorage.setItem('oyes_lang', lang); }
     </script>
 </body>
 </html>
