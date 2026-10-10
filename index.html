@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="appTitleTag">OYES APP - A World at Your Fingertips</title>
-    <!-- Tailwind CSS for modern 3D look and fast performance -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -48,7 +47,6 @@
     <header class="p-3 text-center bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
         <div class="flex justify-between items-center max-w-md mx-auto px-1 mb-1">
             <div class="flex items-center gap-1.5">
-                <!-- Admin Trigger with Double Tap Support -->
                 <div id="adminTriggerBtn" class="cursor-pointer flex items-center gap-1.5 select-none" title="Double Tap for Admin Settings">
                     <div id="headerLogoContainer" class="text-xl flex items-center justify-center">
                         <span id="headerLogoIcon">🌟</span>
@@ -58,7 +56,6 @@
                     </h1>
                 </div>
             </div>
-            <!-- Settings Button & Language Selector -->
             <div class="flex items-center gap-1.5">
                 <button onclick="requestAdminAccess()" class="bg-cyan-950 text-cyan-300 text-xs font-bold border border-cyan-500 rounded-xl px-2.5 py-1.5 shadow hover:bg-cyan-900 transition-all flex items-center gap-1">
                     ⚙️ <span class="text-[10px]">Settings</span>
@@ -88,7 +85,7 @@
         </div>
     </div>
 
-    <!-- Main Dashboard View (Home Screen) -->
+    <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
         <div class="flex justify-between items-center px-1">
@@ -111,7 +108,7 @@
             <span id="voiceStatus" class="text-[10px] text-emerald-300 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full font-semibold">Active Session</span>
         </div>
 
-        <!-- Folders Grid Container -->
+        <!-- Folder Grid Container -->
         <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
             <div onclick="openSubFolders('Education', [
                 {name: 'Quran Online Reading (Free)', url: 'https://quran.com/'},
@@ -120,8 +117,8 @@
                 {name: 'Free Online Courses', url: 'https://swayam.gov.in/'},
                 {name: 'Digital Library & E-Books', url: 'https://ndl.iitkgp.ac.in/'},
                 {name: 'Education Scholarship Links', url: 'https://scholarships.gov.in/'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">📖</div>
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div id="iconEdu" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">📖</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-edu">Education</h3>
                 <p class="text-[10px] text-emerald-200/60 mt-1 folder-edu-sub">Books & Learning</p>
             </div>
@@ -132,8 +129,8 @@
                 {name: 'Emergency Helplines', url: 'https://www.india.gov.in/'},
                 {name: 'Public Services & Certificates', url: 'https://edistrict.kerala.gov.in/'},
                 {name: 'Ration Card & Welfare Portals', url: 'https://civilsupplieskerala.gov.in/'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div id="iconGov" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-gov">Government</h3>
                 <p class="text-[10px] text-cyan-200/60 mt-1 folder-gov-sub">Services & Portals</p>
             </div>
@@ -144,8 +141,8 @@
                 {name: 'Video Editing Tools (Free)', url: 'https://www.capcut.com/'},
                 {name: 'Promotional Poster Maker', url: 'https://www.canva.com/'},
                 {name: 'Shortfilm & Dubbing Platform', url: 'https://www.youtube.com/'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🎬</div>
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div id="iconCin" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🎬</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-cin">Cinema & Music</h3>
                 <p class="text-[10px] text-fuchsia-200/60 mt-1 folder-cin-sub">Free AI Tools</p>
             </div>
@@ -156,8 +153,8 @@
                 {name: 'Claude, Perplexity & AI Hub (Free)', url: 'https://claude.ai/'},
                 {name: 'Free Coding Libraries & Hosting', url: 'https://vercel.com/'},
                 {name: 'Open Source Tools', url: 'https://sourceforge.net/'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🤖</div>
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div id="iconTech" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🤖</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-tech">Technology</h3>
                 <p class="text-[10px] text-indigo-200/60 mt-1 folder-tech-sub">100% Free Tools</p>
             </div>
@@ -167,8 +164,8 @@
                 {name: 'Vehicles & Machinery - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
                 {name: 'Agricultural Products - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
                 {name: 'General Marketplace Exchange', action: 'whatsapp_chat', phone: '919947198248'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div id="iconSales" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-sales">Sales</h3>
                 <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
             </div>
@@ -178,21 +175,21 @@
                 {name: 'Chat with OYES Saleem', action: 'whatsapp_chat', phone: '919633111000'},
                 {name: 'Direct Audio Inquiry', action: 'whatsapp_chat', phone: '919947198248'},
                 {name: 'Support & Trade Helpline', action: 'whatsapp_chat', phone: '919633111000'}
-            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">💬📞</div>
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                <div id="iconWa" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">💬📞</div>
                 <h3 class="font-bold text-sm text-emerald-300">WhatsApp & Call</h3>
                 <p class="text-[10px] text-emerald-200/70 mt-1">Direct Chat & Hub</p>
             </div>
 
             <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
+                <div id="iconAll" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
                 <h3 class="font-bold text-sm folder-all text-teal-300">All Other Services</h3>
                 <p class="text-[10px] folder-all-sub text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
             </div>
         </div>
     </main>
 
-    <!-- Sub-Folders & Admin Settings View -->
+    <!-- Sub-Folders & Settings View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
@@ -230,7 +227,7 @@
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with Gallery Image Upload & Full Admin Customization -->
+    <!-- JavaScript Controls -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
@@ -274,7 +271,6 @@
             }
         }
 
-        // Full Admin Dashboard with Gallery Image Upload & Customization Options
         function openAdminSettingsDashboard() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
@@ -282,41 +278,82 @@
             document.getElementById('pageTitle').innerText = '⚙️ Director Customization & Settings';
 
             const grid = document.getElementById('pageContentGrid');
-            grid.className = "flex flex-col space-y-3 col-span-2 pb-6 pt-2";
+            grid.className = "grid grid-cols-2 gap-3.5 col-span-2 pb-6 pt-2";
             
             let currentTitle = localStorage.getItem('oyes_app_title') || 'OYES APP';
             let currentAdminText = localStorage.getItem('oyes_admin_text') || 'Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)';
+            let currentFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            let currentFolderBg = localStorage.getItem('oyes_folder_bg') || 'linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9))';
+            let iconEdu = localStorage.getItem('oyes_icon_edu') || '📖';
+            let iconGov = localStorage.getItem('oyes_icon_gov') || '🏛️';
+            let iconCin = localStorage.getItem('oyes_icon_cin') || '🎬';
+            let iconTech = localStorage.getItem('oyes_icon_tech') || '🤖';
 
             grid.innerHTML = `
-                <div class="bg-slate-950/90 border border-cyan-500/60 p-5 rounded-3xl shadow-xl space-y-4 text-xs">
-                    <h3 class="font-bold text-sm text-cyan-300">👑 Full Admin Control Panel</h3>
-                    
-                    <div class="space-y-1">
-                        <label class="text-slate-300 font-bold">App Title / Name:</label>
-                        <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 focus:border-cyan-400">
-                    </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">App Title / Name:</label>
+                    <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 focus:border-cyan-400">
+                </div>
 
-                    <div class="space-y-1">
-                        <label class="text-slate-300 font-bold">Upload Logo from Gallery / File:</label>
-                        <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-[11px] file:mr-4 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-cyan-600 file:text-white hover:file:bg-cyan-500">
-                    </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Upload Logo (File):</label>
+                    <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl border border-slate-700 text-[10px] file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[10px] file:font-semibold file:bg-cyan-600 file:text-white">
+                </div>
 
-                    <div class="space-y-1">
-                        <label class="text-slate-300 font-bold">Admin / Contact Details text:</label>
-                        <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 focus:border-cyan-400">${currentAdminText}</textarea>
-                    </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">Admin / Contact Details text:</label>
+                    <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 focus:border-cyan-400">${currentAdminText}</textarea>
+                </div>
 
-                    <div class="space-y-1">
-                        <label class="text-slate-300 font-bold">Select Background Theme / Color:</label>
-                        <select id="editBgColor" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700">
-                            <option value="radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)">Midnight Navy (Default)</option>
-                            <option value="radial-gradient(circle at top, #065f46, #0f172a, #020617)">Emerald Deep</option>
-                            <option value="radial-gradient(circle at top, #831843, #0f172a, #020617)">Royal Fuchsia</option>
-                            <option value="radial-gradient(circle at top, #78350f, #0f172a, #020617)">Amber Dark</option>
-                        </select>
-                    </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">App Background Theme:</label>
+                    <select id="editBgColor" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                        <option value="radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)">Midnight Navy</option>
+                        <option value="radial-gradient(circle at top, #065f46, #0f172a, #020617)">Emerald Deep</option>
+                        <option value="radial-gradient(circle at top, #831843, #0f172a, #020617)">Royal Fuchsia</option>
+                        <option value="radial-gradient(circle at top, #78350f, #0f172a, #020617)">Amber Dark</option>
+                    </select>
+                </div>
 
-                    <button onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all text-sm">
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Folder Design Style:</label>
+                    <select id="editFolderStyle" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                        <option value="rounded-3xl">3D Rounded</option>
+                        <option value="rounded-xl">Compact Box</option>
+                        <option value="rounded-none">Sharp Edge</option>
+                        <option value="rounded-full">Pill / Circle</option>
+                    </select>
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">Folder Background Theme:</label>
+                    <select id="editFolderBg" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                        <option value="linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9))">Dark Slate 3D</option>
+                        <option value="linear-gradient(135deg, rgba(6, 95, 70, 0.7), rgba(15, 23, 42, 0.9))">Emerald Dark</option>
+                        <option value="linear-gradient(135deg, rgba(131, 24, 67, 0.7), rgba(15, 23, 42, 0.9))">Fuchsia Dark</option>
+                        <option value="linear-gradient(135deg, rgba(120, 53, 15, 0.7), rgba(15, 23, 42, 0.9))">Amber Dark</option>
+                    </select>
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Education Icon:</label>
+                    <input type="text" id="iconEduInput" value="${iconEdu}" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl text-center border border-slate-700">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Government Icon:</label>
+                    <input type="text" id="iconGovInput" value="${iconGov}" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl text-center border border-slate-700">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Cinema Icon:</label>
+                    <input type="text" id="iconCinInput" value="${iconCin}" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl text-center border border-slate-700">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Technology Icon:</label>
+                    <input type="text" id="iconTechInput" value="${iconTech}" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl text-center border border-slate-700">
+                </div>
+
+                <div class="col-span-2 pt-2">
+                    <button onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3 rounded-2xl shadow-lg transition-all text-sm">
                         💾 Save All Changes & Apply
                     </button>
                 </div>
@@ -328,17 +365,29 @@
             let newTitle = document.getElementById('editAppTitle').value;
             let newAdminText = document.getElementById('editAdminText').value;
             let newBg = document.getElementById('editBgColor').value;
+            let newFolderStyle = document.getElementById('editFolderStyle').value;
+            let newFolderBg = document.getElementById('editFolderBg').value;
+            let iconEduVal = document.getElementById('iconEduInput').value;
+            let iconGovVal = document.getElementById('iconGovInput').value;
+            let iconCinVal = document.getElementById('iconCinInput').value;
+            let iconTechVal = document.getElementById('iconTechInput').value;
             let fileInput = document.getElementById('editLogoFile');
 
             localStorage.setItem('oyes_app_title', newTitle);
             localStorage.setItem('oyes_admin_text', newAdminText);
             localStorage.setItem('oyes_app_bg', newBg);
+            localStorage.setItem('oyes_folder_style', newFolderStyle);
+            localStorage.setItem('oyes_folder_bg', newFolderBg);
+            localStorage.setItem('oyes_icon_edu', iconEduVal);
+            localStorage.setItem('oyes_icon_gov', iconGovVal);
+            localStorage.setItem('oyes_icon_cin', iconCinVal);
+            localStorage.setItem('oyes_icon_tech', iconTechVal);
 
             if (fileInput.files && fileInput.files[0]) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     localStorage.setItem('oyes_app_logo_img', e.target.result);
-                    alert("✅ All changes & logo saved successfully!");
+                    alert("✅ All changes saved successfully!");
                     loadSavedCustomization();
                     goBackHome();
                 };
@@ -355,6 +404,12 @@
             let savedLogoImg = localStorage.getItem('oyes_app_logo_img');
             let savedAdminText = localStorage.getItem('oyes_admin_text');
             let savedBg = localStorage.getItem('oyes_app_bg');
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style');
+            let savedFolderBg = localStorage.getItem('oyes_folder_bg');
+            let iconEdu = localStorage.getItem('oyes_icon_edu');
+            let iconGov = localStorage.getItem('oyes_icon_gov');
+            let iconCin = localStorage.getItem('oyes_icon_cin');
+            let iconTech = localStorage.getItem('oyes_icon_tech');
 
             if(savedTitle) {
                 document.getElementById('headerMainTitle').innerText = savedTitle;
@@ -369,6 +424,20 @@
             if(savedBg) {
                 document.body.style.background = savedBg;
             }
+            if(savedFolderStyle) {
+                document.querySelectorAll('.folder-card, .card-all').forEach(card => {
+                    card.className = card.className.replace(/rounded-(3xl|xl|none|full)/g, savedFolderStyle);
+                });
+            }
+            if(savedFolderBg) {
+                document.querySelectorAll('.folder-card').forEach(card => {
+                    card.style.background = savedFolderBg;
+                });
+            }
+            if(iconEdu) document.getElementById('iconEdu').innerText = iconEdu;
+            if(iconGov) document.getElementById('iconGov').innerText = iconGov;
+            if(iconCin) document.getElementById('iconCin').innerText = iconCin;
+            if(iconTech) document.getElementById('iconTech').innerText = iconTech;
         }
 
         function goBackHome() {
@@ -390,9 +459,13 @@
             grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
 
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            let savedFolderBg = localStorage.getItem('oyes_folder_bg') || 'linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9))';
+
             subItems.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
+                card.className = `folder-card card-3d p-4 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                card.style.background = savedFolderBg;
                 card.innerHTML = `
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📁</div>
                     <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
@@ -421,17 +494,37 @@
             grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
             
-            for(let i=1; i<=12; i++) {
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            let savedFolderBg = localStorage.getItem('oyes_folder_bg') || 'linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9))';
+
+            // 46 മാസ്റ്റർ ഫോൾഡറുകൾക്ക് നമ്പർ ഒഴിവാക്കി കൃത്യമായ പേരുകൾ നൽകിയിരിക്കുന്നു
+            const serviceNames = [
+                "Digital Services Hub", "Public Utility Portal", "E-Governance Link", "Citizen Support Portal",
+                "Online Registration Hub", "Welfare Schemes Portal", "Skill Development Links", "Employment Exchange Portal",
+                "Legal Aid Services", "Health Care Portal", "Agriculture & Farming", "Transport & Travel Hub",
+                "Banking & Financial Services", "Postal Services Portal", "Consumer Rights Forum", "Cyber Security Portal",
+                "Disaster Management Hub", "Environment & Forestry", "Energy & Power Services", "Water Supply Portal",
+                "Housing & Urban Development", "Rural Development Hub", "Tourism & Heritage", "Sports & Youth Affairs",
+                "Food & Civil Supplies", "Cooperative Sector Hub", "Industries & Commerce", "MSME Support Portal",
+                "Labor Welfare Services", "Taxation & Revenue Hub", "Panchayat Raj Portal", "Local Administration",
+                "Social Welfare Portal", "Women & Child Development", "Tribal Welfare Hub", "Minority Affairs Portal",
+                "Statistics & Data Hub", "Public Grievances Portal", "RTI Information Hub", "Voter Services Portal",
+                "Aadhaar Services Link", "PAN & Tax Services", "Passport Seva Hub", "Insurance Schemes Portal",
+                "Pension Services Hub", "General Utility Portal"
+            ];
+
+            serviceNames.forEach((title) => {
                 const card = document.createElement('div');
-                card.className = 'card-3d p-3.5 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
+                card.className = `folder-card card-3d p-3.5 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                card.style.background = savedFolderBg;
                 card.innerHTML = `
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2">📂</div>
-                    <h3 class="font-bold text-[11px] text-slate-100">Master Service ${i}</h3>
+                    <h3 class="font-bold text-[11px] text-slate-100">${title}</h3>
                     <p class="text-[8px] text-teal-200/60 mt-0.5">Verified Link</p>
                 `;
                 card.onclick = () => window.open('https://www.india.gov.in/', '_blank');
                 grid.appendChild(card);
-            }
+            });
             window.scrollTo(0, 0);
         }
 
