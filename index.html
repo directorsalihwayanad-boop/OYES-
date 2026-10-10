@@ -1,83 +1,118 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="ml" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES - Smart Hub</title>
+    <title>OYES APP - നിങ്ങളുടെ വിരൽതുമ്പിൽ ഒരു ലോകം</title>
+    <!-- Tailwind CSS for modern 3D look and fast performance -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Anti-Screenshot, Anti-Copy & Secure Web View Protection */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            text-align: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            background: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        .card-3d {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #555;
-            font-size: 16px;
-        }
-        .section {
-            margin: 20px 0;
-            padding: 15px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border: 1px solid #e1e1e1;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .btn:hover {
-            background-color: #0056b3;
+        .card-3d:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between">
 
-    <div class="container">
-        <h1>OYES Smart Hub</h1>
-        <p>ബിസിനസ്സ് ആശയങ്ങൾ, പുസ്തകങ്ങൾ, പഠന സാമഗ്രികൾ എന്നിവയ്ക്കായുള്ള ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോം</p>
+    <!-- Header Section / Splash Welcome -->
+    <header class="p-6 text-center bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <h1 class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">OYES APP</h1>
+        <p class="text-xs text-slate-400 mt-1">"നിങ്ങളുടെ വിരൽതുമ്പിൽ ഒരു ലോകം – OYES APP!"</p>
+    </header>
 
-        <!-- AI Voice Assistant Section -->
-        <div class="section">
-            <h3>🤖 AI Voice Assistant</h3>
-            <p>പ്ലാറ്റ്‌ഫോമിനെക്കുറിച്ചും പഠന കാര്യങ്ങളെക്കുറിച്ചും സംസാരിക്കാൻ സഹായിക്കുന്ന അസിസ്റ്റന്റ്.</p>
-            <a href="#" class="btn" onclick="alert('AI Voice Assistant ഉടൻ പ്രവർത്തിച്ചു തുടങ്ങും!')">Voice Assistant തുറക്കുക</a>
+    <!-- Main Dashboard / Categories & Folders -->
+    <main class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
+        
+        <!-- Search Bar -->
+        <div class="relative">
+            <input type="text" placeholder="സേവനങ്ങളും ടൂളുകളും തിരയുക..." class="w-full bg-slate-800 text-slate-200 placeholder-slate-500 px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-cyan-500 text-sm">
         </div>
 
-        <!-- Community Chat Section -->
-        <div class="section">
-            <h3>💬 Community Chat</h3>
-            <p>ചർച്ചകൾക്കും സംശയ നിവാരണത്തിനുമുള്ള ചാറ്റ് സംവിധാനം.</p>
-            <a href="#" class="btn" onclick="alert('Community Chat തുറക്കുന്നു...')">ചാറ്റ് ചെയ്യുക</a>
+        <!-- Categories Grid -->
+        <div class="grid grid-cols-2 gap-3">
+            
+            <!-- 1. Government & Emergency Services -->
+            <div onclick="openSection('ഗവൺമെന്റ് & എമർജൻസി')" class="card-3d p-4 rounded-2xl border border-slate-800 cursor-pointer flex flex-col items-center text-center">
+                <span class="text-3xl mb-2">🏛️</span>
+                <h3 class="font-bold text-sm text-slate-200">ഗവൺമെന്റ് സേവനങ്ങൾ</h3>
+                <p class="text-[10px] text-slate-400 mt-1">പോലീസ്, ഹോസ്പിറ്റൽ ഡയറക്ട് ലിങ്ക്</p>
+            </div>
+
+            <!-- 2. Education & Religious Studies -->
+            <div onclick="openSection('എജ്യുക്കേഷൻ & മതഗ്രന്ഥങ്ങൾ')" class="card-3d p-4 rounded-2xl border border-slate-800 cursor-pointer flex flex-col items-center text-center">
+                <span class="text-3xl mb-2">📖</span>
+                <h3 class="font-bold text-sm text-slate-200">ഖുർആൻ & പഠനം</h3>
+                <p class="text-[10px] text-slate-400 mt-1">ഡിജിറ്റൽ ഗ്രന്ഥങ്ങൾ & കോഴ്സുകൾ</p>
+            </div>
+
+            <!-- 3. Cinema, Media & Music Tech -->
+            <div onclick="openSection('സിനിമ & മ്യൂസിക്')" class="card-3d p-4 rounded-2xl border border-slate-800 cursor-pointer flex flex-col items-center text-center">
+                <span class="text-3xl mb-2">🎬</span>
+                <h3 class="font-bold text-sm text-slate-200">സിനിമ & AI മ്യൂസിക്</h3>
+                <p class="text-[10px] text-slate-400 mt-1">ഫ്രീ മ്യൂസിക് & എഡിറ്റിംഗ് ടൂളുകൾ</p>
+            </div>
+
+            <!-- 4. IT & AI Technology Hub -->
+            <div onclick="openSection('എഐ & ടെക്നോളജി')" class="card-3d p-4 rounded-2xl border border-slate-800 cursor-pointer flex flex-col items-center text-center">
+                <span class="text-3xl mb-2">🤖</span>
+                <h3 class="font-bold text-sm text-slate-200">Gemini & ChatGPT</h3>
+                <p class="text-[10px] text-slate-400 mt-1">ആധുനിക എഐ അസിസ്റ്റന്റുകൾ</p>
+            </div>
+
+            <!-- 5. Sales & Marketplace (Animals, Vehicles, etc.) -->
+            <div onclick="openSection('സെയിൽസ് & മാർക്കറ്റ് പ്ലേസ്')" class="card-3d p-4 rounded-2xl border border-slate-800 cursor-pointer flex flex-col items-center text-center">
+                <span class="text-3xl mb-2">🛒</span>
+                <h3 class="font-bold text-sm text-slate-200">സെയിൽസ് സെക്ഷൻ</h3>
+                <p class="text-[10px] text-slate-400 mt-1">കന്നുകാലികൾ, വാഹനങ്ങൾ, ഉൽപ്പന്നങ്ങൾ</p>
+            </div>
+
+            <!-- 6. 24/7 AI Help Desk & Call Routing -->
+            <div onclick="openHelpDesk()" class="card-3d p-4 rounded-2xl border border-cyan-500/50 cursor-pointer flex flex-col items-center text-center bg-cyan-950/20">
+                <span class="text-3xl mb-2">🎧</span>
+                <h3 class="font-bold text-sm text-cyan-400">24/7 AI ഹെൽപ്പ് ഡെസ്ക്</h3>
+                <p class="text-[10px] text-cyan-300/70 mt-1">വോയിസ് അസിസ്റ്റന്റ് & കോൾ റൂട്ടിംഗ്</p>
+            </div>
+
         </div>
 
-        <!-- Project Files Section -->
-        <div class="section">
-            <h3>📁 പഠന സാമഗ്രികളും പുസ്തകങ്ങളും</h3>
-            <p>ഡൗൺലോഡ് ചെയ്ത് ഉപയോഗിക്കാവുന്ന പ്രൊജക്റ്റ് ഫയലുകൾ.</p>
-            <a href="https://github.com/directorsalihwayanad-boop/OYES-" class="btn" target="_blank">ഫയലുകൾ ഡൗൺലോഡ് ചെയ്യുക</a>
-        </div>
-    </div>
+    </main>
 
+    <!-- Footer / Admin Control Panel Info -->
+    <footer class="p-4 text-center text-[10px] text-slate-500 border-t border-slate-800 bg-slate-900/50">
+        <p>Admins: ഡയറക്ടർ സാലിഹ് വയനാട് & OYES Saleem</p>
+        <p class="mt-1">Official Contact: Platformoyes@gmail.com | Phone: +91 9633111000</p>
+        <p class="mt-1 text-slate-400">© 2026 OYES APP. All Rights Reserved. (Secure & Lightweight)</p>
+    </footer>
+
+    <!-- JavaScript for Security & Actions -->
+    <script>
+        // Disable Right Click, Text Selection & Inspect Elements to protect content
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('selectstart', event => event.preventDefault());
+
+        function openSection(sectionName) {
+            alert(sectionName + ' സെക്ഷനിലേക്ക് സ്വാഗതം! (2G/3G ഒപ്റ്റിമൈസ്ഡ് ഡയറക്ട് വെബ് വ്യൂ ലോഡ് ചെയ്യുന്നു...)');
+        }
+
+        function openHelpDesk() {
+            alert('OYES AI അസിസ്റ്റന്റ്: എമർജൻസി കോളോ അന്വേഷണമോ ആവശ്യമുണ്ടോ? AI അസിസ്റ്റന്റ് കോൾ സ്വീകരിച്ച് ബന്ധപ്പെട്ട വിഭാഗത്തിലേക്ക് കണക്ട് ചെയ്യുന്നു...');
+        }
+    </script>
 </body>
 </html>
