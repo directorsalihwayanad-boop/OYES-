@@ -1,1 +1,158 @@
-index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OYES - Official Platform</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background: #111;
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0; text-align: center;
+        }
+        header {
+            padding: 20px;
+            background: #1a1a1a;
+            border-bottom: 2px solid #d4af37;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .header-title h1 { color: #d4af37; margin: 0; font-size: 24px; letter-spacing: 2px; }
+        .header-title p { margin: 2px 0 0 0; font-size: 10px; color: #ccc; }
+        
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+        
+        .card {
+            background: #1c1c1c;
+            border: 1px solid #d4af37; border-radius: 15px; padding: 20px;
+            margin-bottom: 20px; text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .card h3 { color: #d4af37; margin-top: 0; }
+        .card p { font-size: 13px; color: #bbb; }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #f3c653, #aa820a); color: #000; border: none;
+            padding: 12px; font-weight: bold; font-size: 14px; border-radius: 8px;
+            cursor: pointer; margin-top: 10px; width: 100%; text-align: center; display: block;
+        }
+        .ai-btn { background: linear-gradient(135deg, #ff8c00, #ff4500); color: #fff; }
+        .video-btn { background: linear-gradient(135deg, #007bff, #0056b3); color: #fff; }
+        .chat-btn { background: linear-gradient(135deg, #6f42c1, #563d7c); color: #fff; }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: #222; padding: 25px; border-radius: 15px; border: 2px solid #d4af37;
+            width: 85%; max-width: 400px; text-align: center; color: #fff; position: relative;
+        }
+        .close { color: #d4af37; position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; }
+        .chat-box { width: 100%; height: 150px; background: #111; border: 1px solid #444; border-radius: 5px; overflow-y: auto; text-align: left; padding: 8px; font-size: 12px; margin-bottom: 10px; color: #ccc; }
+        .chat-input { width: calc(100% - 60px); padding: 8px; background: #000; border: 1px solid #d4af37; color: #fff; border-radius: 5px; }
+        .send-btn { width: 50px; padding: 8px; background: #d4af37; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title" style="text-align: left;">
+            <h1>OYES</h1>
+            <p>CONNECTING PEOPLE</p>
+        </div>
+        <button onclick="alert('OYES Alerts Enabled Successfully!')" style="background:#222; color:#d4af37; border:1px solid #d4af37; padding:6px 10px; border-radius:6px; font-weight:bold; font-size:11px;">🔔 Alerts</button>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h3>⚡ OYES Smart Hub</h3>
+            <p>Access AI Assistant, live video conferencing, and community chat instantly below.</p>
+            
+            <button class="action-btn ai-btn" onclick="openModal('aiModal')">🤖 24/7 AI Voice Assistant</button>
+            <button class="action-btn video-btn" onclick="openModal('videoModal')">📹 OYES Video Room</button>
+            <button class="action-btn chat-btn" onclick="openModal('chatModal')">💬 OYES Community Chat</button>
+            <button class="action-btn" onclick="openModal('supportModal')" style="background:#333; color:#d4af37; border:1px solid #d4af37;">📞 Support Info</button>
+        </div>
+    </div>
+
+    <!-- AI Modal -->
+    <div id="aiModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aiModal')">&times;</span>
+            <h3 style="color:#ff8c00;">AI Assistant Active</h3>
+            <p id="aiText" style="font-size:13px; color:#ccc;">Hello! I am your 24/7 OYES assistant. How can I help you?</p>
+            <input type="text" id="aiInput" class="chat-input" placeholder="Ask AI..." style="width:100%; margin-bottom:10px;">
+            <button class="action-btn ai-btn" onclick="askAI()">Send to AI</button>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('videoModal')">&times;</span>
+            <h3 style="color:#007bff;">OYES Video Room</h3>
+            <p style="font-size:13px; color:#ccc; background:#000; padding:20px; border-radius:8px;">🟢 Connected to Secure OYES Stream</p>
+            <button class="action-btn" style="background:#dc3545; color:#fff;" onclick="closeModal('videoModal')">End Call</button>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('chatModal')">&times;</span>
+            <h3 style="color:#6f42c1;">Community Chat</h3>
+            <div class="chat-box" id="chatBox">
+                <p style="color:#d4af37;"><b>System:</b> Welcome to OYES chat.</p>
+            </div>
+            <div style="display:flex; gap:5px;">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Type message...">
+                <button class="send-btn" onclick="sendChat()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('supportModal')">&times;</span>
+            <h3 style="color:#d4af37;">Support Contact</h3>
+            <p style="font-size:14px; font-weight:bold; background:#000; padding:15px; border-radius:8px; border:1px solid #444;">+91 9947198248 / +91 9633111000</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function askAI() {
+            let input = document.getElementById('aiInput');
+            let text = document.getElementById('aiText');
+            if(input.value.trim() !== "") {
+                text.innerText = "AI: I received your query regarding '" + input.value + "'. Processing successfully!";
+                if ('speechSynthesis' in window) {
+                    let utterance = new SpeechSynthesisUtterance("I received your query. Processing successfully!");
+                    window.speechSynthesis.speak(utterance);
+                }
+                input.value = "";
+            }
+        }
+
+        function sendChat() {
+            let input = document.getElementById('chatInput');
+            let box = document.getElementById('chatBox');
+            if(input.value.trim() !== "") {
+                box.innerHTML += `<p style="color:#fff; text-align:right;"><b>You:</b> ${input.value}</p>`;
+                setTimeout(() => {
+                    box.innerHTML += `<p style="color:#d4af37;"><b>Member:</b> Message broadcasted!</p>`;
+                    box.scrollTop = box.scrollHeight;
+                }, 800);
+                input.value = "";
+                box.scrollTop = box.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
