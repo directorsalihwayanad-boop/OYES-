@@ -60,12 +60,13 @@
     <header class="p-3 text-center bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
         <div class="flex justify-between items-center max-w-md mx-auto px-1 mb-1">
             <div class="flex items-center gap-1.5">
-                <div id="headerLogoContainer" ondblclick="verifyDirectorAccess()" class="cursor-pointer flex items-center justify-center" title="Double Click for Admin Settings">
+                <!-- Admin Trigger with Touch & Double Click Support -->
+                <div id="adminTriggerBtn" class="cursor-pointer flex items-center gap-1.5 select-none" title="Double Tap for Admin Settings">
                     <span id="headerLogoIcon" class="text-xl">🌟</span>
+                    <h1 id="headerMainTitle" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500">
+                        OYES APP
+                    </h1>
                 </div>
-                <h1 id="headerMainTitle" ondblclick="verifyDirectorAccess()" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 cursor-pointer" title="Double Click for Admin Settings">
-                    OYES APP
-                </h1>
             </div>
             <!-- Prominent Settings Button & Language Selector -->
             <div class="flex items-center gap-1.5">
@@ -397,6 +398,24 @@
             let savedLang = localStorage.getItem('oyes_app_lang') || 'en';
             document.getElementById('langSelector').value = savedLang;
             changeAppLanguage(savedLang);
+
+            // Robust event listener for mobile double tap & PC double click
+            const adminTrigger = document.getElementById('adminTriggerBtn');
+            let lastTap = 0;
+
+            adminTrigger.addEventListener('click', function(e) {
+                let currentTime = new Date().getTime();
+                let tapLength = currentTime - lastTap;
+                if (tapLength < 500 && tapLength > 0) {
+                    verifyDirectorAccess();
+                    e.preventDefault();
+                }
+                lastTap = currentTime;
+            });
+
+            adminTrigger.addEventListener('dblclick', function() {
+                verifyDirectorAccess();
+            });
         };
 
         // Director Code Verification -> Opens Admin Settings Automatically
