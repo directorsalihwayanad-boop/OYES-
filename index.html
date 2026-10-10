@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="ml" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES - One World, Many Opportunities</title>
+    <title>OYES Salim - Connecting People, Creating Opportunities</title>
     <style>
         :root {
-            --bg-color: #0c0a06;
-            --card-bg: #1a160d;
             --gold: #d4af37;
             --gold-light: #f3e5ab;
             --text-color: #ffffff;
@@ -16,7 +14,8 @@
         * { box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            background: linear-gradient(rgba(12, 10, 6, 0.75), rgba(12, 10, 6, 0.85)), url('home_bg.png') no-repeat center center fixed;
+            background-size: cover;
             color: var(--text-color);
             font-family: sans-serif;
             margin: 0;
@@ -28,10 +27,28 @@
             min-height: 100vh;
         }
 
-        .business-login-btn {
+        .top-bar {
             position: absolute;
             top: 15px;
             right: 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .lang-select {
+            background: #1a160d;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .business-login-btn {
             background-color: #238636;
             color: white;
             padding: 6px 14px;
@@ -40,7 +57,6 @@
             font-size: 0.85rem;
             font-weight: bold;
             border: 1px solid #2ea043;
-            z-index: 100;
         }
         .business-login-btn:hover {
             background-color: #2ea043;
@@ -48,30 +64,34 @@
 
         header {
             text-align: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #332910;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             width: 100%;
             max-width: 1000px;
         }
 
         .logo-container img {
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             object-fit: cover;
             border-radius: 50%;
             border: 2px solid var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
         h1 {
             color: var(--gold);
-            margin: 5px 0;
-            font-size: 20px;
+            margin: 8px 0 2px 0;
+            font-size: 22px;
+            letter-spacing: 1px;
         }
 
         p.tagline {
-            color: #bfa15f;
+            color: var(--gold-light);
             font-size: 11px;
-            margin: 0 0 10px 0;
+            margin: 0 0 12px 0;
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
 
         .controls {
@@ -82,7 +102,7 @@
         }
 
         button {
-            background: #1a160d;
+            background: rgba(26, 22, 13, 0.9);
             color: var(--gold);
             border: 1px solid var(--gold);
             padding: 5px 10px;
@@ -97,13 +117,50 @@
             color: #000;
         }
 
+        /* ഹോം പേജിലെ AI ചാറ്റ് സെക്‌ഷൻ */
+        .home-ai-section {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(26, 22, 13, 0.9);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .home-ai-section h3 {
+            color: var(--gold);
+            margin: 0 0 10px 0;
+            font-size: 15px;
+        }
+
+        .chat-box {
+            background: #0c0a06;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            height: 140px;
+            overflow-y: auto;
+            padding: 8px;
+            text-align: left;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .chat-msg {
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .chat-msg.bot { color: var(--gold-light); }
+        .chat-msg.user { color: #fff; text-align: right; }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             width: 100%;
             max-width: 1000px;
-            padding: 10px 0;
+            padding: 12px 0;
         }
 
         @media (min-width: 600px) {
@@ -114,8 +171,9 @@
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid #4a3b18;
+            background: rgba(26, 22, 13, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 8px;
             padding: 10px 5px;
             text-align: center;
@@ -127,18 +185,27 @@
             justify-content: center;
             min-height: 85px;
             cursor: pointer;
+            transition: 0.2s;
         }
 
-        .card:active {
-            background: #332910;
+        .card:hover {
+            border-color: var(--gold);
+            background: rgba(45, 38, 20, 0.95);
+            transform: translateY(-2px);
         }
 
         .card img.card-img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
             margin-bottom: 4px;
-            border-radius: 4px;
+        }
+
+        .card span.emoji-icon {
+            font-size: 26px;
+            margin-bottom: 4px;
         }
 
         .card span.title {
@@ -179,6 +246,14 @@
             color: var(--gold);
             margin-top: 0;
         }
+        .modal-img {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            margin-bottom: 12px;
+        }
         .sub-link-btn {
             display: block;
             background: #23211a;
@@ -190,6 +265,7 @@
             border-radius: 6px;
             font-weight: bold;
             font-size: 13px;
+            text-align: left;
         }
         .sub-link-btn:hover {
             background: var(--gold);
@@ -224,36 +300,75 @@
             border-radius: 4px;
             font-size: 12px;
         }
+        .contact-info {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(12, 10, 6, 0.85);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 11px;
+            color: #bfa15f;
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            line-height: 1.5;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
 
-    <a href="https://wa.me/919072410161" target="_blank" class="business-login-btn">ബിസിനസ്സ് ലോഗിൻ</a>
+    <div class="top-bar">
+        <select id="langSelector" class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="ml">മലയാളം</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+        <a href="https://wa.me/919947198248" target="_blank" class="business-login-btn" id="btnBusinessLogin">ബിസിനസ്സ് ലോഗിൻ</a>
+    </div>
 
     <div id="appContainer" style="display: flex; width: 100%; flex-direction: column; align-items: center;">
         <header>
             <div class="logo-container">
-                <img id="appLogo" src="watermarked_img_350157874029767559.png" alt="OYES Logo">
+                <img id="appLogo" src="watermarked_img_350157874029767559.png" alt="OYES Salim Logo">
             </div>
-            <h1 id="appName">OYES</h1>
-            <p class="tagline">ONE WORLD • MANY OPPORTUNITIES</p>
+            <h1 id="appName">OYES Salim</h1>
+            <p class="tagline" id="appTagline">CONNECTING PEOPLE • CREATING OPPORTUNITIES</p>
             
             <div class="controls">
-                <button class="admin-btn" onclick="openAdmin()">⚙️ അഡ്മിൻ പാനൽ</button>
+                <button class="admin-btn" id="btnAdmin" onclick="openAdmin()">⚙️ അഡ്മിൻ പാനൽ</button>
             </div>
         </header>
+
+        <!-- ഹോം പേജിൽ തന്നെയുള്ള OYES AI അസിസ്റ്റന്റ് സെക്‌ഷൻ -->
+        <div class="home-ai-section">
+            <h3 id="aiTitle">🤖 OYES Salim AI അസിസ്റ്റന്റ്</h3>
+            <div class="chat-box" id="chatBox">
+                <div class="chat-msg bot" id="botWelcome"><b>OYES Salim AI:</b> നമസ്കാരം! ഞാൻ OYES Salim പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!</div>
+            </div>
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="userInput" placeholder="ചോദ്യം ചോദിക്കൂ..." style="flex:1; padding:6px; background:#000; color:#fff; border:1px solid var(--gold); border-radius:4px; font-size:11px;">
+                <button id="sendBtn" onclick="sendAiMessage()" style="padding: 6px 10px; margin:0; background:var(--gold); color:#000; font-weight:bold;">അയക്കുക</button>
+            </div>
+        </div>
 
         <!-- ഗ്രിഡ് ലേഔട്ട് -->
         <div class="grid-container" id="folderGrid"></div>
 
-        <!-- എഡ്യൂക്കേഷൻ മോഡൽ (വിശുദ്ധ ഗ്രന്ഥങ്ങൾ) -->
+        <!-- ഔദ്യോഗിക കോൺടാക്റ്റ് വിവരങ്ങൾ -->
+        <div class="contact-info">
+            <p><b id="lblPhones">Phones:</b> +91 9947198248 | +91 9633111000</p>
+            <p><b id="lblEmail">Email:</b> platformoyes@gmail.com</p>
+        </div>
+
+        <!-- എഡ്യൂക്കേഷൻ മോഡൽ -->
         <div id="educationModal" class="subModal">
             <div class="sub-modal-content">
-                <h3>വിശുദ്ധ ഗ്രന്ഥങ്ങളും വിദ്യാഭ്യാസവും</h3>
-                <a href="https://quran.com" target="_blank" class="sub-link-btn">📖 ഖുർആൻ (Quran)</a>
-                <a href="https://www.bible.com" target="_blank" class="sub-link-btn">📖 ബൈബിൾ (Bible)</a>
-                <a href="https://www.valmiki.com" target="_blank" class="sub-link-btn">📖 രാമായണം (Ramayana)</a>
-                <a href="https://www.vedabase.io" target="_blank" class="sub-link-btn">📖 മഹാഭാരതം / ഗീത</a>
+                <h3 id="eduModalTitle" style="margin-bottom: 12px;">മതപഠനം & ഗ്രന്ഥങ്ങൾ</h3>
+                <a href="https://quran.com" target="_blank" class="sub-link-btn">📖 ഖുർആൻ / Quran</a>
+                <a href="https://www.bible.com" target="_blank" class="sub-link-btn">📖 ബൈബിൾ / Bible</a>
+                <a href="https://www.valmiki.com" target="_blank" class="sub-link-btn">📖 രാമായണം / Ramayana</a>
+                <a href="https://www.vedabase.io" target="_blank" class="sub-link-btn">📖 മഹാഭാരതം / Gita</a>
                 <button class="close-modal" onclick="closeModal('educationModal')">മടങ്ങിപ്പോവുക</button>
             </div>
         </div>
@@ -261,13 +376,23 @@
         <!-- ഗവൺമെന്റ് പോർട്ടൽ മോഡൽ -->
         <div id="govModal" class="subModal">
             <div class="sub-modal-content">
-                <h3>ഗവൺമെന്റ് പോർട്ടലുകൾ</h3>
-                <a href="https://www.india.gov.in" target="_blank" class="sub-link-btn">🏛️ നാഷണൽ പോർട്ടൽ (India.gov.in)</a>
-                <a href="https://keralapolice.gov.in" target="_blank" class="sub-link-btn">🚨 കേരള പോലീസ് (Kerala Police)</a>
-                <a href="https://service.kerala.gov.in" target="_blank" class="sub-link-btn">📄 ഇ-സേവനങ്ങൾ (e-Services)</a>
-                <a href="https://uidai.gov.in" target="_blank" class="sub-link-btn">🆔 ആധാർ സേവനങ്ങൾ (Aadhaar)</a>
-                <a href="https://www.passportindia.gov.in" target="_blank" class="sub-link-btn">🛂 പാസ്‌പോർട്ട് സേവനങ്ങൾ (Passport)</a>
+                <h3 id="govModalTitle">ഗവൺമെന്റ് സേവനങ്ങൾ</h3>
+                <a href="https://keralapolice.gov.in" target="_blank" class="sub-link-btn">🚨 കേരള പോലീസ് സ്റ്റേഷൻ</a>
+                <a href="https://dhs.kerala.gov.in" target="_blank" class="sub-link-btn">🏥 ഗവൺമെന്റ് ഹോസ്പിറ്റൽ</a>
+                <a href="https://www.india.gov.in" target="_blank" class="sub-link-btn">🏛️ നാഷണൽ പോർട്ടൽ</a>
+                <a href="https://service.kerala.gov.in" target="_blank" class="sub-link-btn">📄 ഇ-സേവനങ്ങൾ</a>
                 <button class="close-modal" onclick="closeModal('govModal')">മടങ്ങിപ്പോവുക</button>
+            </div>
+        </div>
+
+        <!-- സിനിമ / ഫിലിം പ്രൊഡക്ഷൻ മോഡൽ -->
+        <div id="cinemaModal" class="subModal">
+            <div class="sub-modal-content">
+                <h3 id="cinemaModalTitle">സിനിമ & പ്രൊഡക്ഷൻ</h3>
+                <img src="movie_clapper_person.png" alt="Movie Direction" class="modal-img">
+                <p style="font-size: 12px; color: #f3e5ab; margin-bottom: 10px;"><b>The Architect's Journey</b> - Story & Direction</p>
+                <a href="https://www.imdb.com" target="_blank" class="sub-link-btn">🎬 സിനിമ പ്രൊഡക്ഷൻ വിവരങ്ങൾ</a>
+                <button class="close-modal" onclick="closeModal('cinemaModal')">മടങ്ങിപ്പോവുക</button>
             </div>
         </div>
 
@@ -276,7 +401,7 @@
             <div class="modal-content">
                 <h3>അഡ്മിൻ നിയന്ത്രണ പാനൽ</h3>
                 <label>ആപ്പ് പേര്:</label>
-                <input type="text" id="adminTitleInput" value="OYES">
+                <input type="text" id="adminTitleInput" value="OYES Salim">
                 
                 <label>ലോഗോ ഫയൽ പേര്:</label>
                 <input type="text" id="adminLogoInput" value="watermarked_img_350157874029767559.png">
@@ -292,60 +417,126 @@
     </div>
 
     <script>
+        const translations = {
+            ml: {
+                loginBtn: "ബിസിനസ്സ് ലോഗിൻ",
+                tagline: "CONNECTING PEOPLE • CREATING OPPORTUNITIES",
+                adminBtn: "⚙️ അഡ്മിൻ പാനൽ",
+                aiTitle: "🤖 OYES Salim AI അസിസ്റ്റന്റ്",
+                botWelcome: "നമസ്കാരം! ഞാൻ OYES Salim പ്ലാറ്റ്‌ഫോമിനെയും, വിവരങ്ങളും, ഒപ്പം വിദ്യാഭ്യാസപരവും പഠനവുമായി ബന്ധപ്പെട്ട ഏത് സംശയങ്ങൾക്കും മറുപടി നൽകാൻ സജ്ജീകരിച്ചിട്ടുള്ള അസിസ്റ്റന്റ് ആണ്!",
+                inputPlaceholder: "ചോദ്യം ചോദിക്കൂ...",
+                sendBtn: "അയക്കുക",
+                phones: "Phones:",
+                email: "Email:"
+            },
+            en: {
+                loginBtn: "Business Login",
+                tagline: "CONNECTING PEOPLE • CREATING OPPORTUNITIES",
+                adminBtn: "⚙️ Admin Panel",
+                aiTitle: "🤖 OYES Salim AI Assistant",
+                botWelcome: "Hello! I am the assistant configured to provide information about the OYES Salim platform and answers to any educational and study-related doubts!",
+                inputPlaceholder: "Ask a question...",
+                sendBtn: "Send",
+                phones: "Phones:",
+                email: "Email:"
+            },
+            ar: {
+                loginBtn: "تسجيل دخول الأعمال",
+                tagline: "ربط الناس • خلق الفرص",
+                adminBtn: "⚙️ لوحة التحكم",
+                aiTitle: "🤖 مساعد OYES Salim الذكي",
+                botWelcome: "مرحباً! أنا المساعد المصمم لتقديم معلومات حول منصة OYES Salim والإجابة عن أي استفسارات تعليمية ودراسية!",
+                inputPlaceholder: "اطرح سؤالاً...",
+                sendBtn: "إرسال",
+                phones: "الهواتف:",
+                email: "البريد الإلكتروني:"
+            },
+            hi: {
+                loginBtn: "बिजनेस लॉगिन",
+                tagline: "लोगों को जोड़ना • अवसर पैदा करना",
+                adminBtn: "⚙️ एडमिन पैनल",
+                aiTitle: "🤖 OYES Salim AI सहायक",
+                botWelcome: "नमस्ते! मैं OYES Salim प्लेटफॉर्म और किसी भी शैक्षणिक और अध्ययन संबंधी शंकाओं के उत्तर देने के लिए तैयार किया गया सहायक हूँ!",
+                inputPlaceholder: "सवाल पूछें...",
+                sendBtn: "भेजें",
+                phones: "फ़ोन:",
+                email: "ईमेल:"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('btnBusinessLogin').innerText = t.loginBtn;
+            document.getElementById('appTagline').innerText = t.tagline;
+            document.getElementById('btnAdmin').innerText = t.adminBtn;
+            document.getElementById('aiTitle').innerText = t.aiTitle;
+            document.getElementById('botWelcome').innerHTML = `<b>OYES Salim AI:</b> ${t.botWelcome}`;
+            document.getElementById('userInput').placeholder = t.inputPlaceholder;
+            document.getElementById('sendBtn').innerText = t.sendBtn;
+            document.getElementById('lblPhones').innerText = t.phones;
+            document.getElementById('lblEmail').innerText = t.email;
+
+            if(lang === 'ar') {
+                document.getElementById('htmlRoot').setAttribute('dir', 'rtl');
+            } else {
+                document.getElementById('htmlRoot').removeAttribute('dir');
+            }
+        }
+
         const folders = [
-            { title: "EDUCATION", subtitle: "വിദ്യാഭ്യാസം & ഗ്രന്ഥങ്ങൾ", img: "oyes_icon.png", type: "education", link: "" },
-            { title: "JOBS & VACANCIES", subtitle: "തൊഴിലവസരങ്ങൾ", img: "oyes_productions.png", type: "link", link: "https://www.ncs.gov.in" },
-            { title: "HEALTH", subtitle: "ആരോഗ്യം", img: "oyes_icon.png", type: "link", link: "https://www.who.int" },
-            { title: "GOV / PRIVATE", subtitle: "ഗവൺമെന്റ് സേവനങ്ങൾ", img: "watermarked_img_350157874029767559.png", type: "gov", link: "" },
-            { title: "LOCAL PLATFORM", subtitle: "പ്രാദേശിക പ്ലാറ്റ്‌ഫോം", img: "oyes_icon.png", type: "link", link: "https://lsgkerala.gov.in" },
-            { title: "SERVICES", subtitle: "പൊതു സേവനങ്ങൾ", img: "oyes_productions.png", type: "link", link: "https://service.kerala.gov.in" },
-            { title: "SALES / BUY-SELL", subtitle: "വാങ്ങൽ - വിൽപന", img: "oyes_icon.png", type: "link", link: "https://www.olx.in" },
-            { title: "HOTELS & RESTAURANTS", subtitle: "ഹോട്ടലുകൾ & ഭക്ഷണശാലകൾ", img: "oyes_icon.png", type: "link", link: "https://www.zomato.com" },
-            { title: "FOOD & CATERING", subtitle: "ഭക്ഷണ വിതരണം", img: "oyes_icon.png", type: "link", link: "https://www.swiggy.com" },
-            { title: "TRANSPORT", subtitle: "ഗതാഗതം", img: "oyes_icon.png", type: "link", link: "https://ksrtc.kerala.gov.in" },
-            { title: "DELIVERY & COURIER", subtitle: "കൊറിയർ സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.indiapost.gov.in" },
-            { title: "WORKS & ORDERS", subtitle: "ടെൻഡറുകളും വർക്കുകളും", img: "oyes_icon.png", type: "link", link: "https://etenders.kerala.gov.in" },
-            { title: "REAL ESTATE", subtitle: "റിയൽ എസ്റ്റേറ്റ്", img: "oyes_icon.png", type: "link", link: "https://www.magicbricks.com" },
-            { title: "RETAIL & SHOPS", subtitle: "കടകളും ഷോപ്പിംഗും", img: "oyes_icon.png", type: "link", link: "https://www.amazon.in" },
-            { title: "REPAIR & MAINT", subtitle: "റിപ്പയറിങ് സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.urbancompany.com" },
-            { title: "AUTOMOBILE", subtitle: "വാഹനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.cardekho.com" },
-            { title: "TRAINING & SKILL", subtitle: "പരിശീലനം", img: "oyes_icon.png", type: "link", link: "https://www.skillindia.gov.in" },
-            { title: "IT & TECH", subtitle: "സാങ്കേതികവിദ്യ", img: "oyes_icon.png", type: "link", link: "https://technopark.org" },
-            { title: "FINANCE & ACC", subtitle: "ധനകാര്യം & ടാക്സ്", img: "oyes_icon.png", type: "link", link: "https://www.cleartax.in" },
-            { title: "LEGAL SERVICES", subtitle: "നിയമസേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://districts.ecourts.gov.in" },
-            { title: "ENGINEERING", subtitle: "എഞ്ചിനീയറിങ്", img: "oyes_icon.png", type: "link", link: "https://www.ieindia.org" },
-            { title: "AGRICULTURE", subtitle: "കൃഷി", img: "oyes_icon.png", type: "link", link: "https://keralaagriculture.gov.in" },
-            { title: "ANIMAL & DAIRY", subtitle: "മൃഗസംരക്ഷണം", img: "oyes_icon.png", type: "link", link: "https://ahd.kerala.gov.in" },
-            { title: "FASHION & TEXT", subtitle: "വസ്ത്രമേഖല", img: "oyes_icon.png", type: "link", link: "https://www.myntra.com" },
-            { title: "BEAUTY CARE", subtitle: "സൗന്ദര്യ സംരക്ഷണം", img: "oyes_icon.png", type: "link", link: "https://www.nykaa.com" },
-            { title: "OFFICE & ADMIN", subtitle: "ഭരണനിർവഹണം", img: "oyes_icon.png", type: "link", link: "https://www.india.gov.in" },
-            { title: "MANUFACTURING", subtitle: "വ്യവസായം & നിർമാണം", img: "oyes_icon.png", type: "link", link: "https://msme.gov.in" },
-            { title: "WHOLESALE & DIST", subtitle: "വിതരണമേഖല", img: "oyes_icon.png", type: "link", link: "https://www.indiamart.com" },
-            { title: "ONLINE E-COMM", subtitle: "ഇ-കോമേഴ്‌സ്", img: "oyes_icon.png", type: "link", link: "https://www.flipkart.com" },
-            { title: "CINEMA / FILM", subtitle: "സിനിമ & പ്രൊഡക്ഷൻ", img: "movie_clapper_person.png", type: "link", link: "https://www.imdb.com" },
-            { title: "MEDIA", subtitle: "മാധ്യമങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.manoramaonline.com" },
-            { title: "NEWS", subtitle: "വാർത്തകൾ", img: "oyes_icon.png", type: "link", link: "https://www.mathrubhumi.com" },
-            { title: "ENTERTAINMENT", subtitle: "വിനോദം", img: "oyes_icon.png", type: "link", link: "https://www.youtube.com" },
-            { title: "EVENTS MGMT", subtitle: "ഇവന്റുകൾ", img: "oyes_icon.png", type: "link", link: "https://in.bookmyshow.com" },
-            { title: "DESIGN & CREATIVE", subtitle: "ഡിസൈൻ സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.behance.net" },
-            { title: "TOURISM & TRAVEL", subtitle: "ടൂറിസം & യാത്ര", img: "oyes_icon.png", type: "link", link: "https://www.keralatourism.org" },
-            { title: "SPORTS & FITNESS", subtitle: "കായികം & ഫിറ്റ്നസ്", img: "oyes_icon.png", type: "link", link: "https://www.espncricinfo.com" },
-            { title: "SOLAR & ENERGY", subtitle: "സോളാർ ഊർജം", img: "oyes_icon.png", type: "link", link: "https://www.uraan.org" },
-            { title: "ENVIRONMENT", subtitle: "പരിസ്ഥിതി", img: "oyes_icon.png", type: "link", link: "https://env.gov.in" },
-            { title: "CLEANING & FAC", subtitle: "ക്ലീനിങ് സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.urbancompany.com" },
-            { title: "SECURITY", subtitle: "സുരക്ഷ", img: "oyes_icon.png", type: "link", link: "https://keralapolice.gov.in" },
-            { title: "MACHINERY RENTAL", subtitle: "യന്ത്രങ്ങൾ വാടകയ്ക്ക്", img: "oyes_icon.png", type: "link", link: "https://www.indiamart.com" },
-            { title: "PET & ANIMAL", subtitle: "വളർത്തുമൃഗങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.petfinder.com" },
-            { title: "NGO / CHARITY", subtitle: "ചാരിറ്റി സേവനങ്ങൾ", img: "oyes_icon.png", type: "link", link: "https://www.unicef.org" },
-            { title: "JOIN OYES", subtitle: "ഒയസ് അംഗത്വം", img: "watermarked_img_350157874029767559.png", type: "link", link: "https://wa.me/919072410161" },
-            { title: "HELP DESK", subtitle: "സഹായകേന്ദ്രം", img: "oyes_icon.png", type: "link", link: "https://wa.me/919072410161" }
+            { title: "EDUCATION", subtitle: "മതപഠനം & ഗ്രന്ഥങ്ങൾ", icon: "📚", type: "education", link: "" },
+            { title: "JOBS & VACANCIES", subtitle: "തൊഴിലവസരങ്ങൾ", icon: "💼", type: "link", link: "#" },
+            { title: "HEALTH", subtitle: "ആരോഗ്യം", icon: "🩺", type: "link", link: "#" },
+            { title: "GOV / PRIVATE", subtitle: "ഗവൺമെന്റ് സേവനങ്ങൾ", icon: "🏛️", type: "gov", link: "" },
+            { title: "LOCAL PLATFORM", subtitle: "പ്രാദേശിക പ്ലാറ്റ്‌ഫോം", icon: "📍", type: "link", link: "#" },
+            { title: "SERVICES", subtitle: "പൊതു സേവനങ്ങൾ", icon: "🛠️", type: "link", link: "#" },
+            { title: "SALES / BUY-SELL", subtitle: "വാങ്ങൽ - വിൽപന", icon: "🛒", type: "link", link: "#" },
+            { title: "HOTELS & RESTAURANTS", subtitle: "ഹോട്ടലുകൾ & ഭക്ഷണശാലകൾ", icon: "🏨", type: "link", link: "#" },
+            { title: "FOOD & CATERING", subtitle: "ഭക്ഷണ വിതരണം", icon: "🍲", type: "link", link: "#" },
+            { title: "TRANSPORT", subtitle: "ഗതാഗതം", icon: "🚌", type: "link", link: "#" },
+            { title: "DELIVERY & COURIER", subtitle: "കൊറിയർ സേവനങ്ങൾ", icon: "📦", type: "link", link: "#" },
+            { title: "WORKS & ORDERS", subtitle: "ടെൻഡറുകളും വർക്കുകളും", icon: "📋", type: "link", link: "#" },
+            { title: "REAL ESTATE", subtitle: "റിയൽ എസ്റ്റേറ്റ്", icon: "🏠", type: "link", link: "#" },
+            { title: "RETAIL & SHOPS", subtitle: "കടകളും ഷോപ്പിംഗും", icon: "🛍️", type: "link", link: "#" },
+            { title: "REPAIR & MAINT", subtitle: "റിപ്പയറിങ് സേവനങ്ങൾ", icon: "🔧", type: "link", link: "#" },
+            { title: "AUTOMOBILE", subtitle: "വാഹനങ്ങൾ", icon: "🚗", type: "link", link: "#" },
+            { title: "TRAINING & SKILL", subtitle: "പരിശീലനം", icon: "🎯", type: "link", link: "#" },
+            { title: "IT & TECH", subtitle: "സാങ്കേതികവിദ്യ", icon: "💻", type: "link", link: "#" },
+            { title: "FINANCE & ACC", subtitle: "ധനകാര്യം & ടാക്സ്", icon: "💰", type: "link", link: "#" },
+            { title: "LEGAL SERVICES", subtitle: "നിയമസേവനങ്ങൾ", icon: "⚖️", type: "link", link: "#" },
+            { title: "ENGINEERING", subtitle: "എഞ്ചിനീയറിങ്", icon: "⚙️", type: "link", link: "#" },
+            { title: "AGRICULTURE", subtitle: "കൃഷി", icon: "🌾", type: "link", link: "#" },
+            { title: "ANIMAL & DAIRY", subtitle: "മൃഗസംരക്ഷണം", icon: "🐄", type: "link", link: "#" },
+            { title: "FASHION & TEXT", subtitle: "വസ്ത്രമേഖല", icon: "👕", type: "link", link: "#" },
+            { title: "BEAUTY CARE", subtitle: "സൗന്ദര്യ സംരക്ഷണം", icon: "✨", type: "link", link: "#" },
+            { title: "OFFICE & ADMIN", subtitle: "ഭരണനിർവഹണം", icon: "🏢", type: "link", link: "#" },
+            { title: "MANUFACTURING", subtitle: "വ്യവസായം & നിർമാണം", icon: "🏭", type: "link", link: "#" },
+            { title: "WHOLESALE & DIST", subtitle: "വിതരണമേഖല", icon: "📦", type: "link", link: "#" },
+            { title: "ONLINE E-COMM", subtitle: "ഇ-കോമേഴ്‌സ്", icon: "🛒", type: "link", link: "#" },
+            { title: "CINEMA / FILM", subtitle: "സിനിമ & പ്രൊഡക്ഷൻ", isImg: true, icon: "oyes_productions.png", type: "cinema", link: "#" },
+            { title: "MEDIA", subtitle: "മാധ്യമങ്ങൾ", icon: "📰", type: "link", link: "#" },
+            { title: "NEWS", subtitle: "വാർത്തകൾ", icon: "📺", type: "link", link: "#" },
+            { title: "ENTERTAINMENT", subtitle: "വിനോദം", icon: "🎭", type: "link", link: "#" },
+            { title: "EVENTS MGMT", subtitle: "ഇവന്റുകൾ", icon: "🎉", type: "link", link: "#" },
+            { title: "DESIGN & CREATIVE", subtitle: "ഡിസൈൻ സേവനങ്ങൾ", icon: "🎨", type: "link", link: "#" },
+            { title: "TOURISM & TRAVEL", subtitle: "ടൂറിസം & യാത്ര", icon: "✈️", type: "link", link: "#" },
+            { title: "SPORTS & FITNESS", subtitle: "കായികം & ഫിറ്റ്നസ്", icon: "⚽", type: "link", link: "#" },
+            { title: "SOLAR & ENERGY", subtitle: "സോളാർ ഊർജം", icon: "☀️", type: "link", link: "#" },
+            { title: "ENVIRONMENT", subtitle: "പരിസ്ഥിതി", icon: "🌳", type: "link", link: "#" },
+            { title: "CLEANING & FAC", subtitle: "ക്ലീനിങ് സേവനങ്ങൾ", icon: "🧹", type: "link", link: "#" },
+            { title: "SECURITY", subtitle: "സുരക്ഷ", icon: "🔒", type: "link", link: "#" },
+            { title: "MACHINERY RENTAL", subtitle: "യന്ത്രങ്ങൾ വാടകയ്ക്ക്", icon: "🚜", type: "link", link: "#" },
+            { title: "PET & ANIMAL", subtitle: "വളർത്തുമൃഗങ്ങൾ", icon: "🐾", type: "link", link: "#" },
+            { title: "NGO / CHARITY", subtitle: "ചാരിറ്റി സേവനങ്ങൾ", icon: "🤝", type: "link", link: "#" },
+            { title: "JOIN OYES", subtitle: "ഒയസ് അംഗത്വം", icon: "⭐", type: "link", link: "https://wa.me/919947198248" },
+            { title: "HELP DESK", subtitle: "സഹായകേന്ദ്രം", icon: "📞", type: "link", link: "https://wa.me/919947198248" }
         ];
 
         function renderGrid() {
             const grid = document.getElementById('folderGrid');
             grid.innerHTML = '';
             
-            folders.forEach((f, index) => {
+            folders.forEach((f) => {
                 const el = document.createElement('a');
                 el.className = 'card';
                 
@@ -355,18 +546,46 @@
                 } else if(f.type === "gov") {
                     el.href = "javascript:void(0);";
                     el.onclick = () => openModal('govModal');
+                } else if(f.type === "cinema") {
+                    el.href = "javascript:void(0);";
+                    el.onclick = () => openModal('cinemaModal');
                 } else {
                     el.href = f.link || "#";
-                    el.target = "_blank";
+                    if(f.link !== "#") el.target = "_blank";
                 }
 
-                el.innerHTML = `<img src="${f.img}" class="card-img" alt="icon"><span class="title">${f.title}</span><span class="subtitle">${f.subtitle}</span>`;
+                let iconHTML = f.isImg ? `<img src="${f.icon}" class="card-img" alt="icon">` : `<span class="emoji-icon">${f.icon}</span>`;
+                el.innerHTML = `${iconHTML}<span class="title">${f.title}</span><span class="subtitle">${f.subtitle}</span>`;
                 grid.appendChild(el);
             });
         }
 
         function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
         function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+
+        function sendAiMessage() {
+            const input = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            const text = input.value.trim();
+            if(!text) return;
+
+            chatBox.innerHTML += `<div class="chat-msg user"><b>നിങ്ങൾ:</b> ${text}</div>`;
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = "പഠനവുമായി ബന്ധപ്പെട്ട നിങ്ങളുടെ സംശയത്തിന്: എജ്യുക്കേഷൻ വിഭാഗത്തിൽ ഖുർആൻ, ബൈബിൾ, രാമായണം, ഗീത തുടങ്ങിയ വിശുദ്ധ ഗ്രന്ഥങ്ങളുടെ ലിങ്കുകൾ ലഭ്യമാണ്.";
+                const lower = text.toLowerCase();
+                
+                if(lower.includes('oyes') || lower.includes('one world') || lower.includes('ആപ്പ്')) {
+                    reply = "OYES Salim എന്നത് ആളുകളെ ബന്ധിപ്പിക്കാനും പുതിയ അവസരങ്ങൾ സൃഷ്ടിക്കാനുമുള്ള പ്ലാറ്റ്‌ഫോം ആണ്.";
+                } else if(lower.includes('cinema') || lower.includes('movie') || lower.includes('സിനിമ')) {
+                    reply = "സിനിമ വിഭാഗത്തിൽ പ്രൊഡക്ഷൻ വിവരങ്ങളും പ്രൊജക്റ്റുകളും ലഭ്യമാക്കിയിട്ടുണ്ട്.";
+                }
+
+                chatBox.innerHTML += `<div class="chat-msg bot"><b>OYES Salim AI:</b> ${reply}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500);
+        }
 
         function openAdmin() {
             document.getElementById('adminModal').style.display = 'flex';
