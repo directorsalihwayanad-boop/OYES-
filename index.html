@@ -36,6 +36,11 @@
                         inset 0 1px 0 rgba(255, 255, 255, 0.4);
             transform: translateY(-3px);
         }
+        .card-all {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.4), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(45, 212, 191, 0.5);
+            box-shadow: 0 12px 30px -10px rgba(45, 212, 191, 0.4);
+        }
     </style>
 </head>
 <body id="appBody" class="flex flex-col justify-between">
@@ -66,7 +71,7 @@
                 </select>
             </div>
         </div>
-        <p id="headerSubTitle" class="text-[10px] text-cyan-300/80 font-medium tracking-wide mt-0.5">"A World at Your Fingertips — Exclusive Domain & Education Hub!"</p>
+        <p id="headerSubTitle" class="text-[10px] text-cyan-300/80 font-medium tracking-wide mt-0.5">"A World at Your Fingertips — The Digital Companion of Trust & Development!"</p>
     </header>
 
     <!-- Admin Login Modal -->
@@ -86,98 +91,115 @@
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
         <div class="flex justify-between items-center px-1">
-            <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">Domain: Dedicated Hub</span>
+            <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
         </div>
 
         <div class="flex justify-between items-center px-1">
             <h2 id="homeSectionTitle" class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Select Domain / Folder
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
             </h2>
         </div>
 
         <!-- Folder Grid Container -->
         <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
-            <div id="cardEdu" onclick="openSubFolders('Education & Knowledge', [
-                {name: 'Quran Online Reading (Free)', url: 'https://quran.com/', desc: 'Complete Holy Quran digital reading platform.'},
-                {name: 'Bible Digital Link (Free)', url: 'https://www.biblegateway.com/', desc: 'Online Holy Bible scriptures and study tools.'},
-                {name: 'Bhagavad Gita & Ramayana (Free)', url: 'https://www.holy-bhagavad-gita.org/', desc: 'Sacred Hindu epics and spiritual teachings.'},
-                {name: 'Free Online Courses', url: 'https://swayam.gov.in/', desc: 'Government certified education and skill courses.'},
-                {name: 'Digital Library & E-Books', url: 'https://ndl.iitkgp.ac.in/', desc: 'National digital library for students and researchers.'},
-                {name: 'Education Scholarship Links', url: 'https://scholarships.gov.in/', desc: 'Student scholarship portals and application guidelines.'}
+            <div id="cardEdu" onclick="openSubFolders('Education', [
+                {name: 'Quran Online Reading (Free)', url: 'https://quran.com/'},
+                {name: 'Bible Digital Link (Free)', url: 'https://www.biblegateway.com/'},
+                {name: 'Bhagavad Gita & Ramayana (Free)', url: 'https://www.holy-bhagavad-gita.org/'},
+                {name: 'Free Online Courses', url: 'https://swayam.gov.in/'},
+                {name: 'Digital Library & E-Books', url: 'https://ndl.iitkgp.ac.in/'},
+                {name: 'Education Scholarship Links', url: 'https://scholarships.gov.in/'}
             ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">📖</div>
+                <div id="iconEdu" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">📖</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-edu">Education</h3>
                 <p class="text-[10px] text-emerald-200/60 mt-1 folder-edu-sub">Books & Learning</p>
             </div>
 
             <div id="cardGov" onclick="openSubFolders('Government Services', [
-                {name: 'Police Station Links', url: 'https://cybercrime.gov.in/', desc: 'Cyber crime reporting and police portals.'},
-                {name: 'Government Hospital Portal', url: 'https://arogyakeralam.gov.in/', desc: 'Public health and medical emergency services.'},
-                {name: 'Emergency Helplines', url: 'https://www.india.gov.in/', desc: 'National emergency and citizen support desks.'},
-                {name: 'Public Services & Certificates', url: 'https://edistrict.kerala.gov.in/', desc: 'Online certificate and revenue services.'},
-                {name: 'Ration Card & Welfare Portals', url: 'https://civilsupplieskerala.gov.in/', desc: 'Civil supplies and public distribution systems.'}
+                {name: 'Police Station Links', url: 'https://cybercrime.gov.in/'},
+                {name: 'Government Hospital Portal', url: 'https://arogyakeralam.gov.in/'},
+                {name: 'Emergency Helplines', url: 'https://www.india.gov.in/'},
+                {name: 'Public Services & Certificates', url: 'https://edistrict.kerala.gov.in/'},
+                {name: 'Ration Card & Welfare Portals', url: 'https://civilsupplieskerala.gov.in/'}
             ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
+                <div id="iconGov" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-gov">Government</h3>
                 <p class="text-[10px] text-cyan-200/60 mt-1 folder-gov-sub">Services & Portals</p>
             </div>
 
             <div id="cardCin" onclick="openSubFolders('Cinema & Music', [
-                {name: 'Suno AI & Udio (Free Tiers)', url: 'https://suno.com/', desc: 'AI music generation and audio tools.'},
-                {name: 'Free Music Library', url: 'https://freemusicarchive.org/', desc: 'Royalty-free music tracks for creators.'},
-                {name: 'Video Editing Tools (Free)', url: 'https://www.capcut.com/', desc: 'Professional video editing applications.'},
-                {name: 'Promotional Poster Maker', url: 'https://www.canva.com/', desc: 'Graphic design and poster creation tools.'},
-                {name: 'Shortfilm & Dubbing Platform', url: 'https://www.youtube.com/', desc: 'Video sharing and media publication hubs.'}
+                {name: 'Suno AI & Udio (Free Tiers)', url: 'https://suno.com/'},
+                {name: 'Free Music Library', url: 'https://freemusicarchive.org/'},
+                {name: 'Video Editing Tools (Free)', url: 'https://www.capcut.com/'},
+                {name: 'Promotional Poster Maker', url: 'https://www.canva.com/'},
+                {name: 'Shortfilm & Dubbing Platform', url: 'https://www.youtube.com/'}
             ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🎬</div>
+                <div id="iconCin" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🎬</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-cin">Cinema & Music</h3>
                 <p class="text-[10px] text-fuchsia-200/60 mt-1 folder-cin-sub">Free AI Tools</p>
             </div>
 
             <div id="cardTech" onclick="openSubFolders('Technology', [
-                {name: 'Free Web & App Development Tools', url: 'https://github.com/', desc: 'Source code management and repositories.'},
-                {name: 'Google Gemini & ChatGPT (Free Tiers)', url: 'https://gemini.google.com/', desc: 'Artificial intelligence chat and assistants.'},
-                {name: 'Claude, Perplexity & AI Hub (Free)', url: 'https://claude.ai/', desc: 'Advanced research and conversational AI models.'},
-                {name: 'Free Coding Libraries & Hosting', url: 'https://vercel.com/', desc: 'Cloud deployment and web hosting platforms.'},
-                {name: 'Open Source Tools', url: 'https://sourceforge.net/', desc: 'Open source software directory.'}
+                {name: 'Free Web & App Development Tools', url: 'https://github.com/'},
+                {name: 'Google Gemini & ChatGPT (Free Tiers)', url: 'https://gemini.google.com/'},
+                {name: 'Claude, Perplexity & AI Hub (Free)', url: 'https://claude.ai/'},
+                {name: 'Free Coding Libraries & Hosting', url: 'https://vercel.com/'},
+                {name: 'Open Source Tools', url: 'https://sourceforge.net/'}
             ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🤖</div>
+                <div id="iconTech" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🤖</div>
                 <h3 class="font-bold text-sm text-slate-100 folder-tech">Technology</h3>
                 <p class="text-[10px] text-indigo-200/60 mt-1 folder-tech-sub">100% Free Tools</p>
+            </div>
+
+            <div id="cardSales" onclick="openSubFolders('Sales Marketplace', [
+                {name: 'Livestock (Cows, Goats) - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Vehicles & Machinery - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Agricultural Products - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'General Marketplace Exchange', action: 'whatsapp_chat', phone: '919947198248'}
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div id="iconSales" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
+                <h3 class="font-bold text-sm text-slate-100 folder-sales">Sales</h3>
+                <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
+            </div>
+
+            <div id="cardWa" onclick="openSubFolders('WhatsApp & Call Hub', [
+                {name: 'Chat with Director Salih', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Chat with OYES Saleem', action: 'whatsapp_chat', phone: '919633111000'},
+                {name: 'Direct Audio Inquiry', action: 'whatsapp_chat', phone: '919947198248'},
+                {name: 'Support & Trade Helpline', action: 'whatsapp_chat', phone: '919633111000'}
+            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                <div id="iconWa" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform animate-pulse">💬📞</div>
+                <h3 class="font-bold text-sm text-emerald-300">WhatsApp & Call</h3>
+                <p class="text-[10px] text-emerald-200/70 mt-1">Direct Chat & Hub</p>
+            </div>
+
+            <!-- All Other Services (46 Master Folders) Button -->
+            <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
+                <div id="iconAll" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
+                <h3 class="font-bold text-sm folder-all text-teal-300">All Other Services</h3>
+                <p class="text-[10px] folder-all-sub text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
             </div>
         </div>
     </main>
 
-    <!-- Sub-Folders & Dedicated Domain Assistant View -->
+    <!-- Sub-Folders & Settings View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
                 ← Back to Home
             </button>
-            <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Domain Hub</h3>
+            <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
 
-        <!-- Dedicated Domain Specific Assistant Box -->
-        <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                    <span class="text-base">🎯✨</span>
-                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Domain Dedicated Assistant</h4>
-                </div>
-                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Focused Hub</span>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask anything specifically about this domain..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button onclick="askDomainSpecificAI()" id="searchBtnAi" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Search</button>
-            </div>
-            <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
-        </div>
-
-        <div id="pageContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
+        <div id="pageContentGrid" class="grid grid-cols-2 gap-3.5 pb-6"></div>
     </div>
 
     <!-- Footer Section -->
     <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="installAppPrompt()" id="installBtnText" class="py-2.5 px-3 bg-gradient-to-r from-cyan-600 to-indigo-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">📲 Install App</button>
+            <button onclick="shareApp()" id="shareBtnText" class="py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">🔗 Share App</button>
+        </div>
         <p id="footerAdminText" class="font-medium text-slate-300">Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)</p>
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
@@ -187,90 +209,12 @@
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
-        let currentActiveDomain = "";
-
-        // Language Translation Dictionary
         const translations = {
-            en: {
-                subtitle: '"A World at Your Fingertips — Exclusive Domain & Education Hub!"',
-                settings: 'Settings',
-                homeTitle: 'Select Domain / Folder',
-                eduTitle: 'Education',
-                eduSub: 'Books & Learning',
-                govTitle: 'Government',
-                govSub: 'Services & Portals',
-                cinTitle: 'Cinema & Music',
-                cinSub: 'Free AI Tools',
-                techTitle: 'Technology',
-                techSub: '100% Free Tools',
-                backBtn: '← Back to Home',
-                searchBtn: 'Search',
-                aiPlaceholder: 'Ask anything specifically about this domain...'
-            },
-            ml: {
-                subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം — എക്സ്ക്ലൂസീവ് എഡ്യൂക്കേഷൻ ഹബ്!"',
-                settings: 'ക്രമീകരണങ്ങൾ',
-                homeTitle: 'മേഖല തിരഞ്ഞെടുക്കുക',
-                eduTitle: 'വിദ്യാഭ്യാസം',
-                eduSub: 'പുസ്തകങ്ങളും പഠനവും',
-                govTitle: 'സർക്കാർ',
-                govSub: 'സേവനങ്ങളും പോർട്ടലുകളും',
-                cinTitle: 'സിനിമ & സംഗീതം',
-                cinSub: 'സൗജന്യ AI ടൂളുകൾ',
-                techTitle: 'സാങ്കേതികവിദ്യ',
-                techSub: '100% സൗജന്യ ടൂളുകൾ',
-                backBtn: '← ഹോമിലേക്ക് തിരികെ',
-                searchBtn: 'പരതുക',
-                aiPlaceholder: 'ഈ മേഖലയെക്കുറിച്ച് എന്തും ചോദിക്കൂ...'
-            },
-            hi: {
-                subtitle: '"आपकी उंगलियों पर दुनिया — विशेष शिक्षा केंद्र!"',
-                settings: 'सेटिंग्स',
-                homeTitle: 'डोमेन चुनें',
-                eduTitle: 'शिक्षा',
-                eduSub: 'पुस्तके और अध्ययन',
-                govTitle: 'सरकार',
-                govSub: 'सेवाएं और पोर्टल',
-                cinTitle: 'सिनेमा और संगीत',
-                cinSub: 'मुफ्त एआई टूल',
-                techTitle: 'प्रौद्योगिकी',
-                techSub: '100% मुफ्त टूल',
-                backBtn: '← होम पर वापस जाएं',
-                searchBtn: 'खोजें',
-                aiPlaceholder: 'इस डोमेन के बारे में कुछ भी पूछें...'
-            },
-            ta: {
-                subtitle: '"உங்கள் விரல் நுனியில் உலகம் — கல்வி மையம்!"',
-                settings: 'அமைப்புகள்',
-                homeTitle: 'துறையைத் தேர்ந்தெடுக்கவும்',
-                eduTitle: 'கல்வி',
-                eduSub: 'புத்தகங்கள் & கற்றல்',
-                govTitle: 'அரசு',
-                govSub: 'சேவைகள் & தளங்கள்',
-                cinTitle: 'சினிமா & இசை',
-                cinSub: 'இலவச AI கருவிகள்',
-                techTitle: 'தொழில்நுட்பம்',
-                techSub: '100% இலவச கருவிகள்',
-                backBtn: '← முகப்புக்குச் செல்ல',
-                searchBtn: 'தேடுக',
-                aiPlaceholder: 'இந்தத் துறை பற்றி எதையும் கேளுங்கள்...'
-            },
-            kn: {
-                subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ಶಿಕ್ಷಣ ಕೇಂದ್ರ!"',
-                settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು',
-                homeTitle: 'ಕ್ಷೇತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ',
-                eduTitle: 'ಶಿಕ್ಷಣ',
-                eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ',
-                govTitle: 'ಸರ್ಕಾರ',
-                govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು',
-                cinTitle: 'ಸಿನಿಮಾ ಮತ್ತು ಸಂಗೀತ',
-                cinSub: 'ಉಚಿತ AI ಸಾಧನಗಳು',
-                techTitle: 'ತಂತ್ರಜ್ಞಾನ',
-                techSub: '100% ಉಚಿತ ಸಾಧನಗಳು',
-                backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ',
-                searchBtn: 'ಹುಡುಕು',
-                aiPlaceholder: 'ಈ ಕ್ಷೇತ್ರದ ಬಗ್ಗೆ ಯಾವುದೇ ಪ್ರಶ್ನೆ ಕೇಳಿ...'
-            }
+            en: { subtitle: '"A World at Your Fingertips — The Digital Companion of Trust & Development!"', settings: 'Settings', homeTitle: 'Home Main Folders', eduTitle: 'Education', eduSub: 'Books & Learning', govTitle: 'Government', govSub: 'Services & Portals', cinTitle: 'Cinema & Music', cinSub: 'Free AI Tools', techTitle: 'Technology', techSub: '100% Free Tools', backBtn: '← Back to Home' },
+            ml: { subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം!"', settings: 'ക്രമീകരണങ്ങൾ', homeTitle: 'പ്രധാന ഫോൾഡറുകൾ', eduTitle: 'വിദ്യാഭ്യാസം', eduSub: 'പുസ്തകങ്ങളും പഠനവും', govTitle: 'സർക്കാർ', govSub: 'സേവനങ്ങളും പോർട്ടലുകളും', cinTitle: 'സിനിമ & സംഗീതം', cinSub: 'സൗജന്യ AI ടൂളുകൾ', techTitle: 'സാങ്കേതികവിദ്യ', techSub: 'സൗജന്യ ടൂളുകൾ', backBtn: '← ഹോമിലേക്ക് തിരികെ' },
+            hi: { subtitle: '"आपकी उंगलियों पर दुनिया!"', settings: 'सेटिंग्स', homeTitle: 'मुख्य फ़ोल्डर', eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', cinTitle: 'सिनेमा और संगीत', cinSub: 'मुफ्त एआई टूल', techTitle: 'प्रौद्योगिकी', techSub: 'मुफ्त टूल', backBtn: '← होम पर वापस जाएं' },
+            ta: { subtitle: '"உங்கள் விரல் நுனியில் உலகம்!"', settings: 'அமைப்புகள்', homeTitle: 'முதன்மை கோப்புறைகள்', eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', cinTitle: 'சினிமா & இசை', cinSub: 'இலவச AI கருவிகள்', techTitle: 'தொழில்நுட்பம்', techSub: 'இலவச கருவிகள்', backBtn: '← முகப்புக்குச் செல்ல' },
+            kn: { subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು!"', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', cinTitle: 'ಸಿನಿಮಾ ಮತ್ತು ಸಂಗೀತ', cinSub: 'ಉಚಿತ AI ಸಾಧನಗಳು', techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ಉಚಿತ ಸಾಧನಗಳು', backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' }
         };
 
         window.onload = function() {
@@ -297,25 +241,17 @@
         function changeAppLanguage(lang) {
             localStorage.setItem('oyes_lang', lang);
             let t = translations[lang] || translations['en'];
-
             document.getElementById('headerSubTitle').innerText = t.subtitle;
             document.getElementById('homeSectionTitle').innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.homeTitle}`;
-            
             document.querySelector('.folder-edu').innerText = t.eduTitle;
             document.querySelector('.folder-edu-sub').innerText = t.eduSub;
-            
             document.querySelector('.folder-gov').innerText = t.govTitle;
             document.querySelector('.folder-gov-sub').innerText = t.govSub;
-            
             document.querySelector('.folder-cin').innerText = t.cinTitle;
             document.querySelector('.folder-cin-sub').innerText = t.cinSub;
-            
             document.querySelector('.folder-tech').innerText = t.techTitle;
             document.querySelector('.folder-tech-sub').innerText = t.techSub;
-
             document.getElementById('backBtnText').innerText = t.backBtn;
-            document.getElementById('searchBtnAi').innerText = t.searchBtn;
-            document.getElementById('aiFolderQuery').placeholder = t.aiPlaceholder;
         }
 
         function requestAdminAccess() {
@@ -353,14 +289,30 @@
             grid.innerHTML = `
                 <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
                     <label class="text-cyan-300 font-bold block">App Title / Name:</label>
-                    <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 focus:border-cyan-400">
+                    <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">Upload App Logo (File Manager/Gallery):</label>
+                    <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl border border-slate-700 text-[10px] file:bg-cyan-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">Upload App Background Image:</label>
+                    <input type="file" id="editBgImageFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl border border-slate-700 text-[10px] file:bg-cyan-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Education Folder BG Image:</label>
+                    <input type="file" id="bgEduFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs">
+                    <label class="text-cyan-300 font-bold block">Govt Folder BG Image:</label>
+                    <input type="file" id="bgGovFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
                 </div>
                 <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
                     <label class="text-cyan-300 font-bold block">Admin / Contact Details text:</label>
-                    <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 focus:border-cyan-400">${currentAdminText}</textarea>
+                    <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">${currentAdminText}</textarea>
                 </div>
                 <div class="col-span-2 pt-2">
-                    <button onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 text-white font-bold py-3 rounded-2xl shadow-lg text-sm">💾 Save Changes</button>
+                    <button onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 text-white font-bold py-3 rounded-2xl shadow-lg text-sm">💾 Save All Changes</button>
                 </div>
             `;
             window.scrollTo(0, 0);
@@ -371,21 +323,61 @@
             let newAdminText = document.getElementById('editAdminText').value;
             localStorage.setItem('oyes_app_title', newTitle);
             localStorage.setItem('oyes_admin_text', newAdminText);
-            alert("✅ Saved successfully!");
+
+            let logoInput = document.getElementById('editLogoFile');
+            let bgInput = document.getElementById('editBgImageFile');
+            let eduInput = document.getElementById('bgEduFile');
+            let govInput = document.getElementById('bgGovFile');
+
+            if (logoInput.files && logoInput.files[0]) {
+                let r = new FileReader();
+                r.onload = (e) => localStorage.setItem('oyes_logo_img', e.target.result);
+                r.readAsDataURL(logoInput.files[0]);
+            }
+            if (bgInput.files && bgInput.files[0]) {
+                let r = new FileReader();
+                r.onload = (e) => localStorage.setItem('oyes_bg_img', `url('${e.target.result}')`);
+                r.readAsDataURL(bgInput.files[0]);
+            }
+            if (eduInput.files && eduInput.files[0]) {
+                let r = new FileReader();
+                r.onload = (e) => localStorage.setItem('oyes_edu_bg', `url('${e.target.result}')`);
+                r.readAsDataURL(eduInput.files[0]);
+            }
+            if (govInput.files && govInput.files[0]) {
+                let r = new FileReader();
+                r.onload = (e) => localStorage.setItem('oyes_gov_bg', `url('${e.target.result}')`);
+                r.readAsDataURL(govInput.files[0]);
+            }
+
+            alert("✅ All changes, files & backgrounds saved successfully!");
             loadSavedCustomization();
             goBackHome();
         }
 
         function loadSavedCustomization() {
             let savedTitle = localStorage.getItem('oyes_app_title');
+            let savedLogoImg = localStorage.getItem('oyes_logo_img');
             let savedAdminText = localStorage.getItem('oyes_admin_text');
+            let savedCustomBgImg = localStorage.getItem('oyes_bg_img');
+            let eduBg = localStorage.getItem('oyes_edu_bg');
+            let govBg = localStorage.getItem('oyes_gov_bg');
+
             if(savedTitle) {
                 document.getElementById('headerMainTitle').innerText = savedTitle;
                 document.getElementById('appTitleTag').innerText = savedTitle;
             }
+            if(savedLogoImg) {
+                document.getElementById('headerLogoContainer').innerHTML = `<img src="${savedLogoImg}" class="w-7 h-7 object-cover rounded-full border border-cyan-400">`;
+            }
             if(savedAdminText) {
                 document.getElementById('footerAdminText').innerText = savedAdminText;
             }
+            if(savedCustomBgImg) {
+                document.body.style.backgroundImage = savedCustomBgImg;
+            }
+            if(eduBg) document.getElementById('cardEdu').style.backgroundImage = eduBg;
+            if(govBg) document.getElementById('cardGov').style.backgroundImage = govBg;
         }
 
         function goBackHome() {
@@ -395,49 +387,68 @@
         }
 
         function openSubFolders(folderName, subItems) {
-            currentActiveDomain = folderName;
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = folderName;
-            document.getElementById('aiFolderResponse').classList.add('hidden');
-            document.getElementById('aiFolderQuery').value = '';
-            document.getElementById('domainAiTitle').innerText = `${folderName} — Focused Assistant`;
 
             const grid = document.getElementById('pageContentGrid');
-            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
 
             subItems.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "folder-card card-3d p-4 rounded-2xl cursor-pointer flex flex-col space-y-1 group";
+                card.className = "folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group";
                 card.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <h3 class="font-bold text-sm text-slate-100">${item.name}</h3>
-                        <span class="text-xs text-cyan-400">🔗 Open</span>
-                    </div>
-                    <p class="text-[11px] text-slate-300">${item.desc}</p>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2">📁</div>
+                    <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">Resource Link</p>
                 `;
-                card.onclick = function() {
-                    if(item.url) window.open(item.url, '_blank');
-                };
+                card.onclick = () => { if(item.url) window.open(item.url, '_blank'); };
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
         }
 
-        function askDomainSpecificAI() {
-            let query = document.getElementById('aiFolderQuery').value.trim();
-            let resBox = document.getElementById('aiFolderResponse');
-            if(!query) {
-                alert("Please enter your question.");
-                return;
-            }
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `🔍 <b>Searching within ${currentActiveDomain}...</b><br>Analyzing query: "<i>${query}</i>"`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>${currentActiveDomain} Expert Guidance:</b><br>Regarding your query about <b>${query}</b>: In the field of ${currentActiveDomain}, all related resources, books, online platforms, and official portals are fully verified and accessible above. <br><a href="https://www.google.com/search?q=${encodeURIComponent(query + ' ' + currentActiveDomain)}" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Search more on Google ➔</a>`;
-            }, 800);
+        function openAllFoldersPage() {
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
+            
+            const grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
+            grid.innerHTML = '';
+            
+            const serviceNames = [
+                "Digital Services Hub", "Public Utility Portal", "E-Governance Link", "Citizen Support Portal",
+                "Online Registration Hub", "Welfare Schemes Portal", "Skill Development Links", "Employment Exchange Portal",
+                "Legal Aid Services", "Health Care Portal", "Agriculture & Farming", "Transport & Travel Hub",
+                "Banking & Financial Services", "Postal Services Portal", "Consumer Rights Forum", "Cyber Security Portal",
+                "Disaster Management Hub", "Environment & Forestry", "Energy & Power Services", "Water Supply Portal",
+                "Housing & Urban Development", "Rural Development Hub", "Tourism & Heritage", "Sports & Youth Affairs",
+                "Food & Civil Supplies", "Cooperative Sector Hub", "Industries & Commerce", "MSME Support Portal",
+                "Labor Welfare Services", "Taxation & Revenue Hub", "Panchayat Raj Portal", "Local Administration",
+                "Social Welfare Portal", "Women & Child Development", "Tribal Welfare Hub", "Minority Affairs Portal",
+                "Statistics & Data Hub", "Public Grievances Portal", "RTI Information Hub", "Voter Services Portal",
+                "Aadhaar Services Link", "PAN & Tax Services", "Passport Seva Hub", "Insurance Schemes Portal",
+                "Pension Services Hub", "General Utility Portal"
+            ];
+
+            serviceNames.forEach((title) => {
+                const card = document.createElement('div');
+                card.className = "folder-card card-3d p-3.5 rounded-3xl cursor-pointer flex flex-col items-center text-center group";
+                card.innerHTML = `
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2">📂</div>
+                    <h3 class="font-bold text-[11px] text-slate-100">${title}</h3>
+                    <p class="text-[8px] text-teal-200/60 mt-0.5">Verified Link</p>
+                `;
+                card.onclick = () => window.open('https://www.india.gov.in/', '_blank');
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
         }
+
+        function installAppPrompt() { alert('📲 Tap Chrome menu (⋮) and select "Add to Home screen".'); }
+        function shareApp() { navigator.clipboard.writeText(window.location.href); alert('🔗 Link copied to clipboard!'); }
     </script>
 </body>
 </html>
