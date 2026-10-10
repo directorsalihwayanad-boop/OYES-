@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ml" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES APP - നിങ്ങളുടെ വിരൽതുമ്പിൽ ഒരു ലോകം</title>
+    <title>OYES APP - A World at Your Fingertips</title>
     <!-- Tailwind CSS for modern 3D look and fast performance -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -66,10 +66,10 @@
 
     <!-- Header Section -->
     <header class="p-6 text-center bg-slate-950/60 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
-        <h1 onclick="triggerVoiceAssistant()" class="text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 drop-shadow-[0_5px_15px_rgba(6,182,212,0.4)] cursor-pointer hover:scale-105 transition-transform inline-block" title="ക്ലിക്ക് ചെയ്താൽ വോയിസ് അസിസ്റ്റന്റ് സംസാരിക്കും">
+        <h1 onclick="triggerVoiceAssistant()" class="text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 drop-shadow-[0_5px_15px_rgba(6,182,212,0.4)] cursor-pointer hover:scale-105 transition-transform inline-block" title="Click for Voice Assistant">
             OYES APP 🎙️
         </h1>
-        <p class="text-xs text-cyan-300/80 font-medium mt-1 tracking-wide">"നിങ്ങളുടെ വിരൽതുമ്പിൽ ഒരു ലോകം – OYES APP!"</p>
+        <p class="text-xs text-cyan-300/80 font-medium mt-1 tracking-wide">"A World at Your Fingertips – OYES APP!"</p>
     </header>
 
     <!-- Main Dashboard View (Home Screen) -->
@@ -77,8 +77,8 @@
         
         <!-- Search Bar with Voice Mic Button -->
         <div class="relative flex items-center">
-            <input type="text" id="searchBox" placeholder="ഫോൾഡറുകളിൽ നിന്നും തിരയുക..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
-            <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all animate-pulse" title="വോയിസ് അസിസ്റ്റന്റ് ഓപ്പൺ ചെയ്യുക">
+            <input type="text" id="searchBox" placeholder="Search across all folders..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
+            <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all" title="Open Voice Assistant">
                 🎤
             </button>
         </div>
@@ -86,61 +86,68 @@
         <!-- Section Title & Status -->
         <div class="flex justify-between items-center px-1">
             <h2 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ഹോം മെയിൻ ഫോൾഡറുകൾ
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
             </h2>
-            <span class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">Grid Page View</span>
+            <span class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">English Default</span>
         </div>
 
-        <!-- Folders Grid Container (7 Cards) -->
+        <!-- Folders Grid Container -->
         <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
             
-            <!-- 1. Education (Quran, Bible, etc.) - First Position -->
-            <div onclick="openSubFolders('എജ്യുക്കേഷൻ', ['ഖുർആൻ ഓൺലൈൻ റീഡിംഗ് (Free)', 'ബൈബിൾ ഡിജിറ്റൽ ലിങ്ക് (Free)', 'ഭഗവദ്ഗീത & രാമായണം (Free)', 'സൗജന്യ പഠന കോഴ്സുകൾ', 'ഡിജിറ്റൽ ലൈബ്രറി & ഇ-ബുക്സ്', 'വിദ്യാഭ്യാസ സ്കോളർഷിപ്പ് ലിങ്കുകൾ'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <!-- 1. Education -->
+            <div onclick="openSubFolders('Education', ['Quran Online Reading (Free)', 'Bible Digital Link (Free)', 'Bhagavad Gita & Ramayana (Free)', 'Free Online Courses', 'Digital Library & E-Books', 'Education Scholarship Links'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">📖</div>
-                <h3 class="font-bold text-sm text-slate-100">എജ്യുക്കേഷൻ</h3>
-                <p class="text-[10px] text-emerald-200/60 mt-1">ഗ്രന്ഥങ്ങളും പഠനവും</p>
+                <h3 class="font-bold text-sm text-slate-100">Education</h3>
+                <p class="text-[10px] text-emerald-200/60 mt-1">Books & Learning</p>
             </div>
 
             <!-- 2. Government Services -->
-            <div onclick="openSubFolders('ഗവൺമെന്റ് സേവനങ്ങൾ', ['പോലീസ് സ്റ്റേഷൻ ലിങ്ക്', 'ഗവൺമെന്റ് ഹോസ്പിറ്റൽ പോർട്ടൽ', 'എമർജൻസി ഹെൽപ്പ്‌ലൈൻ', 'പൊതു സേവനങ്ങൾ & സർട്ടിഫിക്കറ്റുകൾ', 'റേഷൻ കാർഡ് & വെൽഫെയർ പോർട്ടൽ'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <div onclick="openSubFolders('Government Services', ['Police Station Links', 'Government Hospital Portal', 'Emergency Helplines', 'Public Services & Certificates', 'Ration Card & Welfare Portals'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
-                <h3 class="font-bold text-sm text-slate-100">ഗവൺമെന്റ്</h3>
-                <p class="text-[10px] text-cyan-200/60 mt-1">സേവനങ്ങളും ലിങ്കുകളും</p>
+                <h3 class="font-bold text-sm text-slate-100">Government</h3>
+                <p class="text-[10px] text-cyan-200/60 mt-1">Services & Portals</p>
             </div>
 
             <!-- 3. Cinema & Music -->
-            <div onclick="openSubFolders('സിനിമ & മ്യൂസിക്', ['Suno AI & Udio (Free Tiers)', 'ഫ്രീ മ്യൂസിക് ലൈബ്രറി', 'വീഡിയോ എഡിറ്റിംഗ് ടൂളുകൾ (Free)', 'പ്രൊമോഷണൽ പോസ്റ്റർ മേക്കർ', 'ഷോട്ഫിലിം & ഡബ്ബിംഗ് പ്ലാറ്റ്‌ഫോം'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <div onclick="openSubFolders('Cinema & Music', ['Suno AI & Udio (Free Tiers)', 'Free Music Library', 'Video Editing Tools (Free)', 'Promotional Poster Maker', 'Shortfilm & Dubbing Platform'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🎬</div>
-                <h3 class="font-bold text-sm text-slate-100">സിനിമ & മ്യൂസിക്</h3>
-                <p class="text-[10px] text-fuchsia-200/60 mt-1">ഫ്രീ AI ടൂളുകൾ</p>
+                <h3 class="font-bold text-sm text-slate-100">Cinema & Music</h3>
+                <p class="text-[10px] text-fuchsia-200/60 mt-1">Free AI Tools</p>
             </div>
 
-            <!-- 4. Technology & Free Dev Tools -->
-            <div onclick="openSubFolders('ടെക്നോളജി (Free)', ['ഫ്രീ വെബ് & ആപ്പ് ഡെവലപ്‌മെന്റ് ടൂളുകൾ', 'Google Gemini & ChatGPT (Free Tiers)', 'Claude, Perplexity & AI Hub (Free)', 'ഫ്രീ കോഡിംഗ് ലൈബ്രറികൾ & ഹോസ്റ്റിംഗ്', 'ഓപ്പൺ സോഴ്സ് ടൂളുകൾ'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <!-- 4. Technology -->
+            <div onclick="openSubFolders('Technology (Free)', ['Free Web & App Development Tools', 'Google Gemini & ChatGPT (Free Tiers)', 'Claude, Perplexity & AI Hub (Free)', 'Free Coding Libraries & Hosting', 'Open Source Tools'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🤖</div>
-                <h3 class="font-bold text-sm text-slate-100">ടെക്നോളജി</h3>
-                <p class="text-[10px] text-indigo-200/60 mt-1">100% ഫ്രീ ടൂളുകൾ</p>
+                <h3 class="font-bold text-sm text-slate-100">Technology</h3>
+                <p class="text-[10px] text-indigo-200/60 mt-1">100% Free Tools</p>
             </div>
 
             <!-- 5. Sales Marketplace -->
-            <div onclick="openSubFolders('സെയിൽസ് മാർക്കറ്റ്', ['കന്നുകാലികൾ (പശു, ആട്) - Free List', 'വാഹനങ്ങൾ & യന്ത്രങ്ങൾ', 'കാർഷിക ഉൽപ്പന്നങ്ങൾ വിൽപ്പന', 'ജനറൽ മാർക്കറ്റ് ലിസ്റ്റിംഗ് & എക്സ്ചേഞ്ച്'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <div onclick="openSubFolders('Sales Marketplace', ['Livestock (Cows, Goats) - Free List', 'Vehicles & Machinery', 'Agricultural Products Sale', 'General Marketplace & Exchange'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
-                <h3 class="font-bold text-sm text-slate-100">സെയിൽസ്</h3>
-                <p class="text-[10px] text-amber-200/60 mt-1">മാർക്കറ്റ് പ്ലേസ്</p>
+                <h3 class="font-bold text-sm text-slate-100">Sales</h3>
+                <p class="text-[10px] text-amber-200/60 mt-1">Marketplace</p>
             </div>
 
-            <!-- 6. Special 'All Services (46 Folders)' Master Folder Card -->
-            <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <!-- 6. App Settings Folder -->
+            <div onclick="openSettingsPage()" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/25 border border-blue-400/40 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">⚙️</div>
+                <h3 class="font-bold text-sm text-slate-100">Settings</h3>
+                <p class="text-[10px] text-blue-200/60 mt-1">Language & Theme</p>
+            </div>
+
+            <!-- 7. Special 'All Services' Master Folder Card -->
+            <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
-                <h3 class="font-bold text-sm text-teal-300">മറ്റ് എല്ലാ സേവനങ്ങളും</h3>
-                <p class="text-[10px] text-teal-200/70 mt-1">ബാക്കി 46 ഫോൾഡറുകൾ</p>
+                <h3 class="font-bold text-sm text-teal-300">All Other Services</h3>
+                <p class="text-[10px] text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
             </div>
 
-            <!-- 7. Direct Admin Call & Voice Help Desk Card -->
-            <div onclick="connectAdminCall()" class="card-glow p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
+            <!-- 8. Admin Control Panel / Direct Admin Call Card -->
+            <div onclick="openAdminPanel()" class="card-glow p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.4)]">📞</div>
-                <h3 class="font-bold text-sm text-fuchsia-300">അഡ്മിൻസിനെ കണക്ട് ചെയ്യുക (ഡയറക്ട് കോൾ)</h3>
-                <p class="text-[10px] text-fuchsia-200/70 mt-1">നമ്പറുകൾ: 9633111000, 9947198248</p>
+                <h3 class="font-bold text-sm text-fuchsia-300">Admin Panel & Direct Call</h3>
+                <p class="text-[10px] text-fuchsia-200/70 mt-1">Director Salih Wayanad & OYES Saleem (9633111000, 9947198248)</p>
             </div>
 
         </div>
@@ -150,41 +157,46 @@
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
             <button onclick="goBackHome()" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
-                ← ഹോം പേജിലേക്ക് മടങ്ങുക
+                ← Back to Home
             </button>
-            <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">സബ് പേജ്</h3>
+            <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
-        <!-- Grid layout for sub-items so they appear as small separate cards -->
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3.5 pb-6">
             <!-- Dynamic Sub items will load here as grid cards -->
         </div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
-        <p class="font-medium text-slate-300">Admins: ഡയറക്ടർ സാലിഹ് വയനാട് & OYES Saleem</p>
-        <p class="mt-1">Email: <a href="mailto:Platformoyes@gmail.com" class="text-cyan-400 underline">Platformoyes@gmail.com</a></p>
-        <p class="mt-1">Phones: +91 9633111000 / +91 9947198248</p>
-        <p class="mt-1 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved. (Grid Cards View Active)</p>
+    <!-- Footer Section with Install App Action Button -->
+    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2">
+        <button onclick="installAppPrompt()" class="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+            📲 Install OYES APP to Home Screen
+        </button>
+        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad & OYES Saleem</p>
+        <p class="mt-0.5">Email: <a href="mailto:Platformoyes@gmail.com" class="text-cyan-400 underline">Platformoyes@gmail.com</a> | Phones: 9633111000, 9947198248</p>
+        <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript for Grid Page Transitions & Voice -->
+    <!-- JavaScript with English Default & Language Switcher -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
         function speakText(text) {
             if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ml-IN';
-                utterance.rate = 0.9;
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Switch view to New Grid Page for Sub-folders
+        function installAppPrompt() {
+            speakText('App installation instructions');
+            alert('📲 To install OYES APP to your Home Screen:\n\n1. Tap the three dots (⋮) at the top right of your Chrome browser.\n2. Select "Add to Home screen" or "Install app".\n3. Enjoy instant access like a native app!');
+        }
+
         function openSubFolders(folderName, subItems) {
-            speakText(folderName + ' പേജ് തുറക്കുന്നു');
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('pageTitle').innerText = folderName;
@@ -198,40 +210,76 @@
                 card.innerHTML = `
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
                     <h3 class="font-bold text-xs text-slate-100">${item}</h3>
-                    <p class="text-[9px] text-cyan-200/60 mt-1">ക്ലിക്ക് ചെയ്ത് ഓപ്പൺ ചെയ്യുക</p>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">Click to open link</p>
                 `;
                 card.onclick = function() {
-                    speakText(item + ' ലോഡ് ചെയ്യുന്നു');
-                    alert(item + ' - ലിങ്ക് സുരക്ഷിതമായി ലോഡ് ചെയ്യുന്നു...');
+                    alert(item + ' - Loading securely...');
                 };
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
         }
 
-        // Switch view to New Grid Page for All 46 Master Folders
-        function openAllFoldersPage() {
-            speakText('മറ്റ് എല്ലാ സേവനങ്ങളും പേജ് തുറക്കുന്നു');
+        function openSettingsPage() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = 'മറ്റ് എല്ലാ സേവനങ്ങളും (46 Master Folders)';
+            document.getElementById('pageTitle').innerText = 'App Settings & Language Selection';
+
+            const grid = document.getElementById('pageContentGrid');
+            grid.innerHTML = '';
+
+            const settingsItems = [
+                '🌐 English (Default - Active)',
+                '🌐 മലയാളം (Malayalam)',
+                '🌐 தமிழ் (Tamil)',
+                '🌐 ಕನ್ನಡ (Kannada)',
+                '🌐 العربية (Arabic)',
+                '⚙️ Change Neon Glow Theme',
+                '🛡️ Anti-Screenshot Security Status',
+                '📱 App Version & Update'
+            ];
+
+            settingsItems.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
+                card.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/30 to-indigo-600/30 border border-blue-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🌐</div>
+                    <h3 class="font-bold text-xs text-blue-200">${item}</h3>
+                    <p class="text-[9px] text-blue-300/60 mt-1">Tap to configure</p>
+                `;
+                card.onclick = function() {
+                    if(index < 5) {
+                        alert('Language successfully updated!');
+                    } else {
+                        alert(item + ' - Setting updated.');
+                    }
+                };
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function openAllFoldersPage() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
 
             const grid = document.getElementById('pageContentGrid');
             grid.innerHTML = '';
 
             const allFolders = [
-                '🏥 ആരോഗ്യം & ഫിറ്റ്നസ്', '🌾 കൃഷി & കാർഷികം', '💼 തൊഴിൽ & കരിയർ', '⚖️ നിയമം & സർട്ടിഫിക്കറ്റ്',
-                '🚌 യാത്ര & ടൂറിസം', '🍲 ഭക്ഷണം & റെസ്റ്റോറന്റ്', '🏠 റിയൽ എസ്റ്റേറ്റ് & വാടക', '📰 വാർത്തകൾ & മാധ്യമങ്ങൾ',
-                '💡 ലോക്കൽ സർവീസുകൾ', '📊 ബിസിനസ് & ഫിനാൻസ്', '⚽ സ്പോർട്സ് & ഗെയിംസ്', '🎨 ആർട്ട് & ഡിസൈനിങ്',
-                '⚡ വൈദ്യുതി & യൂട്ടിലിറ്റി', '🌐 ഹോസ്റ്റിംഗ് & ഡൊമേൻ', '🛡️ സൈബർ സെക്യൂരിറ്റി', '📦 കൊറിയർ & പാഴ്സൽ',
-                '🐾 വളർത്തുമൃഗങ്ങൾ', '🌱 ഗാർഡനിങ് & പ്ലാന്റ്സ്', '🚗 ഡ്രൈവിംഗ് സ്കൂൾ', '🛠️ ഹാർഡ്‌വെയർ & ഇലക്ട്രോണിക്സ്',
-                '🎁 ഗിഫ്റ്റ് ഷോപ്സ്', '🧵 വസ്ത്രവ്യാപാരം & ഫാഷൻ', '📚 പുസ്തകശാല & ലൈബ്രറി', '🔍 ജോബ് സെർച്ച് & റെസ്യൂമേ',
-                '🤝 ചാരിറ്റി & സാമൂഹികം', '🎫 ഇവന്റ് മാനേജ്മെന്റ്', '🌐 സോഷ്യൽ മീഡിയ ടൂളുകൾ', '📈 ഡിജിറ്റൽ മാർക്കറ്റിംഗ്',
-                '🎙️ പോഡ്കാസ്റ്റ് & സ്റ്റുഡിയോ', '📷 ഫോട്ടോഗ്രാഫി & എഡിറ്റിംഗ്', '🔮 ജ്യോതിഷം & ആസ്ട്രോളജി', '🧹 ക്ലീനിംഗ് & പെസ്റ്റ് കൺട്രോൾ',
-                '🏗️ കൺസ്ട്രക്ഷൻ പ്ലാനിംഗ്', '✈️ വിസ & പാസ്പോർട്ട്', '🎓 കരിയർ കൗൺസിലിംഗ്', '🏦 ബാങ്കിംഗ് & ഇൻഷുറൻസ്',
-                '🚖 ടാക്സി & കാബ് ബുക്കിംഗ്', '🏨 ഹോട്ടൽ & റിസോർട്ട്', '🛒 സൂപ്പർമാർക്കറ്റ് & ഗ്രോസറി', '💊 ആയുർവേദ & ഹോമിയോ',
-                '📻 റേഡിയോ & മ്യൂസിക്', '🧩 കുട്ടികളുടെ ഗെയിമുകൾ', '📝 ഡോക്യുമെന്റ് എഡിറ്റർ', '🌐 ഫ്രീ ഗൂഗിൾ ടൂളുകൾ',
-                '⚙️ അഡ്മിൻ സെറ്റിംഗ്സ്', '🚀 ഒയേഴ്സ് എക്സ്ട്രാസ്'
+                '🏥 Health & Fitness', '🌾 Agriculture Services', '💼 Jobs & Career', '⚖️ Legal & Certificates',
+                '🚌 Travel & Tourism', '🍲 Food & Restaurants', '🏠 Real Estate & Rentals', '📰 News & Media',
+                '💡 Local Services', '📊 Business & Finance', '⚽ Sports & Games', '🎨 Art & Designing',
+                '⚡ Electricity & Utilities', '🌐 Hosting & Domains', '🛡️ Cyber Security', '📦 Courier & Tracking',
+                '🐾 Pets Hub', '🌱 Gardening & Plants', '🚗 Driving School', '🛠️ Hardware & Electronics',
+                '🎁 Gift Shops', '🧵 Fashion & Tailoring', '📚 Bookstores & Library', '🔍 Job Search & Resume',
+                '🤝 Charity & Social', '🎫 Event Management', '🌐 Social Media Tools', '📈 Digital Marketing',
+                '🎙️ Podcast Studio', '📷 Photo & Video Editor', '🔮 Astrology Links', '🧹 Cleaning Services',
+                '🏗️ Construction Planning', '✈️ Visa & Passport', '🎓 Career Counseling', '🏦 Banking & Insurance',
+                '🚖 Taxi & Cab Booking', '🏨 Hotel & Resorts', '🛒 Supermarket & Grocery', '💊 Ayurveda & Homoeo',
+                '📻 Radio & Music', '🧩 Kids Games & Learning', '📝 Document Editor', '🌐 Free Google Tools',
+                '⚙️ Admin Settings', '🚀 OYES Extra Services'
             ];
 
             allFolders.forEach((item, index) => {
@@ -240,49 +288,73 @@
                 card.innerHTML = `
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
                     <h3 class="font-bold text-xs text-teal-200">${(index + 1)}. ${item}</h3>
-                    <p class="text-[9px] text-teal-300/60 mt-1">തുറക്കുക →</p>
+                    <p class="text-[9px] text-teal-300/60 mt-1">Open Folder →</p>
                 `;
                 card.onclick = function() {
-                    speakText(item + ' തുറക്കുന്നു');
-                    alert(item + ' - ലോഡ് ചെയ്യുന്നു...');
+                    alert(item + ' - Loading folder...');
                 };
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
         }
 
-        // Return back to Home Page view
+        function openAdminPanel() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = 'Admin Panel & Settings Control';
+
+            const grid = document.getElementById('pageContentGrid');
+            grid.innerHTML = '';
+
+            const adminSettings = [
+                '📞 Director Salih Wayanad (Call: 9633111000)',
+                '📞 OYES Saleem (Call: 9947198248)',
+                '✉️ Official Email (Platformoyes@gmail.com)',
+                '🛡️ Anti-Screenshot Security Management',
+                '⚙️ App Glow Theme Customization',
+                '🌐 5 Languages Control (Malayalam, English, Tamil, Kannada, Arabic)',
+                '📊 Manage & Edit 46 Folders',
+                '🎙️ Voice Assistant Control'
+            ];
+
+            adminSettings.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
+                card.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">👑</div>
+                    <h3 class="font-bold text-xs text-purple-200">${item}</h3>
+                    <p class="text-[9px] text-purple-300/60 mt-1">Admin Control</p>
+                `;
+                card.onclick = function() {
+                    if(index === 0) {
+                        window.location.href = 'tel:+919633111000';
+                    } else if(index === 1) {
+                        window.location.href = 'tel:+919947198248';
+                    } else {
+                        alert(item + ' - Admin setting active.');
+                    }
+                };
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
+        }
+
         function goBackHome() {
-            speakText('ഹോം പേജിലേക്ക് മടങ്ങുന്നു');
             document.getElementById('subFolderPageView').classList.add('hidden');
             document.getElementById('homeView').classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
-        function connectAdminCall() {
-            speakText('അഡ്മിൻ നമ്പറിലേക്ക് കോൾ കണക്ട് ചെയ്യുന്നു');
-            let choice = prompt('ഏത് നമ്പറിലേക്കാണ് കോൾ ചെയ്യേണ്ടത്?\n1 - മെയിൻ നമ്പർ (9633111000)\n2 - പുതിയ നമ്പർ (9947198248)\n\nനമ്പർ (1 അല്ലെങ്കിൽ 2) നൽകുക:');
-            if (choice === '1') {
-                window.location.href = 'tel:+919633111000';
-            } else if (choice === '2') {
-                window.location.href = 'tel:+919947198248';
-            } else if (choice !== null) {
-                window.location.href = 'tel:+919633111000';
-            }
-        }
-
         function triggerVoiceAssistant() {
-            speakText('പറയൂ, ഞാൻ കേൾക്കുന്നുണ്ട്');
-            
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                connectAdminCall();
+                openAdminPanel();
                 return;
             }
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
             
-            recognition.lang = 'ml-IN';
+            recognition.lang = 'en-US';
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
 
@@ -292,18 +364,15 @@
                 const speechResult = event.results[0][0].transcript.toLowerCase();
                 document.getElementById('searchBox').value = speechResult;
                 
-                if(speechResult.includes('അഡ്മിൻ') || speechResult.includes('കോൾ') || speechResult.includes('call') || speechResult.includes('admin')) {
-                    speakText('അഡ്മിനെ വിളിക്കുന്നു');
-                    connectAdminCall();
+                if(speechResult.includes('admin') || speechResult.includes('call')) {
+                    openAdminPanel();
                 } else {
-                    speakText('നിങ്ങൾ തിരഞ്ഞത് ' + speechResult + ' ആണ്');
-                    alert('നിങ്ങൾ ചോദിച്ചത്: "' + speechResult + '" - ഫലം പരിശോധിക്കുന്നു...');
+                    alert('You searched for: "' + speechResult + '"');
                 }
             };
 
             recognition.onerror = function(event) {
-                speakText('ക്ഷമിക്കണം, ശബ്ദം വ്യക്തമല്ല. അഡ്മിനെ വിളിക്കണോ?');
-                connectAdminCall();
+                openAdminPanel();
             };
         }
     </script>
