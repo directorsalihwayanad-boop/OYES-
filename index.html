@@ -141,9 +141,13 @@
                     OYES APP
                 </h1>
             </div>
-            <!-- Language Selector Dropdown -->
-            <select id="langSelector" onchange="changeLanguage(this.value)" class="bg-slate-900 text-cyan-300 text-xs font-bold border border-cyan-500/50 rounded-xl px-2.5 py-1.5 focus:outline-none shadow-md">
+            <!-- Multi-Language Selector Dropdown (English, Malayalam, Tamil, Kannada, Hindi) -->
+            <select id="langSelector" onchange="changeAppLanguage(this.value)" class="bg-slate-900 text-cyan-300 text-xs font-bold border border-cyan-500/50 rounded-xl px-2.5 py-1.5 focus:outline-none shadow-md">
                 <option value="en">English</option>
+                <option value="ml">മലയാളം</option>
+                <option value="ta">தமிழ்</option>
+                <option value="kn">ಕನ್ನಡ</option>
+                <option value="hi">हिन्दी</option>
             </select>
         </div>
         <p id="headerSubTitle" class="text-xs text-cyan-300/80 font-medium tracking-wide mt-1">"A World at Your Fingertips — The Digital Companion of Trust & Development!"</p>
@@ -157,7 +161,7 @@
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: General</span>
             <button onclick="openHomeAIChat()" class="bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 border border-cyan-500/50 hover:border-cyan-400 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md transition-all">
                 <span class="text-sm">🤖✨</span>
-                <span class="text-[11px] font-bold text-cyan-300">OYES Google AI Assistant</span>
+                <span id="aiBtnText" class="text-[11px] font-bold text-cyan-300">OYES Google AI Assistant</span>
             </button>
         </div>
 
@@ -307,7 +311,7 @@
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with WhatsApp Permission Prompt restricted ONLY to Call/Chat Hub -->
+    <!-- JavaScript with 5 Languages Support (EN, ML, TA, KN, HI) -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
@@ -324,6 +328,147 @@
         let loggedInUserPhoto = "";
         let loggedInUserCategory = "";
 
+        // Multi-language translation dictionary for 5 Languages
+        const langData = {
+            en: {
+                subtitle: '"A World at Your Fingertips — The Digital Companion of Trust & Development!"',
+                homeTitle: 'Home Main Folders',
+                aiBtn: 'OYES Google AI Assistant',
+                searchPlaceholder: 'Search or speak here...',
+                eduTitle: 'Education',
+                eduSub: 'Books & Learning',
+                govTitle: 'Government',
+                govSub: 'Services & Portals',
+                cinTitle: 'Cinema & Music',
+                cinSub: 'Free AI Tools',
+                techTitle: 'Technology',
+                techSub: '100% Free Tools',
+                salesTitle: 'Sales',
+                salesSub: '10% Admin Fee & Trade',
+                chatHubTitle: 'WhatsApp Chat Hub',
+                chatHubSub: 'Direct Audio & Message',
+                allTitle: 'All Other Services',
+                allSub: 'Remaining 46 Master Folders',
+                installBtn: '📲 Install App',
+                shareBtn: '🔗 Share App'
+            },
+            ml: {
+                subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ഒരു ലോകം — വിശ്വാസത്തിന്റെയും വികസനത്തിന്റെയും ഡിജിറ്റൽ കൂട്ടായ്മ!"',
+                homeTitle: 'പ്രധാന ഫോൾഡറുകൾ',
+                aiBtn: 'ഓയേഴ്സ് ഗൂഗിൾ AI അസിസ്റ്റന്റ്',
+                searchPlaceholder: 'തിരയുക അല്ലെങ്കിൽ സംസാരിക്കുക...',
+                eduTitle: 'വിദ്യാഭ്യാസം',
+                eduSub: 'പുസ്തകങ്ങളും പഠനവും',
+                govTitle: 'സർക്കാർ സേവനങ്ങൾ',
+                govSub: 'സേവനങ്ങളും പോർട്ടലുകളും',
+                cinTitle: 'സിനിമയും സംഗീതവും',
+                cinSub: 'സൗജന്യ AI ടൂളുകൾ',
+                techTitle: 'സാങ്കേതികവിദ്യ',
+                techSub: '100% സൗജന്യ ടൂളുകൾ',
+                salesTitle: 'കച്ചവടം (Sales)',
+                salesSub: '10% അഡ്മിൻ ഫീസും ട്രേഡും',
+                chatHubTitle: 'വാട്സാപ്പ് ചാറ്റ് ഹബ്',
+                chatHubSub: 'ഡയറക്റ്റ് ഓഡിയോയും മെസ്സേജും',
+                allTitle: 'മറ്റ് സേവനങ്ങൾ',
+                allSub: 'ബാക്കി 46 പ്രധാന ഫോൾഡറുകൾ',
+                installBtn: '📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക',
+                shareBtn: '🔗 ആപ്പ് ഷെയർ ചെയ്യുക'
+            },
+            ta: {
+                subtitle: '"உங்கள் விரல் நுனியில் ஒரு உலகம் — நம்பிக்கை மற்றும் வளர்ச்சியின் டிஜிட்டல் தோழன்!"',
+                homeTitle: 'முதன்மை கோப்புறைகள்',
+                aiBtn: 'OYES கூகிள் AI உதவியாளர்',
+                searchPlaceholder: 'தேடவும் அல்லது பேசவும்...',
+                eduTitle: 'கல்வி',
+                eduSub: 'புத்தகங்கள் & கற்றல்',
+                govTitle: 'அரசு சேவைகள்',
+                govSub: 'சேவைகள் & இணையதளங்கள்',
+                cinTitle: 'சினிமா & இசை',
+                cinSub: 'இலவச AI கருவிகள்',
+                techTitle: 'தொழில்நுட்பம்',
+                techSub: '100% இலவச கருவிகள்',
+                salesTitle: 'வியாபாரம்',
+                salesSub: '10% நிர்வாக கட்டணம் & வர்த்தகம்',
+                chatHubTitle: 'வாட்ஸ்அப் அரட்டை மையம்',
+                chatHubSub: 'நேரடி ஆடியோ & செய்தி',
+                allTitle: 'மற்ற சேவைகள்',
+                allSub: 'மீதமுள்ள 46 கோப்புறைகள்',
+                installBtn: '📲 செயலியை நிறுவு',
+                shareBtn: '🔗 செயலியைப் பகிர்க'
+            },
+            kn: {
+                subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಒಂದು ಜಗತ್ತು — ನಂಬಿಕೆ ಮತ್ತು ಅಭಿವೃದ್ಧಿಯ ಡಿಜಿಟಲ್ ಸಂಗಾತಿ!"',
+                homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು',
+                aiBtn: 'OYES ಗೂಗಲ್ AI ಸಹಾಯಕ',
+                searchPlaceholder: 'ಹುಡುಕಿ ಅಥವಾ ಮಾತನಾಡಿ...',
+                eduTitle: 'ಶಿಕ್ಷಣ',
+                eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ',
+                govTitle: 'ಸರ್ಕಾರಿ ಸೇವೆಗಳು',
+                govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು',
+                cinTitle: 'ಸಿನಿಮಾ ಮತ್ತು ಸಂಗೀತ',
+                cinSub: 'ಉಚಿತ AI ಉಪಕರಣಗಳು',
+                techTitle: 'ತಂತ್ರಜ್ಞಾನ',
+                techSub: '100% ಉಚಿತ ಉಪಕರಣಗಳು',
+                salesTitle: 'ಮಾರಾಟ',
+                salesSub: '10% ನಿರ್ವಾಹಕ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
+                chatHubTitle: 'ವಾಟ್ಸಾಪ್ ಚಾಟ್ ಹಬ್',
+                chatHubSub: 'ನೇರ ಆಡಿಯೋ ಮತ್ತು ಸಂದೇಶ',
+                allTitle: 'ಇತರ ಸೇವೆಗಳು',
+                allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
+                installBtn: '📲 ಅಪ್ಲಿಕೇಶನ್ ಸ್ಥಾಪಿಸಿ',
+                shareBtn: '🔗 ಅಪ್ಲಿಕೇಶನ್ ಹಂಚಿಕೊಳ್ಳಿ'
+            },
+            hi: {
+                subtitle: '"आपकी उंगलियों पर एक दुनिया — विश्वास और विकास का डिजिटल साथी!"',
+                homeTitle: 'मुख्य फ़ोल्डर',
+                aiBtn: 'OYES गूगल AI सहायक',
+                searchPlaceholder: 'खोजें या बोलें...',
+                eduTitle: 'शिक्षा',
+                eduSub: 'पुस्तकें और सीखना',
+                govTitle: 'सरकारी सेवाएं',
+                govSub: 'सेवाएं और पोर्टल',
+                cinTitle: 'सिनेमा और संगीत',
+                cinSub: 'मुफ्त AI टूल',
+                techTitle: 'प्रौद्योगिकी',
+                techSub: '100% मुफ्त टूल',
+                salesTitle: 'व्यापार (Sales)',
+                salesSub: '10% एडमिन शुल्क और ट्रेड',
+                chatHubTitle: 'व्हाट्सएप चैट हब',
+                chatHubSub: 'प्रत्यक्ष ऑडियो और संदेश',
+                allTitle: 'अन्य सभी सेवाएं',
+                allSub: 'शेष 46 मास्टर फ़ोल्डर',
+                installBtn: '📲 ऐप इंस्टॉल करें',
+                shareBtn: '🔗 ऐप साझा करें'
+            }
+        };
+
+        function changeAppLanguage(lang) {
+            let t = langData[lang] || langData['en'];
+            document.getElementById('headerSubTitle').innerText = t.subtitle;
+            document.getElementById('homeSectionTitle').innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.homeTitle}`;
+            document.getElementById('aiBtnText').innerText = t.aiBtn;
+            document.getElementById('searchBox').placeholder = t.searchPlaceholder;
+            
+            // Update Folder texts safely
+            let eduT = document.querySelector('.folder-edu'); if(eduT) eduT.innerText = t.eduTitle;
+            let eduSub = document.querySelector('.folder-edu-sub'); if(eduSub) eduSub.innerText = t.eduSub;
+            let govT = document.querySelector('.folder-gov'); if(govT) govT.innerText = t.govTitle;
+            let govSub = document.querySelector('.folder-gov-sub'); if(govSub) govSub.innerText = t.govSub;
+            let cinT = document.querySelector('.folder-cin'); if(cinT) cinT.innerText = t.cinTitle;
+            let cinSub = document.querySelector('.folder-cin-sub'); if(cinSub) cinSub.innerText = t.cinSub;
+            let techT = document.querySelector('.folder-tech'); if(techT) techT.innerText = t.techTitle;
+            let techSub = document.querySelector('.folder-tech-sub'); if(techSub) techSub.innerText = t.techSub;
+            let salesT = document.querySelector('.folder-sales'); if(salesT) salesT.innerText = t.salesTitle;
+            let salesSub = document.querySelector('.folder-sales-sub'); if(salesSub) salesSub.innerText = t.salesSub;
+            let allT = document.querySelector('.folder-all'); if(allT) allT.innerText = t.allTitle;
+            let allSub = document.querySelector('.folder-all-sub'); if(allSub) allSub.innerText = t.allSub;
+            
+            document.getElementById('installBtnText').innerText = t.installBtn;
+            document.getElementById('shareBtnText').innerText = t.shareBtn;
+
+            localStorage.setItem('oyes_app_lang', lang);
+        }
+
         function saveUserToDatabase(name, category, type) {
             let users = JSON.parse(localStorage.getItem('oyes_registered_users') || '[]');
             users.push({
@@ -337,6 +482,10 @@
 
         // Check Permanent Session on App Load
         window.onload = function() {
+            let savedLang = localStorage.getItem('oyes_app_lang') || 'en';
+            document.getElementById('langSelector').value = savedLang;
+            changeAppLanguage(savedLang);
+
             let activeSession = localStorage.getItem('oyes_permanent_session');
             
             if(activeSession) {
@@ -698,226 +847,4 @@
             grid.className = "grid grid-cols-2 gap-3.5 pb-6";
             grid.innerHTML = '';
 
-            const allFolders = [
-                '🏥 Health & Fitness', '🌾 Agriculture Services', '💼 Jobs & Career', '⚖️ Legal & Certificates',
-                '🚌 Travel & Tourism', '🍲 Food & Restaurants', '🏠 Real Estate & Rentals', '📰 News & Media',
-                '💡 Local Services', '📊 Business & Finance', '⚽ Sports & Games', '🎨 Art & Designing',
-                '⚡ Electricity & Utilities', '🌐 Hosting & Domains', '🛡️ Cyber Security', '📦 Courier & Tracking',
-                '🐾 Pets Hub', '🌱 Gardening & Plants', '🚗 Driving School', '🛠️ Hardware & Electronics',
-                '🎁 Gift Shops', '🧵 Fashion & Tailoring', '📚 Bookstores & Library', '🔍 Job Search & Resume',
-                '🤝 Charity & Social', '🎫 Event Management', '🌐 Social Media Tools', '📈 Digital Marketing',
-                '🎙️ Podcast Studio', '📷 Photo & Video Editor', '🔮 Astrology Links', '🧹 Cleaning Services',
-                '🏗️ Construction Planning', '✈️ Visa & Passport', '🎓 Career Counseling', '🏦 Banking & Insurance',
-                '🚖 Taxi & Cab Booking', '🏨 Hotel & Resorts', '🛒 Supermarket & Grocery', '💊 Ayurveda & Homoeo',
-                '📻 Radio & Music', '🧩 Kids Games & Learning', '📝 Document Editor', '🌐 Free Google Tools',
-                '⚙️ Admin Settings', '🚀 OYES Extra Services'
-            ];
-
-            allFolders.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
-                card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
-                    <h3 class="font-bold text-xs text-teal-200">${(index + 1)}. ${item}</h3>
-                    <p class="text-[9px] text-teal-300/60 mt-1">Open Service →</p>
-                `;
-                card.onclick = function() {
-                    alert(item + ' folder is active.');
-                };
-                grid.appendChild(card);
-            });
-            window.scrollTo(0, 0);
-        }
-
-        function openAdminPanel() {
-            document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('aiContainerBox').classList.add('hidden');
-            document.getElementById('pageTitle').innerText = 'Director CMS & Customization Panel';
-
-            const grid = document.getElementById('pageContentGrid');
-            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
-            grid.innerHTML = '';
-
-            const adminCMS = [
-                { title: '📞 Director Salih WhatsApp', desc: '9947198248', action: 'chat1', phone: '919947198248' },
-                { title: '📞 OYES Saleem WhatsApp', desc: '9633111000', action: 'chat2', phone: '919633111000' },
-                { title: '👥 Registered Users Log', desc: 'View All Joined Users & Visitors', action: 'userslog' },
-                { title: '🖼️ Change App Logo', desc: 'Upload Logo from Gallery/Emoji', action: 'logo' },
-                { title: '📸 Upload Background Photo', desc: 'Select Image from Gallery/Storage', action: 'bgphoto' },
-                { title: '🎨 App Themes & Colors', desc: 'Set Neon, Purple or Emerald Theme', action: 'bgtheme' },
-                { title: '✍️ Edit App Titles & Texts', desc: 'Customize Headings & Slogans', action: 'text' },
-                { title: '➕ Add New Folder', desc: 'Create Custom Category Card', action: 'addfolder' }
-            ];
-
-            adminCMS.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
-                card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">👑</div>
-                    <h3 class="font-bold text-xs text-purple-200">${item.title}</h3>
-                    <p class="text-[9px] text-purple-300/60 mt-1">${item.desc}</p>
-                `;
-                card.onclick = function() {
-                    if(item.action === 'chat1' || item.action === 'chat2') {
-                        requestWhatsAppPermission(item.title, item.phone);
-                    } else if(item.action === 'userslog') {
-                        let users = JSON.parse(localStorage.getItem('oyes_registered_users') || '[]');
-                        if(users.length === 0) {
-                            alert('📋 Registered Users Log:\n\nNo users have joined or registered in this browser session yet.');
-                        } else {
-                            let logText = "📋 OYES APP REGISTERED USERS LOG:\n\n";
-                            users.forEach((u, i) => {
-                                logText += `${i+1}. Name: ${u.name}\n   Category: ${u.category}\n   Type: ${u.type}\n   Time: ${u.time}\n-------------------------\n`;
-                            });
-                            alert(logText);
-                        }
-                    } else if(item.action === 'logo') {
-                        let choice = prompt('Choose Logo Type:\n1. Enter Emoji symbol (e.g. 🌟, 🚀, 💎)\n2. Upload Photo from Gallery/Storage\nEnter 1 or 2:', '1');
-                        if(choice === '1') {
-                            let newEmoji = prompt('Enter new logo emoji or symbol:', '🌟');
-                            if(newEmoji) {
-                                document.getElementById('headerLogoContainer').innerHTML = `<span id="headerLogoIcon" class="text-2xl">${newEmoji}</span>`;
-                                alert('Logo emoji updated successfully!');
-                                speakText('Logo updated successfully.');
-                            }
-                        } else if(choice === '2') {
-                            triggerFilePicker(function(imgUrl) {
-                                document.getElementById('headerLogoContainer').innerHTML = `<img src="${imgUrl}" class="w-8 h-8 rounded-full object-cover border border-cyan-400 shadow-md">`;
-                                alert('📸 Custom logo photo uploaded successfully from Gallery/Storage!');
-                                speakText('Custom logo photo uploaded successfully.');
-                                goBackHome();
-                            });
-                        }
-                    } else if(item.action === 'bgphoto') {
-                        triggerFilePicker(function(imgUrl) {
-                            document.body.style.backgroundImage = `url('${imgUrl}')`;
-                            alert('📸 Background photo successfully loaded from Gallery/Storage!');
-                            speakText('Background photo loaded successfully.');
-                            goBackHome();
-                        });
-                    } else if(item.action === 'bgtheme') {
-                        let bgChoice = prompt('Choose App Theme & Colors:\n1. Deep Space Neon (Default)\n2. Cyberpunk Purple Theme\n3. Emerald Dark Theme\nEnter number (1-3):', '1');
-                        if(bgChoice === '2') {
-                            document.body.style.background = 'radial-gradient(circle at top, #4c1d95, #311042, #030712)';
-                            alert('Cyberpunk Purple theme activated!');
-                            speakText('Cyberpunk Purple theme activated.');
-                        } else if(bgChoice === '3') {
-                            document.body.style.background = 'radial-gradient(circle at top, #065f46, #064e3b, #022c22)';
-                            alert('Emerald Dark theme activated!');
-                            speakText('Emerald Dark theme activated.');
-                        } else {
-                            document.body.style.background = 'radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)';
-                            alert('Deep Space Neon theme active.');
-                            speakText('Deep Space Neon theme active.');
-                        }
-                    } else if(item.action === 'text') {
-                        let newTitle = prompt('Enter new App Title:', 'OYES APP');
-                        let newSub = prompt('Enter new App Subtitle/Slogan:', 'A World at Your Fingertips — The Digital Companion of Trust & Development!');
-                        if(newTitle) document.getElementById('headerMainTitle').innerText = newTitle;
-                        if(newSub) document.getElementById('headerSubTitle').innerText = '"' + newSub + '"';
-                        alert('App texts updated successfully!');
-                        speakText('App texts updated successfully.');
-                    } else if(item.action === 'addfolder') {
-                        let folderTitle = prompt('Enter new folder name to add:');
-                        if(folderTitle) {
-                            const newCard = document.createElement('div');
-                            newCard.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
-                            newCard.innerHTML = `
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/30 flex items-center justify-center text-xl mb-2.5 group-hover:scale-110 transition-transform">📁</div>
-                                <h3 class="font-bold text-sm text-slate-100">${folderTitle}</h3>
-                                <p class="text-[10px] text-purple-200/60 mt-1">Custom Folder</p>
-                            `;
-                            newCard.onclick = function() {
-                                alert(folderTitle + ' folder active.');
-                            };
-                            document.getElementById('folderGrid').appendChild(newCard);
-                            alert('New folder "' + folderTitle + '" added successfully to Home screen!');
-                            speakText('New folder added successfully.');
-                        }
-                    } else {
-                        alert(item.title + ' configuration panel is active.');
-                    }
-                };
-                grid.appendChild(card);
-            });
-            window.scrollTo(0, 0);
-        }
-
-        function triggerFilePicker(callback) {
-            let fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = "image/*";
-            fileInput.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(evt) {
-                        callback(evt.target.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            fileInput.click();
-        }
-
-        function goBackHome() {
-            document.getElementById('subFolderPageView').classList.add('hidden');
-            document.getElementById('homeView').classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        function triggerVoiceAssistant() {
-            const statusLabel = document.getElementById('voiceStatus');
-            
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                statusLabel.innerText = 'Not supported';
-                alert('Speech recognition is not supported in this browser.');
-                speakText('Speech recognition is not supported in this browser.');
-                return;
-            }
-
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            
-            recognition.lang = 'en-US';
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
-
-            recognition.onstart = function() {
-                statusLabel.innerText = 'Listening...';
-                speakText('Listening, please speak.');
-            };
-
-            recognition.onresult = function(event) {
-                const speechResult = event.results[0][0].transcript.toLowerCase();
-                document.getElementById('searchBox').value = speechResult;
-                statusLabel.innerText = 'Heard: ' + speechResult;
-                
-                if(speechResult.includes('admin') || speechResult.includes('director')) {
-                    verifyDirectorAccess();
-                } else {
-                    alert('Google AI Assistant heard: "' + speechResult + '"');
-                    speakText('You searched for ' + speechResult);
-                }
-            };
-
-            recognition.onerror = function(event) {
-                statusLabel.innerText = 'Error / Denied';
-            };
-
-            recognition.onend = function() {
-                if(statusLabel.innerText === 'Listening...') {
-                    statusLabel.innerText = 'Ready';
-                }
-            };
-
-            try {
-                recognition.start();
-            } catch (e) {
-                recognition.stop();
-            }
-        }
-    </script>
-</body>
-</html>
+            const allFolders =
