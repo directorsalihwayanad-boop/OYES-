@@ -60,66 +60,69 @@
     <div id="loginGateModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 border border-cyan-500/60 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl text-center">
             <div class="w-16 h-16 mx-auto rounded-full bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-3xl animate-pulse">⏳🔒</div>
-            <h2 class="text-base font-black text-cyan-300 uppercase tracking-wide">OYES APP - സുരക്ഷിത പ്രവേശനം</h2>
+            <h2 class="text-base font-black text-cyan-300 uppercase tracking-wide">OYES APP - Secure Access Gateway</h2>
             
             <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 text-left space-y-1.5 max-h-32 overflow-y-auto text-[11px] text-slate-200 leading-relaxed">
-                <p class="font-bold text-cyan-300">🌟 100% വിശ്വസ്തത & 10% അഡ്മിൻ ഫീസ്:</p>
-                <p>കച്ചവടങ്ങളിൽ നിന്ന് ലഭിക്കുന്ന ലാഭത്തിന്റെ 10% അഡ്മിൻ പാനലിന് നൽകണം. ദുരുപയോഗം ചെയ്താൽ കർശന നിയമനടപടിയും നഷ്ടപരിഹാരവും ഉണ്ടാകും.</p>
-                <p class="font-bold text-amber-400">⏱️ വിസിറ്റർ നിബന്ധന:</p>
-                <p>വിസിറ്റർ ലോഗിൻ ചെയ്യുന്നവർക്ക് 3 ദിവസത്തെ കാലാവധി മാത്രമേ ഉണ്ടാകൂ. അതിനുശേഷം ഫുൾ രജിസ്ട്രേഷൻ ചെയ്യേണ്ടതാണ്.</p>
+                <p class="font-bold text-cyan-300">🌟 100% Trust & 10% Admin Fee:</p>
+                <p>10% of trade revenue/profit goes to the OYES Admin Panel. Any misuse, fraud, or harassment will lead to strict legal actions and financial compensation.</p>
+                <p class="font-bold text-amber-400">⏱️ Visitor Policy:</p>
+                <p>Visitor login has a strict 3-day trial period. Full registration is required to continue afterwards.</p>
             </div>
 
             <!-- Tab Switcher (Full Registration vs Visitor) -->
             <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
-                <button onclick="switchLoginTab('full')" id="tabFullBtn" class="py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all">ഫുൾ രജിസ്ട്രേഷൻ</button>
-                <button onclick="switchLoginTab('visitor')" id="tabVisitorBtn" class="py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all">3 ദിവസത്തെ വിസിറ്റർ</button>
+                <button onclick="switchLoginTab('full')" id="tabFullBtn" class="py-1.5 bg-cyan-600 text-white font-bold text-[11px] rounded-lg transition-all">Full Registration</button>
+                <button onclick="switchLoginTab('visitor')" id="tabVisitorBtn" class="py-1.5 bg-transparent text-slate-400 font-bold text-[11px] rounded-lg transition-all">3-Day Visitor</button>
             </div>
 
             <!-- Full Registration Form -->
             <div id="fullLoginForm" class="space-y-3 text-left">
-                <input type="text" id="userNameInput" placeholder="നിങ്ങളുടെ മുഴുവൻ പേര് (Full Name)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+                <input type="text" id="userNameInput" placeholder="Enter Your Full Name..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
                 
+                <!-- Email field for Admin Direct Auto-Login Bypass -->
+                <input type="email" id="userEmailInput" placeholder="Enter Email (Admin bypass supported)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+
                 <div class="space-y-1">
-                    <label class="text-[10px] text-cyan-300 font-semibold">കാറ്റഗറി തിരഞ്ഞെടുക്കുക:</label>
+                    <label class="text-[10px] text-cyan-300 font-semibold">Select Your Category:</label>
                     <select id="userCategorySelect" class="w-full bg-slate-950 text-cyan-300 font-semibold px-3 py-2 rounded-xl border border-cyan-500/50 text-xs focus:outline-none">
-                        <option value="business">💼 ബിസിനസ്സ് / കച്ചവടക്കാരൻ</option>
-                        <option value="buyer">🛒 സാധനങ്ങൾ വാങ്ങാൻ</option>
-                        <option value="job">👨‍💻 ജോലി ആവശ്യത്തിന്</option>
-                        <option value="services">🌐 മറ്റ് പൊതു സേവനങ്ങൾ</option>
+                        <option value="business">💼 Business / Merchant</option>
+                        <option value="buyer">🛒 Buying Products / Customer</option>
+                        <option value="job">👨‍💻 Job & Career Search</option>
+                        <option value="services">🌐 All Other Services</option>
                     </select>
                 </div>
 
                 <div class="space-y-1">
-                    <label class="text-[10px] text-cyan-300 font-semibold">ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക:</label>
+                    <label class="text-[10px] text-cyan-300 font-semibold">Mandatory Photo Upload:</label>
                     <input type="file" id="userPhotoInput" accept="image/*" class="w-full bg-slate-950 text-slate-300 text-[10px] px-3 py-2 rounded-xl border border-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-cyan-600 file:text-white hover:file:bg-cyan-500">
                 </div>
 
                 <label class="flex items-start gap-2.5 cursor-pointer pt-1">
                     <input type="checkbox" id="legalCheckbox" class="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-0">
-                    <span class="text-[11px] text-slate-300 leading-tight">ഫോട്ടോ, കാറ്റഗറി, നിബന്ധനകൾ എന്നിവ അംഗീകരിക്കുന്നു</span>
+                    <span class="text-[11px] text-slate-300 leading-tight">I agree to photo upload, category selection, 10% admin fee, and legal terms</span>
                 </label>
 
                 <button onclick="completeLoginGate()" class="w-full py-3 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">
-                    ✅ ഫോട്ടോ സഹിതം പ്രവേശിക്കുക
+                    ✅ Enter with Photo Verification
                 </button>
             </div>
 
             <!-- Visitor Login Form (3 Days Trial) -->
             <div id="visitorLoginForm" class="hidden space-y-3 text-left">
-                <input type="text" id="visitorNameInput" placeholder="നിങ്ങളുടെ പേര് (Name)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
-                <input type="tel" id="visitorPhoneInput" placeholder="ഫോൺ നമ്പർ (Phone Number e.g. 9876543210)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+                <input type="text" id="visitorNameInput" placeholder="Enter Your Name..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
+                <input type="tel" id="visitorPhoneInput" placeholder="Enter Phone Number (e.g. 9876543210)..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs focus:outline-none focus:border-cyan-400">
                 
                 <div class="bg-amber-950/60 border border-amber-500/50 p-2.5 rounded-xl text-[10px] text-amber-200">
-                    ⚠️ ശ്രദ്ധിക്കുക: ഈ വിസിറ്റർ ലോഗിന് <b>3 ദിവസത്തെ കാലാവധി</b> മാത്രമാണുള്ളത്. അതിനുശേഷം തുടരാൻ ഫുൾ രജിസ്ട്രേഷൻ ആവശ്യമാണ്.
+                    ⚠️ Note: Visitor login is valid for <b>3 days trial</b> only. Full registration is required afterwards.
                 </div>
 
                 <label class="flex items-start gap-2.5 cursor-pointer pt-1">
                     <input type="checkbox" id="visitorLegalCheckbox" class="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-0">
-                    <span class="text-[11px] text-slate-300 leading-tight">3 ദിവസത്തെ വിസിറ്റർ നിബന്ധനകൾ അംഗീകരിക്കുന്നു</span>
+                    <span class="text-[11px] text-slate-300 leading-tight">I agree to the 3-day visitor terms and 10% admin fee policy</span>
                 </label>
 
                 <button onclick="completeVisitorLogin()" class="w-full py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">
-                    ⏳ 3 ദിവസത്തേക്ക് പ്രവേശിക്കുക
+                    ⏳ Enter as 3-Day Visitor
                 </button>
             </div>
 
@@ -141,7 +144,6 @@
             <!-- Language Selector Dropdown -->
             <select id="langSelector" onchange="changeLanguage(this.value)" class="bg-slate-900 text-cyan-300 text-xs font-bold border border-cyan-500/50 rounded-xl px-2.5 py-1.5 focus:outline-none shadow-md">
                 <option value="en">English</option>
-                <option value="ml">മലയാളം</option>
             </select>
         </div>
         <p id="headerSubTitle" class="text-xs text-cyan-300/80 font-medium tracking-wide mt-1">"A World at Your Fingertips — The Digital Companion of Trust & Development!"</p>
@@ -305,32 +307,58 @@
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with 3-Day Visitor Expiry Logic -->
+    <!-- JavaScript with Admin User Activity Log Folder -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
         const DIRECTOR_ID = "salih9947";
+        const ADMIN_EMAILS = [
+            "platformoyes@gmail.com",
+            "salihwayanad@gmail.com",
+            "oyessaleem@gmail.com"
+        ];
+
         let currentActiveFolder = "";
         let loggedInUserName = "";
         let loggedInUserPhoto = "";
         let loggedInUserCategory = "";
         let isVisitorMode = false;
 
-        // Check 3-Day Visitor Expiry on App Load
+        // Save User Registration to Local Storage for Admin Database Log
+        function saveUserToDatabase(name, category, type) {
+            let users = JSON.parse(localStorage.getItem('oyes_registered_users') || '[]');
+            users.push({
+                name: name,
+                category: category,
+                type: type,
+                time: new Date().toLocaleString()
+            });
+            localStorage.setItem('oyes_registered_users', JSON.stringify(users));
+        }
+
+        // Check Admin Email Bypass or 3-Day Visitor Expiry on App Load
         window.onload = function() {
+            let activeAdmin = localStorage.getItem('oyes_admin_bypass');
+            if(activeAdmin) {
+                loggedInUserName = "Director / Admin (" + activeAdmin + ")";
+                loggedInUserCategory = "Master Admin (Direct Bypass)";
+                loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+                document.getElementById('userCategoryBadge').innerText = `Admin: Direct Access`;
+                document.getElementById('loginGateModal').classList.add('hidden');
+                return;
+            }
+
             let visitorData = localStorage.getItem('oyes_visitor_session');
             if(visitorData) {
                 let session = JSON.parse(visitorData);
                 let currentTime = new Date().getTime();
-                let threeDaysInMillis = 3 * 24 * 60 * 60 * 1000; // 3 Days in milliseconds
+                let threeDaysInMillis = 3 * 24 * 60 * 60 * 1000;
 
                 if(currentTime - session.timestamp > threeDaysInMillis) {
-                    // Expired after 3 days
                     localStorage.removeItem('oyes_visitor_session');
-                    alert('⏳ നിങ്ങളുടെ 3 ദിവസത്തെ വിസിറ്റർ കാലാവധി കഴിഞ്ഞിരിക്കുന്നു!\n\nതുടർന്ന് ആപ്പ് ഉപയോഗിക്കാൻ ദയവായി ഫോട്ടോയും വിവരങ്ങളും നൽകി ഫുൾ രജിസ്ട്രേഷൻ ചെയ്യുക.');
+                    alert('⏳ Your 3-day visitor trial has expired!\n\nPlease complete full registration with photo and details to continue using the app.');
                 } else {
-                    // Active Visitor Session
                     loggedInUserName = session.name + " (Visitor)";
                     loggedInUserCategory = "Visitor (" + session.phone + "; 3-Day Trial Active)";
                     loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
@@ -363,20 +391,37 @@
 
         function completeLoginGate() {
             let nameInput = document.getElementById('userNameInput').value.trim();
+            let emailInput = document.getElementById('userEmailInput').value.trim().toLowerCase();
             let categorySelect = document.getElementById('userCategorySelect').value;
             let photoInput = document.getElementById('userPhotoInput').files[0];
             let isChecked = document.getElementById('legalCheckbox').checked;
 
             if(!nameInput) {
-                alert('ദയവായി നിങ്ങളുടെ പേര് നൽകുക!');
+                alert('Please enter your full name!');
                 return;
             }
+
+            if(emailInput && ADMIN_EMAILS.includes(emailInput)) {
+                localStorage.setItem('oyes_admin_bypass', emailInput);
+                loggedInUserName = nameInput + " (Admin)";
+                loggedInUserCategory = "Master Admin (Direct Bypass)";
+                loggedInUserPhoto = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+                
+                document.getElementById('userCategoryBadge').innerText = `Admin: Direct Access`;
+                document.getElementById('loginGateModal').classList.add('hidden');
+                
+                saveUserToDatabase(nameInput, "Master Admin", "Admin Direct");
+                alert(`👑 Admin Email Verified (${emailInput})!\n\nDirect auto-login granted.`);
+                speakText(`Welcome admin, direct access granted.`);
+                return;
+            }
+
             if(!photoInput) {
-                alert('⚠️ ഫോട്ടോ നിർബന്ധമാണ്! ദയവായി നിങ്ങളുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക.');
+                alert('⚠️ Photo is mandatory! Please upload your photo.');
                 return;
             }
             if(!isChecked) {
-                alert('തുടരുന്നതിനായി ദയവായി നിബന്ധനകൾ അംഗീകരിച്ച് ടിക്ക് ചെയ്യുക!');
+                alert('You must check and agree to the terms to proceed!');
                 return;
             }
 
@@ -387,16 +432,17 @@
                 loggedInUserCategory = categorySelect;
 
                 let catNames = {
-                    'business': '💼 ബിസിനസ്സ് / കച്ചവടം',
-                    'buyer': '🛒 സാധനങ്ങൾ വാങ്ങാൻ',
-                    'job': '👨‍💻 ജോലി ആവശ്യം',
-                    'services': '🌐 പൊതു സേവനങ്ങൾ'
+                    'business': 'Business / Merchant',
+                    'buyer': 'Buying Products',
+                    'job': 'Job & Career',
+                    'services': 'All Services'
                 };
 
                 document.getElementById('userCategoryBadge').innerText = `User: ${loggedInUserName} (${catNames[loggedInUserCategory]})`;
                 document.getElementById('loginGateModal').classList.add('hidden');
                 
-                alert(`✅ സ്വാഗതം, ${loggedInUserName}!\n\nഫുൾ രജിസ്ട്രേഷൻ വിജയകരമായി പൂർത്തിയായി.`);
+                saveUserToDatabase(nameInput, catNames[loggedInUserCategory], "Full Registration");
+                alert(`✅ Welcome, ${loggedInUserName}!\n\nFull registration completed successfully.`);
                 speakText(`Welcome to Oyes App, ${loggedInUserName}.`);
             };
             reader.readAsDataURL(photoInput);
@@ -408,19 +454,18 @@
             let isChecked = document.getElementById('visitorLegalCheckbox').checked;
 
             if(!nameInput) {
-                alert('ദയവായി നിങ്ങളുടെ പേര് നൽകുക!');
+                alert('Please enter your name!');
                 return;
             }
             if(!phoneInput || phoneInput.length < 10) {
-                alert('ദയവായി നിങ്ങളുടെ ശരിയായ ഫോൺ നമ്പർ നൽകുക!');
+                alert('Please enter a valid phone number!');
                 return;
             }
             if(!isChecked) {
-                alert('തുടരുന്നതിനായി ദയവായി നിബന്ധനകൾ അംഗീകരിച്ച് ടിക്ക് ചെയ്യുക!');
+                alert('You must check and agree to the visitor terms to proceed!');
                 return;
             }
 
-            // Save visitor session with current timestamp
             let sessionData = {
                 name: nameInput,
                 phone: phoneInput,
@@ -435,7 +480,8 @@
             document.getElementById('userCategoryBadge').innerText = `Visitor: ${nameInput} (3 Days Trial)`;
             document.getElementById('loginGateModal').classList.add('hidden');
 
-            alert(`✅ വിസിറ്റർ ലോഗിൻ വിജയം!\n\nസ്വാഗതം, ${nameInput}. നിങ്ങൾക്ക് 3 ദിവസത്തേക്ക് ആപ്പ് സൗജന്യമായി ഉപയോഗിക്കാം.`);
+            saveUserToDatabase(nameInput, "Visitor (" + phoneInput + ")", "3-Day Trial");
+            alert(`✅ Visitor Login Success!\n\nWelcome, ${nameInput}. You have 3 days free trial access.`);
             speakText(`Welcome visitor ${nameInput}. 3 days trial active.`);
         }
 
@@ -452,61 +498,6 @@
                     speakText("Invalid ID. Access denied.");
                 }
             }
-        }
-
-        const translations = {
-            en: {
-                subtitle: '"A World at Your Fingertips — The Digital Companion of Trust & Development!"',
-                searchPlaceholder: "Search or speak here...",
-                sectionTitle: "Home Main Folders",
-                edu: "Education", eduSub: "Books & Learning",
-                gov: "Government", govSub: "Services & Portals",
-                cin: "Cinema & Music", cinSub: "Free AI Tools",
-                tech: "Technology", techSub: "100% Free Tools",
-                sales: "Sales", salesSub: "Marketplace",
-                info: "App Info", infoSub: "Security & Details",
-                all: "All Other Services", allSub: "Remaining 46 Master Folders",
-                install: "📲 Install App", share: "🔗 Share App", back: "← Back to Home"
-            },
-            ml: {
-                subtitle: '"ലോകം നിങ്ങളുടെ വിരൽത്തുമ്പിൽ — വിശ്വാസത്തിന്റെയും വികസനത്തിന്റെയും ഡിജിറ്റൽ കൂട്ട്!"',
-                searchPlaceholder: "തിരയുക അല്ലെങ്കിൽ സംസാരിക്കുക...",
-                sectionTitle: "പ്രധാന ഹോം ഫോൾഡറുകൾ",
-                edu: "വിദ്യാഭ്യാസം", eduSub: "പുസ്തകങ്ങളും പഠനവും",
-                gov: "സർക്കാർ സേവനങ്ങൾ", govSub: "പോർട്ടലുകളും സേവനങ്ങളും",
-                cin: "സിനിമ & മ്യൂസിക്", cinSub: "ഫ്രീ എഐ ടൂളുകൾ",
-                tech: "ടെക്നോളജി", techSub: "100% ഫ്രീ ടൂളുകൾ",
-                sales: "വിപണനം (Sales)", salesSub: "മാർക്കറ്റ്പ്ലേസ്",
-                info: "ആപ്പ് വിവരം", infoSub: "സുരക്ഷയും വിവരങ്ങളും",
-                all: "മറ്റു സേവനങ്ങൾ", allSub: "ബാക്കിയുള്ള 46 മാസ്റ്റർ ഫോൾഡറുകൾ",
-                install: "📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക", share: "🔗 ഷെയർ ചെയ്യുക", back: "← ഹോമിലേക്ക് തിരികെ"
-            }
-        };
-
-        function changeLanguage(lang) {
-            const t = translations[lang];
-            document.getElementById('headerSubTitle').innerText = t.subtitle;
-            document.getElementById('searchBox').placeholder = t.searchPlaceholder;
-            document.getElementById('homeSectionTitle').innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.sectionTitle}`;
-            
-            document.querySelector('.folder-edu').innerText = t.edu;
-            document.querySelector('.folder-edu-sub').innerText = t.eduSub;
-            document.querySelector('.folder-gov').innerText = t.gov;
-            document.querySelector('.folder-gov-sub').innerText = t.govSub;
-            document.querySelector('.folder-cin').innerText = t.cin;
-            document.querySelector('.folder-cin-sub').innerText = t.cinSub;
-            document.querySelector('.folder-tech').innerText = t.tech;
-            document.querySelector('.folder-tech-sub').innerText = t.techSub;
-            document.querySelector('.folder-sales').innerText = t.sales;
-            document.querySelector('.folder-sales-sub').innerText = t.salesSub;
-            document.querySelector('.folder-info').innerText = t.info;
-            document.querySelector('.folder-info-sub').innerText = t.infoSub;
-            document.querySelector('.folder-all').innerText = t.all;
-            document.querySelector('.folder-all-sub').innerText = t.allSub;
-
-            document.getElementById('installBtnText').innerText = t.install;
-            document.getElementById('shareBtnText').innerText = t.share;
-            document.getElementById('backBtnText').innerHTML = t.back;
         }
 
         function speakText(text) {
@@ -564,12 +555,12 @@
                     <h3 class="font-bold text-sm text-amber-300 uppercase tracking-wider">${loggedInUserName}</h3>
                     
                     <div class="bg-slate-900 border border-amber-500/60 p-3.5 rounded-2xl text-left space-y-2">
-                        <h4 class="text-xs font-bold text-cyan-300">🌟 ട്രയൽ സെഷൻ വിവരങ്ങൾ:</h4>
-                        <p class="text-[10px] text-slate-300">വിസിറ്റർ ട്രയൽ കാലാവധിക്ക് ശേഷം തുടരാൻ ഫുൾ രജിസ്ട്രേഷൻ ആവശ്യമാണ്. 10% അഡ്മിൻ ഫീസ് ബാധകമാണ്.</p>
+                        <h4 class="text-xs font-bold text-cyan-300">🌟 Session Information:</h4>
+                        <p class="text-[10px] text-slate-300">Full registration is required after the trial period. 10% admin fee applies to trades.</p>
                         
-                        <h4 class="text-xs font-bold text-red-400 pt-1">⚠️ കർശന മുന്നറിയിപ്പ് & നഷ്ടപരിഹാരം:</h4>
+                        <h4 class="text-xs font-bold text-red-400 pt-1">⚠️ Legal Warning & Compensation:</h4>
                         <p class="text-[10px] text-slate-200 leading-relaxed">
-                            ആപ്പ് ദുരുപയോഗം ചെയ്താൽ നൽകിയിട്ടുള്ള വിവരങ്ങൾ വെച്ച് സൈബർ സെൽ മുഖേന കടുത്ത നിയമനടപടിയും നഷ്ടപരിഹാരവും ഈടാക്കും.
+                            Any misuse or fraud will result in strict legal action and mandatory financial compensation under cyber laws.
                         </p>
                     </div>
 
@@ -714,6 +705,7 @@
             const adminCMS = [
                 { title: '📞 Director Salih Call', desc: '9947198248', action: 'call1' },
                 { title: '📞 OYES Saleem Call', desc: '9633111000', action: 'call2' },
+                { title: '👥 Registered Users Log', desc: 'View All Joined Users & Visitors', action: 'userslog' },
                 { title: '🖼️ Change App Logo', desc: 'Upload Logo from Gallery/Emoji', action: 'logo' },
                 { title: '📸 Upload Background Photo', desc: 'Select Image from Gallery/Storage', action: 'bgphoto' },
                 { title: '🎨 App Themes & Colors', desc: 'Set Neon, Purple or Emerald Theme', action: 'bgtheme' },
@@ -734,6 +726,17 @@
                         startPeerCall('Director Call', 'Salih Wayanad');
                     } else if(item.action === 'call2') {
                         startPeerCall('Director Call', 'OYES Saleem');
+                    } else if(item.action === 'userslog') {
+                        let users = JSON.parse(localStorage.getItem('oyes_registered_users') || '[]');
+                        if(users.length === 0) {
+                            alert('📋 Registered Users Log:\n\nNo users have joined or registered in this browser session yet.');
+                        } else {
+                            let logText = "📋 OYES APP REGISTERED USERS LOG:\n\n";
+                            users.forEach((u, i) => {
+                                logText += `${i+1}. Name: ${u.name}\n   Category: ${u.category}\n   Type: ${u.type}\n   Time: ${u.time}\n-------------------------\n`;
+                            });
+                            alert(logText);
+                        }
                     } else if(item.action === 'logo') {
                         let choice = prompt('Choose Logo Type:\n1. Enter Emoji symbol (e.g. 🌟, 🚀, 💎)\n2. Upload Photo from Gallery/Storage\nEnter 1 or 2:', '1');
                         if(choice === '1') {
