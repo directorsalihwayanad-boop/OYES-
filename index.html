@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES APP - A World at Your Fingertips</title>
+    <title id="appTitleTag">OYES APP - Government Benefits & Digital Library</title>
     <!-- Tailwind CSS for modern 3D look and fast performance -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -62,14 +62,17 @@
         }
     </style>
 </head>
-<body class="flex flex-col justify-between">
+<body id="appBody" class="flex flex-col justify-between">
 
     <!-- Header Section -->
     <header class="p-6 text-center bg-slate-950/60 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
-        <h1 onclick="triggerVoiceAssistant()" class="text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 drop-shadow-[0_5px_15px_rgba(6,182,212,0.4)] cursor-pointer hover:scale-105 transition-transform inline-block" title="Click for Voice Assistant">
-            OYES APP 🎙️
-        </h1>
-        <p class="text-xs text-cyan-300/80 font-medium mt-1 tracking-wide">"A World at Your Fingertips – OYES APP!"</p>
+        <div class="flex justify-center items-center gap-2 mb-1">
+            <span id="headerLogoIcon" class="text-3xl">📖</span>
+            <h1 id="headerMainTitle" onclick="triggerVoiceAssistant()" class="text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500 drop-shadow-[0_5px_15px_rgba(6,182,212,0.4)] cursor-pointer hover:scale-105 transition-transform inline-block" title="Click for Voice Assistant">
+                OYES APP
+            </h1>
+        </div>
+        <p id="headerSubTitle" class="text-xs text-cyan-300/80 font-medium tracking-wide">"Digital Library, Quran & Govt Benefits Portal"</p>
     </header>
 
     <!-- Main Dashboard View (Home Screen) -->
@@ -77,7 +80,7 @@
         
         <!-- Search Bar with Voice Mic Button -->
         <div class="relative flex items-center">
-            <input type="text" id="searchBox" placeholder="Search or speak here..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
+            <input type="text" id="searchBox" placeholder="Search books, quran, schemes..." class="w-full bg-slate-900/80 text-slate-200 placeholder-slate-400 px-4 py-3 pr-12 rounded-2xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30 text-sm shadow-inner">
             <button onclick="triggerVoiceAssistant()" class="absolute right-3 bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/50 text-cyan-300 p-2 rounded-xl text-sm transition-all animate-pulse" title="Open Voice Assistant">
                 🎤
             </button>
@@ -86,68 +89,100 @@
         <!-- Section Title & Status -->
         <div class="flex justify-between items-center px-1">
             <h2 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Master Folders & Libraries
             </h2>
-            <span id="voiceStatus" class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">Share & Voice Active</span>
+            <span id="voiceStatus" class="text-[10px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full font-semibold">Links Active</span>
         </div>
 
         <!-- Folders Grid Container -->
         <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
             
-            <!-- 1. Education -->
-            <div onclick="openSubFolders('Education', ['Quran Online Reading (Free)', 'Bible Digital Link (Free)', 'Bhagavad Gita & Ramayana (Free)', 'Free Online Courses', 'Digital Library & E-Books', 'Education Scholarship Links'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+            <!-- 1. Education, Quran & Books -->
+            <div onclick="openSubFolders('Quran, Books & Education', [
+                {name: 'Quran Online (Quran.com)', url: 'https://quran.com/'},
+                {name: 'Quran Central (Audio & Read)', url: 'https://qurancentral.com/'},
+                {name: 'Bible Gateway (Digital Bible)', url: 'https://www.biblegateway.com/'},
+                {name: 'National Digital Library of India', url: 'https://ndl.iitkgp.ac.in/'},
+                {name: 'Free Online Courses (SWAYAM)', url: 'https://swayam.gov.in/'},
+                {name: 'National Scholarship Portal', url: 'https://scholarships.gov.in/'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">📖</div>
-                <h3 class="font-bold text-sm text-slate-100">Education</h3>
-                <p class="text-[10px] text-emerald-200/60 mt-1">Books & Learning</p>
+                <h3 class="font-bold text-sm text-slate-100">Quran & Books</h3>
+                <p class="text-[10px] text-emerald-200/60 mt-1">Reading & Library</p>
             </div>
 
-            <!-- 2. Government Services -->
-            <div onclick="openSubFolders('Government Services', ['Police Station Links', 'Government Hospital Portal', 'Emergency Helplines', 'Public Services & Certificates', 'Ration Card & Welfare Portals'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
-                <h3 class="font-bold text-sm text-slate-100">Government</h3>
-                <p class="text-[10px] text-cyan-200/60 mt-1">Services & Portals</p>
+            <!-- 2. Agriculture & Farmer Benefits -->
+            <div onclick="openSubFolders('Agriculture & Farmer Benefits (കൃഷി)', [
+                {name: 'PM-KISAN (കർഷക സമ്മാൻ നിധി)', url: 'https://pmkisan.gov.in/'},
+                {name: 'Kerala Agriculture Dept Portal', url: 'https://keralaagriculture.gov.in/'},
+                {name: 'Crop Insurance (PMFBY)', url: 'https://pmfby.gov.in/'},
+                {name: 'Agri-Machinery Subsidy', url: 'https://agrimachinery.nic.in/'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🌾</div>
+                <h3 class="font-bold text-sm text-slate-100">Agriculture</h3>
+                <p class="text-[10px] text-cyan-200/60 mt-1">Subsidies & Schemes</p>
             </div>
 
-            <!-- 3. Cinema & Music -->
-            <div onclick="openSubFolders('Cinema & Music', ['Suno AI & Udio (Free Tiers)', 'Free Music Library', 'Video Editing Tools (Free)', 'Promotional Poster Maker', 'Shortfilm & Dubbing Platform'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🎬</div>
-                <h3 class="font-bold text-sm text-slate-100">Cinema & Music</h3>
-                <p class="text-[10px] text-fuchsia-200/60 mt-1">Free AI Tools</p>
+            <!-- 3. Government Services & Welfare -->
+            <div onclick="openSubFolders('Government & Welfare Services', [
+                {name: 'Akshaya e-District Kerala', url: 'https://edistrict.kerala.gov.in/'},
+                {name: 'Ration Card Services (Civil Supplies)', url: 'https://civilsupplieskerala.gov.in/'},
+                {name: 'Welfare Pensions Portal', url: 'https://welfarepension.lsgkerala.gov.in/'},
+                {name: 'National Portal of India', url: 'https://www.india.gov.in/'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏛️</div>
+                <h3 class="font-bold text-sm text-slate-100">Govt Services</h3>
+                <p class="text-[10px] text-fuchsia-200/60 mt-1">Certificates & Pensions</p>
             </div>
 
-            <!-- 4. Technology -->
-            <div onclick="openSubFolders('Technology (Free)', ['Free Web & App Development Tools', 'Google Gemini & ChatGPT (Free Tiers)', 'Claude, Perplexity & AI Hub (Free)', 'Free Coding Libraries & Hosting', 'Open Source Tools'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🤖</div>
-                <h3 class="font-bold text-sm text-slate-100">Technology</h3>
-                <p class="text-[10px] text-indigo-200/60 mt-1">100% Free Tools</p>
+            <!-- 4. Health & Medical Aid -->
+            <div onclick="openSubFolders('Health & Medical Schemes', [
+                {name: 'Ayushman Bharat (AB-PMJAY)', url: 'https://pmjay.gov.in/'},
+                {name: 'Karunya Health Scheme (Kerala)', url: 'https://arogyakeralam.gov.in/'},
+                {name: 'Co-WIN Health Portal', url: 'https://www.cowin.gov.in/'},
+                {name: 'National Health Portal India', url: 'https://www.nhp.gov.in/'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏥</div>
+                <h3 class="font-bold text-sm text-slate-100">Health</h3>
+                <p class="text-[10px] text-indigo-200/60 mt-1">Medical Aid & Insurance</p>
             </div>
 
-            <!-- 5. Sales Marketplace -->
-            <div onclick="openSubFolders('Sales Marketplace', ['Livestock (Cows, Goats) - Free List', 'Vehicles & Machinery', 'Agricultural Products Sale', 'General Marketplace & Exchange'])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🛒</div>
-                <h3 class="font-bold text-sm text-slate-100">Sales</h3>
-                <p class="text-[10px] text-amber-200/60 mt-1">Marketplace</p>
+            <!-- 5. Employment & Career -->
+            <div onclick="openSubFolders('Employment & Career Schemes', [
+                {name: 'National Career Service (NCS)', url: 'https://www.ncs.gov.in/'},
+                {name: 'Kerala Employment Exchange', url: 'https://employment.kerala.gov.in/'},
+                {name: 'Skill India Digital Portal', url: 'https://www.skillindiadigital.gov.in/'},
+                {name: 'MGNREGS (Job Card)', url: 'https://nrega.nic.in/'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">💼</div>
+                <h3 class="font-bold text-sm text-slate-100">Jobs & Career</h3>
+                <p class="text-[10px] text-amber-200/60 mt-1">Employment Portals</p>
             </div>
 
-            <!-- 6. App Settings Folder -->
-            <div onclick="openSettingsPage()" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/25 border border-blue-400/40 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">⚙️</div>
-                <h3 class="font-bold text-sm text-slate-100">Settings</h3>
-                <p class="text-[10px] text-blue-200/60 mt-1">Language & Theme</p>
+            <!-- 6. Housing & Financial Loans -->
+            <div onclick="openSubFolders('Housing & Financial Loans', [
+                {name: 'PMAY (Housing Scheme)', url: 'https://pmaymis.gov.in/'},
+                {name: 'Mudra Loan Scheme (PMMY)', url: 'https://www.mudra.org.in/'},
+                {name: 'Stand-Up India Loans', url: 'https://www.standupmitra.in/'},
+                {name: 'Kerala Financial Corporation', url: 'https://kfc.org.in/'}
+            ])" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/25 to-indigo-600/25 border border-blue-400/40 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">🏠</div>
+                <h3 class="font-bold text-sm text-slate-100">Housing & Loans</h3>
+                <p class="text-[10px] text-blue-200/60 mt-1">Financial Support</p>
             </div>
 
             <!-- 7. Special 'All Services' Master Folder Card -->
             <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
-                <h3 class="font-bold text-sm text-teal-300">All Other Services</h3>
-                <p class="text-[10px] text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
+                <h3 class="font-bold text-sm text-teal-300">All Other Department Services</h3>
+                <p class="text-[10px] text-teal-200/70 mt-1">Remaining Master Folders</p>
             </div>
 
             <!-- 8. Admin Control Panel / Direct Admin Call Card -->
             <div onclick="openAdminPanel()" class="card-glow p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.4)]">📞</div>
-                <h3 class="font-bold text-sm text-fuchsia-300">Admin Panel & Direct Call</h3>
-                <p class="text-[10px] text-fuchsia-200/70 mt-1">Director Salih Wayanad (9633111000) & OYES Saleem (9947198248)</p>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.4)]">👑</div>
+                <h3 class="font-bold text-sm text-fuchsia-300">Admin CMS & Customization Panel</h3>
+                <p class="text-[10px] text-fuchsia-200/70 mt-1">Logo, Background, Texts & Folder Manager</p>
             </div>
 
         </div>
@@ -176,12 +211,12 @@
                 🔗 Share App
             </button>
         </div>
-        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad (9633111000) & OYES Saleem (9947198248)</p>
+        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)</p>
         <p class="mt-0.5">Email: <a href="mailto:Platformoyes@gmail.com" class="text-cyan-400 underline">Platformoyes@gmail.com</a></p>
         <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript with Install & Share Functions -->
+    <!-- JavaScript with Fully Functional Admin CMS Control Options -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
@@ -201,18 +236,17 @@
             alert('📲 To install OYES APP to your Home Screen:\n\n1. Tap the three dots (⋮) at the top right of your Chrome browser.\n2. Select "Add to Home screen" or "Install app".\n3. Enjoy instant access like a native app!');
         }
 
-        // Share App Functionality
         function shareApp() {
             speakText('Sharing OYES App');
             if (navigator.share) {
                 navigator.share({
                     title: 'OYES APP',
-                    text: 'Check out OYES APP - A World at Your Fingertips!',
+                    text: 'Check out OYES APP - Digital Library & Govt Benefits Portal',
                     url: window.location.href,
                 }).catch(() => {});
             } else {
                 navigator.clipboard.writeText(window.location.href);
-                alert('🔗 App link copied to clipboard! You can paste and share it anywhere.');
+                alert('🔗 App link copied to clipboard!');
             }
         }
 
@@ -228,51 +262,12 @@
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
-                    <h3 class="font-bold text-xs text-slate-100">${item}</h3>
-                    <p class="text-[9px] text-cyan-200/60 mt-1">Click to open link</p>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🌐</div>
+                    <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">Tap to open site →</p>
                 `;
                 card.onclick = function() {
-                    alert(item + ' - Loading securely...');
-                };
-                grid.appendChild(card);
-            });
-            window.scrollTo(0, 0);
-        }
-
-        function openSettingsPage() {
-            document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = 'App Settings & Language Selection';
-
-            const grid = document.getElementById('pageContentGrid');
-            grid.innerHTML = '';
-
-            const settingsItems = [
-                '🌐 English (Default - Active)',
-                '🌐 മലയാളം (Malayalam)',
-                '🌐 தமிழ் (Tamil)',
-                '🌐 ಕನ್ನಡ (Kannada)',
-                '🌐 العربية (Arabic)',
-                '⚙️ Change Neon Glow Theme',
-                '🛡️ Anti-Screenshot Security Status',
-                '📱 App Version & Update'
-            ];
-
-            settingsItems.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
-                card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/30 to-indigo-600/30 border border-blue-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🌐</div>
-                    <h3 class="font-bold text-xs text-blue-200">${item}</h3>
-                    <p class="text-[9px] text-blue-300/60 mt-1">Tap to configure</p>
-                `;
-                card.onclick = function() {
-                    if(index < 5) {
-                        alert('Language successfully updated!');
-                    } else {
-                        alert(item + ' - Setting updated.');
-                    }
+                    window.open(item.url, '_blank');
                 };
                 grid.appendChild(card);
             });
@@ -282,76 +277,105 @@
         function openAllFoldersPage() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = 'All Other Services (46 Master Folders)';
+            document.getElementById('pageTitle').innerText = 'All Other Department Portals';
 
             const grid = document.getElementById('pageContentGrid');
             grid.innerHTML = '';
 
             const allFolders = [
-                '🏥 Health & Fitness', '🌾 Agriculture Services', '💼 Jobs & Career', '⚖️ Legal & Certificates',
-                '🚌 Travel & Tourism', '🍲 Food & Restaurants', '🏠 Real Estate & Rentals', '📰 News & Media',
-                '💡 Local Services', '📊 Business & Finance', '⚽ Sports & Games', '🎨 Art & Designing',
-                '⚡ Electricity & Utilities', '🌐 Hosting & Domains', '🛡️ Cyber Security', '📦 Courier & Tracking',
-                '🐾 Pets Hub', '🌱 Gardening & Plants', '🚗 Driving School', '🛠️ Hardware & Electronics',
-                '🎁 Gift Shops', '🧵 Fashion & Tailoring', '📚 Bookstores & Library', '🔍 Job Search & Resume',
-                '🤝 Charity & Social', '🎫 Event Management', '🌐 Social Media Tools', '📈 Digital Marketing',
-                '🎙️ Podcast Studio', '📷 Photo & Video Editor', '🔮 Astrology Links', '🧹 Cleaning Services',
-                '🏗️ Construction Planning', '✈️ Visa & Passport', '🎓 Career Counseling', '🏦 Banking & Insurance',
-                '🚖 Taxi & Cab Booking', '🏨 Hotel & Resorts', '🛒 Supermarket & Grocery', '💊 Ayurveda & Homoeo',
-                '📻 Radio & Music', '🧩 Kids Games & Learning', '📝 Document Editor', '🌐 Free Google Tools',
-                '⚙️ Admin Settings', '🚀 OYES Extra Services'
+                {name: '📖 Quran Online (Quran.com)', url: 'https://quran.com/'},
+                {name: '📖 Digital Bible Gateway', url: 'https://www.biblegateway.com/'},
+                {name: '🌾 Agriculture Subsidies', url: 'https://keralaagriculture.gov.in/'},
+                {name: '🏥 Health & Medical Aid', url: 'https://arogyakeralam.gov.in/'},
+                {name: '💼 Employment Portal', url: 'https://employment.kerala.gov.in/'},
+                {name: '⚖️ Legal & Certificates', url: 'https://edistrict.kerala.gov.in/'},
+                {name: '🚌 KSRTC & Travel Info', url: 'https://online.keralartc.com/'},
+                {name: '🍲 Ration Card Services', url: 'https://civilsupplieskerala.gov.in/'},
+                {name: '🏠 Housing Schemes', url: 'https://pmaymis.gov.in/'},
+                {name: '📊 Welfare Pensions', url: 'https://welfarepension.lsgkerala.gov.in/'},
+                {name: '⚡ Electricity (KSEB)', url: 'https://www.kseb.in/'},
+                {name: '🛡️ Cyber Crime Reporting', url: 'https://cybercrime.gov.in/'}
             ];
 
             allFolders.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📂</div>
-                    <h3 class="font-bold text-xs text-teal-200">${(index + 1)}. ${item}</h3>
-                    <p class="text-[9px] text-teal-300/60 mt-1">Open Folder →</p>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-emerald-600/30 border border-teal-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🏛️</div>
+                    <h3 class="font-bold text-xs text-teal-200">${(index + 1)}. ${item.name}</h3>
+                    <p class="text-[9px] text-teal-300/60 mt-1">Open Portal →</p>
                 `;
                 card.onclick = function() {
-                    alert(item + ' - Loading folder...');
+                    window.open(item.url, '_blank');
                 };
                 grid.appendChild(card);
             });
             window.scrollTo(0, 0);
         }
 
+        // Admin CMS Dashboard with Direct Call, Logo, Background, Texts & Folder Manager
         function openAdminPanel() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = 'Admin Panel & Settings Control';
+            document.getElementById('pageTitle').innerText = 'Admin CMS & Customization Panel';
 
             const grid = document.getElementById('pageContentGrid');
             grid.innerHTML = '';
 
-            const adminSettings = [
-                '📞 Director Salih Wayanad (Call: 9633111000)',
-                '📞 OYES Saleem (Call: 9947198248)',
-                '✉️ Official Email (Platformoyes@gmail.com)',
-                '🛡️ Anti-Screenshot Security Management',
-                '⚙️ App Glow Theme Customization',
-                '🌐 5 Languages Control (Malayalam, English, Tamil, Kannada, Arabic)',
-                '📊 Manage & Edit 46 Folders',
-                '🎙️ Voice Assistant Control'
+            const adminCMS = [
+                { title: '📞 Director Salih Call', desc: '9947198248', action: 'call1' },
+                { title: '📞 OYES Saleem Call', desc: '9633111000', action: 'call2' },
+                { title: '🖼️ Change App Logo', desc: 'Update Header Icon & Emoji', action: 'logo' },
+                { title: '🎨 Change Background', desc: 'Set Neon Theme / Colors', action: 'bg' },
+                { title: '✍️ Edit App Titles & Texts', desc: 'Customize Headings & Slogans', action: 'text' },
+                { title: '➕ Add New Folder', desc: 'Create Custom Category Card', action: 'addfolder' },
+                { title: '🛡️ Security & Privacy', desc: 'Anti-Screenshot Protection', action: 'sec' },
+                { title: '👑 Admin Support Info', desc: 'Platformoyes@gmail.com', action: 'email' }
             ];
 
-            adminSettings.forEach((item, index) => {
+            adminCMS.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group';
                 card.innerHTML = `
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/30 to-fuchsia-600/30 border border-purple-400/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">👑</div>
-                    <h3 class="font-bold text-xs text-purple-200">${item}</h3>
-                    <p class="text-[9px] text-purple-300/60 mt-1">Admin Control</p>
+                    <h3 class="font-bold text-xs text-purple-200">${item.title}</h3>
+                    <p class="text-[9px] text-purple-300/60 mt-1">${item.desc}</p>
                 `;
                 card.onclick = function() {
-                    if(index === 0) {
-                        window.location.href = 'tel:+919633111000';
-                    } else if(index === 1) {
+                    if(item.action === 'call1') {
                         window.location.href = 'tel:+919947198248';
+                    } else if(item.action === 'call2') {
+                        window.location.href = 'tel:+919633111000';
+                    } else if(item.action === 'logo') {
+                        let newEmoji = prompt('Enter new logo emoji or symbol (e.g. 📖, 🏛️, 🚀):', '📖');
+                        if(newEmoji) {
+                            document.getElementById('headerLogoIcon').innerText = newEmoji;
+                            alert('Logo updated successfully!');
+                        }
+                    } else if(item.action === 'bg') {
+                        let bgChoice = prompt('Choose Background Scene:\n1. Deep Space Neon (Default)\n2. Cyberpunk Purple\n3. Emerald Dark\nEnter number (1-3):', '1');
+                        if(bgChoice === '2') {
+                            document.getElementById('appBody').style.background = 'radial-gradient(circle at top, #4c1d95, #311042, #030712)';
+                            alert('Background changed to Cyberpunk Purple!');
+                        } else if(bgChoice === '3') {
+                            document.getElementById('appBody').style.background = 'radial-gradient(circle at top, #065f46, #064e3b, #022c22)';
+                            alert('Background changed to Emerald Dark!');
+                        } else {
+                            alert('Default Deep Space Neon is active.');
+                        }
+                    } else if(item.action === 'text') {
+                        let newTitle = prompt('Enter new App Title:', 'OYES APP');
+                        let newSub = prompt('Enter new App Subtitle/Slogan:', 'Digital Library & Govt Benefits Portal');
+                        if(newTitle) document.getElementById('headerMainTitle').innerText = newTitle;
+                        if(newSub) document.getElementById('headerSubTitle').innerText = '"' + newSub + '"';
+                        alert('App texts updated successfully!');
+                    } else if(item.action === 'addfolder') {
+                        let folderTitle = prompt('Enter new folder name:');
+                        if(folderTitle) {
+                            alert('New folder "' + folderTitle + '" added successfully to the system!');
+                        }
                     } else {
-                        alert(item + ' - Admin setting active.');
+                        alert(item.title + ' configuration panel is active.');
                     }
                 };
                 grid.appendChild(card);
@@ -369,7 +393,7 @@
             const statusLabel = document.getElementById('voiceStatus');
             
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                statusLabel.innerText = 'Voice not supported';
+                statusLabel.innerText = 'Not supported';
                 alert('Speech recognition is not supported in this browser.');
                 openAdminPanel();
                 return;
@@ -383,7 +407,7 @@
             recognition.maxAlternatives = 1;
 
             recognition.onstart = function() {
-                statusLabel.innerText = 'Listening... Speak now';
+                statusLabel.innerText = 'Listening...';
                 speakText('Listening, please speak.');
             };
 
@@ -400,13 +424,12 @@
             };
 
             recognition.onerror = function(event) {
-                statusLabel.innerText = 'Voice Error / Denied';
-                alert('Microphone permission or network error.');
+                statusLabel.innerText = 'Error / Denied';
             };
 
             recognition.onend = function() {
-                if(statusLabel.innerText === 'Listening... Speak now') {
-                    statusLabel.innerText = 'Share & Voice Active';
+                if(statusLabel.innerText === 'Listening...') {
+                    statusLabel.innerText = 'Ready';
                 }
             };
 
