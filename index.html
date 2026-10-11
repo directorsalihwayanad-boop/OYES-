@@ -234,7 +234,6 @@
 
     <!-- Footer Section with Scrolling Ticker Text -->
     <footer class="p-3 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2">
-        <!-- Scrolling Ticker -->
         <div class="overflow-hidden whitespace-nowrap bg-slate-900/80 border border-cyan-500/30 rounded-xl py-1.5 px-2">
             <marquee behavior="scroll" direction="left" scrollamount="4" class="text-cyan-300 font-semibold text-[11px]">
                 🌟 Welcome to OYES APP — A World at Your Fingertips — Directed by Salih Wayanad | Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000) 🌟
@@ -407,7 +406,7 @@
                 cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', 
                 techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', 
                 salesTitle: 'ಮಾರಾಟ ಮಾರುಕಟ್ಟೆ', salesSub: '10% ನಿರ್ವಹಣಾ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
-                waTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ', waSub: 'ನೇರ ಚಾറ്റ് ಕೇಂದ್ರ',
+                waTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ', waSub: 'ನೇರ ಚಾಟ್ ಕೇಂದ್ರ',
                 allTitle: 'ಇತರ ಎಲ್ಲಾ ಸೇವೆಗಳು', allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
                 backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' 
             }
@@ -657,4 +656,277 @@
         function deleteUserFolder(index) {
             let userFolders = JSON.parse(localStorage.getItem('oyes_user_folders') || '[]');
             userFolders.splice(index, 1);
-            localStorage.setItem('
+            localStorage.setItem('oyes_user_folders', JSON.stringify(userFolders));
+            renderDeleteFolderList();
+            loadUserFolders();
+            alert("🗑️ Folder deleted successfully!");
+        }
+
+        function loadUserFolders() {
+            let grid = document.getElementById('userCustomFolderGrid');
+            if(!grid) return;
+            let userFolders = JSON.parse(localStorage.getItem('oyes_user_folders') || '[]');
+            grid.innerHTML = '';
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+
+            userFolders.forEach((folder) => {
+                const card = document.createElement('div');
+                card.className = `card-3d p-4 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                card.innerHTML = `
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5">📂</div>
+                    <h3 class="font-bold text-sm text-slate-100">${folder.name}</h3>
+                    <p class="text-[10px] text-cyan-200/60 mt-1">Custom Folder</p>
+                `;
+                card.onclick = () => window.open(folder.url, '_blank');
+                grid.appendChild(card);
+            });
+        }
+
+        function processAiImageTheme() {
+            let fileInput = document.getElementById('aiThemePhoto');
+            if(!fileInput || !fileInput.files || !fileInput.files[0]) {
+                alert("Please select an image file first.");
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let imgDataUrl = e.target.result;
+                let aiGeneratedBgGradient = `linear-gradient(rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95)), url('${imgDataUrl}')`;
+                localStorage.setItem('oyes_app_bg', aiGeneratedBgGradient);
+                document.body.style.background = aiGeneratedBgGradient;
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundAttachment = "fixed";
+                alert("✨ AI successfully analyzed your photo and generated a custom theme design!");
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function saveAdminChanges() {
+            let titleInput = document.getElementById('editAppTitle');
+            let adminInput = document.getElementById('editAdminText');
+            let bgSelect = document.getElementById('editBgColor');
+            let styleSelect = document.getElementById('editFolderStyle');
+
+            if(titleInput) localStorage.setItem('oyes_app_title', titleInput.value);
+            if(adminInput) localStorage.setItem('oyes_admin_text', adminInput.value);
+            if(styleSelect) localStorage.setItem('oyes_folder_style', styleSelect.value);
+            if(bgSelect && (!localStorage.getItem('oyes_app_bg') || !localStorage.getItem('oyes_app_bg').includes('url('))) {
+                localStorage.setItem('oyes_app_bg', bgSelect.value);
+            }
+
+            let fileInputs = {
+                'oyes_logo_img': document.getElementById('editLogoFile'),
+                'oyes_icon_edu_img': document.getElementById('iconEduFile'),
+                'oyes_icon_gov_img': document.getElementById('iconGovFile'),
+                'oyes_icon_cin_img': document.getElementById('iconCinFile'),
+                'oyes_icon_tech_img': document.getElementById('iconTechFile'),
+                'oyes_edu_bg': document.getElementById('bgEduFile'),
+                'oyes_gov_bg': document.getElementById('bgGovFile'),
+                'oyes_cin_bg': document.getElementById('bgCinFile'),
+                'oyes_tech_bg': document.getElementById('bgTechFile')
+            };
+
+            serviceNames.forEach((_, idx) => {
+                fileInputs[`master_icon_${idx}`] = document.getElementById(`masterIcon_${idx}`);
+                fileInputs[`master_bg_${idx}`] = document.getElementById(`masterBg_${idx}`);
+            });
+
+            let keys = Object.keys(fileInputs);
+            let processed = 0;
+            let totalFiles = keys.filter(k => fileInputs[k] && fileInputs[k].files && fileInputs[k].files[0]).length;
+
+            if (totalFiles === 0) {
+                alert("✅ Salih Wayanad Studio settings saved successfully!");
+                loadSavedCustomization();
+                loadUserFolders();
+                goBackHome();
+                return;
+            }
+
+            keys.forEach(key => {
+                let input = fileInputs[key];
+                if (input && input.files && input.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        localStorage.setItem(key, e.target.result);
+                        processed++;
+                        if (processed >= totalFiles) {
+                            alert("✅ All icons, gallery images & studio settings saved!");
+                            loadSavedCustomization();
+                            loadUserFolders();
+                            goBackHome();
+                        }
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        }
+
+        function loadSavedCustomization() {
+            let savedTitle = localStorage.getItem('oyes_app_title');
+            let savedLogoImg = localStorage.getItem('oyes_logo_img');
+            let savedAdminText = localStorage.getItem('oyes_admin_text');
+            let savedBg = localStorage.getItem('oyes_app_bg');
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style');
+
+            if(savedTitle) {
+                let mTitle = document.getElementById('headerMainTitle');
+                let aTag = document.getElementById('appTitleTag');
+                if(mTitle) mTitle.innerText = savedTitle;
+                if(aTag) aTag.innerText = savedTitle;
+            }
+            if(savedLogoImg) {
+                let lContainer = document.getElementById('headerLogoContainer');
+                if(lContainer) lContainer.innerHTML = `<img src="${savedLogoImg}" class="w-7 h-7 object-cover rounded-full border border-cyan-400">`;
+            }
+            if(savedAdminText) {
+                let fAdmin = document.getElementById('footerAdminText');
+                if(fAdmin) fAdmin.innerText = savedAdminText;
+            }
+            if(savedBg) {
+                document.body.style.background = savedBg;
+                if(savedBg.includes('url(')) {
+                    document.body.style.backgroundSize = "cover";
+                    document.body.style.backgroundPosition = "center";
+                    document.body.style.backgroundAttachment = "fixed";
+                }
+            }
+            if(savedFolderStyle) {
+                document.querySelectorAll('.folder-card, .card-all').forEach(card => {
+                    card.className = card.className.replace(/rounded-(3xl|xl|none|full)/g, savedFolderStyle);
+                });
+            }
+
+            let eduBg = localStorage.getItem('oyes_edu_bg');
+            let govBg = localStorage.getItem('oyes_gov_bg');
+            let cinBg = localStorage.getItem('oyes_cin_bg');
+            let techBg = localStorage.getItem('oyes_tech_bg');
+
+            if(eduBg && document.getElementById('cardEdu')) document.getElementById('cardEdu').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${eduBg}') center/cover`;
+            if(govBg && document.getElementById('cardGov')) document.getElementById('cardGov').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${govBg}') center/cover`;
+            if(cinBg && document.getElementById('cardCin')) document.getElementById('cardCin').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${cinBg}') center/cover`;
+            if(techBg && document.getElementById('cardTech')) document.getElementById('cardTech').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${techBg}') center/cover`;
+
+            let iconEduImg = localStorage.getItem('oyes_icon_edu_img');
+            let iconGovImg = localStorage.getItem('oyes_icon_gov_img');
+            let iconCinImg = localStorage.getItem('oyes_icon_cin_img');
+            let iconTechImg = localStorage.getItem('oyes_icon_tech_img');
+
+            if(iconEduImg) document.getElementById('iconEdu').innerHTML = `<img src="${iconEduImg}" class="w-full h-full object-cover rounded-xl">`;
+            if(iconGovImg) document.getElementById('iconGov').innerHTML = `<img src="${iconGovImg}" class="w-full h-full object-cover rounded-xl">`;
+            if(iconCinImg) document.getElementById('iconCin').innerHTML = `<img src="${iconCinImg}" class="w-full h-full object-cover rounded-xl">`;
+            if(iconTechImg) document.getElementById('iconTech').innerHTML = `<img src="${iconTechImg}" class="w-full h-full object-cover rounded-xl">`;
+        }
+
+        function goBackHome() {
+            let homeView = document.getElementById('homeView');
+            let subView = document.getElementById('subFolderPageView');
+            let domainBox = document.getElementById('domainAiBox');
+            if(homeView) homeView.classList.remove('hidden');
+            if(subView) subView.classList.add('hidden');
+            if(domainBox) domainBox.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openSubFolders(folderName, subItems) {
+            currentActiveDomain = folderName;
+            let homeView = document.getElementById('homeView');
+            let subView = document.getElementById('subFolderPageView');
+            let domainBox = document.getElementById('domainAiBox');
+            let pageTitle = document.getElementById('pageTitle');
+            let domainTitle = document.getElementById('domainAiTitle');
+            let resBox = document.getElementById('aiFolderResponse');
+            let qInput = document.getElementById('aiFolderQuery');
+
+            if(homeView) homeView.classList.add('hidden');
+            if(subView) subView.classList.remove('hidden');
+            if(domainBox) domainBox.classList.remove('hidden');
+            if(pageTitle) pageTitle.innerText = folderName;
+            if(domainTitle) domainTitle.innerText = `${folderName} OYES AI Assistant`;
+            if(resBox) resBox.classList.add('hidden');
+            if(qInput) qInput.value = '';
+
+            const grid = document.getElementById('pageContentGrid');
+            if(!grid) return;
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
+            grid.innerHTML = '';
+
+            subItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `folder-card card-3d p-4 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                card.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2">📁</div>
+                    <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">In-App Resource Hub</p>
+                `;
+                card.onclick = () => {
+                    if(item.action === 'whatsapp_chat') {
+                        let num = prompt("Enter WhatsApp Number:", item.phone);
+                        if(num) window.open(`https://wa.me/${num.trim()}`, '_blank');
+                    } else if(item.url) {
+                        window.open(item.url, '_blank');
+                    }
+                };
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function openAllFoldersPage() {
+            let homeView = document.getElementById('homeView');
+            let subView = document.getElementById('subFolderPageView');
+            let domainBox = document.getElementById('domainAiBox');
+            let pageTitle = document.getElementById('pageTitle');
+
+            if(homeView) homeView.classList.add('hidden');
+            if(subView) subView.classList.remove('hidden');
+            if(domainBox) domainBox.classList.add('hidden');
+            if(pageTitle) pageTitle.innerText = 'All Other Services (46 Master Folders)';
+            
+            const grid = document.getElementById('pageContentGrid');
+            if(!grid) return;
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
+            grid.innerHTML = '';
+            
+            serviceNames.forEach((title, index) => {
+                const card = document.createElement('div');
+                let savedBg = localStorage.getItem(`master_bg_${index}`);
+                let savedIcon = localStorage.getItem(`master_icon_${index}`);
+                
+                if(savedBg) {
+                    card.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${savedBg}') center/cover`;
+                    card.className = `card-3d p-3.5 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                } else {
+                    card.className = `folder-card card-all p-3.5 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                }
+
+                let iconHtml = `<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2">📂</div>`;
+                if(savedIcon) {
+                    iconHtml = `<div class="w-9 h-9 rounded-xl overflow-hidden border border-teal-400 mb-2"><img src="${savedIcon}" class="w-full h-full object-cover"></div>`;
+                }
+
+                card.innerHTML = `
+                    ${iconHtml}
+                    <h3 class="font-bold text-[11px] text-slate-100">${title}</h3>
+                    <p class="text-[8px] text-teal-200/60 mt-0.5">OYES In-App Hub</p>
+                `;
+                card.onclick = () => {
+                    currentActiveDomain = title;
+                    openSubFolders(title, [
+                        {name: `${title} - Official Portal`, url: 'https://www.india.gov.in/'},
+                        {name: `${title} - Direct Support`, action: 'whatsapp_chat', phone: '919947198248'}
+                    ]);
+                };
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function installAppPrompt() { alert('📲 Tap Chrome menu (⋮) and select "Add to Home screen".'); }
+        function shareApp() { navigator.clipboard.writeText(window.location.href); alert('🔗 Link copied to clipboard!'); }
+    </script>
+</body>
+</html>
