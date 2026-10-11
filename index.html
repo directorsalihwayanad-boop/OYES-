@@ -1,627 +1,182 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="appTitleTag">OYES APP - Salih Wayanad Studio</title>
-    <!-- Google Fonts for Modern Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Orbitron:wght@500;700;900&family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-            background: radial-gradient(circle at top, #1e1b4b, #0f172a, #020617);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #f8fafc;
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-        }
-        .card-3d {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 12px 30px -10px rgba(14, 165, 233, 0.3), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-3d:hover {
-            border-color: rgba(6, 182, 212, 0.6);
-            box-shadow: 0 15px 35px -5px rgba(6, 182, 212, 0.5), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
-        }
-        .card-all {
-            background: linear-gradient(135deg, rgba(13, 148, 136, 0.4), rgba(15, 23, 42, 0.9));
-            border: 1px solid rgba(45, 212, 191, 0.5);
-            box-shadow: 0 12px 30px -10px rgba(45, 212, 191, 0.4);
-        }
-        /* WhatsApp Floating Button Style */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 85px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #20ba5a;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081226">
+<title>OYES Platform — Working Web Prototype v3</title>
+<style>
+:root{--bg:#07101f;--panel:#101d33;--panel2:#14243d;--text:#eef5ff;--muted:#9fb1cc;--accent:#35d6e8;--accent2:#7c6cff;--gold:#f2c66d;--line:#263955;--good:#39d98a;--danger:#ff6d82}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#18244c 0,#091326 45%,#050b16 100%);color:var(--text);font:14px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 13px;color:var(--text);background:#172944}button:hover{filter:brightness(1.15)}input,textarea,select{width:100%;border:1px solid var(--line);background:#081426;color:var(--text);padding:11px;border-radius:10px;outline:none}textarea{min-height:90px;resize:vertical}label{display:block;color:var(--muted);font-size:12px;margin:9px 0 5px}.topbar{position:sticky;top:0;z-index:5;background:#07101fee;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 16px}.topinner{max-width:1100px;margin:auto;display:flex;gap:12px;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#174b66,#433b8e);border:1px solid #4fbbd4;font-size:23px}.brand h1{margin:0;font-size:20px;letter-spacing:2px}.tagline{font-size:11px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:7px;align-items:center}.primary{background:linear-gradient(110deg,#087e9c,#5145be);border-color:#42cce1}.gold{border-color:#a8883f;color:#ffe2a0}.wrap{max-width:1100px;margin:0 auto;padding:18px 15px 90px}.hero{padding:20px;border:1px solid #34486a;border-radius:22px;background:linear-gradient(130deg,#132947ee,#1a1742cc);box-shadow:0 16px 38px #0003}.hero h2{margin:0 0 7px;font-size:23px}.hero p{color:#c2d2eb;margin:0;line-height:1.6}.searchrow{display:flex;gap:8px;margin:15px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.folder{padding:16px 10px;min-height:130px;border-radius:18px;background:linear-gradient(145deg,#142842e8,#0b1629);border:1px solid #2b405d;text-align:center;box-shadow:0 9px 20px #0002;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}.folder:hover{border-color:var(--accent);transform:translateY(-1px)}.foldericon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:#203a59;font-size:24px}.folder strong{font-size:14px}.folder small{color:var(--muted);font-size:11px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}.sectionhead h3{margin:0;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}.muted{color:var(--muted)}.pill{display:inline-block;padding:4px 8px;border:1px solid #31506e;background:#0b1c30;border-radius:999px;color:#a8eefa;font-size:10px}.panel{background:#0d192b;border:1px solid var(--line);border-radius:18px;padding:15px;margin:12px 0}.panel h3,.panel h4{margin:0 0 10px}.hidden{display:none!important}.back{margin-bottom:12px}.itemlist{display:grid;gap:8px}.item{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px;border:1px solid var(--line);background:#0b1628;border-radius:12px}.item a{color:#79e8f1;overflow-wrap:anywhere}.smallbtn{padding:6px 9px;font-size:11px}.danger{border-color:#77364b;color:#ff9ca8}.good{border-color:#286448;color:#86f3b6}.adminlayout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:13px}.navtabs{display:grid;gap:7px;align-content:start}.navtabs button{text-align:left}.navtabs button.active{border-color:var(--accent);background:#12364a;color:#a9f5ff}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.stat{background:#101f34;border:1px solid var(--line);border-radius:13px;padding:12px}.stat strong{font-size:21px;display:block}.stat small{color:var(--muted)}.notice{padding:11px;border:1px solid #65532c;background:#2a2415;border-radius:12px;color:#ffe6a6;font-size:12px;line-height:1.5}.footer{margin-top:28px;text-align:center;color:#8396b1;font-size:11px}.modal{position:fixed;inset:0;z-index:20;background:#020611d9;display:grid;place-items:center;padding:18px}.modalbox{width:min(390px,100%);background:#101d32;border:1px solid #35cde1;border-radius:20px;padding:20px;box-shadow:0 20px 60px #0008}.modalbox h3{margin-top:0}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#e9fbff;color:#092033;padding:10px 16px;border-radius:999px;z-index:30;box-shadow:0 8px 25px #0005;font-weight:700}.response{white-space:pre-wrap;line-height:1.6;color:#d9faff;background:#071426;padding:12px;border-radius:12px;border:1px solid #2a4a66}.empty{padding:20px;text-align:center;color:var(--muted)}@media(min-width:680px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:28px}.folder{min-height:145px}}@media(max-width:600px){.topinner{align-items:flex-start}.brand h1{font-size:17px}.tagline{max-width:185px}.actions{flex-wrap:wrap;justify-content:flex-end}.actions button{padding:8px;font-size:11px}.adminlayout{grid-template-columns:1fr}.navtabs{grid-template-columns:repeat(2,minmax(0,1fr))}.navtabs button{font-size:11px;padding:9px}.formgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat{padding:9px}.stat strong{font-size:17px}.hero h2{font-size:20px}}
+
+.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.featured-card{display:block;text-align:left;text-decoration:none;color:var(--text);background:linear-gradient(145deg,#172c4a,#101b31);border:1px solid #344967;border-radius:14px;padding:14px;min-width:0}.featured-card .bookicon{font-size:26px;display:block;margin-bottom:8px}.featured-card strong{display:block;font-size:14px}.featured-card small{display:block;color:var(--muted);margin-top:5px;line-height:1.4}.contact-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.contact-links a{color:#b8f3ff;text-decoration:none;border:1px solid #2d536e;background:#0c2136;border-radius:10px;padding:9px 11px;overflow-wrap:anywhere}.subheading{color:var(--muted);font-size:12px;line-height:1.5;margin-top:-2px}@media(max-width:520px){.featured-grid{grid-template-columns:1fr}.featured-card{display:flex;gap:12px;align-items:center}.featured-card .bookicon{margin:0;min-width:34px}.contact-links a{font-size:12px}}
+</style>
 </head>
-<body id="appBody" class="flex flex-col justify-between">
-
-    <!-- Header Section -->
-    <header class="p-3 text-center bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-lg">
-        <div class="flex justify-between items-center max-w-md mx-auto px-1 mb-1">
-            <div class="flex items-center gap-1.5">
-                <div class="flex items-center gap-1.5 select-none">
-                    <div id="headerLogoContainer" class="text-xl flex items-center justify-center">
-                        <span id="headerLogoIcon">🌟</span>
-                    </div>
-                    <h1 id="headerMainTitle" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-500">
-                        OYES APP
-                    </h1>
-                </div>
-            </div>
-            <div class="flex items-center gap-1.5">
-                <button type="button" onclick="requestAdminAccess()" id="settingsBtnText" class="bg-cyan-950 text-cyan-300 text-xs font-bold border border-cyan-500 rounded-xl px-2.5 py-1.5 shadow hover:bg-cyan-900 transition-all flex items-center gap-1">
-                    ⚙️ <span class="text-[10px]">Settings</span>
-                </button>
-                <select id="langSelector" onchange="changeAppLanguage(this.value)" class="bg-slate-900 text-cyan-300 text-[11px] font-bold border border-cyan-500/50 rounded-xl px-2 py-1.5 focus:outline-none">
-                    <option value="en">EN</option>
-                    <option value="ml">മലയാളം</option>
-                    <option value="ar">العربية</option>
-                    <option value="ta">தமிழ்</option>
-                    <option value="kn">ಕನ್ನಡ</option>
-                    <option value="hi">हिन्दी</option>
-                </select>
-            </div>
-        </div>
-        <p id="headerSubTitle" class="text-[10px] text-cyan-300/80 font-medium tracking-wide mt-0.5">"A World at Your Fingertips — Directed by Salih Wayanad"</p>
-    </header>
-
-    <!-- Persistent WhatsApp Floating Button -->
-    <a href="https://wa.me/919947198248?text=ഹലോ,%20സാലിഹ്%20വയനാട്%20സ്റ്റുഡിയോ%20ഒയെസ്%20ആപ്പുമായി%20ബന്ധപ്പെടാൻ%20വിളിച്ചതാണ്." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
-        💬
-    </a>
-
-    <!-- Admin Login Modal -->
-    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-cyan-500/60 p-5 rounded-3xl max-w-xs w-full shadow-2xl space-y-3">
-            <h3 class="text-sm font-bold text-cyan-300 text-center">🎬 Salih Wayanad Studio Login</h3>
-            <p class="text-[11px] text-slate-300 text-center">Director Secret Code Required:</p>
-            <input type="password" id="adminSecretInput" placeholder="Enter code (salih9947)..." class="w-full bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-cyan-600/50 text-xs focus:outline-none focus:border-cyan-400 text-center">
-            <div class="grid grid-cols-2 gap-2 pt-1">
-                <button type="button" onclick="closeAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 rounded-xl font-bold">Cancel</button>
-                <button type="button" onclick="verifyAdminCode()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs py-2 rounded-xl font-bold">Verify</button>
-            </div>
-        </div>
+<body>
+<header class="topbar"><div class="topinner">
+  <div class="brand"><div class="logo" id="brandIcon">🦅</div><div><h1 id="brandName">OYES</h1><div class="tagline" id="brandTagline">Connect people • Unite opportunities</div></div></div>
+  <div class="actions"><button id="languageBtn" onclick="cycleLanguage()">EN ▾</button><button class="primary" onclick="showLogin()">⚙ Admin</button></div>
+</div></header>
+<main class="wrap">
+<section id="homeView">
+  <div class="hero"><span class="pill">KERALA • 14 DISTRICTS</span><h2 id="heroTitle">Your world. Your community.</h2><p id="heroText">Discover learning, work, local services, cinema, technology and opportunities — together in one place.</p></div>
+  <div class="panel"><h3>🤖 OYES AI Assistant</h3><p class="muted">Ask a question or choose a topic. This demo opens a prepared local response; a live AI service needs a secure API connection.</p><div class="searchrow"><input id="globalQuestion" placeholder="Ask about OYES, jobs, services, learning…"><button class="primary" onclick="askDemoAI('globalQuestion','globalAnswer')">Ask</button></div><div id="globalAnswer" class="response hidden"></div></div>
+  <div class="panel" id="sacredLearningPanel">
+    <div class="sectionhead" style="margin-top:0"><h3>🌍 World of Sacred Learning</h3><span class="pill">Featured first</span></div>
+    <p class="subheading">Explore foundational texts and learning resources across traditions. External links need an internet connection.</p>
+    <div class="featured-grid">
+      <a class="featured-card" href="https://quran.com/" target="_blank" rel="noopener noreferrer"><span class="bookicon">☪️</span><span><strong>The Holy Quran</strong><small>Read and study the Quran</small></span></a>
+      <a class="featured-card" href="https://www.bible.com/" target="_blank" rel="noopener noreferrer"><span class="bookicon">✝️</span><span><strong>The Holy Bible</strong><small>Read and explore Bible passages</small></span></a>
+      <a class="featured-card" href="https://www.gitasupersite.iitk.ac.in/" target="_blank" rel="noopener noreferrer"><span class="bookicon">🕉️</span><span><strong>Bhagavad Gita</strong><small>Study translations and commentaries</small></span></a>
     </div>
-
-    <!-- Main Dashboard View -->
-    <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        
-        <div class="flex justify-between items-center px-1">
-            <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
-        </div>
-
-        <!-- HOME PAGE UNIVERSAL AI Hub (Fixed & Optimized) -->
-        <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                    <span class="text-base">🤖✨</span>
-                    <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wide">AI Assistant Hub (Gemini & ChatGPT)</h4>
-                </div>
-                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Gemini Powered</span>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="globalAiQuery" placeholder="Ask AI / Gemini about anything or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                <button type="button" onclick="triggerUniversalAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
-            </div>
-            <div id="globalAiResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
-        </div>
-
-        <div class="flex justify-between items-center px-1">
-            <h2 id="homeSectionTitle" class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Home Main Folders
-            </h2>
-        </div>
-
-        <!-- Folder Grid Container -->
-        <div id="folderGrid" class="grid grid-cols-2 gap-3.5">
-            <div id="cardEdu" onclick="openSubFolders('Education', [
-                {name: 'Quran Online Reading (Free)', url: 'https://quran.com/'},
-                {name: 'Bible Digital Link (Free)', url: 'https://www.biblegateway.com/'},
-                {name: 'Bhagavad Gita & Ramayana (Free)', url: 'https://www.holy-bhagavad-gita.org/'},
-                {name: 'Free Online Courses', url: 'https://swayam.gov.in/'},
-                {name: 'Digital Library & E-Books', url: 'https://ndl.iitkgp.ac.in/'},
-                {name: 'Education Scholarship Links', url: 'https://scholarships.gov.in/'}
-            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="iconEdu" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden">📖</div>
-                <h3 class="font-bold text-sm text-slate-100 folder-edu">Education</h3>
-                <p class="text-[10px] text-emerald-200/60 mt-1 folder-edu-sub">Books & Learning</p>
-            </div>
-
-            <div id="cardGov" onclick="openSubFolders('Government Services', [
-                {name: 'Police Station Links', url: 'https://cybercrime.gov.in/'},
-                {name: 'Government Hospital Portal', url: 'https://arogyakeralam.gov.in/'},
-                {name: 'Emergency Helplines', url: 'https://www.india.gov.in/'},
-                {name: 'Public Services & Certificates', url: 'https://edistrict.kerala.gov.in/'},
-                {name: 'Ration Card & Welfare Portals', url: 'https://civilsupplieskerala.gov.in/'}
-            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="iconGov" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden">🏛️</div>
-                <h3 class="font-bold text-sm text-slate-100 folder-gov">Government</h3>
-                <p class="text-[10px] text-cyan-200/60 mt-1 folder-gov-sub">Services & Portals</p>
-            </div>
-
-            <div id="cardCin" onclick="openSubFolders('Cinema & Music', [
-                {name: 'Suno AI & Udio (Free Tiers)', url: 'https://suno.com/'},
-                {name: 'Free Music Library', url: 'https://freemusicarchive.org/'},
-                {name: 'Video Editing Tools (Free)', url: 'https://www.capcut.com/'},
-                {name: 'Promotional Poster Maker', url: 'https://www.canva.com/'},
-                {name: 'Shortfilm & Dubbing Platform', url: 'https://www.youtube.com/'}
-            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="iconCin" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-600/20 border border-fuchsia-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden">🎬</div>
-                <h3 class="font-bold text-sm text-slate-100 folder-cin">Cinema & Music</h3>
-                <p class="text-[10px] text-fuchsia-200/60 mt-1 folder-cin-sub">Free AI Tools</p>
-            </div>
-
-            <div id="cardTech" onclick="openSubFolders('Technology & AI Hub', [
-                {name: 'ChatGPT (OpenAI) - Direct Chat & Design', url: 'https://chatgpt.com/'},
-                {name: 'Google Gemini AI - Code & Design Expert', url: 'https://gemini.google.com/'},
-                {name: 'Claude AI (Anthropic)', url: 'https://claude.ai/'},
-                {name: 'GitHub (Development & Hosting)', url: 'https://github.com/'},
-                {name: 'Vercel (Cloud Deployment)', url: 'https://vercel.com/'}
-            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="iconTech" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden">🤖</div>
-                <h3 class="font-bold text-sm text-slate-100 folder-tech">Technology</h3>
-                <p class="text-[10px] text-indigo-200/60 mt-1 folder-tech-sub">ChatGPT, Gemini & AI</p>
-            </div>
-
-            <div id="cardSales" onclick="openSubFolders('Sales Marketplace', [
-                {name: 'Livestock (Cows, Goats) - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
-                {name: 'Vehicles & Machinery - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
-                {name: 'Agricultural Products - Trusted Trade', action: 'whatsapp_chat', phone: '919947198248'},
-                {name: 'General Marketplace Exchange', action: 'whatsapp_chat', phone: '919947198248'}
-            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="iconSales" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden">🛒</div>
-                <h3 class="font-bold text-sm text-slate-100 folder-sales">Sales</h3>
-                <p class="text-[10px] text-amber-200/60 mt-1 folder-sales-sub">10% Admin Fee & Trade</p>
-            </div>
-
-            <div id="cardWa" onclick="openSubFolders('WhatsApp & Call Hub', [
-                {name: 'Chat with Director Salih', action: 'whatsapp_chat', phone: '919947198248'},
-                {name: 'Chat with OYES Saleem', action: 'whatsapp_chat', phone: '919633111000'},
-                {name: 'Direct Audio Inquiry', action: 'whatsapp_chat', phone: '919947198248'},
-                {name: 'Support & Trade Helpline', action: 'whatsapp_chat', phone: '919633111000'}
-            ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                <div id="iconWa" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden animate-pulse">💬📞</div>
-                <h3 class="font-bold text-sm text-emerald-300 folder-wa">WhatsApp & Call</h3>
-                <p class="text-[10px] text-emerald-200/70 mt-1 folder-wa-sub">Direct Chat & Hub</p>
-            </div>
-
-            <!-- All Other Services (46 Master Folders) Button -->
-            <div onclick="openAllFoldersPage()" class="card-all p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group col-span-2">
-                <div id="iconAll" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/35 to-emerald-600/35 border border-teal-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.4)]">📂</div>
-                <h3 class="font-bold text-sm folder-all text-teal-300">All Other Services</h3>
-                <p class="text-[10px] folder-all-sub text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
-            </div>
-        </div>
-
-        <!-- Dynamic User Created Folders Container -->
-        <div id="userCustomFolderGrid" class="grid grid-cols-2 gap-3.5 pt-2"></div>
-    </main>
-
-    <!-- Sub-Folders & Settings View -->
-    <main id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/40 shadow-xl">
-            <button type="button" onclick="goBackHome()" id="backBtnText" class="text-cyan-300 hover:text-white text-xs bg-cyan-950/80 border border-cyan-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
-                ← Back to Home
-            </button>
-            <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
-        </div>
-
-        <!-- DOMAIN AI Assistant (Enhanced Gemini Response Handler) -->
-        <div id="domainAiBox" class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                    <span class="text-base">🎯✨</span>
-                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Domain AI Assistant</h4>
-                </div>
-                <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Gemini Powered</span>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask AI specifically or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                <button type="button" onclick="askOyesAI('aiFolderQuery', 'aiFolderResponse')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
-            </div>
-            <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
-        </div>
-
-        <div id="pageContentGrid" class="grid grid-cols-2 gap-3.5 pb-6"></div>
-    </main>
-
-    <!-- Footer Section with Scrolling Ticker Text -->
-    <footer class="p-3 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2">
-        <div class="overflow-hidden whitespace-nowrap bg-slate-900/80 border border-cyan-500/30 rounded-xl py-1.5 px-2">
-            <marquee behavior="scroll" direction="left" scrollamount="4" class="text-cyan-300 font-semibold text-[11px]">
-                🌟 Welcome to OYES APP — A World at Your Fingertips — Directed by Salih Wayanad | Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000) 🌟
-            </marquee>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2 pt-1">
-            <button type="button" onclick="installAppPrompt()" id="installBtnText" class="py-2.5 px-3 bg-gradient-to-r from-cyan-600 to-indigo-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">📲 Install App</button>
-            <button type="button" onclick="shareApp()" id="shareBtnText" class="py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">🔗 Share App</button>
-        </div>
-        <p id="footerAdminText" class="font-medium text-slate-300">Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)</p>
-        <p class="mt-0.5 text-cyan-400 font-semibold">© 2026 OYES APP. Director Salih Wayanad.</p>
-    </footer>
-
-    <!-- JavaScript Controls & AI Response Handlers -->
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('selectstart', event => event.preventDefault());
-
-        let currentActiveDomain = "OYES Home";
-
-        const serviceNames = [
-            "Digital Services Hub", "Public Utility Portal", "E-Governance Link", "Citizen Support Portal",
-            "Online Registration Hub", "Welfare Schemes Portal", "Skill Development Links", "Employment Exchange Portal",
-            "Legal Aid Services", "Health Care Portal", "Agriculture & Farming", "Transport & Travel Hub",
-            "Banking & Financial Services", "Postal Services Portal", "Consumer Rights Forum", "Cyber Security Portal",
-            "Disaster Management Hub", "Environment & Forestry", "Energy & Power Services", "Water Supply Portal",
-            "Housing & Urban Development", "Rural Development Hub", "Tourism & Heritage", "Sports & Youth Affairs",
-            "Food & Civil Supplies", "Cooperative Sector Hub", "Industries & Commerce", "MSME Support Portal",
-            "Labor Welfare Services", "Taxation & Revenue Hub", "Panchayat Raj Portal", "Local Administration",
-            "Social Welfare Portal", "Women & Child Development", "Tribal Welfare Hub", "Minority Affairs Portal",
-            "Statistics & Data Hub", "Public Grievances Portal", "RTI Information Hub", "Voter Services Portal",
-            "Aadhaar Services Link", "PAN & Tax Services", "Passport Seva Hub", "Insurance Schemes Portal",
-            "Pension Services Hub", "General Utility Portal"
-        ];
-
-        function startVoiceRecognition(targetInputId) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("Speech recognition is not supported in this browser. Please use Google Chrome.");
-                return;
-            }
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'ml-IN'; 
-            recognition.interimResults = true;
-            recognition.maxAlternatives = 1;
-
-            let inputField = document.getElementById(targetInputId);
-            if(inputField) inputField.placeholder = "🎙️ Listening... Speak now...";
-
-            recognition.onresult = function(event) {
-                let speechResult = event.results[0][0].transcript;
-                if (inputField) inputField.value = speechResult;
-            };
-
-            recognition.onerror = function(event) {
-                alert("Voice recognition error: " + event.error);
-                if(inputField) inputField.placeholder = "Ask AI or tap mic...";
-            };
-
-            recognition.onend = function() {
-                if(inputField) inputField.placeholder = "Ask AI or tap mic...";
-            };
-
-            recognition.start();
-        }
-
-        // Optimized AI Responder using Gemini / Direct Link Integration
-        function triggerUniversalAI() {
-            let queryInput = document.getElementById('globalAiQuery');
-            let resBox = document.getElementById('globalAiResponse');
-            if(!queryInput || !queryInput.value.trim()) {
-                alert("ദയവായി ചോദ്യം ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ മൈക്രോഫോൺ വഴി സംസാരിക്കുക.");
-                return;
-            }
-            let userQueryText = queryInput.value.trim();
-            let encodedQuery = encodeURIComponent(userQueryText);
-            
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `✨ <b>Google Gemini & AI Hub:</b><br>"${userQueryText}" എന്ന ചോദ്യത്തിന് താഴെ നൽകിയിരിക്കുന്ന എഐ ടൂളുകൾ വഴി കൃത്യമായ മറുപടി നേടാം:<br>
-            <a href="https://gemini.google.com/app?q=${encodedQuery}" target="_blank" class="text-cyan-300 underline font-bold mt-1.5 block">🤖 Google Gemini AI വഴി ചോദിക്കുക ➔</a>
-            <a href="https://chatgpt.com/?q=${encodedQuery}" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">💬 ChatGPT വഴി ചോദിക്കുക (OpenAI) ➔</a>
-            <a href="https://wa.me/919947198248?text=${encodedQuery}" target="_blank" class="text-emerald-300 underline font-bold mt-1 block">💬 ഡയറക്ടർ സാലിഹ് വയനാടുമായി വാട്ട്‌സ്ആപ്പിൽ സംസാരിക്കുക ➔</a>`;
-        }
-
-        function askOyesAI(inputId, responseId) {
-            let queryInput = document.getElementById(inputId);
-            let resBox = document.getElementById(responseId);
-            if(!queryInput || !queryInput.value.trim()) {
-                alert("ദയവായി ചോദ്യം നൽകുക.");
-                return;
-            }
-            let userQueryText = queryInput.value.trim();
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `🤖 <b>Gemini AI വിശകലനം ചെയ്യുന്നു...</b><br>ചോദ്യം: "<i>${userQueryText}</i>"`;
-
-            setTimeout(() => {
-                let reply = `✨ <b>${currentActiveDomain} - Gemini AI നിർദ്ദേശം:</b><br>"<b>${userQueryText}</b>" സംബന്ധിച്ച് ഡയറക്ടർ സാലിഹ് വയനാടിന്റെ മേൽനോട്ടത്തിൽ ഒയെസ് ആപ്പ് (OYES APP) വഴി ലഭ്യമായ സേവനങ്ങൾ പ്രയോജനപ്പെടുത്താവുന്നതാണ്. കൂടുതൽ വിവരങ്ങൾക്ക് താഴെയുള്ള വാട്ട്‌സ്ആപ്പ് ലിങ്ക് വഴി ബന്ധപ്പെടാം.<br>
-                <a href="https://wa.me/919947198248?text=ഹലോ,%20${encodeURIComponent(currentActiveDomain)}%20കുറിച്ച്%20അറിയാൻ%20വിളിച്ചതാണ്." target="_blank" class="text-emerald-300 underline font-bold mt-1 block">💬 WhatsApp വഴി ബന്ധപ്പെടുക ➔</a>`;
-                resBox.innerHTML = reply;
-            }, 500);
-        }
-
-        const translations = {
-            en: { 
-                subtitle: '"A World at Your Fingertips — Directed by Salih Wayanad"', 
-                settings: 'Settings', 
-                homeTitle: 'Home Main Folders', 
-                eduTitle: 'Education', eduSub: 'Books & Learning', 
-                govTitle: 'Government', govSub: 'Services & Portals', 
-                cinTitle: 'Cinema & Music', cinSub: 'Free AI Tools', 
-                techTitle: 'Technology', techSub: 'ChatGPT, Gemini & AI', 
-                salesTitle: 'Sales', salesSub: '10% Admin Fee & Trade',
-                waTitle: 'WhatsApp & Call', waSub: 'Direct Chat & Hub',
-                allTitle: 'All Other Services', allSub: 'Remaining 46 Master Folders',
-                backBtn: '← Back to Home' 
-            },
-            ml: { 
-                subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം — സംവിധാനം: സാലിഹ് വയനാട്"', 
-                settings: 'ക്രമീകരണങ്ങൾ', 
-                homeTitle: 'പ്രധാന ഫോൾഡറുകൾ', 
-                eduTitle: 'വിദ്യാഭ്യാസം', eduSub: 'പുസ്തകങ്ങളും പഠനവും', 
-                govTitle: 'സർക്കാർ', govSub: 'സേവനങ്ങളും പോർട്ടലുകളും', 
-                cinTitle: 'സിനിമ & സംഗീതം', cinSub: 'സൗജന്യ AI ടൂളുകൾ', 
-                techTitle: 'സാങ്കേതികവിദ്യ', techSub: 'ChatGPT & Gemini ടൂളുകൾ', 
-                salesTitle: 'വ്യാപാരം (Sales)', salesSub: '10% അഡ്മിൻ ഫീസും കച്ചവടവും',
-                waTitle: 'വാട്സ്ആപ്പ് & കോൾ', waSub: 'നേരിട്ടുള്ള ചാറ്റ് ഹബ്ബ്',
-                allTitle: 'മറ്റ് സേവനങ്ങൾ', allSub: 'ബാക്കി 46 മാസ്റ്റർ ഫോൾഡറുകൾ',
-                backBtn: '← ഹോമിലേക്ക് തിരികെ' 
-            },
-            ar: { 
-                subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', 
-                settings: 'الإعدادات', 
-                homeTitle: 'المجلدات الرئيسية', 
-                eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', 
-                govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', 
-                cinTitle: 'السينما والموسيقى', cinSub: 'أدوات الذكاء الاصطناعي', 
-                techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', 
-                salesTitle: 'المبيعات', salesSub: 'رسوم الإدارة والتجارة',
-                waTitle: 'واتساب والمكالمات', waSub: 'مركز المحادثة المباشرة',
-                allTitle: 'جميع الخدمات الأخرى', allSub: 'المجلدات الـ 46 المتبقية',
-                backBtn: '← العودة للرئيسية' 
-            },
-            hi: { 
-                subtitle: '"आपकी उंगलियों पर दुनिया — निर्देशक: सालेह വയനാട്"', 
-                settings: 'सेटिंग्स', 
-                homeTitle: 'मुख्य फ़ोल्डर', 
-                eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', 
-                govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', 
-                cinTitle: 'सिनेमा और संगीत', cinTitle: 'मुफ्त एआई टूल', 
-                techTitle: 'प्रौद्योगिकी', techSub: 'ChatGPT और Gemini', 
-                salesTitle: 'बिक्री बाज़ार', salesSub: '10% एडमिन शुल्क और व्यापार',
-                waTitle: 'व्हाट्सएप और कॉल', waSub: 'सीधी चैट और हब',
-                allTitle: 'अन्य सभी सेवाएं', allSub: 'शेष 46 मास्टर फ़ोल्डर',
-                backBtn: '← होम पर वापस जाएं' 
-            },
-            ta: { 
-                subtitle: '"உங்கள் விரல் நுனியில் உலகம் — இயக்கம்: சாலிஹ் வயநாடு"', 
-                settings: 'அமைப்புகள்', 
-                homeTitle: 'முதன்மை கோப்புறைகள்', 
-                eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', 
-                govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', 
-                cinTitle: 'சினிமா & இசை', cinTitle: 'இலவச AI கருவிகள்', 
-                techTitle: 'தொழில்நுட்பம்', techSub: 'ChatGPT & Gemini கருவிகள்', 
-                salesTitle: 'விற்பனை சந்தை', salesSub: '10% நிர்வாக கட்டணம் & வர்த்தகம்',
-                waTitle: 'வாட்ஸ்அப் & அழைப்பு', waSub: 'நேரடி அரட்டை மையம்',
-                allTitle: 'மற்ற அனைத்து சேவைகள்', allSub: 'மீதமுள்ள 46 கோப்புறைகள்',
-                backBtn: '← முகப்புக்குச் செல்ல' 
-            },
-            kn: { 
-                subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', 
-                settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', 
-                homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', 
-                eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', 
-                govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', 
-                cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', 
-                techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', 
-                salesTitle: 'ಮಾರಾಟ ಮಾರುಕಟ್ಟೆ', salesSub: '10% ನಿರ್ವಹಣಾ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
-                waTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ', waSub: 'ನೇರ ಚಾಟ್ ಕೇಂದ್ರ',
-                allTitle: 'ಇತರ ಎಲ್ಲಾ ಸೇವೆಗಳು', allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
-                backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' 
-            }
-        };
-
-        window.onload = function() {
-            let savedLang = localStorage.getItem('oyes_lang') || 'en';
-            let langSelect = document.getElementById('langSelector');
-            if(langSelect) langSelect.value = savedLang;
-            changeAppLanguage(savedLang);
-        };
-
-        function changeAppLanguage(lang) {
-            localStorage.setItem('oyes_lang', lang);
-            let t = translations[lang] || translations['en'];
-            if(lang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
-            else document.documentElement.setAttribute('dir', 'ltr');
-
-            let subTitleElem = document.getElementById('headerSubTitle');
-            let homeSecElem = document.getElementById('homeSectionTitle');
-            let backBtnElem = document.getElementById('backBtnText');
-
-            if(subTitleElem) subTitleElem.innerText = t.subtitle;
-            if(homeSecElem) homeSecElem.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.homeTitle}`;
-            if(backBtnElem) backBtnElem.innerText = t.backBtn;
-
-            document.querySelectorAll('.folder-edu').forEach(e => e.innerText = t.eduTitle);
-            document.querySelectorAll('.folder-edu-sub').forEach(e => e.innerText = t.eduSub);
-            document.querySelectorAll('.folder-gov').forEach(e => e.innerText = t.govTitle);
-            document.querySelectorAll('.folder-gov-sub').forEach(e => e.innerText = t.govSub);
-            document.querySelectorAll('.folder-cin').forEach(e => e.innerText = t.cinTitle);
-            document.querySelectorAll('.folder-cin-sub').forEach(e => e.innerText = t.cinSub);
-            document.querySelectorAll('.folder-tech').forEach(e => e.innerText = t.techTitle);
-            document.querySelectorAll('.folder-tech-sub').forEach(e => e.innerText = t.techSub);
-            document.querySelectorAll('.folder-sales').forEach(e => e.innerText = t.salesTitle);
-            document.querySelectorAll('.folder-sales-sub').forEach(e => e.innerText = t.salesSub);
-            document.querySelectorAll('.folder-wa').forEach(e => e.innerText = t.waTitle);
-            document.querySelectorAll('.folder-wa-sub').forEach(e => e.innerText = t.waSub);
-            document.querySelectorAll('.folder-all').forEach(e => e.innerText = t.allTitle);
-            document.querySelectorAll('.folder-all-sub').forEach(e => e.innerText = t.allSub);
-        }
-
-        function requestAdminAccess() {
-            let modal = document.getElementById('adminLoginModal');
-            let input = document.getElementById('adminSecretInput');
-            if(modal) modal.classList.remove('hidden');
-            if(input) { input.value = ''; input.focus(); }
-        }
-
-        function closeAdminModal() {
-            let modal = document.getElementById('adminLoginModal');
-            if(modal) modal.classList.add('hidden');
-        }
-
-        function verifyAdminCode() {
-            let input = document.getElementById('adminSecretInput');
-            if(!input) return;
-            let enteredValue = input.value.trim();
-
-            if (enteredValue === "salih9947") {
-                closeAdminModal();
-                alert("✅ Salih Wayanad Studio Secure Access Verified!");
-                openAdminSettingsDashboard();
-            } else {
-                alert("❌ Access Denied! Please enter the correct Director code (salih9947).");
-            }
-        }
-
-        function openAdminSettingsDashboard() {
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let domainBox = document.getElementById('domainAiBox');
-            let pageTitle = document.getElementById('pageTitle');
-
-            if(homeView) homeView.classList.add('hidden');
-            if(subView) subView.classList.remove('hidden');
-            if(domainBox) domainBox.classList.remove('hidden');
-            if(pageTitle) pageTitle.innerText = '🎬 Salih Wayanad Studio & Settings';
-
-            const grid = document.getElementById('pageContentGrid');
-            if(!grid) return;
-            grid.className = "grid grid-cols-2 gap-3.5 col-span-2 pb-6 pt-2";
-            
-            grid.innerHTML = `
-                <div class="card-3d p-4 rounded-2xl space-y-3 text-xs col-span-2 border border-cyan-500/60 bg-gradient-to-br from-slate-900 to-indigo-950/50">
-                    <h4 class="text-cyan-300 font-bold text-sm">📁 Salih Wayanad Studio Dashboard</h4>
-                    <p class="text-slate-300">All Master Folders & Settings are fully active and protected.</p>
-                </div>
-            `;
-        }
-
-        function openSubFolders(domainName, items) {
-            currentActiveDomain = domainName;
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let pageTitle = document.getElementById('pageTitle');
-            let domainAiTitle = document.getElementById('domainAiTitle');
-
-            if(homeView) homeView.classList.add('hidden');
-            if(subView) subView.classList.remove('hidden');
-            if(pageTitle) pageTitle.innerText = domainName;
-            if(domainAiTitle) domainAiTitle.innerText = domainName + " - Gemini AI";
-
-            const grid = document.getElementById('pageContentGrid');
-            if(!grid) return;
-            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
-
-            let html = '';
-            items.forEach(item => {
-                if(item.action === 'whatsapp_chat') {
-                    html += `
-                        <a href="https://wa.me/${item.phone}?text=ഹലോ,%20സാലിഹ്%20വയനാട്%20സ്റ്റുഡിയോ%20ഒയെസ്%20ആപ്പിൽ%20നിന്ന്%20(${encodeURIComponent(item.name)})%20ബന്ധപ്പെടുന്നു." target="_blank" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-500/40">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">💬</div>
-                            <h4 class="font-bold text-xs text-emerald-300">${item.name}</h4>
-                            <span class="text-[9px] text-emerald-200/70 mt-1">WhatsApp Chat ➔</span>
-                        </a>
-                    `;
-                } else {
-                    html += `
-                        <a href="${item.url}" target="_blank" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group">
-                            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🔗</div>
-                            <h4 class="font-bold text-xs text-slate-100">${item.name}</h4>
-                            <span class="text-[9px] text-cyan-300/70 mt-1">Open Link ➔</span>
-                        </a>
-                    `;
-                }
-            });
-            grid.innerHTML = html;
-        }
-
-        function openAllFoldersPage() {
-            currentActiveDomain = "All Master Services";
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let pageTitle = document.getElementById('pageTitle');
-            if(homeView) homeView.classList.add('hidden');
-            if(subView) subView.classList.remove('hidden');
-            if(pageTitle) pageTitle.innerText = "All Other Services (46 Master Folders)";
-
-            const grid = document.getElementById('pageContentGrid');
-            if(!grid) return;
-            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
-
-            let html = '';
-            serviceNames.forEach((sName, index) => {
-                html += `
-                    <div onclick="openSubFolders('${sName}', [
-                        {name: '${sName} Portal 1', url: 'https://www.india.gov.in/'},
-                        {name: '${sName} Helpdesk', action: 'whatsapp_chat', phone: '919947198248'}
-                    ])" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                        <div class="w-9 h-9 rounded-xl bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-lg mb-1.5 group-hover:scale-110 transition-transform">📂</div>
-                        <h4 class="font-bold text-xs text-teal-200">${sName}</h4>
-                        <span class="text-[9px] text-teal-300/60 mt-0.5">Explore Folder</span>
-                    </div>
-                `;
-            });
-            grid.innerHTML = html;
-        }
-
-        function goBackHome() {
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            if(homeView) homeView.classList.remove('hidden');
-            if(subView) subView.classList.add('hidden');
-        }
-
-        function installAppPrompt() {
-            alert("📲 To install OYES APP: Tap your browser menu (3 dots) and select 'Add to Home Screen' or 'Install App'.");
-        }
-
-        function shareApp() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'OYES APP - Salih Wayanad Studio',
-                    text: 'A World at Your Fingertips — Directed by Salih Wayanad',
-                    url: window.location.href,
-                }).catch(() => {});
-            } else {
-                alert("🔗 App Link Copied! Share with your friends and customers.");
-            }
-        }
-    </script>
+    <p class="subheading" style="margin-bottom:0">More resources can be added for Buddhist texts and other religious and cultural traditions.</p>
+  </div>
+  <div class="panel" id="helpDeskQuickPanel">
+    <div class="sectionhead" style="margin-top:0"><h3>🎧 OYES Help Desk</h3><span class="pill">Kerala • 14 districts</span></div>
+    <p class="subheading">Contact the OYES support desk. For immediate danger or medical emergencies, contact the appropriate emergency service.</p>
+    <div class="contact-links"><a href="tel:+919947198248">📞 +91 99471 98248</a><a href="tel:+919142100100">📞 +91 91421 00100</a><a href="mailto:directorsalihwayanad@gmail.com">✉️ Email OYES</a></div>
+  </div>
+  <div class="sectionhead"><h3>Explore OYES</h3><span id="folderCount" class="pill">46 master folders</span></div>
+  <div id="folderGrid" class="grid"></div>
+</section>
+<section id="folderView" class="hidden"><button class="back" onclick="goHome()">← Back to OYES</button><div class="hero"><span class="pill" id="folderPill">OYES DIRECTORY</span><h2 id="folderTitle">Folder</h2><p id="folderDescription">Explore this category.</p></div><div class="panel"><h3 id="folderAiTitle">🎯 Topic Assistant</h3><div class="searchrow"><input id="folderQuestion" placeholder="Ask about this topic…"><button class="primary" onclick="askFolderAI()">Ask</button></div><div id="folderAnswer" class="response hidden"></div></div><div class="sectionhead"><h3>Useful starting points</h3></div><div id="folderLinks" class="itemlist"></div></section>
+<section id="adminView" class="hidden">
+  <button class="back" onclick="goHome()">← Public home</button>
+  <div class="hero"><span class="pill">DIRECTOR CONTROL CENTER</span><h2>OYES Admin Panel</h2><p>Manage the demo app from one place. Changes are saved in this browser on this device.</p></div>
+  <div class="stats" style="margin-top:12px"><div class="stat"><strong id="statFolders">46</strong><small>Folders</small></div><div class="stat"><strong id="statNotes">0</strong><small>Admin notes</small></div><div class="stat"><strong id="statNotices">0</strong><small>Notices</small></div></div>
+  <div class="notice" style="margin:12px 0">Important: this is a front-end starter. A passcode stored in HTML is not secure authentication. Real multi-admin access, shared data, user accounts and live AI require a backend/service connection.</div>
+  <div class="adminlayout"><nav class="navtabs" id="adminTabs">
+    <button class="active" data-tab="overview" onclick="showTab('overview',this)">🏠 Overview</button>
+    <button data-tab="branding" onclick="showTab('branding',this)">🎨 Branding & Layout</button>
+    <button data-tab="folders" onclick="showTab('folders',this)">📂 Folder Manager</button>
+    <button data-tab="people" onclick="showTab('people',this)">👥 Admins & Members</button>
+    <button data-tab="ai" onclick="showTab('ai',this)">🤖 OYES AI Settings</button>
+    <button data-tab="services" onclick="showTab('services',this)">💼 Jobs & Services</button>
+    <button data-tab="notices" onclick="showTab('notices',this)">📢 Notices & Reports</button>
+    <button data-tab="notes" onclick="showTab('notes',this)">📝 Daily Notes</button>
+    <button data-tab="backup" onclick="showTab('backup',this)">💾 Backup & Restore</button>
+  </nav><div id="adminContent"></div></div>
+</section>
+<div class="footer">OYES • “Accept change • Create the future”<br>Demo data stays in this browser unless exported.</div>
+</main>
+<div id="loginModal" class="modal hidden"><div class="modalbox"><h3>🔐 Director Admin Login</h3><p class="muted">Enter the local demo passcode.</p><label>Passcode</label><input id="passcode" type="password" placeholder="Enter passcode" autocomplete="current-password"><div class="searchrow"><button onclick="hideLogin()">Cancel</button><button class="primary" onclick="login()">Unlock Admin</button></div><p class="muted" style="font-size:11px">Demo passcode: <b>OYES2026</b> (change it in Admins & Members). Do not use this demo for real security.</p></div></div>
+<div id="toast" class="toast hidden"></div>
+<script>
+const DEFAULT_FOLDERS = [
+["Education & Sacred Learning","📚","Books, sacred texts, courses and scholarships"],
+["Government Services","🏛️","Public services, certificates and welfare portals"],
+["Cinema & Film Production","🎬","Actors, crew, producers, auditions and production"],
+["Technology & AI","🤖","AI tools, coding, web and digital skills"],
+["Sales Marketplace","🛒","Products, agriculture, vehicles and local trade"],
+["Jobs & Vacancies","💼","Job openings, hiring and work opportunities"],
+["Workers & Professionals","🧰","Find skilled and general workers"],
+["Home & Local Services","🏠","Plumbing, wiring, cleaning and home maintenance"],
+["Accommodation & Rentals","🛏️","Family stays, rooms, rentals and accommodation"],
+["Real Estate","🏡","Property listings, land and buildings"],
+["Health & Hospitals","🏥","Health information and hospital directories"],
+["Emergency & Late-Night Help","🆘","Emergency contacts and urgent assistance"],
+["Transportation","🚌","Bus information, travel and local transport"],
+["Charity & Community Help","🤝","Community support, donations and volunteering"],
+["Help Desk & Support","🎧","OYES support and assistance"],
+["Education & Scholarships","🎓","Scholarships, admissions and learning opportunities"],
+["Digital Library","📖","Books, reference and public learning resources"],
+["Religious & Cultural Learning","🕊️","Quran, Bible, Gita and other learning resources"],
+["Agriculture & Farming","🌱","Farm services, crops, livestock and equipment"],
+["Livestock & Animal Care","🐄","Animal trade, care and farm information"],
+["Vehicles & Machinery","🚜","Vehicles, tools, equipment and machinery"],
+["Food & Catering","🍲","Food businesses, catering and local providers"],
+["Business Directory","🏪","Local businesses, shops and service providers"],
+["Friendship & Community","🫶","Connect with people and communities"],
+["Business Follow","➕","Follow business updates and announcements"],
+["Entertainment & Events","🎭","Events, shows and entertainment"],
+["Music & Audio","🎵","Music resources, audio and creative work"],
+["Media & News","📰","News, media and community updates"],
+["Photography & Video","📸","Photographers, videographers and production"],
+["Design & Advertising","🖌️","Posters, branding, promotion and creative services"],
+["Sports & Fitness","⚽","Sports, fitness and local activities"],
+["Travel & Tourism","🧭","Tourism, destinations and travel providers"],
+["Legal Information","⚖️","Legal awareness and public legal resources"],
+["Finance & Business Learning","📊","Business education and financial literacy"],
+["Women & Family Support","👨‍👩‍👧","Family services and community resources"],
+["Senior Citizen Support","🧓","Support and services for older people"],
+["Accessibility & Inclusion","♿","Accessible services and inclusive support"],
+["Environment & Clean-up","🌿","Waste, cleaning, conservation and green work"],
+["Repairs & Maintenance","🔧","Appliance, electrical and repair services"],
+["Beauty & Personal Care","💇","Beauty, wellness and personal care providers"],
+["Education & Training Jobs","🧑‍🏫","Tutoring, trainers and educational work"],
+["Construction & Labour","🧱","Construction teams, helpers and labour"],
+["Events & Wedding Services","💍","Event planning, weddings and related services"],
+["Public Utilities","💡","Public utility information and useful contacts"],
+["Lost & Found / Community Alerts","📍","Community notices and lost-and-found items"],
+["OYES Updates & Announcements","🔔","Official platform updates and notices"]
+];
+const DEFAULT_LINKS = {
+"Education & Sacred Learning":[["Quran — online reading","https://quran.com/"],["Bible Gateway","https://www.biblegateway.com/"],["Bhagavad Gita","https://www.holy-bhagavad-gita.org/"],["SWAYAM courses","https://swayam.gov.in/"],["National Digital Library of India","https://ndl.iitkgp.ac.in/"],["National Scholarship Portal","https://scholarships.gov.in/"]],
+"Government Services":[["Kerala e-District","https://edistrict.kerala.gov.in/"],["Kerala Civil Supplies","https://civilsupplieskerala.gov.in/"],["National Portal of India","https://www.india.gov.in/"],["National Cyber Crime Portal","https://cybercrime.gov.in/"]],
+"Cinema & Film Production":[["YouTube","https://www.youtube.com/"],["Canva — poster design","https://www.canva.com/"],["Free Music Archive","https://freemusicarchive.org/"],["GitHub","https://github.com/"]],
+"Technology & AI":[["ChatGPT","https://chatgpt.com/"],["Google Gemini","https://gemini.google.com/"],["GitHub","https://github.com/"],["Vercel","https://vercel.com/"]]
+};
+let state = loadState();
+let activeFolder = null, activeTab = "overview", adminUnlocked = false, languageIndex=0;
+const LANGS=["EN","മലയാളം","العربية","தமிழ்","ಕನ್ನಡ","हिन्दी"];
+function initialState(){return {brandName:"OYES",brandIcon:"🦅",brandLogo:"",brandTagline:"Accept change • Create the future",heroTitle:"Your world. Your community.",heroText:"Discover learning, work, local services, cinema, technology and opportunities — together in one place.",layout:"grid",columns:2,adminPass:"OYES2026",aiName:"OYES AI",aiPrompt:"Answer only about the active folder topic. Be helpful, respectful and clear. Do not claim to be connected to a live AI unless configured.",folders:DEFAULT_FOLDERS.map((f,i)=>({id:"f"+(i+1),name:f[0],icon:f[1],description:f[2],enabled:true,links:DEFAULT_LINKS[f[0]]||[]})),admins:[{name:"Director Admin",role:"Owner",contact:"Local demo account"}],members:[],services:[],notices:[],reports:[],notes:[],createdAt:new Date().toISOString()}}
+function loadState(){try{let saved=localStorage.getItem("oyes_admin_build_v1");if(saved){let parsed=JSON.parse(saved);if(parsed&&Array.isArray(parsed.folders))return {...initialState(),...parsed}}}catch(e){}return initialState()}
+function saveState(){try{localStorage.setItem("oyes_admin_build_v1",JSON.stringify(state));renderFolders();updateStats()}catch(e){toast("Storage is full. Export a backup and remove old data.")}}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.remove("hidden");setTimeout(()=>t.classList.add("hidden"),2400)}
+function showLogin(){document.getElementById("loginModal").classList.remove("hidden");document.getElementById("passcode").value=""}
+function hideLogin(){document.getElementById("loginModal").classList.add("hidden")}
+function login(){if(document.getElementById("passcode").value===state.adminPass){adminUnlocked=true;hideLogin();document.getElementById("homeView").classList.add("hidden");document.getElementById("folderView").classList.add("hidden");document.getElementById("adminView").classList.remove("hidden");renderAdmin();toast("Admin panel opened")}else toast("Incorrect passcode")}
+function goHome(){document.getElementById("homeView").classList.remove("hidden");document.getElementById("folderView").classList.add("hidden");document.getElementById("adminView").classList.add("hidden")}
+function openFolder(id){activeFolder=state.folders.find(f=>f.id===id);if(!activeFolder)return;document.getElementById("homeView").classList.add("hidden");document.getElementById("adminView").classList.add("hidden");document.getElementById("folderView").classList.remove("hidden");document.getElementById("folderTitle").textContent=activeFolder.name;document.getElementById("folderDescription").textContent=activeFolder.description;document.getElementById("folderPill").textContent=activeFolder.name.toUpperCase();document.getElementById("folderAiTitle").textContent="🎯 "+state.aiName+" • "+activeFolder.name;document.getElementById("folderQuestion").value="";document.getElementById("folderAnswer").classList.add("hidden");renderLinks()}
+function renderLinks(){let host=document.getElementById("folderLinks"),links=activeFolder?.links||[];host.innerHTML=links.length?links.map((l,i)=>`<div class="item"><div><strong>${esc(l.name)}</strong><br><a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.url)}</a></div><span class="pill">Link ${i+1}</span></div>`).join(""):'<div class="empty">No links added yet. An admin can add topic-specific links in Folder Manager.</div>'}
+function renderFolders(){let grid=document.getElementById("folderGrid");if(!grid)return;let list=state.folders.filter(f=>f.enabled);grid.className="grid";grid.style.gridTemplateColumns=state.layout==="list"?"1fr":`repeat(${Math.max(1,Math.min(4,Number(state.columns)||2))},minmax(0,1fr))`;grid.innerHTML=list.map(f=>`<button class="folder" onclick="openFolder('${esc(f.id)}')"><span class="foldericon">${esc(f.icon||"📁")}</span><strong>${esc(f.name)}</strong><small>${esc(f.description)}</small></button>`).join("");document.getElementById("folderCount").textContent=state.folders.length+" master folders"}
+function applyBrand(){document.getElementById("brandName").textContent=state.brandName;document.getElementById("brandIcon").innerHTML=state.brandLogo?`<img src="${state.brandLogo}" alt="OYES logo" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">`:esc(state.brandIcon||"🦅");document.getElementById("brandTagline").textContent=state.brandTagline;document.getElementById("heroTitle").textContent=state.heroTitle;document.getElementById("heroText").textContent=state.heroText;document.title=state.brandName+" — Platform"}
+function updateStats(){document.getElementById("statFolders").textContent=state.folders.length;document.getElementById("statNotes").textContent=state.notes.length;document.getElementById("statNotices").textContent=state.notices.length}
+function renderAdmin(){applyBrand();updateStats();showTab(activeTab,document.querySelector(`[data-tab="${activeTab}"]`))}
+function showTab(tab,btn){activeTab=tab;document.querySelectorAll("#adminTabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));let c=document.getElementById("adminContent");const field=(label,id,val,type="text")=>`<label>${label}</label><input id="${id}" type="${type}" value="${esc(val)}">`;const area=(label,id,val)=>`<label>${label}</label><textarea id="${id}">${esc(val)}</textarea>`;
+if(tab==="overview"){c.innerHTML=`<div class="panel"><h3>Admin overview</h3><p class="muted">Choose a section from the menu to manage OYES. The public home screen updates when you save settings.</p><div class="itemlist"><div class="item">🎨 Branding and layout <span class="pill">Editable</span></div><div class="item">📂 ${state.folders.length} master folders <span class="pill">Editable</span></div><div class="item">📝 ${state.notes.length} saved notes <span class="pill">Local</span></div><div class="item">📢 ${state.notices.length} notices <span class="pill">Local</span></div></div></div><div class="panel"><h3>Quick actions</h3><div class="formgrid"><button class="primary" onclick="showTab('folders')">Manage folders</button><button onclick="showTab('branding')">Edit branding</button><button onclick="showTab('notes')">Add daily note</button><button onclick="showTab('backup')">Export backup</button></div></div>`}
+else if(tab==="branding"){c.innerHTML=`<div class="panel"><h3>Branding & layout</h3><p class="muted">Keep the approved OYES identity. Upload a logo image only when you choose to change it.</p><div class="formgrid"><div><label>App name</label><input id="bName" value="${esc(state.brandName)}"></div><div><label>Logo / symbol fallback</label><input id="bIcon" value="${esc(state.brandIcon||"🦅")}"></div></div><div class="panel" style="margin-top:12px;background:rgba(255,255,255,.03)"><label>Upload logo image (PNG, JPG, WEBP)</label><input id="bLogoFile" type="file" accept="image/png,image/jpeg,image/webp,image/*"><p class="muted" style="font-size:12px">For best results, use a small square logo image. Preview first, then press Save Branding.</p><div style="display:flex;align-items:center;gap:14px;margin-top:10px"><div id="logoPreview" class="logo" style="width:76px;height:76px;flex:0 0 76px;overflow:hidden">${state.brandLogo?`<img src="${state.brandLogo}" alt="OYES logo preview" style="width:100%;height:100%;object-fit:contain">`:esc(state.brandIcon||"🦅")}</div><div><button type="button" onclick="resetLogoPreview()">Restore default eagle symbol</button><div class="muted" style="font-size:11px;margin-top:6px">This changes the web app logo display, not the installed Android launcher icon.</div></div></div></div>${field("Tagline","bTag",state.brandTagline)}${field("Home heading","bHero",state.heroTitle)}${area("Home description","bText",state.heroText)}<div class="formgrid"><div><label>Card layout</label><select id="bLayout"><option value="grid">Grid</option><option value="list">List</option></select></div><div><label>Grid columns</label><select id="bColumns"><option>2</option><option>3</option><option>4</option></select></div></div><button class="primary" style="margin-top:12px" onclick="saveBrand()">Save branding</button></div>`;document.getElementById("bLayout").value=state.layout;document.getElementById("bColumns").value=String(state.columns);document.getElementById("bLogoFile").addEventListener("change",previewLogoUpload)}
+else if(tab==="folders"){c.innerHTML=`<div class="panel"><h3>Add a master folder</h3><div class="formgrid"><div>${field("Folder name","newFolderName","")}</div><div>${field("Icon / emoji","newFolderIcon","📁")}</div></div>${area("Description","newFolderDesc","") }<button class="primary" onclick="addFolder()">＋ Add folder</button></div><div class="panel"><h3>Folder directory (${state.folders.length})</h3><p class="muted">Edit each folder, enable/disable it, add links, or delete duplicates you no longer need.</p><div class="itemlist">${state.folders.map(f=>`<div class="item" style="align-items:flex-start"><div style="flex:1;min-width:0"><strong>${esc(f.icon)} ${esc(f.name)}</strong><br><small class="muted">${esc(f.description)} • ${f.enabled?"Enabled":"Hidden"} • ${(f.links||[]).length} links</small><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="smallbtn" onclick="editFolder('${f.id}')">Edit</button><button class="smallbtn" onclick="toggleFolder('${f.id}')">${f.enabled?"Hide":"Enable"}</button><button class="smallbtn danger" onclick="deleteFolder('${f.id}')">Delete</button></div></div></div>`).join("")}</div></div>`}
+else if(tab==="people"){c.innerHTML=`<div class="panel"><h3>Admin passcode</h3><p class="muted">This changes only the local demo passcode. Do not treat it as secure production authentication.</p>${field("New local passcode","newPass","", "password")}<button class="primary" onclick="changePass()">Change passcode</button></div><div class="panel"><h3>Admin directory</h3><div class="formgrid"><div>${field("Admin name","adminName","")}</div><div>${field("Role","adminRole","Editor")}</div></div>${field("Contact / note","adminContact","")}<button class="primary" onclick="addAdmin()">＋ Add admin record</button><div class="itemlist" style="margin-top:12px">${state.admins.map((a,i)=>`<div class="item"><div><strong>${esc(a.name)}</strong><br><small class="muted">${esc(a.role)} • ${esc(a.contact)}</small></div><button class="smallbtn danger" onclick="removeAdmin(${i})" ${i===0?"disabled":""}>Remove</button></div>`).join("")}</div><div class="notice" style="margin-top:12px">Admin records here are directory entries only; they do not create separate authenticated accounts. Production access control requires a backend.</div></div><div class="panel"><h3>Member records (manual demo list)</h3><div class="formgrid"><div>${field("Member name","memberName","")}</div><div>${field("Type","memberType","Individual")}</div></div>${field("Contact / note","memberContact","")}<button onclick="addMember()">＋ Add member record</button><div class="itemlist" style="margin-top:10px">${state.members.map((m,i)=>`<div class="item"><span>${esc(m.name)} — ${esc(m.type)}<br><small class="muted">${esc(m.contact)}</small></span><button class="smallbtn danger" onclick="removeMember(${i})">Remove</button></div>`).join("")||'<div class="empty">No member records yet.</div>'}</div></div>`}
+else if(tab==="ai"){c.innerHTML=`<div class="panel"><h3>OYES AI settings</h3>${field("Assistant display name","aiName",state.aiName)}${area("System instruction / topic rule","aiPrompt",state.aiPrompt)}<button class="primary" onclick="saveAI()">Save AI settings</button><div class="notice" style="margin-top:12px">The current assistant gives a local demo response only. For actual ChatGPT/Gemini responses, connect a secure backend; never place private API keys in this HTML file.</div></div>`}
+else if(tab==="services"){c.innerHTML=`<div class="panel"><h3>Add a job or service listing</h3><div class="formgrid"><div><label>Listing type</label><select id="svcType"><option>Job vacancy</option><option>Worker available</option><option>Local service</option><option>Business</option><option>Accommodation</option><option>Property</option><option>Product for sale</option></select></div><div>${field("Title","svcTitle","")}</div></div>${field("District / location","svcLocation","")}${area("Details and contact information","svcDetails","")}<button class="primary" onclick="addService()">＋ Save listing</button></div><div class="panel"><h3>Saved listings</h3><div class="itemlist">${state.services.map((s,i)=>`<div class="item"><div><span class="pill">${esc(s.type)}</span><br><strong>${esc(s.title)}</strong><br><small class="muted">${esc(s.location)} • ${esc(s.details)}</small></div><button class="smallbtn danger" onclick="removeService(${i})">Delete</button></div>`).join("")||'<div class="empty">No listings yet.</div>'}</div></div>`}
+else if(tab==="notices"){c.innerHTML=`<div class="panel"><h3>Publish an announcement</h3>${field("Notice title","noticeTitle","")}${area("Notice details","noticeDetails","")}<button class="primary" onclick="addNotice()">Publish notice</button><div class="itemlist" style="margin-top:12px">${state.notices.map((n,i)=>`<div class="item"><div><strong>${esc(n.title)}</strong><br><small class="muted">${esc(n.details)} • ${esc(n.date)}</small></div><button class="smallbtn danger" onclick="removeNotice(${i})">Delete</button></div>`).join("")||'<div class="empty">No published notices yet.</div>'}</div></div><div class="panel"><h3>Reports / issues</h3>${field("Issue title","reportTitle","")}${area("Details","reportDetails","")}<button onclick="addReport()">＋ Save report</button><div class="itemlist" style="margin-top:10px">${state.reports.map((r,i)=>`<div class="item"><div><strong>${esc(r.title)}</strong><br><small class="muted">${esc(r.details)} • ${esc(r.date)}</small></div><button class="smallbtn good" onclick="resolveReport(${i})">Resolve</button></div>`).join("")||'<div class="empty">No reports saved.</div>'}</div></div>`}
+else if(tab==="notes"){c.innerHTML=`<div class="panel"><h3>Daily admin notes</h3><p class="muted">Save meeting notes, decisions, ideas and next steps.</p>${field("Note title","noteTitle","")}${area("Note / discussion","noteBody","")}<button class="primary" onclick="addNote()">＋ Save note</button><div class="itemlist" style="margin-top:12px">${state.notes.map((n,i)=>`<div class="item"><div><strong>${esc(n.title)}</strong><br><small class="muted">${esc(n.date)}</small><p>${esc(n.body)}</p></div><button class="smallbtn danger" onclick="removeNote(${i})">Delete</button></div>`).join("")||'<div class="empty">No notes saved yet.</div>'}</div></div>`}
+else if(tab==="backup"){c.innerHTML=`<div class="panel"><h3>Backup & restore</h3><p class="muted">Export all current local settings and records as a JSON backup file. Keep a copy before major changes.</p><button class="primary" onclick="exportBackup()">⬇ Export JSON backup</button><label>Restore from a JSON backup file</label><input id="backupFile" type="file" accept=".json,application/json"><button style="margin-top:10px" onclick="restoreBackup()">Restore backup</button><div class="notice" style="margin-top:12px">Restoring replaces the current local data. Export your current state first. This is browser-local storage, not cloud backup.</div><button class="danger" style="margin-top:12px" onclick="resetDemo()">Reset to starter defaults</button></div>`}
+}
+let pendingLogoData=null;
+function previewLogoUpload(event){const file=event.target.files&&event.target.files[0];if(!file)return;if(!file.type.startsWith("image/")){toast("Please choose an image file");event.target.value="";return}if(file.size>1200000){toast("Please use a logo image smaller than 1.2 MB");event.target.value="";return}const reader=new FileReader();reader.onload=()=>{pendingLogoData=String(reader.result||"");const preview=document.getElementById("logoPreview");if(preview)preview.innerHTML=`<img src="${pendingLogoData}" alt="Logo preview" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">`;toast("Logo preview ready — press Save Branding")};reader.onerror=()=>toast("Could not read that image");reader.readAsDataURL(file)}
+function resetLogoPreview(){pendingLogoData="";const preview=document.getElementById("logoPreview");if(preview)preview.textContent="🦅";const file=document.getElementById("bLogoFile");if(file){file.value="";file.dataset.reset="1"}toast("Default eagle symbol selected — press Save Branding to apply")}
+function saveBrand(){state.brandName=document.getElementById("bName").value.trim()||"OYES";state.brandIcon=document.getElementById("bIcon").value.trim()||"🦅";if(pendingLogoData!==null){state.brandLogo=pendingLogoData;pendingLogoData=null}if(document.getElementById("bLogoFile")&&document.getElementById("bLogoFile").value===""&&document.getElementById("logoPreview")&&document.getElementById("logoPreview").textContent==="🦅"&&document.getElementById("bLogoFile").dataset.reset==="1"){state.brandLogo="";document.getElementById("bLogoFile").dataset.reset="";}state.brandTagline=document.getElementById("bTag").value.trim();state.heroTitle=document.getElementById("bHero").value.trim();state.heroText=document.getElementById("bText").value.trim();state.layout=document.getElementById("bLayout").value;state.columns=Number(document.getElementById("bColumns").value)||2;saveState();applyBrand();toast("Branding saved")}
+function addFolder(){let name=document.getElementById("newFolderName").value.trim();if(!name){toast("Enter a folder name");return}let id="custom_"+Date.now();state.folders.push({id,name,icon:document.getElementById("newFolderIcon").value.trim()||"📁",description:document.getElementById("newFolderDesc").value.trim(),enabled:true,links:[]});saveState();showTab("folders");toast("Folder added")}
+function editFolder(id){let f=state.folders.find(x=>x.id===id);if(!f)return;let name=prompt("Folder name:",f.name);if(name===null)return;let icon=prompt("Folder icon / emoji:",f.icon);if(icon===null)return;let desc=prompt("Folder description:",f.description);if(desc===null)return;f.name=name.trim()||f.name;f.icon=icon.trim()||"📁";f.description=desc.trim();let current=(f.links||[]).map(l=>`${l.name} | ${l.url}`).join("\n");let raw=prompt("Topic links, one per line: Label | https://example.com\nLeave empty to clear links.",current);if(raw!==null){f.links=raw.split("\n").map(x=>{let p=x.split("|");return {name:(p.shift()||"").trim(),url:p.join("|").trim()}}).filter(x=>x.name&&/^https?:\/\//i.test(x.url))}saveState();showTab("folders");toast("Folder updated")}
+function toggleFolder(id){let f=state.folders.find(x=>x.id===id);if(f){f.enabled=!f.enabled;saveState();showTab("folders")}}
+function deleteFolder(id){let f=state.folders.find(x=>x.id===id);if(!f)return;if(!confirm(`Delete folder "${f.name}"? This cannot be undone without a backup.`))return;state.folders=state.folders.filter(x=>x.id!==id);saveState();showTab("folders")}
+function changePass(){let p=document.getElementById("newPass").value;if(p.length<6){toast("Use at least 6 characters");return}state.adminPass=p;saveState();toast("Local demo passcode changed");showTab("people")}
+function addAdmin(){let name=document.getElementById("adminName").value.trim();if(!name){toast("Enter admin name");return}state.admins.push({name,role:document.getElementById("adminRole").value.trim()||"Editor",contact:document.getElementById("adminContact").value.trim()});saveState();showTab("people")}
+function removeAdmin(i){if(i===0)return;state.admins.splice(i,1);saveState();showTab("people")}
+function addMember(){let name=document.getElementById("memberName").value.trim();if(!name){toast("Enter member name");return}state.members.push({name,type:document.getElementById("memberType").value,contact:document.getElementById("memberContact").value.trim()});saveState();showTab("people")}
+function removeMember(i){state.members.splice(i,1);saveState();showTab("people")}
+function saveAI(){state.aiName=document.getElementById("aiName").value.trim()||"OYES AI";state.aiPrompt=document.getElementById("aiPrompt").value.trim();saveState();toast("AI settings saved");showTab("ai")}
+function addService(){let title=document.getElementById("svcTitle").value.trim();if(!title){toast("Enter a listing title");return}state.services.unshift({type:document.getElementById("svcType").value,title,location:document.getElementById("svcLocation").value.trim(),details:document.getElementById("svcDetails").value.trim(),date:new Date().toLocaleString()});saveState();showTab("services");toast("Listing saved locally")}
+function removeService(i){state.services.splice(i,1);saveState();showTab("services")}
+function addNotice(){let title=document.getElementById("noticeTitle").value.trim();if(!title){toast("Enter a notice title");return}state.notices.unshift({title,details:document.getElementById("noticeDetails").value.trim(),date:new Date().toLocaleString()});saveState();showTab("notices");toast("Notice published locally")}
+function removeNotice(i){state.notices.splice(i,1);saveState();showTab("notices")}
+function addReport(){let title=document.getElementById("reportTitle").value.trim();if(!title){toast("Enter an issue title");return}state.reports.unshift({title,details:document.getElementById("reportDetails").value.trim(),date:new Date().toLocaleString()});saveState();showTab("notices")}
+function resolveReport(i){state.reports.splice(i,1);saveState();showTab("notices");toast("Report marked resolved")}
+function addNote(){let title=document.getElementById("noteTitle").value.trim(),body=document.getElementById("noteBody").value.trim();if(!title&&!body){toast("Enter a note");return}state.notes.unshift({title:title||"Daily note",body,date:new Date().toLocaleString()});saveState();showTab("notes");toast("Note saved")}
+function removeNote(i){state.notes.splice(i,1);saveState();showTab("notes")}
+function exportBackup(){let blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="OYES-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(url);toast("Backup export started")}
+function restoreBackup(){let file=document.getElementById("backupFile").files[0];if(!file){toast("Choose a backup JSON file");return}let r=new FileReader();r.onload=()=>{try{let data=JSON.parse(r.result);if(!Array.isArray(data.folders)||!data.brandName)throw new Error("invalid");if(!confirm("Replace current local OYES data with this backup?"))return;state={...initialState(),...data};saveState();applyBrand();renderAdmin();toast("Backup restored")}catch(e){toast("Invalid OYES backup file")}};r.readAsText(file)}
+function resetDemo(){if(!confirm("Reset all local OYES data to starter defaults? Export a backup first."))return;state=initialState();saveState();applyBrand();renderAdmin();toast("Starter defaults restored")}
+function askDemoAI(inputId,outId){let q=document.getElementById(inputId).value.trim(),out=document.getElementById(outId);if(!q){toast("Type a question first");return}out.textContent="OYES demo assistant: I received your question: “"+q+"”. This single-file demo is not connected to a live AI model yet. To get real AI answers, connect a secure server-side API. You can browse the relevant OYES folder or contact the platform support team.";out.classList.remove("hidden")}
+function askFolderAI(){let q=document.getElementById("folderQuestion").value.trim();if(!q){toast("Type a question first");return}let out=document.getElementById("folderAnswer");out.textContent=state.aiName+" — "+activeFolder.name+"\n\nYour question: "+q+"\n\nFolder guidance: "+activeFolder.description+"\n\n"+state.aiPrompt+"\n\nThis is a local demo response, not a live AI answer.";out.classList.remove("hidden")}
+function cycleLanguage(){languageIndex=(languageIndex+1)%LANGS.length;document.getElementById("languageBtn").textContent=LANGS[languageIndex]+" ▾";toast("Language selector changed. Full translations can be added in a later build.")}
+function shareApp(){if(navigator.share){navigator.share({title:state.brandName,text:state.brandTagline,url:location.href}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(()=>toast("App link copied"))}else toast("Copy the browser address to share")}
+function installAppPrompt(){toast("For installable PWA support, add a manifest and service worker when hosting the app.")}
+document.getElementById("passcode").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+renderFolders();applyBrand();updateStats();
+</script>
 </body>
 </html>
