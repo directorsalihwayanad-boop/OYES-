@@ -95,17 +95,18 @@
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
         </div>
 
-        <!-- Google & ChatGPT AI Assistant Hub Box on Home Page -->
+        <!-- AI Assistant Hub Box with Voice Mic Button -->
         <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
                     <span class="text-base">🤖✨</span>
-                    <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wide">AI Assistant Hub (Gemini & ChatGPT)</h4>
+                    <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wide">AI Assistant Hub (Voice & ChatGPT)</h4>
                 </div>
                 <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">24/7 Active</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT anything..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <input type="text" id="globalAiQuery" placeholder="Ask AI or tap mic to speak..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Speak to AI" class="bg-rose-600 hover:bg-rose-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
                 <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="globalAiResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
@@ -208,7 +209,7 @@
             <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
 
-        <!-- Dedicated Domain Specific AI Assistant Box -->
+        <!-- Dedicated Domain Specific AI Assistant Box with Mic -->
         <div id="domainAiBox" class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
@@ -218,7 +219,8 @@
                 <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Focused Hub</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask specifically about this domain..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <input type="text" id="aiFolderQuery" placeholder="Ask or speak about this domain..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Speak" class="bg-rose-600 hover:bg-rose-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
                 <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
@@ -250,7 +252,7 @@
             ar: { subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', settings: 'الإعدادات', homeTitle: 'المجلدات الرئيسية', eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', cinTitle: 'السينما والموسيقى', cinSub: 'أدوات الذكاء الاصطناعي', techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', backBtn: '← العودة للرئيسية' },
             hi: { subtitle: '"आपकी उंगलियों पर दुनिया — निर्देशक: सालेह വയനാട്"', settings: 'सेटिंग्स', homeTitle: 'मुख्य फ़ोल्डर', eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', cinTitle: 'सिनेमा और संगीत', cinTitle: 'मुफ्त एआई टूल', techTitle: 'प्रौद्योगिकी', techSub: 'ChatGPT और Gemini', backBtn: '← होम पर वापस जाएं' },
             ta: { subtitle: '"உங்கள் விரல் நுனியில் உலகம் — இயக்கம்: சாலிஹ் வயநாடு"', settings: 'அமைப்புகள்', homeTitle: 'முதன்மை கோப்புறைகள்', eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', cinTitle: 'சினிமா & இசை', cinTitle: 'இலவச AI கருவிகள்', techTitle: 'தொழில்நுட்பம்', techSub: 'ChatGPT & Gemini கருவிகள்', backBtn: '← முகப்புக்குச் செல்ல' },
-            kn: { subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ഡರ್‌ಗಳು', eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' }
+            kn: { subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' }
         };
 
         window.onload = function() {
@@ -277,6 +279,34 @@
             }
         };
 
+        // Voice Recognition Function (Microphone Support)
+        function startVoiceRecognition(inputId) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Speech recognition is not supported in this browser. Please use Google Chrome.");
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US'; // Can be adjusted or set dynamically
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                console.log("Listening... Speak now.");
+            };
+
+            recognition.onresult = function(event) {
+                const speechToText = event.results[0][0].transcript;
+                document.getElementById(inputId).value = speechToText;
+            };
+
+            recognition.onerror = function(event) {
+                alert("Voice recognition error: " + event.error);
+            };
+
+            recognition.start();
+        }
+
         function changeAppLanguage(lang) {
             localStorage.setItem('oyes_lang', lang);
             let t = translations[lang] || translations['en'];
@@ -292,490 +322,4 @@
             let backBtnElem = document.getElementById('backBtnText');
 
             if(subTitleElem) subTitleElem.innerText = t.subtitle;
-            if(homeSecElem) homeSecElem.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.homeTitle}`;
-            
-            let eduElem = document.querySelector('.folder-edu');
-            let eduSubElem = document.querySelector('.folder-edu-sub');
-            if(eduElem) eduElem.innerText = t.eduTitle;
-            if(eduSubElem) eduSubElem.innerText = t.eduSub;
-
-            let govElem = document.querySelector('.folder-gov');
-            let govSubElem = document.querySelector('.folder-gov-sub');
-            if(govElem) govElem.innerText = t.govTitle;
-            if(govSubElem) govSubElem.innerText = t.govSub;
-
-            let cinElem = document.querySelector('.folder-cin');
-            let cinSubElem = document.querySelector('.folder-cin-sub');
-            if(cinElem) cinElem.innerText = t.cinTitle;
-            if(cinSubElem) cinSubElem.innerText = t.cinSub;
-
-            let techElem = document.querySelector('.folder-tech');
-            let techSubElem = document.querySelector('.folder-tech-sub');
-            if(techElem) techElem.innerText = t.techTitle;
-            if(techSubElem) techSubElem.innerText = t.techSub;
-
-            if(backBtnElem) backBtnElem.innerText = t.backBtn;
-        }
-
-        function triggerGoogleAssistant() {
-            let queryInput = document.getElementById('globalAiQuery');
-            let resBox = document.getElementById('globalAiResponse');
-            if(!queryInput || !queryInput.value.trim()) {
-                alert("Please enter a question.");
-                return;
-            }
-            let query = queryInput.value.trim();
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `🤖 <b>ChatGPT & Google Gemini AI Hub...</b><br>Analyzing query: "<i>${query}</i>"`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>AI & ChatGPT Recommended Resources:</b><br>To get the best results for "${query}", explore ChatGPT or Google Gemini directly.<br>
-                <a href="https://chatgpt.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Open in ChatGPT (OpenAI) ➔</a>
-                <a href="https://gemini.google.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Open in Google Gemini ➔</a>`;
-            }, 800);
-        }
-
-        function askDomainSpecificAI() {
-            let queryInput = document.getElementById('aiFolderQuery');
-            let resBox = document.getElementById('aiFolderResponse');
-            if(!queryInput || !queryInput.value.trim()) {
-                alert("Please enter your question.");
-                return;
-            }
-            let query = queryInput.value.trim();
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `🔍 <b>Searching within ${currentActiveDomain}...</b><br>Analyzing: "<i>${query}</i>"`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>${currentActiveDomain} Expert Guidance:</b><br>Regarding your query about <b>${query}</b>: You can connect with ChatGPT or Google Gemini for deep code generation and design support.<br>
-                <a href="https://chatgpt.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Ask ChatGPT ➔</a>
-                <a href="https://gemini.google.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Ask Google Gemini ➔</a>`;
-            }, 800);
-        }
-
-        function requestAdminAccess() {
-            let modal = document.getElementById('adminLoginModal');
-            let input = document.getElementById('adminSecretInput');
-            if(modal) modal.classList.remove('hidden');
-            if(input) {
-                input.value = '';
-                input.focus();
-            }
-        }
-
-        function closeAdminModal() {
-            let modal = document.getElementById('adminLoginModal');
-            if(modal) modal.classList.add('hidden');
-        }
-
-        function verifyAdminCode() {
-            let input = document.getElementById('adminSecretInput');
-            if(!input) return;
-            let enteredCode = input.value.trim();
-            if (enteredCode === "salih9947") {
-                closeAdminModal();
-                alert("✅ Salih Wayanad Studio Access Verified!");
-                openAdminSettingsDashboard();
-            } else {
-                alert("❌ Access Denied! Only Director Salih Wayanad's secret code is authorized for studio changes.");
-            }
-        }
-
-        function openAdminSettingsDashboard() {
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let domainBox = document.getElementById('domainAiBox');
-            let pageTitle = document.getElementById('pageTitle');
-
-            if(homeView) homeView.classList.add('hidden');
-            if(subView) subView.classList.remove('hidden');
-            if(domainBox) domainBox.classList.remove('hidden');
-            if(pageTitle) pageTitle.innerText = '🎬 Salih Wayanad Studio & Settings';
-
-            const grid = document.getElementById('pageContentGrid');
-            if(!grid) return;
-            grid.className = "grid grid-cols-2 gap-3.5 col-span-2 pb-6 pt-2";
-            
-            let currentTitle = localStorage.getItem('oyes_app_title') || 'OYES APP';
-            let currentAdminText = localStorage.getItem('oyes_admin_text') || 'Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)';
-
-            grid.innerHTML = `
-                <!-- Settings AI Assistant Box -->
-                <div class="card-3d p-3.5 rounded-2xl shadow-lg space-y-2 col-span-2 border border-indigo-500/50">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-base">🤖✨</span>
-                            <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Studio AI Assistant (ChatGPT & Gemini)</h4>
-                        </div>
-                        <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Active</span>
-                    </div>
-                    <div class="flex gap-2">
-                        <input type="text" id="aiFolderQuery" placeholder="Ask AI about studio settings..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                        <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
-                    </div>
-                    <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
-                    <label class="text-cyan-300 font-bold block">App Title / Name:</label>
-                    <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
-                </div>
-
-                <!-- AI IMAGE-TO-THEME STUDIO -->
-                <div class="card-3d p-4 rounded-2xl space-y-2 text-xs col-span-2 border border-indigo-500/60 bg-gradient-to-br from-indigo-950/40 to-slate-900">
-                    <label class="text-indigo-300 font-bold block text-sm">🤖 AI Image-to-Theme Studio (Director Salih Only):</label>
-                    <p class="text-[10px] text-slate-300">Upload reference poster/photo. AI will automatically extract color palette and transform the app theme!</p>
-                    <input type="file" id="aiThemePhoto" accept="image/*" class="w-full bg-slate-950 text-slate-100 p-2 rounded-xl border border-indigo-500/50 text-xs file:bg-indigo-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
-                    <button type="button" onclick="processAiImageTheme()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl shadow transition-all text-xs">✨ Apply AI Theme from Photo</button>
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
-                    <label class="text-cyan-300 font-bold block">🎨 Manual App Background Color Theme:</label>
-                    <select id="editBgColor" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
-                        <option value="radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)">Midnight Navy (Default)</option>
-                        <option value="radial-gradient(circle at top, #065f46, #0f172a, #020617)">Emerald Deep</option>
-                        <option value="radial-gradient(circle at top, #831843, #0f172a, #020617)">Royal Fuchsia</option>
-                        <option value="radial-gradient(circle at top, #78350f, #0f172a, #020617)">Amber Dark</option>
-                        <option value="radial-gradient(circle at top, #312e81, #1e1b4b, #000000)">Deep Indigo</option>
-                    </select>
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
-                    <label class="text-cyan-300 font-bold block">✨ Folder Design Style (Shape & Border):</label>
-                    <select id="editFolderStyle" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
-                        <option value="rounded-3xl">3D Rounded</option>
-                        <option value="rounded-xl">Compact Box</option>
-                        <option value="rounded-none">Sharp Edge</option>
-                        <option value="rounded-full">Pill / Circle</option>
-                    </select>
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
-                    <label class="text-cyan-300 font-bold block">📁 Upload App Logo (File Manager / Gallery):</label>
-                    <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl border border-slate-700 text-[10px] file:bg-cyan-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
-                </div>
-
-                <!-- INDIVIDUAL FOLDER ICONS -->
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2 border border-indigo-500/50">
-                    <label class="text-indigo-300 font-bold block">🖼️ Small Folder Icon Photos (Upload from Gallery):</label>
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Education Icon Photo:</label>
-                    <input type="file" id="iconEduFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Govt Icon Photo:</label>
-                    <input type="file" id="iconGovFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Cinema Icon Photo:</label>
-                    <input type="file" id="iconCinFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Tech Icon Photo:</label>
-                    <input type="file" id="iconTechFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-
-                <!-- INDIVIDUAL FOLDER BACKGROUNDS -->
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2 border border-teal-500/50 mt-2">
-                    <label class="text-teal-300 font-bold block">📂 Individual Small Folder Background Images:</label>
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Education Folder BG:</label>
-                    <input type="file" id="bgEduFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Govt Folder BG:</label>
-                    <input type="file" id="bgGovFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Cinema Folder BG:</label>
-                    <input type="file" id="bgCinFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Tech Folder BG:</label>
-                    <input type="file" id="bgTechFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">Sales Folder BG:</label>
-                    <input type="file" id="bgSalesFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
-                    <label class="text-cyan-300 font-bold block">WhatsApp Folder BG:</label>
-                    <input type="file" id="bgWaFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
-                </div>
-
-                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
-                    <label class="text-cyan-300 font-bold block">Admin / Contact Details text:</label>
-                    <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">${currentAdminText}</textarea>
-                </div>
-                <div class="col-span-2 pt-2">
-                    <button type="button" onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 text-white font-bold py-3 rounded-2xl shadow-lg text-sm">💾 Save & Apply Studio Changes</button>
-                </div>
-            `;
-            window.scrollTo(0, 0);
-        }
-
-        function processAiImageTheme() {
-            let fileInput = document.getElementById('aiThemePhoto');
-            if(!fileInput || !fileInput.files || !fileInput.files[0]) {
-                alert("Please select an image file first.");
-                return;
-            }
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                let imgDataUrl = e.target.result;
-                let aiGeneratedBgGradient = `linear-gradient(rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95)), url('${imgDataUrl}')`;
-                localStorage.setItem('oyes_app_bg', aiGeneratedBgGradient);
-                document.body.style.background = aiGeneratedBgGradient;
-                document.body.style.backgroundSize = "cover";
-                document.body.style.backgroundPosition = "center";
-                document.body.style.backgroundAttachment = "fixed";
-                alert("✨ AI successfully analyzed your photo and generated a custom theme design!");
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-
-        function saveAdminChanges() {
-            let titleInput = document.getElementById('editAppTitle');
-            let adminInput = document.getElementById('editAdminText');
-            let bgSelect = document.getElementById('editBgColor');
-            let styleSelect = document.getElementById('editFolderStyle');
-
-            if(titleInput) localStorage.setItem('oyes_app_title', titleInput.value);
-            if(adminInput) localStorage.setItem('oyes_admin_text', adminInput.value);
-            if(styleSelect) localStorage.setItem('oyes_folder_style', styleSelect.value);
-
-            if(bgSelect && (!localStorage.getItem('oyes_app_bg') || !localStorage.getItem('oyes_app_bg').includes('url('))) {
-                localStorage.setItem('oyes_app_bg', bgSelect.value);
-            }
-
-            let fileInputs = {
-                'oyes_logo_img': document.getElementById('editLogoFile'),
-                'oyes_icon_edu_img': document.getElementById('iconEduFile'),
-                'oyes_icon_gov_img': document.getElementById('iconGovFile'),
-                'oyes_icon_cin_img': document.getElementById('iconCinFile'),
-                'oyes_icon_tech_img': document.getElementById('iconTechFile'),
-                'oyes_edu_bg': document.getElementById('bgEduFile'),
-                'oyes_gov_bg': document.getElementById('bgGovFile'),
-                'oyes_cin_bg': document.getElementById('bgCinFile'),
-                'oyes_tech_bg': document.getElementById('bgTechFile'),
-                'oyes_sales_bg': document.getElementById('bgSalesFile'),
-                'oyes_wa_bg': document.getElementById('bgWaFile')
-            };
-
-            let keys = Object.keys(fileInputs);
-            let processed = 0;
-            let totalFiles = keys.filter(k => fileInputs[k] && fileInputs[k].files && fileInputs[k].files[0]).length;
-
-            if (totalFiles === 0) {
-                alert("✅ Salih Wayanad Studio settings saved successfully!");
-                loadSavedCustomization();
-                goBackHome();
-                return;
-            }
-
-            keys.forEach(key => {
-                let input = fileInputs[key];
-                if (input && input.files && input.files[0]) {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        localStorage.setItem(key, e.target.result);
-                        processed++;
-                        if (processed >= totalFiles) {
-                            alert("✅ All gallery images, folder backgrounds & studio settings saved!");
-                            loadSavedCustomization();
-                            goBackHome();
-                        }
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            });
-        }
-
-        function loadSavedCustomization() {
-            let savedTitle = localStorage.getItem('oyes_app_title');
-            let savedLogoImg = localStorage.getItem('oyes_logo_img');
-            let savedAdminText = localStorage.getItem('oyes_admin_text');
-            let savedBg = localStorage.getItem('oyes_app_bg');
-            let savedFolderStyle = localStorage.getItem('oyes_folder_style');
-
-            if(savedTitle) {
-                let mTitle = document.getElementById('headerMainTitle');
-                let aTag = document.getElementById('appTitleTag');
-                if(mTitle) mTitle.innerText = savedTitle;
-                if(aTag) aTag.innerText = savedTitle;
-            }
-            if(savedLogoImg) {
-                let lContainer = document.getElementById('headerLogoContainer');
-                if(lContainer) lContainer.innerHTML = `<img src="${savedLogoImg}" class="w-7 h-7 object-cover rounded-full border border-cyan-400">`;
-            }
-            if(savedAdminText) {
-                let fAdmin = document.getElementById('footerAdminText');
-                if(fAdmin) fAdmin.innerText = savedAdminText;
-            }
-            if(savedBg) {
-                if(savedBg.includes('url(')) {
-                    document.body.style.background = savedBg;
-                    document.body.style.backgroundSize = "cover";
-                    document.body.style.backgroundPosition = "center";
-                    document.body.style.backgroundAttachment = "fixed";
-                } else {
-                    document.body.style.background = savedBg;
-                }
-            }
-            if(savedFolderStyle) {
-                document.querySelectorAll('.folder-card, .card-all').forEach(card => {
-                    card.className = card.className.replace(/rounded-(3xl|xl|none|full)/g, savedFolderStyle);
-                });
-            }
-
-            let eduBg = localStorage.getItem('oyes_edu_bg');
-            let govBg = localStorage.getItem('oyes_gov_bg');
-            let cinBg = localStorage.getItem('oyes_cin_bg');
-            let techBg = localStorage.getItem('oyes_tech_bg');
-            let salesBg = localStorage.getItem('oyes_sales_bg');
-            let waBg = localStorage.getItem('oyes_wa_bg');
-
-            let cardEdu = document.getElementById('cardEdu');
-            let cardGov = document.getElementById('cardGov');
-            let cardCin = document.getElementById('cardCin');
-            let cardTech = document.getElementById('cardTech');
-            let cardSales = document.getElementById('cardSales');
-            let cardWa = document.getElementById('cardWa');
-
-            if(eduBg && cardEdu) cardEdu.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${eduBg}') center/cover`;
-            if(govBg && cardGov) cardGov.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${govBg}') center/cover`;
-            if(cinBg && cardCin) cardCin.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${cinBg}') center/cover`;
-            if(techBg && cardTech) cardTech.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${techBg}') center/cover`;
-            if(salesBg && cardSales) cardSales.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${salesBg}') center/cover`;
-            if(waBg && cardWa) cardWa.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${waBg}') center/cover`;
-
-            let iconEduImg = localStorage.getItem('oyes_icon_edu_img');
-            let iconGovImg = localStorage.getItem('oyes_icon_gov_img');
-            let iconCinImg = localStorage.getItem('oyes_icon_cin_img');
-            let iconTechImg = localStorage.getItem('oyes_icon_tech_img');
-
-            let iconEdu = document.getElementById('iconEdu');
-            let iconGov = document.getElementById('iconGov');
-            let iconCin = document.getElementById('iconCin');
-            let iconTech = document.getElementById('iconTech');
-
-            if(iconEduImg && iconEdu) iconEdu.innerHTML = `<img src="${iconEduImg}" class="w-full h-full object-cover rounded-xl">`;
-            if(iconGovImg && iconGov) iconGov.innerHTML = `<img src="${iconGovImg}" class="w-full h-full object-cover rounded-xl">`;
-            if(iconCinImg && iconCin) iconCin.innerHTML = `<img src="${iconCinImg}" class="w-full h-full object-cover rounded-xl">`;
-            if(iconTechImg && iconTech) iconTech.innerHTML = `<img src="${iconTechImg}" class="w-full h-full object-cover rounded-xl">`;
-        }
-
-        function goBackHome() {
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let domainBox = document.getElementById('domainAiBox');
-            if(homeView) homeView.classList.remove('hidden');
-            if(subView) subView.classList.add('hidden');
-            if(domainBox) domainBox.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        function openSubFolders(folderName, subItems) {
-            currentActiveDomain = folderName;
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let domainBox = document.getElementById('domainAiBox');
-            let pageTitle = document.getElementById('pageTitle');
-            let domainTitle = document.getElementById('domainAiTitle');
-            let resBox = document.getElementById('aiFolderResponse');
-            let qInput = document.getElementById('aiFolderQuery');
-
-            if(homeView) homeView.classList.add('hidden');
-            if(subView) subView.classList.remove('hidden');
-            if(domainBox) domainBox.classList.remove('hidden');
-            if(pageTitle) pageTitle.innerText = folderName;
-            if(domainTitle) domainTitle.innerText = `${folderName} AI Assistant`;
-            if(resBox) resBox.classList.add('hidden');
-            if(qInput) qInput.value = '';
-
-            const grid = document.getElementById('pageContentGrid');
-            if(!grid) return;
-            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
-            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
-            grid.innerHTML = '';
-
-            subItems.forEach(item => {
-                const card = document.createElement('div');
-                card.className = `folder-card card-3d p-4 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
-                card.innerHTML = `
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2">📁</div>
-                    <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
-                    <p class="text-[9px] text-cyan-200/60 mt-1">Resource Link</p>
-                `;
-                card.onclick = () => {
-                    if(item.action === 'whatsapp_chat') {
-                        let num = prompt("Enter WhatsApp Number:", item.phone);
-                        if(num) window.open(`https://wa.me/${num.trim()}`, '_blank');
-                    } else if(item.url) {
-                        window.open(item.url, '_blank');
-                    }
-                };
-                grid.appendChild(card);
-            });
-            window.scrollTo(0, 0);
-        }
-
-        function openAllFoldersPage() {
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            let domainBox = document.getElementById('domainAiBox');
-            let pageTitle = document.getElementById('pageTitle');
-
-            if(homeView) homeView.classList.add('hidden');
-            if(subView) subView.classList.remove('hidden');
-            if(domainBox) domainBox.classList.add('hidden');
-            if(pageTitle) pageTitle.innerText = 'All Other Services (46 Master Folders)';
-            
-            const grid = document.getElementById('pageContentGrid');
-            if(!grid) return;
-            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
-            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
-            grid.innerHTML = '';
-            
-            const serviceNames = [
-                "Digital Services Hub", "Public Utility Portal", "E-Governance Link", "Citizen Support Portal",
-                "Online Registration Hub", "Welfare Schemes Portal", "Skill Development Links", "Employment Exchange Portal",
-                "Legal Aid Services", "Health Care Portal", "Agriculture & Farming", "Transport & Travel Hub",
-                "Banking & Financial Services", "Postal Services Portal", "Consumer Rights Forum", "Cyber Security Portal",
-                "Disaster Management Hub", "Environment & Forestry", "Energy & Power Services", "Water Supply Portal",
-                "Housing & Urban Development", "Rural Development Hub", "Tourism & Heritage", "Sports & Youth Affairs",
-                "Food & Civil Supplies", "Cooperative Sector Hub", "Industries & Commerce", "MSME Support Portal",
-                "Labor Welfare Services", "Taxation & Revenue Hub", "Panchayat Raj Portal", "Local Administration",
-                "Social Welfare Portal", "Women & Child Development", "Tribal Welfare Hub", "Minority Affairs Portal",
-                "Statistics & Data Hub", "Public Grievances Portal", "RTI Information Hub", "Voter Services Portal",
-                "Aadhaar Services Link", "PAN & Tax Services", "Passport Seva Hub", "Insurance Schemes Portal",
-                "Pension Services Hub", "General Utility Portal"
-            ];
-
-            serviceNames.forEach((title) => {
-                const card = document.createElement('div');
-                card.className = `folder-card card-3d p-3.5 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
-                card.innerHTML = `
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2">📂</div>
-                    <h3 class="font-bold text-[11px] text-slate-100">${title}</h3>
-                    <p class="text-[8px] text-teal-200/60 mt-0.5">Verified Link</p>
-                `;
-                card.onclick = () => {
-                    currentActiveDomain = title;
-                    openSubFolders(title, [
-                        {name: `${title} - Official Portal`, url: 'https://www.india.gov.in/'},
-                        {name: `${title} - Support & Helpdesk`, url: 'https://www.india.gov.in/'}
-                    ]);
-                };
-                grid.appendChild(card);
-            });
-            window.scrollTo(0, 0);
-        }
-
-        function installAppPrompt() { alert('📲 Tap Chrome menu (⋮) and select "Add to Home screen".'); }
-        function shareApp() { navigator.clipboard.writeText(window.location.href); alert('🔗 Link copied to clipboard!'); }
-    </script>
-</body>
-</html>
+            if(homeSecElem) homeSecElem.innerHTML = `<span class="w-2 h-2 rounded-full bg
