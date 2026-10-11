@@ -95,7 +95,7 @@
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
         </div>
 
-        <!-- Google & ChatGPT AI Assistant Hub Box on Home Page -->
+        <!-- AI Assistant Hub Box with Voice Microphone -->
         <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
@@ -105,8 +105,9 @@
                 <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">24/7 Active</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT anything..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">🎤</button>
+                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="globalAiResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -208,7 +209,7 @@
             <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
 
-        <!-- Dedicated Domain Specific AI Assistant Box -->
+        <!-- Dedicated Domain Specific AI Assistant Box with Microphone -->
         <div id="domainAiBox" class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
@@ -218,8 +219,9 @@
                 <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Focused Hub</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask specifically about this domain..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                <input type="text" id="aiFolderQuery" placeholder="Ask specifically or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">🎤</button>
+                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -244,10 +246,41 @@
 
         let currentActiveDomain = "";
 
+        // Voice Recognition Support (Microphone Function)
+        function startVoiceRecognition(targetInputId) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Speech recognition is not supported in this browser. Please use Google Chrome or Gboard microphone.");
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ml-IN'; 
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                console.log("Listening... Speak now.");
+            };
+
+            recognition.onresult = function(event) {
+                let speechResult = event.results[0][0].transcript;
+                let inputField = document.getElementById(targetInputId);
+                if (inputField) {
+                    inputField.value = speechResult;
+                }
+            };
+
+            recognition.onerror = function(event) {
+                alert("Voice recognition error: " + event.error);
+            };
+
+            recognition.start();
+        }
+
         const translations = {
             en: { subtitle: '"A World at Your Fingertips — Directed by Salih Wayanad"', settings: 'Settings', homeTitle: 'Home Main Folders', eduTitle: 'Education', eduSub: 'Books & Learning', govTitle: 'Government', govSub: 'Services & Portals', cinTitle: 'Cinema & Music', cinSub: 'Free AI Tools', techTitle: 'Technology', techSub: 'ChatGPT, Gemini & AI', backBtn: '← Back to Home' },
             ml: { subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം — സംവിധാനം: സാലിഹ് വയനാട്"', settings: 'ക്രമീകരണങ്ങൾ', homeTitle: 'പ്രധാന ഫോൾഡറുകൾ', eduTitle: 'വിദ്യാഭ്യാസം', eduSub: 'പുസ്തകങ്ങളും പഠനവും', govTitle: 'സർക്കാർ', govSub: 'സേവനങ്ങളും പോർട്ടലുകളും', cinTitle: 'സിനിമ & സംഗീതം', cinSub: 'സൗജന്യ AI ടൂളുകൾ', techTitle: 'സാങ്കേതികവിദ്യ', techSub: 'ChatGPT & Gemini ടൂളുകൾ', backBtn: '← ഹോമിലേക്ക് തിരികെ' },
-            ar: { subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', settings: 'الإعدادات', homeTitle: 'المجلدات الرئيسية', eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', cinTitle: 'السينما والموسيقى', cinSub: 'أدوات الذكاء الاصطناعي', techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', backBtn: '← العودة للرئيسية' },
+            ar: { subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', settings: 'الإعدادات', homeTitle: 'المجلدات الرئيسية', eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', cinTitle: 'السينما والموسيقى', cinTitle: 'أدوات الذكاء الاصطناعي', techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', backBtn: '← العودة للرئيسية' },
             hi: { subtitle: '"आपकी उंगलियों पर दुनिया — निर्देशक: सालेह വയനാട്"', settings: 'सेटिंग्स', homeTitle: 'मुख्य फ़ोल्डर', eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', cinTitle: 'सिनेमा और संगीत', cinTitle: 'मुफ्त एआई टूल', techTitle: 'प्रौद्योगिकी', techSub: 'ChatGPT और Gemini', backBtn: '← होम पर वापस जाएं' },
             ta: { subtitle: '"உங்கள் விரல் நுனியில் உலகம் — இயக்கம்: சாலிஹ் வயநாடு"', settings: 'அமைப்புகள்', homeTitle: 'முதன்மை கோப்புறைகள்', eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', cinTitle: 'சினிமா & இசை', cinTitle: 'இலவச AI கருவிகள்', techTitle: 'தொழில்நுட்பம்', techSub: 'ChatGPT & Gemini கருவிகள்', backBtn: '← முகப்புக்குச் செல்ல' },
             kn: { subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' }
@@ -321,14 +354,14 @@
             let queryInput = document.getElementById('globalAiQuery');
             let resBox = document.getElementById('globalAiResponse');
             if(!queryInput || !queryInput.value.trim()) {
-                alert("Please enter a question.");
+                alert("Please enter or speak a question.");
                 return;
             }
             let query = queryInput.value.trim();
             resBox.classList.remove('hidden');
             resBox.innerHTML = `🤖 <b>ChatGPT & Google Gemini AI Hub...</b><br>Analyzing query: "<i>${query}</i>"`;
             setTimeout(() => {
-                resBox.innerHTML = `✨ <b>AI & ChatGPT Recommended Resources:</b><br>To get the best results for "${query}", explore ChatGPT or Google Gemini directly.<br>
+                resBox.innerHTML = `✨ <b>AI & ChatGPT Recommended Resources:</b><br>To get results for "${query}", explore ChatGPT or Google Gemini directly.<br>
                 <a href="https://chatgpt.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Open in ChatGPT (OpenAI) ➔</a>
                 <a href="https://gemini.google.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Open in Google Gemini ➔</a>`;
             }, 800);
@@ -338,7 +371,7 @@
             let queryInput = document.getElementById('aiFolderQuery');
             let resBox = document.getElementById('aiFolderResponse');
             if(!queryInput || !queryInput.value.trim()) {
-                alert("Please enter your question.");
+                alert("Please enter or speak your question.");
                 return;
             }
             let query = queryInput.value.trim();
@@ -398,7 +431,7 @@
             let currentAdminText = localStorage.getItem('oyes_admin_text') || 'Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)';
 
             grid.innerHTML = `
-                <!-- Settings AI Assistant Box -->
+                <!-- Settings AI Assistant Box with Mic -->
                 <div class="card-3d p-3.5 rounded-2xl shadow-lg space-y-2 col-span-2 border border-indigo-500/50">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-1.5">
@@ -408,8 +441,9 @@
                         <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Active</span>
                     </div>
                     <div class="flex gap-2">
-                        <input type="text" id="aiFolderQuery" placeholder="Ask AI about studio settings..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                        <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                        <input type="text" id="aiFolderQuery" placeholder="Ask AI about studio settings or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                        <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">🎤</button>
+                        <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
                     </div>
                     <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
                 </div>
