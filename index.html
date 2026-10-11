@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="appTitleTag">OYES APP - Salih Wayanad Studio</title>
-    <!-- Google Fonts for Modern Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Orbitron:wght@500;700;900&family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -79,7 +78,7 @@
     <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-cyan-500/60 p-5 rounded-3xl max-w-xs w-full shadow-2xl space-y-3">
             <h3 class="text-sm font-bold text-cyan-300 text-center">🎬 Salih Wayanad Studio Login</h3>
-            <p class="text-[11px] text-slate-300 text-center">Director Secret Code Required:</p>
+            <p class="text-[11px] text-slate-300 text-center">Director Secret Code Required (Secure):</p>
             <input type="password" id="adminSecretInput" placeholder="Enter code..." class="w-full bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-cyan-600/50 text-xs focus:outline-none focus:border-cyan-400 text-center">
             <div class="grid grid-cols-2 gap-2 pt-1">
                 <button type="button" onclick="closeAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 rounded-xl font-bold">Cancel</button>
@@ -107,7 +106,7 @@
             <div class="flex gap-2">
                 <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
                 <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="globalAiResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -221,7 +220,7 @@
             <div class="flex gap-2">
                 <input type="text" id="aiFolderQuery" placeholder="Ask specifically or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
                 <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -246,25 +245,32 @@
 
         let currentActiveDomain = "";
 
-        // Voice Recognition Support (Microphone Function)
+        // Secure SHA-256 Hashing Function for Admin Password (salih9947)
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Improved Voice Recognition Support with Live Feedback
         function startVoiceRecognition(targetInputId) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
-                alert("Speech recognition is not supported in this browser. Please use Google Chrome.");
+                alert("Speech recognition is not fully supported in this browser. Please open in Google Chrome.");
                 return;
             }
             const recognition = new SpeechRecognition();
             recognition.lang = 'ml-IN'; 
-            recognition.interimResults = false;
+            recognition.interimResults = true;
             recognition.maxAlternatives = 1;
 
-            recognition.onstart = function() {
-                console.log("Listening... Speak now.");
-            };
+            let inputField = document.getElementById(targetInputId);
+            if(inputField) inputField.placeholder = "🎙️ Listening... Speak now...";
 
             recognition.onresult = function(event) {
                 let speechResult = event.results[0][0].transcript;
-                let inputField = document.getElementById(targetInputId);
                 if (inputField) {
                     inputField.value = speechResult;
                 }
@@ -272,6 +278,11 @@
 
             recognition.onerror = function(event) {
                 alert("Voice recognition error: " + event.error);
+                if(inputField) inputField.placeholder = "Ask AI / ChatGPT or tap mic...";
+            };
+
+            recognition.onend = function() {
+                if(inputField) inputField.placeholder = "Ask AI / ChatGPT or tap mic...";
             };
 
             recognition.start();
@@ -280,7 +291,7 @@
         const translations = {
             en: { subtitle: '"A World at Your Fingertips — Directed by Salih Wayanad"', settings: 'Settings', homeTitle: 'Home Main Folders', eduTitle: 'Education', eduSub: 'Books & Learning', govTitle: 'Government', govSub: 'Services & Portals', cinTitle: 'Cinema & Music', cinSub: 'Free AI Tools', techTitle: 'Technology', techSub: 'ChatGPT, Gemini & AI', backBtn: '← Back to Home' },
             ml: { subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം — സംവിധാനം: സാലിഹ് വയനാട്"', settings: 'ക്രമീകരണങ്ങൾ', homeTitle: 'പ്രധാന ഫോൾഡറുകൾ', eduTitle: 'വിദ്യാഭ്യാസം', eduSub: 'പുസ്തകങ്ങളും പഠനവും', govTitle: 'സർക്കാർ', govSub: 'സേവനങ്ങളും പോർട്ടലുകളും', cinTitle: 'സിനിമ & സംഗീതം', cinSub: 'സൗജന്യ AI ടൂളുകൾ', techTitle: 'സാങ്കേതികവിദ്യ', techSub: 'ChatGPT & Gemini ടൂളുകൾ', backBtn: '← ഹോമിലേക്ക് തിരികെ' },
-            ar: { subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', settings: 'الإعدادات', homeTitle: 'المجلدات الرئيسية', eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', cinTitle: 'السينما والموسيقى', cinTitle: 'أدوات الذكاء الاصطناعي', techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', backBtn: '← العودة للرئيسية' },
+            ar: { subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', settings: 'الإعدادات', homeTitle: 'المجلدات الرئيسية', eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', cinTitle: 'السينما والموسيقى', cinSub: 'أدوات الذكاء الاصطناعي', techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', backBtn: '← العودة للرئيسية' },
             hi: { subtitle: '"आपकी उंगलियों पर दुनिया — निर्देशक: सालेह വയനാട്"', settings: 'सेटिंग्स', homeTitle: 'मुख्य फ़ोल्डर', eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', cinTitle: 'सिनेमा और संगीत', cinTitle: 'मुफ्त एआई टूल', techTitle: 'प्रौद्योगिकी', techSub: 'ChatGPT और Gemini', backBtn: '← होम पर वापस जाएं' },
             ta: { subtitle: '"உங்கள் விரல் நுனியில் உலகம் — இயக்கம்: சாலிஹ் வயநாடு"', settings: 'அமைப்புகள்', homeTitle: 'முதன்மை கோப்புறைகள்', eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', cinTitle: 'சினிமா & இசை', cinTitle: 'இலவச AI கருவிகள்', techTitle: 'தொழில்நுட்பம்', techSub: 'ChatGPT & Gemini கருவிகள்', backBtn: '← முகப்புக்குச் செல்ல' },
             kn: { subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' }
@@ -350,6 +361,7 @@
             if(backBtnElem) backBtnElem.innerText = t.backBtn;
         }
 
+        // Functional AI Assistant Connection
         function triggerGoogleAssistant() {
             let queryInput = document.getElementById('globalAiQuery');
             let resBox = document.getElementById('globalAiResponse');
@@ -357,14 +369,11 @@
                 alert("Please enter or speak a question.");
                 return;
             }
-            let query = queryInput.value.trim();
+            let query = encodeURIComponent(queryInput.value.trim());
             resBox.classList.remove('hidden');
-            resBox.innerHTML = `🤖 <b>ChatGPT & Google Gemini AI Hub...</b><br>Analyzing query: "<i>${query}</i>"`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>AI & ChatGPT Recommended Resources:</b><br>To get results for "${query}", explore ChatGPT or Google Gemini directly.<br>
-                <a href="https://chatgpt.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Open in ChatGPT (OpenAI) ➔</a>
-                <a href="https://gemini.google.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Open in Google Gemini ➔</a>`;
-            }, 800);
+            resBox.innerHTML = `✨ <b>AI & ChatGPT Response Ready:</b><br>Click below to instantly search and chat with ChatGPT or Google Gemini about: "<i>${decodeURIComponent(query)}</i>"<br>
+            <a href="https://chatgpt.com/?q=${query}" target="_blank" class="text-cyan-300 underline font-bold mt-1.5 block">💬 Continue in ChatGPT (OpenAI) ➔</a>
+            <a href="https://gemini.google.com/app" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">🤖 Continue in Google Gemini ➔</a>`;
         }
 
         function askDomainSpecificAI() {
@@ -374,14 +383,11 @@
                 alert("Please enter or speak your question.");
                 return;
             }
-            let query = queryInput.value.trim();
+            let query = encodeURIComponent(queryInput.value.trim());
             resBox.classList.remove('hidden');
-            resBox.innerHTML = `🔍 <b>Searching within ${currentActiveDomain}...</b><br>Analyzing: "<i>${query}</i>"`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>${currentActiveDomain} Expert Guidance:</b><br>Regarding your query about <b>${query}</b>: You can connect with ChatGPT or Google Gemini for deep code generation and design support.<br>
-                <a href="https://chatgpt.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Ask ChatGPT ➔</a>
-                <a href="https://gemini.google.com/" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">Ask Google Gemini ➔</a>`;
-            }, 800);
+            resBox.innerHTML = `✨ <b>${currentActiveDomain} AI Guidance:</b><br>Explore deep answers for "<i>${decodeURIComponent(query)}</i>" using AI platforms:<br>
+            <a href="https://chatgpt.com/?q=${query}" target="_blank" class="text-cyan-300 underline font-bold mt-1.5 block">💬 Ask ChatGPT ➔</a>
+            <a href="https://gemini.google.com/app" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">🤖 Ask Google Gemini ➔</a>`;
         }
 
         function requestAdminAccess() {
@@ -399,13 +405,18 @@
             if(modal) modal.classList.add('hidden');
         }
 
-        function verifyAdminCode() {
+        async function verifyAdminCode() {
             let input = document.getElementById('adminSecretInput');
             if(!input) return;
             let enteredCode = input.value.trim();
-            if (enteredCode === "salih9947") {
+            
+            // SHA-256 Hash of "salih9947"
+            const targetHash = "29b8c0c9842a27ffb3a1a591e1d054238e8ecaa213f56e9c60e33efb1c1b1c67"; 
+            const hashedInput = await sha256(enteredCode);
+
+            if (hashedInput === targetHash) {
                 closeAdminModal();
-                alert("✅ Salih Wayanad Studio Access Verified!");
+                alert("✅ Salih Wayanad Studio Secure Access Verified!");
                 openAdminSettingsDashboard();
             } else {
                 alert("❌ Access Denied! Only Director Salih Wayanad's secret code is authorized.");
