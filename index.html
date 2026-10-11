@@ -6,7 +6,7 @@
 
             if(homeView) homeView.classList.add('hidden');
             if(subView) subView.classList.remove('hidden');
-            if(domainBox) domainBox.classList.remove('hidden'); // Ensure AI Box is shown or controlled
+            if(domainBox) domainBox.classList.remove('hidden');
             if(pageTitle) pageTitle.innerText = '🎬 Salih Wayanad Studio & Settings';
 
             const grid = document.getElementById('pageContentGrid');
@@ -38,7 +38,7 @@
                     <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
                 </div>
 
-                <!-- AI IMAGE-TO-THEME STUDIO (SALIH WAYANAD EXCLUSIVE) -->
+                <!-- AI IMAGE-TO-THEME STUDIO -->
                 <div class="card-3d p-4 rounded-2xl space-y-2 text-xs col-span-2 border border-indigo-500/60 bg-gradient-to-br from-indigo-950/40 to-slate-900">
                     <label class="text-indigo-300 font-bold block text-sm">🤖 AI Image-to-Theme Studio (Director Salih Only):</label>
                     <p class="text-[10px] text-slate-300">Upload reference poster/photo. AI will automatically extract color palette and transform the app theme!</p>
@@ -72,7 +72,7 @@
                     <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl border border-slate-700 text-[10px] file:bg-cyan-600 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1">
                 </div>
 
-                <!-- INDIVIDUAL FOLDER ICONS (PHOTO UPLOAD) -->
+                <!-- INDIVIDUAL FOLDER ICONS -->
                 <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2 border border-indigo-500/50">
                     <label class="text-indigo-300 font-bold block">🖼️ Small Folder Icon Photos (Upload from Gallery):</label>
                 </div>
@@ -94,7 +94,7 @@
                     <input type="file" id="iconTechFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
                 </div>
 
-                <!-- INDIVIDUAL FOLDER BACKGROUND IMAGES -->
+                <!-- INDIVIDUAL FOLDER BACKGROUNDS -->
                 <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2 border border-teal-500/50 mt-2">
                     <label class="text-teal-300 font-bold block">📂 Individual Small Folder Background Images:</label>
                 </div>
