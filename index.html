@@ -95,7 +95,7 @@
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
         </div>
 
-        <!-- HOME PAGE AI: Full Open AI Assistant Hub (ChatGPT & Gemini Integration) -->
+        <!-- HOME PAGE UNIVERSAL AI: ChatGPT & Gemini Hub -->
         <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
@@ -187,8 +187,8 @@
                 {name: 'Support & Trade Helpline', action: 'whatsapp_chat', phone: '919633111000'}
             ])" class="folder-card card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                 <div id="iconWa" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/50 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform overflow-hidden animate-pulse">💬📞</div>
-                <h3 class="font-bold text-sm text-emerald-300">WhatsApp & Call</h3>
-                <p class="text-[10px] text-emerald-200/70 mt-1">Direct Chat & Hub</p>
+                <h3 class="font-bold text-sm text-emerald-300 folder-wa">WhatsApp & Call</h3>
+                <p class="text-[10px] text-emerald-200/70 mt-1 folder-wa-sub">Direct Chat & Hub</p>
             </div>
 
             <!-- All Other Services (46 Master Folders) Button -->
@@ -198,6 +198,9 @@
                 <p class="text-[10px] folder-all-sub text-teal-200/70 mt-1">Remaining 46 Master Folders</p>
             </div>
         </div>
+
+        <!-- Dynamic User Created Folders Container -->
+        <div id="userCustomFolderGrid" class="grid grid-cols-2 gap-3.5 pt-2"></div>
     </main>
 
     <!-- Sub-Folders & Settings View -->
@@ -246,7 +249,21 @@
 
         let currentActiveDomain = "OYES Home";
 
-        // Secure SHA-256 Hashing Function for Admin Password (salih9947)
+        const serviceNames = [
+            "Digital Services Hub", "Public Utility Portal", "E-Governance Link", "Citizen Support Portal",
+            "Online Registration Hub", "Welfare Schemes Portal", "Skill Development Links", "Employment Exchange Portal",
+            "Legal Aid Services", "Health Care Portal", "Agriculture & Farming", "Transport & Travel Hub",
+            "Banking & Financial Services", "Postal Services Portal", "Consumer Rights Forum", "Cyber Security Portal",
+            "Disaster Management Hub", "Environment & Forestry", "Energy & Power Services", "Water Supply Portal",
+            "Housing & Urban Development", "Rural Development Hub", "Tourism & Heritage", "Sports & Youth Affairs",
+            "Food & Civil Supplies", "Cooperative Sector Hub", "Industries & Commerce", "MSME Support Portal",
+            "Labor Welfare Services", "Taxation & Revenue Hub", "Panchayat Raj Portal", "Local Administration",
+            "Social Welfare Portal", "Women & Child Development", "Tribal Welfare Hub", "Minority Affairs Portal",
+            "Statistics & Data Hub", "Public Grievances Portal", "RTI Information Hub", "Voter Services Portal",
+            "Aadhaar Services Link", "PAN & Tax Services", "Passport Seva Hub", "Insurance Schemes Portal",
+            "Pension Services Hub", "General Utility Portal"
+        ];
+
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -255,7 +272,6 @@
             return hashHex;
         }
 
-        // Voice Recognition Support with Live Feedback
         function startVoiceRecognition(targetInputId) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
@@ -272,9 +288,7 @@
 
             recognition.onresult = function(event) {
                 let speechResult = event.results[0][0].transcript;
-                if (inputField) {
-                    inputField.value = speechResult;
-                }
+                if (inputField) inputField.value = speechResult;
             };
 
             recognition.onerror = function(event) {
@@ -289,7 +303,6 @@
             recognition.start();
         }
 
-        // HOME PAGE UNIVERSAL AI: Connects to ChatGPT & Gemini Direct Chats
         function triggerUniversalAI() {
             let queryInput = document.getElementById('globalAiQuery');
             let resBox = document.getElementById('globalAiResponse');
@@ -304,7 +317,6 @@
             <a href="https://gemini.google.com/app" target="_blank" class="text-cyan-300 underline font-bold mt-1 block">🤖 Open in Google Gemini ➔</a>`;
         }
 
-        // SUB-FOLDERS NATIVE OYES AI ASSISTANT
         function askOyesAI(inputId, responseId) {
             let queryInput = document.getElementById(inputId);
             let resBox = document.getElementById(responseId);
@@ -312,27 +324,99 @@
                 alert("Please enter or speak a question for OYES AI.");
                 return;
             }
-            let query = queryInput.value.trim().toLowerCase();
             resBox.classList.remove('hidden');
             resBox.innerHTML = `🤖 <b>OYES AI is analyzing ${currentActiveDomain}...</b><br>Query: "<i>${queryInput.value.trim()}</i>"`;
 
             setTimeout(() => {
-                let reply = `✨ <b>OYES AI Guidance for ${currentActiveDomain}:</b><br>Regarding your query about "<b>${queryInput.value.trim()}</b>": OYES APP provides verified master resources, tools, and direct support under the direction of Salih Wayanad. Explore the sub-links above or contact our helpline via WhatsApp!`;
+                let reply = `✨ <b>OYES AI Guidance for ${currentActiveDomain}:</b><br>Regarding your query about "<b>${queryInput.value.trim()}</b>": OYES APP provides verified master resources under the direction of Salih Wayanad.`;
                 resBox.innerHTML = reply;
             }, 600);
         }
 
         const translations = {
-            en: { subtitle: '"A World at Your Fingertips — Directed by Salih Wayanad"', settings: 'Settings', homeTitle: 'Home Main Folders', eduTitle: 'Education', eduSub: 'Books & Learning', govTitle: 'Government', govSub: 'Services & Portals', cinTitle: 'Cinema & Music', cinSub: 'Free AI Tools', techTitle: 'Technology', techSub: 'ChatGPT, Gemini & AI', backBtn: '← Back to Home' },
-            ml: { subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം — സംവിധാനം: സാലിഹ് വയനാട്"', settings: 'ക്രമീകരണങ്ങൾ', homeTitle: 'പ്രധാന ഫോൾഡറുകൾ', eduTitle: 'വിദ്യാഭ്യാസം', eduSub: 'പുസ്തകങ്ങളും പഠനവും', govTitle: 'സർക്കാർ', govSub: 'സേവനങ്ങളും പോർട്ടലുകളും', cinTitle: 'സിനിമ & സംഗീതം', cinSub: 'സൗജന്യ AI ടൂളുകൾ', techTitle: 'സാങ്കേതികവിദ്യ', techSub: 'ChatGPT & Gemini ടൂളുകൾ', backBtn: '← ഹോമിലേക്ക് തിരികെ' },
-            ar: { subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', settings: 'الإعدادات', homeTitle: 'المجلدات الرئيسية', eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', cinTitle: 'السينما والموسيقى', cinTitle: 'أدوات الذكاء الاصطناعي', techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', backBtn: '← العودة للرئيسية' },
-            hi: { subtitle: '"आपकी उंगलियों पर दुनिया — निर्देशक: सालेह വയനാട്"', settings: 'सेटिंग्स', homeTitle: 'मुख्य फ़ोल्डर', eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', cinTitle: 'सिनेमा और संगीत', cinTitle: 'मुफ्त एआई टूल', techTitle: 'प्रौद्योगिकी', techSub: 'ChatGPT और Gemini', backBtn: '← होम पर वापस जाएं' },
-            ta: { subtitle: '"உங்கள் விரல் நுனியில் உலகம் — இயக்கம்: சாலிஹ் வயநாடு"', settings: 'அமைப்புகள்', homeTitle: 'முதன்மை கோப்புறைகள்', eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', cinTitle: 'சினிமா & இசை', cinTitle: 'இலவச AI கருவிகள்', techTitle: 'தொழில்நுட்பம்', techSub: 'ChatGPT & Gemini கருவிகள்', backBtn: '← முகப்புக்குச் செல்ல' },
-            kn: { subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' }
+            en: { 
+                subtitle: '"A World at Your Fingertips — Directed by Salih Wayanad"', 
+                settings: 'Settings', 
+                homeTitle: 'Home Main Folders', 
+                eduTitle: 'Education', eduSub: 'Books & Learning', 
+                govTitle: 'Government', govSub: 'Services & Portals', 
+                cinTitle: 'Cinema & Music', cinSub: 'Free AI Tools', 
+                techTitle: 'Technology', techSub: 'ChatGPT, Gemini & AI', 
+                salesTitle: 'Sales', salesSub: '10% Admin Fee & Trade',
+                waTitle: 'WhatsApp & Call', waSub: 'Direct Chat & Hub',
+                allTitle: 'All Other Services', allSub: 'Remaining 46 Master Folders',
+                backBtn: '← Back to Home' 
+            },
+            ml: { 
+                subtitle: '"നിങ്ങളുടെ വിരൽത്തുമ്പിൽ ലോകം — സംവിധാനം: സാലിഹ് വയനാട്"', 
+                settings: 'ക്രമീകരണങ്ങൾ', 
+                homeTitle: 'പ്രധാന ഫോൾഡറുകൾ', 
+                eduTitle: 'വിദ്യാഭ്യാസം', eduSub: 'പുസ്തകങ്ങളും പഠനവും', 
+                govTitle: 'സർക്കാർ', govSub: 'സേവനങ്ങളും പോർട്ടലുകളും', 
+                cinTitle: 'സിനിമ & സംഗീതം', cinSub: 'സൗജന്യ AI ടൂളുകൾ', 
+                techTitle: 'സാങ്കേതികവിദ്യ', techSub: 'ChatGPT & Gemini ടൂളുകൾ', 
+                salesTitle: 'വ്യാപാരം (Sales)', salesSub: '10% അഡ്മിൻ ഫീസും കച്ചവടവും',
+                waTitle: 'വാട്സ്ആപ്പ് & കോൾ', waSub: 'നേരിട്ടുള്ള ചാറ്റ് ഹബ്ബ്',
+                allTitle: 'മറ്റ് സേവനങ്ങൾ', allSub: 'ബാക്കി 46 മാസ്റ്റർ ഫോൾഡറുകൾ',
+                backBtn: '← ഹോമിലേക്ക് തിരികെ' 
+            },
+            ar: { 
+                subtitle: '"العالم بين يديك — إخراج: صالح واياناد"', 
+                settings: 'الإعدادات', 
+                homeTitle: 'المجلدات الرئيسية', 
+                eduTitle: 'التعليم', eduSub: 'الكتب والتعلم', 
+                govTitle: 'الحكومة', govSub: 'الخدمات والبوابات', 
+                cinTitle: 'السينما والموسيقى', cinTitle: 'أدوات الذكاء الاصطناعي', 
+                techTitle: 'التكنولوجيا', techSub: 'تشات جي بي تي وجيميني', 
+                salesTitle: 'المبيعات', salesSub: 'رسوم الإدارة والتجارة',
+                waTitle: 'واتساب والمكالمات', waSub: 'مركز المحادثة المباشرة',
+                allTitle: 'جميع الخدمات الأخرى', allSub: 'المجلدات الـ 46 المتبقية',
+                backBtn: '← العودة للرئيسية' 
+            },
+            hi: { 
+                subtitle: '"आपकी उंगलियों पर दुनिया — निर्देशक: सालेह വയനാട്"', 
+                settings: 'सेटिंग्स', 
+                homeTitle: 'मुख्य फ़ोल्डर', 
+                eduTitle: 'शिक्षा', eduSub: 'पुस्तके और अध्ययन', 
+                govTitle: 'सरकार', govSub: 'सेवाएं और पोर्टल', 
+                cinTitle: 'सिनेमा और संगीत', cinTitle: 'मुफ्त एआई टूल', 
+                techTitle: 'प्रौद्योगिकी', techSub: 'ChatGPT और Gemini', 
+                salesTitle: 'बिक्री बाज़ार', salesSub: '10% एडमिन शुल्क और व्यापार',
+                waTitle: 'व्हाट्सएप और कॉल', waSub: 'सीधी चैट और हब',
+                allTitle: 'अन्य सभी सेवाएं', allSub: 'शेष 46 मास्टर फ़ोल्डर',
+                backBtn: '← होम पर वापस जाएं' 
+            },
+            ta: { 
+                subtitle: '"உங்கள் விரல் நுனியில் உலகம் — இயக்கம்: சாலிஹ் வயநாடு"', 
+                settings: 'அமைப்புகள்', 
+                homeTitle: 'முதன்மை கோப்புறைகள்', 
+                eduTitle: 'கல்வி', eduSub: 'புத்தகங்கள் & கற்றல்', 
+                govTitle: 'அரசு', govSub: 'சேவைகள் & தளங்கள்', 
+                cinTitle: 'சினிமா & இசை', cinTitle: 'இலவச AI கருவிகள்', 
+                techTitle: 'தொழில்நுட்பம்', techSub: 'ChatGPT & Gemini கருவிகள்', 
+                salesTitle: 'விற்பனை சந்தை', salesSub: '10% நிர்வாக கட்டணம் & வர்த்தகம்',
+                waTitle: 'வாட்ஸ்அப் & அழைப்பு', waSub: 'நேரடி அரட்டை மையம்',
+                allTitle: 'மற்ற அனைத்து சேவைகள்', allSub: 'மீதமுள்ள 46 கோப்புறைகள்',
+                backBtn: '← முகப்புக்குச் செல்ல' 
+            },
+            kn: { 
+                subtitle: '"ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ ಜಗತ್ತು — ನಿರ್ದೇಶನ: ಸಾಲಿಹ್ ವಯನಾಡ್"', 
+                settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', 
+                homeTitle: 'ಮುಖ್ಯ ಫೋಲ್ಡರ್‌ಗಳು', 
+                eduTitle: 'ಶಿಕ್ಷಣ', eduSub: 'ಪುಸ್ತಕಗಳು ಮತ್ತು ಕಲಿಕೆ', 
+                govTitle: 'ಸರ್ಕಾರ', govSub: 'ಸೇವೆಗಳು ಮತ್ತು ಪೋರ್ಟಲ್‌ಗಳು', 
+                cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', 
+                techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', 
+                salesTitle: 'ಮಾರಾಟ ಮಾರುಕಟ್ಟೆ', salesSub: '10% ನಿರ್ವಹಣಾ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
+                waTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ', waSub: 'ನೇರ ಚಾಟ್ ಕೇಂದ್ರ',
+                allTitle: 'ಇತರ ಎಲ್ಲಾ ಸೇವೆಗಳು', allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
+                backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' 
+            }
         };
 
         window.onload = function() {
             loadSavedCustomization();
+            loadUserFolders();
             let savedLang = localStorage.getItem('oyes_lang') || 'en';
             let langSelect = document.getElementById('langSelector');
             if(langSelect) langSelect.value = savedLang;
@@ -358,12 +442,8 @@
         function changeAppLanguage(lang) {
             localStorage.setItem('oyes_lang', lang);
             let t = translations[lang] || translations['en'];
-            
-            if(lang === 'ar') {
-                document.documentElement.setAttribute('dir', 'rtl');
-            } else {
-                document.documentElement.setAttribute('dir', 'ltr');
-            }
+            if(lang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
+            else document.documentElement.setAttribute('dir', 'ltr');
 
             let subTitleElem = document.getElementById('headerSubTitle');
             let homeSecElem = document.getElementById('homeSectionTitle');
@@ -371,38 +451,29 @@
 
             if(subTitleElem) subTitleElem.innerText = t.subtitle;
             if(homeSecElem) homeSecElem.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> ${t.homeTitle}`;
-            
-            let eduElem = document.querySelector('.folder-edu');
-            let eduSubElem = document.querySelector('.folder-edu-sub');
-            if(eduElem) eduElem.innerText = t.eduTitle;
-            if(eduSubElem) eduSubElem.innerText = t.eduSub;
-
-            let govElem = document.querySelector('.folder-gov');
-            let govSubElem = document.querySelector('.folder-gov-sub');
-            if(govElem) govElem.innerText = t.govTitle;
-            if(govSubElem) govSubElem.innerText = t.govSub;
-
-            let cinElem = document.querySelector('.folder-cin');
-            let cinSubElem = document.querySelector('.folder-cin-sub');
-            if(cinElem) cinElem.innerText = t.cinTitle;
-            if(cinSubElem) cinSubElem.innerText = t.cinSub;
-
-            let techElem = document.querySelector('.folder-tech');
-            let techSubElem = document.querySelector('.folder-tech-sub');
-            if(techElem) techElem.innerText = t.techTitle;
-            if(techSubElem) techSubElem.innerText = t.techSub;
-
             if(backBtnElem) backBtnElem.innerText = t.backBtn;
+
+            document.querySelectorAll('.folder-edu').forEach(e => e.innerText = t.eduTitle);
+            document.querySelectorAll('.folder-edu-sub').forEach(e => e.innerText = t.eduSub);
+            document.querySelectorAll('.folder-gov').forEach(e => e.innerText = t.govTitle);
+            document.querySelectorAll('.folder-gov-sub').forEach(e => e.innerText = t.govSub);
+            document.querySelectorAll('.folder-cin').forEach(e => e.innerText = t.cinTitle);
+            document.querySelectorAll('.folder-cin-sub').forEach(e => e.innerText = t.cinSub);
+            document.querySelectorAll('.folder-tech').forEach(e => e.innerText = t.techTitle);
+            document.querySelectorAll('.folder-tech-sub').forEach(e => e.innerText = t.techSub);
+            document.querySelectorAll('.folder-sales').forEach(e => e.innerText = t.salesTitle);
+            document.querySelectorAll('.folder-sales-sub').forEach(e => e.innerText = t.salesSub);
+            document.querySelectorAll('.folder-wa').forEach(e => e.innerText = t.waTitle);
+            document.querySelectorAll('.folder-wa-sub').forEach(e => e.innerText = t.waSub);
+            document.querySelectorAll('.folder-all').forEach(e => e.innerText = t.allTitle);
+            document.querySelectorAll('.folder-all-sub').forEach(e => e.innerText = t.allSub);
         }
 
         function requestAdminAccess() {
             let modal = document.getElementById('adminLoginModal');
             let input = document.getElementById('adminSecretInput');
             if(modal) modal.classList.remove('hidden');
-            if(input) {
-                input.value = '';
-                input.focus();
-            }
+            if(input) { input.value = ''; input.focus(); }
         }
 
         function closeAdminModal() {
@@ -413,11 +484,8 @@
         async function verifyAdminCode() {
             let input = document.getElementById('adminSecretInput');
             if(!input) return;
-            let enteredCode = input.value.trim();
-            
-            // SHA-256 Hash of "salih9947"
             const targetHash = "29b8c0c9842a27ffb3a1a591e1d054238e8ecaa213f56e9c60e33efb1c1b1c67"; 
-            const hashedInput = await sha256(enteredCode);
+            const hashedInput = await sha256(input.value.trim());
 
             if (hashedInput === targetHash) {
                 closeAdminModal();
@@ -446,17 +514,438 @@
             let currentTitle = localStorage.getItem('oyes_app_title') || 'OYES APP';
             let currentAdminText = localStorage.getItem('oyes_admin_text') || 'Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)';
 
-            grid.innerHTML = `
-                <!-- Settings AI Assistant Box with Mic -->
-                <div class="card-3d p-3.5 rounded-2xl shadow-lg space-y-2 col-span-2 border border-indigo-500/50">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-base">🤖✨</span>
-                            <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Studio OYES AI Assistant</h4>
+            let dynamicMasterFolderInputs = '';
+            serviceNames.forEach((sName, index) => {
+                dynamicMasterFolderInputs += `
+                    <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs col-span-2 border border-teal-500/30">
+                        <label class="text-cyan-300 font-bold block">📂 Master Folder #${index+1}: ${sName}</label>
+                        <div class="grid grid-cols-2 gap-2 mt-1">
+                            <div>
+                                <span class="text-[9px] text-slate-300">Custom Icon:</span>
+                                <input type="file" id="masterIcon_${index}" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-teal-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
+                            </div>
+                            <div>
+                                <span class="text-[9px] text-slate-300">Background:</span>
+                                <input type="file" id="masterBg_${index}" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px] file:bg-cyan-600 file:text-white file:border-0 file:rounded-md file:px-1 file:py-0.5">
+                            </div>
                         </div>
-                        <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Active</span>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" id="aiFolderQuery" placeholder="Ask OYES AI about settings or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                        <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                        <button
+                `;
+            });
+
+            grid.innerHTML = `
+                <!-- FOLDER CREATION & DELETION HUB -->
+                <div class="card-3d p-4 rounded-2xl space-y-3 text-xs col-span-2 border border-cyan-500/60 bg-gradient-to-br from-slate-900 to-indigo-950/50">
+                    <h4 class="text-cyan-300 font-bold text-sm">📁 Create & Manage Custom Folders:</h4>
+                    <input type="text" id="newFolderName" placeholder="Enter New Folder Name..." class="w-full bg-slate-950 text-slate-100 p-2.5 rounded-xl border border-cyan-700/60 text-xs">
+                    <input type="text" id="newFolderLink" placeholder="Enter Destination URL or Details..." class="w-full bg-slate-950 text-slate-100 p-2.5 rounded-xl border border-cyan-700/60 text-xs">
+                    <button type="button" onclick="createNewFolder()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl shadow transition-all text-xs">➕ Create & Add New Folder</button>
+                    <div class="pt-2 border-t border-slate-800">
+                        <label class="text-rose-400 font-bold block mb-1">🗑️ Delete Custom Folders:</label>
+                        <div id="deleteFolderList" class="space-y-1.5 max-h-32 overflow-y-auto"></div>
+                    </div>
+                </div>
+
+                <!-- AI IMAGE-TO-THEME STUDIO -->
+                <div class="card-3d p-4 rounded-2xl space-y-2 text-xs col-span-2 border border-indigo-500/60 bg-gradient-to-br from-indigo-950/40 to-slate-900">
+                    <label class="text-indigo-300 font-bold block text-sm">🤖 AI Image-to-Theme Studio (Director Salih Only):</label>
+                    <p class="text-[10px] text-slate-300">Upload reference poster/photo. AI will automatically extract color palette and transform the app theme!</p>
+                    <input type="file" id="aiThemePhoto" accept="image/*" class="w-full bg-slate-950 text-slate-100 p-2 rounded-xl border border-indigo-500/50 text-xs">
+                    <button type="button" onclick="processAiImageTheme()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs">✨ Apply AI Theme from Photo</button>
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">App Title / Name:</label>
+                    <input type="text" id="editAppTitle" value="${currentTitle}" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">🎨 Manual App Background Theme:</label>
+                    <select id="editBgColor" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                        <option value="radial-gradient(circle at top, #1e1b4b, #0f172a, #020617)">Midnight Navy (Default)</option>
+                        <option value="radial-gradient(circle at top, #065f46, #0f172a, #020617)">Emerald Deep</option>
+                        <option value="radial-gradient(circle at top, #831843, #0f172a, #020617)">Royal Fuchsia</option>
+                    </select>
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">✨ Folder Design Style:</label>
+                    <select id="editFolderStyle" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">
+                        <option value="rounded-3xl">3D Rounded</option>
+                        <option value="rounded-xl">Compact Box</option>
+                        <option value="rounded-none">Sharp Edge</option>
+                        <option value="rounded-full">Pill / Circle</option>
+                    </select>
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">📁 Upload App Logo:</label>
+                    <input type="file" id="editLogoFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1.5 rounded-xl border border-slate-700 text-[10px]">
+                </div>
+
+                <!-- MAIN FOLDER ICONS & BG -->
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Education Icon:</label>
+                    <input type="file" id="iconEduFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Govt Icon:</label>
+                    <input type="file" id="iconGovFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Cinema Icon:</label>
+                    <input type="file" id="iconCinFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Tech Icon:</label>
+                    <input type="file" id="iconTechFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Education BG:</label>
+                    <input type="file" id="bgEduFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Govt BG:</label>
+                    <input type="file" id="bgGovFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Cinema BG:</label>
+                    <input type="file" id="bgCinFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+                <div class="card-3d p-3.5 rounded-2xl space-y-1 text-xs">
+                    <label class="text-cyan-300 font-bold block">Tech BG:</label>
+                    <input type="file" id="bgTechFile" accept="image/*" class="w-full bg-slate-900 text-slate-100 p-1 rounded-xl text-[9px]">
+                </div>
+
+                ${dynamicMasterFolderInputs}
+
+                <div class="card-3d p-3.5 rounded-2xl space-y-1.5 text-xs col-span-2">
+                    <label class="text-cyan-300 font-bold block">Admin / Contact Details text:</label>
+                    <textarea id="editAdminText" rows="2" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700">${currentAdminText}</textarea>
+                </div>
+                <div class="col-span-2 pt-2">
+                    <button type="button" onclick="saveAdminChanges()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 text-white font-bold py-3 rounded-2xl shadow-lg text-sm">💾 Save & Apply Studio Changes</button>
+                </div>
+            `;
+            renderDeleteFolderList();
+            window.scrollTo(0, 0);
+        }
+
+        function createNewFolder() {
+            let nameInput = document.getElementById('newFolderName');
+            let linkInput = document.getElementById('newFolderLink');
+            if(!nameInput || !nameInput.value.trim()) {
+                alert("Please enter a folder name.");
+                return;
+            }
+            let userFolders = JSON.parse(localStorage.getItem('oyes_user_folders') || '[]');
+            userFolders.push({
+                name: nameInput.value.trim(),
+                url: linkInput && linkInput.value.trim() ? linkInput.value.trim() : 'https://www.india.gov.in/'
+            });
+            localStorage.setItem('oyes_user_folders', JSON.stringify(userFolders));
+            alert("✅ New custom folder created successfully!");
+            nameInput.value = '';
+            if(linkInput) linkInput.value = '';
+            renderDeleteFolderList();
+            loadUserFolders();
+        }
+
+        function renderDeleteFolderList() {
+            let container = document.getElementById('deleteFolderList');
+            if(!container) return;
+            let userFolders = JSON.parse(localStorage.getItem('oyes_user_folders') || '[]');
+            if(userFolders.length === 0) {
+                container.innerHTML = '<p class="text-[10px] text-slate-400">No custom folders created yet.</p>';
+                return;
+            }
+            container.innerHTML = '';
+            userFolders.forEach((folder, idx) => {
+                let div = document.createElement('div');
+                div.className = "flex justify-between items-center bg-slate-950 p-2 rounded-xl border border-slate-800";
+                div.innerHTML = `
+                    <span class="text-slate-200 text-[11px]">${folder.name}</span>
+                    <button type="button" onclick="deleteUserFolder(${idx})" class="bg-rose-950 hover:bg-rose-900 text-rose-300 px-2 py-1 rounded-lg text-[10px] font-bold">Delete</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function deleteUserFolder(index) {
+            let userFolders = JSON.parse(localStorage.getItem('oyes_user_folders') || '[]');
+            userFolders.splice(index, 1);
+            localStorage.setItem('oyes_user_folders', JSON.stringify(userFolders));
+            renderDeleteFolderList();
+            loadUserFolders();
+            alert("🗑️ Folder deleted successfully!");
+        }
+
+        function loadUserFolders() {
+            let grid = document.getElementById('userCustomFolderGrid');
+            if(!grid) return;
+            let userFolders = JSON.parse(localStorage.getItem('oyes_user_folders') || '[]');
+            grid.innerHTML = '';
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+
+            userFolders.forEach((folder) => {
+                const card = document.createElement('div');
+                card.className = `card-3d p-4 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                card.innerHTML = `
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-2xl mb-2.5">📂</div>
+                    <h3 class="font-bold text-sm text-slate-100">${folder.name}</h3>
+                    <p class="text-[10px] text-cyan-200/60 mt-1">Custom Folder</p>
+                `;
+                card.onclick = () => window.open(folder.url, '_blank');
+                grid.appendChild(card);
+            });
+        }
+
+        function processAiImageTheme() {
+            let fileInput = document.getElementById('aiThemePhoto');
+            if(!fileInput || !fileInput.files || !fileInput.files[0]) {
+                alert("Please select an image file first.");
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let imgDataUrl = e.target.result;
+                let aiGeneratedBgGradient = `linear-gradient(rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95)), url('${imgDataUrl}')`;
+                localStorage.setItem('oyes_app_bg', aiGeneratedBgGradient);
+                document.body.style.background = aiGeneratedBgGradient;
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundAttachment = "fixed";
+                alert("✨ AI successfully analyzed your photo and generated a custom theme design!");
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function saveAdminChanges() {
+            let titleInput = document.getElementById('editAppTitle');
+            let adminInput = document.getElementById('editAdminText');
+            let bgSelect = document.getElementById('editBgColor');
+            let styleSelect = document.getElementById('editFolderStyle');
+
+            if(titleInput) localStorage.setItem('oyes_app_title', titleInput.value);
+            if(adminInput) localStorage.setItem('oyes_admin_text', adminInput.value);
+            if(styleSelect) localStorage.setItem('oyes_folder_style', styleSelect.value);
+            if(bgSelect && (!localStorage.getItem('oyes_app_bg') || !localStorage.getItem('oyes_app_bg').includes('url('))) {
+                localStorage.setItem('oyes_app_bg', bgSelect.value);
+            }
+
+            let fileInputs = {
+                'oyes_logo_img': document.getElementById('editLogoFile'),
+                'oyes_icon_edu_img': document.getElementById('iconEduFile'),
+                'oyes_icon_gov_img': document.getElementById('iconGovFile'),
+                'oyes_icon_cin_img': document.getElementById('iconCinFile'),
+                'oyes_icon_tech_img': document.getElementById('iconTechFile'),
+                'oyes_edu_bg': document.getElementById('bgEduFile'),
+                'oyes_gov_bg': document.getElementById('bgGovFile'),
+                'oyes_cin_bg': document.getElementById('bgCinFile'),
+                'oyes_tech_bg': document.getElementById('bgTechFile')
+            };
+
+            serviceNames.forEach((_, idx) => {
+                fileInputs[`master_icon_${idx}`] = document.getElementById(`masterIcon_${idx}`);
+                fileInputs[`master_bg_${idx}`] = document.getElementById(`masterBg_${idx}`);
+            });
+
+            let keys = Object.keys(fileInputs);
+            let processed = 0;
+            let totalFiles = keys.filter(k => fileInputs[k] && fileInputs[k].files && fileInputs[k].files[0]).length;
+
+            if (totalFiles === 0) {
+                alert("✅ Salih Wayanad Studio settings saved successfully!");
+                loadSavedCustomization();
+                loadUserFolders();
+                goBackHome();
+                return;
+            }
+
+            keys.forEach(key => {
+                let input = fileInputs[key];
+                if (input && input.files && input.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        localStorage.setItem(key, e.target.result);
+                        processed++;
+                        if (processed >= totalFiles) {
+                            alert("✅ All icons, gallery images & studio settings saved!");
+                            loadSavedCustomization();
+                            loadUserFolders();
+                            goBackHome();
+                        }
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        }
+
+        function loadSavedCustomization() {
+            let savedTitle = localStorage.getItem('oyes_app_title');
+            let savedLogoImg = localStorage.getItem('oyes_logo_img');
+            let savedAdminText = localStorage.getItem('oyes_admin_text');
+            let savedBg = localStorage.getItem('oyes_app_bg');
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style');
+
+            if(savedTitle) {
+                let mTitle = document.getElementById('headerMainTitle');
+                let aTag = document.getElementById('appTitleTag');
+                if(mTitle) mTitle.innerText = savedTitle;
+                if(aTag) aTag.innerText = savedTitle;
+            }
+            if(savedLogoImg) {
+                let lContainer = document.getElementById('headerLogoContainer');
+                if(lContainer) lContainer.innerHTML = `<img src="${savedLogoImg}" class="w-7 h-7 object-cover rounded-full border border-cyan-400">`;
+            }
+            if(savedAdminText) {
+                let fAdmin = document.getElementById('footerAdminText');
+                if(fAdmin) fAdmin.innerText = savedAdminText;
+            }
+            if(savedBg) {
+                document.body.style.background = savedBg;
+                if(savedBg.includes('url(')) {
+                    document.body.style.backgroundSize = "cover";
+                    document.body.style.backgroundPosition = "center";
+                    document.body.style.backgroundAttachment = "fixed";
+                }
+            }
+            if(savedFolderStyle) {
+                document.querySelectorAll('.folder-card, .card-all').forEach(card => {
+                    card.className = card.className.replace(/rounded-(3xl|xl|none|full)/g, savedFolderStyle);
+                });
+            }
+
+            let eduBg = localStorage.getItem('oyes_edu_bg');
+            let govBg = localStorage.getItem('oyes_gov_bg');
+            let cinBg = localStorage.getItem('oyes_cin_bg');
+            let techBg = localStorage.getItem('oyes_tech_bg');
+
+            if(eduBg && document.getElementById('cardEdu')) document.getElementById('cardEdu').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${eduBg}') center/cover`;
+            if(govBg && document.getElementById('cardGov')) document.getElementById('cardGov').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${govBg}') center/cover`;
+            if(cinBg && document.getElementById('cardCin')) document.getElementById('cardCin').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${cinBg}') center/cover`;
+            if(techBg && document.getElementById('cardTech')) document.getElementById('cardTech').style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${techBg}') center/cover`;
+
+            let iconEduImg = localStorage.getItem('oyes_icon_edu_img');
+            let iconGovImg = localStorage.getItem('oyes_icon_gov_img');
+            let iconCinImg = localStorage.getItem('oyes_icon_cin_img');
+            let iconTechImg = localStorage.getItem('oyes_icon_tech_img');
+
+            if(iconEduImg) document.getElementById('iconEdu').innerHTML = `<img src="${iconEduImg}" class="w-full h-full object-cover rounded-xl">`;
+            if(iconGovImg) document.getElementById('iconGov').innerHTML = `<img src="${iconGovImg}" class="w-full h-full object-cover rounded-xl">`;
+            if(iconCinImg) document.getElementById('iconCin').innerHTML = `<img src="${iconCinImg}" class="w-full h-full object-cover rounded-xl">`;
+            if(iconTechImg) document.getElementById('iconTech').innerHTML = `<img src="${iconTechImg}" class="w-full h-full object-cover rounded-xl">`;
+        }
+
+        function goBackHome() {
+            let homeView = document.getElementById('homeView');
+            let subView = document.getElementById('subFolderPageView');
+            let domainBox = document.getElementById('domainAiBox');
+            if(homeView) homeView.classList.remove('hidden');
+            if(subView) subView.classList.add('hidden');
+            if(domainBox) domainBox.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openSubFolders(folderName, subItems) {
+            currentActiveDomain = folderName;
+            let homeView = document.getElementById('homeView');
+            let subView = document.getElementById('subFolderPageView');
+            let domainBox = document.getElementById('domainAiBox');
+            let pageTitle = document.getElementById('pageTitle');
+            let domainTitle = document.getElementById('domainAiTitle');
+            let resBox = document.getElementById('aiFolderResponse');
+            let qInput = document.getElementById('aiFolderQuery');
+
+            if(homeView) homeView.classList.add('hidden');
+            if(subView) subView.classList.remove('hidden');
+            if(domainBox) domainBox.classList.remove('hidden');
+            if(pageTitle) pageTitle.innerText = folderName;
+            if(domainTitle) domainTitle.innerText = `${folderName} OYES AI Assistant`;
+            if(resBox) resBox.classList.add('hidden');
+            if(qInput) qInput.value = '';
+
+            const grid = document.getElementById('pageContentGrid');
+            if(!grid) return;
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
+            grid.innerHTML = '';
+
+            subItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `folder-card card-3d p-4 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                card.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-500/30 flex items-center justify-center text-xl mb-2">📁</div>
+                    <h3 class="font-bold text-xs text-slate-100">${item.name}</h3>
+                    <p class="text-[9px] text-cyan-200/60 mt-1">In-App Resource Hub</p>
+                `;
+                card.onclick = () => {
+                    if(item.action === 'whatsapp_chat') {
+                        let num = prompt("Enter WhatsApp Number:", item.phone);
+                        if(num) window.open(`https://wa.me/${num.trim()}`, '_blank');
+                    } else if(item.url) {
+                        window.open(item.url, '_blank');
+                    }
+                };
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function openAllFoldersPage() {
+            let homeView = document.getElementById('homeView');
+            let subView = document.getElementById('subFolderPageView');
+            let domainBox = document.getElementById('domainAiBox');
+            let pageTitle = document.getElementById('pageTitle');
+
+            if(homeView) homeView.classList.add('hidden');
+            if(subView) subView.classList.remove('hidden');
+            if(domainBox) domainBox.classList.add('hidden');
+            if(pageTitle) pageTitle.innerText = 'All Other Services (46 Master Folders)';
+            
+            const grid = document.getElementById('pageContentGrid');
+            if(!grid) return;
+            let savedFolderStyle = localStorage.getItem('oyes_folder_style') || 'rounded-3xl';
+            grid.className = "grid grid-cols-2 gap-3.5 pb-6";
+            grid.innerHTML = '';
+            
+            serviceNames.forEach((title, index) => {
+                const card = document.createElement('div');
+                let savedBg = localStorage.getItem(`master_bg_${index}`);
+                let savedIcon = localStorage.getItem(`master_icon_${index}`);
+                
+                if(savedBg) {
+                    card.style.background = `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('${savedBg}') center/cover`;
+                    card.className = `card-3d p-3.5 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                } else {
+                    card.className = `folder-card card-all p-3.5 ${savedFolderStyle} cursor-pointer flex flex-col items-center text-center group`;
+                }
+
+                let iconHtml = `<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500/25 to-emerald-600/25 border border-teal-500/30 flex items-center justify-center text-lg mb-2">📂</div>`;
+                if(savedIcon) {
+                    iconHtml = `<div class="w-9 h-9 rounded-xl overflow-hidden border border-teal-400 mb-2"><img src="${savedIcon}" class="w-full h-full object-cover"></div>`;
+                }
+
+                card.innerHTML = `
+                    ${iconHtml}
+                    <h3 class="font-bold text-[11px] text-slate-100">${title}</h3>
+                    <p class="text-[8px] text-teal-200/60 mt-0.5">OYES In-App Hub</p>
+                `;
+                card.onclick = () => {
+                    currentActiveDomain = title;
+                    openSubFolders(title, [
+                        {name: `${title} - Official Portal`, url: 'https://www.india.gov.in/'},
+                        {name: `${title} - Direct Support`, action: 'whatsapp_chat', phone: '919947198248'}
+                    ]);
+                };
+                grid.appendChild(card);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function installAppPrompt() { alert('📲 Tap Chrome menu (⋮) and select "Add to Home screen".'); }
+        function shareApp() { navigator.clipboard.writeText(window.location.href); alert('🔗 Link copied to clipboard!'); }
+    </script>
+</body>
+</html>
