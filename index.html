@@ -80,7 +80,7 @@
         <div class="bg-slate-900 border border-cyan-500/60 p-5 rounded-3xl max-w-xs w-full shadow-2xl space-y-3">
             <h3 class="text-sm font-bold text-cyan-300 text-center">🎬 Salih Wayanad Studio Login</h3>
             <p class="text-[11px] text-slate-300 text-center">Director Secret Code Required:</p>
-            <input type="password" id="adminSecretInput" placeholder="Enter code..." class="w-full bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-cyan-600/50 text-xs focus:outline-none focus:border-cyan-400 text-center">
+            <input type="password" id="adminSecretInput" placeholder="Enter code (salih9947)..." class="w-full bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-cyan-600/50 text-xs focus:outline-none focus:border-cyan-400 text-center">
             <div class="grid grid-cols-2 gap-2 pt-1">
                 <button type="button" onclick="closeAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2 rounded-xl font-bold">Cancel</button>
                 <button type="button" onclick="verifyAdminCode()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs py-2 rounded-xl font-bold">Verify</button>
@@ -264,14 +264,6 @@
             "Pension Services Hub", "General Utility Portal"
         ];
 
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex;
-        }
-
         function startVoiceRecognition(targetInputId) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
@@ -408,7 +400,7 @@
                 cinTitle: 'ಸಮಾಚಾರ ಮತ್ತು ಸಂಗೀತ', cinTitle: 'ಉಚಿತ AI ಸಾಧನಗಳು', 
                 techTitle: 'ತಂತ್ರಜ್ಞಾನ', techSub: 'ChatGPT & Gemini ಸಾಧನಗಳು', 
                 salesTitle: 'ಮಾರಾಟ ಮಾರುಕಟ್ಟೆ', salesSub: '10% ನಿರ್ವಹಣಾ ಶುಲ್ಕ ಮತ್ತು ವ್ಯಾಪಾರ',
-                waTitle: 'ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ', waSub: 'ನೇರ ಚಾಟ್ ಕೇಂದ್ರ',
+                ವಾಟ್ಸಾಪ್ ಮತ್ತು ಕರೆ', waSub: 'ನೇರ ಚಾಟ್ ಕೇಂದ್ರ',
                 allTitle: 'ಇತರ ಎಲ್ಲಾ ಸೇವೆಗಳು', allSub: 'ಉಳಿದ 46 ಮಾಸ್ಟರ್ ಫೋಲ್ಡರ್‌ಗಳು',
                 backBtn: '← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ' 
             }
@@ -465,18 +457,17 @@
             if(modal) modal.classList.add('hidden');
         }
 
-        async function verifyAdminCode() {
+        function verifyAdminCode() {
             let input = document.getElementById('adminSecretInput');
             if(!input) return;
-            const targetHash = "29b8c0c9842a27ffb3a1a591e1d054238e8ecaa213f56e9c60e33efb1c1b1c67"; 
-            const hashedInput = await sha256(input.value.trim());
+            let enteredValue = input.value.trim();
 
-            if (hashedInput === targetHash) {
+            if (enteredValue === "salih9947") {
                 closeAdminModal();
                 alert("✅ Salih Wayanad Studio Secure Access Verified!");
                 openAdminSettingsDashboard();
             } else {
-                alert("❌ Access Denied! Only Director Salih Wayanad's secret code is authorized.");
+                alert("❌ Access Denied! Please enter the correct Director code (salih9947).");
             }
         }
 
