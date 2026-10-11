@@ -95,7 +95,7 @@
             <span id="userCategoryBadge" class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-700/60 px-2.5 py-1 rounded-full font-bold">User: Direct Access</span>
         </div>
 
-        <!-- AI Assistant Hub Box with Voice Microphone -->
+        <!-- AI Assistant Hub Box with Microphone Button -->
         <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
@@ -105,9 +105,9 @@
                 <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">24/7 Active</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">🎤</button>
-                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
+                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="globalAiResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -209,7 +209,7 @@
             <h3 id="pageTitle" class="text-xs font-bold text-cyan-300 text-right">Sub Page</h3>
         </div>
 
-        <!-- Dedicated Domain Specific AI Assistant Box with Microphone -->
+        <!-- Dedicated Domain Specific AI Assistant Box with Microphone Button -->
         <div id="domainAiBox" class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
@@ -219,9 +219,9 @@
                 <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Focused Hub</span>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask specifically or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">🎤</button>
-                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
+                <input type="text" id="aiFolderQuery" placeholder="Ask specifically or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
+                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
             </div>
             <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
         </div>
@@ -250,7 +250,7 @@
         function startVoiceRecognition(targetInputId) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
-                alert("Speech recognition is not supported in this browser. Please use Google Chrome or Gboard microphone.");
+                alert("Speech recognition is not supported in this browser. Please use Google Chrome.");
                 return;
             }
             const recognition = new SpeechRecognition();
@@ -441,8 +441,8 @@
                         <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800">Active</span>
                     </div>
                     <div class="flex gap-2">
-                        <input type="text" id="aiFolderQuery" placeholder="Ask AI about studio settings or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
-                        <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">🎤</button>
+                        <input type="text" id="aiFolderQuery" placeholder="Ask AI about studio settings or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-cyan-400">
+                        <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
                         <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
                     </div>
                     <div id="aiFolderResponse" class="hidden text-[11px] text-cyan-100 bg-slate-950/95 p-3 rounded-xl border border-cyan-700/60 mt-1.5 leading-relaxed"></div>
