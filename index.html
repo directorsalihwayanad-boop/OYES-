@@ -142,7 +142,7 @@
 
     <!-- JavaScript -->
     <script>
-        let domainFoldersData = {
+        let defaultDomainData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "വിശുദ്ധ ഖുർആൻ വായന.", link: "https://quran.com"},
                 {name: "Holy Bible", icon: "✝️", desc: "വിശുദ്ധ ബൈബിൾ വായന.", link: "https://www.bible.com"},
@@ -188,6 +188,21 @@
                 {name: "Local Classifieds", icon: "🏷️", desc: "നാടൻ പരസ്യങ്ങൾ.", link: "https://wa.me/919947198248?text=Publish%20Ad"}
             ]
         };
+
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
+
+        // Load Saved Logo and Background on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLogo = localStorage.getItem('oyes_logo');
+            if (savedLogo) {
+                document.getElementById('headerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
+                document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
+            }
+            let savedBg = localStorage.getItem('oyes_bg');
+            if (savedBg) {
+                document.body.style.backgroundImage = 'url(' + savedBg + ')';
+            }
+        });
 
         let currentActiveDomain = 1;
 
@@ -265,7 +280,7 @@
             grid.innerHTML = `
                 <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center col-span-2">
                     <h3 class="text-amber-300 font-bold text-xs uppercase">App Customization & Management</h3>
-                    <p class="text-[11px] text-slate-300">Change Logo, Background, or Manage Folders.</p>
+                    <p class="text-[11px] text-slate-300">Change Logo, Background, or Add/Delete Folders.</p>
                     <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change App Logo</button>
                     <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change Home Background</button>
                     <div class="border-t border-slate-700 pt-3 space-y-2 text-left">
@@ -303,13 +318,15 @@
             }
 
             domainFoldersData[domainId].push({name: name, icon: icon, desc: desc, link: link});
-            alert("New folder card added successfully to Domain " + domainId + "!");
+            localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+            alert("New folder card added successfully and saved!");
             openDomainFolders(domainId);
         }
 
         function deleteFolderCard(domainId, index) {
             if(confirm("Are you sure you want to delete this folder/card?")) {
                 domainFoldersData[domainId].splice(index, 1);
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
                 openDomainFolders(domainId);
             }
         }
@@ -320,9 +337,11 @@
             if(file) {
                 let reader = new FileReader();
                 reader.onload = function(evt) {
-                    document.getElementById('headerLogoIcon').innerHTML = '<img src="' + evt.target.result + '" class="w-full h-full object-cover rounded-full">';
-                    document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + evt.target.result + '" class="w-full h-full object-cover rounded-full">';
-                    alert("Logo updated successfully!");
+                    let base64Image = evt.target.result;
+                    localStorage.setItem('oyes_logo', base64Image);
+                    document.getElementById('headerLogoIcon').innerHTML = '<img src="' + base64Image + '" class="w-full h-full object-cover rounded-full">';
+                    document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + base64Image + '" class="w-full h-full object-cover rounded-full">';
+                    alert("Logo updated and saved permanently!");
                 };
                 reader.readAsDataURL(file);
             }
@@ -334,8 +353,10 @@
             if(file) {
                 let reader = new FileReader();
                 reader.onload = function(evt) {
-                    document.body.style.backgroundImage = 'url(' + evt.target.result + ')';
-                    alert("Background updated successfully!");
+                    let base64Bg = evt.target.result;
+                    localStorage.setItem('oyes_bg', base64Bg);
+                    document.body.style.backgroundImage = 'url(' + base64Bg + ')';
+                    alert("Background updated and saved permanently!");
                 };
                 reader.readAsDataURL(file);
             }
