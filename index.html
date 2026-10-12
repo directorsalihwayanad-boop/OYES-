@@ -165,7 +165,7 @@
 
     <!-- Footer Section -->
     <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800 bg-slate-950/90 space-y-2">
-        <a href="https://wa.me/919947198248?text=Hello%20Director%20Salih%20Wayanad,%20I%20am%20contacting%20you%20from%20OYES%20App." target="_blank" class="block w-full bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-lg text-center">
+        <a href="https://wa.me/919947198248?text=Hello%20Director%20Salih%20Wayanad,%20I%20am%20contacting%20from%20OYES%20App." target="_blank" class="block w-full bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-lg text-center">
             💬 Direct WhatsApp Chat with Director Salih
         </a>
         <p class="font-medium text-slate-300">Director Salih Wayanad (9947198248)</p>
@@ -215,4 +215,281 @@
                 {name: "Vehicles (Cars & Bikes)", icon: "🚗", desc: "കാറുകൾ, ഇരുചക്ര വാഹനങ്ങൾ വാങ്ങാനും വിൽക്കാനും.", link: "https://wa.me/919947198248?text=Vehicle%20Buy%20Sell%20Inquiry"},
                 {name: "Home Appliances & Gadgets", icon: "📱", desc: "മൊബൈലുകൾ, ടിവി, ഫ്രിഡ്ജ് & ഇലക്ട്രോണിക്സ്.", link: "https://wa.me/919947198248?text=Appliances%20Gadgets%20Buy%20Sell%20Inquiry"},
                 {name: "Furniture & General Goods", icon: "🪑", desc: "ഫർണിച്ചറുകളും മറ്റ് എല്ലാവിധ ഉപയോഗിച്ച/പുതിയ സാധനങ്ങളും.", link: "https://wa.me/919947198248?text=Furniture%20General%20Goods%20Buy%20Sell%20Inquiry"},
-                {name: "Post Your Ad to Sell (WhatsApp)", icon: "✍️", desc: "നിങ്ങളുടെ ഉൽപ്പന്നം വിൽക്കാൻ ഫോട്ടോ സഹിതം അയക്കുക.", link: "
+                {name: "Post Your Ad to Sell (WhatsApp)", icon: "✍️", desc: "നിങ്ങളുടെ ഉൽപ്പന്നം വിൽക്കാൻ ഫോട്ടോ സഹിതം അയക്കുക.", link: "https://wa.me/919947198248?text=Post%20New%20Buy%20Sell%20Ad%20-%20OYES%20App"}
+            ],
+            6: [
+                {name: "All Advertisements Hub", icon: "📢", desc: "ഡിജിറ്റൽ, പ്രിന്റ്, കല്യാണം, മരണം & കമേർഷ്യൽ പരസ്യങ്ങൾ.", isFolder: true, folderType: 'ads'},
+                {name: "Events & Management Hub", icon: "🎉", desc: "ഹോസ്റ്റിംഗ്, വെൽക്കം ടീം, ആങ്കറിങ് & സ്റ്റേജ് മാനേജ്‌മെന്റ്.", isFolder: true, folderType: 'events'}
+            ],
+            7: [
+                {name: "Food Delivery", icon: "🍔", desc: "പ്രാദേശിക ഹോട്ടലുകളിൽ നിന്ന് ഫുഡ് ഡെലിവറി.", link: "https://wa.me/919947198248?text=Food%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Grocery & Supermarket", icon: "🛒", desc: "പലവ്യഞ്ജനങ്ങളും നിത്യോപയോഗ സാധനങ്ങളും.", link: "https://wa.me/919947198248?text=Grocery%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Parcel & Courier Service", icon: "📦", desc: "പാഴ്സലുകളും ഡോക്യുമെന്റുകളും കൈമാറാൻ.", link: "https://wa.me/919947198248?text=Parcel%20Courier%20Inquiry%20-%20OYES%20App"},
+                {name: "Medical & Pharmacy Delivery", icon: "💊", desc: "മരുന്നുകളും ആരോഗ്യ സാധനങ്ങളും എത്തിക്കാൻ.", link: "https://wa.me/919947198248?text=Medical%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Emergency Express Delivery", icon: "⚡", desc: "അടിയന്തര ആവശ്യങ്ങൾക്കുള്ള എക്സ്പ്രസ് ഡെലിവറി.", link: "https://wa.me/919947198248?text=Express%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Book Delivery Partner", icon: "📞", desc: "നേരിട്ട് ഡെലിവറി സർവീസുമായി ബന്ധപ്പെടാൻ.", link: "https://wa.me/919947198248?text=Book%20Delivery%20Partner%20-%20OYES%20App"}
+            ]
+        };
+
+        const subFolderData6 = {
+            ads: [
+                {name: "Digital & Social Media Ads", icon: "🌐", desc: "ഫേസ്ബുക്ക്, ഇൻസ്റ്റാഗ്രാം, യൂട്യൂബ് & ഗൂഗിൾ പരസ്യങ്ങൾ.", link: "https://wa.me/919947198248?text=Digital%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Weddings & Celebrations", icon: "💐", desc: "വിവാഹ പരസ്യങ്ങളും കുടുംബ വിശേഷങ്ങളും.", link: "https://wa.me/919947198248?text=Wedding%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Obituaries & Remembrances", icon: "🕯️", desc: "മരണവാർത്തകളും അനുശോചന അറിയിപ്പുകളും.", link: "https://wa.me/919947198248?text=Obituary%20Notice%20-%20OYES%20App"},
+                {name: "Commercial & Business Ads", icon: "📢", desc: "കടകളുടെ ഉൽഘാടനങ്ങൾ, ഓഫറുകൾ & പ്രൊമോഷനുകൾ.", link: "https://wa.me/919947198248?text=Commercial%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Print & Outdoor Media Ads", icon: "📰", desc: "പത്ര പരസ്യങ്ങൾ, ബോർഡുകൾ, ഹോർഡിങ്സ് & ഫ്ലെക്സുകൾ.", link: "https://wa.me/919947198248?text=Print%20Outdoor%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Publish New Ad (WhatsApp)", icon: "✍️", desc: "ഏത് തരത്തിലുള്ള പരസ്യവും നൽകാൻ ബന്ധപ്പെടാം.", link: "https://wa.me/919947198248?text=Publish%20New%20Ad%20-%20OYES%20App"}
+            ],
+            events: [
+                {name: "Hosting Girls Team", icon: "🎙️", desc: "പ്രൊഫഷണൽ ഹോസ്റ്റിംഗ് ഗേൾസ് ബുക്കിംഗ്.", link: "https://wa.me/919947198248?text=Hosting%20Girls%20Booking%20-%20OYES%20App"},
+                {name: "Welcome Girls & Team", icon: "🌸", desc: "വെൽക്കം ഗേൾസ് & ഗെസ്റ്റ് റിസീവിംഗ് ടീം.", link: "https://wa.me/919947198248?text=Welcome%20Girls%20Booking%20-%20OYES%20App"},
+                {name: "Stage Anchoring & MC", icon: "🎤", desc: "സ്റ്റേജ് ആങ്കറിങ് & എംസി സേവനങ്ങൾ.", link: "https://wa.me/919947198248?text=Stage%20Anchoring%20Booking%20-%20OYES%20App"},
+                {name: "Sound & Stage Setup", icon: "🎚️", desc: "ലൈവ് സൗണ്ട് സിസ്റ്റം & സ്റ്റേജ് ഡെക്കറേഷൻ.", link: "https://wa.me/919947198248?text=Sound%20Stage%20Booking%20-%20OYES%20App"},
+                {name: "Photography & Coverage", icon: "📸", desc: "ഇവന്റ് ഫോട്ടോഗ്രാഫി & ക്യാമറ വർക്കുകൾ.", link: "https://wa.me/919947198248?text=Event%20Photography%20Booking%20-%20OYES%20App"},
+                {name: "Full Event Management", icon: "🎉", desc: "മുഴുവൻ ഫങ്ഷൻ & ഇവന്റ് മാനേജ്‌മെന്റ്.", link: "https://wa.me/919947198248?text=Full%20Event%20Management%20Booking%20-%20OYES%20App"}
+            ]
+        };
+
+        // Use original key 'oyes_domains' so previous custom additions/deletions and original state remain intact
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
+
+        // Load Saved Logo and Background on startup using original keys ('oyes_logo' and 'oyes_bg')
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLogo = localStorage.getItem('oyes_logo');
+            if (savedLogo) {
+                document.getElementById('headerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
+                document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
+            }
+            let savedBg = localStorage.getItem('oyes_bg');
+            if (savedBg) {
+                document.body.style.backgroundImage = 'url(' + savedBg + ')';
+            }
+        });
+
+        let currentActiveDomain = 1;
+
+        // PWA Install Prompt Handler
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').classList.remove('hidden');
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        document.getElementById('installBtn').classList.add('hidden');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert("To install this app, tap your browser menu (...) and select 'Add to Home Screen' or 'Install App'.");
+            }
+        }
+
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'OYES APP',
+                    text: 'Check out OYES App by Salih Wayanad Studio!',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                window.open("https://wa.me/?text=Check%20out%20OYES%20App%20by%20Salih%20Wayanad%20Studio!", "_blank");
+            }
+        }
+
+        function openFileManager() {
+            document.getElementById('globalFileManager').click();
+        }
+
+        function handleWhatsAppUpload(event) {
+            let files = event.target.files;
+            if(files.length > 0) {
+                window.open("https://wa.me/919947198248?text=File%20shared%20from%20OYES%20App", "_blank");
+            }
+        }
+
+        function requestAdminAccess() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminCode() {
+            let code = document.getElementById('adminSecretInput').value.trim();
+            if(code === "salih9947") {
+                closeAdminModal();
+                alert("Admin Access Verified!");
+                openAdminSettings();
+            } else {
+                alert("Incorrect Code!");
+            }
+        }
+
+        function openAdminSettings() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = "Salih Wayanad Studio Admin Panel";
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
+            grid.innerHTML = `
+                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center col-span-2">
+                    <h3 class="text-amber-300 font-bold text-xs uppercase">App Customization & Management</h3>
+                    <p class="text-[11px] text-slate-300">Change Logo, Background, or Add/Delete Cards (1 to 7).</p>
+                    <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change App Logo</button>
+                    <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change Home Background</button>
+                    <div class="border-t border-slate-700 pt-3 space-y-2 text-left">
+                        <h4 class="text-amber-300 font-bold text-xs text-center">➕ Add New Card (Domain 1 to 7)</h4>
+                        <label class="text-[10px] text-slate-300">Select Domain (1:Knowledge, 2:Studio, 3:Jobs/Cleaning, 4:Hotels, 5:Buy & Sell, 6:Events/Ads, 7:Delivery):</label>
+                        <input type="number" id="newCardDomain" min="1" max="7" value="3" class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Icon (Emoji):</label>
+                        <input type="text" id="newCardIcon" placeholder="📁" class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Card Title:</label>
+                        <input type="text" id="newCardName" placeholder="Card Name" class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Description:</label>
+                        <input type="text" id="newCardDesc" placeholder="Short description..." class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Destination Link / URL:</label>
+                        <input type="text" id="newCardLink" placeholder="https://..." class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <button type="button" onclick="addNewFolderCard()" class="w-full bg-amber-600 text-slate-950 font-black py-2.5 rounded-xl text-xs shadow mt-2">Add New Card</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function addNewFolderCard() {
+            let domainId = parseInt(document.getElementById('newCardDomain').value);
+            let icon = document.getElementById('newCardIcon').value.trim() || "📁";
+            let name = document.getElementById('newCardName').value.trim();
+            let desc = document.getElementById('newCardDesc').value.trim();
+            let link = document.getElementById('newCardLink').value.trim();
+
+            if(!name || !link) {
+                alert("Please provide Card Name and Link!");
+                return;
+            }
+
+            if(!domainFoldersData[domainId]) {
+                domainFoldersData[domainId] = [];
+            }
+
+            domainFoldersData[domainId].push({name: name, icon: icon, desc: desc, link: link});
+            localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+            alert("New card added successfully and saved!");
+            openDomainFolders(domainId);
+        }
+
+        function deleteFolderCard(domainId, index) {
+            if(confirm("Are you sure you want to delete this card?")) {
+                domainFoldersData[domainId].splice(index, 1);
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                openDomainFolders(domainId);
+            }
+        }
+
+        function triggerLogoPicker() { document.getElementById('logoFileInput').click(); }
+        function handleLogoSelection(e) {
+            let file = e.target.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(evt) {
+                    let base64Image = evt.target.result;
+                    localStorage.setItem('oyes_logo', base64Image);
+                    document.getElementById('headerLogoIcon').innerHTML = '<img src="' + base64Image + '" class="w-full h-full object-cover rounded-full">';
+                    document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + base64Image + '" class="w-full h-full object-cover rounded-full">';
+                    alert("Logo updated and saved permanently!");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function triggerBgPicker() { document.getElementById('bgFileInput').click(); }
+        function handleBgSelection(e) {
+            let file = e.target.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(evt) {
+                    let base64Bg = evt.target.result;
+                    localStorage.setItem('oyes_bg', base64Bg);
+                    document.body.style.backgroundImage = 'url(' + base64Bg + ')';
+                    alert("Background updated and saved permanently!");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openDomainFolders(domainId, subFolderKey = null) {
+            currentActiveDomain = domainId;
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3 pb-6";
+            let html = "";
+            let titleText = "";
+
+            if (domainId === 6 && !subFolderKey) {
+                titleText = "Events & Advertisements";
+                let folders = domainFoldersData[6] || [];
+                for(let i = 0; i < folders.length; i++) {
+                    let f = folders[i];
+                    let clickAction = f.isFolder ? `openDomainFolders(6, '` + f.folderType + `')` : `window.open('` + f.link + `', '_blank')`;
+                    html += `
+                        <div onclick="` + clickAction + `" class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative cursor-pointer">
+                            <div class="space-y-1.5 mt-2">
+                                <span class="text-2xl block">` + f.icon + `</span>
+                                <h3 class="font-bold text-[11px] text-amber-300 leading-tight">` + f.name + `</h3>
+                                <p class="text-[10px] text-slate-300">` + f.desc + `</p>
+                            </div>
+                            <span class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                        </div>
+                    `;
+                }
+            } else {
+                let items = [];
+                if (domainId === 6 && subFolderKey === 'ads') {
+                    titleText = "All Advertisements Hub";
+                    items = subFolderData6.ads;
+                } else if (domainId === 6 && subFolderKey === 'events') {
+                    titleText = "Events & Management Hub";
+                    items = subFolderData6.events;
+                } else {
+                    titleText = domainId === 1 ? "World of Knowledge" : (domainId === 2 ? "OYES Cinema & Studio" : (domainId === 3 ? "Job Vacancies & Cleaning" : (domainId === 4 ? "താമസസൗകര്യം & ഹോട്ടലുകൾ" : (domainId === 5 ? "Buy & Sell Market Hub" : (domainId === 6 ? "Events & Advertisements" : "Delivery Services Hub")))));
+                    items = domainFoldersData[domainId] || [];
+                }
+
+                document.getElementById('pageTitle').innerText = titleText;
+
+                for(let i = 0; i < items.length; i++) {
+                    let f = items[i];
+                    html += `
+                        <div class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
+                            <div class="space-y-1.5 mt-2">
+                                <span class="text-2xl block">` + f.icon + `</span>
+                                <h3 class="font-bold text-[11px] text-amber-300 leading-tight">` + f.name + `</h3>
+                                <p class="text-[10px] text-slate-300">` + f.desc + `</p>
+                            </div>
+                            <a href="` + f.link + `" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById('pageTitle').innerText = titleText;
+            grid.innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
+        function goBackHome() {
+            document.getElementById('homeView').classList.remove('hidden');
+            document.getElementById('subFolderPageView').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
