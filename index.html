@@ -24,9 +24,9 @@
             transition: background 0.4s ease;
         }
         .card-3d {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            border: 1px solid rgba(245, 158, 11, 0.35);
             box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2), 
                         inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -152,10 +152,10 @@
             <div id="icon7" class="w-11 h-11 rounded-2xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">👥</div>
             <div>
                 <h3 id="title7" class="font-extrabold text-sm text-slate-100 tracking-wide">CLUBS & COMMUNITIES</h3>
-                <p class="text-[10px] text-amber-300/80 font-medium mt-0.5">Explore All 46 Master Folders, Local Market & Live Chat</p>
+                <p class="text-[10px] text-amber-300/80 font-medium mt-0.5">Explore All Master Folders, Local Market & Live Chat</p>
             </div>
             <div class="bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-black text-xs px-5 py-2 rounded-xl shadow flex items-center gap-1.5">
-                OPEN 46 FOLDERS HUB ➔
+                OPEN FOLDERS HUB ➔
             </div>
         </div>
 
@@ -173,7 +173,7 @@
         <!-- File Upload to Director WhatsApp Button -->
         <div class="flex gap-2">
             <button type="button" onclick="openFileManager()" class="flex-grow bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5">
-                📁 Send Files / Ads to Director WhatsApp
+                📁 Upload Files / Ads to Director WhatsApp
             </button>
         </div>
 
@@ -212,7 +212,50 @@
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('selectstart', event => event.preventDefault());
 
-        let currentActiveDomain = "";
+        let currentActiveDomain = 1;
+
+        // Master Folders Database mapped with Study, Quran, Hospital, Business & Local Markets
+        const domainFoldersData = {
+            1: [
+                {name: "📖 World Sacred Texts (Quran, Bible, Gita)", icon: "📖"},
+                {name: "📚 Study & E-Learning Portal", icon: "📚"},
+                {name: "🔬 Science & Research Hub", icon: "🔬"},
+                {name: "🏛️ World History & Heritage", icon: "🏛️"}
+            ],
+            2: [
+                {name: "🏥 Emergency Medical & Hospitals", icon: "🏥"},
+                {name: "💼 Job & Employment Hub", icon: "💼"},
+                {name: "👷 Worker Recruitment", icon: "👷"},
+                {name: "🚨 Urgent Helplines & Support", icon: "🚨"}
+            ],
+            3: [
+                {name: "🎬 Cinema & Film Production", icon: "🎬"},
+                {name: "🎥 Short Film Showcase", icon: "🎥"},
+                {name: "✂️ Video Editing & VFX", icon: "✂️"},
+                {name: "📸 Salih Wayanad Studio Gallery", icon: "📸"}
+            ],
+            4: [
+                {name: "🏛️ Government Schemes & Portals", icon: "🏛️"},
+                {name: "🗳️ Political News & Updates", icon: "🗳️"},
+                {name: "📋 Public Services & Applications", icon: "📋"}
+            ],
+            5: [
+                {name: "🪙 Gold & Bullion Market", icon: "🪙"},
+                {name: "🏢 Real Estate & Property", icon: "🏢"},
+                {name: "🚀 Hi-Tech Business Solutions", icon: "🚀"}
+            ],
+            6: [
+                {name: "🤲 Charity Fund & Donations", icon: "🤲"},
+                {name: "❤️ Community Support & Care", icon: "❤️"},
+                {name: "📞 Director Salih Contact Hub", icon: "📞"}
+            ],
+            7: [
+                {name: "🐄 Pashu (Cow) & Goat Trading Market", icon: "🐄"},
+                {name: "⛏️ Well Digging & Water Works", icon: "⛏️"},
+                {name: "💬 OYES Community Live Chat", icon: "💬"},
+                {name: "🏷️ Local Classifieds & Ads", icon: "🏷️"}
+            ]
+        };
 
         function openFileManager() {
             let fileInput = document.getElementById('globalFileManager');
@@ -223,7 +266,7 @@
             let files = event.target.files;
             if(files.length > 0) {
                 let fileNames = Array.from(files).map(f => f.name).join(', ');
-                let waText = encodeURIComponent(`Hello Director Salih Wayanad, I am uploading/sharing files from OYES App: ${fileNames} (Domain: ${currentActiveDomain || 'General'})`);
+                let waText = encodeURIComponent(`Hello Director Salih Wayanad, I am uploading/sharing files from OYES App: ${fileNames}`);
                 alert(`📂 File Selected!\nRedirecting to Director Salih Wayanad's WhatsApp (9947198248) to send the file notification.`);
                 window.open(`https://wa.me/919947198248?text=${waText}`, '_blank');
             }
@@ -300,9 +343,9 @@
             let resBox = document.getElementById('aiFolderResponse');
             if(!query) { alert("Please enter a question."); return; }
             resBox.classList.remove('hidden');
-            resBox.innerHTML = `🔍 <b>Consulting ${currentActiveDomain} AI...</b>`;
+            resBox.innerHTML = `🔍 <b>Consulting AI...</b>`;
             setTimeout(() => {
-                resBox.innerHTML = `✨ <b>${currentActiveDomain} AI Response:</b><br>
+                resBox.innerHTML = `✨ <b>AI Response:</b><br>
                 Regarding "${query}", explore the resources below:<br>
                 <a href="https://chatgpt.com/" target="_blank" class="text-amber-300 underline font-bold mt-1 block">Ask ChatGPT ➔</a>
                 <a href="https://gemini.google.com/" target="_blank" class="text-amber-300 underline font-bold mt-1 block">Ask Gemini ➔</a>`;
@@ -328,9 +371,13 @@
             let subView = document.getElementById('subFolderPageView');
             homeView.classList.add('hidden');
             subView.classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = '🎬 Salih Wayanad Studio - Complete Control Center';
+            document.getElementById('pageTitle').innerText = '🎬 Salih Wayanad Studio - Dynamic Folder Manager';
             document.getElementById('domainAiBox').classList.add('hidden'); 
             
+            renderAdminDashboardContent();
+        }
+
+        function renderAdminDashboardContent() {
             const grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-2 gap-3.5 col-span-2 pb-6 pt-2";
             
@@ -340,48 +387,54 @@
                     <input type="text" id="editAppTitle" value="${document.getElementById('bannerAppTitle').innerText}" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 text-xs">
                 </div>
                 <div class="card-3d p-4 rounded-2xl space-y-3 col-span-2 border border-amber-500/60 text-center">
-                    <label class="text-amber-300 font-bold block text-xs">🖼️ Change App Logo (File Manager / Gallery):</label>
+                    <label class="text-amber-300 font-bold block text-xs">🖼️ Change App Logo (Gallery):</label>
                     <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition-all">📁 Browse File Manager for Logo</button>
                 </div>
                 <div class="card-3d p-4 rounded-2xl space-y-3 col-span-2 border border-amber-500/60 text-center">
-                    <label class="text-amber-300 font-bold block text-xs">🌄 Change Home Page Background (File Manager):</label>
+                    <label class="text-amber-300 font-bold block text-xs">🌄 Change Home Background:</label>
                     <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition-all">📁 Browse File Manager for Home BG</button>
                 </div>
                 <div class="card-3d p-4 rounded-2xl space-y-3 col-span-2 border border-amber-500/60 text-center">
-                    <label class="text-amber-300 font-bold block text-xs">📂 Change Sub-Folders Background (File Manager):</label>
+                    <label class="text-amber-300 font-bold block text-xs">📂 Change Sub-Folders Background:</label>
                     <button type="button" onclick="triggerFolderBgPicker()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition-all">📁 Browse File Manager for Folders BG</button>
                 </div>
-                <div class="card-3d p-4 rounded-2xl space-y-2 col-span-2 border border-amber-500/60">
-                    <h3 class="text-amber-300 font-bold text-xs uppercase">📁 Edit Primary 7 Master Domains (Names & Icons)</h3>
-            `;
-            
-            for(let k=1; k<=7; k++) {
-                let tVal = document.getElementById('title'+k).innerText;
-                let iVal = document.getElementById('icon'+k).innerText;
-                htmlContent += `
-                    <div class="flex gap-2 mt-2">
-                        <input type="text" id="t${k}" value="${tVal}" class="w-2/3 bg-slate-900 text-xs p-2 rounded-xl text-white border border-slate-700">
-                        <input type="text" id="i${k}" value="${iVal}" class="w-1/3 bg-slate-900 text-xs p-2 rounded-xl text-center text-white border border-slate-700" placeholder="Icon / Emoji">
-                    </div>
-                `;
-            }
 
-            htmlContent += `
+                <!-- ADD NEW FOLDER SECTION -->
+                <div class="card-3d p-4 rounded-2xl space-y-3 col-span-2 border border-emerald-500/60">
+                    <h3 class="text-emerald-300 font-bold text-xs uppercase">➕ Create New Folder</h3>
+                    <select id="newFolderDomain" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
+                        <option value="1">Domain 1: World of Knowledge</option>
+                        <option value="2">Domain 2: Need & Urgent</option>
+                        <option value="3">Domain 3: OYES Infinity</option>
+                        <option value="4">Domain 4: Political & Government</option>
+                        <option value="5">Domain 5: Business & Trade</option>
+                        <option value="6">Domain 6: Charity & Community</option>
+                        <option value="7">Domain 7: Clubs & Communities Hub</option>
+                    </select>
+                    <input type="text" id="newFolderName" placeholder="Enter Folder Name (e.g. Study Materials)" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
+                    <input type="text" id="newFolderIcon" placeholder="Enter Icon/Emoji (e.g. 📚)" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
+                    <button type="button" onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs shadow">➕ Add Folder Now</button>
                 </div>
-                <div class="card-3d p-4 rounded-2xl space-y-2 col-span-2 border border-amber-500/60">
-                    <h3 class="text-amber-300 font-bold text-xs uppercase">📂 Edit All 46 Master Folders & Sub-Categories</h3>
+
+                <!-- DELETE FOLDER SECTION -->
+                <div class="card-3d p-4 rounded-2xl space-y-3 col-span-2 border border-rose-500/60">
+                    <h3 class="text-rose-300 font-bold text-xs uppercase">🗑️ Delete Existing Folders</h3>
+                    <div id="deleteFolderListContainer" class="space-y-2 max-h-48 overflow-y-auto pr-1">
             `;
 
-            for(let f=1; f<=46; f++) {
-                htmlContent += `
-                    <div class="flex gap-2 mt-2">
-                        <span class="text-[10px] text-amber-400 w-8 flex items-center font-bold">#${f}</span>
-                        <input type="text" id="folderName_${f}" value="Master Folder Section ${f}" class="w-full bg-slate-900 text-xs p-2 rounded-xl text-white border border-slate-700">
-                    </div>
-                `;
+            for(let d in domainFoldersData) {
+                domainFoldersData[d].forEach((folder, idx) => {
+                    htmlContent += `
+                        <div class="flex justify-between items-center bg-slate-900 p-2 rounded-xl border border-slate-800 text-[11px]">
+                            <span class="text-slate-200">${folder.icon} ${folder.name}</span>
+                            <button type="button" onclick="deleteFolder(${d}, ${idx})" class="bg-rose-600 hover:bg-rose-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold">Delete</button>
+                        </div>
+                    `;
+                });
             }
 
             htmlContent += `
+                    </div>
                 </div>
                 <div class="col-span-2 pt-2">
                     <button type="button" onclick="saveAdminSettings()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition-all">💾 Save All Changes</button>
@@ -390,19 +443,39 @@
             grid.innerHTML = htmlContent;
         }
 
+        function addNewFolder() {
+            let domainId = document.getElementById('newFolderDomain').value;
+            let name = document.getElementById('newFolderName').value.trim();
+            let icon = document.getElementById('newFolderIcon').value.trim() || "📁";
+
+            if(!name) {
+                alert("Please enter a folder name.");
+                return;
+            }
+
+            if(!domainFoldersData[domainId]) {
+                domainFoldersData[domainId] = [];
+            }
+
+            domainFoldersData[domainId].push({name: name, icon: icon});
+            alert(`✅ New Folder "${name}" added successfully!`);
+            renderAdminDashboardContent();
+        }
+
+        function deleteFolder(domainId, index) {
+            if(confirm("Are you sure you want to delete this folder?")) {
+                domainFoldersData[domainId].splice(index, 1);
+                alert("🗑️ Folder deleted successfully!");
+                renderAdminDashboardContent();
+            }
+        }
+
         function saveAdminSettings() {
             let newTitle = document.getElementById('editAppTitle').value;
             document.getElementById('bannerAppTitle').innerText = newTitle;
             document.getElementById('headerMainTitle').innerText = newTitle;
 
-            for(let k=1; k<=7; k++) {
-                let tVal = document.getElementById('t'+k).value;
-                let iVal = document.getElementById('i'+k).value;
-                document.getElementById('title'+k).innerText = tVal;
-                document.getElementById('icon'+k).innerText = iVal;
-            }
-
-            alert("✅ Salih Wayanad Studio: All Settings, Titles & Icons Updated Successfully!");
+            alert("✅ Salih Wayanad Studio: All Folder Changes Saved Successfully!");
             goBackHome();
         }
 
@@ -412,8 +485,10 @@
         }
 
         function openDomainFolders(domainId) {
-            let title = document.getElementById('title' + domainId).innerText;
-            currentActiveDomain = title;
+            currentActiveDomain = domainId;
+            let titleElement = document.getElementById('title' + domainId);
+            let title = titleElement ? titleElement.innerText : "Master Hub";
+            
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             document.getElementById('domainAiBox').classList.remove('hidden');
@@ -427,21 +502,27 @@
             
             let foldersHtml = `
                 <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/40 col-span-2">
-                    <h3 class="font-bold text-xs text-amber-300 uppercase tracking-wide">${title} - Hub</h3>
-                    <p class="text-[11px] text-slate-300 leading-relaxed">Browse sub-folders, upload media via File Manager to Director WhatsApp, or consult specialized AI.</p>
+                    <h3 class="font-bold text-xs text-amber-300 uppercase tracking-wide">${title} - Master Hub</h3>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">Select any folder below to view resources, upload media or send ads to Director Salih's WhatsApp.</p>
                 </div>
             `;
 
-            for(let sub = 1; sub <= 6; sub++) {
-                foldersHtml += `
-                    <div onclick="openFileManager()" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col space-y-1">
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-base">📁</span>
-                            <h3 class="font-bold text-[11px] text-amber-300">${title} - Folder ${sub}</h3>
+            let foldersList = domainFoldersData[domainId] || [];
+            if(foldersList.length === 0) {
+                foldersHtml += `<div class="col-span-2 text-center text-xs text-slate-400 py-6">No folders available in this section. Admin can add new folders from settings.</div>`;
+            } else {
+                foldersList.forEach((folder) => {
+                    let displayName = folder.name.startsWith(folder.icon) ? folder.name : `${folder.icon} ${folder.name}`;
+                    foldersHtml += `
+                        <div onclick="openFileManager()" class="folder-card card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col space-y-1.5 group">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl group-hover:scale-110 transition-transform">${folder.icon}</span>
+                                <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${displayName}</h3>
+                            </div>
+                            <p class="text-[9px] text-slate-300">Tap to upload files or send to WhatsApp.</p>
                         </div>
-                        <p class="text-[9px] text-slate-300">Tap to upload files or send ads to WhatsApp.</p>
-                    </div>
-                `;
+                    `;
+                });
             }
 
             grid.innerHTML = foldersHtml;
