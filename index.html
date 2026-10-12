@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="appTitleTag">OYES APP - Salih Wayanad Studio</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <title>OYES APP - Salih Wayanad Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
-            -webkit-touch-callout: none;
             background: radial-gradient(circle at top, #1e1b4b, #0f172a, #020617);
             background-size: cover;
             background-position: center;
@@ -21,68 +17,54 @@
             color: #f8fafc;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
-            transition: background 0.4s ease;
         }
         .card-3d {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
             backdrop-filter: blur(16px);
             border: 1px solid rgba(245, 158, 11, 0.35);
-            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
         }
         .card-3d:hover {
             border-color: rgba(245, 158, 11, 0.7);
-            box-shadow: 0 15px 35px -5px rgba(245, 158, 11, 0.4), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #f59e0b; border-radius: 4px; }
     </style>
 </head>
-<body id="appBody" class="flex flex-col justify-between min-h-screen">
+<body class="flex flex-col justify-between min-h-screen">
 
     <!-- Header Section -->
-    <header class="p-3 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-40 shadow-xl">
+    <header class="p-3 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
-            <div class="flex items-center gap-2 select-none">
-                <div id="headerLogoContainer" class="w-9 h-9 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-sm shadow-inner overflow-hidden">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-sm overflow-hidden" id="headerLogoContainer">
                     <span id="headerLogoIcon">🦅</span>
                 </div>
-                <h1 id="headerMainTitle" class="text-base font-black tracking-wider text-amber-400">
-                    OYES
-                </h1>
+                <h1 id="headerMainTitle" class="text-base font-black tracking-wider text-amber-400">OYES</h1>
             </div>
             <div class="flex items-center gap-2">
-                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-xs font-semibold border border-indigo-500/60 rounded-xl px-2.5 py-1.5 shadow hover:bg-indigo-900 transition-all flex items-center gap-1">
-                    📁 Upload
-                </button>
-                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-xs font-semibold border border-amber-500/60 rounded-xl px-2.5 py-1.5 shadow hover:bg-amber-900 transition-all">
-                    ⚙️ Admin
-                </button>
+                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-xs font-semibold border border-indigo-500/60 rounded-xl px-2.5 py-1.5 shadow hover:bg-indigo-900">📁 Upload</button>
+                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-xs font-semibold border border-amber-500/60 rounded-xl px-2.5 py-1.5 shadow hover:bg-amber-900">⚙️ Admin</button>
             </div>
         </div>
     </header>
 
-    <!-- Hidden File Inputs -->
-    <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,audio/*,.pdf,.doc,.docx" onchange="handleWhatsAppUpload(event)">
+    <!-- Hidden Inputs -->
+    <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,.pdf" onchange="handleWhatsAppUpload(event)">
     <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="handleLogoSelection(event)">
     <input type="file" id="bgFileInput" class="hidden" accept="image/*" onchange="handleBgSelection(event)">
-    <input type="file" id="folderBgInput" class="hidden" accept="image/*" onchange="handleFolderBgSelection(event)">
 
-    <!-- Admin Settings Login Modal -->
-    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-amber-500/60 p-6 rounded-3xl max-w-xs w-full shadow-2xl space-y-4">
             <div class="text-center space-y-1">
-                <h3 class="text-sm font-bold text-amber-300">🎬 Salih Wayanad Studio Protected Access</h3>
-                <p class="text-[11px] text-slate-400">Enter Director Secret Code:</p>
+                <h3 class="text-sm font-bold text-amber-300">🎬 Salih Wayanad Studio Access</h3>
+                <p class="text-[11px] text-slate-400">Enter Secret Code (salih9947):</p>
             </div>
-            <input type="password" id="adminSecretInput" placeholder="Enter secret code..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-amber-600/50 text-xs focus:outline-none focus:border-amber-400 text-center tracking-widest">
-            <div class="grid grid-cols-2 gap-2.5 pt-1">
-                <button type="button" onclick="closeAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-2.5 rounded-xl font-bold transition-all">Cancel</button>
-                <button type="button" onclick="verifyAdminCode()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs py-2.5 rounded-xl font-bold transition-all shadow-md">Verify</button>
+            <input type="password" id="adminSecretInput" placeholder="Enter code..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-amber-600/50 text-xs text-center tracking-widest focus:outline-none">
+            <div class="grid grid-cols-2 gap-2.5">
+                <button type="button" onclick="closeAdminModal()" class="bg-slate-800 text-slate-300 text-xs py-2.5 rounded-xl font-bold">Cancel</button>
+                <button type="button" onclick="verifyAdminCode()" class="bg-amber-600 text-white text-xs py-2.5 rounded-xl font-bold shadow">Verify</button>
             </div>
         </div>
     </div>
@@ -90,557 +72,211 @@
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
-        <!-- Top Banner / Logo Card -->
-        <div class="bg-slate-900/90 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2 relative overflow-hidden">
-            <div id="bannerLogoContainer" class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-amber-500/20 to-blue-600/20 border-2 border-amber-400/60 flex items-center justify-center text-4xl shadow-lg overflow-hidden">
+        <!-- Top Banner -->
+        <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
+            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
                 <span id="bannerLogoIcon">🌍🦅</span>
             </div>
             <div>
                 <h2 id="bannerAppTitle" class="text-xl font-black tracking-widest text-amber-400">OYES</h2>
                 <p class="text-[11px] text-slate-300 font-semibold tracking-wider mt-0.5">CONNECT PEOPLE • UNITE OPPORTUNITIES</p>
-                <p class="text-[10px] text-amber-300/80 font-medium tracking-wide mt-1">ACCEPT CHANGE • CREATE THE FUTURE</p>
             </div>
-        </div>
-
-        <!-- Global AI Assistant Box -->
-        <div class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                    <span class="text-base">🤖✨</span>
-                    <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wide">OYES Global AI Assistant</h4>
-                </div>
-                <span class="text-[9px] text-amber-300 bg-amber-950 px-2 py-0.5 rounded-full border border-amber-800">24/7 Active</span>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="globalAiQuery" placeholder="Ask AI / ChatGPT or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-amber-400">
-                <button type="button" onclick="startVoiceRecognition('globalAiQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                <button type="button" onclick="triggerGoogleAssistant()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
-            </div>
-            <div id="globalAiResponse" class="hidden text-[11px] text-amber-100 bg-slate-950/95 p-3 rounded-xl border border-amber-700/60 mt-1.5 leading-relaxed"></div>
         </div>
 
         <!-- 7 Primary Domains Grid -->
-        <div id="folderGrid" class="grid grid-cols-3 gap-3">
-            <div onclick="openDomainFolders(1)" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="icon1" class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">📖</div>
-                <h3 id="title1" class="font-bold text-[10px] text-slate-100 leading-tight">WORLD OF KNOWLEDGE</h3>
+        <div class="grid grid-cols-3 gap-3">
+            <div onclick="openDomainFolders(1)" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center">
+                <div class="text-xl mb-1">📖</div>
+                <h3 class="font-bold text-[10px] text-slate-100">WORLD OF KNOWLEDGE</h3>
             </div>
-            <div onclick="openDomainFolders(2)" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="icon2" class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">❤️‍🩹</div>
-                <h3 id="title2" class="font-bold text-[10px] text-slate-100 leading-tight">NEED & URGENT</h3>
+            <div onclick="openDomainFolders(2)" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center">
+                <div class="text-xl mb-1">❤️‍🩹</div>
+                <h3 class="font-bold text-[10px] text-slate-100">NEED & URGENT</h3>
             </div>
-            <div onclick="openDomainFolders(3)" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="icon3" class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">♾️</div>
-                <h3 id="title3" class="font-bold text-[10px] text-slate-100 leading-tight">OYES INFINITY</h3>
+            <div onclick="openDomainFolders(3)" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center">
+                <div class="text-xl mb-1">♾️</div>
+                <h3 class="font-bold text-[10px] text-slate-100">OYES INFINITY</h3>
             </div>
-            <div onclick="openDomainFolders(4)" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="icon4" class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🏛️</div>
-                <h3 id="title4" class="font-bold text-[10px] text-slate-100 leading-tight">POLITICAL & GOVERNMENT</h3>
+            <div onclick="openDomainFolders(4)" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center">
+                <div class="text-xl mb-1">🏛️</div>
+                <h3 class="font-bold text-[10px] text-slate-100">POLITICAL & GOVT</h3>
             </div>
-            <div onclick="openDomainFolders(5)" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="icon5" class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">💼</div>
-                <h3 id="title5" class="font-bold text-[10px] text-slate-100 leading-tight">BUSINESS & TRADE</h3>
+            <div onclick="openDomainFolders(5)" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center">
+                <div class="text-xl mb-1">💼</div>
+                <h3 class="font-bold text-[10px] text-slate-100">BUSINESS & TRADE</h3>
             </div>
-            <div onclick="openDomainFolders(6)" class="folder-card card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center group">
-                <div id="icon6" class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">🤲</div>
-                <h3 id="title6" class="font-bold text-[10px] text-slate-100 leading-tight">CHARITY & COMMUNITY</h3>
+            <div onclick="openDomainFolders(6)" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col items-center text-center">
+                <div class="text-xl mb-1">🤲</div>
+                <h3 class="font-bold text-[10px] text-slate-100">CHARITY & COMMUNITY</h3>
             </div>
         </div>
 
-        <!-- 7. Clubs & Communities Hub Banner -->
-        <div onclick="openDomainFolders(7)" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center group space-y-2 border border-amber-500/50 shadow-lg">
-            <div id="icon7" class="w-11 h-11 rounded-2xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">👥</div>
-            <div>
-                <h3 id="title7" class="font-extrabold text-sm text-slate-100 tracking-wide">CLUBS & COMMUNITIES</h3>
-                <p class="text-[10px] text-amber-300/80 font-medium mt-0.5">Explore All Master Folders, Local Market & Live Chat</p>
-            </div>
-            <div class="bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 font-black text-xs px-5 py-2 rounded-xl shadow flex items-center gap-1.5">
-                OPEN FOLDERS HUB ➔
-            </div>
+        <!-- Domain 7 Hub Banner -->
+        <div onclick="openDomainFolders(7)" class="card-3d p-4 rounded-3xl cursor-pointer flex flex-col items-center text-center space-y-2 border border-amber-500/50">
+            <div class="text-2xl">👥</div>
+            <h3 class="font-extrabold text-sm text-slate-100">CLUBS & COMMUNITIES HUB</h3>
+            <div class="bg-amber-500 text-slate-950 font-black text-xs px-4 py-1.5 rounded-xl shadow">OPEN FOLDERS HUB ➔</div>
         </div>
 
     </main>
 
     <!-- Sub-Folders & Content View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <div class="flex justify-between items-center bg-slate-900/90 backdrop-blur-xl p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
-            <button type="button" onclick="goBackHome()" class="text-amber-300 hover:text-white text-xs bg-amber-950/80 border border-amber-700/60 px-3 py-2 rounded-xl flex items-center gap-1 font-semibold">
-                ← Back
-            </button>
+        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
+            <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
             <h3 id="pageTitle" class="text-xs font-bold text-amber-300 text-right">Sub Page</h3>
         </div>
-
-        <!-- File Upload to Director WhatsApp Button -->
-        <div class="flex gap-2">
-            <button type="button" onclick="openFileManager()" class="flex-grow bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5">
-                📁 Upload Files / Ads to Director WhatsApp
-            </button>
-        </div>
-
-        <!-- Domain AI Assistant Box -->
-        <div id="domainAiBox" class="bg-slate-900/90 border border-indigo-500/50 p-3.5 rounded-2xl shadow-lg space-y-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                    <span class="text-base">🤖✨</span>
-                    <h4 id="domainAiTitle" class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Dedicated Domain AI Expert</h4>
-                </div>
-                <span class="text-[9px] text-amber-300 bg-amber-950 px-2 py-0.5 rounded-full border border-amber-800">Specialized AI</span>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="aiFolderQuery" placeholder="Ask specific questions or tap mic..." class="flex-grow bg-slate-950 text-slate-200 px-3.5 py-2 rounded-xl border border-indigo-700/60 text-xs focus:outline-none focus:border-amber-400">
-                <button type="button" onclick="startVoiceRecognition('aiFolderQuery')" title="Voice Search" class="bg-teal-600 hover:bg-teal-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center">🎤</button>
-                <button type="button" onclick="askDomainSpecificAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">Ask AI</button>
-            </div>
-            <div id="aiFolderResponse" class="hidden text-[11px] text-amber-100 bg-slate-950/95 p-3 rounded-xl border border-amber-700/60 mt-1.5 leading-relaxed"></div>
-        </div>
-
         <div id="pageContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
     </div>
 
     <!-- Footer Section -->
-    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md space-y-2.5">
-        
-        <!-- DIRECT WHATSAPP CHAT WITH DIRECTOR SALIH -->
-        <a href="https://wa.me/919947198248?text=Hello%20Director%20Salih%20Wayanad,%20I%20am%20contacting%20you%20from%20OYES%20App." target="_blank" class="block w-full bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 font-black py-2.5 px-4 rounded-xl text-xs shadow-lg transition-all hover:scale-[1.01] text-center">
+    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800 bg-slate-950/90 space-y-2">
+        <a href="https://wa.me/919947198248?text=Hello%20Director%20Salih%20Wayanad,%20I%20am%20contacting%20you%20from%20OYES%20App." target="_blank" class="block w-full bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-lg text-center">
             💬 Direct WhatsApp Chat with Director Salih
         </a>
-
-        <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="installAppPrompt()" class="py-2.5 px-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">📲 Install App</button>
-            <button type="button" onclick="shareApp()" class="py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">🔗 Share App</button>
-        </div>
-        <p class="font-medium text-slate-300">Admins: Director Salih Wayanad (9947198248) & OYES Saleem (9633111000)</p>
-        <p class="mt-0.5 text-amber-400 font-semibold">© 2026 OYES APP. Director Salih Wayanad.</p>
+        <p class="font-medium text-slate-300">Director Salih Wayanad (9947198248)</p>
     </footer>
 
-    <!-- JavaScript Controls -->
+    <!-- JavaScript -->
     <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('selectstart', event => event.preventDefault());
-
-        let currentActiveDomain = 1;
-
-        // Folders Database with external links & direct web destinations for ALL 7 domains
         const domainFoldersData = {
             1: [
-                {
-                    name: "📖 World Sacred Texts (Quran, Bible, Gita)", 
-                    icon: "📖",
-                    content: "<b>വിശുദ്ധ ഗ്രന്ഥങ്ങൾ & ഓൺലൈൻ പഠനങ്ങൾ:</b><br>• വിശുദ്ധ ഖുർആൻ പൂർണ്ണ രൂപം ഓൺലൈനിൽ വായിക്കാം.<br>• ബൈബിൾ, ഭഗവദ്ഗീത സന്ദേശങ്ങൾ.<br><br><a href='https://quran.com' target='_blank' class='bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>📖 Open Quran Online ➔</a>"
-                },
-                {
-                    name: "📚 Study & E-Learning Portal", 
-                    icon: "📚",
-                    content: "<b>വിദ്യാഭ്യാസ വിഭവങ്ങൾ & ഇ-ലേണിംഗ്:</b><br>• ഓൺലൈൻ ഡിജിറ്റൽ ലൈബ്രറികൾ.<br><br><a href='https://archive.org' target='_blank' class='bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>📚 Open E-Library Portal ➔</a>"
-                },
-                {
-                    name: "🔬 Science & Research Hub", 
-                    icon: "🔬",
-                    content: "<b>ശാസ്ത്ര സാങ്കേതിക വിദ്യ & റിസർച്ച്:</b><br>• ആധുനിക സയൻസ് റിസർച്ച് പേപ്പറുകൾ.<br><br><a href='https://scholar.google.com' target='_blank' class='bg-teal-600 hover:bg-teal-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🔬 Open Google Scholar ➔</a>"
-                },
-                {
-                    name: "🏛️ World History & Heritage", 
-                    icon: "🏛️",
-                    content: "<b>ലോക ചരിത്രവും പൈതൃകവും:</b><br>• ചരിത്ര രേഖകളും മ്യൂസിയം വിവരങ്ങളും.<br><br><a href='https://www.britannica.com' target='_blank' class='bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🏛️ Open World Heritage Hub ➔</a>"
-                }
+                {name: "World Sacred Texts (Quran)", icon: "📖", desc: "വിശുദ്ധ ഖുർആൻ ഓൺലൈനിൽ വായിക്കാം.", link: "https://quran.com"},
+                {name: "Study & E-Learning Portal", icon: "📚", desc: "ഡിജിറ്റൽ ലൈബ്രറി സേവനങ്ങൾ.", link: "https://archive.org"},
+                {name: "Science & Research Hub", icon: "🔬", desc: "ഗൂഗിൾ സ്കോളർ റിസർച്ച് പേപ്പറുകൾ.", link: "https://scholar.google.com"}
             ],
             2: [
-                {
-                    name: "🏥 Emergency Medical & Hospitals", 
-                    icon: "🏥",
-                    content: "<b>അത്യാഹിത സേവനങ്ങൾ & ആശുപത്രികൾ:</b><br>• ആരോഗ്യ വകുപ്പ് സേവനങ്ങളും എമർജൻസി പോർട്ടലുകളും.<br><br><a href='https://mohfw.gov.in' target='_blank' class='bg-rose-600 hover:bg-rose-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🏥 Open Health Portal ➔</a>"
-                },
-                {
-                    name: "💼 Job & Employment Hub", 
-                    icon: "💼",
-                    content: "<b>തൊഴിൽ അവസരങ്ങൾ & റിക്രൂട്ട്മെന്റ്:</b><br>• തൊഴിൽ അവസരങ്ങൾക്കായി നാഷണൽ കരിയർ സർവീസ്.<br><br><a href='https://www.ncs.gov.in' target='_blank' class='bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>💼 Open Career Hub ➔</a>"
-                },
-                {
-                    name: "👷 Worker Recruitment", 
-                    icon: "👷",
-                    content: "<b>തൊഴിലാളി സേവനങ്ങൾ & കണക്റ്റിവിറ്റി:</b><br>• ഇ-ശ്രം പോർട്ടൽ വിവരങ്ങൾ.<br><br><a href='https://eshram.gov.in' target='_blank' class='bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>👷 Open Worker Portal ➔</a>"
-                },
-                {
-                    name: "🚨 Urgent Helplines & Support", 
-                    icon: "🚨",
-                    content: "<b>അടിയന്തിര സഹായ ഹെൽപ്പ് ലൈനുകൾ:</b><br>• എമർജൻസി സേവനങ്ങൾ (112).<br><br><a href='https://112.gov.in' target='_blank' class='bg-rose-700 hover:bg-rose-600 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🚨 Emergency 112 Hub ➔</a>"
-                }
+                {name: "Emergency Medical & Hospitals", icon: "🏥", desc: "ആരോഗ്യ വകുപ്പ് സേവന പോർട്ടൽ.", link: "https://mohfw.gov.in"},
+                {name: "Job & Employment Hub", icon: "💼", desc: "നാഷണൽ കരിയർ സർവീസ്.", link: "https://www.ncs.gov.in"}
             ],
             3: [
-                {
-                    name: "🎬 Cinema & Film Production", 
-                    icon: "🎬",
-                    content: "<b>സിനിമാ നിർമ്മാണം & പ്രൊഡക്ഷൻ:</b><br>• സാലിഹ് വയനാട് സ്റ്റുഡിയോ മൂവി അപ്ഡേറ്റുകൾ.<br><br><a href='https://www.imdb.com' target='_blank' class='bg-purple-600 hover:bg-purple-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🎬 Open Cinema Database ➔</a>"
-                },
-                {
-                    name: "🎥 Short Film Showcase", 
-                    icon: "🎥",
-                    content: "<b>ഷോർട്ട് ഫിലിം പ്രദർശനം:</b><br>• പുതിയ ഹ്രസ്വചിത്രങ്ങൾ കാണാൻ.<br><br><a href='https://www.youtube.com' target='_blank' class='bg-red-600 hover:bg-red-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🎥 Watch Short Films on YouTube ➔</a>"
-                },
-                {
-                    name: "✂️ Video Editing & VFX", 
-                    icon: "✂️",
-                    content: "<b>വീഡിയോ എഡിറ്റിംഗ് & വിഎഫ്എക്സ്:</b><br>• പ്രൊഫഷണൽ എഡിറ്റിംഗ് ടൂളുകൾ.<br><br><a href='https://www.adobe.com/products/premiere.html' target='_blank' class='bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>✂️ Open Editing Tools ➔</a>"
-                },
-                {
-                    name: "📸 Salih Wayanad Studio Gallery", 
-                    icon: "📸",
-                    content: "<b>സ്റ്റുഡിയോ ഗാലറി & ഫോട്ടോ ഷൂട്ടുകൾ:</b><br>• ഫോട്ടോകൾ പങ്കുവെക്കാനും കാണാനുമുള്ള ഇടം.<br><br><a href='https://photos.google.com' target='_blank' class='bg-teal-600 hover:bg-teal-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>📸 Open Photo Gallery ➔</a>"
-                }
+                {name: "Cinema & Film Production", icon: "🎬", desc: "സാലിഹ് വയനാട് സ്റ്റുഡിയോ അപ്ഡേറ്റ്സ്.", link: "https://www.imdb.com"},
+                {name: "Short Film Showcase", icon: "🎥", desc: "യൂട്യൂബ് ഷോർട്ട് ഫിലിംസ്.", link: "https://www.youtube.com"}
             ],
             4: [
-                {
-                    name: "🏛️ Government Schemes & Portals", 
-                    icon: "🏛️",
-                    content: "<b>സർക്കാർ പദ്ധതികളും സേവനങ്ങളും:</b><br>• കേരള സർക്കാർ ഔദ്യോഗിക പോർട്ടൽ.<br><br><a href='https://kerala.gov.in' target='_blank' class='bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🏛️ Open Kerala Govt Portal ➔</a>"
-                },
-                {
-                    name: "🗳️ Political News & Updates", 
-                    icon: "🗳️",
-                    content: "<b>രാഷ്ട്രീയ വാർത്തകളും വിശേഷങ്ങളും:</b><br>• തത്സമയ വാർത്തകൾ അറിയാൻ.<br><br><a href='https://news.google.com' target='_blank' class='bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🗳️ Open News Hub ➔</a>"
-                },
-                {
-                    name: "📋 Public Services & Applications", 
-                    icon: "📋",
-                    content: "<b>പൊതുജന സേവനങ്ങളും അപേക്ഷകളും:</b><br>• ഓൺലൈൻ അക്ഷയ സേവനങ്ങൾ.<br><br><a href='https://services.india.gov.in' target='_blank' class='bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>📋 Open National Services ➔</a>"
-                }
+                {name: "Government Schemes & Portals", icon: "🏛️", desc: "കേരള സർക്കാർ ഔദ്യോഗിക പോർട്ടൽ.", link: "https://kerala.gov.in"},
+                {name: "Political News & Updates", icon: "🗳️", desc: "തത്സമയ വാർത്തകൾ.", link: "https://news.google.com"}
             ],
             5: [
-                {
-                    name: "🪙 Gold & Bullion Market", 
-                    icon: "🪙",
-                    content: "<b>സ്വർണ്ണ വിപണി വില വിവരങ്ങൾ:</b><br>• ഇന്നത്തെ സ്വർണ്ണ നിരക്കുകൾ അറിയാൻ.<br><br><a href='https://www.bankbazaar.com/gold-rate-kerala.html' target='_blank' class='bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🪙 Check Gold Rate Today ➔</a>"
-                },
-                {
-                    name: "🏢 Real Estate & Property", 
-                    icon: "🏢",
-                    content: "<b>റിയൽ എസ്റ്റേറ്റ് & പ്രോപ്പർട്ടി വിപണി:</b><br>• വീടുംസ്ഥലവും വാങ്ങാനും വിൽക്കാനും.<br><br><a href='https://www.magicbricks.com' target='_blank' class='bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🏢 Open Real Estate Portal ➔</a>"
-                },
-                {
-                    name: "🚀 Hi-Tech Business Solutions", 
-                    icon: "🚀",
-                    content: "<b>ബിസിനസ്സ് ആശയങ്ങളും സ്റ്റാർട്ടപ്പുകളും:</b><br>• സ്റ്റാർട്ടപ്പ് ഇന്ത്യ വഴികാട്ടി.<br><br><a href='https://www.startupindia.gov.in' target='_blank' class='bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🚀 Open Startup Hub ➔</a>"
-                }
+                {name: "Gold & Bullion Market", icon: "🪙", desc: "ഇന്നത്തെ സ്വർണ്ണ വില അറിയാൻ.", link: "https://www.bankbazaar.com/gold-rate-kerala.html"},
+                {name: "Real Estate & Property", icon: "🏢", desc: "പ്രോപ്പർട്ടി വിൽപ്പന പരസ്യങ്ങൾ.", link: "https://www.magicbricks.com"}
             ],
             6: [
-                {
-                    name: "🤲 Charity Fund & Donations", 
-                    icon: "🤲",
-                    content: "<b>ജീവകാരുണ്യ പ്രവർത്തനങ്ങളും ഫണ്ടുകളും:</b><br>• ചാരിറ്റി സഹായങ്ങൾക്കായി ബന്ധപ്പെടാം.<br><br><a href='https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20want%20to%20contribute%20to%20Charity%20Fund.' target='_blank' class='bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🤲 Join Charity Fund via WhatsApp ➔</a>"
-                },
-                {
-                    name: "❤️ Community Support & Care", 
-                    icon: "❤️",
-                    content: "<b>സാമൂഹിക സേവനവും പരിചരണവും:</b><br>• പരസ്പര സഹായ കൂട്ടായ്മകൾ.<br><br><a href='https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20need%20Community%20Support.' target='_blank' class='bg-rose-600 hover:bg-rose-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>❤️ Community Support Hub ➔</a>"
-                },
-                {
-                    name: "📞 Director Salih Contact Hub", 
-                    icon: "📞",
-                    content: "<b>ഡയറക്ടർ സാലിഹ് വയനാട് കോൺടാക്റ്റ്:</b><br>• നേരിട്ട് ബന്ധപ്പെടാനുള്ള വാട്സാപ്പ് നമ്പർ.<br><br><a href='https://wa.me/919947198248?text=Hello%20Director%20Salih%20Wayanad.' target='_blank' class='bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>💬 Chat with Director Salih ➔</a>"
-                }
+                {name: "Charity Fund & Donations", icon: "🤲", desc: "ജീവകാരുണ്യ പ്രവർത്തന ഫണ്ടുകൾ.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20want%20to%20contribute%20to%20Charity."},
+                {name: "Director Salih Contact Hub", icon: "📞", desc: "ഡയറക്ടറുമായി നേരിട്ട് ചാറ്റ് ചെയ്യാം.", link: "https://wa.me/919947198248"}
             ],
             7: [
-                {
-                    name: "🐄 Pashu (Cow) & Goat Trading Market", 
-                    icon: "🐄",
-                    content: "<b>കന്നുകാലി വിപണി (പശു, ആട് കച്ചവടം):</b><br>• പ്രാദേശിക കന്നുകാലി പരസ്യങ്ങൾ.<br><br><a href='https://www.OLX.in' target='_blank' class='bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🐄 Open Trading Market ➔</a>"
-                },
-                {
-                    name: "⛏️ Well Digging & Water Works", 
-                    icon: "⛏️",
-                    content: "<b>കിണർ നിർമ്മാണവും ജലസേചന പ്രവൃത്തികളും:</b><br>• സേവനങ്ങൾ ബുക്ക് ചെയ്യാൻ.<br><br><a href='https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20need%20Well%20Digging%20Water%20Works%20service.' target='_blank' class='bg-teal-600 hover:bg-teal-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>⛏️ Book Water Works Service ➔</a>"
-                },
-                {
-                    name: "💬 OYES Community Live Chat", 
-                    icon: "💬",
-                    content: "<b>ഓയേഴ്സ് കമ്മ്യൂണിറ്റി ലൈവ് ചാറ്റ്:</b><br>• അംഗങ്ങളുമായി ഒന്നിച്ച് സംസാരിക്കാൻ.<br><br><a href='https://wa.me/919947198248?text=Hello%20Director%20Salih,%20Add%20me%20to%20OYES%20Community%20Live%20Chat.' target='_blank' class='bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>💬 Join Community Live Chat ➔</a>"
-                },
-                {
-                    name: "🏷️ Local Classifieds & Ads", 
-                    icon: "🏷️",
-                    content: "<b>നാടൻ പരസ്യങ്ങളും ക്ലാസിഫൈഡ്സും:</b><br>• ലോക്കൽ പരസ്യങ്ങൾ നൽകാൻ.<br><br><a href='https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20want%20to%20publish%20a%20Local%20Classified%20Ad.' target='_blank' class='bg-purple-600 hover:bg-purple-500 text-white font-bold px-4 py-2 rounded-xl block text-center mt-3 shadow'>🏷️ Publish Local Ad ➔</a>"
-                }
+                {name: "Pashu & Goat Trading Market", icon: "🐄", desc: "കന്നുകാലി വിപണി വിവരങ്ങൾ.", link: "https://www.olx.in"},
+                {name: "OYES Community Live Chat", icon: "💬", desc: "കമ്മ്യൂണിറ്റി ഗ്രൂപ്പ് ചാറ്റ്.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih,%20Add%20me%20to%20Live%20Chat."}
             ]
         };
 
         function openFileManager() {
-            let fileInput = document.getElementById('globalFileManager');
-            if(fileInput) fileInput.click();
+            document.getElementById('globalFileManager').click();
         }
 
         function handleWhatsAppUpload(event) {
             let files = event.target.files;
             if(files.length > 0) {
-                let fileNames = Array.from(files).map(f => f.name).join(', ');
-                let waText = encodeURIComponent(`Hello Director Salih Wayanad, I am uploading/sharing files from OYES App: ${fileNames}`);
-                alert(`📂 File Selected!\nRedirecting to Director Salih Wayanad's WhatsApp (9947198248).`);
-                window.open(`https://wa.me/919947198248?text=${waText}`, '_blank');
+                window.open("https://wa.me/919947198248?text=File%20shared%20from%20OYES%20App", "_blank");
             }
         }
 
+        function requestAdminAccess() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminCode() {
+            let code = document.getElementById('adminSecretInput').value.trim();
+            if(code === "salih9947") {
+                closeAdminModal();
+                alert("Admin Access Verified!");
+                openAdminSettings();
+            } else {
+                alert("Incorrect Code!");
+            }
+        }
+
+        function openAdminSettings() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = "Salih Wayanad Studio Admin Panel";
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.innerHTML = `
+                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center">
+                    <h3 class="text-amber-300 font-bold text-xs uppercase">App Customization Panel</h3>
+                    <p class="text-[11px] text-slate-300">You have full administrator control over OYES App.</p>
+                    <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-xl text-xs">Change App Logo</button>
+                    <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 text-white font-bold py-2 rounded-xl text-xs">Change Home Background</button>
+                </div>
+            `;
+        }
+
         function triggerLogoPicker() { document.getElementById('logoFileInput').click(); }
-        function handleLogoSelection(event) {
-            let file = event.target.files[0];
+        function handleLogoSelection(e) {
+            let file = e.target.files[0];
             if(file) {
                 let reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('headerLogoIcon').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
-                    document.getElementById('bannerLogoIcon').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
-                    alert("✅ App Logo updated successfully!");
+                reader.onload = function(evt) {
+                    document.getElementById('headerLogoIcon').innerHTML = '<img src="' + evt.target.result + '" class="w-full h-full object-cover rounded-full">';
+                    document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + evt.target.result + '" class="w-full h-full object-cover rounded-full">';
+                    alert("Logo updated successfully!");
                 };
                 reader.readAsDataURL(file);
             }
         }
 
         function triggerBgPicker() { document.getElementById('bgFileInput').click(); }
-        function handleBgSelection(event) {
-            let file = event.target.files[0];
+        function handleBgSelection(e) {
+            let file = e.target.files[0];
             if(file) {
                 let reader = new FileReader();
-                reader.onload = function(e) {
-                    document.body.style.backgroundImage = `url('${e.target.result}')`;
-                    alert("✅ Home Background updated successfully!");
+                reader.onload = function(evt) {
+                    document.body.style.backgroundImage = 'url(' + evt.target.result + ')';
+                    alert("Background updated successfully!");
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        function triggerFolderBgPicker() { document.getElementById('folderBgInput').click(); }
-        function handleFolderBgSelection(event) {
-            let file = event.target.files[0];
-            if(file) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let subView = document.getElementById('subFolderPageView');
-                    subView.style.backgroundImage = `url('${e.target.result}')`;
-                    subView.style.backgroundSize = 'cover';
-                    alert("✅ Sub-Folders Background updated successfully!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function startVoiceRecognition(targetInputId) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) { alert("Speech recognition not supported."); return; }
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'ml-IN';
-            recognition.onresult = function(event) {
-                document.getElementById(targetInputId).value = event.results[0][0].transcript;
-            };
-            recognition.start();
-        }
-
-        function triggerGoogleAssistant() {
-            let query = document.getElementById('globalAiQuery').value.trim();
-            let resBox = document.getElementById('globalAiResponse');
-            if(!query) { alert("Please enter a question."); return; }
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `🤖 <b>OYES Global AI...</b><br>Analyzing: "${query}"`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>Global Guidance for "${query}":</b><br>
-                <a href="https://chatgpt.com/" target="_blank" class="text-amber-300 underline font-bold mt-1 block">Open in ChatGPT ➔</a>
-                <a href="https://gemini.google.com/" target="_blank" class="text-amber-300 underline font-bold mt-1 block">Open in Google Gemini ➔</a>`;
-            }, 800);
-        }
-
-        function askDomainSpecificAI() {
-            let query = document.getElementById('aiFolderQuery').value.trim();
-            let resBox = document.getElementById('aiFolderResponse');
-            if(!query) { alert("Please enter a question."); return; }
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `🔍 <b>Consulting AI...</b>`;
-            setTimeout(() => {
-                resBox.innerHTML = `✨ <b>AI Response:</b><br>
-                Regarding "${query}", explore the resources below:<br>
-                <a href="https://chatgpt.com/" target="_blank" class="text-amber-300 underline font-bold mt-1 block">Ask ChatGPT ➔</a>
-                <a href="https://gemini.google.com/" target="_blank" class="text-amber-300 underline font-bold mt-1 block">Ask Gemini ➔</a>`;
-            }, 800);
-        }
-
-        function requestAdminAccess() { document.getElementById('adminLoginModal').classList.remove('hidden'); }
-        function closeAdminModal() { document.getElementById('adminLoginModal').classList.add('hidden'); }
-
-        function verifyAdminCode() {
-            let input = document.getElementById('adminSecretInput').value.trim();
-            if(input === "salih9947") {
-                closeAdminModal();
-                alert("✅ Salih Wayanad Studio Access Verified!");
-                openAdminSettingsDashboard();
-            } else {
-                alert("❌ Access Denied! Incorrect Code.");
-            }
-        }
-
-        function openAdminSettingsDashboard() {
-            let homeView = document.getElementById('homeView');
-            let subView = document.getElementById('subFolderPageView');
-            homeView.classList.add('hidden');
-            subView.classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = '🎬 Salih Wayanad Studio - Dynamic Folder Manager';
-            document.getElementById('domainAiBox').classList.add('hidden'); 
+        function openDomainFolders(domainId) {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
             
-            renderAdminDashboardContent();
-        }
+            let folders = domainFoldersData[domainId] || [];
+            document.getElementById('pageTitle').innerText = "Domain " + domainId + " Hub";
 
-        function renderAdminDashboardContent() {
-            const grid = document.getElementById('pageContentGrid');
-            grid.className = "grid grid-cols-1 gap-3.5 pb-6 pt-2";
+            let grid = document.getElementById('pageContentGrid');
+            let html = "";
             
-            let htmlContent = `
-                <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/60">
-                    <label class="text-amber-300 font-bold block text-xs">App Title (Protected):</label>
-                    <input type="text" id="editAppTitle" value="${document.getElementById('bannerAppTitle').innerText}" class="w-full bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 text-xs">
-                </div>
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center">
-                    <label class="text-amber-300 font-bold block text-xs">🖼️ Change App Logo:</label>
-                    <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition-all">📁 Browse File Manager for Logo</button>
-                </div>
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center">
-                    <label class="text-amber-300 font-bold block text-xs">🌄 Change Home Background:</label>
-                    <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition-all">📁 Browse File Manager for Home BG</button>
-                </div>
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center">
-                    <label class="text-amber-300 font-bold block text-xs">📂 Change Sub-Folders Background:</label>
-                    <button type="button" onclick="triggerFolderBgPicker()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition-all">📁 Browse File Manager for Folders BG</button>
-                </div>
-
-                <!-- ADD NEW FOLDER SECTION -->
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-emerald-500/60">
-                    <h3 class="text-emerald-300 font-bold text-xs uppercase">➕ Create New Folder</h3>
-                    <select id="newFolderDomain" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
-                        <option value="1">Domain 1: World of Knowledge</option>
-                        <option value="2">Domain 2: Need & Urgent</option>
-                        <option value="3">Domain 3: OYES Infinity</option>
-                        <option value="4">Domain 4: Political & Government</option>
-                        <option value="5">Domain 5: Business & Trade</option>
-                        <option value="6">Domain 6: Charity & Community</option>
-                        <option value="7">Domain 7: Clubs & Communities Hub</option>
-                    </select>
-                    <input type="text" id="newFolderName" placeholder="Enter Folder Name (e.g. Study Materials)" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
-                    <input type="text" id="newFolderIcon" placeholder="Enter Icon/Emoji (e.g. 📚)" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
-                    <input type="text" id="newFolderContent" placeholder="Enter Description/Content details" class="w-full bg-slate-900 text-slate-100 p-2 rounded-xl border border-slate-700 text-xs">
-                    <button type="button" onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs shadow">➕ Add Folder Now</button>
-                </div>
-
-                <!-- DELETE FOLDER SECTION -->
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-rose-500/60">
-                    <h3 class="text-rose-300 font-bold text-xs uppercase">🗑️ Delete Existing Folders</h3>
-                    <div id="deleteFolderListContainer" class="space-y-2 max-h-48 overflow-y-auto pr-1">
-            `;
-
-            for(let d in domainFoldersData) {
-                domainFoldersData[d].forEach((folder, idx) => {
-                    htmlContent += `
-                        <div class="flex justify-between items-center bg-slate-900 p-2 rounded-xl border border-slate-800 text-[11px]">
-                            <span class="text-slate-200">${folder.icon} ${folder.name}</span>
-                            <button type="button" onclick="deleteFolder(${d}, ${idx})" class="bg-rose-600 hover:bg-rose-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold">Delete</button>
+            for(let i = 0; i < folders.length; i++) {
+                let f = folders[i];
+                html += `
+                    <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 border-b border-slate-800 pb-2">
+                                <span class="text-xl">` + f.icon + `</span>
+                                <h3 class="font-bold text-xs text-amber-300">` + f.name + `</h3>
+                            </div>
+                            <p class="text-xs text-slate-200 mt-2">` + f.desc + `</p>
                         </div>
-                    `;
-                });
-            }
-
-            htmlContent += `
+                        <a href="` + f.link + `" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl block text-center text-xs shadow mt-2">Open Portal ➔</a>
                     </div>
-                </div>
-                <div class="pt-2">
-                    <button type="button" onclick="saveAdminSettings()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition-all">💾 Save All Changes</button>
-                </div>
-            `;
-            grid.innerHTML = htmlContent;
-        }
-
-        function addNewFolder() {
-            let domainId = document.getElementById('newFolderDomain').value;
-            let name = document.getElementById('newFolderName').value.trim();
-            let icon = document.getElementById('newFolderIcon').value.trim() || "📁";
-            let content = document.getElementById('newFolderContent').value.trim() || "<b>Custom Folder Content</b><br>Details will be updated here.";
-
-            if(!name) {
-                alert("Please enter a folder name.");
-                return;
+                `;
             }
-
-            if(!domainFoldersData[domainId]) {
-                domainFoldersData[domainId] = [];
-            }
-
-            domainFoldersData[domainId].push({name: name, icon: icon, content: content});
-            alert(`✅ New Folder "${name}" added successfully!`);
-            renderAdminDashboardContent();
-        }
-
-        function deleteFolder(domainId, index) {
-            if(confirm("Are you sure you want to delete this folder?")) {
-                domainFoldersData[domainId].splice(index, 1);
-                alert("🗑️ Folder deleted successfully!");
-                renderAdminDashboardContent();
-            }
-        }
-
-        function saveAdminSettings() {
-            let newTitle = document.getElementById('editAppTitle').value;
-            document.getElementById('bannerAppTitle').innerText = newTitle;
-            document.getElementById('headerMainTitle').innerText = newTitle;
-
-            alert("✅ Salih Wayanad Studio: All Changes Saved Successfully!");
-            goBackHome();
+            grid.innerHTML = html;
+            window.scrollTo(0, 0);
         }
 
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
         }
-
-        function openDomainFolders(domainId) {
-            currentActiveDomain = domainId;
-            let titleElement = document.getElementById('title' + domainId);
-            let title = titleElement ? titleElement.innerText : "Master Hub";
-            
-            document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('domainAiBox').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = title;
-            document.getElementById('domainAiTitle').innerText = `${title} AI Expert`;
-            document.getElementById('aiFolderQuery').value = "";
-            document.getElementById('aiFolderResponse').classList.add('hidden');
-
-            const grid = document.getElementById('pageContentGrid');
-            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
-            
-            let foldersHtml = `
-                <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/40">
-                    <h3 class="font-bold text-xs text-amber-300 uppercase tracking-wide">${title} - Content Hub</h3>
-                    <p class="text-[11px] text-slate-300 leading-relaxed">Explore the web portals and links below. You can also upload files to Director Salih's WhatsApp using the button above.</p>
-                </div>
-            `;
-
-            let foldersList = domainFoldersData[domainId] || [];
-            if(foldersList.length === 0) {
-                foldersHtml += `<div class="text-center text-xs text-slate-400 py-6">No content available in this section. Admin can add folders from settings.</div>`;
-            } else {
-                foldersList.forEach((folder) => {
-                    let displayName = folder.name.startsWith(folder.icon) ? folder.name : `${folder.icon} ${folder.name}`;
-                    foldersHtml += `
-                        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50 shadow-md">
-                            <div class="flex items-center gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-xl">${folder.icon}</span>
-                                <h3 class="font-bold text-xs text-amber-300">${displayName}</h3>
-                            </div>
-                            <div class="text-xs text-slate-200 leading-relaxed pt-1">
-                                ${folder.content}
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-
-            grid.innerHTML = foldersHtml;
-            window.scrollTo(0, 0);
-        }
-
-        function installAppPrompt() { alert('📲 Tap Chrome menu (⋮) and select "Add to Home screen".'); }
-        function shareApp() { navigator.clipboard.writeText(window.location.href); alert('🔗 Link copied!'); }
     </script>
 </body>
 </html>
