@@ -117,7 +117,7 @@
             <div onclick="openDomainFolders(4)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">🏨</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">താമസസൗകര്യം & ഹോട്ടലുകൾ</h3>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">HOTELS & STAYS</h3>
                     <p class="text-[9px] text-slate-300">District-wise stays & room bookings</p>
                 </div>
                 <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
@@ -175,41 +175,185 @@
     <script>
         const defaultDomainData = {
             1: [
-                {name: "Quran Online", icon: "📖", desc: "വിശുദ്ധ ഖുർആൻ വായന.", link: "https://quran.com"},
-                {name: "Holy Bible", icon: "✝️", desc: "വിശുദ്ധ ബൈബിൾ വായന.", link: "https://www.bible.com"},
-                {name: "Bhagavad Gita", icon: "🕉️", desc: "ഭഗവദ്ഗീത സന്ദേശങ്ങൾ.", link: "https://www.holy-bhagavad-gita.org"},
-                {name: "Ramayana Epic", icon: "🛕", desc: "രാമായണ ഇതിഹാസം.", link: "https://archive.org"},
-                {name: "Buddhism Study", icon: "☸️", desc: "ധമ്മപദ പഠനങ്ങൾ.", link: "https://www.accesstoinsight.org"},
-                {name: "E-Library Portal", icon: "📚", desc: "ഡിജിറ്റൽ ലൈബ്രറി.", link: "https://archive.org"}
+                {name: "Quran Online", icon: "📖", desc: "Holy Quran digital reading portal.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading & study scriptures.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita spiritual messages.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic collection.", link: "https://archive.org"},
+                {name: "Buddhism Study", icon: "☸️", desc: "Dhammapada teachings & study.", link: "https://www.accesstoinsight.org"},
+                {name: "E-Library Portal", icon: "📚", desc: "Global digital library archives.", link: "https://archive.org"}
             ],
             2: [
-                {name: "Pro Studio & Editing Tools", icon: "🎛️", desc: "ഫ്രീ വീഡിയോ, ഓഡിയോ, വിഎഫ്എക്സ് എഡിറ്റിംഗ് ടൂളുകൾ.", link: "https://clipchamp.com"},
-                {name: "Kids Cartoons", icon: "🧸", desc: "കുട്ടികൾക്കായുള്ള കാർട്ടൂൺ വീഡിയോകൾ.", link: "https://www.youtube.com/results?search_query=kids+cartoons"},
-                {name: "Short Films Hub", icon: "🎥", desc: "യൂട്യൂബ് ഷോർട്ട് ഫിലിംസ് & സിനിമകൾ.", link: "https://www.youtube.com"},
-                {name: "Studio Gallery", icon: "📸", desc: "സ്റ്റുഡിയോ ഫോട്ടോകളും ചിത്രങ്ങളും.", link: "https://photos.google.com"},
-                {name: "Director Contact", icon: "💬", desc: "ഡയറക്ടറുമായി നേരിട്ട് ചാറ്റ്.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih"}
+                {name: "Pro Studio & Editing Tools", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"},
+                {name: "Kids Cartoons", icon: "🧸", desc: "Animated cartoon videos for kids.", link: "https://www.youtube.com/results?search_query=kids+cartoons"},
+                {name: "Short Films Hub", icon: "🎥", desc: "YouTube short films and cinema portal.", link: "https://www.youtube.com"},
+                {name: "Studio Gallery", icon: "📸", desc: "Studio portfolio photos and pictures.", link: "https://photos.google.com"},
+                {name: "Director Contact", icon: "💬", desc: "Direct chat with Studio Director.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih"}
             ],
             3: [
-                {name: "House Deep Cleaning Service", icon: "🧹", desc: "വീടുകൾ ആഴത്തിൽ വൃത്തിയാക്കൽ (Deep Cleaning).", link: "https://wa.me/919947198248?text=House%20Deep%20Cleaning%20Service%20Inquiry"},
-                {name: "Water Tank Cleaning", icon: "🚰", desc: "കുടിവെള്ള ടാങ്ക് & സംപ് ക്ലീനിംഗ് സേവനങ്ങൾ.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning%20Inquiry"},
-                {name: "Sofa & Carpet Cleaning", icon: "🛋️", desc: "സോഫ, കാർപെറ്റ്, മെത്ത എന്നിവ ക്ലീൻ ചെയ്യൽ.", link: "https://wa.me/919947198248?text=Sofa%20Carpet%20Cleaning%20Inquiry"},
-                {name: "Office & Commercial Cleaning", icon: "🏢", desc: "ഓഫീസുകൾ, ഷോപ്പുകൾ & സ്ഥാപനങ്ങളുടെ ക്ലീനിംഗ്.", link: "https://wa.me/919947198248?text=Office%20Commercial%20Cleaning%20Inquiry"},
-                {name: "Post-Construction Cleaning", icon: "🏗️", desc: "നിർമ്മാണ ജോലികൾക്ക് ശേഷമുള്ള ബിൽഡിംഗ് ക്ലീനിംഗ്.", link: "https://wa.me/919947198248?text=Construction%20Cleaning%20Inquiry"},
-                {name: "Car Wash & Detailing", icon: "🚗", desc: "വാഹനങ്ങളുടെ ഫുൾ വാഷ് & ഇന്റീരിയർ ക്ലീനിംഗ്.", link: "https://wa.me/919947198248?text=Car%20Wash%20Cleaning%20Inquiry"},
-                {name: "General Cleaners & Helpers", icon: "👷", desc: "ക്ലീനിംഗ് ജോലികൾക്കായി തൊഴിലാളികളെ ലഭിക്കാൻ.", link: "https://wa.me/919947198248?text=Cleaning%20Job%20Worker%20Inquiry"},
-                {name: "Kerala PSC & Govt Jobs", icon: "📋", desc: "കേരള പിഎസ്‌സി & കേന്ദ്ര സർക്കാറിന്റെ തൊഴിലുകൾ.", link: "https://keralapsc.gov.in"},
-                {name: "Send Resume / CV (Email)", icon: "✉️", desc: "ബയോഡാറ്റ അയച്ച് അനുയോജ്യമായ ജോലി നേടാൻ.", link: "mailto:salihstudio9947@gmail.com?subject=Job%20Application%20-%20OYES%20App&body=Respected%20Director%20Salih,%0D%0A%0D%0APlease%20find%20my%20details%20below:%0D%0A- Name:%0D%0A- Qualification:%0D%0A- Preferred Job Type:%0D%0A- Contact Number:"}
+                {name: "House Deep Cleaning Service", icon: "🧹", desc: "Complete residential deep cleaning services.", link: "https://wa.me/919947198248?text=House%20Deep%20Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Overhead water tank & sump cleaning.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning%20Inquiry"},
+                {name: "Sofa & Carpet Cleaning", icon: "🛋️", desc: "Sofa, carpet & mattress cleaning services.", link: "https://wa.me/919947198248?text=Sofa%20Carpet%20Cleaning%20Inquiry"},
+                {name: "Office & Commercial Cleaning", icon: "🏢", desc: "Offices, shops & commercial cleaning.", link: "https://wa.me/919947198248?text=Office%20Commercial%20Cleaning%20Inquiry"},
+                {name: "Post-Construction Cleaning", icon: "🏗️", desc: "Post-construction site cleaning & debris removal.", link: "https://wa.me/919947198248?text=Construction%20Cleaning%20Inquiry"},
+                {name: "Car Wash & Detailing", icon: "🚗", desc: "Vehicle full wash & interior detailing.", link: "https://wa.me/919947198248?text=Car%20Wash%20Cleaning%20Inquiry"},
+                {name: "General Cleaners & Helpers", icon: "👷", desc: "Hire construction helpers & cleaning workers.", link: "https://wa.me/919947198248?text=Cleaning%20Job%20Worker%20Inquiry"},
+                {name: "Kerala PSC & Govt Jobs", icon: "📋", desc: "Kerala PSC & central government job alerts.", link: "https://keralapsc.gov.in"},
+                {name: "Send Resume / CV (Email)", icon: "✉️", desc: "Send your resume to apply for suitable jobs.", link: "mailto:salihstudio9947@gmail.com?subject=Job%20Application%20-%20OYES%20App&body=Respected%20Director%20Salih,%0D%0A%0D%0APlease%20find%20my%20details%20below:%0D%0A- Name:%0D%0A- Qualification:%0D%0A- Preferred Job Type:%0D%0A- Contact Number:"}
             ],
             4: [
-                {name: "Wayanad District Stays", icon: "⛰️", desc: "വയനാട്ടിലെ റിസോർട്ടുകളും ഹോംസ്റ്റേകളും.", link: "https://www.booking.com/region/in/wayanad.html"},
-                {name: "Kozhikode District Hotels", icon: "🌊", desc: "കോഴിക്കോട് ജില്ലയിലെ താമസ സൗകര്യങ്ങൾ.", link: "https://www.booking.com/city/in/kozhikode.html"},
-                {name: "Ernakulam / Kochi Stays", icon: "🏙️", desc: "എറണാകുളം ജില്ലയിലെ ഹോട്ടലുകൾ.", link: "https://www.booking.com/city/in/kochi.html"},
-                {name: "Thiruvananthapuram Stays", icon: "🏛️", desc: "തിരുവനന്തപുരം ജില്ലയിലെ ഹോട്ടലുകൾ.", link: "https://www.booking.com/city/in/thiruvananthapuram.html"},
-                {name: "Other Districts & Lodges", icon: "🏨", desc: "മറ്റ് ജില്ലകളിലെ ബജറ്റ് റൂമുകൾ.", link: "https://www.oyorooms.com"},
-                {name: "Direct Room Booking", icon: "📞", desc: "നേരിട്ട് റൂം ബുക്ക് ചെയ്യാൻ വാട്സാപ്പ് വഴി ബന്ധപ്പെടാം.", link: "https://wa.me/919947198248?text=Room%20Booking%20Inquiry%20-%20OYES%20App"}
+                {name: "Wayanad District Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad district.", link: "https://www.booking.com/region/in/wayanad.html"},
+                {name: "Kozhikode District Hotels", icon: "🌊", desc: "Accommodation options in Kozhikode.", link: "https://www.booking.com/city/in/kozhikode.html"},
+                {name: "Ernakulam / Kochi Stays", icon: "🏙️", desc: "Hotels and stays in Kochi & Ernakulam.", link: "https://www.booking.com/city/in/kochi.html"},
+                {name: "Thiruvananthapuram Stays", icon: "🏛️", desc: "Hotels and lodging in Thiruvananthapuram.", link: "https://www.booking.com/city/in/thiruvananthapuram.html"},
+                {name: "Other Districts & Lodges", icon: "🏨", desc: "Budget rooms across other districts.", link: "https://www.oyorooms.com"},
+                {name: "Direct Room Booking", icon: "📞", desc: "Direct room booking via WhatsApp inquiry.", link: "https://wa.me/919947198248?text=Room%20Booking%20Inquiry%20-%20OYES%20App"}
             ],
             5: [
-                {name: "Cows, Goats & Pets (Live Stock)", icon: "🐄", desc: "പശു, ആട്, കോഴി മറ്റ് വളർത്തുമൃഗങ്ങൾ വാങ്ങാനും വിൽക്കാനും.", link: "https://wa.me/919947198248?text=Cows%20Goats%20Pets%20Buy%20Sell%20Inquiry"},
-                {name: "Mangoes, Vegetables & Crops", icon: "🥭", desc: "മാങ്ങ, പച്ചക്കറി, നാടൻ കാർഷിക വിളകൾ വിൽക്കാനും വാങ്ങാനും.", link: "https://wa.me/919947198248?text=Mango%20Vegetables%20Crops%20Buy%20Sell%20Inquiry"},
-                {name: "Real Estate (Houses & Lands)", icon: "🏡", desc: "വീടുകൾ, പ്ലോട്ടുകൾ & സ്ഥലം വാങ്ങാനും വിൽക്കാനും.", link: "https://wa.me/919947198248?text=Real%20Estate%20Buy%20Sell%20Inquiry"},
-                {name: "Vehicles (Cars & Bikes)", icon: "🚗", desc: "കാറുകൾ, ഇരുചക്ര വാഹനങ്ങൾ വാങ്ങാനും വിൽക്കാനും.", link: "
+                {name: "Cows, Goats & Pets (Live Stock)", icon: "🐄", desc: "Buy and sell cows, goats, poultry and pets.", link: "https://wa.me/919947198248?text=Cows%20Goats%20Pets%20Buy%20Sell%20Inquiry"},
+                {name: "Mangoes, Vegetables & Crops", icon: "🥭", desc: "Buy and sell mangoes, vegetables & agricultural produce.", link: "https://wa.me/919947198248?text=Mango%20Vegetables%20Crops%20Buy%20Sell%20Inquiry"},
+                {name: "Real Estate (Houses & Lands)", icon: "🏡", desc: "Houses, plots and lands for buy, sell & rent.", link: "https://wa.me/919947198248?text=Real%20Estate%20Buy%20Sell%20Inquiry"},
+                {name: "Vehicles (Cars & Bikes)", icon: "🚗", desc: "Used and new cars, bikes and vehicles marketplace.", link: "https://wa.me/919947198248?text=Vehicle%20Buy%20Sell%20Inquiry"},
+                {name: "Home Appliances & Gadgets", icon: "📱", desc: "Mobiles, TVs, fridges and home electronics.", link: "https://wa.me/919947198248?text=Appliances%20Gadgets%20Buy%20Sell%20Inquiry"},
+                {name: "Furniture & General Goods", icon: "🪑", desc: "Furniture, office items and general goods.", link: "https://wa.me/919947198248?text=Furniture%20General%20Goods%20Buy%20Sell%20Inquiry"},
+                {name: "Post Your Ad to Sell (WhatsApp)", icon: "✍️", desc: "Send your product photos to list and sell.", link: "https://wa.me/919947198248?text=Post%20New%20Buy%20Sell%20Ad%20-%20OYES%20App"}
+            ],
+            6: [
+                {name: "All Advertisements Hub", icon: "📢", desc: "Digital, print, wedding, obituary & commercial ads.", isFolder: true, folderType: 'ads'},
+                {name: "Events & Management Hub", icon: "🎉", desc: "Hosting, welcome team, anchoring & stage management.", isFolder: true, folderType: 'events'}
+            ],
+            7: [
+                {name: "Food Delivery", icon: "🍔", desc: "Food delivery from local restaurants & hotels.", link: "https://wa.me/919947198248?text=Food%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Grocery & Supermarket", icon: "🛒", desc: "Groceries and everyday household supplies.", link: "https://wa.me/919947198248?text=Grocery%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Parcel & Courier Service", icon: "📦", desc: "Quick parcel and document delivery service.", link: "https://wa.me/919947198248?text=Parcel%20Courier%20Inquiry%20-%20OYES%20App"},
+                {name: "Medical & Pharmacy Delivery", icon: "💊", desc: "Medicines and healthcare product delivery.", link: "https://wa.me/919947198248?text=Medical%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Emergency Express Delivery", icon: "⚡", desc: "Express delivery for urgent needs.", link: "https://wa.me/919947198248?text=Express%20Delivery%20Inquiry%20-%20OYES%20App"},
+                {name: "Book Delivery Partner", icon: "📞", desc: "Direct contact with delivery service partner.", link: "https://wa.me/919947198248?text=Book%20Delivery%20Partner%20-%20OYES%20App"}
+            ]
+        };
+
+        const subFolderData6 = {
+            ads: [
+                {name: "Digital & Social Media Ads", icon: "🌐", desc: "Facebook, Instagram, YouTube & Google ads.", link: "https://wa.me/919947198248?text=Digital%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Weddings & Celebrations", icon: "💐", desc: "Wedding announcements and family events.", link: "https://wa.me/919947198248?text=Wedding%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Obituaries & Remembrances", icon: "🕯️", desc: "Obituary notices and memorial updates.", link: "https://wa.me/919947198248?text=Obituary%20Notice%20-%20OYES%20App"},
+                {name: "Commercial & Business Ads", icon: "📢", desc: "Store openings, offers and brand promotions.", link: "https://wa.me/919947198248?text=Commercial%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Print & Outdoor Media Ads", icon: "📰", desc: "Newspaper ads, hoardings and flex boards.", link: "https://wa.me/919947198248?text=Print%20Outdoor%20Ad%20Inquiry%20-%20OYES%20App"},
+                {name: "Publish New Ad (WhatsApp)", icon: "✍️", desc: "Contact us to publish any advertisement.", link: "https://wa.me/919947198248?text=Publish%20New%20Ad%20-%20OYES%20App"}
+            ],
+            events: [
+                {name: "Hosting Girls Team", icon: "🎙️", desc: "Professional event hosting girls booking.", link: "https://wa.me/919947198248?text=Hosting%20Girls%20Booking%20-%20OYES%20App"},
+                {name: "Welcome Girls & Team", icon: "🌸", desc: "Welcome girls & guest receiving team.", link: "https://wa.me/919947198248?text=Welcome%20Girls%20Booking%20-%20OYES%20App"},
+                {name: "Stage Anchoring & MC", icon: "🎤", desc: "Stage anchoring and Master of Ceremonies.", link: "https://wa.me/919947198248?text=Stage%20Anchoring%20Booking%20-%20OYES%20App"},
+                {name: "Sound & Stage Setup", icon: "🎚️", desc: "Live sound system and stage decoration.", link: "https://wa.me/919947198248?text=Sound%20Stage%20Booking%20-%20OYES%20App"},
+                {name: "Photography & Coverage", icon: "📸", desc: "Event photography & videography coverage.", link: "https://wa.me/919947198248?text=Event%20Photography%20Booking%20-%20OYES%20App"},
+                {name: "Full Event Management", icon: "🎉", desc: "Complete function & event management.", link: "https://wa.me/919947198248?text=Full%20Event%20Management%20Booking%20-%20OYES%20App"}
+            ]
+        };
+
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
+
+        // Load Saved Logo and Background on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLogo = localStorage.getItem('oyes_logo');
+            if (savedLogo) {
+                document.getElementById('headerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
+                document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
+            }
+            let savedBg = localStorage.getItem('oyes_bg');
+            if (savedBg) {
+                document.body.style.backgroundImage = 'url(' + savedBg + ')';
+            }
+        });
+
+        let currentActiveDomain = 1;
+
+        // PWA Install Prompt Handler
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').classList.remove('hidden');
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        document.getElementById('installBtn').classList.add('hidden');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert("To install this app, tap your browser menu (...) and select 'Add to Home Screen' or 'Install App'.");
+            }
+        }
+
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'OYES APP',
+                    text: 'Check out OYES App by Salih Wayanad Studio!',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                window.open("https://wa.me/?text=Check%20out%20OYES%20App%20by%20Salih%20Wayanad%20Studio!", "_blank");
+            }
+        }
+
+        function openFileManager() {
+            document.getElementById('globalFileManager').click();
+        }
+
+        function handleWhatsAppUpload(event) {
+            let files = event.target.files;
+            if(files.length > 0) {
+                window.open("https://wa.me/919947198248?text=File%20shared%20from%20OYES%20App", "_blank");
+            }
+        }
+
+        function requestAdminAccess() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminCode() {
+            let code = document.getElementById('adminSecretInput').value.trim();
+            if(code === "salih9947") {
+                closeAdminModal();
+                alert("Admin Access Verified!");
+                openAdminSettings();
+            } else {
+                alert("Incorrect Code!");
+            }
+        }
+
+        function openAdminSettings() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = "Salih Wayanad Studio Admin Panel";
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
+            grid.innerHTML = `
+                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center col-span-2">
+                    <h3 class="text-amber-300 font-bold text-xs uppercase">App Customization & Management</h3>
+                    <p class="text-[11px] text-slate-300">Change Logo, Background, or Add/Delete Cards (1 to 7).</p>
+                    <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change App Logo</button>
+                    <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change Home Background</button>
+                    <div class="border-t border-slate-700 pt-3 space-y-2 text-left">
+                        <h4 class="text-amber-300 font-bold text-xs text-center">➕ Add New Card (Domain 1 to 7)</h4>
+                        <label class="text-[10px] text-slate-300">Select Domain (1:Knowledge, 2:Studio, 3:Jobs/Cleaning, 4:Hotels, 5:Buy & Sell, 6:Events/Ads, 7:Delivery):</label>
+                        <input type="number" id="newCardDomain" min="1" max="7" value="3" class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Icon (Emoji):</label>
+                        <input type="text" id="newCardIcon" placeholder="📁" class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Card Title:</label>
+                        <input type="text" id="newCardName" placeholder="Card Name" class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Description:</label>
+                        <input type="text" id="newCardDesc" placeholder="Short description..." class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <label class="text-[10px] text-slate-300">Destination Link / URL:</label>
+                        <input type="text" id="newCardLink" placeholder="https://..." class="w-full bg-slate-950 text-slate-200 p-2 rounded-xl border border-amber-600/50 text-xs">
+                        <button type="button" onclick="addNewFolderCard()" class="w-full bg-amber-600 text-slate-950 font-black py-2.5 rounded
