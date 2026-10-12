@@ -126,7 +126,8 @@
             <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
             <h3 id="pageTitle" class="text-xs font-bold text-amber-300 text-right">Sub Page</h3>
         </div>
-        <div id="pageContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
+        <!-- Grid layout for cards -->
+        <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
     <!-- Footer Section -->
@@ -141,33 +142,41 @@
     <script>
         const domainFoldersData = {
             1: [
-                {name: "World Sacred Texts (Quran)", icon: "📖", desc: "വിശുദ്ധ ഖുർആൻ ഓൺലൈനിൽ വായിക്കാം.", link: "https://quran.com"},
-                {name: "Study & E-Learning Portal", icon: "📚", desc: "ഡിജിറ്റൽ ലൈബ്രറി സേവനങ്ങൾ.", link: "https://archive.org"},
-                {name: "Science & Research Hub", icon: "🔬", desc: "ഗൂഗിൾ സ്കോളർ റിസർച്ച് പേപ്പറുകൾ.", link: "https://scholar.google.com"}
+                {name: "Quran Online", icon: "📖", desc: "വിശുദ്ധ ഖുർആൻ വായന.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "വിശുദ്ധ ബൈബിൾ വായന.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "ഭഗവദ്ഗീത സന്ദേശങ്ങൾ.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🛕", desc: "രാമായണ ഇതിഹാസം.", link: "https://archive.org"},
+                {name: "Buddhism Study", icon: "☸️", desc: "ധമ്മപദ പഠനങ്ങൾ.", link: "https://www.accesstoinsight.org"},
+                {name: "Comparative Study", icon: "🕊️", desc: "മതപഠന ഗവേഷണം.", link: "https://archive.org"},
+                {name: "E-Library Portal", icon: "📚", desc: "ഡിജിറ്റൽ ലൈബ്രറി.", link: "https://archive.org"},
+                {name: "Science Research", icon: "🔬", desc: "ഗൂഗിൾ സ്കോളർ ഹബ്.", link: "https://scholar.google.com"}
             ],
             2: [
-                {name: "Emergency Medical & Hospitals", icon: "🏥", desc: "ആരോഗ്യ വകുപ്പ് സേവന പോർട്ടൽ.", link: "https://mohfw.gov.in"},
-                {name: "Job & Employment Hub", icon: "💼", desc: "നാഷണൽ കരിയർ സർവീസ്.", link: "https://www.ncs.gov.in"}
+                {name: "Emergency Hospitals", icon: "🏥", desc: "ആരോഗ്യ വകുപ്പ് പോർട്ടൽ.", link: "https://mohfw.gov.in"},
+                {name: "Ambulance Helpline", icon: "🚑", desc: "അത്യാഹിത ആംബുലൻസ് സേവനം.", link: "https://wa.me/919947198248?text=Emergency%20Ambulance%20Help"},
+                {name: "Emergency 112", icon: "🚨", desc: "അടിയന്തിര സഹായ ഹെൽപ്പ് ലൈൻ.", link: "https://112.gov.in"},
+                {name: "Job Hub", icon: "💼", desc: "നാഷണൽ കരിയർ സർവീസ്.", link: "https://www.ncs.gov.in"},
+                {name: "Worker Registration", icon: "👷", desc: "ഇ-ശ്രം തൊഴിലാളി പോർട്ടൽ.", link: "https://eshram.gov.in"}
             ],
             3: [
-                {name: "Cinema & Film Production", icon: "🎬", desc: "സാലിഹ് വയനാട് സ്റ്റുഡിയോ അപ്ഡേറ്റ്സ്.", link: "https://www.imdb.com"},
-                {name: "Short Film Showcase", icon: "🎥", desc: "യൂട്യൂബ് ഷോർട്ട് ഫിലിംസ്.", link: "https://www.youtube.com"}
+                {name: "Film Production", icon: "🎬", desc: "സ്റ്റുഡിയോ അപ്ഡേറ്റ്സ്.", link: "https://www.imdb.com"},
+                {name: "Short Films", icon: "🎥", desc: "യൂട്യൂബ് ഷോർട്ട്സ്.", link: "https://www.youtube.com"}
             ],
             4: [
-                {name: "Government Schemes & Portals", icon: "🏛️", desc: "കേരള സർക്കാർ ഔദ്യോഗിക പോർട്ടൽ.", link: "https://kerala.gov.in"},
-                {name: "Political News & Updates", icon: "🗳️", desc: "തത്സമയ വാർത്തകൾ.", link: "https://news.google.com"}
+                {name: "Govt Portals", icon: "🏛️", desc: "കേരള സർക്കാർ.", link: "https://kerala.gov.in"},
+                {name: "Political News", icon: "🗳️", desc: "തത്സമയ വാർത്തകൾ.", link: "https://news.google.com"}
             ],
             5: [
-                {name: "Gold & Bullion Market", icon: "🪙", desc: "ഇന്നത്തെ സ്വർണ്ണ വില അറിയാൻ.", link: "https://www.bankbazaar.com/gold-rate-kerala.html"},
-                {name: "Real Estate & Property", icon: "🏢", desc: "പ്രോപ്പർട്ടി വിൽപ്പന പരസ്യങ്ങൾ.", link: "https://www.magicbricks.com"}
+                {name: "Gold Market", icon: "🪙", desc: "സ്വർണ്ണ വില അറിയാൻ.", link: "https://www.bankbazaar.com/gold-rate-kerala.html"},
+                {name: "Real Estate", icon: "🏢", desc: "പ്രോപ്പർട്ടി പരസ്യങ്ങൾ.", link: "https://www.magicbricks.com"}
             ],
             6: [
-                {name: "Charity Fund & Donations", icon: "🤲", desc: "ജീവകാരുണ്യ പ്രവർത്തന ഫണ്ടുകൾ.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20want%20to%20contribute%20to%20Charity."},
-                {name: "Director Salih Contact Hub", icon: "📞", desc: "ഡയറക്ടറുമായി നേരിട്ട് ചാറ്റ് ചെയ്യാം.", link: "https://wa.me/919947198248"}
+                {name: "Charity Fund", icon: "🤲", desc: "ജീവകാരുണ്യ ഫണ്ട്.", link: "https://wa.me/919947198248?text=Charity%20Support"},
+                {name: "Director Contact", icon: "📞", desc: "ഡയറക്ടറുമായി ചാറ്റ്.", link: "https://wa.me/919947198248"}
             ],
             7: [
-                {name: "Pashu & Goat Trading Market", icon: "🐄", desc: "കന്നുകാലി വിപണി വിവരങ്ങൾ.", link: "https://www.olx.in"},
-                {name: "OYES Community Live Chat", icon: "💬", desc: "കമ്മ്യൂണിറ്റി ഗ്രൂപ്പ് ചാറ്റ്.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih,%20Add%20me%20to%20Live%20Chat."}
+                {name: "Trading Market", icon: "🐄", desc: "കന്നുകാലി വിപണി.", link: "https://www.olx.in"},
+                {name: "Community Chat", icon: "💬", desc: "ഗ്രൂപ്പ് ചാറ്റ്.", link: "https://wa.me/919947198248?text=Live%20Chat"}
             ]
         };
 
@@ -207,8 +216,9 @@
             document.getElementById('pageTitle').innerText = "Salih Wayanad Studio Admin Panel";
             
             let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
             grid.innerHTML = `
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center">
+                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center col-span-2">
                     <h3 class="text-amber-300 font-bold text-xs uppercase">App Customization Panel</h3>
                     <p class="text-[11px] text-slate-300">You have full administrator control over OYES App.</p>
                     <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-xl text-xs">Change App Logo</button>
@@ -252,20 +262,19 @@
             document.getElementById('pageTitle').innerText = "Domain " + domainId + " Hub";
 
             let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
             
             for(let i = 0; i < folders.length; i++) {
                 let f = folders[i];
                 html += `
-                    <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-xl">` + f.icon + `</span>
-                                <h3 class="font-bold text-xs text-amber-300">` + f.name + `</h3>
-                            </div>
-                            <p class="text-xs text-slate-200 mt-2">` + f.desc + `</p>
+                    <div class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center">
+                        <div class="space-y-1.5">
+                            <span class="text-2xl block">` + f.icon + `</span>
+                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">` + f.name + `</h3>
+                            <p class="text-[10px] text-slate-300">` + f.desc + `</p>
                         </div>
-                        <a href="` + f.link + `" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl block text-center text-xs shadow mt-2">Open Portal ➔</a>
+                        <a href="` + f.link + `" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
                     </div>
                 `;
             }
