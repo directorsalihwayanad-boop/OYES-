@@ -52,7 +52,7 @@
                     <option value="hi">हिन्दी</option>
                     <option value="ar">العربية</option>
                 </select>
-                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow" title="File Manager">📁</button>
+                <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow" title="File Manager">📁</button>
                 <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow" title="Admin Panel">⚙️</button>
             </div>
         </div>
@@ -91,9 +91,7 @@
         </div>
 
         <!-- 7 Primary Folders Grid -->
-        <div id="homeGridContainer" class="grid grid-cols-2 gap-3">
-            <!-- Dynamically rendered via JS -->
-        </div>
+        <div id="homeGridContainer" class="grid grid-cols-2 gap-3"></div>
 
     </main>
 
@@ -111,7 +109,7 @@
         <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
     </footer>
 
-    <!-- JavaScript & Voice AI Logic -->
+    <!-- JavaScript & Permanent Storage Logic -->
     <script>
         const translations = {
             en: { bannerTitle: "OYES GLOBAL HUB", subtitle: "Embracing Change • Creating the Future", footer: "Change from within • The future through us" },
@@ -131,18 +129,18 @@
         }
 
         const defaultRootFolders = [
-            { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", slogan: "Connecting people • Uniting opportunities" },
-            { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", slogan: "Shift in thought • Progress in life" },
-            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers" },
-            { id: 4, name: "STAYS & HOTELS", icon: "🏨", slogan: "One connection • Endless possibilities" },
-            { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", slogan: "Your world • Your community" },
-            { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", slogan: "Connect digitally • Move forward together" },
-            { id: 7, name: "OYES CINEMA & STUDIO", icon: "🎬", slogan: "Skills awaken • Possibilities unfold" }
+            { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", slogan: "Connecting people • Uniting opportunities", bg: "" },
+            { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", slogan: "Shift in thought • Progress in life", bg: "" },
+            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers", bg: "" },
+            { id: 4, name: "STAYS & HOTELS", icon: "🏨", slogan: "One connection • Endless possibilities", bg: "" },
+            { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", slogan: "Your world • Your community", bg: "" },
+            { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", slogan: "Connect digitally • Move forward together", bg: "" },
+            { id: 7, name: "OYES CINEMA & STUDIO", icon: "🎬", slogan: "Skills awaken • Possibilities unfold", bg: "" }
         ];
 
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
 
-        const defaultDomainData = {
+        const strictDomainData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
                 {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
@@ -150,9 +148,9 @@
                 {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org"}
             ],
             2: [
-                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional deep cleaning services for homes.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
-                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and water tank cleaning services.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
-                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+                {name: "Job Vacancies Portal", icon: "📋", desc: "Local & government job updates, Kerala PSC notifications.", link: "https://keralapsc.gov.in"},
+                {name: "House Deep Cleaning Services", icon: "🧹", desc: "Professional deep cleaning services for homes & offices.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and overhead water tank cleaning services.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"}
             ],
             3: [
                 {name: "Imported & Italian Marbles", icon: "🇮🇹", desc: "Statuario, Botticino, Beige & Designer Imported Marbles with rich textures.", link: "https://wa.me/919947198248?text=Italian%20Marble%20Inquiry"},
@@ -187,11 +185,11 @@
             7: [
                 {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"},
                 {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com"},
-                {name: "Short Films Hub", icon: "🎥", desc: "Watch short films and cinema.", link: "https://www.youtube.com"}
+                {name: "Short Films & Cinema Hub", icon: "🎥", desc: "Watch short films, movies and cinema productions.", link: "https://www.youtube.com"}
             ]
         };
 
-        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || strictDomainData;
 
         function renderHomeGrid() {
             let container = document.getElementById('homeGridContainer');
@@ -235,13 +233,12 @@
             }
         }
 
-        // File Manager Hub Trigger
         let activeFileManagerAction = null;
-        let activeTargetDomainId = null;
+        let activeTargetIndex = null;
 
-        function openFileManager(actionType = 'general', domainId = null) {
+        function openFileManager(actionType, targetIndex = null) {
             activeFileManagerAction = actionType;
-            activeTargetDomainId = domainId;
+            activeTargetIndex = targetIndex;
             document.getElementById('globalFileManager').click();
         }
 
@@ -252,29 +249,33 @@
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     let fileDataUrl = e.target.result;
-                    if (activeFileManagerAction === 'logo') {
+                    if (activeFileManagerAction === 'global_logo') {
                         localStorage.setItem('oyes_custom_logo', fileDataUrl);
                         loadPersistentCustomizations();
-                        alert("App Logo updated permanently via File Manager!");
-                    } else if (activeFileManagerAction === 'background') {
+                        alert("App Logo updated permanently!");
+                    } else if (activeFileManagerAction === 'global_bg') {
                         localStorage.setItem('oyes_custom_bg', fileDataUrl);
                         loadPersistentCustomizations();
-                        alert("App Background updated permanently via File Manager!");
+                        alert("Global Background updated permanently!");
+                    } else if (activeFileManagerAction === 'folder_bg' && activeTargetIndex !== null) {
+                        rootFolders[activeTargetIndex].bg = fileDataUrl;
+                        localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+                        alert("Folder specific background updated permanently via File Manager!");
+                        openAdminSettings();
                     } else {
-                        alert("Files successfully uploaded and saved in OYES File Manager Hub!");
+                        alert("File uploaded successfully to File Manager!");
                     }
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        // Voice & Text Enabled AI Assistant (Speech Recognition)
         function openVoiceAI(domainName) {
             let userQuery = "";
             if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
                 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                 const recognition = new SpeechRecognition();
-                recognition.lang = 'ml-IN'; // Default support for Malayalam, adjusts dynamically
+                recognition.lang = 'ml-IN';
                 recognition.interimResults = false;
                 recognition.maxAlternatives = 1;
 
@@ -284,11 +285,10 @@
 
                 recognition.onresult = function(event) {
                     userQuery = event.results[0][0].transcript;
-                    alert(`AI Response for "${domainName}" (Voice: "${userQuery}"): Processed successfully with multi-language support!`);
+                    alert(`AI Response for "${domainName}" (Voice: "${userQuery}"): Processed successfully!`);
                 };
 
                 recognition.onerror = function(event) {
-                    // Fallback to text prompt if microphone is blocked or not available
                     userQuery = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
                     if (userQuery) {
                         alert(`AI Response for "${domainName}": "${userQuery}" - Processed successfully!`);
@@ -304,7 +304,6 @@
             }
         }
 
-        // Admin Security & Panel
         function requestAdminAccess() {
             document.getElementById('adminSecretInput').value = "";
             document.getElementById('adminLoginModal').classList.remove('hidden');
@@ -336,14 +335,14 @@
             let editHtml = `
                 <div class="card-3d p-4 rounded-2xl text-center col-span-2 space-y-3 border border-amber-500/60">
                     <h4 class="text-amber-300 font-bold text-xs">Global Branding & File Manager Controls</h4>
-                    <div class="flex gap-2 justify-center">
-                        <button type="button" onclick="openFileManager('logo')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo (File Manager)</button>
-                        <button type="button" onclick="openFileManager('background')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change BG (File Manager)</button>
+                    <div class="flex gap-2 justify-center flex-wrap">
+                        <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo</button>
+                        <button type="button" onclick="openFileManager('global_bg')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Global BG</button>
                     </div>
                 </div>
 
                 <div class="card-3d p-4 rounded-2xl col-span-2 space-y-3 text-left">
-                    <h4 class="text-cyan-300 font-bold text-xs">Manage Root Folders & Icons (Fixed 7 Grid Architecture):</h4>
+                    <h4 class="text-cyan-300 font-bold text-xs">Manage Folders, Icons & Folder Backgrounds:</h4>
             `;
 
             rootFolders.forEach((folder, idx) => {
@@ -354,7 +353,10 @@
                             <input type="text" id="root_name_${idx}" value="${folder.name}" class="flex-grow bg-slate-900 text-slate-200 p-1.5 rounded border border-slate-700 text-xs font-bold">
                         </div>
                         <input type="text" id="root_slogan_${idx}" value="${folder.slogan}" class="w-full bg-slate-900 text-slate-300 p-1 rounded border border-slate-700 text-[10px]">
-                        <button type="button" onclick="updateRootFolder(${idx})" class="bg-emerald-600 text-white px-3 py-1 rounded text-[10px] font-bold">Save Folder Details</button>
+                        <div class="flex gap-2 pt-1">
+                            <button type="button" onclick="updateRootFolder(${idx})" class="bg-emerald-600 text-white px-3 py-1 rounded text-[10px] font-bold">Save Details</button>
+                            <button type="button" onclick="openFileManager('folder_bg', ${idx})" class="bg-purple-600 text-white px-3 py-1 rounded text-[10px] font-bold">🖼️ Change Folder BG</button>
+                        </div>
                     </div>
                 `;
             });
@@ -444,11 +446,17 @@
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             
+            let rootObj = rootFolders.find(f => f.id == domainId);
+            
+            // Apply folder specific background if available
+            if (rootObj && rootObj.bg) {
+                document.getElementById('appBody').style.backgroundImage = `url('${rootObj.bg}')`;
+            }
+
             let grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
             let items = domainFoldersData[domainId] || [];
-            let rootObj = rootFolders.find(f => f.id == domainId);
 
             document.getElementById('pageTitle').innerText = rootObj ? rootObj.name : ("Folder #" + domainId);
 
@@ -472,6 +480,7 @@
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
+            loadPersistentCustomizations(); // Reset to global background on home
         }
     </script>
 </body>
