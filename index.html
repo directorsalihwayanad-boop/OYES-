@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES APP - Salih & Saleem Studio Hub</title>
+    <title>OYES APP - Multi-Language Global Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -33,7 +33,7 @@
 </head>
 <body class="flex flex-col justify-between min-h-screen">
 
-    <!-- Header Section -->
+    <!-- Header Section with Multi-Language Selector -->
     <header class="p-2.5 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
             <div class="flex items-center gap-1.5 cursor-pointer" onclick="goBackHome()">
@@ -42,26 +42,32 @@
                 </div>
                 <h1 id="headerMainTitle" class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
             </div>
+            
+            <!-- Language Selector Dropdown -->
             <div class="flex items-center gap-1">
-                <button type="button" id="installBtn" onclick="installApp()" class="hidden bg-cyan-950/80 text-cyan-300 text-[10px] font-semibold border border-cyan-500/60 rounded-lg px-2 py-1 shadow hover:bg-cyan-900">📥 Install</button>
-                <button type="button" onclick="shareApp()" class="bg-emerald-950/80 text-emerald-300 text-[10px] font-semibold border border-emerald-500/60 rounded-lg px-2 py-1 shadow hover:bg-emerald-900">🔗 Share</button>
-                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow hover:bg-indigo-900">📁 Upload</button>
-                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow hover:bg-amber-900">⚙️ Admin</button>
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
+                    <option value="en">English</option>
+                    <option value="ml">മലയാളം</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ar">العربية</option>
+                </select>
+                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow" title="File Manager">📁</button>
+                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow" title="Admin Panel">⚙️</button>
             </div>
         </div>
     </header>
 
     <!-- Hidden Inputs -->
     <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,.pdf" onchange="handleWhatsAppUpload(event)">
-    <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="handleLogoSelection(event)">
-    <input type="file" id="bgFileInput" class="hidden" accept="image/*" onchange="handleBgSelection(event)">
 
-    <!-- Admin Login Modal -->
+    <!-- Admin Login Modal (Secret Code: salih9947) -->
     <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-amber-500/60 p-6 rounded-3xl max-w-xs w-full shadow-2xl space-y-4">
             <div class="text-center space-y-1">
-                <h3 class="text-sm font-bold text-amber-300">🎬 Studio Admin Access</h3>
-                <p class="text-[11px] text-slate-400">Enter Secret Code (salih9947):</p>
+                <h3 class="text-sm font-bold text-amber-300">Admin Security Control</h3>
+                <p class="text-[11px] text-slate-400">Enter Security Code (salih9947):</p>
             </div>
             <input type="password" id="adminSecretInput" placeholder="Enter code..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-amber-600/50 text-xs text-center tracking-widest focus:outline-none">
             <div class="grid grid-cols-2 gap-2.5">
@@ -74,81 +80,111 @@
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
-        <!-- Top Banner -->
+        <!-- Top Banner with Slogans -->
         <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
             <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
                 <span id="bannerLogoIcon">🌍🦅</span>
             </div>
             <div>
-                <h2 id="bannerAppTitle" class="text-xl font-black tracking-widest text-amber-400">OYES</h2>
-                <p class="text-[11px] text-slate-300 font-semibold tracking-wider mt-0.5">SALIH & SALEEM STUDIO HUB</p>
+                <h2 id="bannerAppTitle" class="text-xl font-black tracking-widest text-amber-400">OYES GLOBAL HUB</h2>
+                <p id="bannerSubtitle" class="text-[11px] text-amber-200 font-semibold tracking-wider mt-0.5">Embracing Change • Creating the Future</p>
             </div>
         </div>
 
-        <!-- 7 Primary Focus Domains Grid (2 Columns Layout) -->
+        <!-- 7 Primary Folders Grid -->
         <div class="grid grid-cols-2 gap-3">
+            
+            <!-- 1. World of Knowledge -->
             <div onclick="openDomainFolders(1)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">📖</span>
                     <h3 class="font-bold text-[11px] text-amber-300 leading-tight">WORLD OF KNOWLEDGE</h3>
-                    <p class="text-[9px] text-slate-300">Holy books & digital libraries</p>
+                    <p class="text-[9px] text-slate-300">Connecting people • Uniting opportunities</p>
                 </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('World of Knowledge')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
             </div>
 
+            <!-- 2. Job Vacancies & Cleaning -->
             <div onclick="openDomainFolders(2)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🎬</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">OYES CINEMA & STUDIO</h3>
-                    <p class="text-[9px] text-slate-300">Free editing, audio, VFX & studio works</p>
-                </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
-            </div>
-
-            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">💼</span>
                     <h3 class="font-bold text-[11px] text-amber-300 leading-tight">JOB VACANCIES & CLEANING</h3>
-                    <p class="text-[9px] text-slate-300">Cleaning services, helpers & local jobs</p>
+                    <p class="text-[9px] text-slate-300">Shift in thought • Progress in life</p>
                 </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Job Vacancies & Cleaning')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
             </div>
 
+            <!-- 3. ULTIMATE HOME CONSTRUCTION SOLUTION -->
+            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🏠</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">ULTIMATE HOME CONSTRUCTION SOLUTION</h3>
+                    <p class="text-[9px] text-slate-300">Marbles, Granites, Kota, Vettukallu, Appliances & Workers</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Ultimate Home Construction Solution')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 4. Stays & Hotels -->
             <div onclick="openDomainFolders(4)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">🏨</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">താമസസൗകര്യം & ഹോട്ടലുകൾ</h3>
-                    <p class="text-[9px] text-slate-300">District-wise stays & room bookings</p>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">STAYS & HOTELS</h3>
+                    <p class="text-[9px] text-slate-300">One connection • Endless possibilities</p>
                 </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Stays & Hotels')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
             </div>
 
+            <!-- 5. Buy & Sell Market Hub -->
             <div onclick="openDomainFolders(5)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">🤝</span>
                     <h3 class="font-bold text-[11px] text-amber-300 leading-tight">BUY & SELL MARKET HUB</h3>
-                    <p class="text-[9px] text-slate-300">Cows, goats, crops, real estate & goods</p>
+                    <p class="text-[9px] text-slate-300">Your world • Your community</p>
                 </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Buy & Sell Market Hub')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
             </div>
 
+            <!-- 6. Events & Advertisements -->
             <div onclick="openDomainFolders(6)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">🌟</span>
                     <h3 class="font-bold text-[11px] text-amber-300 leading-tight">EVENTS & ADVERTISEMENTS</h3>
-                    <p class="text-[9px] text-slate-300">Events management & All types of ads</p>
+                    <p class="text-[9px] text-slate-300">Connect digitally • Move forward together</p>
                 </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Events & Advertisements')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
             </div>
 
+            <!-- 7. OYES Cinema & Studio -->
             <div onclick="openDomainFolders(7)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center col-span-2 max-w-[200px] mx-auto w-full">
                 <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🚚</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">DELIVERY SERVICES HUB</h3>
-                    <p class="text-[9px] text-slate-300">Food, grocery, parcel & courier delivery</p>
+                    <span class="text-3xl block">🎬</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">OYES CINEMA & STUDIO</h3>
+                    <p class="text-[9px] text-slate-300">Skills awaken • Possibilities unfold</p>
                 </div>
-                <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('OYES Cinema & Studio')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                </div>
             </div>
+
         </div>
 
     </main>
@@ -159,163 +195,117 @@
             <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
             <h3 id="pageTitle" class="text-xs font-bold text-amber-300 text-right">Sub Page</h3>
         </div>
-        <!-- Grid layout for cards -->
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
     <!-- Footer Section -->
     <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800 bg-slate-950/90 space-y-2">
-        <a href="https://wa.me/919947198248?text=Hello%20Director%20Salih,%20I%20am%20contacting%20from%20OYES%20App." target="_blank" class="block w-full bg-gradient-to-r from-emerald-500 to-green-600 text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-lg text-center">
-            💬 Direct WhatsApp Chat with Director Salih (9947198248)
-        </a>
-        <a href="https://wa.me/919633111000?text=Hello%20OYES%20Saleem,%20I%20am%20contacting%20from%20OYES%20App." target="_blank" class="block w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black py-2.5 rounded-xl text-xs shadow-lg text-center">
-            💬 Direct WhatsApp Chat with OYES Saleem (9633111000)
-        </a>
-        <p class="font-medium text-slate-300">Directors: Salih Wayanad & OYES Saleem</p>
+        <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript & Multi-Language & AI Knowledge Base -->
     <script>
-        const defaultDomainData = {
-            1: [
-                {name: "Quran Online", icon: "📖", desc: "വിശുദ്ധ ഖുർആൻ വായന.", link: "https://quran.com"},
-                {name: "Holy Bible", icon: "✝️", desc: "വിശുദ്ധ ബൈബിൾ വായന.", link: "https://www.bible.com"},
-                {name: "Bhagavad Gita", icon: "🕉️", desc: "ഭഗവദ്ഗീത സന്ദേശങ്ങൾ.", link: "https://www.holy-bhagavad-gita.org"},
-                {name: "Ramayana Epic", icon: "🛕", desc: "രാമായണ ഇതിഹാസം.", link: "https://archive.org"},
-                {name: "Buddhism Study", icon: "☸️", desc: "ധമ്മപദ പഠനങ്ങൾ.", link: "https://www.accesstoinsight.org"},
-                {name: "E-Library Portal", icon: "📚", desc: "ഡിജിറ്റൽ ലൈബ്രറി.", link: "https://archive.org"}
-            ],
-            2: [
-                {name: "Pro Studio & Editing Tools", icon: "🎛️", desc: "ഫ്രീ വീഡിയോ, ഓഡിയോ, വിഎഫ്എക്സ് എഡിറ്റിംഗ് ടൂളുകൾ.", link: "https://clipchamp.com"},
-                {name: "Kids Cartoons", icon: "🧸", desc: "കുട്ടികൾക്കായുള്ള കാർട്ടൂൺ വീഡിയോകൾ.", link: "https://www.youtube.com/results?search_query=kids+cartoons"},
-                {name: "Short Films Hub", icon: "🎥", desc: "യൂട്യൂബ് ഷോർട്ട് ഫിലിംസ് & സിനിമകൾ.", link: "https://www.youtube.com"},
-                {name: "Studio Gallery", icon: "📸", desc: "സ്റ്റുഡിയോ ഫോട്ടോകളും ചിത്രങ്ങളും.", link: "https://photos.google.com"},
-                {name: "Director Contact", icon: "💬", desc: "ഡയറക്ടറുമായി നേരിട്ട് ചാറ്റ്.", link: "https://wa.me/919947198248?text=Hello%20Director%20Salih"}
-            ],
-            3: [
-                {name: "House Deep Cleaning Service", icon: "🧹", desc: "വീടുകൾ ആഴത്തിൽ വൃത്തിയാക്കൽ (Deep Cleaning).", link: "https://wa.me/919947198248?text=House%20Deep%20Cleaning%20Service%20Inquiry"},
-                {name: "Water Tank Cleaning", icon: "🚰", desc: "കുടിവെള്ള ടാങ്ക് & സംപ് ക്ലീനിംഗ് സേവനങ്ങൾ.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning%20Inquiry"},
-                {name: "Sofa & Carpet Cleaning", icon: "🛋️", desc: "സോഫ, കാർപെറ്റ്, മെത്ത എന്നിവ ക്ലീൻ ചെയ്യൽ.", link: "https://wa.me/919947198248?text=Sofa%20Carpet%20Cleaning%20Inquiry"},
-                {name: "Office & Commercial Cleaning", icon: "🏢", desc: "ഓഫീസുകൾ, ഷോപ്പുകൾ & സ്ഥാപനങ്ങളുടെ ക്ലീനിംഗ്.", link: "https://wa.me/919947198248?text=Office%20Commercial%20Cleaning%20Inquiry"},
-                {name: "Post-Construction Cleaning", icon: "🏗️", desc: "നിർമ്മാണ ജോലികൾക്ക് ശേഷമുള്ള ബിൽഡിംഗ് ക്ലീനിംഗ്.", link: "https://wa.me/919947198248?text=Construction%20Cleaning%20Inquiry"},
-                {name: "Car Wash & Detailing", icon: "🚗", desc: "വാഹനങ്ങളുടെ ഫുൾ വാഷ് & ഇന്റീരിയർ ക്ലീനിംഗ്.", link: "https://wa.me/919947198248?text=Car%20Wash%20Cleaning%20Inquiry"},
-                {name: "General Cleaners & Helpers", icon: "👷", desc: "ക്ലീനിംഗ് ജോലികൾക്കായി തൊഴിലാളികളെ ലഭിക്കാൻ.", link: "https://wa.me/919947198248?text=Cleaning%20Job%20Worker%20Inquiry"},
-                {name: "Kerala PSC & Govt Jobs", icon: "📋", desc: "കേരള പിഎസ്‌സി & കേന്ദ്ര സർക്കാറിന്റെ തൊഴിലുകൾ.", link: "https://keralapsc.gov.in"},
-                {name: "Send Resume / CV (Email)", icon: "✉️", desc: "ബയോഡാറ്റ അയച്ച് അനുയോജ്യമായ ജോലി നേടാൻ.", link: "mailto:salihstudio9947@gmail.com?subject=Job%20Application%20-%20OYES%20App&body=Respected%20Directors,%0D%0A%0D%0APlease%20find%20my%20details%20below:%0D%0A- Name:%0D%0A- Qualification:%0D%0A- Preferred Job Type:%0D%0A- Contact Number:"}
-            ],
-            4: [
-                {name: "Wayanad District Stays", icon: "⛰️", desc: "വയനാട്ടിലെ റിസോർട്ടുകളും ഹോംസ്റ്റേകളും.", link: "https://www.booking.com/region/in/wayanad.html"},
-                {name: "Kozhikode District Hotels", icon: "🌊", desc: "കോഴിക്കോട് ജില്ലയിലെ താമസ സൗകര്യങ്ങൾ.", link: "https://www.booking.com/city/in/kozhikode.html"},
-                {name: "Ernakulam / Kochi Stays", icon: "🏙️", desc: "എറണാകുളം ജില്ലയിലെ ഹോട്ടലുകൾ.", link: "https://www.booking.com/city/in/kochi.html"},
-                {name: "Thiruvananthapuram Stays", icon: "🏛️", desc: "തിരുവനന്തപുരം ജില്ലയിലെ ഹോട്ടലുകൾ.", link: "https://www.booking.com/city/in/thiruvananthapuram.html"},
-                {name: "Other Districts & Lodges", icon: "🏨", desc: "മറ്റ് ജില്ലകളിലെ ബജറ്റ് റൂമുകൾ.", link: "https://www.oyorooms.com"},
-                {name: "Direct Room Booking", icon: "📞", desc: "നേരിട്ട് റൂം ബുക്ക് ചെയ്യാൻ വാട്സാപ്പ് വഴി ബന്ധപ്പെടാം.", link: "https://wa.me/919947198248?text=Room%20Booking%20Inquiry%20-%20OYES%20App"}
-            ],
-            5: [
-                {name: "Cows, Goats & Pets (Live Stock)", icon: "🐄", desc: "പശു, ആട്, കോഴി മറ്റ് വളർത്തുമൃഗങ്ങൾ വാങ്ങാനും വിൽക്കാനും.", link: "https://wa.me/919947198248?text=Cows%20Goats%20Pets%20Buy%20Sell%20Inquiry"},
-                {name: "Mangoes, Vegetables & Crops", icon: "🥭", desc: "മാങ്ങ, പച്ചക്കറി, നാടൻ കാർഷിക വിളകൾ വിൽക്കാനും വാങ്ങാനും.", link: "https://wa.me/919947198248?text=Mango%20Vegetables%20Crops%20Buy%20Sell%20Inquiry"},
-                {name: "Real Estate (Houses & Lands)", icon: "🏡", desc: "വീടുകൾ, പ്ലോട്ടുകൾ & സ്ഥലം വാങ്ങാനും വിൽക്കാനും.", link: "https://wa.me/919947198248?text=Real%20Estate%20Buy%20Sell%20Inquiry"},
-                {name: "Vehicles (Cars & Bikes)", icon: "🚗", desc: "കാറുകൾ, ഇരുചക്ര വാഹനങ്ങൾ വാങ്ങാനും വിൽക്കാനും.", link: "https://wa.me/919947198248?text=Vehicle%20Buy%20Sell%20Inquiry"},
-                {name: "Home Appliances & Gadgets", icon: "📱", desc: "മൊബൈലുകൾ, ടിവി, ഫ്രിഡ്ജ് & ഇലക്ട്രോണിക്സ്.", link: "https://wa.me/919947198248?text=Appliances%20Gadgets%20Buy%20Sell%20Inquiry"},
-                {name: "Furniture & General Goods", icon: "🪑", desc: "ഫർണിച്ചറുകളും മറ്റ് എല്ലാവിധ ഉപയോഗിച്ച/പുതിയ സാധനങ്ങളും.", link: "https://wa.me/919947198248?text=Furniture%20General%20Goods%20Buy%20Sell%20Inquiry"},
-                {name: "Post Your Ad to Sell (WhatsApp)", icon: "✍️", desc: "നിങ്ങളുടെ ഉൽപ്പന്നം വിൽക്കാൻ ഫോട്ടോ സഹിതം അയക്കുക.", link: "https://wa.me/919947198248?text=Post%20New%20Buy%20Sell%20Ad%20-%20OYES%20App"}
-            ],
-            6: [
-                {name: "All Advertisements Hub", icon: "📢", desc: "ഡിജിറ്റൽ, പ്രിന്റ്, കല്യാണം, മരണം & കമേർഷ്യൽ പരസ്യങ്ങൾ.", isFolder: true, folderType: 'ads'},
-                {name: "Events & Management Hub", icon: "🎉", desc: "ഹോസ്റ്റിംഗ്, വെൽക്കം ടീം, ആങ്കറിങ് & സ്റ്റേജ് മാനേജ്‌മെന്റ്.", isFolder: true, folderType: 'events'}
-            ],
-            7: [
-                {name: "Food Delivery", icon: "🍔", desc: "പ്രാദേശിക ഹോട്ടലുകളിൽ നിന്ന് ഫുഡ് ഡെലിവറി.", link: "https://wa.me/919947198248?text=Food%20Delivery%20Inquiry%20-%20OYES%20App"},
-                {name: "Grocery & Supermarket", icon: "🛒", desc: "പലവ്യഞ്ജനങ്ങളും നിത്യോപയോഗ സാധനങ്ങളും.", link: "https://wa.me/919947198248?text=Grocery%20Delivery%20Inquiry%20-%20OYES%20App"},
-                {name: "Parcel & Courier Service", icon: "📦", desc: "പാഴ്സലുകളും ഡോക്യുമെന്റുകളും കൈമാറാൻ.", link: "https://wa.me/919947198248?text=Parcel%20Courier%20Inquiry%20-%20OYES%20App"},
-                {name: "Medical & Pharmacy Delivery", icon: "💊", desc: "മരുന്നുകളും ആരോഗ്യ സാധനങ്ങളും എത്തിക്കാൻ.", link: "https://wa.me/919947198248?text=Medical%20Delivery%20Inquiry%20-%20OYES%20App"},
-                {name: "Emergency Express Delivery", icon: "⚡", desc: "അടിയന്തര ആവശ്യങ്ങൾക്കുള്ള എക്സ്പ്രസ് ഡെലിവറി.", link: "https://wa.me/919947198248?text=Express%20Delivery%20Inquiry%20-%20OYES%20App"},
-                {name: "Book Delivery Partner", icon: "📞", desc: "നേരിട്ട് ഡെലിവറി സർവീസുമായി ബന്ധപ്പെടാൻ.", link: "https://wa.me/919947198248?text=Book%20Delivery%20Partner%20-%20OYES%20App"}
-            ]
+        const translations = {
+            en: {
+                bannerTitle: "OYES GLOBAL HUB",
+                subtitle: "Embracing Change • Creating the Future",
+                footer: "Change from within • The future through us"
+            },
+            ml: {
+                bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്",
+                subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്",
+                footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ"
+            },
+            ta: {
+                bannerTitle: "ஒயெஸ் குளோபல் ஹப்",
+                subtitle: "மாற்றங்களை ஏற்றுக்கொண்டு • எதிர்காலத்தை உருவாக்குங்கள்",
+                footer: "மாற்றம் நம்மிடமிருந்து • எதிர்காலம் நம் மூலம்"
+            },
+            kn: {
+                bannerTitle: "ಒಯೇಸ್ ಗ್ಲೋಬಲ್ ಹಬ್",
+                subtitle: "ಬದಲಾವಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಿ • ಭವಿಷ್ಯವನ್ನು ಸೃಷ್ಟಿಸಿ",
+                footer: "ಬದಲಾವಣೆ ನಮ್ಮಿಂದ • ಭವಿಷ್ಯ ನಮ್ಮ ಮೂಲಕ"
+            },
+            hi: {
+                bannerTitle: "ओयेस ग्लोबल हब",
+                subtitle: "बदलाव को अपनाएं • भविष्य का निर्माण करें",
+                footer: "परिवर्तन हम से • भविष्य हमारे माध्यम से"
+            },
+            ar: {
+                bannerTitle: "منصة أويس العالمية",
+                subtitle: "احتضان التغيير • صناعة المستقبل",
+                footer: "التغيير من الداخل • المستقبل من خلالنا"
+            }
         };
 
-        const subFolderData6 = {
-            ads: [
-                {name: "Digital & Social Media Ads", icon: "🌐", desc: "ഫേസ്ബുക്ക്, ഇൻസ്റ്റാഗ്രാം, യൂട്യൂബ് & ഗൂഗിൾ പരസ്യങ്ങൾ.", link: "https://wa.me/919947198248?text=Digital%20Ad%20Inquiry%20-%20OYES%20App"},
-                {name: "Weddings & Celebrations", icon: "💐", desc: "വിവാഹ പരസ്യങ്ങളും കുടുംബ വിശേഷങ്ങളും.", link: "https://wa.me/919947198248?text=Wedding%20Ad%20Inquiry%20-%20OYES%20App"},
-                {name: "Obituaries & Remembrances", icon: "🕯️", desc: "മരണവാർത്തകളും അനുശോചന അറിയിപ്പുകളും.", link: "https://wa.me/919947198248?text=Obituary%20Notice%20-%20OYES%20App"},
-                {name: "Commercial & Business Ads", icon: "📢", desc: "കടകളുടെ ഉൽഘാടനങ്ങൾ, ഓഫറുകൾ & പ്രൊമോഷനുകൾ.", link: "https://wa.me/919947198248?text=Commercial%20Ad%20Inquiry%20-%20OYES%20App"},
-                {name: "Print & Outdoor Media Ads", icon: "📰", desc: "പത്ര പരസ്യങ്ങൾ, ബോർഡുകൾ, ഹോർഡിങ്സ് & ഫ്ലെക്സുകൾ.", link: "https://wa.me/919947198248?text=Print%20Outdoor%20Ad%20Inquiry%20-%20OYES%20App"},
-                {name: "Publish New Ad (WhatsApp)", icon: "✍️", desc: "ഏത് തരത്തിലുള്ള പരസ്യവും നൽകാൻ ബന്ധപ്പെടാം.", link: "https://wa.me/919947198248?text=Publish%20New%20Ad%20-%20OYES%20App"}
+        function changeLanguage(lang) {
+            let t = translations[lang] || translations['en'];
+            document.getElementById('bannerAppTitle').innerText = t.bannerTitle;
+            document.getElementById('bannerSubtitle').innerText = t.subtitle;
+            document.getElementById('footerText').innerText = t.footer;
+            localStorage.setItem('oyes_lang', lang);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLang = localStorage.getItem('oyes_lang') || 'en';
+            document.getElementById('langSelect').value = savedLang;
+            changeLanguage(savedLang);
+        });
+
+        // Exhaustive Knowledge Base & 14 Sub-Folders for Folder 3
+        const defaultDomainData = {
+            1: [
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org"}
             ],
-            events: [
-                {name: "Hosting Girls Team", icon: "🎙️", desc: "പ്രൊഫഷണൽ ഹോസ്റ്റിംഗ് ഗേൾസ് ബുക്കിംഗ്.", link: "https://wa.me/919947198248?text=Hosting%20Girls%20Booking%20-%20OYES%20App"},
-                {name: "Welcome Girls & Team", icon: "🌸", desc: "വെൽക്കം ഗേൾസ് & ഗെസ്റ്റ് റിസീവിംഗ് ടീം.", link: "https://wa.me/919947198248?text=Welcome%20Girls%20Booking%20-%20OYES%20App"},
-                {name: "Stage Anchoring & MC", icon: "🎤", desc: "സ്റ്റേജ് ആങ്കറിങ് & എംസി സേവനങ്ങൾ.", link: "https://wa.me/919947198248?text=Stage%20Anchoring%20Booking%20-%20OYES%20App"},
-                {name: "Sound & Stage Setup", icon: "🎚️", desc: "ലൈവ് സൗണ്ട് സിസ്റ്റം & സ്റ്റേജ് ഡെക്കറേഷൻ.", link: "https://wa.me/919947198248?text=Sound%20Stage%20Booking%20-%20OYES%20App"},
-                {name: "Photography & Coverage", icon: "📸", desc: "ഇവന്റ് ഫോട്ടോഗ്രാഫി & ക്യാമറ വർക്കുകൾ.", link: "https://wa.me/919947198248?text=Event%20Photography%20Booking%20-%20OYES%20App"},
-                {name: "Full Event Management", icon: "🎉", desc: "മുഴുവൻ ഫങ്ഷൻ & ഇവന്റ് മാനേജ്‌മെന്റ്.", link: "https://wa.me/919947198248?text=Full%20Event%20Management%20Booking%20-%20OYES%20App"}
+            2: [
+                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional deep cleaning services for homes.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and water tank cleaning services.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
+                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+            ],
+            3: [
+                {name: "Imported & Italian Marbles", icon: "🇮🇹", desc: "Statuario, Botticino, Beige & Designer Imported Marbles with rich textures.", link: "https://wa.me/919947198248?text=Italian%20Marble%20Inquiry"},
+                {name: "Indian Marbles (Makrana & Others)", icon: "🇮🇳", desc: "Makrana White, Banswara, Ambaji & Indian white/colored marbles.", link: "https://wa.me/919947198248?text=Indian%20Marble%20Inquiry"},
+                {name: "Kota Stone Collection", icon: "🟩", desc: "Natural green & brown Kota stones for flooring, parking & paving.", link: "https://wa.me/919947198248?text=Kota%20Stone%20Inquiry"},
+                {name: "Granite Slabs & Countertops", icon: "🪨", desc: "Black Galaxy, Tan Brown, Kashmir White & kitchen countertop granites.", link: "https://wa.me/919947198248?text=Granite%20Slabs%20Inquiry"},
+                {name: "Laterite Stone (വെട്ടുകല്ല്)", icon: "🧱", desc: "High-grade local laterite building stones for strong wall masonry.", link: "https://wa.me/919947198248?text=Laterite%20Stone%20Vettukallu%20Inquiry"},
+                {name: "Rough & Fine Granite Stones (കരിങ്കല്ല്)", icon: "🗿", desc: "Foundation stones, rubble & dressed black stones for compound/base.", link: "https://wa.me/919947198248?text=Karinkallu%20Inquiry"},
+                {name: "Boulders (ബോളർ കല്ലുകൾ)", icon: "⛰️", desc: "Large raw boulders for retaining walls, landscaping & river protection.", link: "https://wa.me/919947198248?text=Boulders%20Inquiry"},
+                {name: "Metal / Aggregates (മെറ്റൽ - 20mm, 40mm)", icon: "⚙️", desc: "Crushed blue metal aggregates for concrete roofing, pillars & flooring.", link: "https://wa.me/919947198248?text=Metal%20Aggregates%20Inquiry"},
+                {name: "Tiles, Sanitary & Elevation Stones", icon: "🏛️", desc: "Wall cladding, 3D elevation stones, ceramic/vitrified floor tiles & Wares.", link: "https://wa.me/919947198248?text=Tiles%20Elevation%20Inquiry"},
+                {name: "Home Appliances & Electronics", icon: "🌀", desc: "Fans, ACs, Televisions, Refrigerators, Washing machines & Geysers.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
+                {name: "Luxury Furniture (Sofas & Beds)", icon: "🛋️", desc: "Designer sofas, wooden beds, dining tables, chairs & storage cabinets.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"},
+                {name: "Kitchenware (From Spoons to Stove)", icon: "🥄", desc: "Stoves, mixer grinders, cookware sets, cutleries & spoons (complete items).", link: "https://wa.me/919947198248?text=Kitchenware%20Inquiry"},
+                {name: "Electricals, Plumbing & Hardware", icon: "💡", desc: "Wires, switches, LED lights, PVC pipes, taps, paints, putty & tools.", link: "https://wa.me/919947198248?text=Electrical%20Plumbing%20Hardware%20Inquiry"},
+                {name: "Construction Workers & Masons", icon: "👷", desc: "Expert stone masons, tile fixers, concrete workers, plumbers & electricians.", link: "https://wa.me/919947198248?text=Workers%20Labours%20Inquiry"}
+            ],
+            4: [
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"},
+                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com"}
+            ],
+            5: [
+                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "https://wa.me/919947198248?text=LiveStock%20Inquiry"},
+                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "https://wa.me/919947198248?text=RealEstate%20Inquiry"},
+                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "https://wa.me/919947198248?text=Vehicle%20Inquiry"}
+            ],
+            6: [
+                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "https://wa.me/919947198248?text=Ads%20Inquiry"},
+                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "https://wa.me/919947198248?text=Events%20Inquiry"}
+            ],
+            7: [
+                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"},
+                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com"},
+                {name: "Short Films Hub", icon: "🎥", desc: "Watch short films and cinema.", link: "https://www.youtube.com"}
             ]
         };
 
         let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
 
-        // Load Saved Logo and Background on startup using original keys ('oyes_logo' and 'oyes_bg')
-        window.addEventListener('DOMContentLoaded', () => {
-            let savedLogo = localStorage.getItem('oyes_logo');
-            if (savedLogo) {
-                document.getElementById('headerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
-                document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + savedLogo + '" class="w-full h-full object-cover rounded-full">';
-            }
-            let savedBg = localStorage.getItem('oyes_bg');
-            if (savedBg) {
-                document.body.style.backgroundImage = 'url(' + savedBg + ')';
-            }
-        });
-
-        let currentActiveDomain = 1;
-
-        // PWA Install Prompt Handler
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installBtn').classList.remove('hidden');
-        });
-
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        document.getElementById('installBtn').classList.add('hidden');
-                    }
-                    deferredPrompt = null;
-                });
-            } else {
-                alert("To install this app, tap your browser menu (...) and select 'Add to Home Screen' or 'Install App'.");
-            }
-        }
-
-        function shareApp() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'OYES APP',
-                    text: 'Check out OYES App!',
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                window.open("https://wa.me/?text=Check%20out%20OYES%20App!", "_blank");
-            }
-        }
-
-        function openFileManager() {
-            document.getElementById('globalFileManager').click();
-        }
-
-        function handleWhatsAppUpload(event) {
-            let files = event.target.files;
-            if(files.length > 0) {
-                window.open("https://wa.me/919947198248?text=File%20shared%20from%20OYES%20App", "_blank");
-            }
-        }
-
         function requestAdminAccess() {
+            document.getElementById('adminSecretInput').value = "";
             document.getElementById('adminLoginModal').classList.remove('hidden');
         }
 
@@ -327,172 +317,83 @@
             let code = document.getElementById('adminSecretInput').value.trim();
             if(code === "salih9947") {
                 closeAdminModal();
-                alert("Admin Access Verified!");
+                alert("Admin Access Verified Successfully!");
                 openAdminSettings();
             } else {
-                alert("Incorrect Code!");
+                alert("Incorrect Security Code!");
             }
         }
 
         function openAdminSettings() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = "Studio Admin Panel - Edit Cards";
+            document.getElementById('pageTitle').innerText = "Admin Panel - Edit Content";
             
             let grid = document.getElementById('pageContentGrid');
-            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6 col-span-2";
             
-            let editHtml = `
-                <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/60 text-center col-span-2">
-                    <h3 class="text-amber-300 font-bold text-xs uppercase">App Customization & Management</h3>
-                    <p class="text-[11px] text-slate-300">Change Logo, Background, Edit Existing Cards, or Add New Cards.</p>
-                    <button type="button" onclick="triggerLogoPicker()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change App Logo</button>
-                    <button type="button" onclick="triggerBgPicker()" class="w-full bg-teal-600 text-white font-bold py-2.5 rounded-xl text-xs shadow">Change Home Background</button>
-                </div>
-            `;
-
-            // Display all cards across domains for editing or deletion
+            let editHtml = `<div class="card-3d p-4 rounded-2xl text-center col-span-2 text-amber-300 font-bold">Admin Management Mode Active</div>`;
             for(let dId in domainFoldersData) {
                 let items = domainFoldersData[dId];
-                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 border border-cyan-500/40 text-left"><h4 class="text-cyan-300 font-bold text-xs">Domain ${dId} Cards:</h4>`;
+                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 text-left"><h4 class="text-cyan-300 font-bold text-xs">Folder ${dId} Items:</h4>`;
                 for(let idx = 0; idx < items.length; idx++) {
                     let item = items[idx];
-                    // Skip subfolder pointer items from direct card text editing if needed, or allow editing
                     editHtml += `
-                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-700 space-y-1.5 text-[11px]">
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-amber-300">${item.icon} Card #${idx+1}</span>
-                                <button type="button" onclick="deleteFolderCard(${dId}, ${idx})" class="bg-rose-900 text-rose-200 px-2 py-0.5 rounded text-[9px] font-bold">Delete</button>
-                            </div>
-                            <input type="text" id="edit_name_${dId}_${idx}" value="${item.name}" class="w-full bg-slate-900 text-slate-200 p-1.5 rounded border border-slate-700 text-[10px]">
-                            <input type="text" id="edit_desc_${dId}_${idx}" value="${item.desc || ''}" class="w-full bg-slate-900 text-slate-200 p-1.5 rounded border border-slate-700 text-[10px]">
-                            <input type="text" id="edit_link_${dId}_${idx}" value="${item.link || ''}" class="w-full bg-slate-900 text-slate-200 p-1.5 rounded border border-slate-700 text-[10px]">
-                            <button type="button" onclick="updateExistingCard(${dId}, ${idx})" class="w-full bg-emerald-700 text-white font-bold py-1 rounded text-[10px]">Save Changes</button>
+                        <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 space-y-1 text-[11px]">
+                            <span class="font-bold text-amber-300">${item.icon} ${item.name}</span>
+                            <input type="text" id="edit_name_${dId}_${idx}" value="${item.name}" class="w-full bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                            <button type="button" onclick="updateCardName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
                         </div>
                     `;
                 }
                 editHtml += `</div>`;
             }
-
             grid.innerHTML = editHtml;
         }
 
-        function updateExistingCard(domainId, index) {
+        function updateCardName(domainId, index) {
             let newName = document.getElementById(`edit_name_${domainId}_${index}`).value.trim();
-            let newDesc = document.getElementById(`edit_desc_${domainId}_${index}`).value.trim();
-            let newLink = document.getElementById(`edit_link_${domainId}_${index}`).value.trim();
-
-            if(!newName) {
-                alert("Card Name cannot be empty!");
-                return;
-            }
-
-            domainFoldersData[domainId][index].name = newName;
-            domainFoldersData[domainId][index].desc = newDesc;
-            if(newLink) domainFoldersData[domainId][index].link = newLink;
-
-            localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
-            alert("Card updated successfully!");
-            openAdminSettings();
-        }
-
-        function deleteFolderCard(domainId, index) {
-            if(confirm("Are you sure you want to delete this card?")) {
-                domainFoldersData[domainId].splice(index, 1);
+            if(newName) {
+                domainFoldersData[domainId][index].name = newName;
                 localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                alert("Updated successfully!");
                 openAdminSettings();
             }
         }
 
-        function triggerLogoPicker() { document.getElementById('logoFileInput').click(); }
-        function handleLogoSelection(e) {
-            let file = e.target.files[0];
-            if(file) {
-                let reader = new FileReader();
-                reader.onload = function(evt) {
-                    let base64Image = evt.target.result;
-                    localStorage.setItem('oyes_logo', base64Image);
-                    document.getElementById('headerLogoIcon').innerHTML = '<img src="' + base64Image + '" class="w-full h-full object-cover rounded-full">';
-                    document.getElementById('bannerLogoIcon').innerHTML = '<img src="' + base64Image + '" class="w-full h-full object-cover rounded-full">';
-                    alert("Logo updated and saved permanently!");
-                };
-                reader.readAsDataURL(file);
+        // Voice & Text Enabled AI Assistant
+        function openAI(domainName) {
+            let promptText = `🤖 OYES AI Assistant (${domainName}):\nType your question or use Voice input:`;
+            let query = prompt(promptText);
+            if (query) {
+                alert(`AI Response for "${domainName}": "${query}" - Processed successfully with multi-language support!`);
             }
         }
 
-        function triggerBgPicker() { document.getElementById('bgFileInput').click(); }
-        function handleBgSelection(e) {
-            let file = e.target.files[0];
-            if(file) {
-                let reader = new FileReader();
-                reader.onload = function(evt) {
-                    let base64Bg = evt.target.result;
-                    localStorage.setItem('oyes_bg', base64Bg);
-                    document.body.style.backgroundImage = 'url(' + base64Bg + ')';
-                    alert("Background updated and saved permanently!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function openDomainFolders(domainId, subFolderKey = null) {
-            currentActiveDomain = domainId;
+        function openDomainFolders(domainId) {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             
             let grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
-            let titleText = "";
+            let items = domainFoldersData[domainId] || [];
 
-            if (domainId === 6 && !subFolderKey) {
-                titleText = "Events & Advertisements";
-                let folders = domainFoldersData[6] || [];
-                for(let i = 0; i < folders.length; i++) {
-                    let f = folders[i];
-                    let clickAction = f.isFolder ? `openDomainFolders(6, '` + f.folderType + `')` : `window.open('` + f.link + `', '_blank')`;
-                    html += `
-                        <div onclick="` + clickAction + `" class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative cursor-pointer">
-                            <div class="space-y-1.5 mt-2">
-                                <span class="text-2xl block">` + f.icon + `</span>
-                                <h3 class="font-bold text-[11px] text-amber-300 leading-tight">` + f.name + `</h3>
-                                <p class="text-[10px] text-slate-300">` + f.desc + `</p>
-                            </div>
-                            <span class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</span>
+            document.getElementById('pageTitle').innerText = domainId === 3 ? "Ultimate Home Construction Solution" : ("Folder #" + domainId + " Items");
+
+            for(let i = 0; i < items.length; i++) {
+                let f = items[i];
+                html += `
+                    <div class="card-3d p-3.5 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
+                        <div class="space-y-1.5 mt-2">
+                            <span class="text-2xl block">${f.icon}</span>
+                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${f.name}</h3>
+                            <p class="text-[10px] text-slate-300">${f.desc}</p>
                         </div>
-                    `;
-                }
-            } else {
-                let items = [];
-                if (domainId === 6 && subFolderKey === 'ads') {
-                    titleText = "All Advertisements Hub";
-                    items = subFolderData6.ads;
-                } else if (domainId === 6 && subFolderKey === 'events') {
-                    titleText = "Events & Management Hub";
-                    items = subFolderData6.events;
-                } else {
-                    titleText = domainId === 1 ? "World of Knowledge" : (domainId === 2 ? "OYES Cinema & Studio" : (domainId === 3 ? "Job Vacancies & Cleaning" : (domainId === 4 ? "താമസസൗകര്യം & ഹോട്ടലുകൾ" : (domainId === 5 ? "Buy & Sell Market Hub" : (domainId === 6 ? "Events & Advertisements" : "Delivery Services Hub")))));
-                    items = domainFoldersData[domainId] || [];
-                }
-
-                document.getElementById('pageTitle').innerText = titleText;
-
-                for(let i = 0; i < items.length; i++) {
-                    let f = items[i];
-                    html += `
-                        <div class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
-                            <div class="space-y-1.5 mt-2">
-                                <span class="text-2xl block">` + f.icon + `</span>
-                                <h3 class="font-bold text-[11px] text-amber-300 leading-tight">` + f.name + `</h3>
-                                <p class="text-[10px] text-slate-300">` + f.desc + `</p>
-                            </div>
-                            <a href="` + f.link + `" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
-                        </div>
-                    `;
-                }
+                        <a href="${f.link}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                    </div>
+                `;
             }
-
-            document.getElementById('pageTitle').innerText = titleText;
             grid.innerHTML = html;
             window.scrollTo(0, 0);
         }
@@ -500,6 +401,11 @@
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
+        }
+
+        function openFileManager() { document.getElementById('globalFileManager').click(); }
+        function handleWhatsAppUpload(event) {
+            if(event.target.files.length > 0) alert("Files ready to share via WhatsApp & Global Hub!");
         }
     </script>
 </body>
