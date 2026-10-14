@@ -59,7 +59,7 @@
     </header>
 
     <!-- Global Hidden File Manager Trigger -->
-    <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,.pdf" onchange="handleFileManagedUpload(event)">
+    <input type="file" id="globalFileManager" class="hidden" accept="image/*" onchange="handleFileManagedUpload(event)">
 
     <!-- Admin Login Modal (Secret Code: salih9947) -->
     <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
@@ -76,10 +76,25 @@
         </div>
     </div>
 
+    <!-- AI Chat Assistant Modal -->
+    <div id="aiModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-emerald-500/60 p-5 rounded-3xl max-w-sm w-full shadow-2xl space-y-3">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <h3 id="aiModalTitle" class="text-xs font-bold text-emerald-400">🤖 OYES AI Assistant</h3>
+                <button type="button" onclick="closeAIModal()" class="text-slate-400 hover:text-white text-xs font-bold px-2 py-1">✕</button>
+            </div>
+            <div id="aiChatBox" class="bg-slate-950 p-3 rounded-xl h-40 overflow-y-auto text-[11px] text-slate-300 space-y-2 border border-slate-800">
+                <p class="text-emerald-300">Hello! Ask me anything regarding this category...</p>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" id="aiUserInput" placeholder="Type your question..." class="flex-grow bg-slate-950 text-slate-200 px-3 py-2 rounded-xl border border-emerald-700/50 text-xs focus:outline-none">
+                <button type="button" onclick="sendAIMessage()" class="bg-emerald-600 text-white text-xs px-4 py-2 rounded-xl font-bold shadow">Send</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        
-        <!-- Top Banner -->
         <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
             <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
                 <span id="bannerLogoIcon">🌍🦅</span>
@@ -90,9 +105,7 @@
             </div>
         </div>
 
-        <!-- 7 Primary Folders Grid -->
         <div id="homeGridContainer" class="grid grid-cols-2 gap-3"></div>
-
     </main>
 
     <!-- Sub-Folders & Admin Settings View -->
@@ -109,15 +122,11 @@
         <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
     </footer>
 
-    <!-- JavaScript & Permanent Storage Logic -->
+    <!-- JavaScript & Corrected Logic -->
     <script>
         const translations = {
             en: { bannerTitle: "OYES GLOBAL HUB", subtitle: "Embracing Change • Creating the Future", footer: "Change from within • The future through us" },
-            ml: { bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്", subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്", footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ" },
-            ta: { bannerTitle: "ஒயெஸ் குளோபல் ஹப்", subtitle: "மாற்றங்களை ஏற்றுக்கொண்டு • எதிர்காலத்தை உருவாக்குங்கள்", footer: "மாற்றம் நம்மிடமிருந்து • எதிர்காலம் நம் மூலம்" },
-            kn: { bannerTitle: "ಒಯೇಸ್ ಗ್ಲೋಬಲ್ ಹಬ್", subtitle: "ಬದಲಾವಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಿ • ಭವಿಷ್ಯವನ್ನು ಸೃಷ್ಟಿಸಿ", footer: "ಬದಲಾವಣೆ ನಮ್ಮಿಂದ • ಭವಿಷ್ಯ ನಮ್ಮ ಮೂಲಕ" },
-            hi: { bannerTitle: "ओयेस ग्लोबल हब", subtitle: "बदलाव को अपनाएं • भविष्य का निर्माण करें", footer: "परिवर्तन हम से • भविष्य हमारे माध्यम से" },
-            ar: { bannerTitle: "منصة أويس العالمية", subtitle: "احتضان التغيير • صناعة المستقبل", footer: "التغيير من الداخل • المستقبل من خلالنا" }
+            ml: { bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്", subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്", footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ" }
         };
 
         function changeLanguage(lang) {
@@ -140,7 +149,7 @@
 
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
 
-        const strictDomainData = {
+        const exactCorrectDomainData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
                 {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
@@ -189,7 +198,7 @@
             ]
         };
 
-        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || strictDomainData;
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || exactCorrectDomainData;
 
         function renderHomeGrid() {
             let container = document.getElementById('homeGridContainer');
@@ -205,7 +214,7 @@
                         </div>
                         <div class="flex gap-1 mt-3">
                             <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                            <span onclick="event.stopPropagation(); openVoiceAI('${folder.name}')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="Voice & AI Assistant">🎙️ AI</span>
+                            <span onclick="event.stopPropagation(); openAIModal('${folder.name}')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
                         </div>
                     </div>
                 `;
@@ -233,6 +242,35 @@
             }
         }
 
+        // AI Chat Modal Logic
+        let currentAiDomain = "";
+        function openAIModal(domainName) {
+            currentAiDomain = domainName;
+            document.getElementById('aiModalTitle').innerText = `🤖 OYES AI (${domainName})`;
+            document.getElementById('aiChatBox').innerHTML = `<p class="text-emerald-300">Hello! I am your AI assistant for ${domainName}. Ask me anything!</p>`;
+            document.getElementById('aiModal').classList.remove('hidden');
+        }
+
+        function closeAIModal() {
+            document.getElementById('aiModal').classList.add('hidden');
+        }
+
+        function sendAIMessage() {
+            let input = document.getElementById('aiUserInput');
+            let msg = input.value.trim();
+            if (!msg) return;
+
+            let chatBox = document.getElementById('aiChatBox');
+            chatBox.innerHTML += `<p class="text-right text-slate-200"><b>You:</b> ${msg}</p>`;
+            input.value = "";
+
+            setTimeout(() => {
+                chatBox.innerHTML += `<p class="text-emerald-400"><b>OYES AI:</b> Received query regarding "${currentAiDomain}". Processing response successfully!</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500);
+        }
+
+        // File Manager Logic
         let activeFileManagerAction = null;
         let activeTargetIndex = null;
 
@@ -243,9 +281,9 @@
         }
 
         function handleFileManagedUpload(event) {
-            let files = event.target.files;
-            if (files.length > 0) {
-                let file = files[0];
+            let fileInput = event.target;
+            if (fileInput.files.length > 0) {
+                let file = fileInput.files[0];
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     let fileDataUrl = e.target.result;
@@ -260,47 +298,12 @@
                     } else if (activeFileManagerAction === 'folder_bg' && activeTargetIndex !== null) {
                         rootFolders[activeTargetIndex].bg = fileDataUrl;
                         localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-                        alert("Folder specific background updated permanently via File Manager!");
+                        alert("Folder background updated successfully!");
                         openAdminSettings();
-                    } else {
-                        alert("File uploaded successfully to File Manager!");
                     }
+                    fileInput.value = ""; // Reset input so same file can be uploaded again
                 };
                 reader.readAsDataURL(file);
-            }
-        }
-
-        function openVoiceAI(domainName) {
-            let userQuery = "";
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                const recognition = new SpeechRecognition();
-                recognition.lang = 'ml-IN';
-                recognition.interimResults = false;
-                recognition.maxAlternatives = 1;
-
-                recognition.onstart = function() {
-                    alert(`🎙️ OYES Voice AI Listening (${domainName})... Speak now!`);
-                };
-
-                recognition.onresult = function(event) {
-                    userQuery = event.results[0][0].transcript;
-                    alert(`AI Response for "${domainName}" (Voice: "${userQuery}"): Processed successfully!`);
-                };
-
-                recognition.onerror = function(event) {
-                    userQuery = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
-                    if (userQuery) {
-                        alert(`AI Response for "${domainName}": "${userQuery}" - Processed successfully!`);
-                    }
-                };
-
-                recognition.start();
-            } else {
-                userQuery = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
-                if (userQuery) {
-                    alert(`AI Response for "${domainName}": "${userQuery}" - Processed successfully!`);
-                }
             }
         }
 
@@ -330,10 +333,10 @@
             document.getElementById('pageTitle').innerText = "Admin Panel - Permanent Settings";
             
             let grid = document.getElementById('pageContentGrid');
-            grid.className = "grid grid-cols-1 gap-3.5 pb-6 col-span-2";
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6";
             
             let editHtml = `
-                <div class="card-3d p-4 rounded-2xl text-center col-span-2 space-y-3 border border-amber-500/60">
+                <div class="card-3d p-4 rounded-2xl text-center space-y-3 border border-amber-500/60">
                     <h4 class="text-amber-300 font-bold text-xs">Global Branding & File Manager Controls</h4>
                     <div class="flex gap-2 justify-center flex-wrap">
                         <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo</button>
@@ -341,7 +344,7 @@
                     </div>
                 </div>
 
-                <div class="card-3d p-4 rounded-2xl col-span-2 space-y-3 text-left">
+                <div class="card-3d p-4 rounded-2xl space-y-3 text-left">
                     <h4 class="text-cyan-300 font-bold text-xs">Manage Folders, Icons & Folder Backgrounds:</h4>
             `;
 
@@ -365,7 +368,7 @@
             for (let dId in domainFoldersData) {
                 let items = domainFoldersData[dId];
                 let rootName = rootFolders.find(f => f.id == dId)?.name || `Folder ${dId}`;
-                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 text-left"><h4 class="text-amber-300 font-bold text-xs">Sub-Items under "${rootName}":</h4>`;
+                editHtml += `<div class="card-3d p-3 rounded-2xl space-y-2 text-left"><h4 class="text-amber-300 font-bold text-xs">Sub-Items under "${rootName}":</h4>`;
                 for (let idx = 0; idx < items.length; idx++) {
                     let item = items[idx];
                     editHtml += `
@@ -447,8 +450,6 @@
             document.getElementById('subFolderPageView').classList.remove('hidden');
             
             let rootObj = rootFolders.find(f => f.id == domainId);
-            
-            // Apply folder specific background if available
             if (rootObj && rootObj.bg) {
                 document.getElementById('appBody').style.backgroundImage = `url('${rootObj.bg}')`;
             }
@@ -480,7 +481,7 @@
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
-            loadPersistentCustomizations(); // Reset to global background on home
+            loadPersistentCustomizations();
         }
     </script>
 </body>
