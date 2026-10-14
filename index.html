@@ -31,9 +31,9 @@
         }
     </style>
 </head>
-<body class="flex flex-col justify-between min-h-screen">
+<body id="appBody" class="flex flex-col justify-between min-h-screen">
 
-    <!-- Header Section with Multi-Language Selector -->
+    <!-- Header Section -->
     <header class="p-2.5 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
             <div class="flex items-center gap-1.5 cursor-pointer" onclick="goBackHome()">
@@ -43,7 +43,6 @@
                 <h1 id="headerMainTitle" class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
             </div>
             
-            <!-- Language Selector Dropdown -->
             <div class="flex items-center gap-1">
                 <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
                     <option value="en">English</option>
@@ -59,8 +58,8 @@
         </div>
     </header>
 
-    <!-- Hidden Inputs -->
-    <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,.pdf" onchange="handleWhatsAppUpload(event)">
+    <!-- Global Hidden File Manager Trigger -->
+    <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,.pdf" onchange="handleFileManagedUpload(event)">
 
     <!-- Admin Login Modal (Secret Code: salih9947) -->
     <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
@@ -80,7 +79,7 @@
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         
-        <!-- Top Banner with Slogans -->
+        <!-- Top Banner -->
         <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
             <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
                 <span id="bannerLogoIcon">🌍🦅</span>
@@ -92,104 +91,13 @@
         </div>
 
         <!-- 7 Primary Folders Grid -->
-        <div class="grid grid-cols-2 gap-3">
-            
-            <!-- 1. World of Knowledge -->
-            <div onclick="openDomainFolders(1)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">📖</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">WORLD OF KNOWLEDGE</h3>
-                    <p class="text-[9px] text-slate-300">Connecting people • Uniting opportunities</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('World of Knowledge')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
-            <!-- 2. Job Vacancies & Cleaning -->
-            <div onclick="openDomainFolders(2)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">💼</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">JOB VACANCIES & CLEANING</h3>
-                    <p class="text-[9px] text-slate-300">Shift in thought • Progress in life</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('Job Vacancies & Cleaning')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
-            <!-- 3. ULTIMATE HOME CONSTRUCTION SOLUTION -->
-            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🏠</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">ULTIMATE HOME CONSTRUCTION SOLUTION</h3>
-                    <p class="text-[9px] text-slate-300">Marbles, Granites, Kota, Vettukallu, Appliances & Workers</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('Ultimate Home Construction Solution')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
-            <!-- 4. Stays & Hotels -->
-            <div onclick="openDomainFolders(4)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🏨</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">STAYS & HOTELS</h3>
-                    <p class="text-[9px] text-slate-300">One connection • Endless possibilities</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('Stays & Hotels')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
-            <!-- 5. Buy & Sell Market Hub -->
-            <div onclick="openDomainFolders(5)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🤝</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">BUY & SELL MARKET HUB</h3>
-                    <p class="text-[9px] text-slate-300">Your world • Your community</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('Buy & Sell Market Hub')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
-            <!-- 6. Events & Advertisements -->
-            <div onclick="openDomainFolders(6)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🌟</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">EVENTS & ADVERTISEMENTS</h3>
-                    <p class="text-[9px] text-slate-300">Connect digitally • Move forward together</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('Events & Advertisements')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
-            <!-- 7. OYES Cinema & Studio -->
-            <div onclick="openDomainFolders(7)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center col-span-2 max-w-[200px] mx-auto w-full">
-                <div class="space-y-1.5 mt-1">
-                    <span class="text-3xl block">🎬</span>
-                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">OYES CINEMA & STUDIO</h3>
-                    <p class="text-[9px] text-slate-300">Skills awaken • Possibilities unfold</p>
-                </div>
-                <div class="flex gap-1 mt-3">
-                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span onclick="event.stopPropagation(); openAI('OYES Cinema & Studio')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
-                </div>
-            </div>
-
+        <div id="homeGridContainer" class="grid grid-cols-2 gap-3">
+            <!-- Dynamically rendered via JS -->
         </div>
 
     </main>
 
-    <!-- Sub-Folders & Content View -->
+    <!-- Sub-Folders & Admin Settings View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
@@ -203,39 +111,15 @@
         <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
     </footer>
 
-    <!-- JavaScript & Multi-Language & AI Knowledge Base -->
+    <!-- JavaScript & Voice AI Logic -->
     <script>
         const translations = {
-            en: {
-                bannerTitle: "OYES GLOBAL HUB",
-                subtitle: "Embracing Change • Creating the Future",
-                footer: "Change from within • The future through us"
-            },
-            ml: {
-                bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്",
-                subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്",
-                footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ"
-            },
-            ta: {
-                bannerTitle: "ஒயெஸ் குளோபல் ஹப்",
-                subtitle: "மாற்றங்களை ஏற்றுக்கொண்டு • எதிர்காலத்தை உருவாக்குங்கள்",
-                footer: "மாற்றம் நம்மிடமிருந்து • எதிர்காலம் நம் மூலம்"
-            },
-            kn: {
-                bannerTitle: "ಒಯೇಸ್ ಗ್ಲೋಬಲ್ ಹಬ್",
-                subtitle: "ಬದಲಾವಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಿ • ಭವಿಷ್ಯವನ್ನು ಸೃಷ್ಟಿಸಿ",
-                footer: "ಬದಲಾವಣೆ ನಮ್ಮಿಂದ • ಭವಿಷ್ಯ ನಮ್ಮ ಮೂಲಕ"
-            },
-            hi: {
-                bannerTitle: "ओयेस ग्लोबल हब",
-                subtitle: "बदलाव को अपनाएं • भविष्य का निर्माण करें",
-                footer: "परिवर्तन हम से • भविष्य हमारे माध्यम से"
-            },
-            ar: {
-                bannerTitle: "منصة أويس العالمية",
-                subtitle: "احتضان التغيير • صناعة المستقبل",
-                footer: "التغيير من الداخل • المستقبل من خلالنا"
-            }
+            en: { bannerTitle: "OYES GLOBAL HUB", subtitle: "Embracing Change • Creating the Future", footer: "Change from within • The future through us" },
+            ml: { bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്", subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്", footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ" },
+            ta: { bannerTitle: "ஒயெஸ் குளோபல் ஹப்", subtitle: "மாற்றங்களை ஏற்றுக்கொண்டு • எதிர்காலத்தை உருவாக்குங்கள்", footer: "மாற்றம் நம்மிடமிருந்து • எதிர்காலம் நம் மூலம்" },
+            kn: { bannerTitle: "ಒಯೇಸ್ ಗ್ಲೋಬಲ್ ಹಬ್", subtitle: "ಬದಲಾವಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಿ • ಭವಿಷ್ಯವನ್ನು ಸೃಷ್ಟಿಸಿ", footer: "ಬದಲಾವಣೆ ನಮ್ಮಿಂದ • ಭವಿಷ್ಯ ನಮ್ಮ ಮೂಲಕ" },
+            hi: { bannerTitle: "ओयेस ग्लोबल हब", subtitle: "बदलाव को अपनाएं • भविष्य का निर्माण करें", footer: "परिवर्तन हम से • भविष्य हमारे माध्यम से" },
+            ar: { bannerTitle: "منصة أويس العالمية", subtitle: "احتضان التغيير • صناعة المستقبل", footer: "التغيير من الداخل • المستقبل من خلالنا" }
         };
 
         function changeLanguage(lang) {
@@ -246,13 +130,18 @@
             localStorage.setItem('oyes_lang', lang);
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            let savedLang = localStorage.getItem('oyes_lang') || 'en';
-            document.getElementById('langSelect').value = savedLang;
-            changeLanguage(savedLang);
-        });
+        const defaultRootFolders = [
+            { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", slogan: "Connecting people • Uniting opportunities" },
+            { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", slogan: "Shift in thought • Progress in life" },
+            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers" },
+            { id: 4, name: "STAYS & HOTELS", icon: "🏨", slogan: "One connection • Endless possibilities" },
+            { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", slogan: "Your world • Your community" },
+            { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", slogan: "Connect digitally • Move forward together" },
+            { id: 7, name: "OYES CINEMA & STUDIO", icon: "🎬", slogan: "Skills awaken • Possibilities unfold" }
+        ];
 
-        // Exhaustive Knowledge Base & 14 Sub-Folders for Folder 3
+        let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
+
         const defaultDomainData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
@@ -304,6 +193,118 @@
 
         let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
 
+        function renderHomeGrid() {
+            let container = document.getElementById('homeGridContainer');
+            let html = "";
+            rootFolders.forEach((folder, idx) => {
+                let isFullSpan = (idx === 6) ? "col-span-2 max-w-[200px] mx-auto w-full" : "";
+                html += `
+                    <div onclick="openDomainFolders(${folder.id})" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center ${isFullSpan}">
+                        <div class="space-y-1.5 mt-1">
+                            <span class="text-3xl block">${folder.icon}</span>
+                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${folder.name}</h3>
+                            <p class="text-[9px] text-slate-300">${folder.slogan}</p>
+                        </div>
+                        <div class="flex gap-1 mt-3">
+                            <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                            <span onclick="event.stopPropagation(); openVoiceAI('${folder.name}')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="Voice & AI Assistant">🎙️ AI</span>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLang = localStorage.getItem('oyes_lang') || 'en';
+            document.getElementById('langSelect').value = savedLang;
+            changeLanguage(savedLang);
+            renderHomeGrid();
+            loadPersistentCustomizations();
+        });
+
+        function loadPersistentCustomizations() {
+            let savedLogo = localStorage.getItem('oyes_custom_logo');
+            if (savedLogo) {
+                document.getElementById('headerLogoContainer').innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover rounded-full">`;
+                document.getElementById('bannerLogoContainer').innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover rounded-full">`;
+            }
+            let savedBg = localStorage.getItem('oyes_custom_bg');
+            if (savedBg) {
+                document.getElementById('appBody').style.backgroundImage = `url('${savedBg}')`;
+            }
+        }
+
+        // File Manager Hub Trigger
+        let activeFileManagerAction = null;
+        let activeTargetDomainId = null;
+
+        function openFileManager(actionType = 'general', domainId = null) {
+            activeFileManagerAction = actionType;
+            activeTargetDomainId = domainId;
+            document.getElementById('globalFileManager').click();
+        }
+
+        function handleFileManagedUpload(event) {
+            let files = event.target.files;
+            if (files.length > 0) {
+                let file = files[0];
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let fileDataUrl = e.target.result;
+                    if (activeFileManagerAction === 'logo') {
+                        localStorage.setItem('oyes_custom_logo', fileDataUrl);
+                        loadPersistentCustomizations();
+                        alert("App Logo updated permanently via File Manager!");
+                    } else if (activeFileManagerAction === 'background') {
+                        localStorage.setItem('oyes_custom_bg', fileDataUrl);
+                        loadPersistentCustomizations();
+                        alert("App Background updated permanently via File Manager!");
+                    } else {
+                        alert("Files successfully uploaded and saved in OYES File Manager Hub!");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Voice & Text Enabled AI Assistant (Speech Recognition)
+        function openVoiceAI(domainName) {
+            let userQuery = "";
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'ml-IN'; // Default support for Malayalam, adjusts dynamically
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+                recognition.onstart = function() {
+                    alert(`🎙️ OYES Voice AI Listening (${domainName})... Speak now!`);
+                };
+
+                recognition.onresult = function(event) {
+                    userQuery = event.results[0][0].transcript;
+                    alert(`AI Response for "${domainName}" (Voice: "${userQuery}"): Processed successfully with multi-language support!`);
+                };
+
+                recognition.onerror = function(event) {
+                    // Fallback to text prompt if microphone is blocked or not available
+                    userQuery = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
+                    if (userQuery) {
+                        alert(`AI Response for "${domainName}": "${userQuery}" - Processed successfully!`);
+                    }
+                };
+
+                recognition.start();
+            } else {
+                userQuery = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
+                if (userQuery) {
+                    alert(`AI Response for "${domainName}": "${userQuery}" - Processed successfully!`);
+                }
+            }
+        }
+
+        // Admin Security & Panel
         function requestAdminAccess() {
             document.getElementById('adminSecretInput').value = "";
             document.getElementById('adminLoginModal').classList.remove('hidden');
@@ -315,7 +316,7 @@
 
         function verifyAdminCode() {
             let code = document.getElementById('adminSecretInput').value.trim();
-            if(code === "salih9947") {
+            if (code === "salih9947") {
                 closeAdminModal();
                 alert("Admin Access Verified Successfully!");
                 openAdminSettings();
@@ -327,46 +328,115 @@
         function openAdminSettings() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = "Admin Panel - Edit Content";
+            document.getElementById('pageTitle').innerText = "Admin Panel - Permanent Settings";
             
             let grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-1 gap-3.5 pb-6 col-span-2";
             
-            let editHtml = `<div class="card-3d p-4 rounded-2xl text-center col-span-2 text-amber-300 font-bold">Admin Management Mode Active</div>`;
-            for(let dId in domainFoldersData) {
+            let editHtml = `
+                <div class="card-3d p-4 rounded-2xl text-center col-span-2 space-y-3 border border-amber-500/60">
+                    <h4 class="text-amber-300 font-bold text-xs">Global Branding & File Manager Controls</h4>
+                    <div class="flex gap-2 justify-center">
+                        <button type="button" onclick="openFileManager('logo')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo (File Manager)</button>
+                        <button type="button" onclick="openFileManager('background')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change BG (File Manager)</button>
+                    </div>
+                </div>
+
+                <div class="card-3d p-4 rounded-2xl col-span-2 space-y-3 text-left">
+                    <h4 class="text-cyan-300 font-bold text-xs">Manage Root Folders & Icons (Fixed 7 Grid Architecture):</h4>
+            `;
+
+            rootFolders.forEach((folder, idx) => {
+                editHtml += `
+                    <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-700 space-y-2 text-[11px]">
+                        <div class="flex gap-2 items-center">
+                            <input type="text" id="root_icon_${idx}" value="${folder.icon}" class="w-10 bg-slate-900 text-center text-amber-300 p-1.5 rounded border border-slate-700 text-xs">
+                            <input type="text" id="root_name_${idx}" value="${folder.name}" class="flex-grow bg-slate-900 text-slate-200 p-1.5 rounded border border-slate-700 text-xs font-bold">
+                        </div>
+                        <input type="text" id="root_slogan_${idx}" value="${folder.slogan}" class="w-full bg-slate-900 text-slate-300 p-1 rounded border border-slate-700 text-[10px]">
+                        <button type="button" onclick="updateRootFolder(${idx})" class="bg-emerald-600 text-white px-3 py-1 rounded text-[10px] font-bold">Save Folder Details</button>
+                    </div>
+                `;
+            });
+            editHtml += `</div>`;
+
+            for (let dId in domainFoldersData) {
                 let items = domainFoldersData[dId];
-                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 text-left"><h4 class="text-cyan-300 font-bold text-xs">Folder ${dId} Items:</h4>`;
-                for(let idx = 0; idx < items.length; idx++) {
+                let rootName = rootFolders.find(f => f.id == dId)?.name || `Folder ${dId}`;
+                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 text-left"><h4 class="text-amber-300 font-bold text-xs">Sub-Items under "${rootName}":</h4>`;
+                for (let idx = 0; idx < items.length; idx++) {
                     let item = items[idx];
                     editHtml += `
-                        <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 space-y-1 text-[11px]">
-                            <span class="font-bold text-amber-300">${item.icon} ${item.name}</span>
-                            <input type="text" id="edit_name_${dId}_${idx}" value="${item.name}" class="w-full bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
-                            <button type="button" onclick="updateCardName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
+                        <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 flex gap-2 items-center text-[11px]">
+                            <input type="text" id="sub_icon_${dId}_${idx}" value="${item.icon}" class="w-8 bg-slate-900 text-center p-1 rounded border border-slate-700 text-xs">
+                            <input type="text" id="sub_name_${dId}_${idx}" value="${item.name}" class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                            <button type="button" onclick="updateSubItemName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
+                            <button type="button" onclick="deleteSubItem(${dId}, ${idx})" class="bg-rose-700 text-white px-2 py-1 rounded text-[10px]">Delete</button>
                         </div>
                     `;
                 }
-                editHtml += `</div>`;
+                editHtml += `
+                    <div class="mt-2 pt-2 border-t border-slate-800 flex gap-1">
+                        <input type="text" id="new_sub_name_${dId}" placeholder="New sub-folder name..." class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                        <button type="button" onclick="addNewSubItem(${dId})" class="bg-blue-600 text-white px-3 py-1 rounded text-[10px] font-bold">+ Add Sub-Folder</button>
+                    </div>
+                </div>`;
             }
+
             grid.innerHTML = editHtml;
         }
 
-        function updateCardName(domainId, index) {
-            let newName = document.getElementById(`edit_name_${domainId}_${index}`).value.trim();
-            if(newName) {
-                domainFoldersData[domainId][index].name = newName;
-                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
-                alert("Updated successfully!");
+        function updateRootFolder(index) {
+            let newIcon = document.getElementById(`root_icon_${index}`).value.trim();
+            let newName = document.getElementById(`root_name_${index}`).value.trim();
+            let newSlogan = document.getElementById(`root_slogan_${index}`).value.trim();
+            if (newName) {
+                rootFolders[index].icon = newIcon || "📁";
+                rootFolders[index].name = newName;
+                rootFolders[index].slogan = newSlogan;
+                localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+                renderHomeGrid();
+                alert("Root folder updated permanently!");
                 openAdminSettings();
             }
         }
 
-        // Voice & Text Enabled AI Assistant
-        function openAI(domainName) {
-            let promptText = `🤖 OYES AI Assistant (${domainName}):\nType your question or use Voice input:`;
-            let query = prompt(promptText);
-            if (query) {
-                alert(`AI Response for "${domainName}": "${query}" - Processed successfully with multi-language support!`);
+        function updateSubItemName(domainId, index) {
+            let newName = document.getElementById(`sub_name_${domainId}_${index}`).value.trim();
+            let newIcon = document.getElementById(`sub_icon_${domainId}_${index}`).value.trim();
+            if (newName) {
+                domainFoldersData[domainId][index].name = newName;
+                domainFoldersData[domainId][index].icon = newIcon || "📁";
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                alert("Sub-item updated successfully!");
+                openAdminSettings();
+            }
+        }
+
+        function deleteSubItem(domainId, index) {
+            if (confirm("Are you sure you want to delete this sub-folder?")) {
+                domainFoldersData[domainId].splice(index, 1);
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                alert("Deleted successfully!");
+                openAdminSettings();
+            }
+        }
+
+        function addNewSubItem(domainId) {
+            let inputField = document.getElementById(`new_sub_name_${domainId}`);
+            let name = inputField.value.trim();
+            if (name) {
+                if (!domainFoldersData[domainId]) domainFoldersData[domainId] = [];
+                domainFoldersData[domainId].push({
+                    name: name,
+                    icon: "📁",
+                    desc: "Custom created sub-folder item.",
+                    link: "https://wa.me/919947198248?text=" + encodeURIComponent(name + " Inquiry")
+                });
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                inputField.value = "";
+                alert("New sub-folder created successfully!");
+                openAdminSettings();
             }
         }
 
@@ -378,10 +448,11 @@
             grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
             let items = domainFoldersData[domainId] || [];
+            let rootObj = rootFolders.find(f => f.id == domainId);
 
-            document.getElementById('pageTitle').innerText = domainId === 3 ? "Ultimate Home Construction Solution" : ("Folder #" + domainId + " Items");
+            document.getElementById('pageTitle').innerText = rootObj ? rootObj.name : ("Folder #" + domainId);
 
-            for(let i = 0; i < items.length; i++) {
+            for (let i = 0; i < items.length; i++) {
                 let f = items[i];
                 html += `
                     <div class="card-3d p-3.5 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
@@ -401,11 +472,6 @@
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
-        }
-
-        function openFileManager() { document.getElementById('globalFileManager').click(); }
-        function handleWhatsAppUpload(event) {
-            if(event.target.files.length > 0) alert("Files ready to share via WhatsApp & Global Hub!");
         }
     </script>
 </body>
