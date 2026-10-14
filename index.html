@@ -47,10 +47,6 @@
                 <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
-                    <option value="ta">தமிழ்</option>
-                    <option value="kn">ಕನ್ನಡ</option>
-                    <option value="hi">हिन्दी</option>
-                    <option value="ar">العربية</option>
                 </select>
                 <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow" title="File Manager">📁</button>
                 <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow" title="Admin Panel">⚙️</button>
@@ -122,7 +118,7 @@
         <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
     </footer>
 
-    <!-- JavaScript & Corrected Logic -->
+    <!-- JavaScript Logic -->
     <script>
         const translations = {
             en: { bannerTitle: "OYES GLOBAL HUB", subtitle: "Embracing Change • Creating the Future", footer: "Change from within • The future through us" },
@@ -149,7 +145,10 @@
 
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
 
-        const exactCorrectDomainData = {
+        // Dynamic Construction WhatsApp Number (Saved permanently via Admin Panel)
+        let constructionWhatsAppNumber = localStorage.getItem('oyes_construction_wa') || "919447276504";
+
+        const perfectDomainData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
                 {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
@@ -162,20 +161,23 @@
                 {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and overhead water tank cleaning services.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"}
             ],
             3: [
-                {name: "Imported & Italian Marbles", icon: "🇮🇹", desc: "Statuario, Botticino, Beige & Designer Imported Marbles with rich textures.", link: "https://wa.me/919947198248?text=Italian%20Marble%20Inquiry"},
-                {name: "Indian Marbles (Makrana & Others)", icon: "🇮🇳", desc: "Makrana White, Banswara, Ambaji & Indian white/colored marbles.", link: "https://wa.me/919947198248?text=Indian%20Marble%20Inquiry"},
-                {name: "Kota Stone Collection", icon: "🟩", desc: "Natural green & brown Kota stones for flooring, parking & paving.", link: "https://wa.me/919947198248?text=Kota%20Stone%20Inquiry"},
-                {name: "Granite Slabs & Countertops", icon: "🪨", desc: "Black Galaxy, Tan Brown, Kashmir White & kitchen countertop granites.", link: "https://wa.me/919947198248?text=Granite%20Slabs%20Inquiry"},
-                {name: "Laterite Stone (വെട്ടുകല്ല്)", icon: "🧱", desc: "High-grade local laterite building stones for strong wall masonry.", link: "https://wa.me/919947198248?text=Laterite%20Stone%20Vettukallu%20Inquiry"},
-                {name: "Rough & Fine Granite Stones (കരിങ്കല്ല്)", icon: "🗿", desc: "Foundation stones, rubble & dressed black stones for compound/base.", link: "https://wa.me/919947198248?text=Karinkallu%20Inquiry"},
-                {name: "Boulders (ബോളർ കല്ലുകൾ)", icon: "⛰️", desc: "Large raw boulders for retaining walls, landscaping & river protection.", link: "https://wa.me/919947198248?text=Boulders%20Inquiry"},
-                {name: "Metal / Aggregates (മെറ്റൽ - 20mm, 40mm)", icon: "⚙️", desc: "Crushed blue metal aggregates for concrete roofing, pillars & flooring.", link: "https://wa.me/919947198248?text=Metal%20Aggregates%20Inquiry"},
-                {name: "Tiles, Sanitary & Elevation Stones", icon: "🏛️", desc: "Wall cladding, 3D elevation stones, ceramic/vitrified floor tiles & Wares.", link: "https://wa.me/919947198248?text=Tiles%20Elevation%20Inquiry"},
-                {name: "Home Appliances & Electronics", icon: "🌀", desc: "Fans, ACs, Televisions, Refrigerators, Washing machines & Geysers.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
-                {name: "Luxury Furniture (Sofas & Beds)", icon: "🛋️", desc: "Designer sofas, wooden beds, dining tables, chairs & storage cabinets.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"},
-                {name: "Kitchenware (From Spoons to Stove)", icon: "🥄", desc: "Stoves, mixer grinders, cookware sets, cutleries & spoons (complete items).", link: "https://wa.me/919947198248?text=Kitchenware%20Inquiry"},
-                {name: "Electricals, Plumbing & Hardware", icon: "💡", desc: "Wires, switches, LED lights, PVC pipes, taps, paints, putty & tools.", link: "https://wa.me/919947198248?text=Electrical%20Plumbing%20Hardware%20Inquiry"},
-                {name: "Construction Workers & Masons", icon: "👷", desc: "Expert stone masons, tile fixers, concrete workers, plumbers & electricians.", link: "https://wa.me/919947198248?text=Workers%20Labours%20Inquiry"}
+                {name: "Statuario Italian Marble", icon: "🇮🇹", desc: "Premium Statuario white imported Italian marble with grey striking veins."},
+                {name: "Botticino Classic Marble", icon: "🇮🇹", desc: "Beige colored Italian marble ideal for luxury floorings and halls."},
+                {name: "Dyna & Travertine Marble", icon: "🇮🇹", desc: "Rich textured Dyna and natural Travertine Italian marbles."},
+                {name: "Makrana White Indian Marble", icon: "🇮🇳", desc: "World-famous pure white Makrana marble from Rajasthan."},
+                {name: "Banswara & Ambaji Marble", icon: "🇮🇳", desc: "Purple, pink and white Indian marble varieties."},
+                {name: "Natural Green & Brown Kota Stone", icon: "🟩", desc: "Durable green and brown Kota stones for paving and parking."},
+                {name: "Black Galaxy & Tan Brown Granite", icon: "🪨", desc: "High-grade kitchen countertops and flooring granites."},
+                {name: "Laterite Building Stone (വെട്ടുകല്ല്)", icon: "🧱", desc: "High quality local laterite stones for wall construction."},
+                {name: "Rough & Fine Granite Stones (കരിങ്കല്ല്)", icon: "🗿", desc: "Foundation and compound building black stones."},
+                {name: "Raw Boulders (ബോളർ കല്ലുകൾ)", icon: "⛰️", desc: "Large raw stones for retaining walls and landscaping."},
+                {name: "Metal Aggregates (മെറ്റൽ 20mm/40mm)", icon: "⚙️", desc: "Crushed blue metal aggregates for concrete casting."},
+                {name: "Vitrified & Elevation Tiles", icon: "🏛️", desc: "Ceramic floor tiles and 3D outdoor wall cladding stones."},
+                {name: "Home Appliances & Electronics", icon: "🌀", desc: "ACs, Refrigerators, Washing machines, TVs and Geysers."},
+                {name: "Luxury Furniture (Sofas & Beds)", icon: "🛋️", desc: "Designer wooden beds, luxury sofas and dining tables."},
+                {name: "Kitchenware (Stove to Spoons)", icon: "🥄", desc: "Complete kitchen set items from spoons and cookwares to stoves."},
+                {name: "Electrical, Plumbing & Hardware", icon: "💡", desc: "Wires, switches, LED lights, PVC pipes, taps, paints and putty."},
+                {name: "Construction Masons & Labours", icon: "👷", desc: "Expert stone masons, tile fixers, plumbers and electricians."}
             ],
             4: [
                 {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
@@ -198,7 +200,7 @@
             ]
         };
 
-        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || exactCorrectDomainData;
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || perfectDomainData;
 
         function renderHomeGrid() {
             let container = document.getElementById('homeGridContainer');
@@ -242,7 +244,6 @@
             }
         }
 
-        // AI Chat Modal Logic
         let currentAiDomain = "";
         function openAIModal(domainName) {
             currentAiDomain = domainName;
@@ -270,7 +271,6 @@
             }, 500);
         }
 
-        // File Manager Logic
         let activeFileManagerAction = null;
         let activeTargetIndex = null;
 
@@ -301,7 +301,7 @@
                         alert("Folder background updated successfully!");
                         openAdminSettings();
                     }
-                    fileInput.value = ""; // Reset input so same file can be uploaded again
+                    fileInput.value = "";
                 };
                 reader.readAsDataURL(file);
             }
@@ -327,6 +327,16 @@
             }
         }
 
+        function saveConstructionWhatsApp() {
+            let inputNum = document.getElementById('adminConstructionWaInput').value.trim();
+            if (inputNum) {
+                constructionWhatsAppNumber = inputNum;
+                localStorage.setItem('oyes_construction_wa', inputNum);
+                alert("Construction WhatsApp Number updated permanently!");
+                openAdminSettings();
+            }
+        }
+
         function openAdminSettings() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
@@ -341,6 +351,15 @@
                     <div class="flex gap-2 justify-center flex-wrap">
                         <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo</button>
                         <button type="button" onclick="openFileManager('global_bg')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Global BG</button>
+                    </div>
+                </div>
+
+                <div class="card-3d p-4 rounded-2xl space-y-3 text-left border border-emerald-500/60">
+                    <h4 class="text-emerald-300 font-bold text-xs">📞 Folder 3 WhatsApp Number Configuration:</h4>
+                    <p class="text-[10px] text-slate-300">Set the WhatsApp number for all items inside Folder 3 (Construction Hub):</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="adminConstructionWaInput" value="${constructionWhatsAppNumber}" placeholder="e.g. 919447276504" class="flex-grow bg-slate-950 text-emerald-300 p-2 rounded border border-emerald-700 text-xs font-bold">
+                        <button type="button" onclick="saveConstructionWhatsApp()" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold shadow">Save Number</button>
                     </div>
                 </div>
 
@@ -385,7 +404,7 @@
                         <input type="text" id="new_sub_name_${dId}" placeholder="New sub-folder name..." class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
                         <button type="button" onclick="addNewSubItem(${dId})" class="bg-blue-600 text-white px-3 py-1 rounded text-[10px] font-bold">+ Add Sub-Folder</button>
                     </div>
-                </div>`;
+                `;
             }
 
             grid.innerHTML = editHtml;
@@ -435,8 +454,7 @@
                 domainFoldersData[domainId].push({
                     name: name,
                     icon: "📁",
-                    desc: "Custom created sub-folder item.",
-                    link: "https://wa.me/919947198248?text=" + encodeURIComponent(name + " Inquiry")
+                    desc: "Custom created sub-folder item."
                 });
                 localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
                 inputField.value = "";
@@ -463,6 +481,12 @@
 
             for (let i = 0; i < items.length; i++) {
                 let f = items[i];
+                let linkUrl = f.link || "";
+                if (!linkUrl) {
+                    let activeNum = (domainId == 3) ? constructionWhatsAppNumber : "919947198248";
+                    linkUrl = `https://wa.me/${activeNum}?text=` + encodeURIComponent("Inquiry about " + f.name);
+                }
+
                 html += `
                     <div class="card-3d p-3.5 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
                         <div class="space-y-1.5 mt-2">
@@ -470,7 +494,7 @@
                             <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${f.name}</h3>
                             <p class="text-[10px] text-slate-300">${f.desc}</p>
                         </div>
-                        <a href="${f.link}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                        <a href="${linkUrl}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
                     </div>
                 `;
             }
@@ -479,7 +503,7 @@
         }
 
         function goBackHome() {
-            document.getElementById('homeView').classList.remove('hidden');
+            document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
             loadPersistentCustomizations();
         }
