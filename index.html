@@ -48,14 +48,17 @@
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
                 </select>
-                <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow" title="File Manager">📁</button>
-                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow" title="Admin Panel">⚙️</button>
+                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow" title="Admin Panel">⚙️ Admin</button>
             </div>
         </div>
     </header>
 
-    <!-- Global Hidden File Manager Trigger -->
-    <input type="file" id="globalFileManager" class="hidden" accept="image/*" onchange="handleFileManagedUpload(event)">
+    <!-- Admin Hidden File Managers (Strictly Admin Only) -->
+    <input type="file" id="adminLogoFile" class="hidden" accept="image/*" onchange="handleAdminLogoUpload(event)">
+    <input type="file" id="adminBgFile" class="hidden" accept="image/*" onchange="handleAdminBgUpload(event)">
+    <input type="file" id="adminFolderBgFile" class="hidden" accept="image/*" onchange="handleAdminFolderBgUpload(event)">
+    <input type="file" id="adminFolderPhotoFile" class="hidden" accept="image/*" onchange="handleAdminFolderPhotoUpload(event)">
+    <input type="file" id="adminItemPhotoFile" class="hidden" accept="image/*" onchange="handleAdminItemPhotoUpload(event)">
 
     <!-- Admin Login Modal (Secret Code: salih9947) -->
     <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
@@ -134,69 +137,66 @@
         }
 
         const defaultRootFolders = [
-            { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", slogan: "Connecting people • Uniting opportunities", bg: "" },
-            { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", slogan: "Shift in thought • Progress in life", bg: "" },
-            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers", bg: "" },
-            { id: 4, name: "STAYS & HOTELS", icon: "🏨", slogan: "One connection • Endless possibilities", bg: "" },
-            { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", slogan: "Your world • Your community", bg: "" },
-            { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", slogan: "Connect digitally • Move forward together", bg: "" },
-            { id: 7, name: "OYES CINEMA & STUDIO", icon: "🎬", slogan: "Skills awaken • Possibilities unfold", bg: "" }
+            { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", image: "", slogan: "Connecting people • Uniting opportunities", bg: "", waNumber: "919947198248" },
+            { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", image: "", slogan: "Shift in thought • Progress in life", bg: "", waNumber: "919947198248" },
+            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", image: "", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers", bg: "", waNumber: "919447276504" },
+            { id: 4, name: "STAYS & HOTELS", icon: "🏨", image: "", slogan: "One connection • Endless possibilities", bg: "", waNumber: "919947198248" },
+            { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", image: "", slogan: "Your world • Your community", bg: "", waNumber: "919947198248" },
+            { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", image: "", slogan: "Connect digitally • Move forward together", bg: "", waNumber: "919947198248" },
+            { id: 7, name: "OYES CINEMA & STUDIO", icon: "🎬", image: "", slogan: "Skills awaken • Possibilities unfold", bg: "", waNumber: "919947198248" }
         ];
 
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
 
-        // Dynamic Construction WhatsApp Number (Saved permanently via Admin Panel)
-        let constructionWhatsAppNumber = localStorage.getItem('oyes_construction_wa') || "919447276504";
-
         const perfectDomainData = {
             1: [
-                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
-                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
-                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org"},
-                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org"}
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com", image: ""},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com", image: ""},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org", image: ""},
+                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org", image: ""}
             ],
             2: [
-                {name: "Job Vacancies Portal", icon: "📋", desc: "Local & government job updates, Kerala PSC notifications.", link: "https://keralapsc.gov.in"},
-                {name: "House Deep Cleaning Services", icon: "🧹", desc: "Professional deep cleaning services for homes & offices.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
-                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and overhead water tank cleaning services.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"}
+                {name: "Job Vacancies Portal", icon: "📋", desc: "Local & government job updates, Kerala PSC notifications.", link: "https://keralapsc.gov.in", image: ""},
+                {name: "House Deep Cleaning Services", icon: "🧹", desc: "Professional deep cleaning services for homes & offices.", link: "", image: ""},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and overhead water tank cleaning services.", link: "", image: ""}
             ],
             3: [
-                {name: "Statuario Italian Marble", icon: "🇮🇹", desc: "Premium Statuario white imported Italian marble with grey striking veins."},
-                {name: "Botticino Classic Marble", icon: "🇮🇹", desc: "Beige colored Italian marble ideal for luxury floorings and halls."},
-                {name: "Dyna & Travertine Marble", icon: "🇮🇹", desc: "Rich textured Dyna and natural Travertine Italian marbles."},
-                {name: "Makrana White Indian Marble", icon: "🇮🇳", desc: "World-famous pure white Makrana marble from Rajasthan."},
-                {name: "Banswara & Ambaji Marble", icon: "🇮🇳", desc: "Purple, pink and white Indian marble varieties."},
-                {name: "Natural Green & Brown Kota Stone", icon: "🟩", desc: "Durable green and brown Kota stones for paving and parking."},
-                {name: "Black Galaxy & Tan Brown Granite", icon: "🪨", desc: "High-grade kitchen countertops and flooring granites."},
-                {name: "Laterite Building Stone (വെട്ടുകല്ല്)", icon: "🧱", desc: "High quality local laterite stones for wall construction."},
-                {name: "Rough & Fine Granite Stones (കരിങ്കല്ല്)", icon: "🗿", desc: "Foundation and compound building black stones."},
-                {name: "Raw Boulders (ബോളർ കല്ലുകൾ)", icon: "⛰️", desc: "Large raw stones for retaining walls and landscaping."},
-                {name: "Metal Aggregates (മെറ്റൽ 20mm/40mm)", icon: "⚙️", desc: "Crushed blue metal aggregates for concrete casting."},
-                {name: "Vitrified & Elevation Tiles", icon: "🏛️", desc: "Ceramic floor tiles and 3D outdoor wall cladding stones."},
-                {name: "Home Appliances & Electronics", icon: "🌀", desc: "ACs, Refrigerators, Washing machines, TVs and Geysers."},
-                {name: "Luxury Furniture (Sofas & Beds)", icon: "🛋️", desc: "Designer wooden beds, luxury sofas and dining tables."},
-                {name: "Kitchenware (Stove to Spoons)", icon: "🥄", desc: "Complete kitchen set items from spoons and cookwares to stoves."},
-                {name: "Electrical, Plumbing & Hardware", icon: "💡", desc: "Wires, switches, LED lights, PVC pipes, taps, paints and putty."},
-                {name: "Construction Masons & Labours", icon: "👷", desc: "Expert stone masons, tile fixers, plumbers and electricians."}
+                {name: "Statuario Italian Marble", icon: "🇮🇹", desc: "Premium Statuario white imported Italian marble with grey striking veins.", link: "", image: ""},
+                {name: "Botticino Classic Marble", icon: "🇮🇹", desc: "Beige colored Italian marble ideal for luxury floorings and halls.", link: "", image: ""},
+                {name: "Dyna & Travertine Marble", icon: "🇮🇹", desc: "Rich textured Dyna and natural Travertine Italian marbles.", link: "", image: ""},
+                {name: "Makrana White Indian Marble", icon: "🇮🇳", desc: "World-famous pure white Makrana marble from Rajasthan.", link: "", image: ""},
+                {name: "Banswara & Ambaji Marble", icon: "🇮🇳", desc: "Purple, pink and white Indian marble varieties.", link: "", image: ""},
+                {name: "Natural Green & Brown Kota Stone", icon: "🟩", desc: "Durable green and brown Kota stones for paving and parking.", link: "", image: ""},
+                {name: "Black Galaxy & Tan Brown Granite", icon: "🪨", desc: "High-grade kitchen countertops and flooring granites.", link: "", image: ""},
+                {name: "Laterite Building Stone (വെട്ടുകല്ല്)", icon: "🧱", desc: "High quality local laterite stones for wall construction.", link: "", image: ""},
+                {name: "Rough & Fine Granite Stones (കരിങ്കല്ല്)", icon: "🗿", desc: "Foundation and compound building black stones.", link: "", image: ""},
+                {name: "Raw Boulders (ബോളർ കല്ലുകൾ)", icon: "⛰️", desc: "Large raw stones for retaining walls and landscaping.", link: "", image: ""},
+                {name: "Metal Aggregates (മെറ്റൽ 20mm/40mm)", icon: "⚙️", desc: "Crushed blue metal aggregates for concrete casting.", link: "", image: ""},
+                {name: "Vitrified & Elevation Tiles", icon: "🏛️", desc: "Ceramic floor tiles and 3D outdoor wall cladding stones.", link: "", image: ""},
+                {name: "Home Appliances & Electronics", icon: "🌀", desc: "ACs, Refrigerators, Washing machines, TVs and Geysers.", link: "", image: ""},
+                {name: "Luxury Furniture (Sofas & Beds)", icon: "🛋️", desc: "Designer wooden beds, luxury sofas and dining tables.", link: "", image: ""},
+                {name: "Kitchenware (Stove to Spoons)", icon: "🥄", desc: "Complete kitchen set items from spoons and cookwares to stoves.", link: "", image: ""},
+                {name: "Electrical, Plumbing & Hardware", icon: "💡", desc: "Wires, switches, LED lights, PVC pipes, taps, paints and putty.", link: "", image: ""},
+                {name: "Construction Masons & Labours", icon: "👷", desc: "Expert stone masons, tile fixers, plumbers and electricians.", link: "", image: ""}
             ],
             4: [
-                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
-                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"},
-                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com"}
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com", image: ""},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com", image: ""},
+                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com", image: ""}
             ],
             5: [
-                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "https://wa.me/919947198248?text=LiveStock%20Inquiry"},
-                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "https://wa.me/919947198248?text=RealEstate%20Inquiry"},
-                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "https://wa.me/919947198248?text=Vehicle%20Inquiry"}
+                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "", image: ""},
+                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "", image: ""},
+                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "", image: ""}
             ],
             6: [
-                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "https://wa.me/919947198248?text=Ads%20Inquiry"},
-                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "https://wa.me/919947198248?text=Events%20Inquiry"}
+                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "", image: ""},
+                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "", image: ""}
             ],
             7: [
-                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"},
-                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com"},
-                {name: "Short Films & Cinema Hub", icon: "🎥", desc: "Watch short films, movies and cinema productions.", link: "https://www.youtube.com"}
+                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com", image: ""},
+                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com", image: ""},
+                {name: "Short Films & Cinema Hub", icon: "🎥", desc: "Watch short films, movies and cinema productions.", link: "https://www.youtube.com", image: ""}
             ]
         };
 
@@ -207,10 +207,11 @@
             let html = "";
             rootFolders.forEach((folder, idx) => {
                 let isFullSpan = (idx === 6) ? "col-span-2 max-w-[200px] mx-auto w-full" : "";
+                let displayFolderIconOrImg = folder.image ? `<img src="${folder.image}" class="w-12 h-12 mx-auto object-cover rounded-full border border-amber-500/50 shadow">` : `<span class="text-3xl block">${folder.icon}</span>`;
                 html += `
                     <div onclick="openDomainFolders(${folder.id})" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center ${isFullSpan}">
                         <div class="space-y-1.5 mt-1">
-                            <span class="text-3xl block">${folder.icon}</span>
+                            ${displayFolderIconOrImg}
                             <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${folder.name}</h3>
                             <p class="text-[9px] text-slate-300">${folder.slogan}</p>
                         </div>
@@ -271,37 +272,93 @@
             }, 500);
         }
 
-        let activeFileManagerAction = null;
-        let activeTargetIndex = null;
+        // --- ADMIN ONLY FILE UPLOAD HANDLERS ---
+        let selectedFolderBgIndex = null;
+        let selectedFolderPhotoIndex = null;
+        let selectedItemDomainId = null;
+        let selectedItemIndex = null;
 
-        function openFileManager(actionType, targetIndex = null) {
-            activeFileManagerAction = actionType;
-            activeTargetIndex = targetIndex;
-            document.getElementById('globalFileManager').click();
-        }
-
-        function handleFileManagedUpload(event) {
-            let fileInput = event.target;
-            if (fileInput.files.length > 0) {
-                let file = fileInput.files[0];
+        function openAdminLogoPicker() { document.getElementById('adminLogoFile').click(); }
+        function handleAdminLogoUpload(event) {
+            let file = event.target.files[0];
+            if (file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    let fileDataUrl = e.target.result;
-                    if (activeFileManagerAction === 'global_logo') {
-                        localStorage.setItem('oyes_custom_logo', fileDataUrl);
-                        loadPersistentCustomizations();
-                        alert("App Logo updated permanently!");
-                    } else if (activeFileManagerAction === 'global_bg') {
-                        localStorage.setItem('oyes_custom_bg', fileDataUrl);
-                        loadPersistentCustomizations();
-                        alert("Global Background updated permanently!");
-                    } else if (activeFileManagerAction === 'folder_bg' && activeTargetIndex !== null) {
-                        rootFolders[activeTargetIndex].bg = fileDataUrl;
-                        localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-                        alert("Folder background updated successfully!");
-                        openAdminSettings();
-                    }
-                    fileInput.value = "";
+                    localStorage.setItem('oyes_custom_logo', e.target.result);
+                    loadPersistentCustomizations();
+                    alert("Admin: App Logo updated successfully!");
+                    openAdminSettings();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openAdminBgPicker() { document.getElementById('adminBgFile').click(); }
+        function handleAdminBgUpload(event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('oyes_custom_bg', e.target.result);
+                    loadPersistentCustomizations();
+                    alert("Admin: Global Background updated successfully!");
+                    openAdminSettings();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openAdminFolderBgPicker(idx) {
+            selectedFolderBgIndex = idx;
+            document.getElementById('adminFolderBgFile').click();
+        }
+        function handleAdminFolderBgUpload(event) {
+            let file = event.target.files[0];
+            if (file && selectedFolderBgIndex !== null) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    rootFolders[selectedFolderBgIndex].bg = e.target.result;
+                    localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+                    alert("Admin: Folder background updated successfully!");
+                    openAdminSettings();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openAdminFolderPhotoPicker(idx) {
+            selectedFolderPhotoIndex = idx;
+            document.getElementById('adminFolderPhotoFile').click();
+        }
+        function handleAdminFolderPhotoUpload(event) {
+            let file = event.target.files[0];
+            if (file && selectedFolderPhotoIndex !== null) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    rootFolders[selectedFolderPhotoIndex].image = e.target.result;
+                    localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+                    renderHomeGrid();
+                    alert("Admin: Folder photo/icon updated successfully!");
+                    openAdminSettings();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openAdminItemPhotoPicker(domainId, idx) {
+            selectedItemDomainId = domainId;
+            selectedItemIndex = idx;
+            document.getElementById('adminItemPhotoFile').click();
+        }
+        function handleAdminItemPhotoUpload(event) {
+            let file = event.target.files[0];
+            if (file && selectedItemDomainId !== null && selectedItemIndex !== null) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    domainFoldersData[selectedItemDomainId][selectedItemIndex].image = e.target.result;
+                    localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                    alert("Admin: Item photo updated successfully!");
+                    openAdminSettings();
                 };
                 reader.readAsDataURL(file);
             }
@@ -327,16 +384,6 @@
             }
         }
 
-        function saveConstructionWhatsApp() {
-            let inputNum = document.getElementById('adminConstructionWaInput').value.trim();
-            if (inputNum) {
-                constructionWhatsAppNumber = inputNum;
-                localStorage.setItem('oyes_construction_wa', inputNum);
-                alert("Construction WhatsApp Number updated permanently!");
-                openAdminSettings();
-            }
-        }
-
         function openAdminSettings() {
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
@@ -347,37 +394,35 @@
             
             let editHtml = `
                 <div class="card-3d p-4 rounded-2xl text-center space-y-3 border border-amber-500/60">
-                    <h4 class="text-amber-300 font-bold text-xs">Global Branding & File Manager Controls</h4>
+                    <h4 class="text-amber-300 font-bold text-xs">Admin Global Branding Controls</h4>
                     <div class="flex gap-2 justify-center flex-wrap">
-                        <button type="button" onclick="openFileManager('global_logo')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo</button>
-                        <button type="button" onclick="openFileManager('global_bg')" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Global BG</button>
-                    </div>
-                </div>
-
-                <div class="card-3d p-4 rounded-2xl space-y-3 text-left border border-emerald-500/60">
-                    <h4 class="text-emerald-300 font-bold text-xs">📞 Folder 3 WhatsApp Number Configuration:</h4>
-                    <p class="text-[10px] text-slate-300">Set the WhatsApp number for all items inside Folder 3 (Construction Hub):</p>
-                    <div class="flex gap-2">
-                        <input type="text" id="adminConstructionWaInput" value="${constructionWhatsAppNumber}" placeholder="e.g. 919447276504" class="flex-grow bg-slate-950 text-emerald-300 p-2 rounded border border-emerald-700 text-xs font-bold">
-                        <button type="button" onclick="saveConstructionWhatsApp()" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold shadow">Save Number</button>
+                        <button type="button" onclick="openAdminLogoPicker()" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Logo</button>
+                        <button type="button" onclick="openAdminBgPicker()" class="bg-indigo-600 text-white font-bold text-[10px] px-3 py-2 rounded-xl shadow">🖼️ Change Global BG</button>
                     </div>
                 </div>
 
                 <div class="card-3d p-4 rounded-2xl space-y-3 text-left">
-                    <h4 class="text-cyan-300 font-bold text-xs">Manage Folders, Icons & Folder Backgrounds:</h4>
+                    <h4 class="text-cyan-300 font-bold text-xs">Manage Folders, Photos, WhatsApp & Backgrounds:</h4>
             `;
 
             rootFolders.forEach((folder, idx) => {
+                let folderImgPrev = folder.image ? `<img src="${folder.image}" class="w-8 h-8 object-cover rounded">` : `<span class="text-[10px] text-slate-500">No Img</span>`;
                 editHtml += `
                     <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-700 space-y-2 text-[11px]">
                         <div class="flex gap-2 items-center">
+                            ${folderImgPrev}
                             <input type="text" id="root_icon_${idx}" value="${folder.icon}" class="w-10 bg-slate-900 text-center text-amber-300 p-1.5 rounded border border-slate-700 text-xs">
                             <input type="text" id="root_name_${idx}" value="${folder.name}" class="flex-grow bg-slate-900 text-slate-200 p-1.5 rounded border border-slate-700 text-xs font-bold">
                         </div>
                         <input type="text" id="root_slogan_${idx}" value="${folder.slogan}" class="w-full bg-slate-900 text-slate-300 p-1 rounded border border-slate-700 text-[10px]">
-                        <div class="flex gap-2 pt-1">
+                        <div class="flex gap-2 items-center">
+                            <span class="text-[10px] text-amber-300 font-semibold">WhatsApp No:</span>
+                            <input type="text" id="root_wa_${idx}" value="${folder.waNumber || '919947198248'}" class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                        </div>
+                        <div class="flex gap-2 pt-1 flex-wrap">
                             <button type="button" onclick="updateRootFolder(${idx})" class="bg-emerald-600 text-white px-3 py-1 rounded text-[10px] font-bold">Save Details</button>
-                            <button type="button" onclick="openFileManager('folder_bg', ${idx})" class="bg-purple-600 text-white px-3 py-1 rounded text-[10px] font-bold">🖼️ Change Folder BG</button>
+                            <button type="button" onclick="openAdminFolderPhotoPicker(${idx})" class="bg-indigo-600 text-white px-3 py-1 rounded text-[10px] font-bold">📷 Folder Photo</button>
+                            <button type="button" onclick="openAdminFolderBgPicker(${idx})" class="bg-purple-600 text-white px-3 py-1 rounded text-[10px] font-bold">🖼️ Folder BG</button>
                         </div>
                     </div>
                 `;
@@ -390,10 +435,13 @@
                 editHtml += `<div class="card-3d p-3 rounded-2xl space-y-2 text-left"><h4 class="text-amber-300 font-bold text-xs">Sub-Items under "${rootName}":</h4>`;
                 for (let idx = 0; idx < items.length; idx++) {
                     let item = items[idx];
+                    let imgPreview = item.image ? `<img src="${item.image}" class="w-8 h-8 object-cover rounded">` : `<span class="text-[10px] text-slate-500">No Img</span>`;
                     editHtml += `
                         <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 flex gap-2 items-center text-[11px]">
-                            <input type="text" id="sub_icon_${dId}_${idx}" value="${item.icon}" class="w-8 bg-slate-900 text-center p-1 rounded border border-slate-700 text-xs">
+                            ${imgPreview}
+                            <input type="text" id="sub_icon_${dId}_${idx}" value="${item.icon}" class="w-7 bg-slate-900 text-center p-1 rounded border border-slate-700 text-xs">
                             <input type="text" id="sub_name_${dId}_${idx}" value="${item.name}" class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                            <button type="button" onclick="openAdminItemPhotoPicker(${dId}, ${idx})" class="bg-indigo-600 text-white px-2 py-1 rounded text-[10px]">📷 Photo</button>
                             <button type="button" onclick="updateSubItemName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
                             <button type="button" onclick="deleteSubItem(${dId}, ${idx})" class="bg-rose-700 text-white px-2 py-1 rounded text-[10px]">Delete</button>
                         </div>
@@ -414,10 +462,12 @@
             let newIcon = document.getElementById(`root_icon_${index}`).value.trim();
             let newName = document.getElementById(`root_name_${index}`).value.trim();
             let newSlogan = document.getElementById(`root_slogan_${index}`).value.trim();
+            let newWa = document.getElementById(`root_wa_${index}`).value.trim();
             if (newName) {
                 rootFolders[index].icon = newIcon || "📁";
                 rootFolders[index].name = newName;
                 rootFolders[index].slogan = newSlogan;
+                rootFolders[index].waNumber = newWa || "919947198248";
                 localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
                 renderHomeGrid();
                 alert("Root folder updated permanently!");
@@ -454,7 +504,9 @@
                 domainFoldersData[domainId].push({
                     name: name,
                     icon: "📁",
-                    desc: "Custom created sub-folder item."
+                    desc: "Custom created sub-folder item.",
+                    link: "",
+                    image: ""
                 });
                 localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
                 inputField.value = "";
@@ -476,25 +528,24 @@
             grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
             let items = domainFoldersData[domainId] || [];
+            let folderWaNumber = rootObj?.waNumber || "919947198248";
 
             document.getElementById('pageTitle').innerText = rootObj ? rootObj.name : ("Folder #" + domainId);
 
             for (let i = 0; i < items.length; i++) {
                 let f = items[i];
-                let linkUrl = f.link || "";
-                if (!linkUrl) {
-                    let activeNum = (domainId == 3) ? constructionWhatsAppNumber : "919947198248";
-                    linkUrl = `https://wa.me/${activeNum}?text=` + encodeURIComponent("Inquiry about " + f.name);
-                }
+                let displayIconOrImg = f.image ? `<img src="${f.image}" class="w-12 h-12 mx-auto object-cover rounded-xl border border-amber-500/50 shadow">` : `<span class="text-3xl block">${f.icon}</span>`;
+                
+                let destinationLink = f.link ? f.link : `https://wa.me/${folderWaNumber}?text=` + encodeURIComponent("Inquiry about " + f.name);
 
                 html += `
                     <div class="card-3d p-3.5 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
-                        <div class="space-y-1.5 mt-2">
-                            <span class="text-2xl block">${f.icon}</span>
+                        <div class="space-y-1.5 mt-1">
+                            ${displayIconOrImg}
                             <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${f.name}</h3>
                             <p class="text-[10px] text-slate-300">${f.desc}</p>
                         </div>
-                        <a href="${linkUrl}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                        <a href="${destinationLink}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
                     </div>
                 `;
             }
@@ -503,7 +554,7 @@
         }
 
         function goBackHome() {
-            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
             loadPersistentCustomizations();
         }
