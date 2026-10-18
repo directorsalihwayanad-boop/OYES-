@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Dynamic Pro Admin Edition</title>
+    <title>OYES GLOBAL HUB - Full Control Pro Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -41,7 +41,7 @@
                     <img id="headerLogoImg" src="file_00000000b9608211988d7905e24d9dd0.png" class="w-full h-full object-cover rounded-full" alt="OYES Logo">
                 </div>
                 <div>
-                    <h1 id="headerTitleText" class="text-xs font-black tracking-widest text-amber-400 flex items-center gap-1">
+                    <h1 class="text-xs font-black tracking-widest text-amber-400 flex items-center gap-1">
                         OYES HUB <span class="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-full border border-amber-500/40">✓ Pro</span>
                     </h1>
                     <p class="text-[8px] text-slate-400">Global Business Portal</p>
@@ -53,25 +53,22 @@
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
                 </select>
-                <button type="button" onclick="openAdminPanel()" class="bg-amber-950/90 text-amber-300 text-[10px] font-bold border border-amber-500/60 rounded-lg px-2.5 py-1.5 shadow">⚙️ Admin</button>
+                <button type="button" onclick="promptAdminLogin()" class="bg-amber-950/90 text-amber-300 text-[10px] font-bold border border-amber-500/60 rounded-lg px-2.5 py-1.5 shadow">⚙️ Admin</button>
             </div>
         </div>
     </header>
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Professional Banner Card -->
         <div class="card-3d rounded-3xl text-center overflow-hidden border border-amber-500/50 shadow-2xl relative">
             <img id="mainBannerImg" src="file_00000000be808211a0242b24b3b69384.png" class="w-full h-auto object-cover" alt="OYES Banner Tagline">
         </div>
 
-        <!-- Search Bar -->
         <div class="relative">
             <input type="text" placeholder="Search anything on OYES..." class="w-full bg-slate-900/90 text-slate-200 text-xs px-4 py-3 pl-10 rounded-2xl border border-slate-800 focus:outline-none focus:border-amber-500 shadow-inner">
             <span class="absolute left-3.5 top-3.5 text-slate-400 text-xs">🔍</span>
         </div>
 
-        <!-- Home Grid Folders -->
         <div id="homeGridContainer" class="grid grid-cols-2 gap-3"></div>
     </main>
 
@@ -93,47 +90,48 @@
         <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
     </div>
 
-    <!-- Complete File Manager & Admin Dashboard View -->
+    <!-- Full File Manager & Admin Dashboard View -->
     <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
             <h3 class="text-xs font-bold text-amber-300">🗂️ OYES File Manager & Admin</h3>
         </div>
 
-        <!-- Global Assets Settings -->
+        <!-- Global Assets & Logo Manager -->
         <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">🖼️ Global Branding & Backgrounds</h4>
+            <h4 class="text-xs font-bold text-amber-300">🖼️ Logo & Background Manager</h4>
             <div class="space-y-2">
-                <label class="block text-[10px] text-slate-400">Main Banner Image URL / File Name</label>
-                <input type="text" id="adminBannerInput" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                
-                <label class="block text-[10px] text-slate-400">App Background Image URL / File Name</label>
-                <input type="text" id="adminAppBgInput" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                
-                <label class="block text-[10px] text-slate-400">Logo Image URL / File Name</label>
+                <label class="block text-[10px] text-slate-400">Logo Image File / URL</label>
                 <input type="text" id="adminLogoInput" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
                 
-                <button type="button" onclick="saveGlobalSettings()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2 rounded-xl shadow mt-2">Save Global Assets</button>
+                <label class="block text-[10px] text-slate-400">Main Banner Image File / URL</label>
+                <input type="text" id="adminBannerInput" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                
+                <label class="block text-[10px] text-slate-400">App Background Image File / URL</label>
+                <input type="text" id="adminAppBgInput" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                
+                <button type="button" onclick="saveGlobalAssets()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2 rounded-xl shadow mt-2">💾 Save Logo & Backgrounds</button>
             </div>
         </div>
 
-        <!-- Folders File Manager & Creator -->
+        <!-- Folders File Manager (Add/Delete & Edit Backgrounds) -->
         <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📁 Folders File Manager (Add / Delete)</h4>
+            <h4 class="text-xs font-bold text-amber-300">📁 Folder & File Manager</h4>
             <div class="space-y-2">
-                <input type="text" id="newFolderName" placeholder="Folder Name (e.g. Real Estate)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                <input type="text" id="newFolderName" placeholder="New Folder Name (e.g. Real Estate)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
                 <input type="text" id="newFolderSlogan" placeholder="Folder Slogan / Subtitle" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                <input type="text" id="newFolderImg" placeholder="Folder Image File Name" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                <input type="text" id="newFolderImg" placeholder="Folder Thumbnail Image File" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                <input type="text" id="newFolderBg" placeholder="Folder Specific Background Image File" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
                 <button type="button" onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 rounded-xl shadow">➕ Create New Folder</button>
             </div>
             
             <div class="mt-4 pt-3 border-t border-slate-800">
-                <h5 class="text-[11px] font-bold text-amber-300 mb-2">Existing Folders List:</h5>
-                <div id="adminFoldersList" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs"></div>
+                <h5 class="text-[11px] font-bold text-amber-300 mb-2">Manage Existing Folders:</h5>
+                <div id="adminFoldersList" class="space-y-2 max-h-52 overflow-y-auto pr-1 text-xs"></div>
             </div>
         </div>
 
-        <button type="button" onclick="resetToDefaultData()" class="w-full bg-red-950 border border-red-700 text-red-300 font-bold text-xs py-2.5 rounded-xl shadow">🔄 Reset All to Factory Default</button>
+        <button type="button" onclick="resetToDefaultData()" class="w-full bg-red-950 border border-red-700 text-red-300 font-bold text-xs py-2.5 rounded-xl shadow">🔄 Reset Everything to Default</button>
     </div>
 
     <!-- Fully Functional Bottom Navigation Bar -->
@@ -166,7 +164,7 @@
         </div>
     </nav>
 
-    <!-- JavaScript Dynamic File Manager & Admin Logic -->
+    <!-- JavaScript Complete Control Logic -->
     <script>
         const defaultRootFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people • Uniting opportunities", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
@@ -221,7 +219,6 @@
             ]
         };
 
-        // Load from LocalStorage or Defaults
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
         let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domain_data')) || defaultDomainFoldersData;
         let globalAssets = JSON.parse(localStorage.getItem('oyes_global_assets')) || {
@@ -289,7 +286,16 @@
             } else if(tab === 'entertainment' && rootFolders[5]) {
                 openDomainFolders(rootFolders[5].id);
             } else if(tab === 'more') {
+                promptAdminLogin();
+            }
+        }
+
+        function promptAdminLogin() {
+            let pass = prompt("Enter Admin Passcode (Default: oyes123):");
+            if(pass === "oyes123" || pass === "admin") {
                 openAdminPanel();
+            } else if(pass !== null) {
+                alert("Incorrect passcode!");
             }
         }
 
@@ -299,37 +305,38 @@
             document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('adminPageView').classList.remove('hidden');
 
+            document.getElementById('adminLogoInput').value = globalAssets.logo;
             document.getElementById('adminBannerInput').value = globalAssets.banner;
             document.getElementById('adminAppBgInput').value = globalAssets.bg;
-            document.getElementById('adminLogoInput').value = globalAssets.logo;
 
             renderAdminFoldersList();
         }
 
-        function saveGlobalSettings() {
+        function saveGlobalAssets() {
+            globalAssets.logo = document.getElementById('adminLogoInput').value.trim();
             globalAssets.banner = document.getElementById('adminBannerInput').value.trim();
             globalAssets.bg = document.getElementById('adminAppBgInput').value.trim();
-            globalAssets.logo = document.getElementById('adminLogoInput').value.trim();
 
             localStorage.setItem('oyes_global_assets', JSON.stringify(globalAssets));
             applyGlobalAssets();
-            alert("Global Assets & Backgrounds updated successfully!");
+            alert("Logo and Backgrounds updated successfully!");
         }
 
         function addNewFolder() {
             let name = document.getElementById('newFolderName').value.trim();
             let slogan = document.getElementById('newFolderSlogan').value.trim();
             let img = document.getElementById('newFolderImg').value.trim() || globalAssets.logo;
+            let bg = document.getElementById('newFolderBg').value.trim() || globalAssets.bg;
 
             if(!name) {
-                alert("Please enter a folder name!");
+                alert("Please enter folder name!");
                 return;
             }
 
             let newId = Date.now();
-            rootFolders.push({ id: newId, name: name, icon: "📁", image: img, slogan: slogan || "Global opportunity", bg: globalAssets.bg, waNumber: "919947198248" });
+            rootFolders.push({ id: newId, name: name, icon: "📁", image: img, slogan: slogan || "Global opportunity", bg: bg, waNumber: "919947198248" });
             domainFoldersData[newId] = [
-                {name: "General Sub-Item", icon: "📌", desc: "Default item description.", link: "", designs: []}
+                {name: "Sub-Item 1", icon: "📌", desc: "Description here.", link: "", designs: []}
             ];
 
             localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
@@ -338,10 +345,11 @@
             document.getElementById('newFolderName').value = "";
             document.getElementById('newFolderSlogan').value = "";
             document.getElementById('newFolderImg').value = "";
+            document.getElementById('newFolderBg').value = "";
 
             renderAdminFoldersList();
             renderHomeGrid();
-            alert("New folder created successfully!");
+            alert("Folder created successfully!");
         }
 
         function deleteFolder(id) {
@@ -363,7 +371,7 @@
             rootFolders.forEach(f => {
                 html += `
                     <div class="flex justify-between items-center bg-slate-950 p-2.5 rounded-xl border border-slate-800">
-                        <span class="text-amber-300 font-semibold truncate max-w-[200px]">${f.name}</span>
+                        <span class="text-amber-300 font-semibold truncate max-w-[180px]">${f.name}</span>
                         <button onclick="deleteFolder(${f.id})" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold">Delete</button>
                     </div>
                 `;
@@ -372,7 +380,7 @@
         }
 
         function resetToDefaultData() {
-            if(confirm("Reset everything to factory defaults?")) {
+            if(confirm("Reset all settings and folders to factory default?")) {
                 localStorage.clear();
                 location.reload();
             }
