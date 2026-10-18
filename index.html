@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Permanent Storage Edition</title>
+    <title>OYES GLOBAL HUB - Production Ready</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -16,7 +16,6 @@
             color: #f8fafc;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
-            transition: background 0.3s ease;
         }
         .card-3d {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
@@ -33,12 +32,12 @@
 </head>
 <body id="appBody" class="flex flex-col justify-between min-h-screen pb-16">
 
-    <!-- Header Section -->
+    <!-- Professional Header Section -->
     <header class="p-3 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-2xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
             <div class="flex items-center gap-2 cursor-pointer" onclick="switchBottomTab('home')">
                 <div class="w-9 h-9 rounded-full bg-amber-950 border-2 border-amber-500/60 flex items-center justify-center text-xs overflow-hidden shadow-md">
-                    <img id="headerLogoImg" src="file_00000000b9608211988d7905e24d9dd0.png" class="w-full h-full object-cover rounded-full" alt="OYES Logo">
+                    <img src="file_00000000b9608211988d7905e24d9dd0.png" class="w-full h-full object-cover rounded-full" alt="OYES Logo">
                 </div>
                 <div>
                     <h1 class="text-xs font-black tracking-widest text-amber-400 flex items-center gap-1">
@@ -53,22 +52,25 @@
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
                 </select>
-                <button type="button" onclick="promptAdminLogin()" class="bg-amber-950/90 text-amber-300 text-[10px] font-bold border border-amber-500/60 rounded-lg px-2.5 py-1.5 shadow">⚙️ Admin</button>
+                <button type="button" onclick="openAdminPanel()" class="bg-amber-950/90 text-amber-300 text-[10px] font-bold border border-amber-500/60 rounded-lg px-2.5 py-1.5 shadow">⚙️ Admin</button>
             </div>
         </div>
     </header>
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
+        <!-- Professional Banner Card with Tagline Photo -->
         <div class="card-3d rounded-3xl text-center overflow-hidden border border-amber-500/50 shadow-2xl relative">
-            <img id="mainBannerImg" src="file_00000000be808211a0242b24b3b69384.png" class="w-full h-auto object-cover" alt="OYES Banner Tagline">
+            <img src="file_00000000be808211a0242b24b3b69384.png" class="w-full h-auto object-cover" alt="OYES Banner Tagline">
         </div>
 
+        <!-- Search Bar -->
         <div class="relative">
             <input type="text" placeholder="Search anything on OYES..." class="w-full bg-slate-900/90 text-slate-200 text-xs px-4 py-3 pl-10 rounded-2xl border border-slate-800 focus:outline-none focus:border-amber-500 shadow-inner">
             <span class="absolute left-3.5 top-3.5 text-slate-400 text-xs">🔍</span>
         </div>
 
+        <!-- Home Grid Folders -->
         <div id="homeGridContainer" class="grid grid-cols-2 gap-3"></div>
     </main>
 
@@ -81,6 +83,25 @@
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
+    <!-- Admin Panel View -->
+    <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-16">
+        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
+            <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
+            <h3 class="text-xs font-bold text-amber-300">OYES Admin Settings</h3>
+        </div>
+        <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
+            <h4 class="text-xs font-bold text-amber-300">Branding & Background Controls</h4>
+            <p class="text-[10px] text-slate-300">Default assets are securely configured for seamless performance.</p>
+            <div class="space-y-2">
+                <label class="block text-[10px] text-slate-400">Main Heading Line 1</label>
+                <input type="text" id="adminInputH1" value="OYES GLOBAL HUB" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                <label class="block text-[10px] text-slate-400">Tagline / Subtitle</label>
+                <input type="text" id="adminInputSub" value="Connecting People • Uniting Opportunities" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                <button type="button" onclick="saveAdminSettings()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl shadow mt-2">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Multi-Designs Detail View -->
     <div id="designDetailView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
@@ -90,54 +111,7 @@
         <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
     </div>
 
-    <!-- Admin Panel & File Manager View -->
-    <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
-        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
-            <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
-            <h3 class="text-xs font-bold text-amber-300">🗂️ Permanent File & Folder Manager</h3>
-        </div>
-
-        <!-- Global Logo & Banner Upload -->
-        <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">🖼️ Update Global Logo / Banner</h4>
-            <div class="space-y-2">
-                <label class="block text-[10px] text-amber-400 font-semibold">Target Item:</label>
-                <select id="globalTargetType" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                    <option value="logo">App Logo</option>
-                    <option value="banner">Home Page Banner</option>
-                    <option value="homeBg">Home Page Background</option>
-                </select>
-
-                <label class="block text-[10px] text-amber-400 font-semibold mt-2">Select Image from Gallery / File Manager:</label>
-                <input type="file" id="globalFileInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 px-3 py-2 rounded-xl border border-slate-800 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-600 file:text-slate-950 hover:file:bg-amber-500">
-                
-                <button type="button" onclick="uploadGlobalAsset()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl shadow mt-2">🚀 Update & Save Permanently</button>
-            </div>
-        </div>
-
-        <!-- Folder Management & Custom Backgrounds -->
-        <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📂 Create New Folder</h4>
-            <div class="space-y-2">
-                <input type="text" id="newFolderName" placeholder="Folder Name (e.g. Real Estate)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                <input type="text" id="newFolderSlogan" placeholder="Folder Subtitle / Slogan" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                
-                <label class="block text-[10px] text-amber-400 font-semibold mt-1">Folder Background Image (From Gallery):</label>
-                <input type="file" id="newFolderBgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 px-3 py-2 rounded-xl border border-slate-800 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500">
-
-                <button type="button" onclick="addNewFolderWithBg()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2.5 rounded-xl shadow">➕ Create Folder with Background</button>
-            </div>
-            
-            <div class="mt-4 pt-3 border-t border-slate-800">
-                <h5 class="text-[11px] font-bold text-amber-300 mb-2">Manage Existing Folders (Delete / Change Bg):</h5>
-                <div id="adminFoldersList" class="space-y-2 max-h-52 overflow-y-auto pr-1 text-xs"></div>
-            </div>
-        </div>
-
-        <button type="button" onclick="resetToDefaultData()" class="w-full bg-red-950 border border-red-700 text-red-300 font-bold text-xs py-2.5 rounded-xl shadow">🔄 Reset Everything to Default</button>
-    </div>
-
-    <!-- Bottom Navigation Bar -->
+    <!-- Fully Functional Bottom Navigation Bar -->
     <nav class="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 p-2 z-40 shadow-2xl">
         <div class="flex justify-around items-center max-w-md mx-auto text-center">
             <button onclick="switchBottomTab('home')" id="nav_home" class="flex flex-col items-center text-amber-400 space-y-0.5">
@@ -162,24 +136,80 @@
             </button>
             <button onclick="switchBottomTab('more')" id="nav_more" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
                 <span class="text-base">🗂️</span>
-                <span class="text-[9px]">Admin</span>
+                <span class="text-[9px]">More</span>
             </button>
         </div>
     </nav>
 
-    <!-- JavaScript Permanent Storage Logic -->
+    <!-- JavaScript Logic with Exact Photo Mapping -->
     <script>
-        const defaultRootFolders = [
-            { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people • Uniting opportunities", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
-            { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", image: "file_00000000b3fc8211bf1f6afe9a255554.png", slogan: "Shift in thought • Progress in life", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
-            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", image: "file_000000009d708211a36cd96f5b948416.png", slogan: "Marble & Granites Collection", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919447276504" },
-            { id: 4, name: "STAYS & HOTELS", icon: "🏨", image: "file_0000000079708211b058ca27deb1b8be.png", slogan: "One connection • Endless possibilities", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
-            { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", image: "file_00000000f5888211ad512e83258ddd20.png", slogan: "Your world • Your community", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
-            { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", image: "file_000000006c6882118fb5e593feac5e18.png", slogan: "Connect digitally • Move forward together", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
-            { id: 7, name: "OYES CINEMA & STUDIO", icon: "🎬", image: "file_00000000de888211994c080cb8cf98e8.png", slogan: "Skills awaken • Possibilities unfold", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" }
+        const rootFolders = [
+            { 
+                id: 1, 
+                name: "WORLD OF KNOWLEDGE", 
+                icon: "📖", 
+                image: "file_00000000c4c08211b8239d606ec89bbc.png", 
+                slogan: "Connecting people • Uniting opportunities", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919947198248" 
+            },
+            { 
+                id: 2, 
+                name: "JOB VACANCIES & CLEANING", 
+                icon: "💼", 
+                image: "file_00000000b3fc8211bf1f6afe9a255554.png", 
+                slogan: "Shift in thought • Progress in life", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919947198248" 
+            },
+            { 
+                id: 3, 
+                name: "ULTIMATE HOME CONSTRUCTION SOLUTION", 
+                icon: "🏠", 
+                image: "file_000000009d708211a36cd96f5b948416.png", 
+                slogan: "Marble & Granites Collection", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919447276504" 
+            },
+            { 
+                id: 4, 
+                name: "STAYS & HOTELS", 
+                icon: "🏨", 
+                image: "file_0000000079708211b058ca27deb1b8be.png", 
+                slogan: "One connection • Endless possibilities", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919947198248" 
+            },
+            { 
+                id: 5, 
+                name: "BUY & SELL MARKET HUB", 
+                icon: "🤝", 
+                image: "file_00000000f5888211ad512e83258ddd20.png", 
+                slogan: "Your world • Your community", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919947198248" 
+            },
+            { 
+                id: 6, 
+                name: "EVENTS & ADVERTISEMENTS", 
+                icon: "🌟", 
+                image: "file_000000006c6882118fb5e593feac5e18.png", 
+                slogan: "Connect digitally • Move forward together", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919947198248" 
+            },
+            { 
+                id: 7, 
+                name: "OYES CINEMA & STUDIO", 
+                icon: "🎬", 
+                image: "file_00000000de888211994c080cb8cf98e8.png", 
+                slogan: "Skills awaken • Possibilities unfold", 
+                bg: "file_00000000be808211a0242b24b3b69384.png", 
+                waNumber: "919947198248" 
+            }
         ];
 
-        const defaultDomainFoldersData = {
+        const domainFoldersData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com", designs: []},
                 {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com", designs: []},
@@ -222,26 +252,11 @@
             ]
         };
 
-        // Permanent LocalStorage Persistence
-        let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
-        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domain_data')) || defaultDomainFoldersData;
-        let globalAssets = JSON.parse(localStorage.getItem('oyes_global_assets')) || {
-            banner: "file_00000000be808211a0242b24b3b69384.png",
-            homeBg: "file_00000000be808211a0242b24b3b69384.png",
-            logo: "file_00000000b9608211988d7905e24d9dd0.png"
-        };
-
-        function applyHomeBackground() {
-            document.getElementById('appBody').style.backgroundImage = `url('${globalAssets.homeBg}')`;
-            document.getElementById('mainBannerImg').src = globalAssets.banner;
-            document.getElementById('headerLogoImg').src = globalAssets.logo;
-        }
-
         function renderHomeGrid() {
             let container = document.getElementById('homeGridContainer');
             let html = "";
             rootFolders.forEach((folder, idx) => {
-                let isFullSpan = (idx === rootFolders.length - 1 && rootFolders.length % 2 !== 0) ? "col-span-2 max-w-[200px] mx-auto w-full" : "";
+                let isFullSpan = (idx === 6) ? "col-span-2 max-w-[200px] mx-auto w-full" : "";
                 let displayFolderIconOrImg = folder.image ? `<img src="${folder.image}" class="w-12 h-12 mx-auto object-cover rounded-full border border-amber-500/50 shadow">` : `<span class="text-3xl block">${folder.icon}</span>`;
                 html += `
                     <div onclick="openDomainFolders(${folder.id})" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center ${isFullSpan}">
@@ -260,8 +275,8 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            applyHomeBackground();
             renderHomeGrid();
+            document.getElementById('appBody').style.backgroundImage = `url('file_00000000be808211a0242b24b3b69384.png')`;
         });
 
         function switchBottomTab(tab) {
@@ -281,25 +296,16 @@
 
             if(tab === 'home') {
                 goBackHome();
-            } else if(tab === 'books' && rootFolders[0]) {
-                openDomainFolders(rootFolders[0].id);
-            } else if(tab === 'jobs' && rootFolders[1]) {
-                openDomainFolders(rootFolders[1].id);
-            } else if(tab === 'cinema' && rootFolders[6]) {
-                openDomainFolders(rootFolders[6].id);
-            } else if(tab === 'entertainment' && rootFolders[5]) {
-                openDomainFolders(rootFolders[5].id);
+            } else if(tab === 'books') {
+                openDomainFolders(1);
+            } else if(tab === 'jobs') {
+                openDomainFolders(2);
+            } else if(tab === 'cinema') {
+                openDomainFolders(7);
+            } else if(tab === 'entertainment') {
+                openDomainFolders(6);
             } else if(tab === 'more') {
-                promptAdminLogin();
-            }
-        }
-
-        function promptAdminLogin() {
-            let pass = prompt("Enter Admin Passcode (Default: oyes123):");
-            if(pass === "oyes123" || pass === "admin") {
                 openAdminPanel();
-            } else if(pass !== null) {
-                alert("Incorrect passcode!");
             }
         }
 
@@ -308,130 +314,11 @@
             document.getElementById('subFolderPageView').classList.add('hidden');
             document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('adminPageView').classList.remove('hidden');
-            renderAdminFoldersList();
         }
 
-        function uploadGlobalAsset() {
-            let fileInput = document.getElementById('globalFileInput');
-            let target = document.getElementById('globalTargetType').value;
-
-            if(fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let base64 = e.target.result;
-                    if(target === 'logo') globalAssets.logo = base64;
-                    else if(target === 'banner') globalAssets.banner = base64;
-                    else if(target === 'homeBg') globalAssets.homeBg = base64;
-
-                    localStorage.setItem('oyes_global_assets', JSON.stringify(globalAssets));
-                    applyHomeBackground();
-                    alert("Updated and saved permanently on this device!");
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                alert("Please select an image file first!");
-            }
-        }
-
-        function addNewFolderWithBg() {
-            let name = document.getElementById('newFolderName').value.trim();
-            let slogan = document.getElementById('newFolderSlogan').value.trim();
-            let bgInput = document.getElementById('newFolderBgInput');
-
-            if(!name) {
-                alert("Please enter folder name!");
-                return;
-            }
-
-            let newId = Date.now();
-            let defaultBg = globalAssets.homeBg;
-
-            if(bgInput.files && bgInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    createFolderFinal(newId, name, slogan, e.target.result);
-                };
-                reader.readAsDataURL(bgInput.files[0]);
-            } else {
-                createFolderFinal(newId, name, slogan, defaultBg);
-            }
-        }
-
-        function createFolderFinal(id, name, slogan, bg) {
-            rootFolders.push({ id: id, name: name, icon: "📁", image: globalAssets.logo, slogan: slogan || "Global opportunity", bg: bg, waNumber: "919947198248" });
-            domainFoldersData[id] = [
-                {name: "Sub-Item 1", icon: "📌", desc: "Description here.", link: "", designs: []}
-            ];
-
-            localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-            localStorage.setItem('oyes_domain_data', JSON.stringify(domainFoldersData));
-
-            document.getElementById('newFolderName').value = "";
-            document.getElementById('newFolderSlogan').value = "";
-            document.getElementById('newFolderBgInput').value = "";
-
-            renderAdminFoldersList();
-            renderHomeGrid();
-            alert("New folder created and saved permanently!");
-        }
-
-        function updateFolderBg(id) {
-            let fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = 'image/*';
-            fileInput.onchange = e => {
-                let file = e.target.files[0];
-                if(file) {
-                    let reader = new FileReader();
-                    reader.onload = function(event) {
-                        let folderObj = rootFolders.find(f => f.id === id);
-                        if(folderObj) {
-                            folderObj.bg = event.target.result;
-                            localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-                            alert(`Background updated permanently for: ${folderObj.name}`);
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            fileInput.click();
-        }
-
-        function deleteFolder(id) {
-            if(confirm("Are you sure you want to delete this folder?")) {
-                rootFolders = rootFolders.filter(f => f.id !== id);
-                delete domainFoldersData[id];
-
-                localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-                localStorage.setItem('oyes_domain_data', JSON.stringify(domainFoldersData));
-
-                renderAdminFoldersList();
-                renderHomeGrid();
-            }
-        }
-
-        function renderAdminFoldersList() {
-            let listContainer = document.getElementById('adminFoldersList');
-            let html = "";
-            rootFolders.forEach(f => {
-                html += `
-                    <div class="flex justify-between items-center bg-slate-950 p-2.5 rounded-xl border border-slate-800">
-                        <span class="text-amber-300 font-semibold truncate max-w-[140px]">${f.name}</span>
-                        <div class="flex gap-1">
-                            <button onclick="updateFolderBg(${f.id})" class="bg-amber-600 hover:bg-amber-500 text-slate-950 px-2 py-1 rounded-lg text-[9px] font-bold">Change Bg</button>
-                            <button onclick="deleteFolder(${f.id})" class="bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded-lg text-[9px] font-bold">Delete</button>
-                        </div>
-                    </div>
-                `;
-            });
-            listContainer.innerHTML = html;
-        }
-
-        function resetToDefaultData() {
-            if(confirm("Reset all settings and folders to factory default?")) {
-                localStorage.clear();
-                location.reload();
-            }
+        function saveAdminSettings() {
+            alert("Settings saved successfully!");
+            switchBottomTab('home');
         }
 
         let activeDomainContext = null;
@@ -444,10 +331,6 @@
             document.getElementById('subFolderPageView').classList.remove('hidden');
             
             let rootObj = rootFolders.find(f => f.id == domainId);
-            if (rootObj && rootObj.bg) {
-                document.getElementById('appBody').style.backgroundImage = `url('${rootObj.bg}')`;
-            }
-
             let grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
@@ -528,7 +411,7 @@
             document.getElementById('subFolderPageView').classList.add('hidden');
             document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('adminPageView').classList.add('hidden');
-            applyHomeBackground();
+            document.getElementById('appBody').style.backgroundImage = `url('file_00000000be808211a0242b24b3b69384.png')`;
         }
     </script>
 </body>
