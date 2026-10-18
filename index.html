@@ -1,16 +1,16 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES APP - Multi-Language Global Hub</title>
+    <title>OYES GLOBAL HUB - Full Pro Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             -webkit-user-select: none;
             user-select: none;
-            background: radial-gradient(circle at top, #1e1b4b, #0f172a, #020617);
+            background: radial-gradient(circle at top, #0f172a, #020617, #000000);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -19,7 +19,7 @@
             min-height: 100vh;
         }
         .card-3d {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
             backdrop-filter: blur(16px);
             border: 1px solid rgba(245, 158, 11, 0.35);
             box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2);
@@ -27,41 +27,46 @@
         }
         .card-3d:hover {
             border-color: rgba(245, 158, 11, 0.7);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
     </style>
 </head>
-<body id="appBody" class="flex flex-col justify-between min-h-screen">
+<body id="appBody" class="flex flex-col justify-between min-h-screen pb-16">
 
-    <!-- Header Section -->
-    <header class="p-2.5 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-xl">
+    <!-- Professional Header Section -->
+    <header class="p-3 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-2xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
-            <div class="flex items-center gap-1.5 cursor-pointer" onclick="goBackHome()">
-                <div class="w-8 h-8 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-xs overflow-hidden" id="headerLogoContainer">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="switchBottomTab('home')">
+                <div class="w-9 h-9 rounded-full bg-amber-950 border-2 border-amber-500/60 flex items-center justify-center text-xs overflow-hidden shadow-md" id="headerLogoContainer">
                     <span id="headerLogoIcon">🦅</span>
                 </div>
-                <h1 id="headerMainTitle" class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
+                <div>
+                    <h1 class="text-xs font-black tracking-widest text-amber-400 flex items-center gap-1">
+                        OYES HUB <span class="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-full border border-amber-500/40">✓ Pro</span>
+                    </h1>
+                    <p class="text-[8px] text-slate-400">Global Business Portal</p>
+                </div>
             </div>
             
-            <div class="flex items-center gap-1">
-                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
+            <div class="flex items-center gap-1.5">
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-2 py-1.5 focus:outline-none shadow">
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
                 </select>
-                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow" title="Admin Panel">⚙️ Admin</button>
+                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/90 text-amber-300 text-[10px] font-bold border border-amber-500/60 rounded-lg px-2.5 py-1.5 shadow hover:bg-amber-900" title="Admin Panel">⚙️ Admin</button>
             </div>
         </div>
     </header>
 
-    <!-- Admin Hidden File Managers (Strictly Admin Only) -->
+    <!-- Admin Hidden File Managers -->
     <input type="file" id="adminLogoFile" class="hidden" accept="image/*" onchange="handleAdminLogoUpload(event)">
     <input type="file" id="adminBgFile" class="hidden" accept="image/*" onchange="handleAdminBgUpload(event)">
     <input type="file" id="adminFolderBgFile" class="hidden" accept="image/*" onchange="handleAdminFolderBgUpload(event)">
     <input type="file" id="adminFolderPhotoFile" class="hidden" accept="image/*" onchange="handleAdminFolderPhotoUpload(event)">
-    <input type="file" id="adminItemPhotoFile" class="hidden" accept="image/*" onchange="handleAdminItemPhotoUpload(event)">
+    <input type="file" id="adminSubDesignPhotoFile" class="hidden" accept="image/*" onchange="handleAdminSubDesignPhotoUpload(event)">
 
-    <!-- Admin Login Modal (Secret Code: salih9947) -->
-    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-amber-500/60 p-6 rounded-3xl max-w-xs w-full shadow-2xl space-y-4">
             <div class="text-center space-y-1">
                 <h3 class="text-sm font-bold text-amber-300">Admin Security Control</h3>
@@ -76,7 +81,7 @@
     </div>
 
     <!-- AI Chat Assistant Modal -->
-    <div id="aiModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div id="aiModal" class="hidden fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-emerald-500/60 p-5 rounded-3xl max-w-sm w-full shadow-2xl space-y-3">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                 <h3 id="aiModalTitle" class="text-xs font-bold text-emerald-400">🤖 OYES AI Assistant</h3>
@@ -94,52 +99,98 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
-            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
+        <!-- Professional Banner Card -->
+        <div class="card-3d p-5 rounded-3xl text-center space-y-3 border border-amber-500/50 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
+            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/70 flex items-center justify-center text-3xl overflow-hidden shadow-xl" id="bannerLogoContainer">
                 <span id="bannerLogoIcon">🌍🦅</span>
             </div>
-            <div>
-                <h2 id="bannerAppTitle" class="text-xl font-black tracking-widest text-amber-400">OYES GLOBAL HUB</h2>
-                <p id="bannerSubtitle" class="text-[11px] text-amber-200 font-semibold tracking-wider mt-0.5">Embracing Change • Creating the Future</p>
+            <div class="space-y-1">
+                <h2 id="bannerAppTitle" class="text-lg font-black tracking-widest text-amber-400 uppercase">OYES GLOBAL HUB</h2>
+                <p id="bannerSubtitle" class="text-[11px] text-amber-200/90 font-medium tracking-wider">Embracing Change • Creating the Future</p>
+                <div class="pt-1 flex justify-center items-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-[9px] text-emerald-400 font-semibold tracking-wide uppercase">Official Verified Hub</span>
+                </div>
             </div>
         </div>
 
+        <!-- Search Bar -->
+        <div class="relative">
+            <input type="text" placeholder="Search anything on OYES..." class="w-full bg-slate-900/90 text-slate-200 text-xs px-4 py-3 pl-10 rounded-2xl border border-slate-800 focus:outline-none focus:border-amber-500 shadow-inner">
+            <span class="absolute left-3.5 top-3.5 text-slate-400 text-xs">🔍</span>
+        </div>
+
+        <!-- Home Grid Folders -->
         <div id="homeGridContainer" class="grid grid-cols-2 gap-3"></div>
     </main>
 
-    <!-- Sub-Folders & Admin Settings View -->
+    <!-- Sub-Folders View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
-            <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
+            <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
             <h3 id="pageTitle" class="text-xs font-bold text-amber-300 text-right">Sub Page</h3>
         </div>
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800 bg-slate-950/90 space-y-2">
-        <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
-    </footer>
+    <!-- Multi-Designs Detail View -->
+    <div id="designDetailView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
+        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
+            <button type="button" onclick="goBackToSubFolders()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
+            <h3 id="designPageTitle" class="text-xs font-bold text-amber-300 text-right">Designs</h3>
+        </div>
+        <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
+    </div>
+
+    <!-- Fully Functional Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 p-2 z-40 shadow-2xl">
+        <div class="flex justify-around items-center max-w-md mx-auto text-center">
+            <button onclick="switchBottomTab('home')" id="nav_home" class="flex flex-col items-center text-amber-400 space-y-0.5">
+                <span class="text-base">🏠</span>
+                <span class="text-[9px] font-bold">Home</span>
+            </button>
+            <button onclick="switchBottomTab('books')" id="nav_books" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
+                <span class="text-base">📖</span>
+                <span class="text-[9px]">Books</span>
+            </button>
+            <button onclick="switchBottomTab('jobs')" id="nav_jobs" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
+                <span class="text-base">💼</span>
+                <span class="text-[9px]">Jobs</span>
+            </button>
+            <button onclick="switchBottomTab('cinema')" id="nav_cinema" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
+                <span class="text-base">🎬</span>
+                <span class="text-[9px]">Cinema</span>
+            </button>
+            <button onclick="switchBottomTab('entertainment')" id="nav_entertainment" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
+                <span class="text-base">👥</span>
+                <span class="text-[9px]">Events</span>
+            </button>
+            <button onclick="switchBottomTab('more')" id="nav_more" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
+                <span class="text-base">🗂️</span>
+                <span class="text-[9px]">More</span>
+            </button>
+        </div>
+    </nav>
 
     <!-- JavaScript Logic -->
     <script>
         const translations = {
-            en: { bannerTitle: "OYES GLOBAL HUB", subtitle: "Embracing Change • Creating the Future", footer: "Change from within • The future through us" },
-            ml: { bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്", subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്", footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ" }
+            en: { bannerTitle: "OYES GLOBAL HUB", subtitle: "Embracing Change • Creating the Future" },
+            ml: { bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്", subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്" }
         };
 
         function changeLanguage(lang) {
             let t = translations[lang] || translations['en'];
             document.getElementById('bannerAppTitle').innerText = t.bannerTitle;
             document.getElementById('bannerSubtitle').innerText = t.subtitle;
-            document.getElementById('footerText').innerText = t.footer;
             localStorage.setItem('oyes_lang', lang);
         }
 
         const defaultRootFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", image: "", slogan: "Connecting people • Uniting opportunities", bg: "", waNumber: "919947198248" },
             { id: 2, name: "JOB VACANCIES & CLEANING", icon: "💼", image: "", slogan: "Shift in thought • Progress in life", bg: "", waNumber: "919947198248" },
-            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", image: "", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers", bg: "", waNumber: "919447276504" },
+            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", icon: "🏠", image: "", slogan: "Marble & Granites Collection", bg: "", waNumber: "919447276504" },
             { id: 4, name: "STAYS & HOTELS", icon: "🏨", image: "", slogan: "One connection • Endless possibilities", bg: "", waNumber: "919947198248" },
             { id: 5, name: "BUY & SELL MARKET HUB", icon: "🤝", image: "", slogan: "Your world • Your community", bg: "", waNumber: "919947198248" },
             { id: 6, name: "EVENTS & ADVERTISEMENTS", icon: "🌟", image: "", slogan: "Connect digitally • Move forward together", bg: "", waNumber: "919947198248" },
@@ -150,53 +201,44 @@
 
         const perfectDomainData = {
             1: [
-                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com", image: ""},
-                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com", image: ""},
-                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org", image: ""},
-                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org", image: ""}
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com", designs: []},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com", designs: []},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org", designs: []},
+                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org", designs: []}
             ],
             2: [
-                {name: "Job Vacancies Portal", icon: "📋", desc: "Local & government job updates, Kerala PSC notifications.", link: "https://keralapsc.gov.in", image: ""},
-                {name: "House Deep Cleaning Services", icon: "🧹", desc: "Professional deep cleaning services for homes & offices.", link: "", image: ""},
-                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and overhead water tank cleaning services.", link: "", image: ""}
+                {name: "Job Vacancies Portal", icon: "📋", desc: "Local & government job updates, Kerala PSC notifications.", link: "https://keralapsc.gov.in", designs: []},
+                {name: "House Deep Cleaning Services", icon: "🧹", desc: "Professional deep cleaning services for homes & offices.", link: "", designs: []},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and overhead water tank cleaning services.", link: "", designs: []}
             ],
             3: [
-                {name: "Statuario Italian Marble", icon: "🇮🇹", desc: "Premium Statuario white imported Italian marble with grey striking veins.", link: "", image: ""},
-                {name: "Botticino Classic Marble", icon: "🇮🇹", desc: "Beige colored Italian marble ideal for luxury floorings and halls.", link: "", image: ""},
-                {name: "Dyna & Travertine Marble", icon: "🇮🇹", desc: "Rich textured Dyna and natural Travertine Italian marbles.", link: "", image: ""},
-                {name: "Makrana White Indian Marble", icon: "🇮🇳", desc: "World-famous pure white Makrana marble from Rajasthan.", link: "", image: ""},
-                {name: "Banswara & Ambaji Marble", icon: "🇮🇳", desc: "Purple, pink and white Indian marble varieties.", link: "", image: ""},
-                {name: "Natural Green & Brown Kota Stone", icon: "🟩", desc: "Durable green and brown Kota stones for paving and parking.", link: "", image: ""},
-                {name: "Black Galaxy & Tan Brown Granite", icon: "🪨", desc: "High-grade kitchen countertops and flooring granites.", link: "", image: ""},
-                {name: "Laterite Building Stone (വെട്ടുകല്ല്)", icon: "🧱", desc: "High quality local laterite stones for wall construction.", link: "", image: ""},
-                {name: "Rough & Fine Granite Stones (കരിങ്കല്ല്)", icon: "🗿", desc: "Foundation and compound building black stones.", link: "", image: ""},
-                {name: "Raw Boulders (ബോളർ കല്ലുകൾ)", icon: "⛰️", desc: "Large raw stones for retaining walls and landscaping.", link: "", image: ""},
-                {name: "Metal Aggregates (മെറ്റൽ 20mm/40mm)", icon: "⚙️", desc: "Crushed blue metal aggregates for concrete casting.", link: "", image: ""},
-                {name: "Vitrified & Elevation Tiles", icon: "🏛️", desc: "Ceramic floor tiles and 3D outdoor wall cladding stones.", link: "", image: ""},
-                {name: "Home Appliances & Electronics", icon: "🌀", desc: "ACs, Refrigerators, Washing machines, TVs and Geysers.", link: "", image: ""},
-                {name: "Luxury Furniture (Sofas & Beds)", icon: "🛋️", desc: "Designer wooden beds, luxury sofas and dining tables.", link: "", image: ""},
-                {name: "Kitchenware (Stove to Spoons)", icon: "🥄", desc: "Complete kitchen set items from spoons and cookwares to stoves.", link: "", image: ""},
-                {name: "Electrical, Plumbing & Hardware", icon: "💡", desc: "Wires, switches, LED lights, PVC pipes, taps, paints and putty.", link: "", image: ""},
-                {name: "Construction Masons & Labours", icon: "👷", desc: "Expert stone masons, tile fixers, plumbers and electricians.", link: "", image: ""}
+                {
+                    name: "Marble & Granites", icon: "🏛️", desc: "Premium Italian and Indian marbles, black galaxy and tan brown granites.", link: "",
+                    designs: [
+                        {title: "Design 01 - Statuario Italian Marble", image: "", desc: "Premium white imported Italian marble with grey striking veins."},
+                        {title: "Design 02 - Botticino Classic Marble", image: "", desc: "Beige colored Italian marble ideal for luxury floorings."},
+                        {title: "Design 03 - Black Galaxy Granite", image: "", desc: "High-grade kitchen countertops and flooring granites."}
+                    ]
+                }
             ],
             4: [
-                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com", image: ""},
-                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com", image: ""},
-                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com", image: ""}
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com", designs: []},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com", designs: []},
+                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com", designs: []}
             ],
             5: [
-                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "", image: ""},
-                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "", image: ""},
-                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "", image: ""}
+                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "", designs: []},
+                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "", designs: []},
+                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "", designs: []}
             ],
             6: [
-                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "", image: ""},
-                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "", image: ""}
+                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "", designs: []},
+                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "", designs: []}
             ],
             7: [
-                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com", image: ""},
-                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com", image: ""},
-                {name: "Short Films & Cinema Hub", icon: "🎥", desc: "Watch short films, movies and cinema productions.", link: "https://www.youtube.com", image: ""}
+                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com", designs: []},
+                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com", designs: []},
+                {name: "Short Films & Cinema Hub", icon: "🎥", desc: "Watch short films, movies and cinema productions.", link: "https://www.youtube.com", designs: []}
             ]
         };
 
@@ -215,9 +257,9 @@
                             <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${folder.name}</h3>
                             <p class="text-[9px] text-slate-300">${folder.slogan}</p>
                         </div>
-                        <div class="flex gap-1 mt-3">
-                            <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                            <span onclick="event.stopPropagation(); openAIModal('${folder.name}')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow" title="AI Assistant">🤖 AI</span>
+                        <div class="flex gap-1.5 mt-3">
+                            <span class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-2 py-1.5 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                            <span onclick="event.stopPropagation(); openAIModal('${folder.name}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1.5 rounded-xl text-[10px] shadow flex items-center justify-center gap-0.5" title="AI Assistant">🤖 AI</span>
                         </div>
                     </div>
                 `;
@@ -242,6 +284,37 @@
             let savedBg = localStorage.getItem('oyes_custom_bg');
             if (savedBg) {
                 document.getElementById('appBody').style.backgroundImage = `url('${savedBg}')`;
+            }
+        }
+
+        // --- Bottom Navigation Handler ---
+        function switchBottomTab(tab) {
+            ['home', 'books', 'jobs', 'cinema', 'entertainment', 'more'].forEach(t => {
+                let btn = document.getElementById(`nav_${t}`);
+                if(btn) {
+                    btn.classList.remove('text-amber-400', 'font-bold');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+
+            let activeBtn = document.getElementById(`nav_${tab}`);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-slate-400');
+                activeBtn.classList.add('text-amber-400', 'font-bold');
+            }
+
+            if(tab === 'home') {
+                goBackHome();
+            } else if(tab === 'books') {
+                openDomainFolders(1); // World of Knowledge
+            } else if(tab === 'jobs') {
+                openDomainFolders(2); // Job Vacancies
+            } else if(tab === 'cinema') {
+                openDomainFolders(7); // Cinema & Studio
+            } else if(tab === 'entertainment') {
+                openDomainFolders(6); // Events & Ads
+            } else if(tab === 'more') {
+                requestAdminAccess();
             }
         }
 
@@ -275,8 +348,9 @@
         // --- ADMIN ONLY FILE UPLOAD HANDLERS ---
         let selectedFolderBgIndex = null;
         let selectedFolderPhotoIndex = null;
-        let selectedItemDomainId = null;
-        let selectedItemIndex = null;
+        let adminDesignDomainId = null;
+        let adminDesignItemIndex = null;
+        let adminDesignSubIndex = null;
 
         function openAdminLogoPicker() { document.getElementById('adminLogoFile').click(); }
         function handleAdminLogoUpload(event) {
@@ -338,26 +412,30 @@
                     rootFolders[selectedFolderPhotoIndex].image = e.target.result;
                     localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
                     renderHomeGrid();
-                    alert("Admin: Folder photo/icon updated successfully!");
+                    alert("Admin: Folder photo updated successfully!");
                     openAdminSettings();
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        function openAdminItemPhotoPicker(domainId, idx) {
-            selectedItemDomainId = domainId;
-            selectedItemIndex = idx;
-            document.getElementById('adminItemPhotoFile').click();
+        function openAdminSubDesignPhotoPicker(domainId, itemIdx, designIdx) {
+            adminDesignDomainId = domainId;
+            adminDesignItemIndex = itemIdx;
+            adminDesignSubIndex = designIdx;
+            document.getElementById('adminSubDesignPhotoFile').click();
         }
-        function handleAdminItemPhotoUpload(event) {
+        function handleAdminSubDesignPhotoUpload(event) {
             let file = event.target.files[0];
-            if (file && selectedItemDomainId !== null && selectedItemIndex !== null) {
+            if (file && adminDesignDomainId !== null && adminDesignItemIndex !== null && adminDesignSubIndex !== null) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    domainFoldersData[selectedItemDomainId][selectedItemIndex].image = e.target.result;
+                    if(!domainFoldersData[adminDesignDomainId][adminDesignItemIndex].designs) {
+                        domainFoldersData[adminDesignDomainId][adminDesignItemIndex].designs = [];
+                    }
+                    domainFoldersData[adminDesignDomainId][adminDesignItemIndex].designs[adminDesignSubIndex].image = e.target.result;
                     localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
-                    alert("Admin: Item photo updated successfully!");
+                    alert("Admin: Design photo uploaded successfully!");
                     openAdminSettings();
                 };
                 reader.readAsDataURL(file);
@@ -386,8 +464,11 @@
 
         function openAdminSettings() {
             document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('subFolderPageView').classList.remove('hidden');
-            document.getElementById('pageTitle').innerText = "Admin Panel - Permanent Settings";
+            document.getElementById('designDetailView').classList.add('hidden');
+            
+            let subView = document.getElementById('subFolderPageView');
+            subView.classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = "Admin Panel - Full Controls";
             
             let grid = document.getElementById('pageContentGrid');
             grid.className = "grid grid-cols-1 gap-3.5 pb-6";
@@ -402,7 +483,7 @@
                 </div>
 
                 <div class="card-3d p-4 rounded-2xl space-y-3 text-left">
-                    <h4 class="text-cyan-300 font-bold text-xs">Manage Folders, Photos, WhatsApp & Backgrounds:</h4>
+                    <h4 class="text-cyan-300 font-bold text-xs">Manage Folders, WhatsApp Numbers & Photos:</h4>
             `;
 
             rootFolders.forEach((folder, idx) => {
@@ -435,15 +516,38 @@
                 editHtml += `<div class="card-3d p-3 rounded-2xl space-y-2 text-left"><h4 class="text-amber-300 font-bold text-xs">Sub-Items under "${rootName}":</h4>`;
                 for (let idx = 0; idx < items.length; idx++) {
                     let item = items[idx];
-                    let imgPreview = item.image ? `<img src="${item.image}" class="w-8 h-8 object-cover rounded">` : `<span class="text-[10px] text-slate-500">No Img</span>`;
                     editHtml += `
-                        <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 flex gap-2 items-center text-[11px]">
-                            ${imgPreview}
-                            <input type="text" id="sub_icon_${dId}_${idx}" value="${item.icon}" class="w-7 bg-slate-900 text-center p-1 rounded border border-slate-700 text-xs">
-                            <input type="text" id="sub_name_${dId}_${idx}" value="${item.name}" class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
-                            <button type="button" onclick="openAdminItemPhotoPicker(${dId}, ${idx})" class="bg-indigo-600 text-white px-2 py-1 rounded text-[10px]">📷 Photo</button>
-                            <button type="button" onclick="updateSubItemName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
-                            <button type="button" onclick="deleteSubItem(${dId}, ${idx})" class="bg-rose-700 text-white px-2 py-1 rounded text-[10px]">Delete</button>
+                        <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-700 space-y-2 text-[11px]">
+                            <div class="flex gap-2 items-center">
+                                <input type="text" id="sub_icon_${dId}_${idx}" value="${item.icon}" class="w-7 bg-slate-900 text-center p-1 rounded border border-slate-700 text-xs">
+                                <input type="text" id="sub_name_${dId}_${idx}" value="${item.name}" class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-xs font-bold">
+                                <button type="button" onclick="updateSubItemName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
+                                <button type="button" onclick="deleteSubItem(${dId}, ${idx})" class="bg-rose-700 text-white px-2 py-1 rounded text-[10px]">Delete</button>
+                            </div>
+                            <div class="border-t border-slate-800 pt-2 space-y-2">
+                                <p class="text-[10px] text-amber-400 font-bold">Design Variations / Photos:</p>
+                    `;
+                    
+                    if(item.designs && item.designs.length > 0) {
+                        item.designs.forEach((des, dIdx) => {
+                            let desImgPrev = des.image ? `<img src="${des.image}" class="w-8 h-8 object-cover rounded">` : `<span class="text-[9px] text-slate-500">No Img</span>`;
+                            editHtml += `
+                                <div class="flex gap-2 items-center bg-slate-900 p-2 rounded border border-slate-800">
+                                    ${desImgPrev}
+                                    <input type="text" id="des_title_${dId}_${idx}_${dIdx}" value="${des.title}" class="flex-grow bg-slate-950 text-slate-200 p-1 rounded border border-slate-800 text-[10px]">
+                                    <button type="button" onclick="openAdminSubDesignPhotoPicker(${dId}, ${idx}, ${dIdx})" class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px]">📷 Photo</button>
+                                    <button type="button" onclick="deleteDesign(${dId}, ${idx}, ${dIdx})" class="bg-rose-800 text-white px-2 py-1 rounded text-[9px]">✕</button>
+                                </div>
+                            `;
+                        });
+                    }
+
+                    editHtml += `
+                                <div class="flex gap-1 mt-1">
+                                    <input type="text" id="new_des_title_${dId}_${idx}" placeholder="New design name..." class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-800 text-[10px]">
+                                    <button type="button" onclick="addNewDesign(${dId}, ${idx})" class="bg-blue-600 text-white px-2 py-1 rounded text-[10px] font-bold">+ Add Design</button>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }
@@ -452,7 +556,7 @@
                         <input type="text" id="new_sub_name_${dId}" placeholder="New sub-folder name..." class="flex-grow bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
                         <button type="button" onclick="addNewSubItem(${dId})" class="bg-blue-600 text-white px-3 py-1 rounded text-[10px] font-bold">+ Add Sub-Folder</button>
                     </div>
-                `;
+                </div>`;
             }
 
             grid.innerHTML = editHtml;
@@ -506,7 +610,7 @@
                     icon: "📁",
                     desc: "Custom created sub-folder item.",
                     link: "",
-                    image: ""
+                    designs: []
                 });
                 localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
                 inputField.value = "";
@@ -515,8 +619,40 @@
             }
         }
 
+        function addNewDesign(domainId, itemIdx) {
+            let inputField = document.getElementById(`new_des_title_${domainId}_${itemIdx}`);
+            let title = inputField.value.trim();
+            if(title) {
+                if(!domainFoldersData[domainId][itemIdx].designs) {
+                    domainFoldersData[domainId][itemIdx].designs = [];
+                }
+                domainFoldersData[domainId][itemIdx].designs.push({
+                    title: title,
+                    image: "",
+                    desc: "Custom added design variety."
+                });
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                inputField.value = "";
+                alert("New design added successfully!");
+                openAdminSettings();
+            }
+        }
+
+        function deleteDesign(domainId, itemIdx, desIdx) {
+            if(confirm("Are you sure you want to delete this design?")) {
+                domainFoldersData[domainId][itemIdx].designs.splice(desIdx, 1);
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                alert("Design deleted successfully!");
+                openAdminSettings();
+            }
+        }
+
+        let activeDomainContext = null;
+
         function openDomainFolders(domainId) {
+            activeDomainContext = domainId;
             document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             
             let rootObj = rootFolders.find(f => f.id == domainId);
@@ -528,24 +664,21 @@
             grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
             let items = domainFoldersData[domainId] || [];
-            let folderWaNumber = rootObj?.waNumber || "919947198248";
 
             document.getElementById('pageTitle').innerText = rootObj ? rootObj.name : ("Folder #" + domainId);
 
             for (let i = 0; i < items.length; i++) {
                 let f = items[i];
-                let displayIconOrImg = f.image ? `<img src="${f.image}" class="w-12 h-12 mx-auto object-cover rounded-xl border border-amber-500/50 shadow">` : `<span class="text-3xl block">${f.icon}</span>`;
+                let displayIconOrImg = f.icon ? `<span class="text-3xl block">${f.icon}</span>` : `<span class="text-3xl block">📁</span>`;
                 
-                let destinationLink = f.link ? f.link : `https://wa.me/${folderWaNumber}?text=` + encodeURIComponent("Inquiry about " + f.name);
-
                 html += `
-                    <div class="card-3d p-3.5 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
+                    <div onclick="openItemDesigns(${domainId}, ${i})" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/50 text-center relative">
                         <div class="space-y-1.5 mt-1">
                             ${displayIconOrImg}
                             <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${f.name}</h3>
                             <p class="text-[10px] text-slate-300">${f.desc}</p>
                         </div>
-                        <a href="${destinationLink}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                        <span class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">View Designs ➔</span>
                     </div>
                 `;
             }
@@ -553,9 +686,59 @@
             window.scrollTo(0, 0);
         }
 
+        function openItemDesigns(domainId, itemIdx) {
+            document.getElementById('subFolderPageView').classList.add('hidden');
+            document.getElementById('designDetailView').classList.remove('hidden');
+
+            let item = domainFoldersData[domainId][itemIdx];
+            let rootObj = rootFolders.find(f => f.id == domainId);
+            let folderWaNumber = rootObj?.waNumber || "919447276504";
+
+            document.getElementById('designPageTitle').innerText = item.name;
+
+            let grid = document.getElementById('designContentGrid');
+            let html = "";
+
+            if(item.designs && item.designs.length > 0) {
+                item.designs.forEach((des) => {
+                    let desImg = des.image ? `<img src="${des.image}" class="w-full h-48 object-cover rounded-xl border border-amber-500/40 shadow mb-3">` : `<div class="w-full h-32 bg-slate-950/70 rounded-xl flex items-center justify-center text-slate-500 text-xs mb-3 border border-slate-800">No Design Photo Uploaded</div>`;
+                    let waLink = `https://wa.me/${folderWaNumber}?text=` + encodeURIComponent(`Inquiry about ${item.name} - ${des.title}`);
+
+                    html += `
+                        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
+                            ${desImg}
+                            <h4 class="font-bold text-xs text-amber-300">${des.title}</h4>
+                            <p class="text-[10px] text-slate-300">${des.desc}</p>
+                            <a href="${waLink}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl block text-center text-xs shadow mt-2">💬 Inquire via WhatsApp</a>
+                        </div>
+                    `;
+                });
+            } else {
+                let waLink = `https://wa.me/${folderWaNumber}?text=` + encodeURIComponent(`Inquiry about ${item.name}`);
+                html = `
+                    <div class="card-3d p-6 rounded-2xl text-center space-y-3">
+                        <p class="text-xs text-slate-300">No specific design photos added yet for this item.</p>
+                        <a href="${waLink}" target="_blank" class="bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded-xl block text-xs shadow">Inquire on WhatsApp ➔</a>
+                    </div>
+                `;
+            }
+
+            grid.innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
+        function goBackToSubFolders() {
+            if(activeDomainContext !== null) {
+                openDomainFolders(activeDomainContext);
+            } else {
+                goBackHome();
+            }
+        }
+
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
+            document.getElementById('designDetailView').classList.add('hidden');
             loadPersistentCustomizations();
         }
     </script>
