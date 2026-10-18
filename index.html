@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Gallery File Uploader Edition</title>
+    <title>OYES GLOBAL HUB - Permanent Storage Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -90,45 +90,47 @@
         <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
     </div>
 
-    <!-- Admin Panel & Gallery Uploader View -->
+    <!-- Admin Panel & File Manager View -->
     <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
-            <h3 class="text-xs font-bold text-amber-300">📁 Admin & Gallery Uploader</h3>
+            <h3 class="text-xs font-bold text-amber-300">🗂️ Permanent File & Folder Manager</h3>
         </div>
 
-        <!-- Direct Gallery & File Upload Panel -->
+        <!-- Global Logo & Banner Upload -->
         <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">🖼️ Upload Logo / Banner from Gallery</h4>
-            <p class="text-[10px] text-slate-300">Select an image from your phone gallery or file manager to update instantly.</p>
-            
+            <h4 class="text-xs font-bold text-amber-300">🖼️ Update Global Logo / Banner</h4>
             <div class="space-y-2">
-                <label class="block text-[10px] text-amber-400 font-semibold">Choose Target to Update:</label>
-                <select id="uploadTargetType" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+                <label class="block text-[10px] text-amber-400 font-semibold">Target Item:</label>
+                <select id="globalTargetType" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
                     <option value="logo">App Logo</option>
-                    <option value="banner">Home Banner</option>
-                    <option value="bg">App Background</option>
+                    <option value="banner">Home Page Banner</option>
+                    <option value="homeBg">Home Page Background</option>
                 </select>
 
-                <label class="block text-[10px] text-amber-400 font-semibold mt-2">Select Image File (Gallery / File Manager):</label>
-                <input type="file" id="galleryFileInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 px-3 py-2 rounded-xl border border-slate-800 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-600 file:text-slate-950 hover:file:bg-amber-500">
+                <label class="block text-[10px] text-amber-400 font-semibold mt-2">Select Image from Gallery / File Manager:</label>
+                <input type="file" id="globalFileInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 px-3 py-2 rounded-xl border border-slate-800 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-600 file:text-slate-950 hover:file:bg-amber-500">
                 
-                <button type="button" onclick="handleGalleryUpload()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl shadow mt-2">🚀 Upload & Apply Image</button>
+                <button type="button" onclick="uploadGlobalAsset()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl shadow mt-2">🚀 Update & Save Permanently</button>
             </div>
         </div>
 
-        <!-- Add / Delete Folders Section -->
+        <!-- Folder Management & Custom Backgrounds -->
         <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📂 Create / Delete Folders</h4>
+            <h4 class="text-xs font-bold text-amber-300">📂 Create New Folder</h4>
             <div class="space-y-2">
                 <input type="text" id="newFolderName" placeholder="Folder Name (e.g. Real Estate)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
                 <input type="text" id="newFolderSlogan" placeholder="Folder Subtitle / Slogan" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-                <button type="button" onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 rounded-xl shadow">➕ Create New Folder</button>
+                
+                <label class="block text-[10px] text-amber-400 font-semibold mt-1">Folder Background Image (From Gallery):</label>
+                <input type="file" id="newFolderBgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 px-3 py-2 rounded-xl border border-slate-800 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500">
+
+                <button type="button" onclick="addNewFolderWithBg()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2.5 rounded-xl shadow">➕ Create Folder with Background</button>
             </div>
             
             <div class="mt-4 pt-3 border-t border-slate-800">
-                <h5 class="text-[11px] font-bold text-amber-300 mb-2">Existing Folders List:</h5>
-                <div id="adminFoldersList" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs"></div>
+                <h5 class="text-[11px] font-bold text-amber-300 mb-2">Manage Existing Folders (Delete / Change Bg):</h5>
+                <div id="adminFoldersList" class="space-y-2 max-h-52 overflow-y-auto pr-1 text-xs"></div>
             </div>
         </div>
 
@@ -165,7 +167,7 @@
         </div>
     </nav>
 
-    <!-- JavaScript Logic with Base64 Gallery Upload Support -->
+    <!-- JavaScript Permanent Storage Logic -->
     <script>
         const defaultRootFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", icon: "📖", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people • Uniting opportunities", bg: "file_00000000be808211a0242b24b3b69384.png", waNumber: "919947198248" },
@@ -220,16 +222,17 @@
             ]
         };
 
+        // Permanent LocalStorage Persistence
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
         let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domain_data')) || defaultDomainFoldersData;
         let globalAssets = JSON.parse(localStorage.getItem('oyes_global_assets')) || {
             banner: "file_00000000be808211a0242b24b3b69384.png",
-            bg: "file_00000000be808211a0242b24b3b69384.png",
+            homeBg: "file_00000000be808211a0242b24b3b69384.png",
             logo: "file_00000000b9608211988d7905e24d9dd0.png"
         };
 
-        function applyGlobalAssets() {
-            document.getElementById('appBody').style.backgroundImage = `url('${globalAssets.bg}')`;
+        function applyHomeBackground() {
+            document.getElementById('appBody').style.backgroundImage = `url('${globalAssets.homeBg}')`;
             document.getElementById('mainBannerImg').src = globalAssets.banner;
             document.getElementById('headerLogoImg').src = globalAssets.logo;
         }
@@ -257,7 +260,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            applyGlobalAssets();
+            applyHomeBackground();
             renderHomeGrid();
         });
 
@@ -308,26 +311,21 @@
             renderAdminFoldersList();
         }
 
-        function handleGalleryUpload() {
-            let fileInput = document.getElementById('galleryFileInput');
-            let targetType = document.getElementById('uploadTargetType').value;
+        function uploadGlobalAsset() {
+            let fileInput = document.getElementById('globalFileInput');
+            let target = document.getElementById('globalTargetType').value;
 
             if(fileInput.files && fileInput.files[0]) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    let base64Image = e.target.result;
-                    
-                    if(targetType === 'logo') {
-                        globalAssets.logo = base64Image;
-                    } else if(targetType === 'banner') {
-                        globalAssets.banner = base64Image;
-                    } else if(targetType === 'bg') {
-                        globalAssets.bg = base64Image;
-                    }
+                    let base64 = e.target.result;
+                    if(target === 'logo') globalAssets.logo = base64;
+                    else if(target === 'banner') globalAssets.banner = base64;
+                    else if(target === 'homeBg') globalAssets.homeBg = base64;
 
                     localStorage.setItem('oyes_global_assets', JSON.stringify(globalAssets));
-                    applyGlobalAssets();
-                    alert("Image successfully uploaded from your gallery and applied!");
+                    applyHomeBackground();
+                    alert("Updated and saved permanently on this device!");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
@@ -335,9 +333,10 @@
             }
         }
 
-        function addNewFolder() {
+        function addNewFolderWithBg() {
             let name = document.getElementById('newFolderName').value.trim();
             let slogan = document.getElementById('newFolderSlogan').value.trim();
+            let bgInput = document.getElementById('newFolderBgInput');
 
             if(!name) {
                 alert("Please enter folder name!");
@@ -345,8 +344,22 @@
             }
 
             let newId = Date.now();
-            rootFolders.push({ id: newId, name: name, icon: "📁", image: globalAssets.logo, slogan: slogan || "Global opportunity", bg: globalAssets.bg, waNumber: "919947198248" });
-            domainFoldersData[newId] = [
+            let defaultBg = globalAssets.homeBg;
+
+            if(bgInput.files && bgInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    createFolderFinal(newId, name, slogan, e.target.result);
+                };
+                reader.readAsDataURL(bgInput.files[0]);
+            } else {
+                createFolderFinal(newId, name, slogan, defaultBg);
+            }
+        }
+
+        function createFolderFinal(id, name, slogan, bg) {
+            rootFolders.push({ id: id, name: name, icon: "📁", image: globalAssets.logo, slogan: slogan || "Global opportunity", bg: bg, waNumber: "919947198248" });
+            domainFoldersData[id] = [
                 {name: "Sub-Item 1", icon: "📌", desc: "Description here.", link: "", designs: []}
             ];
 
@@ -355,10 +368,33 @@
 
             document.getElementById('newFolderName').value = "";
             document.getElementById('newFolderSlogan').value = "";
+            document.getElementById('newFolderBgInput').value = "";
 
             renderAdminFoldersList();
             renderHomeGrid();
-            alert("New folder created successfully!");
+            alert("New folder created and saved permanently!");
+        }
+
+        function updateFolderBg(id) {
+            let fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.onchange = e => {
+                let file = e.target.files[0];
+                if(file) {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        let folderObj = rootFolders.find(f => f.id === id);
+                        if(folderObj) {
+                            folderObj.bg = event.target.result;
+                            localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+                            alert(`Background updated permanently for: ${folderObj.name}`);
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            fileInput.click();
         }
 
         function deleteFolder(id) {
@@ -380,8 +416,11 @@
             rootFolders.forEach(f => {
                 html += `
                     <div class="flex justify-between items-center bg-slate-950 p-2.5 rounded-xl border border-slate-800">
-                        <span class="text-amber-300 font-semibold truncate max-w-[180px]">${f.name}</span>
-                        <button onclick="deleteFolder(${f.id})" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold">Delete</button>
+                        <span class="text-amber-300 font-semibold truncate max-w-[140px]">${f.name}</span>
+                        <div class="flex gap-1">
+                            <button onclick="updateFolderBg(${f.id})" class="bg-amber-600 hover:bg-amber-500 text-slate-950 px-2 py-1 rounded-lg text-[9px] font-bold">Change Bg</button>
+                            <button onclick="deleteFolder(${f.id})" class="bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded-lg text-[9px] font-bold">Delete</button>
+                        </div>
                     </div>
                 `;
             });
@@ -489,7 +528,7 @@
             document.getElementById('subFolderPageView').classList.add('hidden');
             document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('adminPageView').classList.add('hidden');
-            applyGlobalAssets();
+            applyHomeBackground();
         }
     </script>
 </body>
