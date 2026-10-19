@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Ultimate Studio Edition</title>
+    <title>OYES GLOBAL HUB - Final Stable Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -36,7 +36,7 @@
         .dynamic-title {
             color: var(--app-title-color, #fbbf24) !important;
         }
-        .hidden { display: none; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="pb-20" id="mainBody">
@@ -44,7 +44,7 @@
     <!-- Top Header -->
     <header class="p-3 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-50 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
-            <button class="text-amber-400 text-xl font-bold p-1 hover:scale-110 transition">☰</button>
+            <button onclick="toggleAdminPanel()" class="text-amber-400 text-xl font-bold p-1 hover:scale-110 transition">☰</button>
             <div class="flex items-center gap-1.5 cursor-pointer" onclick="goHome()">
                 <span class="text-amber-400 font-bold text-sm tracking-wider">OYES HUB</span>
             </div>
@@ -92,7 +92,7 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Editable Top Banner Box (100% Clean - No Logo) -->
+        <!-- Editable Top Banner Box (100% Clean) -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-5 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
             <div class="space-y-1.5 py-4">
                 <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
@@ -181,13 +181,17 @@
         function getMainFolders() {
             const saved = localStorage.getItem('oyesMainFolders');
             if (saved) {
-                let folders = JSON.parse(saved);
-                defaultMainFolders.forEach(def => {
-                    if (!folders.some(f => f.id === def.id)) {
-                        folders.push(def);
-                    }
-                });
-                return folders;
+                try {
+                    let folders = JSON.parse(saved);
+                    defaultMainFolders.forEach(def => {
+                        if (!folders.some(f => f.id === def.id)) {
+                            folders.push(def);
+                        }
+                    });
+                    return folders;
+                } catch(e) {
+                    return defaultMainFolders;
+                }
             }
             return defaultMainFolders;
         }
@@ -198,7 +202,14 @@
 
         function getDomainData() {
             const saved = localStorage.getItem('oyesDomainData');
-            return saved ? JSON.parse(saved) : defaultDomainData;
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch(e) {
+                    return defaultDomainData;
+                }
+            }
+            return defaultDomainData;
         }
 
         function saveDomainData(data) {
@@ -480,7 +491,7 @@
 
         function requestAdminAccess() {
             if (isAdminLoggedIn) {
-                document.getElementById('adminPanelBox').classList.toggle('hidden');
+                toggleAdminPanel();
                 return;
             }
             let pwd = prompt("Enter Admin Password (default: admin):");
@@ -493,6 +504,14 @@
             } else if (pwd !== null) {
                 alert("പാസ്‌വേഡ് തെറ്റാണ്!");
             }
+        }
+
+        function toggleAdminPanel() {
+            if (!isAdminLoggedIn) {
+                requestAdminAccess();
+                return;
+            }
+            document.getElementById('adminPanelBox').classList.toggle('hidden');
         }
 
         function lockAdminPanel() {
@@ -576,7 +595,7 @@
         function processItemMediaUpload(event) {
             const file = event.target.files[0];
             if (file && pendingItemData) {
-                const.reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = function(e) {
                     const allData = getDomainData();
                     if (!allData[currentDomainId]) allData[currentDomainId] = [];
