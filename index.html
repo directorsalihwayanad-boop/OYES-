@@ -33,18 +33,19 @@
 </head>
 <body class="flex flex-col justify-between min-h-screen">
 
-    <!-- Header Section -->
+    <!-- Header Section with Multi-Language Selector -->
     <header class="p-2.5 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
             <div class="flex items-center gap-1.5 cursor-pointer" onclick="goBackHome()">
-                <div class="w-8 h-8 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-xs overflow-hidden">
-                    <span>🦅</span>
+                <div class="w-8 h-8 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-xs overflow-hidden" id="headerLogoContainer">
+                    <span id="headerLogoIcon">🦅</span>
                 </div>
-                <h1 class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
+                <h1 id="headerMainTitle" class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
             </div>
 
+            <!-- Language Selector Dropdown -->
             <div class="flex items-center gap-1">
-                <select id="langSelect" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
                     <option value="ta">தமிழ்</option>
@@ -52,8 +53,8 @@
                     <option value="hi">हिन्दी</option>
                     <option value="ar">العربية</option>
                 </select>
-                <button type="button" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow">📁</button>
-                <button type="button" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow">⚙️</button>
+                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow">📁</button>
+                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow">⚙️</button>
             </div>
         </div>
     </header>
@@ -61,14 +62,14 @@
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
 
-        <!-- Top Banner -->
+        <!-- Top Banner with User Slogans -->
         <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
-            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden">
-                <span>🌍🦅</span>
+            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
+                <span id="bannerLogoIcon">🌍🦅</span>
             </div>
             <div>
-                <h2 class="text-xl font-black tracking-widest text-amber-400">OYES GLOBAL HUB</h2>
-                <p class="text-[11px] text-amber-200 font-semibold tracking-wider mt-0.5">Embracing Change • Creating the Future</p>
+                <h2 id="bannerAppTitle" class="text-xl font-black tracking-widest text-amber-400">OYES GLOBAL HUB</h2>
+                <p id="bannerSubtitle" class="text-[11px] text-amber-200 font-semibold tracking-wider mt-0.5">Embracing Change • Creating the Future</p>
             </div>
         </div>
 
@@ -84,7 +85,7 @@
                 </div>
                 <div class="flex gap-1 mt-3">
                     <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                    <span onclick="event.stopPropagation(); openAI('World of Knowledge')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
                 </div>
             </div>
 
@@ -97,24 +98,20 @@
                 </div>
                 <div class="flex gap-1 mt-3">
                     <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                    <span onclick="event.stopPropagation(); openAI('Job Vacancies & Cleaning')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
                 </div>
             </div>
 
-            <!-- 3. House Materials, Appliances & Workers (Containing Worldwide Marble Hub) -->
-            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center relative">
-                <!-- Worldwide Marble Hub badge -->
-                <div class="absolute top-2 right-2 bg-amber-500 text-slate-950 text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow">
-                    🏛️ Marble Hub
-                </div>
+            <!-- 3. House Materials, Appliances & Workers Hub -->
+            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">🏠</span>
                     <h3 class="font-bold text-[11px] text-amber-300 leading-tight">HOUSE MATERIALS, APPLIANCES & WORKERS</h3>
-                    <p class="text-[9px] text-slate-300">Granites, Worldwide Marbles, Fans, Sofas, Kitchenware & Labours</p>
+                    <p class="text-[9px] text-slate-300">Granites, Worldwide Marbles, Fans, Sofas & Labours</p>
                 </div>
                 <div class="flex gap-1 mt-3">
-                    <a href="https://drive.google.com/file/d/1juyK-1-_oz0N8mNpoQl3WphDihPH1KQe/view?usp=drivesdk" target="_blank" onclick="event.stopPropagation()" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow text-center">Marble Hub ➔</a>
-                    <span class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('House Materials & Appliances')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
                 </div>
             </div>
 
@@ -127,12 +124,60 @@
                 </div>
                 <div class="flex gap-1 mt-3">
                     <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
-                    <span class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                    <span onclick="event.stopPropagation(); openAI('Stays & Hotels')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Script Section with Complete Domain Data -->
+    <script>
+        const defaultDomainData = {
+            1: [
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🏹", desc: "Ramayana ancient epic.", link: "https://archive.org"}
+            ],
+            2: [
+                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional home cleaning services.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚿", desc: "Sump and water tank cleaning.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
+                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+            ],
+            3: [
+                {name: "Worldwide Marble Hub", icon: "🏛️", desc: "Explore world-class marble varieties from across the globe", link: "https://drive.google.com/file/d/1juyK-1-_oz0N8mNpoQl3WphDihPH1KQe/view?usp=drivesdk"},
+                {name: "Granites & Marbles Hub", icon: "🧱", desc: "Italian marble, Indian granite & flooring stones.", link: "https://wa.me/919947198248?text=Granite%20Marble%20Inquiry"},
+                {name: "Tiles & Sanitary Wares", icon: "🧮", desc: "Floor tiles, wall tiles, washbasins & toilets.", link: "https://wa.me/919947198248?text=Tiles%20Sanitary%20Inquiry"},
+                {name: "Home Appliances (Fans, AC, TV)", icon: "🌀", desc: "Ceiling fans, air conditioners, TVs & refrigerators.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
+                {name: "Furniture (Sofas, Beds, Dining)", icon: "🛋️", desc: "Luxury sofas, wooden beds, dining tables & chairs.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"},
+                {name: "Kitchenware (Spoons to Cookware)", icon: "🍽️", desc: "Stove, mixer grinder, utensils, spoons & all kitchen items.", link: "https://wa.me/919947198248?text=Kitchenware%20Inquiry"},
+                {name: "Electricals & Lighting", icon: "💡", desc: "LED bulbs, wires, switches, chandeliers & fittings.", link: "https://wa.me/919947198248?text=Electricals%20Inquiry"},
+                {name: "Plumbing & Bathroom Fittings", icon: "🚿", desc: "Pipes, taps, showers, water tanks & valves.", link: "https://wa.me/919947198248?text=Plumbing%20Inquiry"},
+                {name: "Paints, Putty & Hardware", icon: "🎨", desc: "Wall paints, primer, putty, nails, locks & tools.", link: "https://wa.me/919947198248?text=Paints%20Hardware%20Inquiry"},
+                {name: "Construction Workers & Masons", icon: "👷", desc: "Masons, helpers, tile fixers, electricians & plumbers.", link: "https://wa.me/919947198248?text=Construction%20Workers%20Inquiry"}
+            ],
+            4: [
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"},
+                {name: "Kochi Stays", icon: "🏢", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com"}
+            ]
+        };
+
+        function openDomainFolders(domainId) {
+            // Folder opening logic
+            let items = defaultDomainData[domainId] || [];
+            console.log("Opening domain:", domainId, items);
+            // Add your standard view renderer here if applicable
+        }
+
+        function goBackHome() {
+            console.log("Going back home");
+        }
+
+        function openAI(domainName) {
+            console.log("Opening AI for:", domainName);
+        }
+    </script>
 </body>
 </html>
