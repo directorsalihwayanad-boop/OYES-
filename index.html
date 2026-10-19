@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Design Studio Edition</title>
+    <title>OYES GLOBAL HUB - Final Clean Studio Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -22,7 +22,7 @@
         .card-3d {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.88), rgba(15, 23, 42, 0.96));
             backdrop-filter: blur(18px);
-            border: 1px solid var(--app-border-color, rgba(245, 158, 11, 0.4));
+            border: 1px solid rgba(245, 158, 11, 0.4);
             box-shadow: 0 12px 35px -10px rgba(245, 158, 11, 0.25);
             background-size: cover;
             background-position: center;
@@ -60,21 +60,21 @@
         </div>
     </header>
 
-    <!-- Master Admin Control Panel (With Design Studio Studio Tools) -->
+    <!-- Master Admin Control Panel -->
     <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/98 border-b border-amber-500/60 p-4 hidden space-y-3 z-40 shadow-2xl">
         <div class="flex justify-between items-center">
-            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🎨 Design Studio & Admin</h3>
+            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🔒 Full Admin & Studio</h3>
             <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 hover:bg-red-800 text-white px-2.5 py-1 rounded font-bold shadow">Lock 🔒</button>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs">
             <button onclick="document.getElementById('logoFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🖼️ Change App Logo</button>
             <button onclick="document.getElementById('bgFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌅 Change App BG</button>
             <button onclick="document.getElementById('topBannerBgInput').click()" class="bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🌄 Change Top Box BG</button>
-            <button onclick="editTopBannerPrompt()" class="bg-indigo-600/90 hover:bg-indigo-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">✏️ Edit Top Banner Text & Logo</button>
+            <button onclick="editTopBannerPrompt()" class="bg-indigo-600/90 hover:bg-indigo-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">✏️ Edit Top Banner Text</button>
             
-            <!-- Design Studio Color & Font Customizers -->
-            <button onclick="openColorStudio()" class="bg-pink-600/90 hover:bg-pink-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🎨 Text & Theme Colors</button>
-            <button onclick="openFontStudio()" class="bg-purple-600/90 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔤 Font Style Studio</button>
+            <!-- Design Studio Options -->
+            <button onclick="openColorStudio()" class="bg-pink-600/90 hover:bg-pink-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🎨 Change Title Color</button>
+            <button onclick="openFontStudio()" class="bg-purple-600/90 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔤 Change Font Style</button>
 
             <button onclick="promptFolderCustomization('bg')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📁 Folder Background</button>
             <button onclick="promptFolderCustomization('icon')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔖 Folder Icon Photo</button>
@@ -93,19 +93,15 @@
     <input type="file" id="folderBgInput" class="hidden" onchange="applyFolderBgFile(event)">
     <input type="file" id="folderIconInput" class="hidden" onchange="applyFolderIconFile(event)">
     <input type="file" id="itemMediaInput" class="hidden" onchange="processItemMediaUpload(event)">
-    <input type="file" id="bannerIconInput" class="hidden" onchange="applyBannerIcon(event)">
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Editable Top Banner Box -->
+        <!-- Editable Top Banner Box (Without Eagle/Bird Icon) -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
-            <div id="bannerIconDisplay" class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden shadow-xl cursor-pointer hover:opacity-90 transition" onclick="if(isAdminLoggedIn) document.getElementById('bannerIconInput').click()" title="Click to change banner icon">
-                <span>🌐</span>
-            </div>
-            <div>
+            <div class="space-y-1 pt-1">
                 <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
                 <h2 id="bannerTitle2" class="text-lg font-black tracking-widest dynamic-title">UNITING OPPORTUNITIES</h2>
-                <p id="bannerSubtitle" class="text-[10px] text-amber-200 font-semibold tracking-wider mt-0.5">OYES — A WORLD OF OPPORTUNITIES</p>
+                <p id="bannerSubtitle" class="text-[10px] text-amber-200 font-semibold tracking-wider mt-1">OYES — A WORLD OF OPPORTUNITIES</p>
             </div>
             <div class="relative mt-2">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-amber-400 text-xs">🔍</span>
@@ -215,24 +211,20 @@
 
         function loadDesignStudioPreferences() {
             const titleColor = localStorage.getItem('appTitleColor') || '#fbbf24';
-            const textColor = localStorage.getItem('appTextColor') || '#f8fafc';
             const fontStyle = localStorage.getItem('appFontFamily') || "'Poppins', sans-serif";
 
             document.documentElement.style.setProperty('--app-title-color', titleColor);
-            document.documentElement.style.setProperty('--app-text-color', textColor);
             document.documentElement.style.setProperty('--app-font', fontStyle);
         }
 
         function openColorStudio() {
-            let tColor = prompt("Enter Title Color (Hex code e.g. #fbbf24, #38bdf8, #f43f5e):", localStorage.getItem('appTitleColor') || '#fbbf24');
-            let txtColor = prompt("Enter General Text Color (Hex code e.g. #f8fafc, #e2e8f0):", localStorage.getItem('appTextColor') || '#f8fafc');
-
-            if (tColor) localStorage.setItem('appTitleColor', tColor);
-            if (txtColor) localStorage.setItem('appTextColor', txtColor);
-
-            loadDesignStudioPreferences();
-            renderHome();
-            alert("കളർ തീം വിജയകരമായി മാറ്റി!");
+            let tColor = prompt("Enter Title Color (Hex code e.g. #fbbf24, #38bdf8, #f43f5e, #ffffff):", localStorage.getItem('appTitleColor') || '#fbbf24');
+            if (tColor) {
+                localStorage.setItem('appTitleColor', tColor);
+                loadDesignStudioPreferences();
+                renderHome();
+                alert("ടൈറ്റിൽ കളർ മാറ്റി!");
+            }
         }
 
         function openFontStudio() {
@@ -244,398 +236,9 @@
 
             localStorage.setItem('appFontFamily', selectedFont);
             loadDesignStudioPreferences();
+            renderHome();
             alert("ഫോണ്ട് സ്റ്റൈൽ അപ്ഡേറ്റ് ചെയ്തു!");
         }
 
         function loadTopBanner() {
-            loadDesignStudioPreferences();
-            const t1 = localStorage.getItem('bannerT1') || "CONNECTING PEOPLE";
-            const t2 = localStorage.getItem('bannerT2') || "UNITING OPPORTUNITIES";
-            const sub = localStorage.getItem('bannerSub') || "OYES — A WORLD OF OPPORTUNITIES";
-            const icon = localStorage.getItem('bannerIcon');
-            const topBg = localStorage.getItem('topBannerBg');
-
-            document.getElementById('bannerTitle1').innerText = t1;
-            document.getElementById('bannerTitle2').innerText = t2;
-            document.getElementById('bannerSubtitle').innerText = sub;
-
-            if (icon) {
-                if (icon.startsWith('data:') || icon.startsWith('http')) {
-                    document.getElementById('bannerIconDisplay').innerHTML = `<img src="${icon}" class="w-full h-full object-cover rounded-full">`;
-                } else {
-                    document.getElementById('bannerIconDisplay').innerHTML = `<span>${icon}</span>`;
-                }
-            }
-            if (topBg) {
-                document.getElementById('topBannerBox').style.backgroundImage = `url('${topBg}')`;
-            }
-        }
-
-        function editTopBannerPrompt() {
-            let t1 = prompt("Enter Top Line 1 Text:", document.getElementById('bannerTitle1').innerText);
-            let t2 = prompt("Enter Top Line 2 Text:", document.getElementById('bannerTitle2').innerText);
-            let sub = prompt("Enter Subtitle Text:", document.getElementById('bannerSubtitle').innerText);
-
-            if (t1) localStorage.setItem('bannerT1', t1);
-            if (t2) localStorage.setItem('bannerT2', t2);
-            if (sub) localStorage.setItem('bannerSub', sub);
-
-            loadTopBanner();
-            alert("ടോപ്പ് ബാനർ ടെക്സ്റ്റ് അപ്ഡേറ്റ് ചെയ്തു!");
-        }
-
-        function applyBannerIcon(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('bannerIconDisplay').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
-                    localStorage.setItem('bannerIcon', e.target.result);
-                    alert("ബാനർ ലോഗോ സേവ് ചെയ്തു!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function applyTopBannerBg(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('topBannerBox').style.backgroundImage = `url('${e.target.result}')`;
-                    localStorage.setItem('topBannerBg', e.target.result);
-                    alert("ടോപ്പ് ബോക്സ് ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function renderHome() {
-            loadTopBanner();
-            const folders = getMainFolders();
-            const container = document.getElementById('mainHomeGrid');
-            container.innerHTML = "";
-
-            folders.forEach(folder => {
-                const card = document.createElement('div');
-                card.className = folder.fullWidth ? "card-3d p-4 rounded-2xl cursor-pointer flex items-center justify-between col-span-2" : "card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between text-center";
-                
-                if (folder.bg) card.style.backgroundImage = `url('${folder.bg}')`;
-                card.setAttribute('onclick', `openDomain(${folder.id})`);
-
-                let iconDisplay = folder.icon;
-                if (folder.icon && (folder.icon.startsWith('data:') || folder.icon.startsWith('http'))) {
-                    iconDisplay = `<img src="${folder.icon}" class="w-10 h-10 mx-auto object-cover rounded-xl shadow">`;
-                }
-
-                if (folder.fullWidth) {
-                    card.innerHTML = `
-                        <div class="flex items-center space-x-3">
-                            <span class="text-3xl">${iconDisplay}</span>
-                            <div>
-                                <h3 class="font-bold text-xs dynamic-title">${folder.name}</h3>
-                                <p class="text-[9px] text-slate-300">${folder.desc}</p>
-                            </div>
-                        </div>
-                        <span class="w-7 h-7 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center dynamic-title text-xs font-bold">➔</span>
-                    `;
-                } else {
-                    card.innerHTML = `
-                        <div class="space-y-1.5 mt-1">
-                            <span class="text-3xl block">${iconDisplay}</span>
-                            <h3 class="font-bold text-[11px] dynamic-title leading-tight">${folder.name}</h3>
-                            <p class="text-[9px] text-slate-300">${folder.desc}</p>
-                        </div>
-                        <div class="flex justify-end mt-3">
-                            <span class="w-6 h-6 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center dynamic-title text-xs">➔</span>
-                        </div>
-                    `;
-                }
-                container.appendChild(card);
-            });
-        }
-
-        function openDomain(domainId) {
-            currentDomainId = domainId;
-            const allData = getDomainData();
-            const items = allData[domainId] || [];
-            const container = document.getElementById('subFolderContainer');
-            container.innerHTML = "";
-
-            items.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = "card-3d p-3.5 rounded-2xl flex flex-col justify-between text-center relative";
-                
-                let deleteBtn = "";
-                if (isAdminLoggedIn) {
-                    deleteBtn = `<button onclick="event.stopPropagation(); deleteItem(${domainId}, ${index})" class="absolute top-2 right-2 text-[9px] bg-red-900/80 text-white px-1.5 py-0.5 rounded shadow font-bold z-10 hover:bg-red-700 transition">🗑️ Delete</button>`;
-                }
-
-                let mediaDisplay = `<span class="text-3xl block">${item.icon}</span>`;
-                if (item.type === 'pdf') {
-                    mediaDisplay = `<div class="w-full h-24 rounded-xl overflow-hidden mb-2 bg-slate-900 flex flex-col items-center justify-center border border-amber-500/50 dynamic-title font-bold text-xs shadow-inner">📄 View PDF</div>`;
-                } else if (item.icon && (item.icon.startsWith('data:') || item.icon.startsWith('http'))) {
-                    mediaDisplay = `<div class="w-full h-24 rounded-xl overflow-hidden mb-2 border border-amber-500/30"><img src="${item.icon}" class="w-full h-full object-cover"></div>`;
-                }
-
-                let priceTag = item.price ? `<span class="inline-block bg-amber-500/20 dynamic-title text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/40 my-1">🏷️ ${item.price}</span>` : "";
-
-                card.innerHTML = `
-                    ${deleteBtn}
-                    <div class="space-y-1 mt-1">
-                        ${mediaDisplay}
-                        <h3 class="font-bold text-[11px] dynamic-title leading-tight">${item.name}</h3>
-                        ${priceTag}
-                        <p class="text-[9px] text-slate-300 leading-tight">${item.desc}</p>
-                    </div>
-                    <div class="mt-3">
-                        <a href="${item.link}" target="_blank" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-[10px] shadow block w-full transition">${item.type === 'pdf' ? '📖 Read PDF ➔' : 'Open / View ➔'}</a>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-
-            if (isAdminLoggedIn) {
-                document.getElementById('addItemBtn').classList.remove('hidden');
-            } else {
-                document.getElementById('addItemBtn').classList.add('hidden');
-            }
-
-            document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('subFolderView').classList.remove('hidden');
-        }
-
-        function goHome() {
-            document.getElementById('subFolderView').classList.add('hidden');
-            document.getElementById('homeView').classList.remove('hidden');
-            renderHome();
-        }
-
-        function requestAdminAccess() {
-            if (isAdminLoggedIn) {
-                document.getElementById('adminPanelBox').classList.toggle('hidden');
-                return;
-            }
-            let pwd = prompt("Enter Admin Password (default: admin):");
-            if (pwd === "admin") {
-                isAdminLoggedIn = true;
-                document.getElementById('adminPanelBox').classList.remove('hidden');
-                alert("അഡ്മിൻ പ്രവേശനം വിജയം!");
-                renderHome();
-                if(currentDomainId !== null) openDomain(currentDomainId);
-            } else if (pwd !== null) {
-                alert("പാസ്‌വേഡ് തെറ്റാണ്!");
-            }
-        }
-
-        function lockAdminPanel() {
-            isAdminLoggedIn = false;
-            document.getElementById('adminPanelBox').classList.add('hidden');
-            alert("അഡ്മിൻ പാനൽ ലോക്ക് ചെയ്തു.");
-            renderHome();
-            if(currentDomainId !== null) openDomain(currentDomainId);
-        }
-
-        function applyGlobalLogo(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('appLogoDisplay').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
-                    localStorage.setItem('appLogo', e.target.result);
-                    alert("ആപ്പ് ലോഗോ സേവ് ചെയ്തു!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function applyGlobalBackground(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.body.style.backgroundImage = `url('${e.target.result}')`;
-                    localStorage.setItem('appBg', e.target.result);
-                    alert("ആപ്പ് ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function promptFolderCustomization(type) {
-            let id = prompt("Enter Folder ID:");
-            let folders = getMainFolders();
-            let folder = folders.find(f => f.id == id);
-            if (folder) {
-                targetFolderIdForCustom = id;
-                if (type === 'bg') document.getElementById('folderBgInput').click();
-                else document.getElementById('folderIconInput').click();
-            } else {
-                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
-            }
-        }
-
-        function applyFolderBgFile(event) {
-            const file = event.target.files[0];
-            if (file && targetFolderIdForCustom) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    let folders = getMainFolders();
-                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
-                    if (folder) {
-                        folder.bg = e.target.result;
-                        saveMainFolders(folders);
-                        renderHome();
-                        alert("ഫോൾഡർ ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function applyFolderIconFile(event) {
-            const file = event.target.files[0];
-            if (file && targetFolderIdForCustom) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    let folders = getMainFolders();
-                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
-                    if (folder) {
-                        folder.icon = e.target.result;
-                        saveMainFolders(folders);
-                        renderHome();
-                        alert("ഫോൾഡർ ഐക്കൺ സേവ് ചെയ്തു!");
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function addNewMainFolderPrompt() {
-            let name = prompt("Enter Main Folder Name:");
-            let desc = prompt("Enter Description:");
-            let icon = prompt("Enter Emoji (e.g. 📁):", "📁");
-            let id = prompt("Enter Unique Folder ID (Number):");
-
-            if (name && id) {
-                let folders = getMainFolders();
-                folders.push({ id: parseInt(id), name, desc: desc || "", icon: icon || "📁", bg: "" });
-                saveMainFolders(folders);
-                renderHome();
-                alert("പുതിയ ഫോൾഡർ വിജയകരമായി ചേർത്തു!");
-            }
-        }
-
-        function editFolderDetailsPrompt() {
-            let id = prompt("Enter Folder ID to edit:");
-            let folders = getMainFolders();
-            let folder = folders.find(f => f.id == id);
-            if (folder) {
-                let newName = prompt("Enter new Folder Name:", folder.name);
-                let newDesc = prompt("Enter new Description:", folder.desc);
-                if (newName) folder.name = newName;
-                if (newDesc) folder.desc = newDesc;
-                saveMainFolders(folders);
-                renderHome();
-                alert("ഫോൾഡർ വിവരങ്ങൾ അപ്ഡേറ്റ് ചെയ്തു!");
-            } else {
-                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
-            }
-        }
-
-        function deleteFolderPrompt() {
-            let id = prompt("Enter Folder ID to delete:");
-            let folders = getMainFolders();
-            let index = folders.findIndex(f => f.id == id);
-            if (index !== -1) {
-                if (confirm(`"${folders[index].name}" ഫോൾഡർ ഡിലീറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?`)) {
-                    folders.splice(index, 1);
-                    saveMainFolders(folders);
-                    renderHome();
-                    alert("ഫോൾഡർ ഡിലീറ്റ് ചെയ്തു!");
-                }
-            } else {
-                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
-            }
-        }
-
-        function checkStorageStatus() {
-            let total = 0;
-            for (let key in localStorage) {
-                if (localStorage.hasOwnProperty(key)) {
-                    total += ((localStorage[key].length * 2) / 1024 / 1024);
-                }
-            }
-            alert(`Storage Status:\nCurrently used storage: ~${total.toFixed(2)} MB in LocalStorage.`);
-        }
-
-        function openAddItemPrompt() {
-            let name = prompt("Enter Product / Item Name:");
-            let price = prompt("Enter Price / Rate (e.g. ₹150/sq.ft):", "₹");
-            let desc = prompt("Enter Description:");
-
-            if (name) {
-                pendingItemData = { name, price: price || "", desc: desc || "" };
-                alert("ഇനി ഗാലറിയിൽ നിന്ന് ഫോട്ടോയോ അല്ലെങ്കിൽ ഫയൽ മാനേജറിൽ നിന്ന് PDF ഫയലോ സെലക്ട് ചെയ്യുക!");
-                document.getElementById('itemMediaInput').click();
-            }
-        }
-
-        function processItemMediaUpload(event) {
-            const file = event.target.files[0];
-            if (file && pendingItemData) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const allData = getDomainData();
-                    if (!allData[currentDomainId]) allData[currentDomainId] = [];
-                    
-                    let fileData = e.target.result;
-                    let isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf');
-                    let fileType = isPdf ? 'pdf' : 'image';
-
-                    allData[currentDomainId].push({
-                        name: pendingItemData.name,
-                        icon: fileData,
-                        price: pendingItemData.price,
-                        desc: pendingItemData.desc,
-                        link: fileData,
-                        type: fileType
-                    });
-
-                    saveDomainData(allData);
-                    openDomain(currentDomainId);
-                    alert("വിജയകരമായി അപ്‌ലോഡ് ചെയ്തു!");
-                    pendingItemData = null;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function deleteItem(domainId, index) {
-            if (confirm("ഈ ഐറ്റം ഡിലീറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?")) {
-                const allData = getDomainData();
-                allData[domainId].splice(index, 1);
-                saveDomainData(allData);
-                openDomain(domainId);
-            }
-        }
-
-        function resetAppSettings() {
-            if (confirm("എല്ലാ മാറ്റങ്ങളും പൂർണ്ണമായി റീസെറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?")) {
-                localStorage.clear();
-                location.reload();
-            }
-        }
-
-        window.onload = function() {
-            const savedBg = localStorage.getItem('appBg');
-            if (savedBg) document.body.style.backgroundImage = `url('${savedBg}')`;
-
-            const savedLogo = localStorage.getItem('appLogo');
-            if (savedLogo) document.getElementById('appLogoDisplay').innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover rounded-full">`;
-
-            renderHome();
-        }
-    </script>
-</body>
-</html>
+            loadDesignStudio
