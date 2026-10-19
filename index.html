@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Ultimate Pro Upgraded</title>
+    <title>OYES GLOBAL HUB - Final Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -57,15 +57,16 @@
         </div>
     </header>
 
-    <!-- Upgraded Master Admin Control Panel -->
+    <!-- Master Admin Control Panel (Full Options) -->
     <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/98 border-b border-amber-500/60 p-4 hidden space-y-3 z-40 shadow-2xl">
         <div class="flex justify-between items-center">
-            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🔒 Upgraded Admin Settings</h3>
+            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🔒 Full Admin Settings</h3>
             <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 hover:bg-red-800 text-white px-2.5 py-1 rounded font-bold shadow">Lock 🔒</button>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs">
             <button onclick="document.getElementById('logoFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🖼️ Change App Logo</button>
             <button onclick="document.getElementById('bgFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌅 Change App BG</button>
+            <button onclick="document.getElementById('topBannerBgInput').click()" class="bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🌄 Change Top Box BG</button>
             <button onclick="editTopBannerPrompt()" class="bg-indigo-600/90 hover:bg-indigo-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">✏️ Edit Top Banner Text & Logo</button>
             <button onclick="promptFolderCustomization('bg')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📁 Folder Background</button>
             <button onclick="promptFolderCustomization('icon')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔖 Folder Icon Photo</button>
@@ -80,6 +81,7 @@
     <!-- Hidden File Inputs -->
     <input type="file" id="logoFileInput" class="hidden" onchange="applyGlobalLogo(event)">
     <input type="file" id="bgFileInput" class="hidden" onchange="applyGlobalBackground(event)">
+    <input type="file" id="topBannerBgInput" class="hidden" onchange="applyTopBannerBg(event)">
     <input type="file" id="folderBgInput" class="hidden" onchange="applyFolderBgFile(event)">
     <input type="file" id="folderIconInput" class="hidden" onchange="applyFolderIconFile(event)">
     <input type="file" id="itemMediaInput" class="hidden" onchange="processItemMediaUpload(event)">
@@ -87,8 +89,8 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Top Banner -->
-        <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-3">
+        <!-- Editable Top Banner Box -->
+        <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
             <div id="bannerIconDisplay" class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden shadow-xl cursor-pointer hover:opacity-90 transition" onclick="if(isAdminLoggedIn) document.getElementById('bannerIconInput').click()" title="Click to change banner icon">
                 <span>🌍🦅</span>
             </div>
@@ -125,7 +127,7 @@
         <button onclick="openDomain(5)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium transition"><span class="text-lg">👥</span>Entertainment</button>
     </nav>
 
-    <!-- Upgraded JavaScript Engine -->
+    <!-- JavaScript Engine -->
     <script>
         let currentDomainId = null;
         let isAdminLoggedIn = false;
@@ -178,7 +180,16 @@
 
         function getMainFolders() {
             const saved = localStorage.getItem('oyesMainFolders');
-            return saved ? JSON.parse(saved) : defaultMainFolders;
+            if (saved) {
+                let folders = JSON.parse(saved);
+                defaultMainFolders.forEach(def => {
+                    if (!folders.some(f => f.id === def.id)) {
+                        folders.push(def);
+                    }
+                });
+                return folders;
+            }
+            return defaultMainFolders;
         }
 
         function saveMainFolders(folders) {
@@ -199,6 +210,7 @@
             const t2 = localStorage.getItem('bannerT2') || "UNITING OPPORTUNITIES";
             const sub = localStorage.getItem('bannerSub') || "OYES — A WORLD OF OPPORTUNITIES";
             const icon = localStorage.getItem('bannerIcon');
+            const topBg = localStorage.getItem('topBannerBg');
 
             document.getElementById('bannerTitle1').innerText = t1;
             document.getElementById('bannerTitle2').innerText = t2;
@@ -206,6 +218,9 @@
 
             if (icon) {
                 document.getElementById('bannerIconDisplay').innerHTML = `<img src="${icon}" class="w-full h-full object-cover rounded-full">`;
+            }
+            if (topBg) {
+                document.getElementById('topBannerBox').style.backgroundImage = `url('${topBg}')`;
             }
         }
 
@@ -230,6 +245,19 @@
                     document.getElementById('bannerIconDisplay').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
                     localStorage.setItem('bannerIcon', e.target.result);
                     alert("ബാനർ ലോഗോ സേവ് ചെയ്തു!");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyTopBannerBg(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('topBannerBox').style.backgroundImage = `url('${e.target.result}')`;
+                    localStorage.setItem('topBannerBg', e.target.result);
+                    alert("ടോപ്പ് ബോക്സ് ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
                 };
                 reader.readAsDataURL(file);
             }
