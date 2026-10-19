@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Customizer & Admin</title>
+    <title>OYES GLOBAL HUB</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -39,23 +39,20 @@
     <header class="p-3 flex justify-between items-center bg-black/60 backdrop-blur-md sticky top-0 z-50 border-b border-amber-500/20">
         <button onclick="openAdminPanel()" class="text-amber-400 text-xl font-bold p-1">⚙️</button>
         <div class="flex items-center gap-2">
-            <div id="appLogoDisplay" class="w-10 h-10 rounded-full border border-amber-400/60 overflow-hidden bg-amber-500/20 flex items-center justify-center cursor-pointer" onclick="document.getElementById('logoInput').click()">
+            <div id="appLogoDisplay" class="w-10 h-10 rounded-full border border-amber-400/60 overflow-hidden bg-amber-500/20 flex items-center justify-center">
                 <span class="text-xs font-bold text-amber-300" id="logoIconText">🦅</span>
             </div>
-            <input type="file" id="logoInput" class="hidden" accept="image/*" onchange="changeLogo(event)">
         </div>
         <div class="flex items-center gap-2">
             <select class="bg-slate-900 text-amber-300 border border-amber-500/40 text-xs rounded-lg px-2 py-1 outline-none">
                 <option value="en">English ▾</option>
                 <option value="ml">മലയാളം</option>
             </select>
-            <button onclick="document.getElementById('bgInput').click()" class="bg-amber-500/20 border border-amber-500/50 text-amber-300 px-3 py-1 rounded-lg text-xs font-semibold">🖼️ BG</button>
-            <input type="file" id="bgInput" class="hidden" accept="image/*" onchange="changeAppBackground(event)">
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-md mx-auto p-4 w-full space-y-4">
+    <!-- Main Dashboard View (Home View) -->
+    <main id="homeView" class="max-w-md mx-auto p-4 w-full space-y-4">
 
         <!-- Banner Section -->
         <div class="card-glass p-5 rounded-3xl text-center space-y-3 relative overflow-hidden">
@@ -78,16 +75,15 @@
             </div>
         </div>
 
-        <!-- Grid Cards Section -->
-        <div class="grid grid-cols-2 gap-3" id="dynamicGrid">
+        <!-- Grid Cards Section (Main Folders) -->
+        <div class="grid grid-cols-2 gap-3" id="mainGrid">
 
             <!-- 1. World of Knowledge -->
-            <div class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group">
-                <button onclick="editFolder(this)" class="absolute top-2 left-2 text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 opacity-0 group-hover:opacity-100 transition">✏️ Edit</button>
-                <div class="space-y-1 mt-3">
-                    <span class="text-2xl block folder-icon">📖</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">WORLD OF KNOWLEDGE</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight folder-desc">Connecting people Uniting opportunities</p>
+            <div onclick="openDomain(1)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
+                <div class="space-y-1 mt-1">
+                    <span class="text-2xl block">📖</span>
+                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">WORLD OF KNOWLEDGE</h3>
+                    <p class="text-[9px] text-slate-300 leading-tight">Connecting people Uniting opportunities</p>
                 </div>
                 <div class="flex justify-end mt-3">
                     <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
@@ -95,25 +91,23 @@
             </div>
 
             <!-- 2. Job Vacancies & Cleaning -->
-            <div class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group">
-                <button onclick="editFolder(this)" class="absolute top-2 left-2 text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 opacity-0 group-hover:opacity-100 transition">✏️ Edit</button>
-                <div class="space-y-1 mt-3">
-                    <span class="text-2xl block folder-icon">💼</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">JOB VACANCIES & CLEANING</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight folder-desc">Shift in thought Progress in life</p>
+            <div onclick="openDomain(2)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
+                <div class="space-y-1 mt-1">
+                    <span class="text-2xl block">💼</span>
+                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">JOB VACANCIES & CLEANING</h3>
+                    <p class="text-[9px] text-slate-300 leading-tight">Shift in thought Progress in life</p>
                 </div>
                 <div class="flex justify-end mt-3">
                     <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
                 </div>
             </div>
 
-            <!-- 3. Ultimate Home Construction Solution (Marble Hub) -->
-            <div class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group" onclick="window.open('https://drive.google.com/file/d/1juyK-1-_oz0N8mNpoQl3WphDihPH1KQe/view?usp=drivesdk', '_blank')">
-                <div class="absolute top-2 right-2 bg-amber-500 text-slate-950 font-bold text-[8px] px-1.5 py-0.5 rounded-full">🏛️ Marble Hub</div>
-                <div class="space-y-1 mt-3">
-                    <span class="text-2xl block folder-icon">🏠</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">ULTIMATE HOME CONSTRUCTION SOLUTION</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight folder-desc">Marbles, Granites, Kota, Vettukallu, Appliances & Workers</p>
+            <!-- 3. Ultimate Home Construction Solution (Opens Sub-folder view containing Worldwide Marble Hub) -->
+            <div onclick="openDomain(3)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
+                <div class="space-y-1 mt-1">
+                    <span class="text-2xl block">🏠</span>
+                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">ULTIMATE HOME CONSTRUCTION SOLUTION</h3>
+                    <p class="text-[9px] text-slate-300 leading-tight">Marbles, Granites, Kota, Vettukallu, Appliances & Workers</p>
                 </div>
                 <div class="flex justify-end mt-3">
                     <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
@@ -121,12 +115,11 @@
             </div>
 
             <!-- 4. Stays & Hotels -->
-            <div class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group">
-                <button onclick="editFolder(this)" class="absolute top-2 left-2 text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 opacity-0 group-hover:opacity-100 transition">✏️ Edit</button>
-                <div class="space-y-1 mt-3">
-                    <span class="text-2xl block folder-icon">🏨</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">STAYS & HOTELS</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight folder-desc">One connection Endless possibilities</p>
+            <div onclick="openDomain(4)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
+                <div class="space-y-1 mt-1">
+                    <span class="text-2xl block">🏨</span>
+                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">STAYS & HOTELS</h3>
+                    <p class="text-[9px] text-slate-300 leading-tight">One connection Endless possibilities</p>
                 </div>
                 <div class="flex justify-end mt-3">
                     <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
@@ -134,12 +127,11 @@
             </div>
 
             <!-- 5. Buy & Sell Market Hub -->
-            <div class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group">
-                <button onclick="editFolder(this)" class="absolute top-2 left-2 text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 opacity-0 group-hover:opacity-100 transition">✏️ Edit</button>
-                <div class="space-y-1 mt-3">
-                    <span class="text-2xl block folder-icon">🤝</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">BUY & SELL MARKET HUB</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight folder-desc">Your world Your community</p>
+            <div onclick="openDomain(5)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
+                <div class="space-y-1 mt-1">
+                    <span class="text-2xl block">🤝</span>
+                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">BUY & SELL MARKET HUB</h3>
+                    <p class="text-[9px] text-slate-300 leading-tight">Your world Your community</p>
                 </div>
                 <div class="flex justify-end mt-3">
                     <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
@@ -147,12 +139,11 @@
             </div>
 
             <!-- 6. Events & Advertisements -->
-            <div class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group">
-                <button onclick="editFolder(this)" class="absolute top-2 left-2 text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 opacity-0 group-hover:opacity-100 transition">✏️ Edit</button>
-                <div class="space-y-1 mt-3">
-                    <span class="text-2xl block folder-icon">⭐</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">EVENTS & ADVERTISEMENTS</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight folder-desc">Connect digitally Move forward together</p>
+            <div onclick="openDomain(6)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
+                <div class="space-y-1 mt-1">
+                    <span class="text-2xl block">⭐</span>
+                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">EVENTS & ADVERTISEMENTS</h3>
+                    <p class="text-[9px] text-slate-300 leading-tight">Connect digitally Move forward together</p>
                 </div>
                 <div class="flex justify-end mt-3">
                     <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
@@ -162,12 +153,12 @@
         </div>
 
         <!-- 7. OYES Cinema & Studio -->
-        <div class="card-glass p-4 rounded-2xl flex items-center justify-between cursor-pointer relative group">
+        <div onclick="openDomain(7)" class="card-glass p-4 rounded-2xl flex items-center justify-between cursor-pointer">
             <div class="flex items-center space-x-3">
-                <span class="text-3xl folder-icon">🎥</span>
+                <span class="text-3xl">🎥</span>
                 <div>
-                    <h3 class="font-black text-xs text-amber-400 folder-title">OYES CINEMA & STUDIO</h3>
-                    <p class="text-[9px] text-slate-300 folder-desc">Watch • Upload • Sell • Earn</p>
+                    <h3 class="font-black text-xs text-amber-400">OYES CINEMA & STUDIO</h3>
+                    <p class="text-[9px] text-slate-300">Watch • Upload • Sell • Earn</p>
                 </div>
             </div>
             <span class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs font-bold">➔</span>
@@ -175,101 +166,119 @@
 
     </main>
 
+    <!-- Sub-folder View (Hidden by default, shown when clicking a main folder) -->
+    <main id="subFolderView" class="max-w-md mx-auto p-4 w-full space-y-3 hidden flex-grow">
+        <button onclick="goHome()" class="bg-amber-500/20 border border-amber-500/50 text-amber-300 px-3 py-1.5 rounded-xl text-xs font-semibold mb-2">⬅️ Back to Home</button>
+        <div id="subFolderContainer" class="space-y-3">
+            <!-- Dynamic sub-items will load here -->
+        </div>
+    </main>
+
     <!-- Bottom Navigation Footer -->
     <nav class="fixed bottom-0 inset-x-0 bg-slate-950/90 backdrop-blur-xl border-t border-amber-500/20 py-2.5 px-4 flex justify-around items-center z-50">
-        <button class="flex flex-col items-center text-amber-400 text-[10px] font-bold"><span class="text-lg">🏠</span>Home</button>
-        <button class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">📖</span>Books</button>
-        <button class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">💼</span>Jobs</button>
-        <button class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">🎬</span>Cinema</button>
-        <button class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">👥</span>Entertainment</button>
-        <button onclick="addNewFolderPrompt()" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">➕</span>Add</button>
+        <button onclick="goHome()" class="flex flex-col items-center text-amber-400 text-[10px] font-bold"><span class="text-lg">🏠</span>Home</button>
+        <button onclick="openDomain(1)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">📖</span>Books</button>
+        <button onclick="openDomain(2)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">💼</span>Jobs</button>
+        <button onclick="openDomain(7)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">🎬</span>Cinema</button>
+        <button onclick="openDomain(5)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">👥</span>Entertainment</button>
     </nav>
 
-    <!-- JavaScript for Customization & Admin Control -->
+    <!-- JavaScript Data & Logic -->
     <script>
-        // Change App Background
-        function changeAppBackground(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('mainBody').style.backgroundImage = `url('${e.target.result}')`;
-                    localStorage.setItem('customAppBg', e.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        }
+        const domainData = {
+            1: [
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings and verses.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🏹", desc: "Ramayana ancient epic scriptures.", link: "https://archive.org"}
+            ],
+            2: [
+                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional home cleaning services.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚿", desc: "Sump and water tank cleaning.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
+                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+            ],
+            3: [
+                {name: "Worldwide Marble Hub", icon: "🏛️", desc: "Explore world-class marble varieties from across the globe", link: "https://drive.google.com/file/d/1juyK-1-_oz0N8mNpoQl3WphDihPH1KQe/view?usp=drivesdk"},
+                {name: "Granites & Marbles Hub", icon: "🧱", desc: "Italian marble, Indian granite & flooring stones.", link: "https://wa.me/919947198248?text=Granite%20Marble%20Inquiry"},
+                {name: "Tiles & Sanitary Wares", icon: "🧮", desc: "Floor tiles, wall tiles, washbasins & toilets.", link: "https://wa.me/919947198248?text=Tiles%20Sanitary%20Inquiry"},
+                {name: "Home Appliances (Fans, AC, TV)", icon: "🌀", desc: "Ceiling fans, air conditioners, TVs & refrigerators.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
+                {name: "Furniture (Sofas, Beds, Dining)", icon: "🛋️", desc: "Luxury sofas, wooden beds, dining tables & chairs.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"}
+            ],
+            4: [
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"}
+            ],
+            5: [
+                {name: "Buy & Sell Market Hub", icon: "🤝", desc: "Your world, your community trading.", link: "https://wa.me/919947198248?text=BuySell%20Inquiry"}
+            ],
+            6: [
+                {name: "Events & Advertisements", icon: "⭐", desc: "Connect digitally, move forward together.", link: "https://wa.me/919947198248?text=Events%20Inquiry"}
+            ],
+            7: [
+                {name: "OYES Cinema & Studio", icon: "🎬", desc: "Watch, Upload, Sell & Earn from movies.", link: "https://wa.me/919947198248?text=Cinema%20Inquiry"}
+            ]
+        };
 
-        // Change Logo
-        function changeLogo(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('appLogoDisplay').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
-                    localStorage.setItem('customAppLogo', e.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        }
+        function openDomain(domainId) {
+            const items = domainData[domainId] || [];
+            const container = document.getElementById('subFolderContainer');
+            container.innerHTML = "";
 
-        // Edit Folder Icon & Title
-        function editFolder(btn) {
-            const card = btn.closest('.card-glass');
-            const titleElem = card.querySelector('.folder-title');
-            const iconElem = card.querySelector('.folder-icon');
-
-            const newTitle = prompt("Enter new title:", titleElem.innerText);
-            if (newTitle) titleElem.innerText = newTitle;
-
-            const newIcon = prompt("Enter new emoji icon:", iconElem.innerText);
-            if (newIcon) iconElem.innerText = newIcon;
-        }
-
-        // Add New Folder
-        function addNewFolderPrompt() {
-            const title = prompt("Enter new folder name:");
-            const icon = prompt("Enter emoji icon:", "📁");
-            const desc = prompt("Enter description:", "New category description");
-
-            if (title) {
-                const grid = document.getElementById('dynamicGrid');
-                const newCard = document.createElement('div');
-                newCard.className = "card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer relative group";
-                newCard.innerHTML = `
-                    <button onclick="editFolder(this)" class="absolute top-2 left-2 text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 opacity-0 group-hover:opacity-100 transition">✏️ Edit</button>
-                    <button onclick="this.closest('.card-glass').remove()" class="absolute top-2 right-2 text-[10px] bg-red-900 px-1.5 py-0.5 rounded text-white opacity-0 group-hover:opacity-100 transition">🗑️ Delete</button>
-                    <div class="space-y-1 mt-3">
-                        <span class="text-2xl block folder-icon">${icon}</span>
-                        <h3 class="font-black text-[11px] text-amber-400 leading-tight folder-title">${title}</h3>
-                        <p class="text-[9px] text-slate-300 leading-tight folder-desc">${desc}</p>
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "card-glass p-3.5 rounded-2xl flex items-center justify-between cursor-pointer";
+                card.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">${item.icon}</span>
+                        <div>
+                            <h3 class="font-bold text-xs text-amber-400">${item.name}</h3>
+                            <p class="text-[10px] text-slate-300">${item.desc}</p>
+                        </div>
                     </div>
-                    <div class="flex justify-end mt-3">
-                        <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                    </div>
+                    <a href="${item.link}" target="_blank" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-[10px] shadow">Open ➔</a>
                 `;
-                grid.appendChild(newCard);
-                alert("പുതിയ ഫോൾഡർ വിജയകരമായി ചേർത്തു!");
-            }
+                container.appendChild(card);
+            });
+
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderView').classList.remove('hidden');
         }
 
-        // Admin Panel Access
+        function goHome() {
+            document.getElementById('subFolderView').classList.add('hidden');
+            document.getElementById('homeView').classList.remove('hidden');
+        }
+
+        // Admin Panel for Changing Background & Logo
         function openAdminPanel() {
             const pwd = prompt("Enter Admin Password (default: admin):");
             if(pwd === "admin") {
-                alert("അഡ്മിൻ മോഡ് സജീവമാക്കി! നിങ്ങൾക്ക് ഫോൾഡറുകളിൽ ഹോവർ ചെയ്ത് എഡിറ്റ് ചെയ്യാനും ഡിലീറ്റ് ചെയ്യാനും താഴെ '+' ബട്ടൺ ഉപയോഗിച്ച് പുതിയവ ചേർക്കാനും സാധിക്കും.");
+                let choice = prompt("Choose action:\n1. Change Background Image URL\n2. Change Logo Image URL");
+                if(choice === "1") {
+                    let bgUrl = prompt("Enter image URL for Background:");
+                    if(bgUrl) {
+                        document.getElementById('mainBody').style.backgroundImage = `url('${bgUrl}')`;
+                        localStorage.setItem('appBg', bgUrl);
+                    }
+                } else if(choice === "2") {
+                    let logoUrl = prompt("Enter image URL for Logo:");
+                    if(logoUrl) {
+                        document.getElementById('appLogoDisplay').innerHTML = `<img src="${logoUrl}" class="w-full h-full object-cover rounded-full">`;
+                        localStorage.setItem('appLogo', logoUrl);
+                    }
+                }
             } else if(pwd !== null) {
                 alert("പാസ്‌വേഡ് തെറ്റാണ്!");
             }
         }
 
-        // Load saved settings on start
+        // Load saved settings
         window.onload = function() {
-            const savedBg = localStorage.getItem('customAppBg');
+            const savedBg = localStorage.getItem('appBg');
             if(savedBg) {
                 document.getElementById('mainBody').style.backgroundImage = `url('${savedBg}')`;
             }
-            const savedLogo = localStorage.getItem('customAppLogo');
+            const savedLogo = localStorage.getItem('appLogo');
             if(savedLogo) {
                 document.getElementById('appLogoDisplay').innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover rounded-full">`;
             }
