@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Final Ultimate Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>OYES GLOBAL HUB - Design Studio Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -12,8 +12,8 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #f8fafc;
-            font-family: 'Poppins', sans-serif;
+            color: var(--app-text-color, #f8fafc);
+            font-family: var(--app-font, 'Poppins'), sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -22,7 +22,7 @@
         .card-3d {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.88), rgba(15, 23, 42, 0.96));
             backdrop-filter: blur(18px);
-            border: 1px solid rgba(245, 158, 11, 0.4);
+            border: 1px solid var(--app-border-color, rgba(245, 158, 11, 0.4));
             box-shadow: 0 12px 35px -10px rgba(245, 158, 11, 0.25);
             background-size: cover;
             background-position: center;
@@ -32,6 +32,9 @@
             border-color: rgba(245, 158, 11, 0.8);
             transform: translateY(-3px);
             box-shadow: 0 15px 40px -10px rgba(245, 158, 11, 0.4);
+        }
+        .dynamic-title {
+            color: var(--app-title-color, #fbbf24) !important;
         }
         .hidden { display: none; }
     </style>
@@ -44,7 +47,7 @@
             <button class="text-amber-400 text-xl font-bold p-1 hover:scale-110 transition">☰</button>
             <div class="flex items-center gap-1.5 cursor-pointer" onclick="goHome()">
                 <div id="appLogoDisplay" class="w-9 h-9 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-xs overflow-hidden shadow">
-                    <span>🦅</span>
+                    <span>🌐</span>
                 </div>
             </div>
             <div class="flex items-center gap-2">
@@ -57,10 +60,10 @@
         </div>
     </header>
 
-    <!-- Master Admin Control Panel (Full Options) -->
+    <!-- Master Admin Control Panel (With Design Studio Studio Tools) -->
     <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/98 border-b border-amber-500/60 p-4 hidden space-y-3 z-40 shadow-2xl">
         <div class="flex justify-between items-center">
-            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🔒 Full Admin Settings</h3>
+            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🎨 Design Studio & Admin</h3>
             <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 hover:bg-red-800 text-white px-2.5 py-1 rounded font-bold shadow">Lock 🔒</button>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs">
@@ -68,10 +71,15 @@
             <button onclick="document.getElementById('bgFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌅 Change App BG</button>
             <button onclick="document.getElementById('topBannerBgInput').click()" class="bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🌄 Change Top Box BG</button>
             <button onclick="editTopBannerPrompt()" class="bg-indigo-600/90 hover:bg-indigo-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">✏️ Edit Top Banner Text & Logo</button>
+            
+            <!-- Design Studio Color & Font Customizers -->
+            <button onclick="openColorStudio()" class="bg-pink-600/90 hover:bg-pink-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🎨 Text & Theme Colors</button>
+            <button onclick="openFontStudio()" class="bg-purple-600/90 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔤 Font Style Studio</button>
+
             <button onclick="promptFolderCustomization('bg')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📁 Folder Background</button>
             <button onclick="promptFolderCustomization('icon')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔖 Folder Icon Photo</button>
             <button onclick="addNewMainFolderPrompt()" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">➕ Add New Folder</button>
-            <button onclick="editFolderDetailsPrompt()" class="bg-purple-600/90 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">✏️ Edit Folder Name</button>
+            <button onclick="editFolderDetailsPrompt()" class="bg-violet-600/90 hover:bg-violet-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">✏️ Edit Folder Name</button>
             <button onclick="deleteFolderPrompt()" class="bg-rose-900/90 hover:bg-rose-800 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🗑️ Delete Folder</button>
             <button onclick="checkStorageStatus()" class="bg-cyan-700/90 hover:bg-cyan-600 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📊 Check Storage</button>
             <button onclick="resetAppSettings()" class="bg-red-950 hover:bg-red-900 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🔄 Factory Reset Settings</button>
@@ -92,11 +100,11 @@
         <!-- Editable Top Banner Box -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
             <div id="bannerIconDisplay" class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden shadow-xl cursor-pointer hover:opacity-90 transition" onclick="if(isAdminLoggedIn) document.getElementById('bannerIconInput').click()" title="Click to change banner icon">
-                <span>🌍🦅</span>
+                <span>🌐</span>
             </div>
             <div>
-                <h2 id="bannerTitle1" class="text-lg font-black tracking-widest text-amber-400">CONNECTING PEOPLE</h2>
-                <h2 id="bannerTitle2" class="text-lg font-black tracking-widest text-amber-400">UNITING OPPORTUNITIES</h2>
+                <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
+                <h2 id="bannerTitle2" class="text-lg font-black tracking-widest dynamic-title">UNITING OPPORTUNITIES</h2>
                 <p id="bannerSubtitle" class="text-[10px] text-amber-200 font-semibold tracking-wider mt-0.5">OYES — A WORLD OF OPPORTUNITIES</p>
             </div>
             <div class="relative mt-2">
@@ -205,7 +213,42 @@
             localStorage.setItem('oyesDomainData', JSON.stringify(data));
         }
 
+        function loadDesignStudioPreferences() {
+            const titleColor = localStorage.getItem('appTitleColor') || '#fbbf24';
+            const textColor = localStorage.getItem('appTextColor') || '#f8fafc';
+            const fontStyle = localStorage.getItem('appFontFamily') || "'Poppins', sans-serif";
+
+            document.documentElement.style.setProperty('--app-title-color', titleColor);
+            document.documentElement.style.setProperty('--app-text-color', textColor);
+            document.documentElement.style.setProperty('--app-font', fontStyle);
+        }
+
+        function openColorStudio() {
+            let tColor = prompt("Enter Title Color (Hex code e.g. #fbbf24, #38bdf8, #f43f5e):", localStorage.getItem('appTitleColor') || '#fbbf24');
+            let txtColor = prompt("Enter General Text Color (Hex code e.g. #f8fafc, #e2e8f0):", localStorage.getItem('appTextColor') || '#f8fafc');
+
+            if (tColor) localStorage.setItem('appTitleColor', tColor);
+            if (txtColor) localStorage.setItem('appTextColor', txtColor);
+
+            loadDesignStudioPreferences();
+            renderHome();
+            alert("കളർ തീം വിജയകരമായി മാറ്റി!");
+        }
+
+        function openFontStudio() {
+            let choice = prompt("Select Font Style Number:\n1. Poppins (Modern)\n2. Cinzel (Classic / Royal)\n3. Orbitron (Futuristic)", "1");
+            let selectedFont = "'Poppins', sans-serif";
+
+            if (choice === "2") selectedFont = "'Cinzel', serif";
+            else if (choice === "3") selectedFont = "'Orbitron', sans-serif";
+
+            localStorage.setItem('appFontFamily', selectedFont);
+            loadDesignStudioPreferences();
+            alert("ഫോണ്ട് സ്റ്റൈൽ അപ്ഡേറ്റ് ചെയ്തു!");
+        }
+
         function loadTopBanner() {
+            loadDesignStudioPreferences();
             const t1 = localStorage.getItem('bannerT1') || "CONNECTING PEOPLE";
             const t2 = localStorage.getItem('bannerT2') || "UNITING OPPORTUNITIES";
             const sub = localStorage.getItem('bannerSub') || "OYES — A WORLD OF OPPORTUNITIES";
@@ -217,7 +260,11 @@
             document.getElementById('bannerSubtitle').innerText = sub;
 
             if (icon) {
-                document.getElementById('bannerIconDisplay').innerHTML = `<img src="${icon}" class="w-full h-full object-cover rounded-full">`;
+                if (icon.startsWith('data:') || icon.startsWith('http')) {
+                    document.getElementById('bannerIconDisplay').innerHTML = `<img src="${icon}" class="w-full h-full object-cover rounded-full">`;
+                } else {
+                    document.getElementById('bannerIconDisplay').innerHTML = `<span>${icon}</span>`;
+                }
             }
             if (topBg) {
                 document.getElementById('topBannerBox').style.backgroundImage = `url('${topBg}')`;
@@ -286,21 +333,21 @@
                         <div class="flex items-center space-x-3">
                             <span class="text-3xl">${iconDisplay}</span>
                             <div>
-                                <h3 class="font-bold text-xs text-amber-300">${folder.name}</h3>
+                                <h3 class="font-bold text-xs dynamic-title">${folder.name}</h3>
                                 <p class="text-[9px] text-slate-300">${folder.desc}</p>
                             </div>
                         </div>
-                        <span class="w-7 h-7 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xs font-bold">➔</span>
+                        <span class="w-7 h-7 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center dynamic-title text-xs font-bold">➔</span>
                     `;
                 } else {
                     card.innerHTML = `
                         <div class="space-y-1.5 mt-1">
                             <span class="text-3xl block">${iconDisplay}</span>
-                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${folder.name}</h3>
+                            <h3 class="font-bold text-[11px] dynamic-title leading-tight">${folder.name}</h3>
                             <p class="text-[9px] text-slate-300">${folder.desc}</p>
                         </div>
                         <div class="flex justify-end mt-3">
-                            <span class="w-6 h-6 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xs">➔</span>
+                            <span class="w-6 h-6 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center dynamic-title text-xs">➔</span>
                         </div>
                     `;
                 }
@@ -326,18 +373,18 @@
 
                 let mediaDisplay = `<span class="text-3xl block">${item.icon}</span>`;
                 if (item.type === 'pdf') {
-                    mediaDisplay = `<div class="w-full h-24 rounded-xl overflow-hidden mb-2 bg-slate-900 flex flex-col items-center justify-center border border-amber-500/50 text-amber-400 font-bold text-xs shadow-inner">📄 View PDF</div>`;
+                    mediaDisplay = `<div class="w-full h-24 rounded-xl overflow-hidden mb-2 bg-slate-900 flex flex-col items-center justify-center border border-amber-500/50 dynamic-title font-bold text-xs shadow-inner">📄 View PDF</div>`;
                 } else if (item.icon && (item.icon.startsWith('data:') || item.icon.startsWith('http'))) {
                     mediaDisplay = `<div class="w-full h-24 rounded-xl overflow-hidden mb-2 border border-amber-500/30"><img src="${item.icon}" class="w-full h-full object-cover"></div>`;
                 }
 
-                let priceTag = item.price ? `<span class="inline-block bg-amber-500/20 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/40 my-1">🏷️ ${item.price}</span>` : "";
+                let priceTag = item.price ? `<span class="inline-block bg-amber-500/20 dynamic-title text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/40 my-1">🏷️ ${item.price}</span>` : "";
 
                 card.innerHTML = `
                     ${deleteBtn}
                     <div class="space-y-1 mt-1">
                         ${mediaDisplay}
-                        <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${item.name}</h3>
+                        <h3 class="font-bold text-[11px] dynamic-title leading-tight">${item.name}</h3>
                         ${priceTag}
                         <p class="text-[9px] text-slate-300 leading-tight">${item.desc}</p>
                     </div>
