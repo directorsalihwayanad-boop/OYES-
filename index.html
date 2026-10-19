@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Secure Admin</title>
+    <title>OYES GLOBAL HUB - Ultimate Pro App</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -56,23 +56,28 @@
         </div>
     </header>
 
-    <!-- Secure Admin Control Panel (Hidden by default, requires password 'admin') -->
-    <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/95 border-b border-amber-500/50 p-4 hidden space-y-3 z-40">
+    <!-- Full Admin Control Panel (Visible only when logged in as Admin) -->
+    <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/95 border-b border-amber-500/50 p-4 hidden space-y-3 z-40 shadow-2xl">
         <div class="flex justify-between items-center">
-            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider">🔒 Secure Admin Panel Active</h3>
-            <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 text-white px-2 py-0.5 rounded">Lock 🔒</button>
+            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider">🔒 Admin File Manager & Customizer</h3>
+            <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 text-white px-2 py-0.5 rounded font-bold">Lock 🔒</button>
         </div>
         <div class="grid grid-cols-2 gap-2">
-            <button onclick="document.getElementById('logoFileInput').click()" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold p-2 rounded-xl text-[10px] shadow">🖼️ Change Logo</button>
+            <button onclick="document.getElementById('logoFileInput').click()" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold p-2 rounded-xl text-[10px] shadow">🖼️ Change App Logo</button>
             <button onclick="document.getElementById('bgFileInput').click()" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold p-2 rounded-xl text-[10px] shadow">🌅 Change App BG</button>
-            <button onclick="addNewFolder()" class="bg-emerald-600/80 text-white font-bold p-2 rounded-xl text-[10px] shadow">📁 Add Folder</button>
-            <button onclick="resetAppSettings()" class="bg-red-900/80 text-white font-bold p-2 rounded-xl text-[10px] shadow">🔄 Reset Defaults</button>
+            <button onclick="promptFolderCustomization('bg')" class="bg-blue-600/80 hover:bg-blue-500 text-white font-bold p-2 rounded-xl text-[10px] shadow">📁 Folder Background</button>
+            <button onclick="promptFolderCustomization('icon')" class="bg-blue-600/80 hover:bg-blue-500 text-white font-bold p-2 rounded-xl text-[10px] shadow">🔖 Folder Icon / Photo</button>
+            <button onclick="addNewMainFolderPrompt()" class="bg-emerald-600/80 text-white font-bold p-2 rounded-xl text-[10px] shadow">➕ Add Main Folder</button>
+            <button onclick="editFolderDetailsPrompt()" class="bg-purple-600/80 text-white font-bold p-2 rounded-xl text-[10px] shadow">✏️ Edit Folder Name</button>
+            <button onclick="resetAppSettings()" class="bg-red-900/80 text-white font-bold p-2 rounded-xl text-[10px] shadow col-span-2">🔄 Reset Default Settings</button>
         </div>
     </div>
 
-    <!-- Hidden File Inputs -->
+    <!-- Hidden File Inputs for Gallery / File Manager Access -->
     <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="applyGlobalLogo(event)">
     <input type="file" id="bgFileInput" class="hidden" accept="image/*" onchange="applyGlobalBackground(event)">
+    <input type="file" id="folderBgInput" class="hidden" accept="image/*" onchange="applyFolderBgFile(event)">
+    <input type="file" id="folderIconInput" class="hidden" accept="image/*" onchange="applyFolderIconFile(event)">
     <input type="file" id="itemMediaInput" class="hidden" accept="image/*,video/*,.pdf" onchange="applyItemMediaFile(event)">
 
     <!-- Main Dashboard View (Home Page Grid) -->
@@ -120,10 +125,11 @@
         <button onclick="openDomain(5)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">👥</span>Entertainment</button>
     </nav>
 
-    <!-- JavaScript Engine -->
+    <!-- JavaScript Complete Engine -->
     <script>
         let currentDomainId = null;
         let isAdminLoggedIn = false;
+        let targetFolderIdForCustom = null;
 
         const defaultMainFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", desc: "Connecting people Uniting opportunities", icon: "📖", bg: "" },
@@ -199,10 +205,15 @@
                 if (folder.bg) card.style.backgroundImage = `url('${folder.bg}')`;
                 card.setAttribute('onclick', `openDomain(${folder.id})`);
 
+                let iconDisplay = folder.icon;
+                if (folder.icon.startsWith('data:') || folder.icon.startsWith('http')) {
+                    iconDisplay = `<img src="${folder.icon}" class="w-10 h-10 mx-auto object-cover rounded-xl shadow">`;
+                }
+
                 if (folder.fullWidth) {
                     card.innerHTML = `
                         <div class="flex items-center space-x-3">
-                            <span class="text-3xl">${folder.icon.startsWith('data:') ? `<img src="${folder.icon}" class="w-10 h-10 object-cover rounded-xl">` : folder.icon}</span>
+                            <span class="text-3xl">${iconDisplay}</span>
                             <div>
                                 <h3 class="font-bold text-xs text-amber-300">${folder.name}</h3>
                                 <p class="text-[9px] text-slate-300">${folder.desc}</p>
@@ -213,7 +224,7 @@
                 } else {
                     card.innerHTML = `
                         <div class="space-y-1.5 mt-1">
-                            <span class="text-3xl block">${folder.icon.startsWith('data:') ? `<img src="${folder.icon}" class="w-10 h-10 mx-auto object-cover rounded-xl">` : folder.icon}</span>
+                            <span class="text-3xl block">${iconDisplay}</span>
                             <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${folder.name}</h3>
                             <p class="text-[9px] text-slate-300">${folder.desc}</p>
                         </div>
@@ -237,15 +248,20 @@
                 const card = document.createElement('div');
                 card.className = "card-3d p-3.5 rounded-2xl flex flex-col justify-between text-center relative";
                 
-                let deleteButtonHTML = "";
+                let deleteBtn = "";
                 if (isAdminLoggedIn) {
-                    deleteButtonHTML = `<button onclick="event.stopPropagation(); deleteItem(${domainId}, ${index})" class="absolute top-2 right-2 text-[9px] bg-red-900/80 text-white px-1.5 py-0.5 rounded shadow">🗑️ Delete</button>`;
+                    deleteBtn = `<button onclick="event.stopPropagation(); deleteItem(${domainId}, ${index})" class="absolute top-2 right-2 text-[9px] bg-red-900/80 text-white px-1.5 py-0.5 rounded shadow font-bold">🗑️ Delete</button>`;
+                }
+
+                let itemIcon = item.icon;
+                if (item.icon.startsWith('data:') || item.icon.startsWith('http')) {
+                    itemIcon = `<img src="${item.icon}" class="w-12 h-12 mx-auto object-cover rounded-xl shadow">`;
                 }
 
                 card.innerHTML = `
-                    ${deleteButtonHTML}
+                    ${deleteBtn}
                     <div class="space-y-1.5 mt-2">
-                        <span class="text-3xl block">${item.icon.startsWith('data:') ? `<img src="${item.icon}" class="w-10 h-10 mx-auto object-cover rounded-xl">` : item.icon}</span>
+                        <span class="text-3xl block">${itemIcon}</span>
                         <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${item.name}</h3>
                         <p class="text-[9px] text-slate-300 leading-tight">${item.desc}</p>
                     </div>
@@ -277,11 +293,11 @@
                 document.getElementById('adminPanelBox').classList.toggle('hidden');
                 return;
             }
-            let pwd = prompt("Enter Admin Password to access Control Panel:");
+            let pwd = prompt("Enter Admin Password (default: admin):");
             if (pwd === "admin") {
                 isAdminLoggedIn = true;
                 document.getElementById('adminPanelBox').classList.remove('hidden');
-                alert("അഡ്മിൻ പ്രവേശനം വിജയം! ഇപ്പോൾ നിങ്ങൾക്ക് ഫയലുകൾ ചേർക്കാനും മാനേജ് ചെയ്യാനും സാധിക്കും.");
+                alert("അഡ്മിൻ പ്രവേശനം വിജയം! ഇപ്പോൾ നിങ്ങൾക്ക് എല്ലാ ഫോൾഡറുകളും ബാക്ക്ഗ്രൗണ്ടുകളും ഫയലുകളും മാനേജ് ചെയ്യാം.");
                 renderHome();
                 if(currentDomainId !== null) openDomain(currentDomainId);
             } else if (pwd !== null) {
@@ -292,7 +308,7 @@
         function lockAdminPanel() {
             isAdminLoggedIn = false;
             document.getElementById('adminPanelBox').classList.add('hidden');
-            alert("അഡ്മിൻ പാനൽ ലോക്ക് ചെയ്തു. സാധാരണ യൂസർ മോഡ് ആക്ടീവ് ആണ്.");
+            alert("അഡ്മിൻ പാനൽ ലോക്ക് ചെയ്തു.");
             renderHome();
             if(currentDomainId !== null) openDomain(currentDomainId);
         }
@@ -304,7 +320,7 @@
                 reader.onload = function(e) {
                     document.getElementById('appLogoDisplay').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
                     localStorage.setItem('appLogo', e.target.result);
-                    alert("ലോഗോ വിജയകരമായി മാറ്റി സേവ് ചെയ്തു!");
+                    alert("ലോഗോ പെർമനെന്റായി മാറ്റി സേവ് ചെയ്തു!");
                 }
                 reader.readAsDataURL(file);
             }
@@ -317,16 +333,68 @@
                 reader.onload = function(e) {
                     document.body.style.backgroundImage = `url('${e.target.result}')`;
                     localStorage.setItem('appBg', e.target.result);
-                    alert("ബാക്ക്ഗ്രൗണ്ട് വിജയകരമായി മാറ്റി സേവ് ചെയ്തു!");
+                    alert("ബാക്ക്ഗ്രൗണ്ട് പെർമനെന്റായി മാറ്റി സേവ് ചെയ്തു!");
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        function addNewFolder() {
-            let name = prompt("Enter Folder Name:");
+        function promptFolderCustomization(type) {
+            let id = prompt("Enter Folder ID/Number (1 to 7 or your custom folder ID):");
+            let folders = getMainFolders();
+            let folder = folders.find(f => f.id == id);
+            if (folder) {
+                targetFolderIdForCustom = id;
+                if (type === 'bg') {
+                    document.getElementById('folderBgInput').click();
+                } else {
+                    document.getElementById('folderIconInput').click();
+                }
+            } else {
+                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
+            }
+        }
+
+        function applyFolderBgFile(event) {
+            const file = event.target.files[0];
+            if (file && targetFolderIdForCustom) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let folders = getMainFolders();
+                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
+                    if (folder) {
+                        folder.bg = e.target.result;
+                        saveMainFolders(folders);
+                        renderHome();
+                        alert("ഫോൾഡർ ബാക്ക്ഗ്രൗണ്ട് വിജയകരമായി സേവ് ചെയ്തു!");
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyFolderIconFile(event) {
+            const file = event.target.files[0];
+            if (file && targetFolderIdForCustom) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let folders = getMainFolders();
+                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
+                    if (folder) {
+                        folder.icon = e.target.result;
+                        saveMainFolders(folders);
+                        renderHome();
+                        alert("ഫോൾഡർ ഐക്കൺ ഫോട്ടോ വിജയകരമായി സേവ് ചെയ്തു!");
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addNewMainFolderPrompt() {
+            let name = prompt("Enter Main Folder Name:");
             let desc = prompt("Enter Description:");
-            let icon = prompt("Enter Emoji (e.g. 📁):", "📁");
+            let icon = prompt("Enter Emoji or type 'photo':", "📁");
             let id = prompt("Enter Folder Number/ID:");
 
             if (name && id) {
@@ -334,13 +402,30 @@
                 folders.push({ id: parseInt(id), name, desc: desc || "", icon: icon || "📁", bg: "" });
                 saveMainFolders(folders);
                 renderHome();
-                alert("പുതിയ ഫോൾഡർ വിജയകരമായി ചേർത്തു!");
+                alert("പുതിയ മെയിൻ ഫോൾഡർ വിജയകരമായി ചേർത്തു!");
+            }
+        }
+
+        function editFolderDetailsPrompt() {
+            let id = prompt("Enter Folder ID to edit (1 to 7):");
+            let folders = getMainFolders();
+            let folder = folders.find(f => f.id == id);
+            if (folder) {
+                let newName = prompt("Enter new Folder Name:", folder.name);
+                let newDesc = prompt("Enter new Description:", folder.desc);
+                if (newName) folder.name = newName;
+                if (newDesc) folder.desc = newDesc;
+                saveMainFolders(folders);
+                renderHome();
+                alert("ഫോൾഡർ വിവരങ്ങൾ അപ്ഡേറ്റ് ചെയ്തു!");
+            } else {
+                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
             }
         }
 
         function openAddItemPrompt() {
-            let name = prompt("Enter Item Name:");
-            let iconInput = prompt("Type Emoji (e.g. 🏛️) or type 'photo' to upload image:", "🏛️");
+            let name = prompt("Enter Item Name (e.g. New Document):");
+            let iconInput = prompt("Type Emoji (e.g. 📄) or type 'photo' to upload image from gallery:", "📄");
             let desc = prompt("Enter Short Description:");
             let link = prompt("Enter Link (Drive / WhatsApp / Web URL):");
 
@@ -356,7 +441,7 @@
                 allData[currentDomainId].push({name, icon: iconInput || "📁", desc: desc || "", link});
                 saveDomainData(allData);
                 openDomain(currentDomainId);
-                alert("പുതിയ ഫയൽ/ഐറ്റം വിജയകരമായി ചേർത്തു!");
+                alert("പുതിയ ഫയൽ വിജയകരമായി ചേർത്തു!");
             }
         }
 
@@ -375,7 +460,7 @@
                     });
                     saveDomainData(allData);
                     openDomain(currentDomainId);
-                    alert("ഫോട്ടോ സഹിതം ഐറ്റം വിജയകരമായി ചേർത്തു!");
+                    alert("ഫോട്ടോ ഫയൽ സഹിതം പുതിയ ഐറ്റം വിജയകരമായി ചേർത്തു!");
                     window.tempItemData = null;
                 }
                 reader.readAsDataURL(file);
@@ -387,7 +472,7 @@
                 const allData = getDomainData();
                 allData[domainId].splice(index, 1);
                 saveDomainData(allData);
-                openDomain(currentDomainId);
+                openDomain(domainId);
             }
         }
 
