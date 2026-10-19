@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Ultimate Pro Customizer</title>
+    <title>OYES APP - Multi-Language Global Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             -webkit-user-select: none;
             user-select: none;
-            background: radial-gradient(circle at top, #0f172a, #020617, #000000);
+            background: radial-gradient(circle at top, #1e1b4b, #0f172a, #020617);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -19,588 +19,388 @@
             min-height: 100vh;
         }
         .card-3d {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.98));
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.25);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2);
             transition: all 0.3s ease;
         }
         .card-3d:hover {
-            border-color: rgba(245, 158, 11, 0.8);
+            border-color: rgba(245, 158, 11, 0.7);
             transform: translateY(-2px);
-        }
-        .gold-gradient-text {
-            background: linear-gradient(to bottom, #ffeb3b, #ff9800);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body id="appBody" class="flex flex-col justify-between min-h-screen pb-20">
+<body class="flex flex-col justify-between min-h-screen">
 
-    <!-- Top Header Bar -->
-    <header class="p-3 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-2xl">
+    <!-- Header Section with Multi-Language Selector -->
+    <header class="p-2.5 text-center bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-40 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
-            <button onclick="promptAdminLogin()" class="text-slate-200 text-xl p-1" title="Admin Settings">⚙️</button>
-            
-            <div class="flex flex-col items-center cursor-pointer" onclick="switchBottomTab('home')">
-                <div class="w-10 h-10 rounded-full bg-slate-900 border-2 border-amber-500/80 flex items-center justify-center overflow-hidden shadow-lg -mt-1">
-                    <img id="headerLogoImg" src="file_00000000b9608211988d7905e24d9dd0.png" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100'" class="w-full h-full object-cover rounded-full" alt="Logo">
+            <div class="flex items-center gap-1.5 cursor-pointer" onclick="goBackHome()">
+                <div class="w-8 h-8 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-xs overflow-hidden" id="headerLogoContainer">
+                    <span id="headerLogoIcon">🦅</span>
                 </div>
-                <span class="text-[9px] font-extrabold tracking-widest text-amber-400 mt-0.5">OYES</span>
+                <h1 id="headerMainTitle" class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
             </div>
             
-            <div class="flex items-center gap-2">
-                <select class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-2 py-1 focus:outline-none shadow">
+            <!-- Language Selector Dropdown -->
+            <div class="flex items-center gap-1">
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
                     <option value="en">English</option>
                     <option value="ml">മലയാളം</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ar">العربية</option>
                 </select>
-                <button type="button" onclick="promptAdminLogin()" class="bg-amber-950/90 text-amber-300 text-[10px] font-bold border border-amber-500/60 rounded-lg px-2 py-1 shadow">Admin</button>
+                <button type="button" onclick="openFileManager()" class="bg-indigo-950/80 text-indigo-300 text-[10px] font-semibold border border-indigo-500/60 rounded-lg px-2 py-1 shadow">📁</button>
+                <button type="button" onclick="requestAdminAccess()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2 py-1 shadow">⚙️</button>
             </div>
         </div>
     </header>
 
+    <!-- Hidden Inputs -->
+    <input type="file" id="globalFileManager" class="hidden" multiple accept="image/*,video/*,.pdf" onchange="handleWhatsAppUpload(event)">
+    <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="handleLogoSelection(event)">
+    <input type="file" id="bgFileInput" class="hidden" accept="image/*" onchange="handleBgSelection(event)">
+
+    <!-- Admin Login Modal (Secret Code: salih9947) -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-amber-500/60 p-6 rounded-3xl max-w-xs w-full shadow-2xl space-y-4">
+            <div class="text-center space-y-1">
+                <h3 class="text-sm font-bold text-amber-300">Admin Security Control</h3>
+                <p class="text-[11px] text-slate-400">Enter Security Code (salih9947):</p>
+            </div>
+            <input type="password" id="adminSecretInput" placeholder="Enter code..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-amber-600/50 text-xs text-center tracking-widest focus:outline-none">
+            <div class="grid grid-cols-2 gap-2.5">
+                <button type="button" onclick="closeAdminModal()" class="bg-slate-800 text-slate-300 text-xs py-2.5 rounded-xl font-bold">Cancel</button>
+                <button type="button" onclick="verifyAdminCode()" class="bg-amber-600 text-white text-xs py-2.5 rounded-xl font-bold shadow">Verify</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Hero Banner Section -->
-        <div class="card-3d rounded-3xl text-center overflow-hidden border border-amber-500/50 shadow-2xl relative p-4 space-y-1.5">
-            <div class="relative z-10 space-y-0.5">
-                <h2 class="text-sm font-black tracking-wider gold-gradient-text">CONNECTING PEOPLE</h2>
-                <h2 class="text-sm font-black tracking-wider gold-gradient-text">UNITING OPPORTUNITIES</h2>
-                <div class="flex items-center justify-center gap-2 pt-1">
-                    <span class="h-[1px] w-6 bg-amber-500/50"></span>
-                    <p class="text-[8px] tracking-wider text-slate-300 uppercase font-semibold">OYES — A WORLD OF OPPORTUNITIES</p>
-                    <span class="h-[1px] w-6 bg-amber-500/50"></span>
-                </div>
+        
+        <!-- Top Banner with User Slogans -->
+        <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
+            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
+                <span id="bannerLogoIcon">🌍🦅</span>
+            </div>
+            <div>
+                <h2 id="bannerAppTitle" class="text-xl font-black tracking-widest text-amber-400">OYES GLOBAL HUB</h2>
+                <p id="bannerSubtitle" class="text-[11px] text-amber-200 font-semibold tracking-wider mt-0.5">Embracing Change • Creating the Future</p>
             </div>
         </div>
 
-        <!-- Search Bar -->
-        <div class="relative flex items-center">
-            <input type="text" placeholder="Search anything on OYES..." class="w-full bg-slate-900/90 text-slate-200 text-xs px-4 py-3 pl-10 pr-10 rounded-2xl border border-slate-800 focus:outline-none focus:border-amber-500 shadow-inner">
-            <span class="absolute left-3.5 text-slate-400 text-xs">🔍</span>
-            <span class="absolute right-3.5 text-slate-300 text-xs cursor-pointer">🎛️</span>
+        <!-- 7 Primary Folders Grid -->
+        <div class="grid grid-cols-2 gap-3">
+            
+            <!-- 1. World of Knowledge -->
+            <div onclick="openDomainFolders(1)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">📖</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">WORLD OF KNOWLEDGE</h3>
+                    <p class="text-[9px] text-slate-300">Connecting people • Uniting opportunities</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('World of Knowledge')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 2. Job Vacancies & Cleaning -->
+            <div onclick="openDomainFolders(2)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">💼</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">JOB VACANCIES & CLEANING</h3>
+                    <p class="text-[9px] text-slate-300">Shift in thought • Progress in life</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Job Vacancies & Cleaning')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 3. Complete House Construction, Granites, Appliances & Workers Hub (Updated 3rd) -->
+            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🏠</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">HOUSE MATERIALS, APPLIANCES & WORKERS</h3>
+                    <p class="text-[9px] text-slate-300">Granites, Marbles, Fans, Sofas, Kitchenware & Labours</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('House Materials & Appliances')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 4. Stays & Hotels -->
+            <div onclick="openDomainFolders(4)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🏨</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">STAYS & HOTELS</h3>
+                    <p class="text-[9px] text-slate-300">One connection • Endless possibilities</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Stays & Hotels')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 5. Buy & Sell Market Hub -->
+            <div onclick="openDomainFolders(5)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🤝</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">BUY & SELL MARKET HUB</h3>
+                    <p class="text-[9px] text-slate-300">Your world • Your community</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Buy & Sell Market Hub')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 6. Events & Advertisements -->
+            <div onclick="openDomainFolders(6)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🌟</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">EVENTS & ADVERTISEMENTS</h3>
+                    <p class="text-[9px] text-slate-300">Connect digitally • Move forward together</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Events & Advertisements')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 7. OYES Cinema & Studio -->
+            <div onclick="openDomainFolders(7)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center col-span-2 max-w-[200px] mx-auto w-full">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🎬</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">OYES CINEMA & STUDIO</h3>
+                    <p class="text-[9px] text-slate-300">Skills awaken • Possibilities unfold</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('OYES Cinema & Studio')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Home Grid Folders -->
-        <div id="homeGridContainer" class="grid grid-cols-2 gap-3"></div>
     </main>
 
-    <!-- Sub-Folders View -->
+    <!-- Sub-Folders & Content View -->
     <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
-            <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
+            <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
             <h3 id="pageTitle" class="text-xs font-bold text-amber-300 text-right">Sub Page</h3>
         </div>
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
-    <!-- Details View -->
-    <div id="designDetailView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
-            <button type="button" onclick="goBackToSubFolders()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
-            <h3 id="designPageTitle" class="text-xs font-bold text-amber-300 text-right">Details</h3>
-        </div>
-        <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
-    </div>
+    <!-- Footer Section -->
+    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800 bg-slate-950/90 space-y-2">
+        <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
+    </footer>
 
-    <!-- Admin Panel View -->
-    <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
-        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
-            <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
-            <h3 class="text-xs font-bold text-amber-300">⚙️ OYES Full Customizer & Admin</h3>
-        </div>
-
-        <!-- Global App Background Customizer -->
-        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">🎨 Update Overall App Background</h4>
-            <input type="file" id="adminAppBgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
-            <button onclick="updateAppBackground()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs shadow">Save App Background</button>
-        </div>
-
-        <!-- Global Contact Settings -->
-        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📧 Official Contact Settings</h4>
-            <label class="block text-[10px] text-slate-400">Email ID:</label>
-            <input type="email" id="adminEmailInput" value="Platformoyes@gmail.com" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <label class="block text-[10px] text-slate-400 mt-1">WhatsApp Number:</label>
-            <input type="text" id="adminWaInput" value="919947198248" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <button onclick="saveContactSettings()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs shadow mt-2">Save Contact Info</button>
-        </div>
-
-        <!-- Update Main App Logo -->
-        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">🖼️ Update Main App Logo</h4>
-            <input type="file" id="adminLogoInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
-            <button onclick="updateAppLogo()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs shadow">Save Logo</button>
-        </div>
-
-        <!-- Create New Folder Section -->
-        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📂 Create New Category / Folder</h4>
-            <input type="text" id="newFolderNameInput" placeholder="Folder Name" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <input type="text" id="newFolderSloganInput" placeholder="Folder Slogan / Description" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <label class="block text-[10px] text-amber-400">Card Icon / Image:</label>
-            <input type="file" id="newFolderImgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
-            <button onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Create Folder</button>
-        </div>
-
-        <!-- Edit Existing Folders & Backgrounds -->
-        <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">✏️ Edit Folders (Name, Slogan, Icon/Background)</h4>
-            <div id="adminEditFoldersList" class="space-y-3 max-h-72 overflow-y-auto pr-1 text-xs"></div>
-        </div>
-
-        <!-- File Manager: Add Items/PDFs to Folders -->
-        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📄 File Manager: Add PDF / Item to Folder</h4>
-            <select id="targetFolderSelect" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800"></select>
-            <input type="text" id="newItemNameInput" placeholder="Item Name (e.g. Job Vacancy / PDF)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <input type="text" id="newItemDescInput" placeholder="Short Description" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <input type="text" id="newItemLinkInput" placeholder="External Web Link / PDF URL (Optional)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <input type="text" id="newItemIconInput" placeholder="Emoji Icon (e.g. 📋, 📄, 📖)" value="📌" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <button onclick="addNewFileToFolder()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Add File/Item</button>
-        </div>
-
-        <button onclick="resetFactorySettings()" class="w-full bg-red-950 border border-red-700 text-red-300 font-bold py-2 rounded-xl text-xs shadow">🔄 Reset Everything to Default</button>
-    </div>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 p-2 z-40 shadow-2xl">
-        <div class="flex justify-around items-center max-w-md mx-auto text-center">
-            <button onclick="switchBottomTab('home')" id="nav_home" class="flex flex-col items-center text-amber-400 space-y-0.5">
-                <span class="text-base">🏠</span>
-                <span class="text-[9px] font-bold">Home</span>
-            </button>
-            <button onclick="switchBottomTab('books')" id="nav_books" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
-                <span class="text-base">📖</span>
-                <span class="text-[9px]">Books</span>
-            </button>
-            <button onclick="switchBottomTab('jobs')" id="nav_jobs" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
-                <span class="text-base">💼</span>
-                <span class="text-[9px]">Jobs</span>
-            </button>
-            <button onclick="switchBottomTab('cinema')" id="nav_cinema" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
-                <span class="text-base">🎬</span>
-                <span class="text-[9px]">Cinema</span>
-            </button>
-            <button onclick="switchBottomTab('entertainment')" id="nav_entertainment" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
-                <span class="text-base">👥</span>
-                <span class="text-[9px]">Entertainment</span>
-            </button>
-            <button onclick="switchBottomTab('more')" id="nav_more" class="flex flex-col items-center text-slate-400 hover:text-amber-300 space-y-0.5">
-                <span class="text-base">⚙️</span>
-                <span class="text-[9px]">Admin</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- JavaScript Master Execution Logic -->
+    <!-- JavaScript & Multi-Language Dictionary -->
     <script>
-        const defaultRootFolders = [
-            { id: 1, name: "WORLD OF KNOWLEDGE", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people Uniting opportunities" },
-            { id: 2, name: "JOB VACANCIES & CLEANING", image: "file_00000000b3fc8211bf1f6afe9a255554.png", slogan: "Shift in thought Progress in life" },
-            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", image: "file_000000009d708211a36cd96f5b948416.png", slogan: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers" },
-            { id: 4, name: "STAYS & HOTELS", image: "file_0000000079708211b058ca27deb1b8be.png", slogan: "One connection Endless possibilities" },
-            { id: 5, name: "BUY & SELL MARKET HUB", image: "file_00000000f5888211ad512e83258ddd20.png", slogan: "Your world Your community" },
-            { id: 6, name: "EVENTS & ADVERTISEMENTS", image: "file_000000006c6882118fb5e593feac5e18.png", slogan: "Connect digitally Move forward together" },
-            { id: 7, name: "OYES CINEMA & STUDIO", image: "file_00000000de888211994c080cb8cf98e8.png", slogan: "Watch • Upload • Sell • Earn" }
-        ];
-
-        const defaultDomainFoldersData = {
-            1: [
-                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading and translation portal.", link: "https://quran.com"},
-                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal across multiple versions.", link: "https://www.bible.com"},
-                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita sacred teachings and verses.", link: "https://www.holy-bhagavad-gita.org"},
-                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic and spiritual texts.", link: "https://archive.org"},
-                {name: "Dhammapada (Buddha Teachings)", icon: "☸️", desc: "The path of Buddha teachings and philosophy.", link: "https://www.accesstoinsight.org"}
-            ],
-            2: [
-                {name: "Job Vacancies Portal", icon: "📋", desc: "Local & government job updates, Kerala PSC notifications.", link: "https://keralapsc.gov.in"},
-                {name: "House Deep Cleaning Services", icon: "🧹", desc: "Professional deep cleaning services for homes & offices.", link: ""}
-            ],
-            3: [
-                {name: "Marble & Granites", icon: "🏛️", desc: "Premium Italian and Indian marbles, black galaxy and tan brown granites.", link: ""}
-            ],
-            4: [
-                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
-                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"}
-            ],
-            5: [
-                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: ""}
-            ],
-            6: [
-                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: ""}
-            ],
-            7: [
-                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"}
-            ]
+        const translations = {
+            en: {
+                bannerTitle: "OYES GLOBAL HUB",
+                subtitle: "Embracing Change • Creating the Future",
+                footer: "Change from within • The future through us"
+            },
+            ml: {
+                bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്",
+                subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്",
+                footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ"
+            },
+            ta: {
+                bannerTitle: "ஒயெஸ் குளோபல் ஹப்",
+                subtitle: "மாற்றங்களை ஏற்றுக்கொண்டு • எதிர்காலத்தை உருவாக்குங்கள்",
+                footer: "மாற்றம் நம்மிடமிருந்து • எதிர்காலம் நம் மூலம்"
+            },
+            kn: {
+                bannerTitle: "ಒಯೇಸ್ ಗ್ಲೋಬಲ್ ಹಬ್",
+                subtitle: "ಬದಲಾವಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಿ • ಭವಿಷ್ಯವನ್ನು ಸೃಷ್ಟಿಸಿ",
+                footer: "ಬದಲಾವಣೆ ನಮ್ಮಿಂದ • ಭವಿಷ್ಯ ನಮ್ಮ ಮೂಲಕ"
+            },
+            hi: {
+                bannerTitle: "ओयेस ग्लोबल हब",
+                subtitle: "बदलाव को अपनाएं • भविष्य का निर्माण करें",
+                footer: "परिवर्तन हम से • भविष्य हमारे माध्यम से"
+            },
+            ar: {
+                bannerTitle: "منصة أويس العالمية",
+                subtitle: "احتضان التغيير • صناعة المستقبل",
+                footer: "التغيير من الداخل • المستقبل من خلالنا"
+            }
         };
 
-        let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
-        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domain_data')) || defaultDomainFoldersData;
-        let appLogo = localStorage.getItem('oyes_app_logo') || "file_00000000b9608211988d7905e24d9dd0.png";
-        let appBg = localStorage.getItem('oyes_app_bg') || "";
-        let adminEmail = localStorage.getItem('oyes_admin_email') || "Platformoyes@gmail.com";
-        let adminWa = localStorage.getItem('oyes_admin_wa') || "919947198248";
-
-        function applyAppSettings() {
-            document.getElementById('headerLogoImg').src = appLogo;
-            if(appBg) {
-                document.body.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.9)), url('${appBg}')`;
-            }
-            let emailInput = document.getElementById('adminEmailInput');
-            let waInput = document.getElementById('adminWaInput');
-            if(emailInput) emailInput.value = adminEmail;
-            if(waInput) waInput.value = adminWa;
-            renderHomeGrid();
+        function changeLanguage(lang) {
+            let t = translations[lang] || translations['en'];
+            document.getElementById('bannerAppTitle').innerText = t.bannerTitle;
+            document.getElementById('bannerSubtitle').innerText = t.subtitle;
+            document.getElementById('footerText').innerText = t.footer;
+            localStorage.setItem('oyes_lang', lang);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            applyAppSettings();
+            let savedLang = localStorage.getItem('oyes_lang') || 'en';
+            document.getElementById('langSelect').value = savedLang;
+            changeLanguage(savedLang);
         });
 
-        function renderHomeGrid() {
-            let container = document.getElementById('homeGridContainer');
-            if(!container) return;
-            let html = "";
-            rootFolders.forEach((folder, idx) => {
-                let isFullSpan = (idx === rootFolders.length - 1 && rootFolders.length % 2 !== 0) ? "col-span-2 max-w-[210px] mx-auto w-full" : "";
-                html += `
-                    <div class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/40 ${isFullSpan}">
-                        <div class="flex items-center gap-2.5">
-                            <img src="${folder.image}" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100'" class="w-10 h-10 object-cover rounded-xl border border-amber-500/50 shadow flex-shrink-0">
-                            <div class="overflow-hidden">
-                                <h3 class="font-bold text-[10px] text-amber-300 leading-tight truncate">${folder.name}</h3>
-                                <p class="text-[8px] text-slate-300 line-clamp-2 mt-0.5">${folder.slogan}</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-1.5 mt-2.5 pt-2 border-t border-slate-800/60">
-                            <button onclick="openDomainFolders(${folder.id})" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-slate-950 font-extrabold px-2.5 py-1 rounded-xl flex-1 text-[9px] shadow text-center">Open ➔</button>
-                            <button onclick="alert('AI Assistant for ${folder.name}')" class="bg-slate-900 text-emerald-400 border border-emerald-500/40 font-bold px-2 py-1 rounded-xl text-[9px] flex items-center gap-0.5 shadow">🤖 AI</button>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
+        // Comprehensive Data Mapping with Expanded 3rd Folder
+        const defaultDomainData = {
+            1: [
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org"}
+            ],
+            2: [
+                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional home cleaning services.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and water tank cleaning.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
+                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+            ],
+            3: [
+                {name: "Granites & Marbles Hub", icon: "🪨", desc: "Italian marble, Indian granite & flooring stones.", link: "https://wa.me/919947198248?text=Granite%20Marble%20Inquiry"},
+                {name: "Tiles & Sanitary Wares", icon: "🧱", desc: "Floor tiles, wall tiles, washbasins & toilets.", link: "https://wa.me/919947198248?text=Tiles%20Sanitary%20Inquiry"},
+                {name: "Home Appliances (Fans, AC, TV)", icon: "🌀", desc: "Ceiling fans, air conditioners, TVs & refrigerators.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
+                {name: "Furniture (Sofas, Beds, Dining)", icon: "🛋️", desc: "Luxury sofas, wooden beds, dining tables & chairs.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"},
+                {name: "Kitchenware (Spoons to Cookware)", icon: "🥄", desc: "Stove, mixer grinder, utensils, spoons & all kitchen items.", link: "https://wa.me/919947198248?text=Kitchenware%20Inquiry"},
+                {name: "Electricals & Lighting", icon: "💡", desc: "LED bulbs, wires, switches, chandeliers & fittings.", link: "https://wa.me/919947198248?text=Electricals%20Inquiry"},
+                {name: "Plumbing & Bathroom Fittings", icon: "🚿", desc: "Pipes, taps, showers, water tanks & valves.", link: "https://wa.me/919947198248?text=Plumbing%20Inquiry"},
+                {name: "Paints, Putty & Hardware", icon: "🎨", desc: "Wall paints, primer, putty, nails, locks & tools.", link: "https://wa.me/919947198248?text=Paints%20Hardware%20Inquiry"},
+                {name: "Construction Workers & Masons", icon: "👷", desc: "Masons, helpers, tile fixers, electricians & plumbers.", link: "https://wa.me/919947198248?text=Construction%20Workers%20Inquiry"}
+            ],
+            4: [
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"},
+                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com"}
+            ],
+            5: [
+                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "https://wa.me/919947198248?text=LiveStock%20Inquiry"},
+                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "https://wa.me/919947198248?text=RealEstate%20Inquiry"},
+                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "https://wa.me/919947198248?text=Vehicle%20Inquiry"}
+            ],
+            6: [
+                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "https://wa.me/919947198248?text=Ads%20Inquiry"},
+                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "https://wa.me/919947198248?text=Events%20Inquiry"}
+            ],
+            7: [
+                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"},
+                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com"},
+                {name: "Short Films Hub", icon: "🎥", desc: "Watch short films and cinema.", link: "https://www.youtube.com"}
+            ]
+        };
+
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
+
+        function requestAdminAccess() {
+            document.getElementById('adminSecretInput').value = "";
+            document.getElementById('adminLoginModal').classList.remove('hidden');
         }
 
-        function switchBottomTab(tab) {
-            ['home', 'books', 'jobs', 'cinema', 'entertainment', 'more'].forEach(t => {
-                let btn = document.getElementById(`nav_${t}`);
-                if(btn) {
-                    btn.classList.remove('text-amber-400', 'font-bold');
-                    btn.classList.add('text-slate-400');
-                }
-            });
+        function closeAdminModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
 
-            let activeBtn = document.getElementById(`nav_${tab}`);
-            if(activeBtn) {
-                activeBtn.classList.remove('text-slate-400');
-                activeBtn.classList.add('text-amber-400', 'font-bold');
+        function verifyAdminCode() {
+            let code = document.getElementById('adminSecretInput').value.trim();
+            if(code === "salih9947") {
+                closeAdminModal();
+                alert("Admin Access Verified Successfully!");
+                openAdminSettings();
+            } else {
+                alert("Incorrect Security Code!");
             }
-
-            if(tab === 'home') goBackHome();
-            else if(tab === 'books') openDomainFolders(rootFolders[0] ? rootFolders[0].id : 1);
-            else if(tab === 'jobs') openDomainFolders(rootFolders[1] ? rootFolders[1].id : 2);
-            else if(tab === 'cinema') openDomainFolders(rootFolders[6] ? rootFolders[6].id : 7);
-            else if(tab === 'entertainment') openDomainFolders(rootFolders[5] ? rootFolders[5].id : 6);
-            else if(tab === 'more') promptAdminLogin();
         }
 
-        function promptAdminLogin() {
-            let pass = prompt("Enter Admin Passcode (Default: oyes123):");
-            if(pass === "oyes123" || pass === "admin") {
-                openAdminPanel();
-            } else if(pass !== null) {
-                alert("Incorrect Passcode!");
-            }
-        }
-
-        function openAdminPanel() {
+        function openAdminSettings() {
             document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('subFolderPageView').classList.add('hidden');
-            document.getElementById('designDetailView').classList.add('hidden');
-            document.getElementById('adminPageView').classList.remove('hidden');
-            populateFolderDropdown();
-            renderAdminEditList();
-        }
-
-        function saveContactSettings() {
-            let emailVal = document.getElementById('adminEmailInput').value.trim();
-            let waVal = document.getElementById('adminWaInput').value.trim();
-            if(emailVal) adminEmail = emailVal;
-            if(waVal) adminWa = waVal;
-            localStorage.setItem('oyes_admin_email', adminEmail);
-            localStorage.setItem('oyes_admin_wa', adminWa);
-            alert("Email & WhatsApp contact settings saved successfully!");
-        }
-
-        function populateFolderDropdown() {
-            let select = document.getElementById('targetFolderSelect');
-            if(!select) return;
-            let html = "";
-            rootFolders.forEach(f => {
-                html += `<option value="${f.id}">${f.name}</option>`;
-            });
-            select.innerHTML = html;
-        }
-
-        function updateAppLogo() {
-            let fileInput = document.getElementById('adminLogoInput');
-            if(fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    appLogo = e.target.result;
-                    localStorage.setItem('oyes_app_logo', appLogo);
-                    applyAppSettings();
-                    alert("App Logo updated successfully!");
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                alert("Please select an image file first!");
-            }
-        }
-
-        function updateAppBackground() {
-            let fileInput = document.getElementById('adminAppBgInput');
-            if(fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    appBg = e.target.result;
-                    localStorage.setItem('oyes_app_bg', appBg);
-                    applyAppSettings();
-                    alert("App Background updated successfully!");
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                alert("Please select an image file first!");
-            }
-        }
-
-        function addNewFolder() {
-            let name = document.getElementById('newFolderNameInput').value.trim();
-            let slogan = document.getElementById('newFolderSloganInput').value.trim();
-            let fileInput = document.getElementById('newFolderImgInput');
-
-            if(!name) {
-                alert("Please enter folder name!");
-                return;
-            }
-
-            let newId = Date.now();
-            let defaultImg = appLogo;
-
-            if(fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    saveNewFolderFinal(newId, name, slogan, e.target.result);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                saveNewFolderFinal(newId, name, slogan, defaultImg);
-            }
-        }
-
-        function saveNewFolderFinal(id, name, slogan, image) {
-            rootFolders.push({ id: id, name: name, image: image, slogan: slogan || "Global opportunity" });
-            domainFoldersData[id] = [];
-
-            localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-            localStorage.setItem('oyes_domain_data', JSON.stringify(domainFoldersData));
-
-            document.getElementById('newFolderNameInput').value = "";
-            document.getElementById('newFolderSloganInput').value = "";
-            document.getElementById('newFolderImgInput').value = "";
-
-            populateFolderDropdown();
-            renderAdminEditList();
-            renderHomeGrid();
-            alert("New folder created successfully!");
-        }
-
-        function updateFolderDetails(id) {
-            let nameInput = document.getElementById(`edit_name_${id}`).value.trim();
-            let sloganInput = document.getElementById(`edit_slogan_${id}`).value.trim();
-            let fileInput = document.getElementById(`edit_img_${id}`);
-
-            let folderObj = rootFolders.find(f => f.id === id);
-            if(!folderObj) return;
-
-            folderObj.name = nameInput || folderObj.name;
-            folderObj.slogan = sloganInput || folderObj.slogan;
-
-            if(fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    folderObj.image = e.target.result;
-                    finalizeFolderUpdate();
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                finalizeFolderUpdate();
-            }
-        }
-
-        function finalizeFolderUpdate() {
-            localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-            renderHomeGrid();
-            renderAdminEditList();
-            populateFolderDropdown();
-            alert("Folder updated successfully!");
-        }
-
-        function deleteFolder(id) {
-            if(confirm("Are you sure you want to delete this folder?")) {
-                rootFolders = rootFolders.filter(f => f.id !== id);
-                delete domainFoldersData[id];
-
-                localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
-                localStorage.setItem('oyes_domain_data', JSON.stringify(domainFoldersData));
-
-                renderAdminEditList();
-                populateFolderDropdown();
-                renderHomeGrid();
-            }
-        }
-
-        function renderAdminEditList() {
-            let container = document.getElementById('adminEditFoldersList');
-            if(!container) return;
-            let html = "";
-            rootFolders.forEach(f => {
-                html += `
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex items-center gap-2">
-                            <img src="${f.image}" class="w-8 h-8 rounded-lg object-cover border border-amber-500/40">
-                            <input type="text" id="edit_name_${f.id}" value="${f.name}" class="w-full bg-slate-900 text-amber-300 text-[11px] font-bold px-2.5 py-1.5 rounded-lg border border-slate-700">
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = "Admin Panel - Edit Content";
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6 col-span-2";
+            
+            let editHtml = `<div class="card-3d p-4 rounded-2xl text-center col-span-2 text-amber-300 font-bold">Admin Management Mode Active</div>`;
+            for(let dId in domainFoldersData) {
+                let items = domainFoldersData[dId];
+                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 text-left"><h4 class="text-cyan-300 font-bold text-xs">Folder ${dId} Items:</h4>`;
+                for(let idx = 0; idx < items.length; idx++) {
+                    let item = items[idx];
+                    editHtml += `
+                        <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 space-y-1 text-[11px]">
+                            <span class="font-bold text-amber-300">${item.icon} ${item.name}</span>
+                            <input type="text" id="edit_name_${dId}_${idx}" value="${item.name}" class="w-full bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                            <button type="button" onclick="updateCardName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
                         </div>
-                        <input type="text" id="edit_slogan_${f.id}" value="${f.slogan}" class="w-full bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-lg border border-slate-700">
-                        <div class="flex items-center gap-1.5">
-                            <label class="text-[9px] text-amber-400">Change Folder Photo:</label>
-                            <input type="file" id="edit_img_${f.id}" accept="image/*" class="w-full bg-slate-900 text-[9px] text-slate-400 p-1 rounded-lg border border-slate-700">
-                        </div>
-                        <div class="flex gap-2 pt-1">
-                            <button onclick="updateFolderDetails(${f.id})" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1 rounded-lg text-[10px] flex-1 shadow">💾 Save Changes</button>
-                            <button onclick="deleteFolder(${f.id})" class="bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1 rounded-lg text-[10px] shadow">🗑️ Delete</button>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
+                    `;
+                }
+                editHtml += `</div>`;
+            }
+            grid.innerHTML = editHtml;
         }
 
-        function addNewFileToFolder() {
-            let targetId = document.getElementById('targetFolderSelect').value;
-            let itemName = document.getElementById('newItemNameInput').value.trim();
-            let itemDesc = document.getElementById('newItemDescInput').value.trim();
-            let itemLink = document.getElementById('newItemLinkInput').value.trim();
-            let itemIcon = document.getElementById('newItemIconInput').value.trim() || "📌";
-
-            if(!itemName) {
-                alert("Please enter item name!");
-                return;
-            }
-
-            if(!domainFoldersData[targetId]) {
-                domainFoldersData[targetId] = [];
-            }
-
-            domainFoldersData[targetId].push({
-                name: itemName,
-                icon: itemIcon,
-                desc: itemDesc || "No description provided.",
-                link: itemLink
-            });
-
-            localStorage.setItem('oyes_domain_data', JSON.stringify(domainFoldersData));
-
-            document.getElementById('newItemNameInput').value = "";
-            document.getElementById('newItemDescInput').value = "";
-            document.getElementById('newItemLinkInput').value = "";
-            alert("File/Item added successfully to folder!");
-        }
-
-        function resetFactorySettings() {
-            if(confirm("Reset all settings and folders to default?")) {
-                localStorage.clear();
-                location.reload();
+        function updateCardName(domainId, index) {
+            let newName = document.getElementById(`edit_name_${domainId}_${index}`).value.trim();
+            if(newName) {
+                domainFoldersData[domainId][index].name = newName;
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                alert("Updated successfully!");
+                openAdminSettings();
             }
         }
 
-        let activeDomainContext = null;
+        function openAI(domainName) {
+            let query = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
+            if (query) {
+                alert(`AI Response: "${query}" - Processing request with multi-language support!`);
+            }
+        }
 
         function openDomainFolders(domainId) {
-            activeDomainContext = domainId;
             document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('adminPageView').classList.add('hidden');
-            document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('subFolderPageView').classList.remove('hidden');
             
-            let rootObj = rootFolders.find(f => f.id == domainId);
             let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3 pb-6";
             let html = "";
             let items = domainFoldersData[domainId] || [];
 
-            document.getElementById('pageTitle').innerText = rootObj ? rootObj.name : ("Folder #" + domainId);
+            document.getElementById('pageTitle').innerText = "Folder #" + domainId + " Items";
 
-            if(items.length === 0) {
-                html = `<div class="col-span-2 text-center py-8 text-xs text-slate-400">No items found in this folder. Add items from Admin Panel.</div>`;
-            } else {
-                items.forEach((f, i) => {
-                    html += `
-                        <div onclick="openItemDetails(${domainId}, ${i})" class="card-3d p-3 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/50 text-center">
-                            <div class="space-y-1 mt-1">
-                                <span class="text-2xl block">${f.icon}</span>
-                                <h3 class="font-bold text-[10px] text-amber-300 leading-tight">${f.name}</h3>
-                                <p class="text-[9px] text-slate-300 line-clamp-2">${f.desc}</p>
-                            </div>
-                            <span class="bg-amber-600 text-slate-950 font-bold px-2.5 py-1 rounded-xl block text-[9px] shadow mt-2">Open ➔</span>
+            for(let i = 0; i < items.length; i++) {
+                let f = items[i];
+                html += `
+                    <div class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
+                        <div class="space-y-1.5 mt-2">
+                            <span class="text-2xl block">${f.icon}</span>
+                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${f.name}</h3>
+                            <p class="text-[10px] text-slate-300">${f.desc}</p>
                         </div>
-                    `;
-                });
+                        <a href="${f.link}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                    </div>
+                `;
             }
             grid.innerHTML = html;
             window.scrollTo(0, 0);
         }
 
-        function openItemDetails(domainId, itemIdx) {
-            document.getElementById('subFolderPageView').classList.add('hidden');
-            document.getElementById('designDetailView').classList.remove('hidden');
-            let item = domainFoldersData[domainId][itemIdx];
-            document.getElementById('designPageTitle').innerText = item.name;
-            let grid = document.getElementById('designContentGrid');
-            
-            let actionBtn = "";
-            if(item.link && item.link.trim() !== "") {
-                actionBtn = `<a href="${item.link}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2.5 rounded-xl block text-xs shadow text-center">Open Link / PDF ➔</a>`;
-            } else {
-                let waText = encodeURIComponent(`Hello, I am interested in inquiring about: ${item.name} from OYES Global Hub.`);
-                let mailSub = encodeURIComponent(`Inquiry regarding ${item.name}`);
-                let mailBody = encodeURIComponent(`Hello OYES Team,\n\nI would like to know more details about ${item.name}.\n\nThank you.`);
-                
-                actionBtn = `
-                    <div class="space-y-2.5">
-                        <p class="text-xs text-slate-300 mb-2">${item.desc}</p>
-                        <a href="https://wa.me/${adminWa}?text=${waText}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl block text-xs shadow text-center">💬 Inquire via WhatsApp (${adminWa})</a>
-                        <a href="mailto:${adminEmail}?subject=${mailSub}&body=${mailBody}" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2.5 rounded-xl block text-xs shadow text-center">✉️ Send Email to ${adminEmail}</a>
-                    </div>
-                `;
-            }
-
-            grid.innerHTML = `<div class="card-3d p-5 rounded-2xl text-center space-y-3"><p class="text-xs text-slate-300">${item.desc}</p>${actionBtn}</div>`;
-        }
-
-        function goBackToSubFolders() {
-            if(activeDomainContext !== null) openDomainFolders(activeDomainContext);
-            else goBackHome();
-        }
-
         function goBackHome() {
             document.getElementById('homeView').classList.remove('hidden');
             document.getElementById('subFolderPageView').classList.add('hidden');
-            document.getElementById('designDetailView').classList.add('hidden');
-            document.getElementById('adminPageView').classList.add('hidden');
+        }
+
+        function openFileManager() { document.getElementById('globalFileManager').click(); }
+        function handleWhatsAppUpload(event) {
+            if(event.target.files.length > 0) alert("Files ready to share!");
         }
     </script>
 </body>
