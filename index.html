@@ -42,7 +42,7 @@
                 </div>
                 <h1 id="headerMainTitle" class="text-sm font-black tracking-wider text-amber-400">OYES</h1>
             </div>
-
+            
             <!-- Language Selector Dropdown -->
             <div class="flex items-center gap-1">
                 <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-1.5 py-1 focus:outline-none">
@@ -64,9 +64,24 @@
     <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="handleLogoSelection(event)">
     <input type="file" id="bgFileInput" class="hidden" accept="image/*" onchange="handleBgSelection(event)">
 
+    <!-- Admin Login Modal (Secret Code: salih9947) -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-amber-500/60 p-6 rounded-3xl max-w-xs w-full shadow-2xl space-y-4">
+            <div class="text-center space-y-1">
+                <h3 class="text-sm font-bold text-amber-300">Admin Security Control</h3>
+                <p class="text-[11px] text-slate-400">Enter Security Code (salih9947):</p>
+            </div>
+            <input type="password" id="adminSecretInput" placeholder="Enter code..." class="w-full bg-slate-950 text-slate-200 px-3.5 py-2.5 rounded-xl border border-amber-600/50 text-xs text-center tracking-widest focus:outline-none">
+            <div class="grid grid-cols-2 gap-2.5">
+                <button type="button" onclick="closeAdminModal()" class="bg-slate-800 text-slate-300 text-xs py-2.5 rounded-xl font-bold">Cancel</button>
+                <button type="button" onclick="verifyAdminCode()" class="bg-amber-600 text-white text-xs py-2.5 rounded-xl font-bold shadow">Verify</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-
+        
         <!-- Top Banner with User Slogans -->
         <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-2">
             <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden" id="bannerLogoContainer">
@@ -78,9 +93,9 @@
             </div>
         </div>
 
-        <!-- Primary Folders Grid -->
+        <!-- 7 Primary Folders Grid -->
         <div class="grid grid-cols-2 gap-3">
-
+            
             <!-- 1. World of Knowledge -->
             <div onclick="openDomainFolders(1)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
@@ -107,16 +122,12 @@
                 </div>
             </div>
 
-            <!-- 3. Complete House Construction, Granites, Appliances & Workers Hub -->
-            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center relative">
-                <!-- Worldwide Marble Hub badge inside Category 3 -->
-                <div class="absolute top-2 right-2 bg-amber-500 text-slate-950 text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow">
-                    🏛️ Marble Hub
-                </div>
+            <!-- 3. Complete House Construction, Granites, Appliances & Workers Hub (Updated 3rd) -->
+            <div onclick="openDomainFolders(3)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
                 <div class="space-y-1.5 mt-1">
                     <span class="text-3xl block">🏠</span>
                     <h3 class="font-bold text-[11px] text-amber-300 leading-tight">HOUSE MATERIALS, APPLIANCES & WORKERS</h3>
-                    <p class="text-[9px] text-slate-300">Granites, Worldwide Marbles, Fans, Sofas, Kitchenware & Labours</p>
+                    <p class="text-[9px] text-slate-300">Granites, Marbles, Fans, Sofas, Kitchenware & Labours</p>
                 </div>
                 <div class="flex gap-1 mt-3">
                     <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
@@ -137,8 +148,261 @@
                 </div>
             </div>
 
+            <!-- 5. Buy & Sell Market Hub -->
+            <div onclick="openDomainFolders(5)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🤝</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">BUY & SELL MARKET HUB</h3>
+                    <p class="text-[9px] text-slate-300">Your world • Your community</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Buy & Sell Market Hub')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 6. Events & Advertisements -->
+            <div onclick="openDomainFolders(6)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🌟</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">EVENTS & ADVERTISEMENTS</h3>
+                    <p class="text-[9px] text-slate-300">Connect digitally • Move forward together</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('Events & Advertisements')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
+            <!-- 7. OYES Cinema & Studio -->
+            <div onclick="openDomainFolders(7)" class="card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between border border-amber-500/40 text-center col-span-2 max-w-[200px] mx-auto w-full">
+                <div class="space-y-1.5 mt-1">
+                    <span class="text-3xl block">🎬</span>
+                    <h3 class="font-bold text-[11px] text-amber-300 leading-tight">OYES CINEMA & STUDIO</h3>
+                    <p class="text-[9px] text-slate-300">Skills awaken • Possibilities unfold</p>
+                </div>
+                <div class="flex gap-1 mt-3">
+                    <span class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl flex-1 text-[10px] shadow">Open ➔</span>
+                    <span onclick="event.stopPropagation(); openAI('OYES Cinema & Studio')" class="bg-emerald-600/80 text-white font-bold px-2 py-1 rounded-xl text-[10px] shadow">🤖 AI</span>
+                </div>
+            </div>
+
         </div>
+
     </main>
 
+    <!-- Sub-Folders & Content View -->
+    <div id="subFolderPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
+        <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
+            <button type="button" onclick="goBackHome()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
+            <h3 id="pageTitle" class="text-xs font-bold text-amber-300 text-right">Sub Page</h3>
+        </div>
+        <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="p-4 text-center text-[10px] text-slate-400 border-t border-slate-800 bg-slate-950/90 space-y-2">
+        <p id="footerText" class="font-medium text-slate-300">Change from within • The future through us</p>
+    </footer>
+
+    <!-- JavaScript & Multi-Language Dictionary -->
+    <script>
+        const translations = {
+            en: {
+                bannerTitle: "OYES GLOBAL HUB",
+                subtitle: "Embracing Change • Creating the Future",
+                footer: "Change from within • The future through us"
+            },
+            ml: {
+                bannerTitle: "ഒയേസ് ഗ്ലോബൽ ഹബ്ബ്",
+                subtitle: "മാറ്റങ്ങളെ സ്വീകരിച്ച് • ഭാവിയെ സൃഷ്ടിച്ച്",
+                footer: "മാറ്റം നമ്മിൽ നിന്ന് • ഭാവി നമ്മിലൂടെ"
+            },
+            ta: {
+                bannerTitle: "ஒயெஸ் குளோபல் ஹப்",
+                subtitle: "மாற்றங்களை ஏற்றுக்கொண்டு • எதிர்காலத்தை உருவாக்குங்கள்",
+                footer: "மாற்றம் நம்மிடமிருந்து • எதிர்காலம் நம் மூலம்"
+            },
+            kn: {
+                bannerTitle: "ಒಯೇಸ್ ಗ್ಲೋಬಲ್ ಹಬ್",
+                subtitle: "ಬದಲಾವಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಿ • ಭವಿಷ್ಯವನ್ನು ಸೃಷ್ಟಿಸಿ",
+                footer: "ಬದಲಾವಣೆ ನಮ್ಮಿಂದ • ಭವಿಷ್ಯ ನಮ್ಮ ಮೂಲಕ"
+            },
+            hi: {
+                bannerTitle: "ओयेस ग्लोबल हब",
+                subtitle: "बदलाव को अपनाएं • भविष्य का निर्माण करें",
+                footer: "परिवर्तन हम से • भविष्य हमारे माध्यम से"
+            },
+            ar: {
+                bannerTitle: "منصة أويس العالمية",
+                subtitle: "احتضان التغيير • صناعة المستقبل",
+                footer: "التغيير من الداخل • المستقبل من خلالنا"
+            }
+        };
+
+        function changeLanguage(lang) {
+            let t = translations[lang] || translations['en'];
+            document.getElementById('bannerAppTitle').innerText = t.bannerTitle;
+            document.getElementById('bannerSubtitle').innerText = t.subtitle;
+            document.getElementById('footerText').innerText = t.footer;
+            localStorage.setItem('oyes_lang', lang);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedLang = localStorage.getItem('oyes_lang') || 'en';
+            document.getElementById('langSelect').value = savedLang;
+            changeLanguage(savedLang);
+        });
+
+        // Comprehensive Data Mapping with Expanded 3rd Folder
+        const defaultDomainData = {
+            1: [
+                {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading.", link: "https://quran.com"},
+                {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Ramayana Epic", icon: "🛕", desc: "Ramayana ancient epic.", link: "https://archive.org"}
+            ],
+            2: [
+                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional home cleaning services.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
+                {name: "Water Tank Cleaning", icon: "🚰", desc: "Sump and water tank cleaning.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
+                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+            ],
+            3: [
+                {name: "Granites & Marbles Hub", icon: "🪨", desc: "Italian marble, Indian granite & flooring stones.", link: "https://wa.me/919947198248?text=Granite%20Marble%20Inquiry"},
+                {name: "Tiles & Sanitary Wares", icon: "🧱", desc: "Floor tiles, wall tiles, washbasins & toilets.", link: "https://wa.me/919947198248?text=Tiles%20Sanitary%20Inquiry"},
+                {name: "Home Appliances (Fans, AC, TV)", icon: "🌀", desc: "Ceiling fans, air conditioners, TVs & refrigerators.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
+                {name: "Furniture (Sofas, Beds, Dining)", icon: "🛋️", desc: "Luxury sofas, wooden beds, dining tables & chairs.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"},
+                {name: "Kitchenware (Spoons to Cookware)", icon: "🥄", desc: "Stove, mixer grinder, utensils, spoons & all kitchen items.", link: "https://wa.me/919947198248?text=Kitchenware%20Inquiry"},
+                {name: "Electricals & Lighting", icon: "💡", desc: "LED bulbs, wires, switches, chandeliers & fittings.", link: "https://wa.me/919947198248?text=Electricals%20Inquiry"},
+                {name: "Plumbing & Bathroom Fittings", icon: "🚿", desc: "Pipes, taps, showers, water tanks & valves.", link: "https://wa.me/919947198248?text=Plumbing%20Inquiry"},
+                {name: "Paints, Putty & Hardware", icon: "🎨", desc: "Wall paints, primer, putty, nails, locks & tools.", link: "https://wa.me/919947198248?text=Paints%20Hardware%20Inquiry"},
+                {name: "Construction Workers & Masons", icon: "👷", desc: "Masons, helpers, tile fixers, electricians & plumbers.", link: "https://wa.me/919947198248?text=Construction%20Workers%20Inquiry"}
+            ],
+            4: [
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"},
+                {name: "Kochi Stays", icon: "🏙️", desc: "Hotels in Ernakulam / Kochi.", link: "https://www.booking.com"}
+            ],
+            5: [
+                {name: "Cows & Goats (Live Stock)", icon: "🐄", desc: "Buy and sell pets & farm animals.", link: "https://wa.me/919947198248?text=LiveStock%20Inquiry"},
+                {name: "Real Estate Hub", icon: "🏡", desc: "Houses, plots and lands for sale.", link: "https://wa.me/919947198248?text=RealEstate%20Inquiry"},
+                {name: "Vehicles Market", icon: "🚗", desc: "Cars and bikes buy/sell portal.", link: "https://wa.me/919947198248?text=Vehicle%20Inquiry"}
+            ],
+            6: [
+                {name: "All Advertisements", icon: "📢", desc: "Digital, print & commercial ads.", link: "https://wa.me/919947198248?text=Ads%20Inquiry"},
+                {name: "Events Management", icon: "🎉", desc: "Hosting, anchoring & event setup.", link: "https://wa.me/919947198248?text=Events%20Inquiry"}
+            ],
+            7: [
+                {name: "Pro Studio & Editing", icon: "🎛️", desc: "Free video, audio & VFX editing tools.", link: "https://clipchamp.com"},
+                {name: "Kids Cartoons", icon: "🧸", desc: "Entertainment & cartoons for kids.", link: "https://www.youtube.com"},
+                {name: "Short Films Hub", icon: "🎥", desc: "Watch short films and cinema.", link: "https://www.youtube.com"}
+            ]
+        };
+
+        let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domains')) || defaultDomainData;
+
+        function requestAdminAccess() {
+            document.getElementById('adminSecretInput').value = "";
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminCode() {
+            let code = document.getElementById('adminSecretInput').value.trim();
+            if(code === "salih9947") {
+                closeAdminModal();
+                alert("Admin Access Verified Successfully!");
+                openAdminSettings();
+            } else {
+                alert("Incorrect Security Code!");
+            }
+        }
+
+        function openAdminSettings() {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            document.getElementById('pageTitle').innerText = "Admin Panel - Edit Content";
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-1 gap-3.5 pb-6 col-span-2";
+            
+            let editHtml = `<div class="card-3d p-4 rounded-2xl text-center col-span-2 text-amber-300 font-bold">Admin Management Mode Active</div>`;
+            for(let dId in domainFoldersData) {
+                let items = domainFoldersData[dId];
+                editHtml += `<div class="card-3d p-3 rounded-2xl col-span-2 space-y-2 text-left"><h4 class="text-cyan-300 font-bold text-xs">Folder ${dId} Items:</h4>`;
+                for(let idx = 0; idx < items.length; idx++) {
+                    let item = items[idx];
+                    editHtml += `
+                        <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-700 space-y-1 text-[11px]">
+                            <span class="font-bold text-amber-300">${item.icon} ${item.name}</span>
+                            <input type="text" id="edit_name_${dId}_${idx}" value="${item.name}" class="w-full bg-slate-900 text-slate-200 p-1 rounded border border-slate-700 text-[10px]">
+                            <button type="button" onclick="updateCardName(${dId}, ${idx})" class="bg-emerald-700 text-white px-2 py-1 rounded text-[10px]">Save</button>
+                        </div>
+                    `;
+                }
+                editHtml += `</div>`;
+            }
+            grid.innerHTML = editHtml;
+        }
+
+        function updateCardName(domainId, index) {
+            let newName = document.getElementById(`edit_name_${domainId}_${index}`).value.trim();
+            if(newName) {
+                domainFoldersData[domainId][index].name = newName;
+                localStorage.setItem('oyes_domains', JSON.stringify(domainFoldersData));
+                alert("Updated successfully!");
+                openAdminSettings();
+            }
+        }
+
+        function openAI(domainName) {
+            let query = prompt(`🤖 OYES AI Assistant (${domainName}): Type your question here:`);
+            if (query) {
+                alert(`AI Response: "${query}" - Processing request with multi-language support!`);
+            }
+        }
+
+        function openDomainFolders(domainId) {
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('subFolderPageView').classList.remove('hidden');
+            
+            let grid = document.getElementById('pageContentGrid');
+            grid.className = "grid grid-cols-2 gap-3 pb-6";
+            let html = "";
+            let items = domainFoldersData[domainId] || [];
+
+            document.getElementById('pageTitle').innerText = "Folder #" + domainId + " Items";
+
+            for(let i = 0; i < items.length; i++) {
+                let f = items[i];
+                html += `
+                    <div class="card-3d p-3 rounded-2xl flex flex-col justify-between border border-amber-500/50 text-center relative">
+                        <div class="space-y-1.5 mt-2">
+                            <span class="text-2xl block">${f.icon}</span>
+                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${f.name}</h3>
+                            <p class="text-[10px] text-slate-300">${f.desc}</p>
+                        </div>
+                        <a href="${f.link}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl block text-[10px] shadow mt-3">Open ➔</a>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
+        function goBackHome() {
+            document.getElementById('homeView').classList.remove('hidden');
+            document.getElementById('subFolderPageView').classList.add('hidden');
+        }
+
+        function openFileManager() { document.getElementById('globalFileManager').click(); }
+        function handleWhatsAppUpload(event) {
+            if(event.target.files.length > 0) alert("Files ready to share!");
+        }
+    </script>
 </body>
 </html>
+
