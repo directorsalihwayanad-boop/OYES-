@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB</title>
+    <title>OYES GLOBAL HUB - Ultimate Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background: #090b10;
+            background: radial-gradient(circle at top, #1e1b4b, #0f172a, #020617);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -19,15 +19,17 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .card-glass {
-            background: linear-gradient(135deg, rgba(20, 24, 33, 0.8), rgba(10, 13, 18, 0.9));
-            backdrop-filter: blur(20px);
+        .card-3d {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(245, 158, 11, 0.35);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.2);
+            background-size: cover;
+            background-position: center;
             transition: all 0.3s ease;
         }
-        .card-glass:hover {
-            border-color: rgba(245, 158, 11, 0.8);
+        .card-3d:hover {
+            border-color: rgba(245, 158, 11, 0.7);
             transform: translateY(-2px);
         }
         .hidden { display: none; }
@@ -35,143 +37,68 @@
 </head>
 <body class="pb-20" id="mainBody">
 
-    <!-- Top Navigation Bar -->
-    <header class="p-3 flex justify-between items-center bg-black/60 backdrop-blur-md sticky top-0 z-50 border-b border-amber-500/20">
-        <button onclick="openAdminPanel()" class="text-amber-400 text-xl font-bold p-1">⚙️</button>
-        <div class="flex items-center gap-2">
-            <div id="appLogoDisplay" class="w-10 h-10 rounded-full border border-amber-400/60 overflow-hidden bg-amber-500/20 flex items-center justify-center">
-                <span class="text-xs font-bold text-amber-300" id="logoIconText">🦅</span>
+    <!-- Top Header -->
+    <header class="p-3 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-50 shadow-xl">
+        <div class="flex justify-between items-center max-w-md mx-auto px-1">
+            <button class="text-amber-400 text-xl font-bold p-1">☰</button>
+            <div class="flex items-center gap-1.5 cursor-pointer" onclick="goHome()">
+                <div id="appLogoDisplay" class="w-9 h-9 rounded-full bg-amber-950 border border-amber-500/50 flex items-center justify-center text-xs overflow-hidden shadow">
+                    <span>🦅</span>
+                </div>
             </div>
-        </div>
-        <div class="flex items-center gap-2">
-            <select class="bg-slate-900 text-amber-300 border border-amber-500/40 text-xs rounded-lg px-2 py-1 outline-none">
-                <option value="en">English ▾</option>
-                <option value="ml">മലയാളം</option>
-            </select>
+            <div class="flex items-center gap-2">
+                <select class="bg-slate-900 text-amber-300 border border-amber-500/50 text-[10px] rounded-lg px-2 py-1 outline-none">
+                    <option value="en">English ▾</option>
+                    <option value="ml">മലയാളം</option>
+                </select>
+                <button onclick="openAdminSettings()" class="bg-amber-950/80 text-amber-300 text-[10px] font-semibold border border-amber-500/60 rounded-lg px-2.5 py-1 shadow">⚙️ Admin</button>
+            </div>
         </div>
     </header>
 
-    <!-- Main Dashboard View (Home View) -->
-    <main id="homeView" class="max-w-md mx-auto p-4 w-full space-y-4">
+    <!-- Hidden File Inputs for Gallery / File Manager Access -->
+    <input type="file" id="bgFileInput" class="hidden" accept="image/*" onchange="applyGlobalBackground(event)">
+    <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="applyGlobalLogo(event)">
+    <input type="file" id="folderBgFileInput" class="hidden" accept="image/*" onchange="applyFolderBgFile(event)">
+    <input type="file" id="folderIconFileInput" class="hidden" accept="image/*" onchange="applyFolderIconFile(event)">
+    <input type="file" id="itemMediaInput" class="hidden" accept="image/*,video/*,.pdf" onchange="applyItemMediaFile(event)">
 
-        <!-- Banner Section -->
-        <div class="card-glass p-5 rounded-3xl text-center space-y-3 relative overflow-hidden">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
-            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-amber-600 to-amber-300 p-0.5 shadow-xl">
-                <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-2xl font-black text-amber-400">
-                    🌍🦅
-                </div>
+    <!-- Main Dashboard View (Home Page Grid) -->
+    <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
+
+        <!-- Top Banner -->
+        <div class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-3">
+            <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl overflow-hidden shadow-xl">
+                <span>🌍🦅</span>
             </div>
             <div>
-                <h1 class="text-xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500">CONNECTING PEOPLE</h1>
-                <h2 class="text-xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500">UNITING OPPORTUNITIES</h2>
-                <p class="text-[10px] text-amber-200/80 tracking-wider mt-1 font-medium">OYES — A WORLD OF OPPORTUNITIES</p>
+                <h2 class="text-lg font-black tracking-widest text-amber-400">CONNECTING PEOPLE</h2>
+                <h2 class="text-lg font-black tracking-widest text-amber-400">UNITING OPPORTUNITIES</h2>
+                <p class="text-[10px] text-amber-200 font-semibold tracking-wider mt-0.5">OYES — A WORLD OF OPPORTUNITIES</p>
             </div>
 
             <!-- Search Bar -->
             <div class="relative mt-2">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-amber-400">🔍</span>
-                <input type="text" placeholder="Search anything on OYES..." class="w-full bg-slate-950/80 border border-amber-500/30 rounded-2xl py-2.5 pl-10 pr-10 text-xs text-slate-200 focus:outline-none focus:border-amber-400">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-amber-400 text-xs">🔍</span>
+                <input type="text" placeholder="Search anything on OYES..." class="w-full bg-slate-950/80 border border-amber-500/30 rounded-2xl py-2 pl-9 pr-9 text-[11px] text-slate-200 focus:outline-none focus:border-amber-400">
+                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-amber-400 text-xs cursor-pointer">🎛️</span>
             </div>
         </div>
 
-        <!-- Grid Cards Section (Main Folders) -->
-        <div class="grid grid-cols-2 gap-3" id="mainGrid">
-
-            <!-- 1. World of Knowledge -->
-            <div onclick="openDomain(1)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
-                <div class="space-y-1 mt-1">
-                    <span class="text-2xl block">📖</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">WORLD OF KNOWLEDGE</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight">Connecting people Uniting opportunities</p>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                </div>
-            </div>
-
-            <!-- 2. Job Vacancies & Cleaning -->
-            <div onclick="openDomain(2)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
-                <div class="space-y-1 mt-1">
-                    <span class="text-2xl block">💼</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">JOB VACANCIES & CLEANING</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight">Shift in thought Progress in life</p>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                </div>
-            </div>
-
-            <!-- 3. Ultimate Home Construction Solution (Opens Sub-folder view containing Worldwide Marble Hub) -->
-            <div onclick="openDomain(3)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
-                <div class="space-y-1 mt-1">
-                    <span class="text-2xl block">🏠</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">ULTIMATE HOME CONSTRUCTION SOLUTION</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight">Marbles, Granites, Kota, Vettukallu, Appliances & Workers</p>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                </div>
-            </div>
-
-            <!-- 4. Stays & Hotels -->
-            <div onclick="openDomain(4)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
-                <div class="space-y-1 mt-1">
-                    <span class="text-2xl block">🏨</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">STAYS & HOTELS</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight">One connection Endless possibilities</p>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                </div>
-            </div>
-
-            <!-- 5. Buy & Sell Market Hub -->
-            <div onclick="openDomain(5)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
-                <div class="space-y-1 mt-1">
-                    <span class="text-2xl block">🤝</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">BUY & SELL MARKET HUB</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight">Your world Your community</p>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                </div>
-            </div>
-
-            <!-- 6. Events & Advertisements -->
-            <div onclick="openDomain(6)" class="card-glass p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer">
-                <div class="space-y-1 mt-1">
-                    <span class="text-2xl block">⭐</span>
-                    <h3 class="font-black text-[11px] text-amber-400 leading-tight">EVENTS & ADVERTISEMENTS</h3>
-                    <p class="text-[9px] text-slate-300 leading-tight">Connect digitally Move forward together</p>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs">➔</span>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- 7. OYES Cinema & Studio -->
-        <div onclick="openDomain(7)" class="card-glass p-4 rounded-2xl flex items-center justify-between cursor-pointer">
-            <div class="flex items-center space-x-3">
-                <span class="text-3xl">🎥</span>
-                <div>
-                    <h3 class="font-black text-xs text-amber-400">OYES CINEMA & STUDIO</h3>
-                    <p class="text-[9px] text-slate-300">Watch • Upload • Sell • Earn</p>
-                </div>
-            </div>
-            <span class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-xs font-bold">➔</span>
+        <!-- Dynamic Main Folders Grid Container -->
+        <div class="grid grid-cols-2 gap-3" id="mainHomeGrid">
+            <!-- Folders will load dynamically here -->
         </div>
 
     </main>
 
-    <!-- Sub-folder View (Hidden by default, shown when clicking a main folder) -->
+    <!-- Sub-folder Grid View -->
     <main id="subFolderView" class="max-w-md mx-auto p-4 w-full space-y-3 hidden flex-grow">
-        <button onclick="goHome()" class="bg-amber-500/20 border border-amber-500/50 text-amber-300 px-3 py-1.5 rounded-xl text-xs font-semibold mb-2">⬅️ Back to Home</button>
-        <div id="subFolderContainer" class="space-y-3">
-            <!-- Dynamic sub-items will load here -->
+        <div class="flex justify-between items-center mb-2">
+            <button onclick="goHome()" class="bg-amber-500/20 border border-amber-500/50 text-amber-300 px-3 py-1.5 rounded-xl text-xs font-semibold">⬅️ Back to Home</button>
+            <button onclick="openAddItemPrompt()" class="bg-emerald-600/80 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow">➕ Add Item / File</button>
         </div>
+        <div id="subFolderContainer" class="grid grid-cols-2 gap-3"></div>
     </main>
 
     <!-- Bottom Navigation Footer -->
@@ -183,59 +110,139 @@
         <button onclick="openDomain(5)" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[10px] font-medium"><span class="text-lg">👥</span>Entertainment</button>
     </nav>
 
-    <!-- JavaScript Data & Logic -->
+    <!-- JavaScript Complete Customization Engine -->
     <script>
-        const domainData = {
+        let currentDomainId = null;
+        let targetFolderId = null;
+
+        // Default Main Folders Configuration
+        const defaultMainFolders = [
+            { id: 1, name: "WORLD OF KNOWLEDGE", desc: "Connecting people Uniting opportunities", icon: "📖", bg: "" },
+            { id: 2, name: "JOB VACANCIES & CLEANING", desc: "Shift in thought Progress in life", icon: "💼", bg: "" },
+            { id: 3, name: "ULTIMATE HOME CONSTRUCTION SOLUTION", desc: "Marbles, Granites, Kota, Vettukallu, Appliances & Workers", icon: "🏠", bg: "" },
+            { id: 4, name: "STAYS & HOTELS", desc: "One connection Endless possibilities", icon: "🏨", bg: "" },
+            { id: 5, name: "BUY & SELL MARKET HUB", desc: "Your world Your community", icon: "🤝", bg: "" },
+            { id: 6, name: "EVENTS & ADVERTISEMENTS", desc: "Connect digitally Move forward together", icon: "⭐", desc: "Connect digitally Move forward together", icon: "⭐", bg: "" },
+            { id: 7, name: "OYES CINEMA & STUDIO", desc: "Watch • Upload • Sell • Earn", icon: "🎥", bg: "", fullWidth: true }
+        ];
+
+        // Default Sub-items Data
+        const defaultDomainData = {
             1: [
                 {name: "Quran Online", icon: "📖", desc: "Digital Holy Quran reading portal.", link: "https://quran.com"},
                 {name: "Holy Bible", icon: "✝️", desc: "Holy Bible reading portal.", link: "https://www.bible.com"},
-                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings and verses.", link: "https://www.holy-bhagavad-gita.org"},
+                {name: "Bhagavad Gita", icon: "🕉️", desc: "Bhagavad Gita teachings.", link: "https://www.holy-bhagavad-gita.org"},
                 {name: "Ramayana Epic", icon: "🏹", desc: "Ramayana ancient epic scriptures.", link: "https://archive.org"}
             ],
             2: [
-                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional home cleaning services.", link: "https://wa.me/919947198248?text=Cleaning%20Service%20Inquiry"},
-                {name: "Water Tank Cleaning", icon: "🚿", desc: "Sump and water tank cleaning.", link: "https://wa.me/919947198248?text=Water%20Tank%20Cleaning"},
-                {name: "Job Vacancies", icon: "📋", desc: "Local & government job updates.", link: "https://keralapsc.gov.in"}
+                {name: "House Deep Cleaning", icon: "🧹", desc: "Professional home cleaning.", link: "https://wa.me/919947198248?text=Cleaning"},
+                {name: "Water Tank Cleaning", icon: "🚿", desc: "Sump and water tank cleaning.", link: "https://wa.me/919947198248?text=Tank"},
+                {name: "Job Vacancies", icon: "📋", desc: "Local & govt job updates.", link: "https://keralapsc.gov.in"}
             ],
             3: [
-                {name: "Worldwide Marble Hub", icon: "🏛️", desc: "Explore world-class marble varieties from across the globe", link: "https://drive.google.com/file/d/1juyK-1-_oz0N8mNpoQl3WphDihPH1KQe/view?usp=drivesdk"},
-                {name: "Granites & Marbles Hub", icon: "🧱", desc: "Italian marble, Indian granite & flooring stones.", link: "https://wa.me/919947198248?text=Granite%20Marble%20Inquiry"},
-                {name: "Tiles & Sanitary Wares", icon: "🧮", desc: "Floor tiles, wall tiles, washbasins & toilets.", link: "https://wa.me/919947198248?text=Tiles%20Sanitary%20Inquiry"},
-                {name: "Home Appliances (Fans, AC, TV)", icon: "🌀", desc: "Ceiling fans, air conditioners, TVs & refrigerators.", link: "https://wa.me/919947198248?text=Home%20Appliances%20Inquiry"},
-                {name: "Furniture (Sofas, Beds, Dining)", icon: "🛋️", desc: "Luxury sofas, wooden beds, dining tables & chairs.", link: "https://wa.me/919947198248?text=Furniture%20Inquiry"}
+                {name: "Worldwide Marble Hub", icon: "🏛️", desc: "Explore world-class marble varieties", link: "https://drive.google.com/file/d/1juyK-1-_oz0N8mNpoQl3WphDihPH1KQe/view?usp=drivesdk"},
+                {name: "Granites & Marbles", icon: "🧱", desc: "Italian marble & granite stones.", link: "https://wa.me/919947198248?text=Granite"},
+                {name: "Tiles & Sanitary Wares", icon: "🧮", desc: "Floor tiles, washbasins & toilets.", link: "https://wa.me/919947198248?text=Tiles"},
+                {name: "Home Appliances", icon: "🌀", desc: "AC, TVs & refrigerators.", link: "https://wa.me/919947198248?text=Appliances"},
+                {name: "Furniture", icon: "🛋️", desc: "Sofas, wooden beds & dining tables.", link: "https://wa.me/919947198248?text=Furniture"}
             ],
             4: [
-                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays in Wayanad.", link: "https://www.booking.com"},
-                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode district.", link: "https://www.booking.com"}
+                {name: "Wayanad Stays", icon: "⛰️", desc: "Resorts and homestays.", link: "https://www.booking.com"},
+                {name: "Kozhikode Hotels", icon: "🌊", desc: "Stays in Kozhikode.", link: "https://www.booking.com"}
             ],
             5: [
-                {name: "Buy & Sell Market Hub", icon: "🤝", desc: "Your world, your community trading.", link: "https://wa.me/919947198248?text=BuySell%20Inquiry"}
+                {name: "Buy & Sell Market", icon: "🤝", desc: "Community trading hub.", link: "https://wa.me/919947198248?text=Market"}
             ],
             6: [
-                {name: "Events & Advertisements", icon: "⭐", desc: "Connect digitally, move forward together.", link: "https://wa.me/919947198248?text=Events%20Inquiry"}
+                {name: "Events & Ads", icon: "⭐", desc: "Digital promotions.", link: "https://wa.me/919947198248?text=Events"}
             ],
             7: [
-                {name: "OYES Cinema & Studio", icon: "🎬", desc: "Watch, Upload, Sell & Earn from movies.", link: "https://wa.me/919947198248?text=Cinema%20Inquiry"}
+                {name: "OYES Cinema & Studio", icon: "🎬", desc: "Watch & Earn.", link: "https://wa.me/919947198248?text=Cinema"}
             ]
         };
 
+        function getMainFolders() {
+            const saved = localStorage.getItem('oyesMainFolders');
+            return saved ? JSON.parse(saved) : defaultMainFolders;
+        }
+
+        function saveMainFolders(folders) {
+            localStorage.setItem('oyesMainFolders', JSON.stringify(folders));
+        }
+
+        function getDomainData() {
+            const saved = localStorage.getItem('oyesDomainData');
+            return saved ? JSON.parse(saved) : defaultDomainData;
+        }
+
+        function saveDomainData(data) {
+            localStorage.setItem('oyesDomainData', JSON.stringify(data));
+        }
+
+        // Render Home Grid
+        function renderHome() {
+            const folders = getMainFolders();
+            const container = document.getElementById('mainHomeGrid');
+            container.innerHTML = "";
+
+            folders.forEach(folder => {
+                const card = document.createElement('div');
+                card.className = folder.fullWidth ? "card-3d p-4 rounded-2xl cursor-pointer flex items-center justify-between col-span-2" : "card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between text-center";
+                
+                if (folder.bg) {
+                    card.style.backgroundImage = `url('${folder.bg}')`;
+                }
+
+                card.setAttribute('onclick', `openDomain(${folder.id})`);
+
+                if (folder.fullWidth) {
+                    card.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <span class="text-3xl">${folder.icon.startsWith('data:') || folder.icon.startsWith('http') ? `<img src="${folder.icon}" class="w-10 h-10 object-cover rounded-xl">` : folder.icon}</span>
+                            <div>
+                                <h3 class="font-bold text-xs text-amber-300">${folder.name}</h3>
+                                <p class="text-[9px] text-slate-300">${folder.desc}</p>
+                            </div>
+                        </div>
+                        <span class="w-7 h-7 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xs font-bold">➔</span>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <div class="space-y-1.5 mt-1">
+                            <span class="text-3xl block">${folder.icon.startsWith('data:') || folder.icon.startsWith('http') ? `<img src="${folder.icon}" class="w-10 h-10 mx-auto object-cover rounded-xl">` : folder.icon}</span>
+                            <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${folder.name}</h3>
+                            <p class="text-[9px] text-slate-300">${folder.desc}</p>
+                        </div>
+                        <div class="flex justify-end mt-3">
+                            <span class="w-6 h-6 rounded-full bg-amber-500/25 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xs">➔</span>
+                        </div>
+                    `;
+                }
+                container.appendChild(card);
+            });
+        }
+
+        // Open Sub-folder Grid View
         function openDomain(domainId) {
-            const items = domainData[domainId] || [];
+            currentDomainId = domainId;
+            const allData = getDomainData();
+            const items = allData[domainId] || [];
             const container = document.getElementById('subFolderContainer');
             container.innerHTML = "";
 
-            items.forEach(item => {
+            items.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = "card-glass p-3.5 rounded-2xl flex items-center justify-between cursor-pointer";
+                card.className = "card-3d p-3.5 rounded-2xl flex flex-col justify-between text-center relative";
                 card.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl">${item.icon}</span>
-                        <div>
-                            <h3 class="font-bold text-xs text-amber-400">${item.name}</h3>
-                            <p class="text-[10px] text-slate-300">${item.desc}</p>
-                        </div>
+                    <button onclick="event.stopPropagation(); deleteItem(${domainId}, ${index})" class="absolute top-2 right-2 text-[9px] bg-red-900/80 text-white px-1.5 py-0.5 rounded shadow">🗑️</button>
+                    <div class="space-y-1.5 mt-2">
+                        <span class="text-3xl block">${item.icon.startsWith('data:') || item.icon.startsWith('http') ? `<img src="${item.icon}" class="w-10 h-10 mx-auto object-cover rounded-xl">` : item.icon}</span>
+                        <h3 class="font-bold text-[11px] text-amber-300 leading-tight">${item.name}</h3>
+                        <p class="text-[9px] text-slate-300 leading-tight">${item.desc}</p>
                     </div>
-                    <a href="${item.link}" target="_blank" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-[10px] shadow">Open ➔</a>
+                    <div class="mt-3">
+                        <a href="${item.link}" target="_blank" class="bg-amber-600/80 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-[10px] shadow block w-full">Open ➔</a>
+                    </div>
                 `;
                 container.appendChild(card);
             });
@@ -247,42 +254,205 @@
         function goHome() {
             document.getElementById('subFolderView').classList.add('hidden');
             document.getElementById('homeView').classList.remove('hidden');
+            renderHome();
         }
 
-        // Admin Panel for Changing Background & Logo
-        function openAdminPanel() {
-            const pwd = prompt("Enter Admin Password (default: admin):");
-            if(pwd === "admin") {
-                let choice = prompt("Choose action:\n1. Change Background Image URL\n2. Change Logo Image URL");
-                if(choice === "1") {
-                    let bgUrl = prompt("Enter image URL for Background:");
-                    if(bgUrl) {
-                        document.getElementById('mainBody').style.backgroundImage = `url('${bgUrl}')`;
-                        localStorage.setItem('appBg', bgUrl);
-                    }
-                } else if(choice === "2") {
-                    let logoUrl = prompt("Enter image URL for Logo:");
-                    if(logoUrl) {
-                        document.getElementById('appLogoDisplay').innerHTML = `<img src="${logoUrl}" class="w-full h-full object-cover rounded-full">`;
-                        localStorage.setItem('appLogo', logoUrl);
-                    }
+        // Admin Settings & File Manager Integration
+        function openAdminSettings() {
+            let pwd = prompt("Enter Admin Password (default: admin):");
+            if (pwd === "admin") {
+                let action = prompt("Admin Options:\n1. Change App Background (Gallery)\n2. Change App Logo (Gallery)\n3. Change Folder Name/Number\n4. Change Folder Background (Gallery)\n5. Change Folder Icon (Gallery)\n6. Add New Main Folder\n7. Reset All");
+                
+                if (action === "1") document.getElementById('bgFileInput').click();
+                else if (action === "2") document.getElementById('logoFileInput').click();
+                else if (action === "3") editFolderNameNumber();
+                else if (action === "4") {
+                    targetFolderId = prompt("Enter Folder ID (1 to 7 or new):");
+                    if(targetFolderId) document.getElementById('folderBgFileInput').click();
                 }
-            } else if(pwd !== null) {
+                else if (action === "5") {
+                    targetFolderId = prompt("Enter Folder ID (1 to 7 or new):");
+                    if(targetFolderId) document.getElementById('folderIconFileInput').click();
+                }
+                else if (action === "6") addNewMainFolder();
+                else if (action === "7") {
+                    localStorage.clear();
+                    location.reload();
+                }
+            } else if (pwd !== null) {
                 alert("പാസ്‌വേഡ് തെറ്റാണ്!");
             }
         }
 
-        // Load saved settings
+        // Edit Folder Name & Number/ID
+        function editFolderNameNumber() {
+            let id = prompt("Enter current Folder ID (1 to 7) to edit:");
+            let folders = getMainFolders();
+            let folder = folders.find(f => f.id == id);
+            if (folder) {
+                let newName = prompt("Enter new Folder Name:", folder.name);
+                let newId = prompt("Enter new Folder Number/ID:", folder.id);
+                let newDesc = prompt("Enter new Description:", folder.desc);
+                
+                if (newName) folder.name = newName;
+                if (newId) folder.id = parseInt(newId);
+                if (newDesc) folder.desc = newDesc;
+                
+                saveMainFolders(folders);
+                renderHome();
+                alert("ഫോൾഡർ വിവരങ്ങൾ വിജയകരമായി അപ്ഡേറ്റ് ചെയ്തു!");
+            } else {
+                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
+            }
+        }
+
+        // Add New Main Folder
+        function addNewMainFolder() {
+            let name = prompt("Enter Main Folder Name:");
+            let desc = prompt("Enter Description:");
+            let icon = prompt("Enter Emoji Icon:", "📁");
+            let id = prompt("Enter Folder Number/ID:");
+
+            if (name && id) {
+                let folders = getMainFolders();
+                folders.push({ id: parseInt(id), name, desc: desc || "", icon: icon || "📁", bg: "" });
+                saveMainFolders(folders);
+                renderHome();
+                alert("പുതിയ മെയിൻ ഫോൾഡർ വിജയകരമായി ആഡ് ചെയ്തു!");
+            }
+        }
+
+        // File Manager Handlers
+        function applyGlobalBackground(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url('${e.target.result}')`;
+                    localStorage.setItem('appBg', e.target.result);
+                    alert("ആപ്പ് ബാക്ക്ഗ്രൗണ്ട് പെർമനെന്റായി മാറ്റുകയും സേവ് ചെയ്യുകയും ചെയ്തു!");
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyGlobalLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('appLogoDisplay').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
+                    localStorage.setItem('appLogo', e.target.result);
+                    alert("ലോഗോ പെർമനെന്റായി മാറ്റുകയും സേവ് ചെയ്യുകയും ചെയ്തു!");
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyFolderBgFile(event) {
+            const file = event.target.files[0];
+            if (file && targetFolderId) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let folders = getMainFolders();
+                    let folder = folders.find(f => f.id == targetFolderId);
+                    if (folder) {
+                        folder.bg = e.target.result;
+                        saveMainFolders(folders);
+                        renderHome();
+                        alert(`ഫോൾഡർ ${targetFolderId}-ന്റെ ബാക്ക്ഗ്രൗണ്ട് ഫോട്ടോ പെർമനെന്റായി സേവ് ചെയ്തു!`);
+                    } else {
+                        alert("ഫോൾഡർ ഐഡി മാച്ച് ചെയ്തില്ല!");
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyFolderIconFile(event) {
+            const file = event.target.files[0];
+            if (file && targetFolderId) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let folders = getMainFolders();
+                    let folder = folders.find(f => f.id == targetFolderId);
+                    if (folder) {
+                        folder.icon = e.target.result;
+                        saveMainFolders(folders);
+                        renderHome();
+                        alert(`ഫോൾഡർ ${targetFolderId}-ന്റെ ഐക്കൺ ഫോട്ടോ പെർമനെന്റായി സേവ് ചെയ്തു!`);
+                    } else {
+                        alert("ഫോൾഡർ ഐഡി മാച്ച് ചെയ്തില്ല!");
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add sub-items (Files / Photos / Drive Links)
+        function openAddItemPrompt() {
+            let name = prompt("Enter Item Name:");
+            let iconInput = prompt("Type Emoji (e.g. 🏛️) or type 'photo' to upload image from File Manager:", "🏛️");
+            let desc = prompt("Enter Short Description:");
+            let link = prompt("Enter Link (Google Drive Link / WhatsApp / Web URL):");
+
+            if (iconInput === "photo") {
+                window.tempItemData = { name, desc: desc || "", link };
+                document.getElementById('itemMediaInput').click();
+                return;
+            }
+
+            if (name && link) {
+                const allData = getDomainData();
+                if (!allData[currentDomainId]) allData[currentDomainId] = [];
+                allData[currentDomainId].push({name, icon: iconInput || "📁", desc: desc || "", link});
+                saveDomainData(allData);
+                openDomain(currentDomainId);
+                alert("പുതിയ ഫയൽ/ഐറ്റം വിജയകരമായി ആഡ് ചെയ്തു!");
+            }
+        }
+
+        function applyItemMediaFile(event) {
+            const file = event.target.files[0];
+            if (file && window.tempItemData) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const allData = getDomainData();
+                    if (!allData[currentDomainId]) allData[currentDomainId] = [];
+                    allData[currentDomainId].push({
+                        name: window.tempItemData.name,
+                        icon: e.target.result, // Saved image as icon
+                        desc: window.tempItemData.desc,
+                        link: window.tempItemData.link
+                    });
+                    saveDomainData(allData);
+                    openDomain(currentDomainId);
+                    alert("ഫോട്ടോ ഫയൽ സഹിതം ഐറ്റം വിജയകരമായി ആഡ് ചെയ്തു!");
+                    window.tempItemData = null;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function deleteItem(domainId, index) {
+            if (confirm("ഈ ഐറ്റം ഡിലീറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?")) {
+                const allData = getDomainData();
+                allData[domainId].splice(index, 1);
+                saveDomainData(allData);
+                openDomain(domainId);
+            }
+        }
+
+        // Initialize on startup
         window.onload = function() {
             const savedBg = localStorage.getItem('appBg');
-            if(savedBg) {
-                document.getElementById('mainBody').style.backgroundImage = `url('${savedBg}')`;
-            }
+            if (savedBg) document.body.style.backgroundImage = `url('${savedBg}')`;
+
             const savedLogo = localStorage.getItem('appLogo');
-            if(savedLogo) {
-                document.getElementById('appLogoDisplay').innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover rounded-full">`;
-            }
+            if (savedLogo) document.getElementById('appLogoDisplay').innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover rounded-full">`;
+
+            renderHome();
         }
     </script>
 </body>
-</html> 
+</html>
