@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Final Clean Version</title>
+    <title>OYES GLOBAL HUB - Ultimate Studio Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -58,7 +58,7 @@
         </div>
     </header>
 
-    <!-- Admin Control Panel -->
+    <!-- Master Admin Control Panel (Design Studio & Customizations) -->
     <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/98 border-b border-amber-500/60 p-4 hidden space-y-3 z-40 shadow-2xl">
         <div class="flex justify-between items-center">
             <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🎨 Design Studio & Admin</h3>
@@ -73,8 +73,12 @@
             <button onclick="document.getElementById('topBannerBgInput').click()" class="bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌄 Change Top Box BG</button>
             <button onclick="editTopBannerPrompt()" class="bg-indigo-600/90 hover:bg-indigo-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">✏️ Edit Top Banner Text</button>
 
+            <button onclick="promptFolderCustomization('bg')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📁 Folder Background</button>
+            <button onclick="promptFolderCustomization('icon')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔖 Folder Icon Photo</button>
             <button onclick="addNewMainFolderPrompt()" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">➕ Add New Folder</button>
+            <button onclick="editFolderDetailsPrompt()" class="bg-violet-600/90 hover:bg-violet-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">✏️ Edit Folder Name</button>
             <button onclick="deleteFolderPrompt()" class="bg-rose-900/90 hover:bg-rose-800 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🗑️ Delete Folder</button>
+            <button onclick="checkStorageStatus()" class="bg-cyan-700/90 hover:bg-cyan-600 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📊 Check Storage</button>
             <button onclick="resetAppSettings()" class="bg-red-950 hover:bg-red-900 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🔄 Factory Reset Settings</button>
         </div>
     </div>
@@ -88,7 +92,7 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Editable Top Banner Box (100% Clean - No Eagle/Logo) -->
+        <!-- Editable Top Banner Box (100% Clean - No Logo) -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-5 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
             <div class="space-y-1.5 py-4">
                 <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
@@ -127,6 +131,7 @@
     <script>
         let currentDomainId = null;
         let isAdminLoggedIn = false;
+        let targetFolderIdForCustom = null;
         let pendingItemData = null;
 
         const defaultMainFolders = [
@@ -272,6 +277,19 @@
             alert("ടോപ്പ് ബാനർ ടെക്സ്റ്റ് അപ്ഡേറ്റ് ചെയ്തു!");
         }
 
+        function applyGlobalBackground(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url('${e.target.result}')`;
+                    localStorage.setItem('appBg', e.target.result);
+                    alert("ആപ്പ് ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         function applyTopBannerBg(event) {
             const file = event.target.files[0];
             if (file) {
@@ -285,18 +303,77 @@
             }
         }
 
+        function promptFolderCustomization(type) {
+            let id = prompt("Enter Folder ID (1 to 7):");
+            let folders = getMainFolders();
+            let folder = folders.find(f => f.id == id);
+            if (folder) {
+                targetFolderIdForCustom = id;
+                if (type === 'bg') document.getElementById('folderBgInput').click();
+                else document.getElementById('folderIconInput').click();
+            } else {
+                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല! ശരിയായ ID നൽകുക.");
+            }
+        }
+
+        function applyFolderBgFile(event) {
+            const file = event.target.files[0];
+            if (file && targetFolderIdForCustom) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let folders = getMainFolders();
+                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
+                    if (folder) {
+                        folder.bg = e.target.result;
+                        saveMainFolders(folders);
+                        renderHome();
+                        alert("ഫോൾഡർ ബാക്ക്ഗ്രൗണ്ട് വിജയകരമായി സേവ് ചെയ്തു!");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyFolderIconFile(event) {
+            const file = event.target.files[0];
+            if (file && targetFolderIdForCustom) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let folders = getMainFolders();
+                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
+                    if (folder) {
+                        folder.icon = e.target.result;
+                        saveMainFolders(folders);
+                        renderHome();
+                        alert("ഫോൾഡർ ഐക്കൺ ഫോട്ടോ വിജയകരമായി സേവ് ചെയ്തു!");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         function renderHome() {
             loadTopBanner();
             const folders = getMainFolders();
             const container = document.getElementById('mainHomeGrid');
             container.innerHTML = "";
 
-            folders.forEach(folder => {
+            folders.forEach((folder, index) => {
                 const card = document.createElement('div');
-                card.className = folder.fullWidth ? "card-3d p-4 rounded-2xl cursor-pointer flex items-center justify-between col-span-2" : "card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between text-center";
+                card.className = folder.fullWidth ? "card-3d p-4 rounded-2xl cursor-pointer flex items-center justify-between col-span-2 relative" : "card-3d p-3.5 rounded-2xl cursor-pointer flex flex-col justify-between text-center relative";
                 
                 if (folder.bg) card.style.backgroundImage = `url('${folder.bg}')`;
                 card.setAttribute('onclick', `openDomain(${folder.id})`);
+
+                let moveControls = "";
+                if (isAdminLoggedIn) {
+                    moveControls = `
+                        <div class="absolute top-2 left-2 flex gap-1 z-20">
+                            <button onclick="event.stopPropagation(); moveFolder(${index}, -1)" class="bg-slate-800 text-amber-400 px-1.5 py-0.5 rounded text-[10px] font-bold shadow hover:bg-slate-700">◀</button>
+                            <button onclick="event.stopPropagation(); moveFolder(${index}, 1)" class="bg-slate-800 text-amber-400 px-1.5 py-0.5 rounded text-[10px] font-bold shadow hover:bg-slate-700">▶</button>
+                        </div>
+                    `;
+                }
 
                 let iconDisplay = folder.icon;
                 if (folder.icon && (folder.icon.startsWith('data:') || folder.icon.startsWith('http'))) {
@@ -305,10 +382,11 @@
 
                 if (folder.fullWidth) {
                     card.innerHTML = `
-                        <div class="flex items-center space-x-3">
+                        ${moveControls}
+                        <div class="flex items-center space-x-3 mt-4 sm:mt-0">
                             <span class="text-3xl">${iconDisplay}</span>
                             <div>
-                                <h3 class="font-bold text-xs dynamic-title">${folder.name}</h3>
+                                <h3 class="font-bold text-xs dynamic-title">${folder.name} (ID: ${folder.id})</h3>
                                 <p class="text-[9px]" style="color: var(--app-text-color, #cbd5e1);">${folder.desc}</p>
                             </div>
                         </div>
@@ -316,9 +394,10 @@
                     `;
                 } else {
                     card.innerHTML = `
-                        <div class="space-y-1.5 mt-1">
+                        ${moveControls}
+                        <div class="space-y-1.5 mt-5">
                             <span class="text-3xl block">${iconDisplay}</span>
-                            <h3 class="font-bold text-[11px] dynamic-title leading-tight">${folder.name}</h3>
+                            <h3 class="font-bold text-[11px] dynamic-title leading-tight">${folder.name} (ID: ${folder.id})</h3>
                             <p class="text-[9px]" style="color: var(--app-text-color, #cbd5e1);">${folder.desc}</p>
                         </div>
                         <div class="flex justify-end mt-3">
@@ -328,6 +407,19 @@
                 }
                 container.appendChild(card);
             });
+        }
+
+        function moveFolder(index, direction) {
+            event.stopPropagation();
+            let folders = getMainFolders();
+            let targetIndex = index + direction;
+            if (targetIndex >= 0 && targetIndex < folders.length) {
+                let temp = folders[index];
+                folders[index] = folders[targetIndex];
+                folders[targetIndex] = temp;
+                saveMainFolders(folders);
+                renderHome();
+            }
         }
 
         function openDomain(domainId) {
@@ -411,19 +503,6 @@
             if(currentDomainId !== null) openDomain(currentDomainId);
         }
 
-        function applyGlobalBackground(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.body.style.backgroundImage = `url('${e.target.result}')`;
-                    localStorage.setItem('appBg', e.target.result);
-                    alert("ആപ്പ് ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
         function addNewMainFolderPrompt() {
             let name = prompt("Enter Main Folder Name:");
             let desc = prompt("Enter Description:");
@@ -436,6 +515,23 @@
                 saveMainFolders(folders);
                 renderHome();
                 alert("പുതിയ ഫോൾഡർ വിജയകരമായി ചേർത്തു!");
+            }
+        }
+
+        function editFolderDetailsPrompt() {
+            let id = prompt("Enter Folder ID to edit:");
+            let folders = getMainFolders();
+            let folder = folders.find(f => f.id == id);
+            if (folder) {
+                let newName = prompt("Enter new Folder Name:", folder.name);
+                let newDesc = prompt("Enter new Description:", folder.desc);
+                if (newName) folder.name = newName;
+                if (newDesc) folder.desc = newDesc;
+                saveMainFolders(folders);
+                renderHome();
+                alert("ഫോൾഡർ വിവരങ്ങൾ അപ്ഡേറ്റ് ചെയ്തു!");
+            } else {
+                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
             }
         }
 
@@ -455,8 +551,69 @@
             }
         }
 
+        function checkStorageStatus() {
+            let total = 0;
+            for (let key in localStorage) {
+                if (localStorage.hasOwnProperty(key)) {
+                    total += ((localStorage[key].length * 2) / 1024 / 1024);
+                }
+            }
+            alert(`Storage Status:\nCurrently used storage: ~${total.toFixed(2)} MB in LocalStorage.`);
+        }
+
+        function openAddItemPrompt() {
+            let name = prompt("Enter Product / Item Name:");
+            let price = prompt("Enter Price / Rate (e.g. ₹150/sq.ft):", "₹");
+            let desc = prompt("Enter Description:");
+
+            if (name) {
+                pendingItemData = { name, price: price || "", desc: desc || "" };
+                alert("ഇനി ഗാലറിയിൽ നിന്ന് ഫോട്ടോയോ അല്ലെങ്കിൽ ഫയൽ മാനേജറിൽ നിന്ന് PDF ഫയലോ സെലക്ട് ചെയ്യുക!");
+                document.getElementById('itemMediaInput').click();
+            }
+        }
+
+        function processItemMediaUpload(event) {
+            const file = event.target.files[0];
+            if (file && pendingItemData) {
+                const.reader = new FileReader();
+                reader.onload = function(e) {
+                    const allData = getDomainData();
+                    if (!allData[currentDomainId]) allData[currentDomainId] = [];
+                    
+                    let fileData = e.target.result;
+                    let isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf');
+                    let fileType = isPdf ? 'pdf' : 'image';
+
+                    allData[currentDomainId].push({
+                        name: pendingItemData.name,
+                        icon: fileData,
+                        price: pendingItemData.price,
+                        desc: pendingItemData.desc,
+                        link: fileData,
+                        type: fileType
+                    });
+
+                    saveDomainData(allData);
+                    openDomain(currentDomainId);
+                    alert("വിജയകരമായി അപ്‌ലോഡ് ചെയ്തു!");
+                    pendingItemData = null;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function deleteItem(domainId, index) {
+            if (confirm("ഈ ഐറ്റം ഡിലീറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?")) {
+                const allData = getDomainData();
+                allData[domainId].splice(index, 1);
+                saveDomainData(allData);
+                openDomain(domainId);
+            }
+        }
+
         function resetAppSettings() {
-            if (confirm("എല്ലാ സെറ്റിംഗ്സും റീസെറ്റ് ചെയ്യണോ? (ഇത് പഴയ കാഷെ ക്ലിയർ ചെയ്യാൻ സഹായിക്കും)")) {
+            if (confirm("എല്ലാ സെറ്റിംഗ്സും റീസെറ്റ് ചെയ്യണോ?")) {
                 localStorage.clear();
                 location.reload();
             }
