@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Full File Manager & Customizer Edition</title>
+    <title>OYES GLOBAL HUB - Complete Customizer Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -95,7 +95,7 @@
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
-    <!-- Details View with Email & WhatsApp Integration -->
+    <!-- Details View -->
     <div id="designDetailView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="goBackToSubFolders()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
@@ -104,7 +104,7 @@
         <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
     </div>
 
-    <!-- Admin Panel & File Manager View -->
+    <!-- Admin Panel View -->
     <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
@@ -133,15 +133,15 @@
             <h4 class="text-xs font-bold text-amber-300">📂 Create New Category / Folder</h4>
             <input type="text" id="newFolderNameInput" placeholder="Folder Name" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
             <input type="text" id="newFolderSloganInput" placeholder="Folder Slogan / Description" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <label class="block text-[10px] text-amber-400">Card Background/Icon Image:</label>
+            <label class="block text-[10px] text-amber-400">Card Background / Icon Image:</label>
             <input type="file" id="newFolderImgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
             <button onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Create Folder</button>
         </div>
 
-        <!-- Edit Existing Folders & Backgrounds Section -->
+        <!-- Edit Existing Folders, Names & Icons/Backgrounds -->
         <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">✏️ Edit Existing Folders & Backgrounds</h4>
-            <div id="adminEditFoldersList" class="space-y-3 max-h-64 overflow-y-auto pr-1 text-xs"></div>
+            <h4 class="text-xs font-bold text-amber-300">✏️ Edit Folders (Name, Slogan, Icon/Background)</h4>
+            <div id="adminEditFoldersList" class="space-y-3 max-h-72 overflow-y-auto pr-1 text-xs"></div>
         </div>
 
         <!-- File Manager: Add Items/PDFs to Folders -->
@@ -188,7 +188,7 @@
         </div>
     </nav>
 
-    <!-- JavaScript Execution Logic -->
+    <!-- JavaScript Master Logic -->
     <script>
         const defaultRootFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people Uniting opportunities" },
@@ -449,7 +449,8 @@
                             <input type="text" id="edit_name_${f.id}" value="${f.name}" class="w-full bg-slate-900 text-amber-300 text-[11px] font-bold px-2.5 py-1.5 rounded-lg border border-slate-700">
                         </div>
                         <input type="text" id="edit_slogan_${f.id}" value="${f.slogan}" class="w-full bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-lg border border-slate-700">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-1.5">
+                            <label class="text-[9px] text-amber-400">Change Icon/Image:</label>
                             <input type="file" id="edit_img_${f.id}" accept="image/*" class="w-full bg-slate-900 text-[9px] text-slate-400 p-1 rounded-lg border border-slate-700">
                         </div>
                         <div class="flex gap-2 pt-1">
