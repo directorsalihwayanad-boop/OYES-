@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Complete Pro Edition</title>
+    <title>OYES GLOBAL HUB - Full File Manager & Customizer Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -95,7 +95,7 @@
         <div id="pageContentGrid" class="grid grid-cols-2 gap-3 pb-6"></div>
     </div>
 
-    <!-- Details View with Email / Inquiry Action -->
+    <!-- Details View with Email & WhatsApp Integration -->
     <div id="designDetailView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="goBackToSubFolders()" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Back</button>
@@ -104,49 +104,55 @@
         <div id="designContentGrid" class="grid grid-cols-1 gap-3.5 pb-6"></div>
     </div>
 
-    <!-- Admin Panel View -->
+    <!-- Admin Panel & File Manager View -->
     <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
-            <h3 class="text-xs font-bold text-amber-300">⚙️ OYES Admin & Contact Settings</h3>
+            <h3 class="text-xs font-bold text-amber-300">⚙️ OYES File Manager & Admin</h3>
         </div>
 
-        <!-- Global Contact Info Settings (Email & WhatsApp) -->
+        <!-- Global Contact Settings -->
         <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📧 Admin Email & WhatsApp Settings</h4>
-            <label class="block text-[10px] text-slate-400">Official Notification Email:</label>
+            <h4 class="text-xs font-bold text-amber-300">📧 Official Contact Settings</h4>
+            <label class="block text-[10px] text-slate-400">Email ID:</label>
             <input type="email" id="adminEmailInput" value="Platformoyes@gmail.com" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <label class="block text-[10px] text-slate-400 mt-1">WhatsApp Inquiry Number (with country code):</label>
+            <label class="block text-[10px] text-slate-400 mt-1">WhatsApp Number:</label>
             <input type="text" id="adminWaInput" value="919947198248" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
             <button onclick="saveContactSettings()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs shadow mt-2">Save Contact Info</button>
         </div>
 
-        <!-- Update Logo Section -->
+        <!-- Update Main App Logo -->
         <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
             <h4 class="text-xs font-bold text-amber-300">🖼️ Update Main App Logo</h4>
             <input type="file" id="adminLogoInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
             <button onclick="updateAppLogo()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs shadow">Save Logo</button>
         </div>
 
-        <!-- Add New Folder Section -->
+        <!-- Create New Folder Section -->
         <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
             <h4 class="text-xs font-bold text-amber-300">📂 Create New Category / Folder</h4>
             <input type="text" id="newFolderNameInput" placeholder="Folder Name" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
             <input type="text" id="newFolderSloganInput" placeholder="Folder Slogan / Description" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <label class="block text-[10px] text-amber-400">Card Photo / Icon:</label>
+            <label class="block text-[10px] text-amber-400">Card Background/Icon Image:</label>
             <input type="file" id="newFolderImgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
             <button onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Create Folder</button>
         </div>
 
-        <!-- Add New File/Item Inside Folders Section -->
+        <!-- Edit Existing Folders & Backgrounds Section -->
+        <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
+            <h4 class="text-xs font-bold text-amber-300">✏️ Edit Existing Folders & Backgrounds</h4>
+            <div id="adminEditFoldersList" class="space-y-3 max-h-64 overflow-y-auto pr-1 text-xs"></div>
+        </div>
+
+        <!-- File Manager: Add Items/PDFs to Folders -->
         <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
-            <h4 class="text-xs font-bold text-amber-300">📄 Add New File / Item to Folder</h4>
+            <h4 class="text-xs font-bold text-amber-300">📄 File Manager: Add PDF / Item to Folder</h4>
             <select id="targetFolderSelect" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800"></select>
             <input type="text" id="newItemNameInput" placeholder="Item Name (e.g. Job Vacancy / PDF)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
             <input type="text" id="newItemDescInput" placeholder="Short Description" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
             <input type="text" id="newItemLinkInput" placeholder="External Web Link / PDF URL (Optional)" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <input type="text" id="newItemIconInput" placeholder="Emoji Icon (e.g. 📋, 📄)" value="📌" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <button onclick="addNewFileToFolder()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Add File to Folder</button>
+            <input type="text" id="newItemIconInput" placeholder="Emoji Icon (e.g. 📋, 📄, 📖)" value="📌" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
+            <button onclick="addNewFileToFolder()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Add File/Item</button>
         </div>
 
         <button onclick="resetFactorySettings()" class="w-full bg-red-950 border border-red-700 text-red-300 font-bold py-2 rounded-xl text-xs shadow">🔄 Reset Everything to Default</button>
@@ -182,7 +188,7 @@
         </div>
     </nav>
 
-    <!-- JavaScript Master Logic with Email & WhatsApp Integration -->
+    <!-- JavaScript Execution Logic -->
     <script>
         const defaultRootFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people Uniting opportunities" },
@@ -232,8 +238,10 @@
 
         function applyAppSettings() {
             document.getElementById('headerLogoImg').src = appLogo;
-            document.getElementById('adminEmailInput').value = adminEmail;
-            document.getElementById('adminWaInput').value = adminWa;
+            let emailInput = document.getElementById('adminEmailInput');
+            let waInput = document.getElementById('adminWaInput');
+            if(emailInput) emailInput.value = adminEmail;
+            if(waInput) waInput.value = adminWa;
             renderHomeGrid();
         }
 
@@ -243,6 +251,7 @@
 
         function renderHomeGrid() {
             let container = document.getElementById('homeGridContainer');
+            if(!container) return;
             let html = "";
             rootFolders.forEach((folder, idx) => {
                 let isFullSpan = (idx === rootFolders.length - 1 && rootFolders.length % 2 !== 0) ? "col-span-2 max-w-[210px] mx-auto w-full" : "";
@@ -303,11 +312,14 @@
             document.getElementById('designDetailView').classList.add('hidden');
             document.getElementById('adminPageView').classList.remove('hidden');
             populateFolderDropdown();
+            renderAdminEditList();
         }
 
         function saveContactSettings() {
-            adminEmail = document.getElementById('adminEmailInput').value.trim() || "Platformoyes@gmail.com";
-            adminWa = document.getElementById('adminWaInput').value.trim() || "919947198248";
+            let emailVal = document.getElementById('adminEmailInput').value.trim();
+            let waVal = document.getElementById('adminWaInput').value.trim();
+            if(emailVal) adminEmail = emailVal;
+            if(waVal) adminWa = waVal;
             localStorage.setItem('oyes_admin_email', adminEmail);
             localStorage.setItem('oyes_admin_wa', adminWa);
             alert("Email & WhatsApp contact settings saved successfully!");
@@ -315,6 +327,7 @@
 
         function populateFolderDropdown() {
             let select = document.getElementById('targetFolderSelect');
+            if(!select) return;
             let html = "";
             rootFolders.forEach(f => {
                 html += `<option value="${f.id}">${f.name}</option>`;
@@ -374,8 +387,79 @@
             document.getElementById('newFolderImgInput').value = "";
 
             populateFolderDropdown();
+            renderAdminEditList();
             renderHomeGrid();
             alert("New folder created successfully!");
+        }
+
+        function updateFolderDetails(id) {
+            let nameInput = document.getElementById(`edit_name_${id}`).value.trim();
+            let sloganInput = document.getElementById(`edit_slogan_${id}`).value.trim();
+            let fileInput = document.getElementById(`edit_img_${id}`);
+
+            let folderObj = rootFolders.find(f => f.id === id);
+            if(!folderObj) return;
+
+            folderObj.name = nameInput || folderObj.name;
+            folderObj.slogan = sloganInput || folderObj.slogan;
+
+            if(fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    folderObj.image = e.target.result;
+                    finalizeFolderUpdate();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                finalizeFolderUpdate();
+            }
+        }
+
+        function finalizeFolderUpdate() {
+            localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+            renderHomeGrid();
+            renderAdminEditList();
+            populateFolderDropdown();
+            alert("Folder updated successfully!");
+        }
+
+        function deleteFolder(id) {
+            if(confirm("Are you sure you want to delete this folder?")) {
+                rootFolders = rootFolders.filter(f => f.id !== id);
+                delete domainFoldersData[id];
+
+                localStorage.setItem('oyes_root_folders', JSON.stringify(rootFolders));
+                localStorage.setItem('oyes_domain_data', JSON.stringify(domainFoldersData));
+
+                renderAdminEditList();
+                populateFolderDropdown();
+                renderHomeGrid();
+            }
+        }
+
+        function renderAdminEditList() {
+            let container = document.getElementById('adminEditFoldersList');
+            if(!container) return;
+            let html = "";
+            rootFolders.forEach(f => {
+                html += `
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <img src="${f.image}" class="w-8 h-8 rounded-lg object-cover border border-amber-500/40">
+                            <input type="text" id="edit_name_${f.id}" value="${f.name}" class="w-full bg-slate-900 text-amber-300 text-[11px] font-bold px-2.5 py-1.5 rounded-lg border border-slate-700">
+                        </div>
+                        <input type="text" id="edit_slogan_${f.id}" value="${f.slogan}" class="w-full bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-lg border border-slate-700">
+                        <div class="flex items-center gap-2">
+                            <input type="file" id="edit_img_${f.id}" accept="image/*" class="w-full bg-slate-900 text-[9px] text-slate-400 p-1 rounded-lg border border-slate-700">
+                        </div>
+                        <div class="flex gap-2 pt-1">
+                            <button onclick="updateFolderDetails(${f.id})" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1 rounded-lg text-[10px] flex-1 shadow">💾 Save Changes</button>
+                            <button onclick="deleteFolder(${f.id})" class="bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1 rounded-lg text-[10px] shadow">🗑️ Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
         }
 
         function addNewFileToFolder() {
@@ -460,17 +544,18 @@
             let grid = document.getElementById('designContentGrid');
             
             let actionBtn = "";
-            if(item.link) {
-                actionBtn = `<a href="${item.link}" target="_blank" class="bg-amber-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl block text-xs shadow">Open Link / PDF ➔</a>`;
+            if(item.link && item.link.trim() !== "") {
+                actionBtn = `<a href="${item.link}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2.5 rounded-xl block text-xs shadow text-center">Open Link / PDF ➔</a>`;
             } else {
                 let waText = encodeURIComponent(`Hello, I am interested in inquiring about: ${item.name} from OYES Global Hub.`);
                 let mailSub = encodeURIComponent(`Inquiry regarding ${item.name}`);
                 let mailBody = encodeURIComponent(`Hello OYES Team,\n\nI would like to know more details about ${item.name}.\n\nThank you.`);
                 
                 actionBtn = `
-                    <div class="space-y-2">
-                        <a href="https://wa.me/${adminWa}?text=${waText}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl block text-xs shadow">💬 Inquire via WhatsApp</a>
-                        <a href="mailto:${adminEmail}?subject=${mailSub}&body=${mailBody}" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2.5 rounded-xl block text-xs shadow">✉️ Send Email to ${adminEmail}</a>
+                    <div class="space-y-2.5">
+                        <p class="text-xs text-slate-300 mb-2">${item.desc}</p>
+                        <a href="https://wa.me/${adminWa}?text=${waText}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl block text-xs shadow text-center">💬 Inquire via WhatsApp (${adminWa})</a>
+                        <a href="mailto:${adminEmail}?subject=${mailSub}&body=${mailBody}" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2.5 rounded-xl block text-xs shadow text-center">✉️ Send Email to ${adminEmail}</a>
                     </div>
                 `;
             }
