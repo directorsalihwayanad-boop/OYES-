@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Complete Studio Edition</title>
+    <title>OYES GLOBAL HUB - Final Clean Studio Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -60,19 +60,19 @@
         </div>
     </header>
 
-    <!-- Master Admin Control Panel with Full Design Studio Options -->
+    <!-- Master Admin Control Panel (Design Studio & All Controls) -->
     <div id="adminPanelBox" class="max-w-md mx-auto w-full bg-slate-900/98 border-b border-amber-500/60 p-4 hidden space-y-3 z-40 shadow-2xl">
         <div class="flex justify-between items-center">
-            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🎨 Full Design Studio & Admin</h3>
+            <h3 class="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1">🎨 Design Studio & Admin</h3>
             <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 hover:bg-red-800 text-white px-2.5 py-1 rounded font-bold shadow">Lock 🔒</button>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs">
-            <!-- Studio Theme Customizers -->
+            <!-- Studio Color & Font Customizers -->
             <button onclick="openColorStudio()" class="bg-pink-600/90 hover:bg-pink-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🎨 Studio: Title Color</button>
             <button onclick="openTextStudio()" class="bg-pink-700/90 hover:bg-pink-600 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">✍️ Studio: Text Color</button>
             <button onclick="openFontStudio()" class="bg-purple-600/90 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🔤 Studio: Font Style (Poppins / Cinzel / Orbitron)</button>
             
-            <!-- Branding & Layout Controls -->
+            <!-- Standard Admin Controls -->
             <button onclick="document.getElementById('logoFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🖼️ Change App Logo</button>
             <button onclick="document.getElementById('bgFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌅 Change App BG</button>
             <button onclick="document.getElementById('topBannerBgInput').click()" class="bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🌄 Change Top Box BG</button>
@@ -99,9 +99,9 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Editable Top Banner Box (Clean layout) -->
+        <!-- Editable Top Banner Box (100% Clean - No Eagle, No Round Logo) -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-4 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
-            <div class="space-y-1 pt-1">
+            <div class="space-y-1.5 py-1">
                 <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
                 <h2 id="bannerTitle2" class="text-lg font-black tracking-widest dynamic-title">UNITING OPPORTUNITIES</h2>
                 <p id="bannerSubtitle" class="text-[10px] font-semibold tracking-wider mt-1" style="color: var(--app-text-color, #fef3c7);">OYES — A WORLD OF OPPORTUNITIES</p>
