@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Complete Customizer Edition</title>
+    <title>OYES GLOBAL HUB - Ultimate Pro Customizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -108,7 +108,14 @@
     <div id="adminPageView" class="hidden flex-grow p-4 max-w-md mx-auto w-full space-y-4 pb-20">
         <div class="flex justify-between items-center bg-slate-900/90 p-3.5 rounded-2xl border border-amber-500/40 shadow-xl">
             <button type="button" onclick="switchBottomTab('home')" class="text-amber-300 text-xs bg-amber-950 border border-amber-700 px-3 py-2 rounded-xl font-semibold">← Home</button>
-            <h3 class="text-xs font-bold text-amber-300">⚙️ OYES File Manager & Admin</h3>
+            <h3 class="text-xs font-bold text-amber-300">⚙️ OYES Full Customizer & Admin</h3>
+        </div>
+
+        <!-- Global App Background Customizer -->
+        <div class="card-3d p-4 rounded-2xl space-y-2 border border-amber-500/50">
+            <h4 class="text-xs font-bold text-amber-300">🎨 Update Overall App Background</h4>
+            <input type="file" id="adminAppBgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
+            <button onclick="updateAppBackground()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-xl text-xs shadow">Save App Background</button>
         </div>
 
         <!-- Global Contact Settings -->
@@ -133,12 +140,12 @@
             <h4 class="text-xs font-bold text-amber-300">📂 Create New Category / Folder</h4>
             <input type="text" id="newFolderNameInput" placeholder="Folder Name" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
             <input type="text" id="newFolderSloganInput" placeholder="Folder Slogan / Description" class="w-full bg-slate-950 text-xs text-slate-200 px-3 py-2 rounded-xl border border-slate-800">
-            <label class="block text-[10px] text-amber-400">Card Background / Icon Image:</label>
+            <label class="block text-[10px] text-amber-400">Card Icon / Image:</label>
             <input type="file" id="newFolderImgInput" accept="image/*" class="w-full bg-slate-950 text-xs text-slate-300 p-2 rounded-xl border border-slate-800">
             <button onclick="addNewFolder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs shadow">➕ Create Folder</button>
         </div>
 
-        <!-- Edit Existing Folders, Names & Icons/Backgrounds -->
+        <!-- Edit Existing Folders & Backgrounds -->
         <div class="card-3d p-4 rounded-2xl space-y-3 border border-amber-500/50">
             <h4 class="text-xs font-bold text-amber-300">✏️ Edit Folders (Name, Slogan, Icon/Background)</h4>
             <div id="adminEditFoldersList" class="space-y-3 max-h-72 overflow-y-auto pr-1 text-xs"></div>
@@ -188,7 +195,7 @@
         </div>
     </nav>
 
-    <!-- JavaScript Master Logic -->
+    <!-- JavaScript Master Execution Logic -->
     <script>
         const defaultRootFolders = [
             { id: 1, name: "WORLD OF KNOWLEDGE", image: "file_00000000c4c08211b8239d606ec89bbc.png", slogan: "Connecting people Uniting opportunities" },
@@ -233,11 +240,15 @@
         let rootFolders = JSON.parse(localStorage.getItem('oyes_root_folders')) || defaultRootFolders;
         let domainFoldersData = JSON.parse(localStorage.getItem('oyes_domain_data')) || defaultDomainFoldersData;
         let appLogo = localStorage.getItem('oyes_app_logo') || "file_00000000b9608211988d7905e24d9dd0.png";
+        let appBg = localStorage.getItem('oyes_app_bg') || "";
         let adminEmail = localStorage.getItem('oyes_admin_email') || "Platformoyes@gmail.com";
         let adminWa = localStorage.getItem('oyes_admin_wa') || "919947198248";
 
         function applyAppSettings() {
             document.getElementById('headerLogoImg').src = appLogo;
+            if(appBg) {
+                document.body.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.9)), url('${appBg}')`;
+            }
             let emailInput = document.getElementById('adminEmailInput');
             let waInput = document.getElementById('adminWaInput');
             if(emailInput) emailInput.value = adminEmail;
@@ -351,6 +362,22 @@
             }
         }
 
+        function updateAppBackground() {
+            let fileInput = document.getElementById('adminAppBgInput');
+            if(fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    appBg = e.target.result;
+                    localStorage.setItem('oyes_app_bg', appBg);
+                    applyAppSettings();
+                    alert("App Background updated successfully!");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert("Please select an image file first!");
+            }
+        }
+
         function addNewFolder() {
             let name = document.getElementById('newFolderNameInput').value.trim();
             let slogan = document.getElementById('newFolderSloganInput').value.trim();
@@ -450,7 +477,7 @@
                         </div>
                         <input type="text" id="edit_slogan_${f.id}" value="${f.slogan}" class="w-full bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-lg border border-slate-700">
                         <div class="flex items-center gap-1.5">
-                            <label class="text-[9px] text-amber-400">Change Icon/Image:</label>
+                            <label class="text-[9px] text-amber-400">Change Folder Photo:</label>
                             <input type="file" id="edit_img_${f.id}" accept="image/*" class="w-full bg-slate-900 text-[9px] text-slate-400 p-1 rounded-lg border border-slate-700">
                         </div>
                         <div class="flex gap-2 pt-1">
