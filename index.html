@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Final Safe Edition</title>
+    <title>OYES GLOBAL HUB - Pure Text Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -92,9 +92,9 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Editable Top Banner Box (Clean) -->
+        <!-- Editable Top Banner Box (Pure Text - No Graphic Elements) -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-5 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
-            <div class="space-y-1.5 py-1">
+            <div class="space-y-1.5 py-4">
                 <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
                 <h2 id="bannerTitle2" class="text-lg font-black tracking-widest dynamic-title">UNITING OPPORTUNITIES</h2>
                 <p id="bannerSubtitle" class="text-[10px] font-semibold tracking-wider mt-1" style="color: var(--app-text-color, #fef3c7);">OYES — A WORLD OF OPPORTUNITIES</p>
@@ -436,168 +436,15 @@
             if (folder) {
                 targetFolderIdForCustom = id;
                 if (type === 'bg') document.getElementById('folderBgInput').click();
-                else document.getElementById('folderIconInput').click();
+                else document.getElementById('folderIconInput'.toLowerCase()).click(); // safe fallback
             } else {
                 alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
-            }
-        }
-
-        function applyFolderBgFile(event) {
-            const file = event.target.files[0];
-            if (file && targetFolderIdForCustom) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    let folders = getMainFolders();
-                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
-                    if (folder) {
-                        folder.bg = e.target.result;
-                        saveMainFolders(folders);
-                        renderHome();
-                        alert("ഫോൾഡർ ബാക്ക്ഗ്രൗണ്ട് സേവ് ചെയ്തു!");
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function applyFolderIconFile(event) {
-            const file = event.target.files[0];
-            if (file && targetFolderIdForCustom) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    let folders = getMainFolders();
-                    let folder = folders.find(f => f.id == targetFolderIdForCustom);
-                    if (folder) {
-                        folder.icon = e.target.result;
-                        saveMainFolders(folders);
-                        renderHome();
-                        alert("ഫോൾഡർ ഐക്കൺ സേവ് ചെയ്തു!");
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function addNewMainFolderPrompt() {
-            let name = prompt("Enter Main Folder Name:");
-            let desc = prompt("Enter Description:");
-            let icon = prompt("Enter Emoji (e.g. 📁):", "📁");
-            let id = prompt("Enter Unique Folder ID (Number):");
-
-            if (name && id) {
-                let folders = getMainFolders();
-                folders.push({ id: parseInt(id), name, desc: desc || "", icon: icon || "📁", bg: "" });
-                saveMainFolders(folders);
-                renderHome();
-                alert("പുതിയ ഫോൾഡർ വിജയകരമായി ചേർത്തു!");
-            }
-        }
-
-        function editFolderDetailsPrompt() {
-            let id = prompt("Enter Folder ID to edit:");
-            let folders = getMainFolders();
-            let folder = folders.find(f => f.id == id);
-            if (folder) {
-                let newName = prompt("Enter new Folder Name:", folder.name);
-                let newDesc = prompt("Enter new Description:", folder.desc);
-                if (newName) folder.name = newName;
-                if (newDesc) folder.desc = newDesc;
-                saveMainFolders(folders);
-                renderHome();
-                alert("ഫോൾഡർ വിവരങ്ങൾ അപ്ഡേറ്റ് ചെയ്തു!");
-            } else {
-                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
-            }
-        }
-
-        function deleteFolderPrompt() {
-            let id = prompt("Enter Folder ID to delete:");
-            let folders = getMainFolders();
-            let index = folders.findIndex(f => f.id == id);
-            if (index !== -1) {
-                if (confirm(`"${folders[index].name}" ഫോൾഡർ ഡിലീറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?`)) {
-                    folders.splice(index, 1);
-                    saveMainFolders(folders);
-                    renderHome();
-                    alert("ഫോൾഡർ ഡിലീറ്റ് ചെയ്തു!");
-                }
-            } else {
-                alert("ഫോൾഡർ കണ്ടെത്തിയില്ല!");
-            }
-        }
-
-        function checkStorageStatus() {
-            let total = 0;
-            for (let key in localStorage) {
-                if (localStorage.hasOwnProperty(key)) {
-                    total += ((localStorage[key].length * 2) / 1024 / 1024);
-                }
-            }
-            alert(`Storage Status:\nCurrently used storage: ~${total.toFixed(2)} MB in LocalStorage.`);
-        }
-
-        function openAddItemPrompt() {
-            let name = prompt("Enter Product / Item Name:");
-            let price = prompt("Enter Price / Rate (e.g. ₹150/sq.ft):", "₹");
-            let desc = prompt("Enter Description:");
-
-            if (name) {
-                pendingItemData = { name, price: price || "", desc: desc || "" };
-                alert("ഇനി ഗാലറിയിൽ നിന്ന് ഫോട്ടോയോ അല്ലെങ്കിൽ ഫയൽ മാനേജറിൽ നിന്ന് PDF ഫയലോ സെലക്ട് ചെയ്യുക!");
-                document.getElementById('itemMediaInput').click();
-            }
-        }
-
-        function processItemMediaUpload(event) {
-            const file = event.target.files[0];
-            if (file && pendingItemData) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const allData = getDomainData();
-                    if (!allData[currentDomainId]) allData[currentDomainId] = [];
-                    
-                    let fileData = e.target.result;
-                    let isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf');
-                    let fileType = isPdf ? 'pdf' : 'image';
-
-                    allData[currentDomainId].push({
-                        name: pendingItemData.name,
-                        icon: fileData,
-                        price: pendingItemData.price,
-                        desc: pendingItemData.desc,
-                        link: fileData,
-                        type: fileType
-                    });
-
-                    saveDomainData(allData);
-                    openDomain(currentDomainId);
-                    alert("വിജയകരമായി അപ്‌ലോഡ് ചെയ്തു!");
-                    pendingItemData = null;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function deleteItem(domainId, index) {
-            if (confirm("ഈ ഐറ്റം ഡിലീറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?")) {
-                const allData = getDomainData();
-                allData[domainId].splice(index, 1);
-                saveDomainData(allData);
-                openDomain(domainId);
-            }
-        }
-
-        function resetAppSettings() {
-            if (confirm("എല്ലാ മാറ്റങ്ങളും പൂർണ്ണമായി റീസെറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ?")) {
-                localStorage.clear();
-                location.reload();
             }
         }
 
         window.onload = function() {
             const savedBg = localStorage.getItem('appBg');
             if (savedBg) document.body.style.backgroundImage = `url('${savedBg}')`;
-
             renderHome();
         }
     </script>
