@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES GLOBAL HUB - Studio Edition</title>
+    <title>OYES GLOBAL HUB - Final Clean Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -41,7 +41,7 @@
 </head>
 <body class="pb-20" id="mainBody">
 
-    <!-- Top Header -->
+    <!-- Top Header (Cleaned) -->
     <header class="p-3 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-50 shadow-xl">
         <div class="flex justify-between items-center max-w-md mx-auto px-1">
             <button class="text-amber-400 text-xl font-bold p-1 hover:scale-110 transition">☰</button>
@@ -65,17 +65,14 @@
             <button onclick="lockAdminPanel()" class="text-xs bg-red-900/80 hover:bg-red-800 text-white px-2.5 py-1 rounded font-bold shadow">Lock 🔒</button>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs">
-            <!-- Studio Color & Font Customizers -->
             <button onclick="openColorStudio()" class="bg-pink-600/90 hover:bg-pink-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🎨 Studio: Title Color</button>
             <button onclick="openTextStudio()" class="bg-pink-700/90 hover:bg-pink-600 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">✍️ Studio: Text Color</button>
             <button onclick="openFontStudio()" class="bg-purple-600/90 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">🔤 Studio: Font Style (Poppins / Cinzel / Orbitron)</button>
             
-            <!-- Standard Admin Controls -->
             <button onclick="document.getElementById('bgFileInput').click()" class="bg-amber-600/90 hover:bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌅 Change App BG</button>
             <button onclick="document.getElementById('topBannerBgInput').click()" class="bg-amber-500 text-slate-950 font-bold p-2.5 rounded-xl text-[10px] shadow transition">🌄 Change Top Box BG</button>
             <button onclick="editTopBannerPrompt()" class="bg-indigo-600/90 hover:bg-indigo-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow col-span-2 transition">✏️ Edit Top Banner Text</button>
 
-            <!-- Folder & Media Management -->
             <button onclick="promptFolderCustomization('bg')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">📁 Folder Background</button>
             <button onclick="promptFolderCustomization('icon')" class="bg-blue-600/90 hover:bg-blue-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">🔖 Folder Icon Photo</button>
             <button onclick="addNewMainFolderPrompt()" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold p-2.5 rounded-xl text-[10px] shadow transition">➕ Add New Folder</button>
@@ -95,7 +92,7 @@
 
     <!-- Main Dashboard View -->
     <main id="homeView" class="flex-grow p-4 max-w-md mx-auto w-full space-y-4">
-        <!-- Editable Top Banner Box (100% Clean - No Eagle, No Logo) -->
+        <!-- Editable Top Banner Box (100% Clean - Eagle & Round Logo Completely Removed) -->
         <div id="topBannerBox" class="bg-slate-900/95 border border-amber-500/40 p-5 rounded-3xl shadow-xl text-center space-y-3 bg-cover bg-center">
             <div class="space-y-1.5 py-1">
                 <h2 id="bannerTitle1" class="text-lg font-black tracking-widest dynamic-title">CONNECTING PEOPLE</h2>
