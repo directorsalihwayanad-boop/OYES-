@@ -30,10 +30,9 @@
     <!-- Main Content Container -->
     <main class="p-3 md:p-6 max-w-5xl mx-auto w-full flex-grow">
         
-        <!-- Dynamic View Area -->
         <div id="mainView">
             <div class="mb-4 relative">
-                <input type="text5" id="searchInput" placeholder="Search hubs..." class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 pl-9 text-xs text-white focus:outline-none focus:border-yellow-500">
+                <input type="text" id="searchInput" placeholder="Search hubs..." class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 pl-9 text-xs text-white focus:outline-none focus:border-yellow-500">
                 <span class="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
             </div>
 
@@ -42,99 +41,99 @@
             <!-- Standard Compact Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 
-                <!-- Hub 01: Fully Loaded with Knowledge, Quran, Bible -->
+                <!-- Hub 01 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center">
                             <span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 01</span>
-                            <span class="text-[10px] text-green-400">📖 Full Content</span>
+                            <span class="text-[10px] text-green-400">📖 Holy Books</span>
                         </div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">World of Knowledge</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Quran, Bible, Digital Library & Books.</p>
+                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Quran, Bible & Digital Library.</p>
                     </div>
                     <div class="mt-3">
-                        <button onclick="openKnowledgeHubFull()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button>
+                        <button onclick="openKnowledgeHub()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button>
                     </div>
                 </div>
 
                 <!-- Hub 02 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 02</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 02</span><span class="text-[10px] text-green-400">🧹 Services</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Job & Cleaning Hub</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Cleaning & Employment.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(2)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(2, 'Job & Cleaning Hub')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 03 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 03</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 03</span><span class="text-[10px] text-green-400">🏗️ Materials</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Ultimate Construction</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Marbles, Granites, Workers.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(3)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(3, 'Ultimate Construction')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 04 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 04</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 04</span><span class="text-[10px] text-green-400">🏨 Stays</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Stays & Hotels</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Hotels & Travel Stays.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(4)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(4, 'Stays & Hotels')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 05 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 05</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 05</span><span class="text-[10px] text-green-400">🛒 Market</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Buy & Sell Market</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Classifieds & Community.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(5)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(5, 'Buy & Sell Market')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 06 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 06</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 06</span><span class="text-[10px] text-green-400">🎉 Events</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Events & Ads</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Events & Business Banners.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(6)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(6, 'Events & Ads')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 07 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 07</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 07</span><span class="text-[10px] text-green-400">🏥 SOS</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Public Care & SOS</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Medical & Emergency SOS.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(7)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(7, 'Public Care & SOS')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 08 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 08</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 08</span><span class="text-[10px] text-green-400">🎬 Media</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Entertainment Hub</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Media & Community Fun.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(8)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(8, 'Entertainment Hub')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
                 <!-- Hub 09 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 09</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 09</span><span class="text-[10px] text-green-400">🎥 Cinema</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">OYES Cinema & Studio</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Watch, Upload & Earn.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(9)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
+                    <div class="mt-3"><button onclick="openServiceHub(9, 'OYES Cinema & Studio')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
             </div>
@@ -188,7 +187,7 @@
                             <button onclick="startVoiceRecognition()" id="micBtn" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded font-bold text-xs" title="Speak">🎙️</button>
                             <button onclick="runAiCommand()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-2 py-1 rounded text-xs">Run</button>
                         </div>
-                        <p id="voiceStatus" class="text-[9px] text-green-400 mt-1">Status: Microphone Ready</p>
+                        <p id="voiceStatus" class="text-[9px] text-green-400 mt-1">Status: Ready</p>
                     </div>
                 </div>
 
@@ -236,91 +235,61 @@
         const SUPABASE_ANON_KEY = 'sb_publishable_ST5zYe5tRD2QTu6adwmpCQ_xheB9oc1';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Fully Loaded Hub 01: Knowledge, Quran, Bible, Library
-        function openKnowledgeHubFull() {
+        // Hub 01: Clean Reading View for Quran, Bible & Library (No public upload forms)
+        function openKnowledgeHub() {
             document.getElementById('homeBtn').classList.remove('hidden');
             const view = document.getElementById('mainView');
             view.innerHTML = `
                 <div class="mb-4">
                     <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 01</span>
                     <h2 class="text-lg font-bold text-yellow-400 mt-1">📖 World of Knowledge & Holy Scriptures</h2>
-                    <p class="text-gray-300 text-[11px] mt-0.5">ഖുർആൻ, ബൈബിൾ, ഡിജിറ്റൽ ലൈബ്രറി എന്നിവയുടെ ഫുൾ ആക്സസ്.</p>
+                    <p class="text-gray-300 text-[11px] mt-0.5">വിശുദ്ധ ഖുർആൻ, ബൈബിൾ, ഡിജിറ്റൽ ലൈബ്രറി റഫറൻസുകൾ.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                    <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl shadow">
-                        <h3 class="font-bold text-yellow-400 text-xs">📖 Holy Quran</h3>
-                        <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ഖുർആൻ വായനയും റഫറൻസുകളും.</p>
-                        <a href="https://quran.com" target="_blank" class="mt-3 block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Quran Hub ↗</a>
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-yellow-400 text-xs">📖 Holy Quran</h3>
+                            <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ഖുർആൻ ഓൺലൈൻ വായന.</p>
+                        </div>
+                        <a href="https://quran.com" target="_blank" class="mt-4 block text-center bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-1.5 rounded">Open Quran ↗</a>
                     </div>
-                    <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl shadow">
-                        <h3 class="font-bold text-yellow-400 text-xs">✝️ Holy Bible</h3>
-                        <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ബൈബിൾ വായനയും പഠനങ്ങളും.</p>
-                        <a href="https://www.bible.com" target="_blank" class="mt-3 block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Bible Hub ↗</a>
-                    </div>
-                    <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl shadow">
-                        <h3 class="font-bold text-yellow-400 text-xs">📚 Digital Library</h3>
-                        <p class="text-gray-300 text-[10px] mt-1">പഠനപുസ്തകങ്ങളും ടെക്നോളജി ബുക്സും.</p>
-                        <button onclick="alert('Digital Library Cloud Database Active!')" class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-1 rounded">Open Library</button>
-                    </div>
-                </div>
 
-                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow space-y-2">
-                    <h3 class="font-bold text-yellow-400 text-xs">➕ Add New Book / Scripture Link to Cloud</h3>
-                    <input type="text" id="libTitle" placeholder="Title (ഉദാ: പുസ്തകത്തിന്റെ പേര്)" class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-1.5 text-xs text-white">
-                    <input type="text" id="libLink" placeholder="External Link / PDF URL" class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-1.5 text-xs text-white">
-                    <button onclick="saveLibraryRecord()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 rounded text-xs">Save to Supabase 🚀</button>
-                    <p id="libStatus" class="text-[10px] text-green-400"></p>
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-yellow-400 text-xs">✝️ Holy Bible</h3>
+                            <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ബൈബിൾ ഓൺലൈൻ വായന.</p>
+                        </div>
+                        <a href="https://www.bible.com" target="_blank" class="mt-4 block text-center bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-1.5 rounded">Open Bible ↗</a>
+                    </div>
+
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-yellow-400 text-xs">📚 Digital Library</h3>
+                            <p class="text-gray-300 text-[10px] mt-1">പഠനപുസ്തകങ്ങളും റഫറൻസുകളും.</p>
+                        </div>
+                        <button onclick="alert('Digital Library Catalog Active!')" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1.5 rounded">View Books</button>
+                    </div>
                 </div>
             `;
         }
 
-        async function saveLibraryRecord() {
-            const title = document.getElementById('libTitle').value;
-            const link = document.getElementById('libLink').value;
-            if(!title) {
-                alert('പേര് നൽകുക!');
-                return;
-            }
-            document.getElementById('libStatus').innerText = "⏳ Saving...";
-            
-            await supabaseClient.from('oyes_global_records').insert([{ hub_id: 1, title: title, description: link }]);
-            document.getElementById('libStatus').innerText = "✅ Successfully Saved to Database!";
-            document.getElementById('libTitle').value = '';
-            document.getElementById('libLink').value = '';
-        }
-
-        function openHub(hubNumber) {
-            if(hubNumber === 1) {
-                openKnowledgeHubFull();
-                return;
-            }
+        // Clean Service View for Hubs 2 to 9 (No public upload forms)
+        function openServiceHub(hubNum, hubTitle) {
             document.getElementById('homeBtn').classList.remove('hidden');
             const view = document.getElementById('mainView');
             view.innerHTML = `
                 <div class="mb-4">
-                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 0${hubNumber}</span>
-                    <h2 class="text-lg font-bold text-yellow-400 mt-1">Hub 0${hubNumber} Management Panel</h2>
-                    <p class="text-gray-300 text-[11px] mt-0.5">ഈ ഹബ്ബിലെ ഡാറ്റകൾ ഇവിടെ മാനേജ് ചെയ്യാം.</p>
+                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 0${hubNum}</span>
+                    <h2 class="text-lg font-bold text-yellow-400 mt-1">${hubTitle}</h2>
+                    <p class="text-gray-300 text-[11px] mt-0.5">ഈ ഹബ്ബിലെ ലഭ്യമായ സേവനങ്ങളും വിവരങ്ങളും.</p>
                 </div>
-                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow space-y-3">
-                    <input type="text" id="itemTitle" placeholder="Enter Title..." class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-2 text-xs text-white">
-                    <textarea id="itemDesc" placeholder="Enter Details..." class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-2 text-xs text-white h-20"></textarea>
-                    <button onclick="submitHubRecord(${hubNumber})" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-1.5 rounded text-xs">Save Data 🚀</button>
-                    <p id="recordStatus" class="text-[10px] text-green-400"></p>
+                <div class="bg-gray-800 border border-gray-700 p-6 rounded-xl shadow text-center space-y-3">
+                    <span class="text-3xl">🚀</span>
+                    <h3 class="font-bold text-yellow-400 text-sm">Services & Listings Live</h3>
+                    <p class="text-gray-300 text-xs">ഇവിടെ ഉപയോക്താക്കൾക്ക് സേവനങ്ങൾ പരിശോധിക്കാനും ഉപയോഗിക്കാനുമുള്ള സംവിധാനം സജ്ജീകരിച്ചിരിക്കുന്നു.</p>
                 </div>
             `;
-        }
-
-        async function submitHubRecord(hubNum) {
-            const title = document.getElementById('itemTitle').value;
-            const desc = document.getElementById('itemDesc').value;
-            if(!title) { alert('ഡീറ്റെയിൽസ് നൽകുക!'); return; }
-            document.getElementById('recordStatus').innerText = "⏳ Saving...";
-            await supabaseClient.from('oyes_global_records').insert([{ hub_id: hubNum, title: title, description: desc }]);
-            document.getElementById('recordStatus').innerText = "✅ Successfully Saved to Supabase Database!";
-            document.getElementById('itemTitle').value = '';
-            document.getElementById('itemDesc').value = '';
         }
 
         function startVoiceRecognition() {
