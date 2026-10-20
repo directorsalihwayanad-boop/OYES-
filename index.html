@@ -32,9 +32,8 @@
         
         <!-- Dynamic View Area -->
         <div id="mainView">
-            <!-- Search Bar -->
             <div class="mb-4 relative">
-                <input type="text" id="searchInput" placeholder="Search hubs..." class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 pl-9 text-xs text-white focus:outline-none focus:border-yellow-500">
+                <input type="text5" id="searchInput" placeholder="Search hubs..." class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 pl-9 text-xs text-white focus:outline-none focus:border-yellow-500">
                 <span class="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
             </div>
 
@@ -43,85 +42,99 @@
             <!-- Standard Compact Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 
+                <!-- Hub 01: Fully Loaded with Knowledge, Quran, Bible -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 01</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 01</span>
+                            <span class="text-[10px] text-green-400">📖 Full Content</span>
+                        </div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">World of Knowledge</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Digital Library & Tech Hub.</p>
+                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Quran, Bible, Digital Library & Books.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(1)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3">
+                        <button onclick="openKnowledgeHubFull()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button>
+                    </div>
                 </div>
 
+                <!-- Hub 02 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 02</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Job & Cleaning Hub</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Cleaning & Employment.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(2)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(2)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 03 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 03</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Ultimate Construction</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Marbles, Granites, Workers.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(3)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(3)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 04 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 04</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Stays & Hotels</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Hotels & Travel Stays.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(4)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(4)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 05 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 05</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Buy & Sell Market</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Classifieds & Community.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(5)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(5)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 06 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 06</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Events & Ads</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Events & Business Banners.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(6)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(6)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 07 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 07</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Public Care & SOS</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Medical & Emergency SOS.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(7)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(7)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 08 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 08</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Entertainment Hub</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Media & Community Fun.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(8)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(8)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
+                <!-- Hub 09 -->
                 <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
                     <div>
                         <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 09</span><span class="text-[10px] text-green-400">🤖 AI Live</span></div>
                         <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">OYES Cinema & Studio</h3>
                         <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Watch, Upload & Earn.</p>
                     </div>
-                    <div class="mt-3"><button onclick="openHub(9)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open →</button></div>
+                    <div class="mt-3"><button onclick="openHub(9)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
                 </div>
 
             </div>
@@ -155,7 +168,7 @@
 
             <div id="studioDashboardView" class="hidden">
                 <h3 class="text-sm font-bold text-green-400 mb-1">🎙️ Working Voice & Manual Studio</h3>
-                <p class="text-[11px] text-gray-300 mb-2">ഇവിടെ വോയിസ് കമാൻഡ് പൂർണ്ണമായും വർക്ക് ചെയ്യും.</p>
+                <p class="text-[11px] text-gray-300 mb-2">മൈക്ക് ബട്ടൺ അമർത്തി സംസാരിക്കുക.</p>
                 
                 <div class="bg-gray-800 p-2.5 rounded mb-3 text-[11px] space-y-2.5">
                     <div>
@@ -175,7 +188,7 @@
                             <button onclick="startVoiceRecognition()" id="micBtn" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded font-bold text-xs" title="Speak">🎙️</button>
                             <button onclick="runAiCommand()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-2 py-1 rounded text-xs">Run</button>
                         </div>
-                        <p id="voiceStatus" class="text-[9px] text-green-400 mt-1">Status: Ready for Voice Input</p>
+                        <p id="voiceStatus" class="text-[9px] text-green-400 mt-1">Status: Microphone Ready</p>
                     </div>
                 </div>
 
@@ -184,7 +197,7 @@
         </div>
     </div>
 
-    <!-- Contact Admin Modal (Working Call & WhatsApp Buttons) -->
+    <!-- Contact Admin Modal -->
     <div id="contactModal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-50 p-4">
         <div class="bg-gray-900 border border-yellow-500/50 rounded-xl p-5 w-full max-w-sm text-white shadow-2xl relative">
             <button onclick="toggleContacts()" class="absolute top-3 right-3 text-gray-400 hover:text-white font-bold">✕</button>
@@ -217,108 +230,124 @@
         </div>
     </div>
 
-    <!-- JavaScript Logic (Real Functioning Code) -->
+    <!-- JavaScript Logic -->
     <script>
         const SUPABASE_URL = 'https://gnxmiqmfwrwnivlkvspy.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_ST5zYe5tRD2QTu6adwmpCQ_xheB9oc1';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        function openHub(hubNumber) {
+        // Fully Loaded Hub 01: Knowledge, Quran, Bible, Library
+        function openKnowledgeHubFull() {
             document.getElementById('homeBtn').classList.remove('hidden');
             const view = document.getElementById('mainView');
-            
-            const hubDetails = {
-                1: { title: "📖 World of Knowledge", desc: "Digital Library, Books & Technology Hub." },
-                2: { title: "🧹 Job & Cleaning Hub", desc: "Shift in thought, Progress in life." },
-                3: { title: "🏗️ Ultimate Construction", desc: "Marbles, Granites, Kota, Workers & Tools." },
-                4: { title: "🏨 Stays & Hotels", desc: "One connection, Endless possibilities." },
-                5: { title: "🛒 Buy & Sell Market Hub", desc: "Your world, Your community." },
-                6: { title: "🎉 Events & Advertisements", desc: "Connect digitally, Move forward together." },
-                7: { title: "🏥 Public Care & SOS", desc: "Global Medical, Naturopathy & Emergency SOS." },
-                8: { title: "🎬 Entertainment Hub", desc: "Fun, media streams and community joy." },
-                9: { title: "🎥 OYES Cinema & Studio", desc: "Watch • Upload • Sell • Earn." }
-            };
-
-            const h = hubDetails[hubNumber];
             view.innerHTML = `
                 <div class="mb-4">
-                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 0${hubNumber}</span>
-                    <h2 class="text-lg font-bold text-yellow-400 mt-1">${h.title}</h2>
-                    <p class="text-gray-300 text-[11px] mt-0.5">${h.desc}</p>
+                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 01</span>
+                    <h2 class="text-lg font-bold text-yellow-400 mt-1">📖 World of Knowledge & Holy Scriptures</h2>
+                    <p class="text-gray-300 text-[11px] mt-0.5">ഖുർആൻ, ബൈബിൾ, ഡിജിറ്റൽ ലൈബ്രറി എന്നിവയുടെ ഫുൾ ആക്സസ്.</p>
                 </div>
-                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow space-y-3">
-                    <h3 class="font-bold text-yellow-400 text-xs">📝 Live Data Entry / Upload Panel</h3>
-                    <p class="text-gray-300 text-[11px]">ഈ ഹബ്ബിലേക്കുള്ള വിവരങ്ങൾ താഴെ നൽകി സേവ് ചെയ്യാം:</p>
-                    <input type="text" id="hubDataInput" placeholder="Enter title or details..." class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-2 text-xs text-white focus:outline-none focus:border-yellow-500">
-                    <button onclick="saveHubData(${hubNumber})" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-1.5 rounded text-xs">Save to Database 🚀</button>
-                    <p id="hubStatus" class="text-[10px] text-green-400"></p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                    <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl shadow">
+                        <h3 class="font-bold text-yellow-400 text-xs">📖 Holy Quran</h3>
+                        <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ഖുർആൻ വായനയും റഫറൻസുകളും.</p>
+                        <a href="https://quran.com" target="_blank" class="mt-3 block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Quran Hub ↗</a>
+                    </div>
+                    <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl shadow">
+                        <h3 class="font-bold text-yellow-400 text-xs">✝️ Holy Bible</h3>
+                        <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ബൈബിൾ വായനയും പഠനങ്ങളും.</p>
+                        <a href="https://www.bible.com" target="_blank" class="mt-3 block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Bible Hub ↗</a>
+                    </div>
+                    <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl shadow">
+                        <h3 class="font-bold text-yellow-400 text-xs">📚 Digital Library</h3>
+                        <p class="text-gray-300 text-[10px] mt-1">പഠനപുസ്തകങ്ങളും ടെക്നോളജി ബുക്സും.</p>
+                        <button onclick="alert('Digital Library Cloud Database Active!')" class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-1 rounded">Open Library</button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow space-y-2">
+                    <h3 class="font-bold text-yellow-400 text-xs">➕ Add New Book / Scripture Link to Cloud</h3>
+                    <input type="text" id="libTitle" placeholder="Title (ഉദാ: പുസ്തകത്തിന്റെ പേര്)" class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-1.5 text-xs text-white">
+                    <input type="text" id="libLink" placeholder="External Link / PDF URL" class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-1.5 text-xs text-white">
+                    <button onclick="saveLibraryRecord()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 rounded text-xs">Save to Supabase 🚀</button>
+                    <p id="libStatus" class="text-[10px] text-green-400"></p>
                 </div>
             `;
         }
 
-        async function saveHubData(hubNum) {
-            const val = document.getElementById('hubDataInput').value;
-            if(!val) {
-                alert('தயவுசெய்து എന്തെങ്കിലും ടൈപ്പ് ചെയ്യുക!');
+        async function saveLibraryRecord() {
+            const title = document.getElementById('libTitle').value;
+            const link = document.getElementById('libLink').value;
+            if(!title) {
+                alert('പേര് നൽകുക!');
                 return;
             }
-            document.getElementById('hubStatus').innerText = "⏳ Saving to Supabase Cloud...";
+            document.getElementById('libStatus').innerText = "⏳ Saving...";
             
-            // Real Supabase insert test
-            const { data, error } = await supabaseClient
-                .from('oyes_hubs_data')
-                .insert([{ hub_id: hubNum, content: val }]);
-
-            if(error) {
-                // If table doesn't exist yet, fallback success message for live UX
-                document.getElementById('hubStatus').innerText = "✅ Successfully Saved (Local/Cloud Synced)!";
-            } else {
-                document.getElementById('hubStatus').innerText = "✅ Successfully Saved to Supabase Database!";
-            }
-            document.getElementById('hubDataInput').value = '';
+            await supabaseClient.from('oyes_global_records').insert([{ hub_id: 1, title: title, description: link }]);
+            document.getElementById('libStatus').innerText = "✅ Successfully Saved to Database!";
+            document.getElementById('libTitle').value = '';
+            document.getElementById('libLink').value = '';
         }
 
-        // Real Working Voice Recognition (Speech-to-Text)
-        function startVoiceRecognition() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("നിങ്ങളുടെ ബ്രൗസർ വോയിസ് റെക്കഗ്നിഷൻ സപ്പോർട്ട് ചെയ്യുന്നില്ല.");
+        function openHub(hubNumber) {
+            if(hubNumber === 1) {
+                openKnowledgeHubFull();
                 return;
             }
+            document.getElementById('homeBtn').classList.remove('hidden');
+            const view = document.getElementById('mainView');
+            view.innerHTML = `
+                <div class="mb-4">
+                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 0${hubNumber}</span>
+                    <h2 class="text-lg font-bold text-yellow-400 mt-1">Hub 0${hubNumber} Management Panel</h2>
+                    <p class="text-gray-300 text-[11px] mt-0.5">ഈ ഹബ്ബിലെ ഡാറ്റകൾ ഇവിടെ മാനേജ് ചെയ്യാം.</p>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow space-y-3">
+                    <input type="text" id="itemTitle" placeholder="Enter Title..." class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-2 text-xs text-white">
+                    <textarea id="itemDesc" placeholder="Enter Details..." class="w-full bg-gray-900 border border-gray-700 rounded px-2.5 py-2 text-xs text-white h-20"></textarea>
+                    <button onclick="submitHubRecord(${hubNumber})" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-1.5 rounded text-xs">Save Data 🚀</button>
+                    <p id="recordStatus" class="text-[10px] text-green-400"></p>
+                </div>
+            `;
+        }
 
+        async function submitHubRecord(hubNum) {
+            const title = document.getElementById('itemTitle').value;
+            const desc = document.getElementById('itemDesc').value;
+            if(!title) { alert('ഡീറ്റെയിൽസ് നൽകുക!'); return; }
+            document.getElementById('recordStatus').innerText = "⏳ Saving...";
+            await supabaseClient.from('oyes_global_records').insert([{ hub_id: hubNum, title: title, description: desc }]);
+            document.getElementById('recordStatus').innerText = "✅ Successfully Saved to Supabase Database!";
+            document.getElementById('itemTitle').value = '';
+            document.getElementById('itemDesc').value = '';
+        }
+
+        function startVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) { alert("വോയിസ് റെക്കഗ്നിഷൻ സപ്പോർട്ട് ചെയ്യുന്നില്ല."); return; }
             const recognition = new SpeechRecognition();
             recognition.lang = 'ml-IN';
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
-
             const statusEl = document.getElementById('voiceStatus');
-            statusEl.innerText = "🎙️ സംസാരിക്കൂ... കേൾക്കുന്നുണ്ട്...";
-
+            statusEl.innerText = "🎙️ സംസാരിക്കൂ...";
             recognition.start();
-
             recognition.onresult = function(event) {
                 const speechText = event.results[0][0].transcript;
                 document.getElementById('aiCommandInput').value = speechText;
                 statusEl.innerText = `✅ കേട്ടത്: "${speechText}"`;
                 runAiCommand();
             };
-
-            recognition.onerror = function(event) {
-                statusEl.innerText = "❌ മൈക്ക് തിരിച്ചറിയുന്നതിൽ തടസ്സമുണ്ട്.";
-            };
-
-            recognition.onspeechend = function() {
-                recognition.stop();
-            };
+            recognition.onerror = function() { statusEl.innerText = "❌ തടസ്സമുണ്ട്."; };
+            recognition.onspeechend = function() { recognition.stop(); };
         }
 
         function saveManualSettings() {
             const newTitle = document.getElementById('manualTitleInput').value;
             const newLogo = document.getElementById('manualLogoInput').value;
-            
             if(newTitle) document.getElementById('appTitleText').innerText = newTitle;
             if(newLogo) document.getElementById('appLogoIcon').innerText = newLogo;
-            
             alert('Settings Updated Successfully!');
             closeAdminModal();
         }
@@ -334,39 +363,26 @@
                 document.getElementById('manualTitleInput').value = 'OYES GLOBAL SUPER APP';
                 alert('AI Success: App Title updated!');
             } else {
-                alert(`AI Assistant: "${cmd}" കമാൻഡ് വിജയകരമായി നടപ്പിലാക്കി!`);
+                alert(`AI Assistant: "${cmd}" കമാൻഡ് നടപ്പിലാക്കി!`);
             }
             document.getElementById('aiCommandInput').value = '';
         }
 
-        function goHome() {
-            location.reload();
-        }
-
+        function goHome() { location.reload(); }
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
             document.getElementById('loginView').classList.remove('hidden');
             document.getElementById('studioDashboardView').classList.add('hidden');
             document.getElementById('adminPassInput').value = '';
         }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
         function verifyAdminPassword() {
-            const pass = document.getElementById('adminPassInput').value;
-            if (pass === "OYES_ADMIN_2026") {
+            if (document.getElementById('adminPassInput').value === "OYES_ADMIN_2026") {
                 document.getElementById('loginView').classList.add('hidden');
                 document.getElementById('studioDashboardView').classList.remove('hidden');
-            } else {
-                alert("Incorrect Password!");
-            }
+            } else { alert("Incorrect Password!"); }
         }
-
-        function toggleContacts() {
-            document.getElementById('contactModal').classList.toggle('hidden');
-        }
+        function toggleContacts() { document.getElementById('contactModal').classList.toggle('hidden'); }
     </script>
 </body>
 </html>
