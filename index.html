@@ -1,56 +1,184 @@
-<!-- OYES Super App: Multi-AI Architecture & Admin Control Blueprint -->
-<div class="bg-gray-950 border-2 border-yellow-500/80 p-5 rounded-2xl shadow-2xl text-gray-100">
-    
-    <!-- App Header & Home AI Status -->
-    <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-3">
-        <div class="flex items-center space-x-3">
-            <div class="w-12 h-12 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
-                <img src="1791765607047.png" alt="OYES Logo" class="w-full h-full object-cover">
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OYES Super App</title>
+    <!-- Tailwind CSS CDN for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-gray-100 font-sans p-4">
+
+    <div class="max-w-4xl mx-auto space-y-6">
+
+        <!-- Main Super App Header -->
+        <div class="bg-gray-950 border-2 border-yellow-500 p-4 rounded-xl shadow-2xl flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                    <img src="1791765607047.png" alt="OYES Logo" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">OYES Super App</span>
+                    <h1 class="text-lg font-bold text-yellow-400 mt-0.5">🌐 Main Dashboard & Multi-AI System</h1>
+                </div>
             </div>
-            <div>
-                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">OYES Super App - Main Hub</span>
-                <h3 class="text-base font-bold text-yellow-400 mt-0.5">🌐 Home Page & General AI Assistant Active</h3>
+            <span class="text-[10px] text-green-400 font-semibold bg-green-500/10 px-2.5 py-1 rounded">Online & Synced</span>
+        </div>
+
+        <!-- Hub 03: Construction Materials -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                        <span class="text-yellow-400 font-bold">🏗️</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 03</span>
+                        <h3 class="text-base font-bold text-yellow-400 mt-1">🏗️ OYES Construction & Materials Hub</h3>
+                    </div>
+                </div>
+                <span class="text-[10px] text-yellow-400 font-semibold bg-yellow-500/10 px-2 py-1 rounded">Domain AI Active</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">🔩 1. Hardware (A-Z)</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">എല്ലാവിധ ഹാർഡ്‌വെയർ സാധനങ്ങളും</p>
+                    </div>
+                    <button onclick="alert('Opening Hardware Directory...')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">Explore ↗</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">🏛️ 2. Marbles, Granites, Tiles & Paving</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">5000+ മാർബിൾ, 3960 ഗ്രാനൈറ്റ്, 1500+ ടൈലുകൾ</p>
+                    </div>
+                    <button onclick="alert('Opening Marbles & Granites Directory...')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">Explore ↗</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">🪨 3. Stones</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">കഡപ്പ, തന്ദൂർ, ലേറ്ററൈറ്റ്, മണൽ</p>
+                    </div>
+                    <button onclick="alert('Opening Stones Directory...')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">Explore ↗</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">🛋️ 4. Furniture & Painting</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">ഫർണിച്ചറുകളും പെയിന്റിംഗ് സാമഗ്രികളും</p>
+                    </div>
+                    <button onclick="alert('Opening Furniture & Painting Directory...')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">Explore ↗</button>
+                </div>
             </div>
         </div>
-        <span class="text-[10px] text-green-400 font-semibold bg-green-500/10 px-2 py-1 rounded">Multi-AI Online</span>
-    </div>
 
-    <!-- Core Structure Overview with Domain AIs -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-[11px] mb-4">
-        
-        <!-- Hub 01 AI -->
-        <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-            <h4 class="font-bold text-yellow-400">🧠 Hub 01 AI (Tech & Scriptures)</h4>
-            <p class="text-gray-400 text-[10px] mt-1">ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് ചരിത്രം, വിശുദ്ധ ഗ്രന്ഥങ്ങൾ എന്നിവയെക്കുറിച്ച് മാത്രം സംസാരിക്കുന്ന എഐ.</p>
+        <!-- Hub 02: Jobs & Cleaning Service -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                        <span class="text-yellow-400 font-bold">🧹</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 02</span>
+                        <h3 class="text-base font-bold text-yellow-400 mt-1">🧹 OYES Job & Cleaning Service</h3>
+                    </div>
+                </div>
+                <span class="text-[10px] text-yellow-400 font-semibold bg-yellow-500/10 px-2 py-1 rounded">Domain AI Active</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">✨ All Cleaning Services</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">വീടുകൾ, ഓഫീസുകൾ & വാട്ടർ ടാങ്ക് ക്ലീനിംഗ്</p>
+                    </div>
+                    <button onclick="alert('Opening Cleaning Services Directory...')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">View Cleaning ↗</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">💼 Job Opportunities</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">വിവിധ തൊഴിൽ അവസരങ്ങളും ഒഴിവുകളും</p>
+                    </div>
+                    <button onclick="alert('Opening Job Opportunities Directory...')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">Explore Jobs ↗</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Hub 02 AI -->
-        <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-            <h4 class="font-bold text-yellow-400">🧹 Hub 02 AI (Jobs & Cleaning)</h4>
-            <p class="text-gray-400 text-[10px] mt-1">ക്ലീനിംഗ് സർവീസുകളും തൊഴിൽ അവസരങ്ങളും മാത്രം കൈകാര്യം ചെയ്യുന്ന എഐ.</p>
+        <!-- Hub 01: Tech & Sacred Scriptures -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                        <span class="text-yellow-400 font-bold">🧠</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 01</span>
+                        <h3 class="text-base font-bold text-yellow-400 mt-1">🧠 OYES Tech & Sacred Scriptures</h3>
+                    </div>
+                </div>
+                <span class="text-[10px] text-yellow-400 font-semibold bg-yellow-500/10 px-2 py-1 rounded">Domain AI Active</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">🤖 AI Technology & Evolution</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസിന്റെ രൂപീകരണം, ചരിത്രം & പ്രണേതാക്കൾ</p>
+                    </div>
+                    <button onclick="alert('Opening AI Technology Directory...')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">Explore AI ↗</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-yellow-400">📖 Sacred Scriptures & Book History</h4>
+                        <p class="text-gray-300 text-[10px] mt-0.5">ഖുറാൻ, ബൈബിൾ, രാമായണം, ഗീത, ബുദ്ധ-ജൈന-ഷിയാ ഗ്രന്ഥങ്ങൾ</p>
+                    </div>
+                    <button onclick="alert('Opening Sacred Scriptures Directory...')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1.5 rounded font-bold text-[11px]">View Scriptures ↗</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Hub 03 AI -->
-        <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-            <h4 class="font-bold text-yellow-400">🏗️ Hub 03 AI (Construction Hub)</h4>
-            <p class="text-gray-400 text-[10px] mt-1">മാർബിൾ, ഗ്രാനൈറ്റ്, ഹാർഡ്‌വെയർ & നിർമ്മാണ സാമഗ്രികൾ എന്നിവയിൽ മാത്രം വിദഗ്ദ്ധനായ എഐ.</p>
+        <!-- Admin Settings & AI Studio Panel -->
+        <div class="bg-gray-950 border-2 border-red-500/80 p-4 rounded-xl shadow-2xl text-gray-100">
+            <div class="flex items-center justify-between mb-3 border-b border-gray-800 pb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full border-2 border-red-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                        <span class="text-red-500 font-bold text-lg">⚙️</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Restricted Access</span>
+                        <h3 class="text-base font-bold text-red-400 mt-1">🔐 Master Admin & AI Studio</h3>
+                    </div>
+                </div>
+                <span class="text-[10px] text-yellow-400 font-semibold bg-yellow-500/10 px-2 py-1 rounded">Secured Panel</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
+                <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
+                    <h4 class="font-bold text-yellow-400 flex items-center gap-1.5">📁 Folder & File Manager</h4>
+                    <p class="text-gray-400 text-[10px] mt-1">ബാക്ക്ഗ്രൗണ്ട്, ഐക്കൺ മാറ്റാനും പുതിയ ഫോൾഡർ നിർമ്മിക്കാനും/ഡിലീറ്റ് ചെയ്യാനും.</p>
+                    <div class="mt-3 flex gap-2">
+                        <button onclick="alert('Opening File Manager...')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded font-bold text-[10px]">Manage Folders ↗</button>
+                        <button onclick="alert('Changing Logo...')" class="bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded font-bold text-[10px]">Change Logo</button>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
+                    <h4 class="font-bold text-purple-400 flex items-center gap-1.5">🤖 OYES AI Studio & Downloader</h4>
+                    <p class="text-gray-400 text-[10px] mt-1">തീം കസ്റ്റമൈസേഷൻ, അപ്ഡേഷൻ അസിസ്റ്റന്റ് & നെറ്റിൽ നിന്ന് ഡൗൺലോഡ് സ്റ്റുഡിയോ.</p>
+                    <div class="mt-3 flex gap-2">
+                        <button onclick="alert('Opening AI Studio...')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open AI Studio ↗</button>
+                        <button onclick="alert('Connecting to Downloader Hub...')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded font-bold text-[10px]">Download Hub</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Helpline Footer -->
+        <div class="text-center text-xs text-gray-400 pt-2 border-t border-gray-900">
+            <span>സെൻട്രൽ ഹെൽപ്പ്‌ലൈൻ: <a href="tel:+919447276504" class="text-yellow-400 font-bold underline">+91 94472 76504</a></span>
         </div>
 
     </div>
 
-    <!-- Admin & Settings AI Studio Section -->
-    <div class="bg-gray-900 border border-red-500/50 p-3 rounded-xl flex flex-col md:flex-row justify-between items-center gap-3">
-        <div>
-            <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Restricted Admin Area</span>
-            <h4 class="font-bold text-red-400 mt-1 text-xs">⚙️ Settings & Admin Update AI Studio</h4>
-            <p class="text-gray-400 text-[10px]">തീമുകൾ മാറ്റാനും, ഫോൾഡറുകൾ കസ്റ്റമൈസ് ചെയ്യാനും, പുതിയ അപ്ഡേഷനുകൾ നൽകാനും അഡ്മിനെ സഹായിക്കുന്ന സ്പെഷ്യൽ എഐ സ്റ്റുഡിയോ.</p>
-        </div>
-        <button onclick="alert('Accessing Admin Settings & Update AI Studio...')" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold text-[11px] whitespace-nowrap">Open Admin Studio ↗</button>
-    </div>
-
-    <!-- Footer Helpline -->
-    <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
-        <span>സെൻട്രൽ ഹെൽപ്പ്‌ലൈൻ: <a href="tel:+919447276504" class="text-yellow-400 font-bold underline">+91 94472 76504</a></span>
-        <span class="text-[10px] text-yellow-500 font-bold">OYES Global Architecture</span>
-    </div>
-</div>
+</body>
+</html>
