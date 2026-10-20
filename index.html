@@ -38,7 +38,7 @@
 
             <h2 class="text-sm font-bold text-indigo-400 mb-3">🌟 9 Core Hubs</h2>
 
-            <!-- Standard Compact Grid -->
+            <!-- 9 Compact Grid Cards -->
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 
                 <!-- Hub 01 -->
@@ -166,8 +166,8 @@
             </div>
 
             <div id="studioDashboardView" class="hidden">
-                <h3 class="text-sm font-bold text-green-400 mb-1">🎙️ Working Voice & Manual Studio</h3>
-                <p class="text-[11px] text-gray-300 mb-2">മൈക്ക് ബട്ടൺ അമർത്തി സംസാരിക്കുക.</p>
+                <h3 class="text-sm font-bold text-green-400 mb-1">👑 OYES Admin Studio Dashboard</h3>
+                <p class="text-[11px] text-gray-300 mb-2">ഇവിടെ അഡ്മിൻ കൺട്രോളുകളും ലിങ്കുകളും മാനേജ് ചെയ്യാം.</p>
                 
                 <div class="bg-gray-800 p-2.5 rounded mb-3 text-[11px] space-y-2.5">
                     <div>
@@ -179,19 +179,28 @@
                     </div>
 
                     <hr class="border-gray-700">
-                    
+
                     <div>
-                        <label class="block text-yellow-400 font-semibold mb-1">🤖 AI Voice Command (Mic)</label>
-                        <div class="flex gap-1.5">
-                            <input type="text" id="aiCommandInput" placeholder="മൈക്ക് ഞെക്കി സംസാരിക്കുക..." class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-yellow-500">
-                            <button onclick="startVoiceRecognition()" id="micBtn" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded font-bold text-xs" title="Speak">🎙️</button>
-                            <button onclick="runAiCommand()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-2 py-1 rounded text-xs">Run</button>
-                        </div>
-                        <p id="voiceStatus" class="text-[9px] text-green-400 mt-1">Status: Ready</p>
+                        <label class="block text-yellow-400 font-semibold mb-1">➕ Add Hub Link / URL</label>
+                        <select id="adminHubSelect" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white mb-1.5">
+                            <option value="1">Hub 01: Knowledge / Quran / Bible</option>
+                            <option value="2">Hub 02: Job & Cleaning</option>
+                            <option value="3">Hub 03: Construction</option>
+                            <option value="4">Hub 04: Stays & Hotels</option>
+                            <option value="5">Hub 05: Buy & Sell</option>
+                            <option value="6">Hub 06: Events & Ads</option>
+                            <option value="7">Hub 07: Public Care & SOS</option>
+                            <option value="8">Hub 08: Entertainment</option>
+                            <option value="9">Hub 09: Cinema Studio</option>
+                        </select>
+                        <input type="text" id="adminItemTitle" placeholder="Title" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white mb-1.5">
+                        <input type="text" id="adminItemUrl" placeholder="URL / Link" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white mb-1.5">
+                        <button onclick="adminSaveToCloud()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-1 rounded text-xs">Save to Database 🚀</button>
+                        <p id="adminStatus" class="text-[9px] text-green-400 mt-1"></p>
                     </div>
                 </div>
 
-                <button onclick="saveManualSettings()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 rounded text-xs">Save Changes</button>
+                <button onclick="saveManualSettings()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 rounded text-xs">Save Settings</button>
             </div>
         </div>
     </div>
@@ -235,7 +244,6 @@
         const SUPABASE_ANON_KEY = 'sb_publishable_ST5zYe5tRD2QTu6adwmpCQ_xheB9oc1';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Hub 01: Clean Reading View for Quran, Bible & Library (No public upload forms)
         function openKnowledgeHub() {
             document.getElementById('homeBtn').classList.remove('hidden');
             const view = document.getElementById('mainView');
@@ -274,7 +282,6 @@
             `;
         }
 
-        // Clean Service View for Hubs 2 to 9 (No public upload forms)
         function openServiceHub(hubNum, hubTitle) {
             document.getElementById('homeBtn').classList.remove('hidden');
             const view = document.getElementById('mainView');
@@ -287,29 +294,22 @@
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-xl shadow text-center space-y-3">
                     <span class="text-3xl">🚀</span>
                     <h3 class="font-bold text-yellow-400 text-sm">Services & Listings Live</h3>
-                    <p class="text-gray-300 text-xs">ഇവിടെ ഉപയോക്താക്കൾക്ക് സേവനങ്ങൾ പരിശോധിക്കാനും ഉപയോഗിക്കാനുമുള്ള സംവിധാനം സജ്ജീകരിച്ചിരിക്കുന്നു.</p>
+                    <p class="text-gray-300 text-xs">ഇവിടെ ഉപയോക്താക്കൾക്ക് സേവനങ്ങൾ പരിശോധിക്കാനുള്ള സംവിധാനം സജ്ജീകരിച്ചിരിക്കുന്നു.</p>
                 </div>
             `;
         }
 
-        function startVoiceRecognition() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) { alert("വോയിസ് റെക്കഗ്നിഷൻ സപ്പോർട്ട് ചെയ്യുന്നില്ല."); return; }
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'ml-IN';
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
-            const statusEl = document.getElementById('voiceStatus');
-            statusEl.innerText = "🎙️ സംസാരിക്കൂ...";
-            recognition.start();
-            recognition.onresult = function(event) {
-                const speechText = event.results[0][0].transcript;
-                document.getElementById('aiCommandInput').value = speechText;
-                statusEl.innerText = `✅ കേട്ടത്: "${speechText}"`;
-                runAiCommand();
-            };
-            recognition.onerror = function() { statusEl.innerText = "❌ തടസ്സമുണ്ട്."; };
-            recognition.onspeechend = function() { recognition.stop(); };
+        async function adminSaveToCloud() {
+            const hubId = document.getElementById('adminHubSelect').value;
+            const title = document.getElementById('adminItemTitle').value;
+            const url = document.getElementById('adminItemUrl').value;
+            if(!title) { alert('ടൈറ്റിൽ നൽകുക!'); return; }
+            
+            document.getElementById('adminStatus').innerText = "⏳ Saving to Supabase...";
+            await supabaseClient.from('oyes_global_records').insert([{ hub_id: hubId, title: title, description: url }]);
+            document.getElementById('adminStatus').innerText = "✅ Successfully Saved to Database!";
+            document.getElementById('adminItemTitle').value = '';
+            document.getElementById('adminItemUrl').value = '';
         }
 
         function saveManualSettings() {
@@ -319,22 +319,6 @@
             if(newLogo) document.getElementById('appLogoIcon').innerText = newLogo;
             alert('Settings Updated Successfully!');
             closeAdminModal();
-        }
-
-        function runAiCommand() {
-            const cmd = document.getElementById('aiCommandInput').value.toLowerCase();
-            if(cmd.includes('ലോഗോ') || cmd.includes('logo') || cmd.includes('റോക്കറ്റ്')) {
-                document.getElementById('appLogoIcon').innerText = '🚀';
-                document.getElementById('manualLogoInput').value = '🚀';
-                alert('AI Success: Logo updated to Rocket 🚀');
-            } else if(cmd.includes('പേര്') || cmd.includes('title')) {
-                document.getElementById('appTitleText').innerText = 'OYES GLOBAL SUPER APP';
-                document.getElementById('manualTitleInput').value = 'OYES GLOBAL SUPER APP';
-                alert('AI Success: App Title updated!');
-            } else {
-                alert(`AI Assistant: "${cmd}" കമാൻഡ് നടപ്പിലാക്കി!`);
-            }
-            document.getElementById('aiCommandInput').value = '';
         }
 
         function goHome() { location.reload(); }
