@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES Super App - Master Edition with Settings</title>
+    <title>OYES Super App - Nested Folder System</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Supabase JS SDK -->
@@ -11,272 +11,261 @@
 </head>
 <body class="bg-black text-gray-100 font-sans p-4">
 
-    <div class="max-w-3xl mx-auto space-y-4">
+    <div class="max-w-3xl mx-auto space-y-3">
 
         <!-- Main Dashboard Header -->
-        <div class="bg-gray-950 border-2 border-yellow-500 p-4 rounded-xl shadow-2xl flex items-center justify-between">
+        <div class="bg-gray-950 border border-yellow-500/80 p-3.5 rounded-xl shadow-xl flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                <div class="w-9 h-9 rounded-full border border-yellow-500 overflow-hidden bg-black flex items-center justify-center">
                     <img src="1791765607047.png" alt="OYES Logo" class="w-full h-full object-cover">
                 </div>
                 <div>
-                    <span class="text-[9px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">OYES Super App</span>
-                    <h1 class="text-base font-bold text-yellow-400 mt-0.5">🌐 Main Dashboard</h1>
+                    <span class="text-[9px] bg-yellow-600 text-white px-1.5 py-0.5 rounded font-bold">OYES Super App</span>
+                    <h1 class="text-sm font-bold text-yellow-400 mt-0.5">📁 Root Storage Directory</h1>
                 </div>
             </div>
             <div class="flex items-center space-x-2">
-                <button onclick="toggleFolder('settingsHub')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-2.5 py-1 rounded text-xs font-bold flex items-center space-x-1">
-                    <span>⚙️ Settings</span>
-                </button>
-                <span id="cloudStatus" class="text-[10px] text-green-400 font-semibold bg-green-500/10 px-2 py-1 rounded">Cloud Live 🟢</span>
+                <button onclick="toggleBox('settingsBox')" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 border border-yellow-500/50 px-2.5 py-1 rounded text-xs font-bold">⚙️ Settings</button>
+                <span id="cloudStatus" class="text-[9px] text-green-400 font-semibold bg-green-500/10 px-2 py-1 rounded">Cloud Live 🟢</span>
             </div>
         </div>
 
-        <!-- ==================== ⚙️ App Settings Hub ==================== -->
-        <div id="settingsHub" class="hidden bg-gray-950 border-2 border-yellow-500 p-4 rounded-xl shadow-xl space-y-3">
-            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                <h3 class="text-sm font-bold text-yellow-400">⚙️ OYES App Settings & Studio</h3>
-                <span class="text-[9px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Config</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-                <div class="bg-gray-900 p-3 rounded border border-gray-800 space-y-2">
-                    <h4 class="font-bold text-yellow-400">🎨 Theme & Display</h4>
-                    <p class="text-gray-400 text-[10px]">ആപ്പിന്റെ ലുക്കും കളറും കസ്റ്റമൈസ് ചെയ്യുക.</p>
-                    <button onclick="alert('Theme settings updated!')" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 px-2.5 py-1 rounded text-[10px] font-bold border border-yellow-500/40">Toggle Dark/Gold</button>
-                </div>
-                <div class="bg-gray-900 p-3 rounded border border-gray-800 space-y-2">
-                    <h4 class="font-bold text-blue-400">🔔 Cloud Sync & Cache</h4>
-                    <p class="text-gray-400 text-[10px]">സൂപ്പർ ബേസ് ഡാറ്റയും സിൻക്രണൈസേഷനും.</p>
-                    <button onclick="alert('Cloud cache cleared & synced!')" class="bg-gray-800 hover:bg-gray-700 text-blue-400 px-2.5 py-1 rounded text-[10px] font-bold border border-blue-500/40">Sync with Supabase</button>
-                </div>
+        <!-- ⚙️ Settings Box (Hidden Inside) -->
+        <div id="settingsBox" class="hidden bg-gray-900 border border-yellow-500/50 p-3 rounded-lg space-y-2">
+            <h3 class="text-xs font-bold text-yellow-400">⚙️ App Settings & System Config</h3>
+            <div class="grid grid-cols-2 gap-2 text-[10px]">
+                <button onclick="alert('Theme Updated')" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 p-2 rounded border border-gray-700">🎨 Toggle Theme</button>
+                <button onclick="alert('Supabase Synced')" class="bg-gray-800 hover:bg-gray-700 text-blue-400 p-2 rounded border border-gray-700">🔄 Sync Database</button>
             </div>
         </div>
 
         <!-- ==================== 1. World of Knowledge ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub1')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 1. World of Knowledge</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub1')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 1. World of Knowledge</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub1" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sacred Texts & Books</h4>
-                    <p class="text-gray-400 text-[10px]">ഖുർആൻ, ബൈബിൾ തുടങ്ങിയ ഡിജിറ്റൽ ലൈബ്രറി.</p>
+            <div id="hub1" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800 hover:border-yellow-500/50 transition">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Sacred Texts</span>
+                    <p class="text-gray-400 text-[9px]">ഖുർആൻ, ബൈബിൾ ലൈബ്രറി.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 AI Knowledge Assistant</h4>
-                    <p class="text-gray-400 text-[10px]">ഗ്രന്ഥങ്ങളെക്കുറിച്ച് സംശയങ്ങൾ ചോദിക്കാൻ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800 hover:border-blue-500/50 transition">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 AI Assistant</span>
+                    <p class="text-gray-400 text-[9px]">ഗ്രന്ഥ സംശയ നിവാരണം.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-purple-400 text-xs">📂 Audio/Podcast Hub</h4>
-                    <p class="text-gray-400 text-[10px]">ഗ്രന്ഥ പാരായണങ്ങളും ഓഡിയോ ലെസൻസും.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800 hover:border-purple-500/50 transition">
+                    <span class="text-purple-400 text-xs font-bold block mb-1">📂 Audio Hub</span>
+                    <p class="text-gray-400 text-[9px]">പാരായണങ്ങളും ലെസൻസും.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 2. OYES Job and Cleaning Service ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub2')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 2. OYES Job and Cleaning Service</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub2')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 2. OYES Job and Cleaning Service</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub2" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 OYES Job Portal</h4>
-                    <p class="text-gray-400 text-[10px]">പ്രൊഫൈൽ നൽകാനും ഒഴിവുകൾ പോസ്റ്റ് ചെയ്യാനും.</p>
+            <div id="hub2" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Job Portal</span>
+                    <p class="text-gray-400 text-[9px]">തൊഴിൽ ഒഴിവുകളും പ്രൊഫൈലും.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Home Cleaning Services</h4>
-                    <p class="text-gray-400 text-[10px]">വീടുകൾ, ഓഫീസുകൾ ഡീപ് ക്ലീനിംഗ് ബുക്കിംഗ്.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Home Cleaning</span>
+                    <p class="text-gray-400 text-[9px]">ഡീപ് ക്ലീനിംഗ് ബുക്കിംഗ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Specialized Cleaning</h4>
-                    <p class="text-gray-400 text-[10px]">വാട്ടർ ടാങ്ക്, സോഫ/കാർപെറ്റ് വാഷിംഗ്.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Special Cleaning</span>
+                    <p class="text-gray-400 text-[9px]">വാട്ടർ ടാങ്ക്, സോഫ വാഷിംഗ്.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 3. Ultimate Home Construction Solution ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub3')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 3. Ultimate Home Construction Solution</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">4 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub3')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 3. Ultimate Home Construction Solution</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub3" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 House Plans & Designs</h4>
-                    <p class="text-gray-400 text-[10px]">മോഡേൺ, ട്രഡീഷണൽ പ്ലാനുകളും 3D ഡിസൈനുകളും.</p>
+            <div id="hub3" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 House Plans</span>
+                    <p class="text-gray-400 text-[9px]">മോഡേൺ, 3D ഡിസൈനുകൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Contractors & Engineers</h4>
-                    <p class="text-gray-400 text-[10px]">എൻജിനീയർമാർ, മേസ്തരിമാർ കോൺടാക്റ്റ്.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Contractors</span>
+                    <p class="text-gray-400 text-[9px]">എൻജിനീയർമാർ, മേസ്തരിമാർ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Building Materials Hub</h4>
-                    <p class="text-gray-400 text-[10px]">സിമന്റ്, കമ്പി, ടൈൽ വിലവിവരങ്ങൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Building Materials</span>
+                    <p class="text-gray-400 text-[9px]">സിമന്റ്, കമ്പി, ടൈൽ വിവരങ്ങൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-purple-400 text-xs">📂 Interior & Exterior Works</h4>
-                    <p class="text-gray-400 text-[10px]">അകത്തളങ്ങളും പുറംമോടിയും മനോഹരമാക്കാൻ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-purple-400 text-xs font-bold block mb-1">📂 Interior & Exterior</span>
+                    <p class="text-gray-400 text-[9px]">അകത്തളങ്ങളും പുറംമോടിയും.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 4. Buy and Sell ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub4')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 4. Buy and Sell</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub4')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 4. Buy and Sell</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub4" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Vehicle Marketplace</h4>
-                    <p class="text-gray-400 text-[10px]">കാറുകൾ, ബൈക്കുകൾ വാങ്ങാനും വിൽക്കാനും.</p>
+            <div id="hub4" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Vehicles</span>
+                    <p class="text-gray-400 text-[9px]">കാറുകൾ, ബൈക്കുകൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Real Estate</h4>
-                    <p class="text-gray-400 text-[10px]">പ്ലോട്ടുകൾ, വീടുകൾ, ഫ്ലാറ്റുകൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Real Estate</span>
+                    <p class="text-gray-400 text-[9px]">പ്ലോട്ടുകൾ, വീടുകൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Electronics & Appliances</h4>
-                    <p class="text-gray-400 text-[10px]">യൂസ്ഡ് അല്ലെങ്കിൽ പുതിയ ഇലക്ട്രോണിക്സ്.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Electronics</span>
+                    <p class="text-gray-400 text-[9px]">യൂസ്ഡ്/ന്യൂ അപ്ലയൻസസ്.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 5. Tourism Travels ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub5')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 5. Tourism Travels</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub5')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 5. Tourism Travels</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub5" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Tour Packages</h4>
-                    <p class="text-gray-400 text-[10px]">കസ്റ്റമൈസ്ഡ് ടൂർ പാക്കേജുകൾ.</p>
+            <div id="hub5" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Tour Packages</span>
+                    <p class="text-gray-400 text-[9px]">കേരളം & പുറം ടൂറുകൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Cab & Vehicle Rental</h4>
-                    <p class="text-gray-400 text-[10px]">കാറുകളും ട്രാവലറുകളും ബുക്ക് ചെയ്യാൻ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Cab Rental</span>
+                    <p class="text-gray-400 text-[9px]">കാർ & ട്രാവലർ ബുക്കിംഗ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Hotel & Resort Booking</h4>
-                    <p class="text-gray-400 text-[10px]">താമസ സൗകര്യങ്ങൾ മുൻകൂട്ടി ബുക്ക് ചെയ്യാം.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Hotel Booking</span>
+                    <p class="text-gray-400 text-[9px]">റെസോർട്ട് & സ്റ്റേ.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 6. Event and Advertisement ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub6')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 6. Event and Advertisement</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub6')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 6. Event and Advertisement</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub6" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Event Management</h4>
-                    <p class="text-gray-400 text-[10px]">വിവാഹം, ഉദ്ഘാടനങ്ങൾ പ്ലാൻ ചെയ്യാൻ.</p>
+            <div id="hub6" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Event Management</span>
+                    <p class="text-gray-400 text-[9px]">വിവാഹം, പാർട്ടി പ്ലാനിംഗ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Digital & Media Ads</h4>
-                    <p class="text-gray-400 text-[10px]">ബിസിനസുകൾക്കായുള്ള പരസ്യങ്ങൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Media Ads</span>
+                    <p class="text-gray-400 text-[9px]">ബിസിനസ് പ്രൊമോഷൻസ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Stage & Sound Setup</h4>
-                    <p class="text-gray-400 text-[10px]">ലൈവ് സ്റ്റേജ്, സൗണ്ട് സിസ്റ്റം ബുക്കിംഗ്.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Stage & Sound</span>
+                    <p class="text-gray-400 text-[9px]">ലൈറ്റിംഗ് & സൗണ്ട് സിസ്റ്റം.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 7. OYES Public Care ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub7')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 7. OYES Public Care</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">4 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub7')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 7. OYES Public Care</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub7" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-red-400 text-xs">📂 Emergency Helpline</h4>
-                    <p class="text-gray-400 text-[10px]">പോലീസ്, ഫയർഫോഴ്സ് നമ്പറുകൾ.</p>
+            <div id="hub7" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-red-400 text-xs font-bold block mb-1">📂 Emergency Helpline</span>
+                    <p class="text-gray-400 text-[9px]">പോലീസ്, ഫയർഫോഴ്സ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Hospital Directory</h4>
-                    <p class="text-gray-400 text-[10px]">ഹോസ്പിറ്റലുകൾ, ഡോക്ടർമാരുടെ വിവരങ്ങൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Hospital Directory</span>
+                    <p class="text-gray-400 text-[9px]">ക്ലിനിക്കുകൾ, ഡോക്ടർമാർ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Ambulance Services</h4>
-                    <p class="text-gray-400 text-[10px]">24 മണിക്കൂർ ആംബുലൻസ് ഡയറക്ട് കോൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Ambulance Services</span>
+                    <p class="text-gray-400 text-[9px]">24/7 ആംബുലൻസ് കോൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-purple-400 text-xs">📂 Blood Donation Bank</h4>
-                    <p class="text-gray-400 text-[10px]">രക്തദാതാക്കളുടെ വിവരങ്ങൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-purple-400 text-xs font-bold block mb-1">📂 Blood Donation</span>
+                    <p class="text-gray-400 text-[9px]">രക്തദാതാക്കളുടെ ബാങ്ക്.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 8. OYES Entertainment ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub8')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 8. OYES Entertainment</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub8')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 8. OYES Entertainment</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub8" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Short Films & Videos</h4>
-                    <p class="text-gray-400 text-[10px]">ക്രിയേറ്റീവ് വീഡിയോകളും ഷോർട്ട് ഫിലിമുകളും.</p>
+            <div id="hub8" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Short Films</span>
+                    <p class="text-gray-400 text-[9px]">ക്രിയേറ്റീവ് വീഡിയോകൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Audition & Acting Hub</h4>
-                    <p class="text-gray-400 text-[10px]">അഭിനയമോഹികൾക്ക് കഴിവുകൾ പ്രകടിപ്പിക്കാൻ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Audition Hub</span>
+                    <p class="text-gray-400 text-[9px]">അഭിനയ അവസരങ്ങൾ.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Cultural Programs</h4>
-                    <p class="text-gray-400 text-[10px]">സ്റ്റേജ് ഷോകൾ, സംഗീത പരിപാടികൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Cultural Programs</span>
+                    <p class="text-gray-400 text-[9px]">സ്റ്റേജ് ഷോകൾ.</p>
                 </div>
             </div>
         </div>
 
         <!-- ==================== 9. OYES Cinema Studio ==================== -->
-        <div class="bg-gray-900 border border-yellow-500/70 rounded-xl shadow-md overflow-hidden">
-            <button onclick="toggleFolder('hub9')" class="w-full p-3.5 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left transition">
-                <span class="font-bold text-yellow-400 text-sm">📁 9. OYES Cinema Studio</span>
-                <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded">3 Sub-Folders ▼</span>
+        <div class="bg-gray-900 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <button onclick="toggleBox('hub9')" class="w-full p-3 bg-gray-900 hover:bg-gray-800/80 flex items-center justify-between text-left transition">
+                <span class="font-bold text-yellow-400 text-xs">📁 9. OYES Cinema Studio</span>
+                <span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">Open Folder 📂</span>
             </button>
-            <div id="hub9" class="hidden p-3 bg-gray-950 border-t border-gray-800 space-y-2">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Film Production</h4>
-                    <p class="text-gray-400 text-[10px]">സിനിമ നിർമ്മാണ ഗൈഡൻസും അപ്ഡേറ്റുകളും.</p>
+            <div id="hub9" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-yellow-400 text-xs font-bold block mb-1">📂 Film Production</span>
+                    <p class="text-gray-400 text-[9px]">നിമ്മാണ ഗൈഡൻസ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-blue-400 text-xs">📂 Technical Wing</h4>
-                    <p class="text-gray-400 text-[10px]">ക്യാമറ, എഡിറ്റിംഗ്, സൗണ്ട് ഡിസൈൻ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-blue-400 text-xs font-bold block mb-1">📂 Technical Wing</span>
+                    <p class="text-gray-400 text-[9px]">ക്യാമറ & എഡിറ്റിംഗ്.</p>
                 </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-800">
-                    <h4 class="font-bold text-green-400 text-xs">📂 Crew & Artist Directory</h4>
-                    <p class="text-gray-400 text-[10px]">ആർട്ടിസ്റ്റുകൾ, ടെക്നീഷ്യന്മാർ വിവരങ്ങൾ.</p>
+                <div class="bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                    <span class="text-green-400 text-xs font-bold block mb-1">📂 Crew Directory</span>
+                    <p class="text-gray-400 text-[9px]">ആർട്ടിസ്റ്റുകൾ & ഡയറക്ടറി.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== ADMIN & CONNECT WITH US ==================== -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-            <!-- Admin Control Panel -->
-            <div class="bg-gray-950 border border-red-500/70 p-3.5 rounded-xl shadow-md space-y-2">
-                <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                    <h3 class="text-xs font-bold text-red-400">⚙️ Admin Control Panel</h3>
-                    <span class="text-[9px] bg-red-600 text-white px-1.5 py-0.5 rounded font-bold">Locked</span>
+        <!-- ==================== ADMIN & CONNECT FOLDERS ==================== -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+            <!-- Admin Panel Folder -->
+            <div class="bg-gray-900 border border-red-500/40 rounded-xl overflow-hidden">
+                <button onclick="toggleBox('adminBox')" class="w-full p-3 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left">
+                    <span class="font-bold text-red-400 text-xs">🔐 Admin Control Panel</span>
+                    <span class="text-[9px] text-red-400 bg-red-500/10 px-2 py-0.5 rounded">Locked 🔒</span>
+                </button>
+                <div id="adminBox" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 space-y-2">
+                    <p class="text-gray-400 text-[9px]">കണ്ടന്റുകൾ നിയന്ത്രിക്കാനുള്ള സെക്യൂർ ഫോൾഡർ.</p>
+                    <button onclick="alert('Enter Admin Passcode')" class="w-full bg-red-600 hover:bg-red-700 text-white p-1.5 rounded text-[10px] font-bold">Open Backend</button>
                 </div>
-                <p class="text-gray-400 text-[10px]">ഡാറ്റകളും നോട്ടിഫിക്കേഷനുകളും നിയന്ത്രിക്കാനുള്ള ബാക്ക്എൻഡ്.</p>
-                <button onclick="alert('Admin Panel Locked')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open Admin</button>
             </div>
 
-            <!-- Connect with Us -->
-            <div class="bg-gray-950 border border-green-500/70 p-3.5 rounded-xl shadow-md space-y-2">
-                <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                    <h3 class="text-xs font-bold text-green-400">🟢 Connect with Us</h3>
-                    <span class="text-[9px] bg-green-600 text-white px-1.5 py-0.5 rounded font-bold">Official</span>
-                </div>
-                <div class="text-[10px] text-gray-300 space-y-0.5">
+            <!-- Connect With Us Folder -->
+            <div class="bg-gray-900 border border-green-500/40 rounded-xl overflow-hidden">
+                <button onclick="toggleBox('connectBox')" class="w-full p-3 bg-gray-900 hover:bg-gray-800 flex items-center justify-between text-left">
+                    <span class="font-bold text-green-400 text-xs">🟢 Connect with Us</span>
+                    <span class="text-[9px] text-green-400 bg-green-500/10 px-2 py-0.5 rounded">Official 📇</span>
+                </button>
+                <div id="connectBox" class="hidden p-2.5 bg-gray-950 border-t border-gray-800 text-[10px] text-gray-300 space-y-1">
                     <p><strong>OYES Saleem:</strong> +91 9633111000<br><span class="text-gray-400 text-[9px]">Platformoyes@gmail.com</span></p>
                     <p><strong>Salih Wayanad:</strong> +91 9947198248<br><span class="text-gray-400 text-[9px]">Directorsalihwayanad@gmail.com</span></p>
                 </div>
@@ -285,9 +274,9 @@
 
     </div>
 
-    <!-- Script for Folder Toggle & Supabase -->
+    <!-- Script for Toggling Folders & Supabase -->
     <script>
-        function toggleFolder(id) {
+        function toggleBox(id) {
             const el = document.getElementById(id);
             if (el.classList.contains('hidden')) {
                 el.classList.remove('hidden');
