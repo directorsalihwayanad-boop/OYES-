@@ -1,341 +1,56 @@
-<!DOCTYPE html>
-<html lang="ml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES Global Hub - Super App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body class="bg-[#0b0f19] text-white min-h-screen flex flex-col justify-between font-sans">
-
-    <!-- Top Header Bar -->
-    <header class="bg-[#111827] border-b border-gray-800 px-4 py-3 flex justify-between items-center sticky top-0 z-40 shadow-md">
-        <div class="flex items-center space-x-2">
-            <span id="appLogoIcon" class="text-xl">🦅</span>
+<!-- OYES Super App: Multi-AI Architecture & Admin Control Blueprint -->
+<div class="bg-gray-950 border-2 border-yellow-500/80 p-5 rounded-2xl shadow-2xl text-gray-100">
+    
+    <!-- App Header & Home AI Status -->
+    <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-3">
+        <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
+                <img src="1791765607047.png" alt="OYES Logo" class="w-full h-full object-cover">
+            </div>
             <div>
-                <h1 id="appTitleText" class="font-bold text-yellow-400 text-xs tracking-wider">OYES GLOBAL HUB</h1>
-                <p class="text-[9px] text-gray-400">Connecting People, Uniting Opportunities</p>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">OYES Super App - Main Hub</span>
+                <h3 class="text-base font-bold text-yellow-400 mt-0.5">🌐 Home Page & General AI Assistant Active</h3>
             </div>
         </div>
-        <div class="flex items-center space-x-2">
-            <button onclick="goHome()" id="homeBtn" class="hidden bg-gray-800 hover:bg-gray-700 text-yellow-400 text-[11px] px-2.5 py-1 rounded border border-gray-700">🏠 Home</button>
-            <button onclick="openAdminModal()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-[11px] px-2.5 py-1 rounded flex items-center space-x-1 shadow">
-                <span>⚙️</span>
-                <span>Admin Studio</span>
-            </button>
-        </div>
-    </header>
+        <span class="text-[10px] text-green-400 font-semibold bg-green-500/10 px-2 py-1 rounded">Multi-AI Online</span>
+    </div>
 
-    <!-- Main Content Container -->
-    <main class="p-3 md:p-6 max-w-5xl mx-auto w-full flex-grow">
+    <!-- Core Structure Overview with Domain AIs -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-[11px] mb-4">
         
-        <div id="mainView">
-            <div class="mb-4 relative">
-                <input type="text" id="searchInput" placeholder="Search hubs..." class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 pl-9 text-xs text-white focus:outline-none focus:border-yellow-500">
-                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
-            </div>
-
-            <h2 class="text-sm font-bold text-indigo-400 mb-3">🌟 9 Core Hubs</h2>
-
-            <!-- 9 Compact Grid Cards -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                
-                <!-- Hub 01 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 01</span>
-                            <span class="text-[10px] text-green-400">📖 Holy Books</span>
-                        </div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">World of Knowledge</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Quran, Bible & Digital Library.</p>
-                    </div>
-                    <div class="mt-3">
-                        <button onclick="openKnowledgeHub()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button>
-                    </div>
-                </div>
-
-                <!-- Hub 02 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 02</span><span class="text-[10px] text-green-400">🧹 Services</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Job & Cleaning Hub</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Cleaning & Employment.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(2, 'Job & Cleaning Hub')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 03 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 03</span><span class="text-[10px] text-green-400">🏗️ Materials</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Ultimate Construction</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Marbles, Granites, Workers.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(3, 'Ultimate Construction')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 04 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 04</span><span class="text-[10px] text-green-400">🏨 Stays</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Stays & Hotels</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Hotels & Travel Stays.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(4, 'Stays & Hotels')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 05 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 05</span><span class="text-[10px] text-green-400">🛒 Market</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Buy & Sell Market</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Classifieds & Community.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(5, 'Buy & Sell Market')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 06 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 06</span><span class="text-[10px] text-green-400">🎉 Events</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Events & Ads</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Events & Business Banners.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(6, 'Events & Ads')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 07 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 07</span><span class="text-[10px] text-green-400">🏥 SOS</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Public Care & SOS</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Medical & Emergency SOS.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(7, 'Public Care & SOS')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 08 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 08</span><span class="text-[10px] text-green-400">🎬 Media</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">Entertainment Hub</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Media & Community Fun.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(8, 'Entertainment Hub')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-                <!-- Hub 09 -->
-                <div class="bg-gray-800/80 border border-gray-700/80 p-3 rounded-lg hover:border-yellow-500 transition duration-200 flex flex-col justify-between shadow">
-                    <div>
-                        <div class="flex justify-between items-center"><span class="text-[10px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded font-semibold">Hub 09</span><span class="text-[10px] text-green-400">🎥 Cinema</span></div>
-                        <h3 class="font-bold text-yellow-400 mt-1.5 text-xs">OYES Cinema & Studio</h3>
-                        <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-2">Watch, Upload & Earn.</p>
-                    </div>
-                    <div class="mt-3"><button onclick="openServiceHub(9, 'OYES Cinema & Studio')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1 rounded">Open Hub →</button></div>
-                </div>
-
-            </div>
+        <!-- Hub 01 AI -->
+        <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
+            <h4 class="font-bold text-yellow-400">🧠 Hub 01 AI (Tech & Scriptures)</h4>
+            <p class="text-gray-400 text-[10px] mt-1">ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് ചരിത്രം, വിശുദ്ധ ഗ്രന്ഥങ്ങൾ എന്നിവയെക്കുറിച്ച് മാത്രം സംസാരിക്കുന്ന എഐ.</p>
         </div>
 
-        <!-- Contact Admin Button -->
-        <div class="text-center mt-4">
-            <button onclick="toggleContacts()" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-bold text-[11px] py-2 px-5 rounded-full shadow hover:scale-105 transition duration-200">
-                👑 Contact Admin & Support
-            </button>
+        <!-- Hub 02 AI -->
+        <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
+            <h4 class="font-bold text-yellow-400">🧹 Hub 02 AI (Jobs & Cleaning)</h4>
+            <p class="text-gray-400 text-[10px] mt-1">ക്ലീനിംഗ് സർവീസുകളും തൊഴിൽ അവസരങ്ങളും മാത്രം കൈകാര്യം ചെയ്യുന്ന എഐ.</p>
         </div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-[#111827] border-t border-gray-800 p-3 text-center text-[10px] text-gray-500">
-        <p>© 2026 OYES Global Hub. All Rights Reserved. | Supabase Cloud Connected 🚀</p>
-    </footer>
-
-    <!-- Admin Password & Studio Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-gray-900 border border-yellow-500/50 rounded-xl p-5 w-full max-w-sm text-white shadow-2xl relative">
-            <button onclick="closeAdminModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white font-bold">✕</button>
-            
-            <div id="loginView">
-                <h3 class="text-sm font-bold text-yellow-400 mb-1">🔐 Admin Security</h3>
-                <p class="text-[11px] text-gray-400 mb-3">പാസ്‌വേർഡ് (OYES_ADMIN_2026) നൽകുക.</p>
-                <input type="password" id="adminPassInput" placeholder="Password" class="w-full bg-gray-800 border border-gray-700 rounded px-2.5 py-1.5 text-xs mb-3 text-white focus:outline-none focus:border-yellow-500">
-                <button onclick="verifyAdminPassword()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-1.5 rounded text-xs">Login</button>
-            </div>
-
-            <div id="studioDashboardView" class="hidden">
-                <h3 class="text-sm font-bold text-green-400 mb-1">👑 OYES Admin Studio Dashboard</h3>
-                <p class="text-[11px] text-gray-300 mb-2">ഇവിടെ അഡ്മിൻ കൺട്രോളുകളും ലിങ്കുകളും മാനേജ് ചെയ്യാം.</p>
-                
-                <div class="bg-gray-800 p-2.5 rounded mb-3 text-[11px] space-y-2.5">
-                    <div>
-                        <label class="block text-yellow-400 font-semibold mb-1">✏️ App Title</label>
-                        <input type="text" id="manualTitleInput" value="OYES GLOBAL HUB" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-yellow-500 mb-1.5">
-                        
-                        <label class="block text-yellow-400 font-semibold mb-1">🦅 Logo Emoji</label>
-                        <input type="text" id="manualLogoInput" value="🦅" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-yellow-500">
-                    </div>
-
-                    <hr class="border-gray-700">
-
-                    <div>
-                        <label class="block text-yellow-400 font-semibold mb-1">➕ Add Hub Link / URL</label>
-                        <select id="adminHubSelect" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white mb-1.5">
-                            <option value="1">Hub 01: Knowledge / Quran / Bible</option>
-                            <option value="2">Hub 02: Job & Cleaning</option>
-                            <option value="3">Hub 03: Construction</option>
-                            <option value="4">Hub 04: Stays & Hotels</option>
-                            <option value="5">Hub 05: Buy & Sell</option>
-                            <option value="6">Hub 06: Events & Ads</option>
-                            <option value="7">Hub 07: Public Care & SOS</option>
-                            <option value="8">Hub 08: Entertainment</option>
-                            <option value="9">Hub 09: Cinema Studio</option>
-                        </select>
-                        <input type="text" id="adminItemTitle" placeholder="Title" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white mb-1.5">
-                        <input type="text" id="adminItemUrl" placeholder="URL / Link" class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-xs text-white mb-1.5">
-                        <button onclick="adminSaveToCloud()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-1 rounded text-xs">Save to Database 🚀</button>
-                        <p id="adminStatus" class="text-[9px] text-green-400 mt-1"></p>
-                    </div>
-                </div>
-
-                <button onclick="saveManualSettings()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 rounded text-xs">Save Settings</button>
-            </div>
+        <!-- Hub 03 AI -->
+        <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
+            <h4 class="font-bold text-yellow-400">🏗️ Hub 03 AI (Construction Hub)</h4>
+            <p class="text-gray-400 text-[10px] mt-1">മാർബിൾ, ഗ്രാനൈറ്റ്, ഹാർഡ്‌വെയർ & നിർമ്മാണ സാമഗ്രികൾ എന്നിവയിൽ മാത്രം വിദഗ്ദ്ധനായ എഐ.</p>
         </div>
+
     </div>
 
-    <!-- Contact Admin Modal -->
-    <div id="contactModal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-gray-900 border border-yellow-500/50 rounded-xl p-5 w-full max-w-sm text-white shadow-2xl relative">
-            <button onclick="toggleContacts()" class="absolute top-3 right-3 text-gray-400 hover:text-white font-bold">✕</button>
-            <div class="text-center mb-3">
-                <span class="text-2xl">🦅</span>
-                <h3 class="text-sm font-bold text-yellow-400 mt-1">OYES Admin Contacts</h3>
-            </div>
-            <div class="space-y-2 text-[11px]">
-                <div class="bg-gray-800 p-2.5 rounded border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <p class="text-yellow-400 font-semibold">OYES Saleem</p>
-                        <p class="font-mono text-gray-300">+91 9633111000</p>
-                    </div>
-                    <div class="flex gap-1">
-                        <a href="tel:+919633111000" class="bg-green-600 hover:bg-green-700 text-white py-1 px-2.5 rounded font-semibold text-center">📞 Call</a>
-                        <a href="https://wa.me/919633111000?text=Hello%20OYES%20Saleem" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white py-1 px-2.5 rounded font-semibold text-center">💬 WhatsApp</a>
-                    </div>
-                </div>
-                <div class="bg-gray-800 p-2.5 rounded border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <p class="text-yellow-400 font-semibold">Director Salih Wayanad</p>
-                        <p class="font-mono text-gray-300">+91 9947198248</p>
-                    </div>
-                    <div class="flex gap-1">
-                        <a href="tel:+919947198248" class="bg-green-600 hover:bg-green-700 text-white py-1 px-2.5 rounded font-semibold text-center">📞 Call</a>
-                        <a href="https://wa.me/919947198248?text=Hello%20Director%20Salih" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white py-1 px-2.5 rounded font-semibold text-center">💬 WhatsApp</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Admin & Settings AI Studio Section -->
+    <div class="bg-gray-900 border border-red-500/50 p-3 rounded-xl flex flex-col md:flex-row justify-between items-center gap-3">
+        <div>
+            <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Restricted Admin Area</span>
+            <h4 class="font-bold text-red-400 mt-1 text-xs">⚙️ Settings & Admin Update AI Studio</h4>
+            <p class="text-gray-400 text-[10px]">തീമുകൾ മാറ്റാനും, ഫോൾഡറുകൾ കസ്റ്റമൈസ് ചെയ്യാനും, പുതിയ അപ്ഡേഷനുകൾ നൽകാനും അഡ്മിനെ സഹായിക്കുന്ന സ്പെഷ്യൽ എഐ സ്റ്റുഡിയോ.</p>
         </div>
+        <button onclick="alert('Accessing Admin Settings & Update AI Studio...')" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold text-[11px] whitespace-nowrap">Open Admin Studio ↗</button>
     </div>
 
-    <!-- JavaScript Logic -->
-    <script>
-        const SUPABASE_URL = 'https://gnxmiqmfwrwnivlkvspy.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_ST5zYe5tRD2QTu6adwmpCQ_xheB9oc1';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        function openKnowledgeHub() {
-            document.getElementById('homeBtn').classList.remove('hidden');
-            const view = document.getElementById('mainView');
-            view.innerHTML = `
-                <div class="mb-4">
-                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 01</span>
-                    <h2 class="text-lg font-bold text-yellow-400 mt-1">📖 World of Knowledge & Holy Scriptures</h2>
-                    <p class="text-gray-300 text-[11px] mt-0.5">വിശുദ്ധ ഖുർആൻ, ബൈബിൾ, ഡിജിറ്റൽ ലൈബ്രറി റഫറൻസുകൾ.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-yellow-400 text-xs">📖 Holy Quran</h3>
-                            <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ഖുർആൻ ഓൺലൈൻ വായന.</p>
-                        </div>
-                        <a href="https://quran.com" target="_blank" class="mt-4 block text-center bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-1.5 rounded">Open Quran ↗</a>
-                    </div>
-
-                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-yellow-400 text-xs">✝️ Holy Bible</h3>
-                            <p class="text-gray-300 text-[10px] mt-1">വിശുദ്ധ ബൈബിൾ ഓൺലൈൻ വായന.</p>
-                        </div>
-                        <a href="https://www.bible.com" target="_blank" class="mt-4 block text-center bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold py-1.5 rounded">Open Bible ↗</a>
-                    </div>
-
-                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-yellow-400 text-xs">📚 Digital Library</h3>
-                            <p class="text-gray-300 text-[10px] mt-1">പഠനപുസ്തകങ്ങളും റഫറൻസുകളും.</p>
-                        </div>
-                        <button onclick="alert('Digital Library Catalog Active!')" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1.5 rounded">View Books</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function openServiceHub(hubNum, hubTitle) {
-            document.getElementById('homeBtn').classList.remove('hidden');
-            const view = document.getElementById('mainView');
-            view.innerHTML = `
-                <div class="mb-4">
-                    <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 0${hubNum}</span>
-                    <h2 class="text-lg font-bold text-yellow-400 mt-1">${hubTitle}</h2>
-                    <p class="text-gray-300 text-[11px] mt-0.5">ഈ ഹബ്ബിലെ ലഭ്യമായ സേവനങ്ങളും വിവരങ്ങളും.</p>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-xl shadow text-center space-y-3">
-                    <span class="text-3xl">🚀</span>
-                    <h3 class="font-bold text-yellow-400 text-sm">Services & Listings Live</h3>
-                    <p class="text-gray-300 text-xs">ഇവിടെ ഉപയോക്താക്കൾക്ക് സേവനങ്ങൾ പരിശോധിക്കാനുള്ള സംവിധാനം സജ്ജീകരിച്ചിരിക്കുന്നു.</p>
-                </div>
-            `;
-        }
-
-        async function adminSaveToCloud() {
-            const hubId = document.getElementById('adminHubSelect').value;
-            const title = document.getElementById('adminItemTitle').value;
-            const url = document.getElementById('adminItemUrl').value;
-            if(!title) { alert('ടൈറ്റിൽ നൽകുക!'); return; }
-            
-            document.getElementById('adminStatus').innerText = "⏳ Saving to Supabase...";
-            await supabaseClient.from('oyes_global_records').insert([{ hub_id: hubId, title: title, description: url }]);
-            document.getElementById('adminStatus').innerText = "✅ Successfully Saved to Database!";
-            document.getElementById('adminItemTitle').value = '';
-            document.getElementById('adminItemUrl').value = '';
-        }
-
-        function saveManualSettings() {
-            const newTitle = document.getElementById('manualTitleInput').value;
-            const newLogo = document.getElementById('manualLogoInput').value;
-            if(newTitle) document.getElementById('appTitleText').innerText = newTitle;
-            if(newLogo) document.getElementById('appLogoIcon').innerText = newLogo;
-            alert('Settings Updated Successfully!');
-            closeAdminModal();
-        }
-
-        function goHome() { location.reload(); }
-        function openAdminModal() {
-            document.getElementById('adminModal').classList.remove('hidden');
-            document.getElementById('loginView').classList.remove('hidden');
-            document.getElementById('studioDashboardView').classList.add('hidden');
-            document.getElementById('adminPassInput').value = '';
-        }
-        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
-        function verifyAdminPassword() {
-            if (document.getElementById('adminPassInput').value === "OYES_ADMIN_2026") {
-                document.getElementById('loginView').classList.add('hidden');
-                document.getElementById('studioDashboardView').classList.remove('hidden');
-            } else { alert("Incorrect Password!"); }
-        }
-        function toggleContacts() { document.getElementById('contactModal').classList.toggle('hidden'); }
-    </script>
-</body>
-</html>
+    <!-- Footer Helpline -->
+    <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
+        <span>സെൻട്രൽ ഹെൽപ്പ്‌ലൈൻ: <a href="tel:+919447276504" class="text-yellow-400 font-bold underline">+91 94472 76504</a></span>
+        <span class="text-[10px] text-yellow-500 font-bold">OYES Global Architecture</span>
+    </div>
+</div>
