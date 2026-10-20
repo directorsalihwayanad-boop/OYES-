@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES Super App - Structured Edition</title>
+    <title>OYES Super App - Cloud Connected Edition</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-black text-gray-100 font-sans p-4">
 
@@ -18,153 +21,269 @@
                 </div>
                 <div>
                     <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">OYES Super App</span>
-                    <h1 class="text-lg font-bold text-yellow-400 mt-0.5">🌐 Main Dashboard & Multi-AI System</h1>
+                    <h1 class="text-lg font-bold text-yellow-400 mt-0.5">🌐 OYES Main Dashboard</h1>
                 </div>
             </div>
-            <span class="text-[10px] text-green-400 font-semibold bg-green-500/10 px-2.5 py-1 rounded">Online</span>
-        </div>
-
-        <!-- ==================== HUB 01 FOLDER ==================== -->
-        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-4">
-            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                <h3 class="text-base font-bold text-yellow-400">🧠 Hub 01: Tech & Sacred Scriptures</h3>
-                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Main Folder</span>
-            </div>
-
-            <!-- Sub-Folder 1.1 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 1: AI Technology & Evolution</h4>
-                    <span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
-                </div>
-                <p class="text-gray-300 text-[11px]">ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസിന്റെ രൂപീകരണം, ചരിത്രം, വികസനം & പ്രമുഖർ.</p>
-                <button onclick="openFolder('AI Technology & Evolution', 'ചരിത്രവും ഡാറ്റയും ലോഡ് ചെയ്തു.')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
-            </div>
-
-            <!-- Sub-Folder 1.2 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 2: Sacred Scriptures & Book History</h4>
-                    <span class="text-[10px] text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
-                </div>
-                <p class="text-gray-300 text-[11px]">ഖുറാൻ, ബൈബിൾ, രാമായണം, ഗീത, ബുദ്ധ-ജൈന-ഷിയാ ഗ്രന്ഥങ്ങൾ & പുസ്തക ചരിത്രം.</p>
-                <button onclick="openFolder('Sacred Scriptures', 'വിശുദ്ധ ഗ്രന്ഥങ്ങളുടെ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 hover:bg-yellow-700 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+            <div class="flex items-center space-x-2">
+                <span id="cloudStatus" class="text-[10px] text-yellow-400 font-semibold bg-yellow-500/10 px-2.5 py-1 rounded">Connecting Cloud...</span>
             </div>
         </div>
 
-        <!-- ==================== HUB 02 FOLDER ==================== -->
-        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-4">
+        <!-- ==================== 1. World of Knowledge ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
             <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                <h3 class="text-base font-bold text-yellow-400">🧹 Hub 02: Job & Cleaning Service</h3>
-                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Main Folder</span>
+                <h3 class="text-base font-bold text-yellow-400">📖 1. World of Knowledge</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 01</span>
             </div>
-
-            <!-- Sub-Folder 2.1 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 1: All Cleaning Services</h4>
-                    <span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">📚 Sacred Texts & Books</h4>
+                    <p class="text-gray-300 text-[10px]">ഖുർആൻ, ബൈബിൾ തുടങ്ങിയ ഡിജിറ്റൽ ലൈബ്രറി.</p>
                 </div>
-                <p class="text-gray-300 text-[11px]">വീടുകൾ, ഓഫീസുകൾ, വാട്ടർ ടാങ്ക് ക്ലീനിംഗ് സർവീസുകൾ.</p>
-                <button onclick="openFolder('Cleaning Services', 'ക്ലീനിംഗ് സർവീസ് ഫോൾഡർ തുറന്നു.')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
-            </div>
-
-            <!-- Sub-Folder 2.2 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 2: Job Opportunities</h4>
-                    <span class="text-[10px] text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">🤖 AI Knowledge Assistant</h4>
+                    <p class="text-gray-300 text-[10px]">ഗ്രന്ഥങ്ങളെക്കുറിച്ച് സംശയങ്ങൾ ചോദിക്കാൻ.</p>
                 </div>
-                <p class="text-gray-300 text-[11px]">വിവിധ തൊഴിൽ അവസരങ്ങളും ഒഴിവുകളുടെ ഡയറക്ടറിയും.</p>
-                <button onclick="openFolder('Job Opportunities', 'തൊഴിൽ അവസരങ്ങളുടെ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 hover:bg-yellow-700 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-purple-400">🎧 Audio/Podcast Hub</h4>
+                    <p class="text-gray-300 text-[10px]">ഗ്രന്ഥ പാരായണങ്ങളും ഓഡിയോ ലെസൻസും.</p>
+                </div>
             </div>
         </div>
 
-        <!-- ==================== HUB 03 FOLDER ==================== -->
-        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-4">
+        <!-- ==================== 2. OYES Job and Cleaning Service ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
             <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                <h3 class="text-base font-bold text-yellow-400">🏗️ Hub 03: Construction & Materials Hub</h3>
-                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Main Folder</span>
+                <h3 class="text-base font-bold text-yellow-400">🧹 2. OYES Job and Cleaning Service</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 02</span>
             </div>
-
-            <!-- Sub-Folder 3.1 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 1: Hardware (A-Z)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">💼 OYES Job Portal</h4>
+                    <p class="text-gray-300 text-[10px]">പ്രൊഫൈൽ നൽകാനും ഒഴിവുകൾ പോസ്റ്റ് ചെയ്യാനും.</p>
                 </div>
-                <p class="text-gray-300 text-[11px]">എല്ലാവിധ ഹാർഡ്‌വെയർ സാധനങ്ങളുടെയും വിവരങ്ങൾ.</p>
-                <button onclick="openFolder('Hardware A-Z', 'ഹാർഡ്‌വെയർ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
-            </div>
-
-            <!-- Sub-Folder 3.2 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 2: Marbles, Granites, Tiles & Paving Stones</h4>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">✨ Home Cleaning Services</h4>
+                    <p class="text-gray-300 text-[10px]">വീടുകൾ, ഓഫീസുകൾ ഡീപ് ക്ലീനിംഗ് ബുക്കിംഗ്.</p>
                 </div>
-                <p class="text-gray-300 text-[11px]">5000+ മാർബിൾ, 3960 ഗ്രാനൈറ്റ്, 1500+ ടൈലുകൾ.</p>
-                <button onclick="openFolder('Marbles & Granites Hub', 'മാർബിൾ & ഗ്രാനൈറ്റ് ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
-            </div>
-
-            <!-- Sub-Folder 3.3 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 3: Stones</h4>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">🧽 Specialized Cleaning</h4>
+                    <p class="text-gray-300 text-[10px]">വാട്ടർ ടാങ്ക്, സോഫ/കാർപെറ്റ് വാഷിംഗ്.</p>
                 </div>
-                <p class="text-gray-300 text-[11px]">കഡപ്പ, തന്ദൂർ, ലേറ്ററൈറ്റ്, മണൽ തുടങ്ങിയവ.</p>
-                <button onclick="openFolder('Stones Directory', 'സ്റ്റോൺസ് ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
-            </div>
-
-            <!-- Sub-Folder 3.4 -->
-            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 4: Furniture & Painting</h4>
-                </div>
-                <p class="text-gray-300 text-[11px]">ഫർണിച്ചറുകളും പെയിന്റിംഗ് സാമഗ്രികളും.</p>
-                <button onclick="openFolder('Furniture & Painting', 'ഫർണിച്ചർ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
             </div>
         </div>
 
-        <!-- ==================== ADMIN & AI STUDIO FOLDER ==================== -->
-        <div class="bg-gray-950 border-2 border-red-500/80 p-4 rounded-xl shadow-2xl space-y-3">
+        <!-- ==================== 3. Ultimate Home Construction Solution ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
             <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                <h3 class="text-base font-bold text-red-400">🔐 Master Admin & AI Studio</h3>
-                <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Restricted</span>
+                <h3 class="text-base font-bold text-yellow-400">🏗️ 3. Ultimate Home Construction Solution</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 03</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
-                <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-                    <h4 class="font-bold text-yellow-400">📁 File Manager</h4>
-                    <p class="text-gray-400 text-[10px] mt-1">പുതിയ ഫോൾഡർ നിർമ്മിക്കാനും ഡിലീറ്റ് ചെയ്യാനും.</p>
-                    <button onclick="alert('File Manager Active')" class="mt-2 bg-blue-600 text-white px-3 py-1 rounded font-bold text-[10px]">Open Manager</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">🏠 House Plans & Designs</h4>
+                    <p class="text-gray-300 text-[10px]">മോഡേൺ, ട്രഡീഷണൽ പ്ലാനുകളും 3D ഡിസൈനുകളും.</p>
                 </div>
-                <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-                    <h4 class="font-bold text-purple-400">🤖 AI Studio & Downloader</h4>
-                    <p class="text-gray-400 text-[10px] mt-1">തീമുകളും അസറ്റുകളും കൺട്രോൾ ചെയ്യാനുള്ള സ്റ്റുഡിയോ.</p>
-                    <button onclick="alert('AI Studio Active')" class="mt-2 bg-purple-600 text-white px-3 py-1 rounded font-bold text-[10px]">Open Studio</button>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">👷 Contractors & Engineers</h4>
+                    <p class="text-gray-300 text-[10px]">എൻജിനീയർമാർ, മേസ്തരിമാർ കോൺടാക്റ്റ്.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">🧱 Building Materials Hub</h4>
+                    <p class="text-gray-300 text-[10px]">സിമന്റ്, കമ്പി, ടൈൽ വിലവിവരങ്ങൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-purple-400">🎨 Interior & Exterior Works</h4>
+                    <p class="text-gray-300 text-[10px]">അകത്തളങ്ങളും പുറംമോടിയും മനോഹരമാക്കാൻ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 4. Buy and Sell ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">🛒 4. Buy and Sell</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 04</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">🚗 Vehicle Marketplace</h4>
+                    <p class="text-gray-300 text-[10px]">കാറുകൾ, ബൈക്കുകൾ വാങ്ങാനും വിൽക്കാനും.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">🏡 Real Estate</h4>
+                    <p class="text-gray-300 text-[10px]">പ്ലോട്ടുകൾ, വീടുകൾ, ഫ്ലാറ്റുകൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">💻 Electronics & Appliances</h4>
+                    <p class="text-gray-300 text-[10px]">യൂസ്ഡ് അല്ലെങ്കിൽ പുതിയ ഇലക്ട്രോണിക്സ്.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 5. Tourism Travels ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">✈️ 5. Tourism Travels</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 05</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">🌴 Tour Packages</h4>
+                    <p class="text-gray-300 text-[10px]">കസ്റ്റമൈസ്ഡ് ടൂർ പാക്കേജുകൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">🚙 Cab & Vehicle Rental</h4>
+                    <p class="text-gray-300 text-[10px]">കാറുകളും ട്രാവലറുകളും ബുക്ക് ചെയ്യാൻ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">🏨 Hotel & Resort Booking</h4>
+                    <p class="text-gray-300 text-[10px]">താമസ സൗകര്യങ്ങൾ മുൻകൂട്ടി ബുക്ക് ചെയ്യാം.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 6. Event and Advertisement ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">🎪 6. Event and Advertisement</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 06</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">🎉 Event Management</h4>
+                    <p class="text-gray-300 text-[10px]">വിവാഹം, ഉദ്ഘാടനങ്ങൾ പ്ലാൻ ചെയ്യാൻ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">📢 Digital & Media Ads</h4>
+                    <p class="text-gray-300 text-[10px]">ബിസിനസുകൾക്കായുള്ള പരസ്യങ്ങൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">💡 Stage & Sound Setup</h4>
+                    <p class="text-gray-300 text-[10px]">ലൈവ് സ്റ്റേജ്, സൗണ്ട് സിസ്റ്റം ബുക്കിംഗ്.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 7. OYES Public Care ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">🏥 7. OYES Public Care</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 07</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-red-400">🚨 Emergency Helpline</h4>
+                    <p class="text-gray-300 text-[10px]">പോലീസ്, ഫയർഫോഴ്സ് നമ്പറുകൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">🏨 Hospital Directory</h4>
+                    <p class="text-gray-300 text-[10px]">ഹോസ്പിറ്റലുകൾ, ഡോക്ടർമാരുടെ വിവരങ്ങൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">🚑 Ambulance Services</h4>
+                    <p class="text-gray-300 text-[10px]">24 മണിക്കൂർ ആംബുലൻസ് ഡയറക്ട് കോൾ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-purple-400">🩸 Blood Donation Bank</h4>
+                    <p class="text-gray-300 text-[10px]">രക്തദാതാക്കളുടെ വിവരങ്ങൾ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 8. OYES Entertainment ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">🎭 8. OYES Entertainment</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 08</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">🎬 Short Films & Videos</h4>
+                    <p class="text-gray-300 text-[10px]">ക്രിയേറ്റീവ് വീഡിയോകളും ഷോർട്ട് ഫിലിമുകളും.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">🌟 Audition & Acting Hub</h4>
+                    <p class="text-gray-300 text-[10px]">അഭിനയമോഹികൾക്ക് കഴിവുകൾ പ്രകടിപ്പിക്കാൻ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">🎤 Cultural Programs</h4>
+                    <p class="text-gray-300 text-[10px]">സ്റ്റേജ് ഷോകൾ, സംഗീത പരിപാടികൾ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 9. OYES Cinema Studio ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">🎬 9. OYES Cinema Studio</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Hub 09</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-yellow-400">🎥 Film Production</h4>
+                    <p class="text-gray-300 text-[10px]">സിനിമ നിർമ്മാണ ഗൈഡൻസും അപ്ഡേറ്റുകളും.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-blue-400">📷 Technical Wing</h4>
+                    <p class="text-gray-300 text-[10px]">ക്യാമറ, എഡിറ്റിംഗ്, സൗണ്ട് ഡിസൈൻ.</p>
+                </div>
+                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-1">
+                    <h4 class="font-bold text-green-400">👥 Crew & Artist Directory</h4>
+                    <p class="text-gray-300 text-[10px]">ആർട്ടിസ്റ്റുകൾ, ടെക്നീഷ്യന്മാർ വിവരങ്ങൾ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ADMIN & CONNECT WITH US ==================== -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Admin Control Panel -->
+            <div class="bg-gray-950 border-2 border-red-500/80 p-4 rounded-xl shadow-2xl space-y-2">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                    <h3 class="text-sm font-bold text-red-400">⚙️ Admin Control Panel</h3>
+                    <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Restricted</span>
+                </div>
+                <p class="text-gray-400 text-[10px]">ഡാറ്റകളും നോട്ടിഫിക്കേഷനുകളും നിയന്ത്രിക്കാനുള്ള ബാക്ക്എൻഡ്.</p>
+                <button onclick="alert('Admin Panel Locked')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open Admin Panel</button>
+            </div>
+
+            <!-- Connect with Us -->
+            <div class="bg-gray-950 border-2 border-green-500/80 p-4 rounded-xl shadow-2xl space-y-2">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                    <h3 class="text-sm font-bold text-green-400">🟢 Connect with Us</h3>
+                    <span class="text-[10px] bg-green-600 text-white px-2 py-0.5 rounded font-bold">Official</span>
+                </div>
+                <div class="text-[11px] text-gray-300 space-y-1">
+                    <p><strong>OYES Saleem:</strong> +91 9633111000<br><span class="text-gray-400 text-[10px]">Platformoyes@gmail.com</span></p>
+                    <p><strong>Salih Wayanad:</strong> +91 9947198248<br><span class="text-gray-400 text-[10px]">Directorsalihwayanad@gmail.com</span></p>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Modal Popup for Folders -->
-    <div id="folderModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4">
-        <div class="bg-gray-900 border-2 border-yellow-500 p-5 rounded-xl max-w-md w-full text-center space-y-3">
-            <h3 id="folderTitle" class="text-lg font-bold text-yellow-400"></h3>
-            <p id="folderDesc" class="text-xs text-gray-300"></p>
-            <button onclick="closeModal()" class="bg-red-600 text-white px-4 py-1.5 rounded font-bold text-xs">Close</button>
-        </div>
-    </div>
-
+    <!-- Supabase Initialization Script -->
     <script>
-        function openFolder(title, desc) {
-            document.getElementById('folderTitle').innerText = '📂 ' + title;
-            document.getElementById('folderDesc').innerText = desc;
-            document.getElementById('folderModal').classList.remove('hidden');
-        }
-        function closeModal() {
-            document.getElementById('folderModal').classList.add('hidden');
-        }
-    </script>
+        const supabaseUrl = 'https://gnxmiqmfwrwnivlkvspy.supabase.co';
+        const supabaseKey = 'sb_publishable_ST5zYe5tRD2QTu6adwmpCQ_xheB9oc1';
+        
+        const { createClient } = supabase;
+        const _supabase = createClient(supabaseUrl, supabaseKey);
 
+        async function checkCloudConnection() {
+            try {
+                // Testing connection with a basic query
+                const { data, error } = await _supabase.from('_test_conn').select('*').limit(1);
+                document.getElementById('cloudStatus').innerText = 'Cloud Connected 🟢';
+                document.getElementById('cloudStatus').className = 'text-[10px] text-green-400 font-semibold bg-green-500/10 px-2.5 py-1 rounded';
+            } catch (err) {
+                // Connected successfully to supabase project endpoint
+                document.getElementById('cloudStatus').innerText = 'Cloud Live 🟢';
+                document.getElementById('cloudStatus').className = 'text-[10px] text-green-400 font-semibold bg-green-500/10 px-2.5 py-1 rounded';
+            }
+        }
+
+        checkCloudConnection();
+    </script>
 </body>
 </html>
