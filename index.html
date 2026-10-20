@@ -3,179 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OYES Super App - Functional Edition</title>
+    <title>OYES Super App - Structured Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-gray-100 font-sans p-4" id="appBody">
+<body class="bg-black text-gray-100 font-sans p-4">
 
     <div class="max-w-4xl mx-auto space-y-6">
 
-        <!-- Main Dashboard & General AI -->
+        <!-- Main Dashboard Header -->
         <div class="bg-gray-950 border-2 border-yellow-500 p-4 rounded-xl shadow-2xl flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center" id="logoContainer">
+                <div class="w-12 h-12 rounded-full border-2 border-yellow-500 overflow-hidden bg-black shadow-md flex items-center justify-center">
                     <img src="1791765607047.png" alt="OYES Logo" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">OYES Super App</span>
-                    <h1 class="text-lg font-bold text-yellow-400 mt-0.5">🌐 Main Dashboard & General AI</h1>
+                    <h1 class="text-lg font-bold text-yellow-400 mt-0.5">🌐 Main Dashboard & Multi-AI System</h1>
                 </div>
             </div>
-            <button onclick="openAI('General Home AI', 'ഹോം പേജ് ജനറൽ എഐ: എല്ലാ പൊതുവായ കാര്യങ്ങളും ചർച്ച ചെയ്യാം.')" class="bg-yellow-600 hover:bg-yellow-700 text-black px-3 py-1.5 rounded font-bold text-xs">Chat with Home AI 🤖</button>
+            <span class="text-[10px] text-green-400 font-semibold bg-green-500/10 px-2.5 py-1 rounded">Online</span>
         </div>
 
-        <!-- Hub 01: Tech & Sacred Scriptures -->
-        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg">
-            <div class="flex items-center justify-between mb-3">
+        <!-- ==================== HUB 01 FOLDER ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
                 <h3 class="text-base font-bold text-yellow-400">🧠 Hub 01: Tech & Sacred Scriptures</h3>
-                <button onclick="openAI('Hub 01 Domain AI', 'എഐ സാങ്കേതികവിദ്യയും വിശുദ്ധ ഗ്രന്ഥങ്ങളും മാത്രം ചർച്ച ചെയ്യുന്ന എഐ.')" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded text-[10px] font-bold">Hub 01 AI ↗</button>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Main Folder</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">🤖 AI Technology & History</h4>
-                        <p class="text-gray-300 text-[10px]">ചരിത്രവും രൂപീകരണവും</p>
-                    </div>
-                    <button onclick="openFolderContent('AI Technology', 'ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് ചരിത്രവും പ്രമുഖരും.')" class="bg-blue-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+
+            <!-- Sub-Folder 1.1 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 1: AI Technology & Evolution</h4>
+                    <span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
                 </div>
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">📖 Sacred Scriptures</h4>
-                        <p class="text-gray-300 text-[10px]">ഖുറാൻ, ബൈബിൾ, ഗീത, രാമായണം</p>
-                    </div>
-                    <button onclick="openFolderContent('Sacred Scriptures', 'വിശുദ്ധ ഗ്രന്ഥങ്ങളും പുസ്തക ചരിത്രവും.')" class="bg-yellow-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+                <p class="text-gray-300 text-[11px]">ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസിന്റെ രൂപീകരണം, ചരിത്രം, വികസനം & പ്രമുഖർ.</p>
+                <button onclick="openFolder('AI Technology & Evolution', 'ചരിത്രവും ഡാറ്റയും ലോഡ് ചെയ്തു.')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+            </div>
+
+            <!-- Sub-Folder 1.2 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 2: Sacred Scriptures & Book History</h4>
+                    <span class="text-[10px] text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
                 </div>
+                <p class="text-gray-300 text-[11px]">ഖുറാൻ, ബൈബിൾ, രാമായണം, ഗീത, ബുദ്ധ-ജൈന-ഷിയാ ഗ്രന്ഥങ്ങൾ & പുസ്തക ചരിത്രം.</p>
+                <button onclick="openFolder('Sacred Scriptures', 'വിശുദ്ധ ഗ്രന്ഥങ്ങളുടെ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 hover:bg-yellow-700 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
             </div>
         </div>
 
-        <!-- Hub 02: Jobs & Cleaning Service -->
-        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg">
-            <div class="flex items-center justify-between mb-3">
+        <!-- ==================== HUB 02 FOLDER ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
                 <h3 class="text-base font-bold text-yellow-400">🧹 Hub 02: Job & Cleaning Service</h3>
-                <button onclick="openAI('Hub 02 Domain AI', 'ക്ലീനിംഗ് സർവീസുകളും തൊഴിലവസരങ്ങളും മാത്രം ചർച്ച ചെയ്യുന്ന എഐ.')" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded text-[10px] font-bold">Hub 02 AI ↗</button>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Main Folder</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">✨ Cleaning Services</h4>
-                        <p class="text-gray-300 text-[10px]">വീടുകൾ, ഓഫീസുകൾ, ടാങ്ക്</p>
-                    </div>
-                    <button onclick="openFolderContent('Cleaning Services', 'എല്ലാവിധ പ്രൊഫഷണൽ ക്ലീനിംഗ് സർവീസുകൾ.')" class="bg-blue-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+
+            <!-- Sub-Folder 2.1 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 1: All Cleaning Services</h4>
+                    <span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
                 </div>
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">💼 Job Opportunities</h4>
-                        <p class="text-gray-300 text-[10px]">തൊഴിൽ അവസരങ്ങളും ഒഴിവുകളും</p>
-                    </div>
-                    <button onclick="openFolderContent('Job Opportunities', 'വിവിധ തൊഴിൽ അവസരങ്ങളുടെ ഡയറക്ടറി.')" class="bg-yellow-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+                <p class="text-gray-300 text-[11px]">വീടുകൾ, ഓഫീസുകൾ, വാട്ടർ ടാങ്ക് ക്ലീനിംഗ് സർവീസുകൾ.</p>
+                <button onclick="openFolder('Cleaning Services', 'ക്ലീനിംഗ് സർവീസ് ഫോൾഡർ തുറന്നു.')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+            </div>
+
+            <!-- Sub-Folder 2.2 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 2: Job Opportunities</h4>
+                    <span class="text-[10px] text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">Domain AI Active</span>
                 </div>
+                <p class="text-gray-300 text-[11px]">വിവിധ തൊഴിൽ അവസരങ്ങളും ഒഴിവുകളുടെ ഡയറക്ടറിയും.</p>
+                <button onclick="openFolder('Job Opportunities', 'തൊഴിൽ അവസരങ്ങളുടെ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 hover:bg-yellow-700 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
             </div>
         </div>
 
-        <!-- Hub 03: Construction Materials -->
-        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-base font-bold text-yellow-400">🏗️ Hub 03: Construction Hub</h3>
-                <button onclick="openAI('Hub 03 Domain AI', 'മാർബിൾ, ഗ്രാനൈറ്റ്, ഹാർഡ്‌വെയർ എന്നിവ മാത്രം ചർച്ച ചെയ്യുന്ന എഐ.')" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded text-[10px] font-bold">Hub 03 AI ↗</button>
+        <!-- ==================== HUB 03 FOLDER ==================== -->
+        <div class="bg-gray-900 border-2 border-yellow-500/80 p-4 rounded-xl shadow-lg space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                <h3 class="text-base font-bold text-yellow-400">🏗️ Hub 03: Construction & Materials Hub</h3>
+                <span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded font-bold">Main Folder</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">🔩 Hardware (A-Z)</h4>
-                        <p class="text-gray-300 text-[10px]">എല്ലാവിധ ഹാർഡ്‌വെയർ സാധനങ്ങളും</p>
-                    </div>
-                    <button onclick="openFolderContent('Hardware', 'ഹാർഡ്‌വെയർ സാധനങ്ങളുടെ ലിസ്റ്റ്.')" class="bg-yellow-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+
+            <!-- Sub-Folder 3.1 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 1: Hardware (A-Z)</h4>
                 </div>
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">🏛️ Marbles & Granites</h4>
-                        <p class="text-gray-300 text-[10px]">5000+ മാർബിൾ, 3960 ഗ്രാനൈറ്റ്, 1500+ ടൈൽ</p>
-                    </div>
-                    <button onclick="openFolderContent('Marbles & Granites', 'മാർബിൾ, ഗ്രാനൈറ്റ്, ടൈൽ കളക്ഷൻസ്.')" class="bg-yellow-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+                <p class="text-gray-300 text-[11px]">എല്ലാവിധ ഹാർഡ്‌വെയർ സാധനങ്ങളുടെയും വിവരങ്ങൾ.</p>
+                <button onclick="openFolder('Hardware A-Z', 'ഹാർഡ്‌വെയർ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+            </div>
+
+            <!-- Sub-Folder 3.2 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 2: Marbles, Granites, Tiles & Paving Stones</h4>
                 </div>
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">🪨 Stones</h4>
-                        <p class="text-gray-300 text-[10px]">കഡപ്പ, തന്ദൂർ, ലേറ്ററൈറ്റ്, മണൽ</p>
-                    </div>
-                    <button onclick="openFolderContent('Stones', 'കല്ലുകളും മണലും.')" class="bg-yellow-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+                <p class="text-gray-300 text-[11px]">5000+ മാർബിൾ, 3960 ഗ്രാനൈറ്റ്, 1500+ ടൈലുകൾ.</p>
+                <button onclick="openFolder('Marbles & Granites Hub', 'മാർബിൾ & ഗ്രാനൈറ്റ് ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+            </div>
+
+            <!-- Sub-Folder 3.3 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 3: Stones</h4>
                 </div>
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-yellow-400">🛋️ Furniture & Painting</h4>
-                        <p class="text-gray-300 text-[10px]">ഫർണിച്ചർ & പെയിന്റിംഗ് സാധനങ്ങൾ</p>
-                    </div>
-                    <button onclick="openFolderContent('Furniture & Painting', 'ഫർണിച്ചർ & പെയിന്റിംഗ്.')" class="bg-yellow-600 text-white px-3 py-1.5 rounded font-bold text-[11px]">Open</button>
+                <p class="text-gray-300 text-[11px]">കഡപ്പ, തന്ദൂർ, ലേറ്ററൈറ്റ്, മണൽ തുടങ്ങിയവ.</p>
+                <button onclick="openFolder('Stones Directory', 'സ്റ്റോൺസ് ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
+            </div>
+
+            <!-- Sub-Folder 3.4 -->
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700 space-y-2">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-yellow-400 text-xs">📂 Sub-Folder 4: Furniture & Painting</h4>
                 </div>
+                <p class="text-gray-300 text-[11px]">ഫർണിച്ചറുകളും പെയിന്റിംഗ് സാമഗ്രികളും.</p>
+                <button onclick="openFolder('Furniture & Painting', 'ഫർണിച്ചർ ഫോൾഡർ തുറന്നു.')" class="bg-yellow-600 text-black px-3 py-1 rounded font-bold text-[10px]">Open Folder ↗</button>
             </div>
         </div>
 
-        <!-- Admin Settings & AI Studio Panel -->
-        <div class="bg-gray-950 border-2 border-red-500/80 p-4 rounded-xl shadow-2xl text-gray-100">
-            <div class="flex items-center justify-between mb-3 border-b border-gray-800 pb-3">
+        <!-- ==================== ADMIN & AI STUDIO FOLDER ==================== -->
+        <div class="bg-gray-950 border-2 border-red-500/80 p-4 rounded-xl shadow-2xl space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2">
                 <h3 class="text-base font-bold text-red-400">🔐 Master Admin & AI Studio</h3>
                 <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Restricted</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
                 <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-                    <h4 class="font-bold text-yellow-400">📁 File Manager & Customizer</h4>
-                    <p class="text-gray-400 text-[10px] mt-1">ഫോൾഡർ ബാക്ക്ഗ്രൗണ്ട്/ഐക്കൺ മാറ്റാനും പുതിയവ നിർമ്മിക്കാനും.</p>
-                    <div class="mt-3 flex gap-2">
-                        <button onclick="manageFolders()" class="bg-blue-600 text-white px-3 py-1 rounded font-bold text-[10px]">Manage Folders</button>
-                        <button onclick="changeThemeColor()" class="bg-gray-800 text-gray-200 px-3 py-1 rounded font-bold text-[10px]">Change Theme</button>
-                    </div>
+                    <h4 class="font-bold text-yellow-400">📁 File Manager</h4>
+                    <p class="text-gray-400 text-[10px] mt-1">പുതിയ ഫോൾഡർ നിർമ്മിക്കാനും ഡിലീറ്റ് ചെയ്യാനും.</p>
+                    <button onclick="alert('File Manager Active')" class="mt-2 bg-blue-600 text-white px-3 py-1 rounded font-bold text-[10px]">Open Manager</button>
                 </div>
                 <div class="bg-gray-900 p-3 rounded-lg border border-gray-800">
-                    <h4 class="font-bold text-purple-400">🤖 Admin Update AI Studio</h4>
-                    <p class="text-gray-400 text-[10px] mt-1">അപ്ഡേഷനുകളും തീമുകളും തത്സമയം കൺട്രോൾ ചെയ്യാൻ.</p>
-                    <div class="mt-3 flex gap-2">
-                        <button onclick="openAI('Admin AI Studio', 'അഡ്മിൻ എഐ സ്റ്റുഡിയോ: ആപ്പ് കസ്റ്റമൈസേഷൻ അസിസ്റ്റന്റ്.')" class="bg-purple-600 text-white px-3 py-1 rounded font-bold text-[10px]">Open Studio</button>
-                        <button onclick="alert('Asset Downloader Connected!')" class="bg-green-600 text-white px-3 py-1 rounded font-bold text-[10px]">Download Hub</button>
-                    </div>
+                    <h4 class="font-bold text-purple-400">🤖 AI Studio & Downloader</h4>
+                    <p class="text-gray-400 text-[10px] mt-1">തീമുകളും അസറ്റുകളും കൺട്രോൾ ചെയ്യാനുള്ള സ്റ്റുഡിയോ.</p>
+                    <button onclick="alert('AI Studio Active')" class="mt-2 bg-purple-600 text-white px-3 py-1 rounded font-bold text-[10px]">Open Studio</button>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Interactive Modal / Popup System -->
-    <div id="modalBox" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4">
+    <!-- Modal Popup for Folders -->
+    <div id="folderModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4">
         <div class="bg-gray-900 border-2 border-yellow-500 p-5 rounded-xl max-w-md w-full text-center space-y-3">
-            <h3 id="modalTitle" class="text-lg font-bold text-yellow-400"></h3>
-            <p id="modalDesc" class="text-xs text-gray-300"></p>
-            <div id="modalExtra" class="my-2"></div>
+            <h3 id="folderTitle" class="text-lg font-bold text-yellow-400"></h3>
+            <p id="folderDesc" class="text-xs text-gray-300"></p>
             <button onclick="closeModal()" class="bg-red-600 text-white px-4 py-1.5 rounded font-bold text-xs">Close</button>
         </div>
     </div>
 
     <script>
-        function openAI(aiName, desc) {
-            document.getElementById('modalTitle').innerText = '🤖 ' + aiName;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('modalExtra').innerHTML = '<input type="text" placeholder="എഐയോട് ചോദിക്കുക..." class="w-full bg-black border border-gray-700 p-2 rounded text-xs text-white mt-2">';
-            document.getElementById('modalBox').classList.remove('hidden');
+        function openFolder(title, desc) {
+            document.getElementById('folderTitle').innerText = '📂 ' + title;
+            document.getElementById('folderDesc').innerText = desc;
+            document.getElementById('folderModal').classList.remove('hidden');
         }
-
-        function openFolderContent(folderName, desc) {
-            document.getElementById('modalTitle').innerText = '📂 ' + folderName;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('modalExtra').innerHTML = '<p class="text-green-400 text-xs font-semibold mt-2">ഡാറ്റ സിങ്ക് ചെയ്തു: ഫയലുകൾ ലഭ്യമാണ്.</p>';
-            document.getElementById('modalBox').classList.remove('hidden');
-        }
-
-        function manageFolders() {
-            alert('അഡ്മിൻ ഫയൽ മാനേജർ: പുതിയ ഫോൾഡർ നിർമ്മിക്കാനും ഡിലീറ്റ് ചെയ്യാനുമുള്ള കൺട്രോൾ.');
-        }
-
-        function changeThemeColor() {
-            const colors = ['bg-black', 'bg-slate-950', 'bg-zinc-950'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            document.getElementById('appBody').className = randomColor + ' text-gray-100 font-sans p-4';
-            alert('തീം മാറ്റ_ വിജയകരമായി!');
-        }
-
         function closeModal() {
-            document.getElementById('modalBox').classList.add('hidden');
+            document.getElementById('folderModal').classList.add('hidden');
         }
     </script>
 
