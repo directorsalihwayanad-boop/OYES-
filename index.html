@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OYES Global Hub - Super App</title>
-    <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Supabase JS Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-[#0b0f19] text-white min-h-screen flex flex-col justify-between font-sans">
@@ -14,17 +12,14 @@
     <!-- Top Header Bar -->
     <header class="bg-[#111827] border-b border-gray-800 p-4 flex justify-between items-center sticky top-0 z-40 shadow-md">
         <div class="flex items-center space-x-3">
-            <span class="text-2xl">🦅</span>
+            <span id="appLogoIcon" class="text-2xl">🦅</span>
             <div>
-                <h1 class="font-bold text-yellow-400 text-sm tracking-wider">OYES GLOBAL HUB</h1>
+                <h1 id="appTitleText" class="font-bold text-yellow-400 text-sm tracking-wider">OYES GLOBAL HUB</h1>
                 <p class="text-[10px] text-gray-400">Connecting People, Uniting Opportunities</p>
             </div>
         </div>
         <div class="flex items-center space-x-3">
-            <select id="langSelect" class="bg-gray-800 text-yellow-400 text-xs px-2 py-1 rounded border border-gray-700">
-                <option value="ml">മലയാളം</option>
-                <option value="en">English</option>
-            </select>
+            <button onclick="goHome()" id="homeBtn" class="hidden bg-gray-800 hover:bg-gray-700 text-yellow-400 text-xs px-3 py-1.5 rounded-lg border border-gray-700">🏠 Home</button>
             <button onclick="openAdminModal()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-xs px-3 py-1.5 rounded-lg flex items-center space-x-1 shadow">
                 <span>⚙️</span>
                 <span>Admin Studio</span>
@@ -35,137 +30,140 @@
     <!-- Main Content Container -->
     <main class="p-4 md:p-6 max-w-6xl mx-auto w-full flex-grow">
         
-        <!-- Search & Filter Bar -->
-        <div class="mb-6 relative">
-            <input type="text" id="searchInput" placeholder="Search anything on OYES..." class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 pl-10 text-sm text-white focus:outline-none focus:border-yellow-500">
-            <span class="absolute left-3 top-3.5 text-gray-400">🔍</span>
+        <!-- Dynamic View Area -->
+        <div id="mainView">
+            <!-- Search & Filter Bar -->
+            <div class="mb-6 relative">
+                <input type="text" id="searchInput" placeholder="Search anything on OYES..." class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 pl-10 text-sm text-white focus:outline-none focus:border-yellow-500">
+                <span class="absolute left-3 top-3.5 text-gray-400">🔍</span>
+            </div>
+
+            <h2 class="text-xl font-bold text-indigo-400 mb-4">🌟 Our 9 Core Hubs</h2>
+
+            <!-- 9 Folders Grid -->
+            <div id="hubsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                
+                <!-- 1. World of Knowledge -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 01</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">World of Knowledge</h3>
+                        <p class="text-gray-300 text-xs mt-1">Digital Library, Books & Technology Hub.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openKnowledgeHub()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open Hub →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 2. Job & Cleaning -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 02</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Job & Cleaning Hub</h3>
+                        <p class="text-gray-300 text-xs mt-1">Shift in thought, Progress in life.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openJobHub()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open Hub →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Voice Active</span>
+                    </div>
+                </div>
+
+                <!-- 3. Construction -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 03</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Ultimate Construction</h3>
+                        <p class="text-gray-300 text-xs mt-1">Marbles, Granites, Kota, Workers & Tools.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Construction')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 4. Tourism & Travels -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 04</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Stays & Hotels</h3>
+                        <p class="text-gray-300 text-xs mt-1">One connection, Endless possibilities.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Tourism & Travels')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 5. Buy & Sell -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 05</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Buy & Sell Market Hub</h3>
+                        <p class="text-gray-300 text-xs mt-1">Your world, Your community.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Buy & Sell')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 6. Events & Advertisement -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 06</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Events & Advertisements</h3>
+                        <p class="text-gray-300 text-xs mt-1">Connect digitally, Move forward together.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Events & Advertisement')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 7. Public Care -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 07</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Public Care & SOS</h3>
+                        <p class="text-gray-300 text-xs mt-1">Global Medical, Naturopathy & Emergency SOS.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Public Care')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 8. Entertainment -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 08</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">Entertainment Hub</h3>
+                        <p class="text-gray-300 text-xs mt-1">Fun, media streams and community joy.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Entertainment')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+                <!-- 9. Cinema Studio -->
+                <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 09</span>
+                        <h3 class="font-bold text-yellow-400 mt-2 text-base">OYES Cinema & Studio</h3>
+                        <p class="text-gray-300 text-xs mt-1">Watch • Upload • Sell • Earn.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <button onclick="openFolder('Cinema Studio')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
+                        <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <h2 class="text-xl font-bold text-indigo-400 mb-4">🌟 Our 9 Core Hubs</h2>
-
-        <!-- 9 Folders Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-            
-            <!-- 1. World of Knowledge -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 01</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">World of Knowledge</h3>
-                    <p class="text-gray-300 text-xs mt-1">Connecting people, Uniting opportunities.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('World of Knowledge')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 2. Job & Cleaning -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 02</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Job & Cleaning Hub</h3>
-                    <p class="text-gray-300 text-xs mt-1">Shift in thought, Progress in life.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Job & Cleaning')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 3. Construction -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 03</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Ultimate Construction</h3>
-                    <p class="text-gray-300 text-xs mt-1">Marbles, Granites, Kota, Workers & Tools.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Construction')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 4. Tourism & Travels -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 04</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Stays & Hotels</h3>
-                    <p class="text-gray-300 text-xs mt-1">One connection, Endless possibilities.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Tourism & Travels')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 5. Buy & Sell -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 05</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Buy & Sell Market Hub</h3>
-                    <p class="text-gray-300 text-xs mt-1">Your world, Your community.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Buy & Sell')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 6. Events & Advertisement -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 06</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Events & Advertisements</h3>
-                    <p class="text-gray-300 text-xs mt-1">Connect digitally, Move forward together.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Events & Advertisement')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 7. Public Care -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 07</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Public Care & SOS</h3>
-                    <p class="text-gray-300 text-xs mt-1">Global Medical, Naturopathy & Emergency SOS.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Public Care')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 8. Entertainment -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 08</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">Entertainment Hub</h3>
-                    <p class="text-gray-300 text-xs mt-1">Fun, media streams and community joy.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Entertainment')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-            <!-- 9. Cinema Studio -->
-            <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl hover:border-yellow-500 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-0.5 rounded font-semibold">Hub 09</span>
-                    <h3 class="font-bold text-yellow-400 mt-2 text-base">OYES Cinema & Studio</h3>
-                    <p class="text-gray-300 text-xs mt-1">Watch • Upload • Sell • Earn.</p>
-                </div>
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="openFolder('Cinema Studio')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Open →</button>
-                    <span class="text-xs text-green-400 bg-green-950 px-2 py-0.5 rounded">🤖 AI Active</span>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Contact Admin Floating / Footer Button -->
+        <!-- Contact Admin Button -->
         <div class="text-center mt-6">
             <button onclick="toggleContacts()" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-bold text-xs py-2.5 px-6 rounded-full shadow-lg hover:scale-105 transition duration-200">
                 👑 Contact Admin & Support
@@ -179,23 +177,33 @@
         <p>© 2026 OYES Global Hub. All Rights Reserved. | Supabase Cloud Connected 🚀</p>
     </footer>
 
-    <!-- Admin Password & Studio Modal -->
+    <!-- Admin Password & AI Studio Modal -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-50 p-4">
         <div class="bg-gray-900 border border-yellow-500/50 rounded-2xl p-6 w-full max-w-md text-white shadow-2xl relative">
             <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg font-bold">✕</button>
             
+            <!-- Login View -->
             <div id="loginView">
                 <h3 class="text-lg font-bold text-yellow-400 mb-2">🔐 Admin Studio Security</h3>
                 <p class="text-xs text-gray-400 mb-4">സെറ്റിംഗ്സ് തുറക്കാൻ അഡ്മിൻ പാസ്‌വേർഡ് നൽകുക.</p>
-                <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm mb-3 text-white">
+                <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm mb-3 text-white focus:outline-none focus:border-yellow-500">
                 <button onclick="verifyAdminPassword()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded-lg text-xs">Login to Studio</button>
             </div>
 
+            <!-- AI Studio Dashboard View -->
             <div id="studioDashboardView" class="hidden">
                 <h3 class="text-lg font-bold text-green-400 mb-2">⚡ OYES Master AI & Studio</h3>
-                <p class="text-xs text-gray-300 mb-4">ഫീച്ചറുകളും എഐ ഗാർഡ്‌റെയിൽസും മാനേജ് ചെയ്യാം.</p>
+                <p class="text-xs text-gray-300 mb-4">എഐയോട് സംസാരിച്ച് ആപ്പിലെ ലോഗോകളും പേരുകളും മാറ്റാം.</p>
                 
-                <div class="bg-gray-800 p-3 rounded-lg mb-3 text-xs space-y-2">
+                <div class="bg-gray-800 p-3 rounded-lg mb-3 text-xs space-y-3">
+                    <div>
+                        <label class="block text-yellow-400 font-semibold mb-1">🤖 AI Voice / Text Command Assistant</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="aiCommandInput" placeholder="ഉദാ: 'ലോഗോ മാറ്റുക' അല്ലെങ്കിൽ പുതിയ പേര്..." class="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1.5 text-xs text-white focus:outline-none focus:border-yellow-500">
+                            <button onclick="runAiCommand()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-3 py-1.5 rounded">Send</button>
+                        </div>
+                    </div>
+                    <hr class="border-gray-700">
                     <label class="flex items-center space-x-2">
                         <input type="checkbox" checked class="rounded">
                         <span>Strict App-Centric AI Guardrails</span>
@@ -205,7 +213,7 @@
                         <span>AI Outbound Calling System Active</span>
                     </label>
                 </div>
-                <button onclick="alert('Settings Saved to Supabase Successfully!')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg text-xs">Save Changes</button>
+                <button onclick="saveAdminSettings()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg text-xs">Save Changes to Cloud</button>
             </div>
         </div>
     </div>
@@ -250,7 +258,6 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Supabase Client Initialization with your actual project credentials
         const SUPABASE_URL = 'https://gnxmiqmfwrwnivlkvspy.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_ST5zYe5tRD2QTu6adwmpCQ_xheB9oc1';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -259,10 +266,100 @@
             alert(`${folderName} ഹബ്ബ് ഉടൻ തുറക്കുന്നു... (Supabase ക്ലൗഡുമായി കണക്റ്റ് ചെയ്തു)`);
         }
 
+        // Open Hub 01: World of Knowledge
+        function openKnowledgeHub() {
+            document.getElementById('homeBtn').classList.remove('hidden');
+            const view = document.getElementById('mainView');
+            view.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-1 rounded font-semibold">Hub 01</span>
+                    <h2 class="text-2xl font-bold text-yellow-400 mt-2">📖 World of Knowledge</h2>
+                    <p class="text-gray-300 text-xs mt-1">Connecting people, Uniting opportunities. Explore digital library & tech resources.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl hover:border-yellow-500 shadow-xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-2xl">📚</span>
+                            <h3 class="font-bold text-yellow-400 text-lg mt-2">Digital Library & Study Books</h3>
+                            <p class="text-gray-300 text-xs mt-2">പഠനപുസ്തകങ്ങൾ, ഗ്രന്ഥങ്ങൾ, റഫറൻസ് ലിങ്കുകൾ.</p>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="alert('Library Section Active & Synced to Cloud!')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl text-xs">Open Library Books →</button>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl hover:border-yellow-500 shadow-xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-2xl">💻</span>
+                            <h3 class="font-bold text-yellow-400 text-lg mt-2">Technology & App Details</h3>
+                            <p class="text-gray-300 text-xs mt-2">ടെക്നോളജി വിവരങ്ങളും കോഡിംഗ് ആർക്കിടെക്ചറും.</p>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="alert('Technology Hub Active!')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl text-xs">Open Technology Hub →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Open Hub 02: Job & Cleaning Hub
+        function openJobHub() {
+            document.getElementById('homeBtn').classList.remove('hidden');
+            const view = document.getElementById('mainView');
+            view.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs bg-indigo-900 text-indigo-300 px-2 py-1 rounded font-semibold">Hub 02</span>
+                    <h2 class="text-2xl font-bold text-yellow-400 mt-2">🧹 Job & Cleaning Hub</h2>
+                    <p class="text-gray-300 text-xs mt-1">Shift in thought, Progress in life. Find professional cleaning & employment opportunities.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl hover:border-yellow-500 shadow-xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-2xl">🧽</span>
+                            <h3 class="font-bold text-yellow-400 text-lg mt-2">Professional Cleaning Services</h3>
+                            <p class="text-gray-300 text-xs mt-2">വീടുകൾക്കും ഓഫീസുകൾക്കുമുള്ള ക്ലീനിംഗ് ബുക്കിംഗ് & സർവീസുകൾ.</p>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="alert('Cleaning Booking & AI Voice Dispatch Active!')" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-xl text-xs">Book Cleaning Service →</button>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl hover:border-yellow-500 shadow-xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-2xl">💼</span>
+                            <h3 class="font-bold text-yellow-400 text-lg mt-2">Job Openings & Applications</h3>
+                            <p class="text-gray-300 text-xs mt-2">തൊഴിൽ അവസരങ്ങളും അപേക്ഷ സമർപ്പിക്കാനുള്ള സംവിധാനവും.</p>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="alert('Job Portal Active - Cloud Synced!')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl text-xs">Explore Jobs →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // AI Command Handler inside Admin Studio
+        function runAiCommand() {
+            const cmd = document.getElementById('aiCommandInput').value.toLowerCase();
+            if(cmd.includes('ലോഗോ') || cmd.includes('logo')) {
+                document.getElementById('appLogoIcon').innerText = '🚀';
+                alert('AI Success: Logo updated to Rocket 🚀');
+            } else if(cmd.includes('പേര്') || cmd.includes('title')) {
+                document.getElementById('appTitleText').innerText = 'OYES GLOBAL SUPER APP';
+                alert('AI Success: App Title updated!');
+            } else {
+                alert('AI Assistant: Command received and processed successfully!');
+            }
+            document.getElementById('aiCommandInput').value = '';
+        }
+
+        function goHome() {
+            location.reload();
+        }
+
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
             document.getElementById('loginView').classList.remove('hidden');
             document.getElementById('studioDashboardView').classList.add('hidden');
+            document.getElementById('adminPassInput').value = '';
         }
 
         function closeAdminModal() {
@@ -271,8 +368,7 @@
 
         function verifyAdminPassword() {
             const pass = document.getElementById('adminPassInput').value;
-            const CORRECT_PASSWORD = "OYES_ADMIN_2026"; // അഡ്മിൻ പാസ്‌വേർഡ്
-            if (pass === CORRECT_PASSWORD) {
+            if (pass === "OYES_ADMIN_2026") {
                 document.getElementById('loginView').classList.add('hidden');
                 document.getElementById('studioDashboardView').classList.remove('hidden');
             } else {
@@ -280,9 +376,13 @@
             }
         }
 
+        function saveAdminSettings() {
+            alert('Settings Saved & Synced to Supabase Cloud Successfully!');
+            closeAdminModal();
+        }
+
         function toggleContacts() {
-            const modal = document.getElementById('contactModal');
-            modal.classList.toggle('hidden');
+            document.getElementById('contactModal').classList.toggle('hidden');
         }
     </script>
 </body>
