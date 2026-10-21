@@ -1,408 +1,57 @@
+SQL
 
-<!DOCTYPE html>
-<html lang="ml">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OYES Platform</title>
+-- OYES Global Hub: Base database setup
+-- Run this in the Supabase SQL Editor.
 
-<style>
-* {
-  box-sizing: border-box;
-}
+create table if not exists public.oyes_folders (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  description text default '',
+  icon text default '📁',
+  sort_order integer not null default 0,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #071426;
-  color: white;
-}
+create table if not exists public.oyes_settings (
+  id uuid primary key default gen_random_uuid(),
+  setting_key text not null unique,
+  setting_value jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
 
-header {
-  text-align: center;
-  padding: 25px 12px;
-  background: linear-gradient(135deg, #102a46, #06101e);
-  border-bottom: 2px solid #d6ae52;
-}
+alter table public.oyes_folders enable row level security;
+alter table public.oyes_settings enable row level security;
 
-.logo {
-  font-size: 44px;
-}
+-- Public users can read active folders.
+create policy "Anyone can read active OYES folders"
+on public.oyes_folders
+for select
+to anon, authenticated
+using (is_active = true);
 
-header h1 {
-  margin: 5px 0;
-  color: #f1cc72;
-  letter-spacing: 4px;
-}
+-- Public users can read app settings.
+create policy "Anyone can read OYES settings"
+on public.oyes_settings
+for select
+to anon, authenticated
+using (true);
 
-header p {
-  margin: 8px 0 14px;
-  font-size: 13px;
-}
+-- Initial app settings
+insert into public.oyes_settings (setting_key, setting_value)
+values
+  ('app_name', '{"en":"OYES","ml":"ഓയെസ്"}'::jsonb),
+  ('theme', '{"name":"cream-brown-gold"}'::jsonb),
+  ('storage_mode', '{"localStorage":false,"provider":"supabase"}'::jsonb)
+on conflict (setting_key) do nothing;
 
-.lang {
-  background: #d6ae52;
-  color: #071426;
-  border: none;
-  padding: 9px 18px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.container {
-  max-width: 700px;
-  margin: auto;
-  padding: 18px;
-}
-
-.welcome {
-  text-align: center;
-  margin: 12px 0 22px;
-}
-
-.welcome h2 {
-  color: #f1cc72;
-  font-size: 22px;
-}
-
-.folder {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: linear-gradient(110deg, #142b45, #0c1c30);
-  border: 1px solid #b99547;
-  border-radius: 15px;
-  padding: 17px 14px;
-  margin-bottom: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.folder:active {
-  transform: scale(0.98);
-  background: #203c59;
-}
-
-.emoji {
-  font-size: 35px;
-  min-width: 48px;
-  text-align: center;
-}
-
-.folder h3 {
-  margin: 0 0 6px;
-  color: #f1cc72;
-  font-size: 16px;
-}
-
-.folder p {
-  margin: 0;
-  color: #d1d9e4;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.arrow {
-  margin-left: auto;
-  color: #f1cc72;
-  font-size: 23px;
-}
-
-#details {
-  display: none;
-  background: #10243a;
-  border: 1px solid #d6ae52;
-  border-radius: 15px;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-#details h2 {
-  color: #f1cc72;
-  font-size: 20px;
-}
-
-.subitem {
-  background: #1a3048;
-  border-radius: 8px;
-  padding: 12px;
-  margin: 9px 0;
-  font-size: 14px;
-}
-
-.back {
-  padding: 10px 18px;
-  background: #d6ae52;
-  color: #071426;
-  border: 0;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 12px;
-  cursor: pointer;
-}
-
-footer {
-  text-align: center;
-  padding: 25px 10px;
-  color: #b7c1cf;
-  font-size: 12px;
-  border-top: 1px solid #26394c;
-  margin-top: 25px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="logo">🌍🦅</div>
-  <h1>OYES</h1>
-  <p>SALIH &amp; SALEEM STUDIO HUB</p>
-  <p id="tagline">ONE WORLD • ONE PLATFORM</p>
-  <button class="lang" onclick="changeLanguage()">
-    മലയാളം / English
-  </button>
-</header>
-
-<main class="container">
-
-  <section id="home">
-    <div class="welcome">
-      <h2 id="welcomeTitle">OYES-ലേക്ക് സ്വാഗതം</h2>
-      <p id="welcomeText">നിങ്ങളുടെ ആവശ്യങ്ങൾക്കായി അഞ്ച് പ്രധാന വിഭാഗങ്ങൾ.</p>
-    </div>
-
-    <div class="folder" onclick="openFolder(0)">
-      <div class="emoji">🌍</div>
-      <div>
-        <h3>World of Knowledge</h3>
-        <p id="desc0">Books, Scriptures, Technology & Learning</p>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="folder" onclick="openFolder(1)">
-      <div class="emoji">🏗️</div>
-      <div>
-        <h3>Ultimate Construction Solution</h3>
-        <p id="desc1">Hardware, Marble, Granite, Furniture & More</p>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="folder" onclick="openFolder(2)">
-      <div class="emoji">🎬</div>
-      <div>
-        <h3>OYES Entertainment</h3>
-        <p id="desc2">Cinema, Music, Acting & Film Production</p>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="folder" onclick="openFolder(3)">
-      <div class="emoji">🤝</div>
-      <div>
-        <h3>OYES Public Care</h3>
-        <p id="desc3">Community Help & Public Services</p>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="folder" onclick="openFolder(4)">
-      <div class="emoji">🛍️</div>
-      <div>
-        <h3>OYES Shopping &amp; Delivery</h3>
-        <p id="desc4">Products, Shopping & Delivery Services</p>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-  </section>
-
-  <section id="details">
-    <h2 id="detailTitle"></h2>
-    <p id="detailIntro"></p>
-    <div id="items"></div>
-    <button class="back" onclick="goHome()" id="backButton">
-      ← ഹോം പേജിലേക്ക് മടങ്ങുക
-    </button>
-  </section>
-
-</main>
-
-<footer>
-  <p>OYES PLATFORM</p>
-  <p>TOGETHER WE GROW 🌍</p>
-</footer>
-
-<script>
-let language = "ml";
-
-const folders = [
-  {
-    title: "World of Knowledge",
-    ml: [
-      "പുസ്തകങ്ങൾ",
-      "വിശുദ്ധഗ്രന്ഥങ്ങൾ",
-      "ഇ-ബുക്കുകളും PDF-കളും",
-      "സാങ്കേതികവിദ്യയും പഠനവും",
-      "ഓൺലൈൻ ക്ലാസുകൾ"
-    ],
-    en: [
-      "Books",
-      "Scriptures",
-      "E-Books & PDFs",
-      "Technology & Learning",
-      "Online Classes"
-    ]
-  },
-  {
-    title: "Ultimate Construction Solution",
-    ml: [
-      "Hardware & Tools",
-      "Marble Master Catalogue — OYES Marble PDF",
-      "Granite Master Catalogue — OYES Granite PDF",
-      "Furniture",
-      "Tiles & Other Materials",
-      "Construction Services"
-    ],
-    en: [
-      "Hardware & Tools",
-      "Marble Master Catalogue — OYES Marble PDF",
-      "Granite Master Catalogue — OYES Granite PDF",
-      "Furniture",
-      "Tiles & Other Materials",
-      "Construction Services"
-    ]
-  },
-  {
-    title: "OYES Entertainment",
-    ml: [
-      "മലയാളം സിനിമ",
-      "ഇന്ത്യൻ ഭാഷാ സിനിമകൾ",
-      "ഷോർട്ട് ഫിലിമുകളും ഡോക്യുമെന്ററികളും",
-      "അഭിനയവും ഓഡിഷനും",
-      "സംവിധാനവും ഫിലിം പ്രൊഡക്ഷനും",
-      "സംഗീതവും എഡിറ്റിംഗും"
-    ],
-    en: [
-      "Malayalam Cinema",
-      "Indian Language Cinema",
-      "Short Films & Documentaries",
-      "Acting & Auditions",
-      "Direction & Film Production",
-      "Music & Editing"
-    ]
-  },
-  {
-    title: "OYES Public Care",
-    ml: [
-      "സഹായം അഭ്യർഥിക്കുക",
-      "രക്തദാതാക്കളെ കണ്ടെത്തുക",
-      "വിദ്യാഭ്യാസ സഹായം",
-      "സന്നദ്ധ സേവനങ്ങൾ",
-      "കമ്മ്യൂണിറ്റി സേവനങ്ങൾ"
-    ],
-    en: [
-      "Request Help",
-      "Find Blood Donors",
-      "Education Support",
-      "Volunteer Services",
-      "Community Services"
-    ]
-  },
-  {
-    title: "OYES Shopping & Delivery",
-    ml: [
-      "ഉൽപ്പന്നങ്ങൾ വാങ്ങുക",
-      "ഉൽപ്പന്നങ്ങൾ വിൽക്കുക",
-      "കടകളും വ്യാപാരികളും",
-      "ഡെലിവറി സേവനങ്ങൾ",
-      "ഓർഡറുകൾ",
-      "വിൽപ്പനക്കാരായി രജിസ്റ്റർ ചെയ്യുക"
-    ],
-    en: [
-      "Buy Products",
-      "Sell Products",
-      "Shops & Businesses",
-      "Delivery Services",
-      "Orders",
-      "Register as Seller"
-    ]
-  }
-];
-
-function openFolder(index) {
-  const folder = folders[index];
-
-  document.getElementById("home").style.display = "none";
-  document.getElementById("details").style.display = "block";
-  document.getElementById("detailTitle").textContent = folder.title;
-
-  document.getElementById("detailIntro").textContent =
-    language === "ml"
-      ? "ഈ വിഭാഗത്തിലെ സേവനങ്ങൾ തിരഞ്ഞെടുക്കുക."
-      : "Choose a section below.";
-
-  const list = document.getElementById("items");
-  list.innerHTML = "";
-
-  const items = language === "ml" ? folder.ml : folder.en;
-
-  items.forEach(function(item) {
-    const div = document.createElement("div");
-    div.className = "subitem";
-    div.textContent = "◆  " + item;
-    list.appendChild(div);
-  });
-
-  document.getElementById("backButton").textContent =
-    language === "ml" ? "← ഹോം പേജിലേക്ക് മടങ്ങുക" : "← Back to Home";
-}
-
-function goHome() {
-  document.getElementById("details").style.display = "none";
-  document.getElementById("home").style.display = "block";
-}
-
-function changeLanguage() {
-  language = language === "ml" ? "en" : "ml";
-
-  document.getElementById("welcomeTitle").textContent =
-    language === "ml" ? "OYES-ലേക്ക് സ്വാഗതം" : "Welcome to OYES";
-
-  document.getElementById("welcomeText").textContent =
-    language === "ml"
-      ? "നിങ്ങളുടെ ആവശ്യങ്ങൾക്കായി അഞ്ച് പ്രധാന വിഭാഗങ്ങൾ."
-      : "Five main sections for your needs.";
-
-  const descriptions = language === "ml"
-    ? [
-        "പുസ്തകങ്ങൾ, പഠനം, സാങ്കേതികവിദ്യ",
-        "ഹാർഡ്‌വെയർ, മാർബിൾ, ഗ്രാനൈറ്റ്, ഫർണിച്ചർ",
-        "സിനിമ, സംഗീതം, അഭിനയം",
-        "കമ്മ്യൂണിറ്റി സഹായവും പൊതുസേവനങ്ങളും",
-        "വാങ്ങൽ, വിൽപ്പന, ഡെലിവറി"
-      ]
-    : [
-        "Books, Scriptures, Technology & Learning",
-        "Hardware, Marble, Granite, Furniture & More",
-        "Cinema, Music, Acting & Film Production",
-        "Community Help & Public Services",
-        "Products, Shopping & Delivery Services"
-      ];
-
-  descriptions.forEach(function(text, i) {
-    document.getElementById("desc" + i).textContent = text;
-  });
-
-  if (document.getElementById("details").style.display === "block") {
-    const currentTitle = document.getElementById("detailTitle").textContent;
-    const index = folders.findIndex(f => f.title === currentTitle);
-    if (index >= 0) openFolder(index);
-  }
-}
-</script>
-
-</body>
-</html>
+-- Initial five main folders
+insert into public.oyes_folders (name, description, icon, sort_order)
+values
+  ('World of Knowledge', 'Knowledge, learning and information', '🌍', 1),
+  ('Ultimate Construction Solution', 'Marble, granite, hardware and construction materials', '🏗️', 2),
+  ('OYES Entertainment', 'Cinema, film production and entertainment', '🎬', 3),
+  ('OYES Public Care', 'Public support and community services', '🤝', 4),
+  ('OYES Shopping & Delivery', 'Shopping, marketplace and delivery services', '🛍️', 5)
+on conflict do nothing;
