@@ -1,57 +1,421 @@
-SQL
+HTML
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f5efe4">
+<title>OYES — Salih &amp; Saleem Studio Hub</title>
 
--- OYES Global Hub: Base database setup
--- Run this in the Supabase SQL Editor.
+<style>
+:root {
+  --bg: #f5efe4;
+  --card: #fffaf1;
+  --text: #382719;
+  --muted: #796958;
+  --gold: #b58a45;
+  --border: #e4d4bb;
+}
+[data-theme="dark"] {
+  --bg: #211a15;
+  --card: #30251d;
+  --text: #f8eddd;
+  --muted: #d0bda6;
+  --gold: #d6ad68;
+  --border: #574434;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+.container {
+  width: min(1150px, 94%);
+  margin: auto;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #ead2a0, var(--gold));
+  font-size: 26px;
+}
+.brand h1 { margin: 0; letter-spacing: 3px; }
+.brand p { margin: 0; color: var(--muted); font-size: 12px; }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.btn.primary {
+  background: var(--gold);
+  color: #24190f;
+  font-weight: bold;
+}
+.hero {
+  padding: clamp(25px, 6vw, 65px);
+  border-radius: 24px;
+  background: linear-gradient(125deg, var(--card), #ead8b8);
+  color: #382719;
+  border: 1px solid var(--border);
+}
+.hero small {
+  color: #8b632b;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.hero h2 {
+  font-size: clamp(30px, 5vw, 55px);
+  line-height: 1.15;
+  margin: 15px 0;
+}
+.hero p { max-width: 650px; }
+.section-heading {
+  margin: 32px 0 15px;
+}
+.section-heading h2 { margin-bottom: 4px; }
+.section-heading p { color: var(--muted); margin-top: 0; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  min-width: 0;
+}
+.card .emoji { font-size: 34px; }
+.card h3 { margin: 10px 0 5px; }
+.card p { color: var(--muted); }
+.card button { margin-top: 10px; }
+.panel {
+  margin-top: 25px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--card);
+}
+.panel h2 { margin-top: 0; }
+.field { margin: 14px 0; }
+.field label { display: block; margin-bottom: 6px; }
+.field input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+.note {
+  padding: 13px;
+  border-radius: 10px;
+  background: #b58a4520;
+}
+.hidden { display: none !important; }
+footer {
+  margin-top: 35px;
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+@media (max-width: 800px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 540px) {
+  .cards { grid-template-columns: 1fr; }
+  .tools { width: 100%; }
+  .tools button { flex: 1; }
+}
+</style>
+</head>
 
-create table if not exists public.oyes_folders (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  description text default '',
-  icon text default '📁',
-  sort_order integer not null default 0,
-  is_active boolean not null default true,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
-);
+<body>
+<div class="container">
 
-create table if not exists public.oyes_settings (
-  id uuid primary key default gen_random_uuid(),
-  setting_key text not null unique,
-  setting_value jsonb not null default '{}'::jsonb,
-  updated_at timestamptz not null default now()
-);
+<header>
+  <div class="brand">
+    <div class="logo">🌍</div>
+    <div>
+      <h1>OYES</h1>
+      <p>SALIH &amp; SALEEM STUDIO HUB</p>
+    </div>
+  </div>
 
-alter table public.oyes_folders enable row level security;
-alter table public.oyes_settings enable row level security;
+  <div class="tools">
+    <button class="btn" id="languageButton">English</button>
+    <button class="btn" id="themeButton">🌙 രൂപം</button>
+    <button class="btn" id="adminButton">🔐 അഡ്മിൻ</button>
+  </div>
+</header>
 
--- Public users can read active folders.
-create policy "Anyone can read active OYES folders"
-on public.oyes_folders
-for select
-to anon, authenticated
-using (is_active = true);
+<main>
+  <section class="hero">
+    <small id="tagline">ഒരു കുടക്കീഴിൽ അനവധി സാധ്യതകൾ</small>
+    <h2 id="heroTitle">നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ അവസരങ്ങൾ.</h2>
+    <p id="heroDescription">
+      അറിവ്, നിർമ്മാണം, വിനോദം, പൊതുസേവനം,
+      ഷോപ്പിംഗ് എന്നിവയെല്ലാം ഒരിടത്ത്.
+    </p>
+    <button class="btn primary" id="exploreButton">
+      വിഭാഗങ്ങൾ കാണുക ↓
+    </button>
+  </section>
 
--- Public users can read app settings.
-create policy "Anyone can read OYES settings"
-on public.oyes_settings
-for select
-to anon, authenticated
-using (true);
+  <section id="sections">
+    <div class="section-heading">
+      <h2 id="sectionsTitle">പ്രധാന വിഭാഗങ്ങൾ</h2>
+      <p id="sectionsDescription">നിങ്ങൾക്ക് വേണ്ട ലോകം തിരഞ്ഞെടുക്കൂ.</p>
+      <button class="btn" id="viewButton">☷ പട്ടിക രൂപം</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
 
--- Initial app settings
-insert into public.oyes_settings (setting_key, setting_value)
-values
-  ('app_name', '{"en":"OYES","ml":"ഓയെസ്"}'::jsonb),
-  ('theme', '{"name":"cream-brown-gold"}'::jsonb),
-  ('storage_mode', '{"localStorage":false,"provider":"supabase"}'::jsonb)
-on conflict (setting_key) do nothing;
+  <section class="panel hidden" id="adminPanel">
+    <h2 id="adminTitle">അഡ്മിൻ പ്രവേശനം</h2>
 
--- Initial five main folders
-insert into public.oyes_folders (name, description, icon, sort_order)
-values
-  ('World of Knowledge', 'Knowledge, learning and information', '🌍', 1),
-  ('Ultimate Construction Solution', 'Marble, granite, hardware and construction materials', '🏗️', 2),
-  ('OYES Entertainment', 'Cinema, film production and entertainment', '🎬', 3),
-  ('OYES Public Care', 'Public support and community services', '🤝', 4),
-  ('OYES Shopping & Delivery', 'Shopping, marketplace and delivery services', '🛍️', 5)
-on conflict do nothing;
+    <div class="note">
+      ഇത് ഇപ്പോൾ പ്രാഥമിക രൂപമാണ്. യഥാർഥ അഡ്മിൻ പ്രവേശനം
+      പ്രവർത്തിപ്പിക്കാൻ സുരക്ഷിതമായ അക്കൗണ്ട് സംവിധാനവും
+      ഡാറ്റാബേസ് അനുമതികളും ബന്ധിപ്പിക്കണം.
+      പാസ്‌വേഡ് ഈ HTML ഫയലിൽ സൂക്ഷിക്കരുത്.
+    </div>
+
+    <div class="field">
+      <label for="adminEmail">അഡ്മിൻ ഇമെയിൽ</label>
+      <input id="adminEmail" type="email"
+             autocomplete="username"
+             placeholder="admin@example.com">
+    </div>
+
+    <div class="field">
+      <label for="adminPassword">പാസ്‌വേഡ്</label>
+      <input id="adminPassword" type="password"
+             autocomplete="current-password"
+             placeholder="പാസ്‌വേഡ്">
+    </div>
+
+    <button class="btn primary" id="loginButton">
+      പ്രവേശിക്കുക
+    </button>
+
+    <p id="loginMessage" role="status">
+      സുരക്ഷിത പ്രവേശന സംവിധാനം ഇനിയും ബന്ധിപ്പിച്ചിട്ടില്ല.
+    </p>
+
+    <button class="btn" id="closeAdminButton">അടയ്ക്കുക</button>
+  </section>
+
+  <section class="panel">
+    <h2 id="aboutTitle">OYES-നെ കുറിച്ച്</h2>
+    <p id="aboutDescription">
+      OYES ഒരു വിപുലീകരിക്കാവുന്ന ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോമാണ്.
+      പുതിയ സേവനങ്ങളും വിഭാഗങ്ങളും ഘട്ടംഘട്ടമായി ചേർക്കാം.
+    </p>
+  </section>
+</main>
+
+<footer>
+  © <span id="year"></span> OYES — Salih &amp; Saleem Studio Hub
+  <br>
+  വിശ്വാസം • സേവനം • സാധ്യതകൾ
+</footer>
+
+</div>
+
+<script>
+const sections = [
+  {
+    icon: "📚",
+    ml: "അറിവിന്റെ ലോകം",
+    en: "World of Knowledge",
+    mlDesc: "പഠനം, അറിവ്, കഴിവുകൾ, പഠനവിഭവങ്ങൾ.",
+    enDesc: "Learning, knowledge, skills and educational resources."
+  },
+  {
+    icon: "🏗️",
+    ml: "അൾട്ടിമേറ്റ് കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻ",
+    en: "Ultimate Construction Solution",
+    mlDesc: "മാർബിൾ, ഗ്രാനൈറ്റ്, ഹാർഡ്‌വെയർ, ഫർണിച്ചർ, നിർമാണ സാമഗ്രികൾ.",
+    enDesc: "Marble, granite, hardware, furniture and construction materials."
+  },
+  {
+    icon: "🎬",
+    ml: "OYES വിനോദം",
+    en: "OYES Entertainment",
+    mlDesc: "സിനിമ, ഷോർട്ട് ഫിലിം, സംഗീതം, സൃഷ്ടാക്കൾ.",
+    enDesc: "Cinema, short films, music and creators."
+  },
+  {
+    icon: "🤝",
+    ml: "OYES പൊതുസേവനം",
+    en: "OYES Public Care",
+    mlDesc: "ജോലി, അടിയന്തര സഹായം, സമൂഹ സേവനങ്ങൾ.",
+    enDesc: "Jobs, urgent help and community services."
+  },
+  {
+    icon: "🛍️",
+    ml: "OYES ഷോപ്പിംഗ് & ഡെലിവറി",
+    en: "OYES Shopping & Delivery",
+    mlDesc: "വാങ്ങൽ, വിൽപ്പന, ഉൽപ്പന്നങ്ങൾ, ഡെലിവറി.",
+    enDesc: "Buying, selling, products and delivery."
+  }
+];
+
+let english = false;
+let listView = false;
+
+const get = id => document.getElementById(id);
+
+function renderCards() {
+  get("cards").innerHTML = sections.map((section, index) => `
+    <article class="card">
+      <div class="emoji">${section.icon}</div>
+      <h3>${english ? section.en : section.ml}</h3>
+      <p>${english ? section.enDesc : section.mlDesc}</p>
+      <button class="btn" data-section="${index}">
+        ${english ? "Open section" : "വിഭാഗം തുറക്കുക"} →
+      </button>
+    </article>
+  `).join("");
+
+  get("cards").style.gridTemplateColumns =
+    listView ? "1fr" : "";
+
+  get("viewButton").textContent = listView
+    ? (english ? "▦ Grid view" : "▦ ഗ്രിഡ് രൂപം")
+    : (english ? "☷ List view" : "☷ പട്ടിക രൂപം");
+}
+
+function renderLanguage() {
+  document.documentElement.lang = english ? "en" : "ml";
+
+  get("languageButton").textContent =
+    english ? "മലയാളം" : "English";
+
+  get("themeButton").textContent =
+    english ? "🌙 Theme" : "🌙 രൂപം";
+
+  get("adminButton").textContent =
+    english ? "🔐 Admin" : "🔐 അഡ്മിൻ";
+
+  get("tagline").textContent = english
+    ? "Many possibilities, one hub"
+    : "ഒരു കുടക്കീഴിൽ അനവധി സാധ്യതകൾ";
+
+  get("heroTitle").textContent = english
+    ? "Your world. Your opportunities."
+    : "നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ അവസരങ്ങൾ.";
+
+  get("heroDescription").textContent = english
+    ? "Knowledge, construction, entertainment, public care and shopping in one place."
+    : "അറിവ്, നിർമ്മാണം, വിനോദം, പൊതുസേവനം, ഷോപ്പിംഗ് എന്നിവയെല്ലാം ഒരിടത്ത്.";
+
+  get("exploreButton").textContent = english
+    ? "Explore sections ↓"
+    : "വിഭാഗങ്ങൾ കാണുക ↓";
+
+  get("sectionsTitle").textContent = english
+    ? "Main Sections"
+    : "പ്രധാന വിഭാഗങ്ങൾ";
+
+  get("sectionsDescription").textContent = english
+    ? "Choose the section you need."
+    : "നിങ്ങൾക്ക് വേണ്ട ലോകം തിരഞ്ഞെടുക്കൂ.";
+
+  get("adminTitle").textContent = english
+    ? "Admin Sign In"
+    : "അഡ്മിൻ പ്രവേശനം";
+
+  get("aboutTitle").textContent = english
+    ? "About OYES"
+    : "OYES-നെ കുറിച്ച്";
+
+  get("aboutDescription").textContent = english
+    ? "OYES is an expandable digital platform. New services and sections can be added step by step."
+    : "OYES ഒരു വിപുലീകരിക്കാവുന്ന ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോമാണ്. പുതിയ സേവനങ്ങളും വിഭാഗങ്ങളും ഘട്ടംഘട്ടമായി ചേർക്കാം.";
+
+  renderCards();
+}
+
+get("languageButton").onclick = () => {
+  english = !english;
+  renderLanguage();
+};
+
+get("themeButton").onclick = () => {
+  const dark = document.documentElement.getAttribute("data-theme") === "dark";
+  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+};
+
+get("adminButton").onclick = () => {
+  get("adminPanel").classList.toggle("hidden");
+  get("adminPanel").scrollIntoView({ behavior: "smooth" });
+};
+
+get("closeAdminButton").onclick = () => {
+  get("adminPanel").classList.add("hidden");
+};
+
+get("viewButton").onclick = () => {
+  listView = !listView;
+  renderCards();
+};
+
+get("exploreButton").onclick = () => {
+  get("sections").scrollIntoView({ behavior: "smooth" });
+};
+
+get("cards").addEventListener("click", event => {
+  const button = event.target.closest("[data-section]");
+  if (!button) return;
+
+  const section = sections[Number(button.dataset.section)];
+  alert(
+    (english ? section.en : section.ml) + "\n\n" +
+    (english ? section.enDesc : section.mlDesc) + "\n\n" +
+    (english
+      ? "This section will be developed in the next stage."
+      : "ഈ വിഭാഗത്തിന്റെ പ്രവർത്തനങ്ങൾ അടുത്ത ഘട്ടത്തിൽ നിർമ്മിക്കും.")
+  );
+});
+
+get("loginButton").onclick = () => {
+  get("loginMessage").textContent = english
+    ? "Authentication is not connected yet. Secure authentication must be configured before admin access can work."
+    : "പ്രവേശന സംവിധാനം ഇനിയും ബന്ധിപ്പിച്ചിട്ടില്ല. സുരക്ഷിതമായ അക്കൗണ്ട് സംവിധാനം ചേർത്തശേഷമേ അഡ്മിൻ പ്രവേശനം പ്രവർത്തിക്കൂ.";
+};
+
+get("year").textContent = new Date().getFullYear();
+
+renderLanguage();
+</script>
+</body>
+</html>
