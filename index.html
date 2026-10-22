@@ -1,421 +1,347 @@
 HTML
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="ml">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5efe4">
-<title>OYES — Salih &amp; Saleem Studio Hub</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17251f">
+<title>OYES — Salih & Saleem Studio Hub</title>
 <style>
-:root {
-  --bg: #f5efe4;
-  --card: #fffaf1;
-  --text: #382719;
-  --muted: #796958;
-  --gold: #b58a45;
-  --border: #e4d4bb;
-}
-[data-theme="dark"] {
-  --bg: #211a15;
-  --card: #30251d;
-  --text: #f8eddd;
-  --muted: #d0bda6;
-  --gold: #d6ad68;
-  --border: #574434;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-}
-button {
-  font: inherit;
-  cursor: pointer;
-}
-.container {
-  width: min(1150px, 94%);
-  margin: auto;
-}
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  padding: 20px 0;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.logo {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #ead2a0, var(--gold));
-  font-size: 26px;
-}
-.brand h1 { margin: 0; letter-spacing: 3px; }
-.brand p { margin: 0; color: var(--muted); font-size: 12px; }
-.tools { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn {
-  background: var(--card);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 14px;
-}
-.btn.primary {
-  background: var(--gold);
-  color: #24190f;
-  font-weight: bold;
-}
-.hero {
-  padding: clamp(25px, 6vw, 65px);
-  border-radius: 24px;
-  background: linear-gradient(125deg, var(--card), #ead8b8);
-  color: #382719;
-  border: 1px solid var(--border);
-}
-.hero small {
-  color: #8b632b;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-.hero h2 {
-  font-size: clamp(30px, 5vw, 55px);
-  line-height: 1.15;
-  margin: 15px 0;
-}
-.hero p { max-width: 650px; }
-.section-heading {
-  margin: 32px 0 15px;
-}
-.section-heading h2 { margin-bottom: 4px; }
-.section-heading p { color: var(--muted); margin-top: 0; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 22px;
-  min-width: 0;
-}
-.card .emoji { font-size: 34px; }
-.card h3 { margin: 10px 0 5px; }
-.card p { color: var(--muted); }
-.card button { margin-top: 10px; }
-.panel {
-  margin-top: 25px;
-  padding: 22px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--card);
-}
-.panel h2 { margin-top: 0; }
-.field { margin: 14px 0; }
-.field label { display: block; margin-bottom: 6px; }
-.field input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-}
-.note {
-  padding: 13px;
-  border-radius: 10px;
-  background: #b58a4520;
-}
-.hidden { display: none !important; }
-footer {
-  margin-top: 35px;
-  padding: 22px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-}
-@media (max-width: 800px) {
-  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 540px) {
-  .cards { grid-template-columns: 1fr; }
-  .tools { width: 100%; }
-  .tools button { flex: 1; }
+:root{--bg:#f5f0e5;--panel:#fffdf7;--ink:#1c2b24;--muted:#66736b;--gold:#c49a4a;--line:#e4dac5;--deep:#17251f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,"Noto Sans Malayalam",sans-serif}
+body.dark{--bg:#101914;--panel:#19241d;--ink:#f5f0e5;--muted:#bdc7bd;--line:#354239;--deep:#0b120e}
+button,input,select{font:inherit}
+button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 13px;background:var(--panel);color:var(--ink)}
+button.primary{background:var(--deep);color:white}
+button.gold{background:var(--gold);color:#20190b}
+header{background:var(--deep);color:white;padding:14px 4%;display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:3}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-size:22px;font-weight:900}
+.brand h1{font-size:20px;margin:0;letter-spacing:2px}
+.brand p{margin:0;color:#e5d8bd;font-size:11px}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.actions button{background:#26372d;color:white;border-color:#455449;padding:8px 10px}
+main{max-width:1200px;margin:auto;padding:22px 3% 55px}
+.hero{background:linear-gradient(125deg,#17251f,#314a39 60%,#70572e);color:white;border:1px solid #927542;border-radius:24px;padding:clamp(24px,5vw,52px);position:relative;overflow:hidden}
+.hero:after{content:"🌍🦅";position:absolute;right:4%;top:15%;font-size:clamp(50px,10vw,120px);opacity:.15}
+.eyebrow{color:#e7c578;letter-spacing:2px;font-size:12px;font-weight:700}
+.hero h2{font-size:clamp(30px,5vw,52px);line-height:1.12;margin:12px 0;max-width:760px}
+.hero p{max-width:650px;color:#f1e9d8}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 14px;flex-wrap:wrap}
+.section-head h2{margin:0;font-size:23px}
+.section-head p{margin:3px 0;color:var(--muted)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.toolbar input,.toolbar select,.field input{border:1px solid var(--line);border-radius:11px;padding:11px;background:var(--panel);color:var(--ink)}
+.toolbar input{width:min(290px,100%)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
+.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}
+.card{display:flex;flex-direction:column;gap:9px;min-height:185px}
+.card .emoji{font-size:32px}
+.card h3{margin:0;font-size:18px}
+.card p{margin:0;color:var(--muted);flex:1}
+.tag,.hint{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.field{display:grid;gap:6px;margin:10px 0}
+.field input{width:100%}
+.chatlog{min-height:150px;max-height:330px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);display:flex;flex-direction:column;gap:9px}
+.bubble{padding:10px 12px;border-radius:12px;max-width:90%;white-space:pre-wrap}
+.bubble.user{background:var(--deep);color:white;align-self:flex-end}
+.bubble.bot{background:var(--panel);border:1px solid var(--line);align-self:flex-start}
+.chatrow{display:flex;gap:8px;margin-top:10px}
+.chatrow input{flex:1;min-width:0;border:1px solid var(--line);border-radius:11px;padding:11px;background:var(--panel);color:var(--ink)}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+@media(max-width:620px){
+header{align-items:flex-start;flex-direction:column}
+.hero:after{right:-10px;top:30%}
+.chatrow{flex-wrap:wrap}
+.chatrow input{flex-basis:100%}
 }
 </style>
 </head>
-
 <body>
-<div class="container">
-
 <header>
-  <div class="brand">
-    <div class="logo">🌍</div>
-    <div>
-      <h1>OYES</h1>
-      <p>SALIH &amp; SALEEM STUDIO HUB</p>
-    </div>
-  </div>
-
-  <div class="tools">
-    <button class="btn" id="languageButton">English</button>
-    <button class="btn" id="themeButton">🌙 രൂപം</button>
-    <button class="btn" id="adminButton">🔐 അഡ്മിൻ</button>
-  </div>
+<div class="brand">
+<div class="logo">O</div>
+<div><h1>OYES</h1><p>SALIH &amp; SALEEM STUDIO HUB</p></div>
+</div>
+<div class="actions">
+<button id="langBtn">മലയാളം / English</button>
+<button id="viewBtn">▦ Grid / List</button>
+<button id="themeBtn">☾ Theme</button>
+<button id="settingsBtn">⚙ Settings</button>
+</div>
 </header>
 
 <main>
-  <section class="hero">
-    <small id="tagline">ഒരു കുടക്കീഴിൽ അനവധി സാധ്യതകൾ</small>
-    <h2 id="heroTitle">നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ അവസരങ്ങൾ.</h2>
-    <p id="heroDescription">
-      അറിവ്, നിർമ്മാണം, വിനോദം, പൊതുസേവനം,
-      ഷോപ്പിംഗ് എന്നിവയെല്ലാം ഒരിടത്ത്.
-    </p>
-    <button class="btn primary" id="exploreButton">
-      വിഭാഗങ്ങൾ കാണുക ↓
-    </button>
-  </section>
+<section class="hero">
+<div class="eyebrow">ONE HUB • MANY POSSIBILITIES</div>
+<h2 id="heroTitle">നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ ജോലി. നിങ്ങളുടെ OYES.</h2>
+<p id="heroText">അറിവ്, നിർമ്മാണം, വിനോദം, പൊതുസേവനം, ഷോപ്പിംഗും ഡെലിവറിയും — എല്ലാം ഒരിടത്ത്.</p>
+<div class="cta">
+<button class="gold" id="exploreBtn">Explore OYES ↓</button>
+<button id="helpBtn">സഹായം / Help</button>
+</div>
+</section>
 
-  <section id="sections">
-    <div class="section-heading">
-      <h2 id="sectionsTitle">പ്രധാന വിഭാഗങ്ങൾ</h2>
-      <p id="sectionsDescription">നിങ്ങൾക്ക് വേണ്ട ലോകം തിരഞ്ഞെടുക്കൂ.</p>
-      <button class="btn" id="viewButton">☷ പട്ടിക രൂപം</button>
-    </div>
-    <div class="cards" id="cards"></div>
-  </section>
+<div class="section-head">
+<div>
+<h2 id="sectionsTitle">OYES ലോകം കണ്ടെത്തൂ</h2>
+<p>ഓരോ വിഭാഗത്തിനും അതിന്റേതായ ഇടമുണ്ട്.</p>
+</div>
+<div class="toolbar">
+<input id="search" placeholder="വിഭാഗങ്ങൾ തിരയുക…">
+<select id="filter">
+<option value="all">All / എല്ലാം</option>
+<option value="knowledge">Knowledge</option>
+<option value="construction">Construction</option>
+<option value="entertainment">Entertainment</option>
+<option value="care">Public Care</option>
+<option value="shopping">Shopping</option>
+</select>
+</div>
+</div>
 
-  <section class="panel hidden" id="adminPanel">
-    <h2 id="adminTitle">അഡ്മിൻ പ്രവേശനം</h2>
+<div id="sections" class="grid"></div>
 
-    <div class="note">
-      ഇത് ഇപ്പോൾ പ്രാഥമിക രൂപമാണ്. യഥാർഥ അഡ്മിൻ പ്രവേശനം
-      പ്രവർത്തിപ്പിക്കാൻ സുരക്ഷിതമായ അക്കൗണ്ട് സംവിധാനവും
-      ഡാറ്റാബേസ് അനുമതികളും ബന്ധിപ്പിക്കണം.
-      പാസ്‌വേഡ് ഈ HTML ഫയലിൽ സൂക്ഷിക്കരുത്.
-    </div>
+<section id="detail" class="panel hidden">
+<button id="backBtn">← All sections</button>
+<div class="section-head">
+<div><h2 id="detailTitle"></h2><p id="detailDesc"></p></div>
+</div>
+<div id="subs" class="grid"></div>
+<div class="panel">
+<h3 id="assistantTitle">വിഭാഗ സഹായി / Section assistant</h3>
+<p class="hint">ഡെമോ മാത്രം: യഥാർത്ഥ AI മറുപടികൾക്കായി സുരക്ഷിതമായ server-side AI ബന്ധിപ്പിക്കണം.</p>
+<div class="chatlog" id="chatlog"></div>
+<div class="chatrow">
+<input id="chatInput" placeholder="ഈ വിഭാഗത്തെക്കുറിച്ച് ചോദിക്കുക…">
+<button class="primary" id="sendBtn">Send</button>
+<button id="micBtn">🎙</button>
+</div>
+<p class="hint">മൈക്രോഫോൺ പ്രവർത്തനം browser support അനുസരിച്ചിരിക്കും.</p>
+</div>
+</section>
 
-    <div class="field">
-      <label for="adminEmail">അഡ്മിൻ ഇമെയിൽ</label>
-      <input id="adminEmail" type="email"
-             autocomplete="username"
-             placeholder="admin@example.com">
-    </div>
+<section id="settings" class="panel hidden">
+<div class="section-head">
+<div><h2>OYES Control Centre</h2><p>Online connection settings</p></div>
+<button id="closeSettings">Close</button>
+</div>
 
-    <div class="field">
-      <label for="adminPassword">പാസ്‌വേഡ്</label>
-      <input id="adminPassword" type="password"
-             autocomplete="current-password"
-             placeholder="പാസ്‌വേഡ്">
-    </div>
+<div class="split">
+<div class="panel">
+<h3>Supabase connection</h3>
+<p class="hint">Project URL-ഉം publishable/anon key-ഉം മാത്രം നൽകുക. Service-role secret ഇവിടെ ഒരിക്കലും ഇടരുത്.</p>
+<div class="field">
+<label>Project URL</label>
+<input id="sbUrl" value="https://gnxmiqmfwrwnivlkvspy.supabase.co">
+</div>
+<div class="field">
+<label>Publishable / anon key</label>
+<input id="sbKey" type="password" placeholder="Paste key">
+</div>
+<button class="primary" id="saveSb">Save for this page</button>
+<button id="testSb">Test connection</button>
+<p id="sbStatus" class="hint">ഇതുവരെ ബന്ധിപ്പിച്ചിട്ടില്ല.</p>
+</div>
 
-    <button class="btn primary" id="loginButton">
-      പ്രവേശിക്കുക
-    </button>
+<div class="panel">
+<h3>സുരക്ഷാ ക്രമീകരണങ്ങൾ</h3>
+<ul>
+<li>Supabase Auth വഴി admin sign-in.</li>
+<li>Database tables-ൽ RLS policies.</li>
+<li>Storage upload policies.</li>
+<li>AI keys-നും സുരക്ഷിത പ്രവർത്തനങ്ങൾക്കും Edge Functions.</li>
+</ul>
+<p class="hint">ഈ HTML-ൽ secure admin login, cloud file manager, persistent database, server-side AI എന്നിവ ഇപ്പോഴും ഒരുക്കിയിട്ടില്ല.</p>
+</div>
+</div>
 
-    <p id="loginMessage" role="status">
-      സുരക്ഷിത പ്രവേശന സംവിധാനം ഇനിയും ബന്ധിപ്പിച്ചിട്ടില്ല.
-    </p>
+<div class="panel">
+<h3>തുടർന്ന് ബന്ധിപ്പിക്കേണ്ട മോഡ്യൂളുകൾ</h3>
+<div class="grid">
+<article class="card">
+<div class="emoji">🗂️</div><h3>File Manager</h3>
+<p>Images, video, PDF, audio, ZIP, HTML/JS ഫയലുകൾ online upload/manage ചെയ്യൽ.</p>
+<span class="tag">BACKEND REQUIRED</span>
+</article>
+<article class="card">
+<div class="emoji">🎨</div><h3>Creative Studio</h3>
+<p>Poster, catalogue, image, video workflows.</p>
+<span class="tag">INTEGRATION REQUIRED</span>
+</article>
+<article class="card">
+<div class="emoji">✨</div><h3>AI Studio</h3>
+<p>ഓരോ വിഭാഗത്തിനും പരിധിയുള്ള text/voice assistant.</p>
+<span class="tag">SERVER REQUIRED</span>
+</article>
+<article class="card">
+<div class="emoji">☁️</div><h3>Cloud Backup</h3>
+<p>Access controls ഉള്ള online storage, backup, restore.</p>
+<span class="tag">BACKEND REQUIRED</span>
+</article>
+</div>
+</div>
+</section>
 
-    <button class="btn" id="closeAdminButton">അടയ്ക്കുക</button>
-  </section>
-
-  <section class="panel">
-    <h2 id="aboutTitle">OYES-നെ കുറിച്ച്</h2>
-    <p id="aboutDescription">
-      OYES ഒരു വിപുലീകരിക്കാവുന്ന ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോമാണ്.
-      പുതിയ സേവനങ്ങളും വിഭാഗങ്ങളും ഘട്ടംഘട്ടമായി ചേർക്കാം.
-    </p>
-  </section>
+<section id="notice" class="panel">
+<h3>Prototype status / നിലവിലെ സ്ഥിതി</h3>
+<p class="hint">Responsive UI, വിഭാഗങ്ങൾ, തിരച്ചിൽ, filter, theme, language toggle, Supabase endpoint test എന്നിവ പ്രവർത്തിക്കുന്നു. Online database, user accounts, file manager, live AI എന്നിവ സുരക്ഷിതമായി ബന്ധിപ്പിക്കുകയും പ്രത്യേകം പരിശോധിക്കുകയും വേണം.</p>
+</section>
 </main>
 
 <footer>
-  © <span id="year"></span> OYES — Salih &amp; Saleem Studio Hub
-  <br>
-  വിശ്വാസം • സേവനം • സാധ്യതകൾ
+OYES • SALIH &amp; SALEEM STUDIO HUB<br>
+താൽക്കാലിക “O” ലോഗോ — യഥാർത്ഥ വൃത്താകൃതിയിലുള്ള ലോഗോ പിന്നീട് ചേർക്കാം.
 </footer>
 
-</div>
-
 <script>
-const sections = [
-  {
-    icon: "📚",
-    ml: "അറിവിന്റെ ലോകം",
-    en: "World of Knowledge",
-    mlDesc: "പഠനം, അറിവ്, കഴിവുകൾ, പഠനവിഭവങ്ങൾ.",
-    enDesc: "Learning, knowledge, skills and educational resources."
-  },
-  {
-    icon: "🏗️",
-    ml: "അൾട്ടിമേറ്റ് കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻ",
-    en: "Ultimate Construction Solution",
-    mlDesc: "മാർബിൾ, ഗ്രാനൈറ്റ്, ഹാർഡ്‌വെയർ, ഫർണിച്ചർ, നിർമാണ സാമഗ്രികൾ.",
-    enDesc: "Marble, granite, hardware, furniture and construction materials."
-  },
-  {
-    icon: "🎬",
-    ml: "OYES വിനോദം",
-    en: "OYES Entertainment",
-    mlDesc: "സിനിമ, ഷോർട്ട് ഫിലിം, സംഗീതം, സൃഷ്ടാക്കൾ.",
-    enDesc: "Cinema, short films, music and creators."
-  },
-  {
-    icon: "🤝",
-    ml: "OYES പൊതുസേവനം",
-    en: "OYES Public Care",
-    mlDesc: "ജോലി, അടിയന്തര സഹായം, സമൂഹ സേവനങ്ങൾ.",
-    enDesc: "Jobs, urgent help and community services."
-  },
-  {
-    icon: "🛍️",
-    ml: "OYES ഷോപ്പിംഗ് & ഡെലിവറി",
-    en: "OYES Shopping & Delivery",
-    mlDesc: "വാങ്ങൽ, വിൽപ്പന, ഉൽപ്പന്നങ്ങൾ, ഡെലിവറി.",
-    enDesc: "Buying, selling, products and delivery."
-  }
+const D=[
+{id:'knowledge',e:'📚',en:'World of Knowledge',ml:'അറിവിന്റെ ലോകം',enD:'Learn, discover, read and explore useful information.',mlD:'പഠിക്കാനും വായിക്കാനും പുതിയ അറിവുകൾ കണ്ടെത്താനുമുള്ള ഇടം.',s:[['📖','Learning & Reference','പഠനവും റഫറൻസും'],['🌐','Languages & Culture','ഭാഷകളും സംസ്കാരവും'],['🧭','Guides & Useful Knowledge','മാർഗ്ഗനിർദ്ദേശങ്ങൾ']]},
+{id:'construction',e:'🏗️',en:'Ultimate Construction Solution',ml:'കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻസ്',enD:'Marble, granite, tiles, furniture, hardware and building materials.',mlD:'മാർബിൾ, ഗ്രാനൈറ്റ്, ടൈൽസ്, ഫർണിച്ചർ, ഹാർഡ്‌വെയർ, നിർമ്മാണ സാമഗ്രികൾ.',s:[['🪨','Marble & Granite','മാർബിളും ഗ്രാനൈറ്റും'],['🧱','Tiles & Stone','ടൈൽസും കല്ലുകളും'],['🪑','Furniture & Interiors','ഫർണിച്ചറും ഇന്റീരിയറും'],['🔩','Hardware & Materials','ഹാർഡ്‌വെയറും സാമഗ്രികളും']]},
+{id:'entertainment',e:'🎬',en:'OYES Entertainment',ml:'OYES വിനോദലോകം',enD:'Movies, music, games and creative entertainment.',mlD:'സിനിമ, സംഗീതം, ഗെയിമുകൾ, സൃഷ്ടിപരമായ വിനോദം.',s:[['🎥','Cinema & Film Studio','സിനിമയും ചലച്ചിത്ര സ്റ്റുഡിയോയും'],['🎵','Music & Audio','സംഗീതവും ഓഡിയോയും'],['🎮','Games','ഗെയിമുകൾ']]},
+{id:'care',e:'🤝',en:'OYES Public Care',ml:'OYES പൊതുസേവനം',enD:'Community support, useful services and public information.',mlD:'സമൂഹസഹായം, സേവനങ്ങൾ, പൊതുവിവരങ്ങൾ.',s:[['🧑‍🤝‍🧑','Community Support','സമൂഹസഹായം'],['🆘','Help & Urgent Needs','സഹായവും അടിയന്തര ആവശ്യങ്ങളും'],['📢','Public Information','പൊതുവിവരങ്ങൾ']]},
+{id:'shopping',e:'🛍️',en:'OYES Shopping & Delivery',ml:'OYES ഷോപ്പിംഗും ഡെലിവറിയും',enD:'Discover products, shops, orders and delivery services.',mlD:'ഉൽപ്പന്നങ്ങൾ, കടകൾ, ഓർഡറുകൾ, ഡെലിവറി സേവനങ്ങൾ.',s:[['🛒','Shopping Market','ഷോപ്പിംഗ് മാർക്കറ്റ്'],['🚚','Delivery Services','ഡെലിവറി സേവനങ്ങൾ'],['🏪','Shops & Sellers','കടകളും വിൽപ്പനക്കാരും']]}
 ];
 
-let english = false;
-let listView = false;
+let ml=true,list=false,current=null;
+const $=x=>document.getElementById(x);
+const name=d=>ml?d.ml:d.en;
+const description=d=>ml?d.mlD:d.enD;
 
-const get = id => document.getElementById(id);
+function render(){
+let q=$('search').value.toLowerCase();
+let f=$('filter').value;
+let a=D.filter(d=>(f==='all'||f===d.id)&&[d.en,d.ml,d.enD,d.mlD].join(' ').toLowerCase().includes(q));
+$('sections').innerHTML=a.map(d=>`
+<article class="card">
+<div class="emoji">${d.e}</div>
+<span class="tag">OYES SECTION</span>
+<h3>${name(d)}</h3>
+<p>${description(d)}</p>
+<button class="primary" data-open="${d.id}">${ml?'തുറക്കുക':'Open section'} →</button>
+</article>`).join('')||'<p>No matching sections.</p>';
 
-function renderCards() {
-  get("cards").innerHTML = sections.map((section, index) => `
-    <article class="card">
-      <div class="emoji">${section.icon}</div>
-      <h3>${english ? section.en : section.ml}</h3>
-      <p>${english ? section.enDesc : section.mlDesc}</p>
-      <button class="btn" data-section="${index}">
-        ${english ? "Open section" : "വിഭാഗം തുറക്കുക"} →
-      </button>
-    </article>
-  `).join("");
+if(list)$('sections').style.gridTemplateColumns='1fr';
+else $('sections').style.gridTemplateColumns='';
 
-  get("cards").style.gridTemplateColumns =
-    listView ? "1fr" : "";
-
-  get("viewButton").textContent = listView
-    ? (english ? "▦ Grid view" : "▦ ഗ്രിഡ് രൂപം")
-    : (english ? "☷ List view" : "☷ പട്ടിക രൂപം");
+document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>open(b.dataset.open));
 }
 
-function renderLanguage() {
-  document.documentElement.lang = english ? "en" : "ml";
-
-  get("languageButton").textContent =
-    english ? "മലയാളം" : "English";
-
-  get("themeButton").textContent =
-    english ? "🌙 Theme" : "🌙 രൂപം";
-
-  get("adminButton").textContent =
-    english ? "🔐 Admin" : "🔐 അഡ്മിൻ";
-
-  get("tagline").textContent = english
-    ? "Many possibilities, one hub"
-    : "ഒരു കുടക്കീഴിൽ അനവധി സാധ്യതകൾ";
-
-  get("heroTitle").textContent = english
-    ? "Your world. Your opportunities."
-    : "നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ അവസരങ്ങൾ.";
-
-  get("heroDescription").textContent = english
-    ? "Knowledge, construction, entertainment, public care and shopping in one place."
-    : "അറിവ്, നിർമ്മാണം, വിനോദം, പൊതുസേവനം, ഷോപ്പിംഗ് എന്നിവയെല്ലാം ഒരിടത്ത്.";
-
-  get("exploreButton").textContent = english
-    ? "Explore sections ↓"
-    : "വിഭാഗങ്ങൾ കാണുക ↓";
-
-  get("sectionsTitle").textContent = english
-    ? "Main Sections"
-    : "പ്രധാന വിഭാഗങ്ങൾ";
-
-  get("sectionsDescription").textContent = english
-    ? "Choose the section you need."
-    : "നിങ്ങൾക്ക് വേണ്ട ലോകം തിരഞ്ഞെടുക്കൂ.";
-
-  get("adminTitle").textContent = english
-    ? "Admin Sign In"
-    : "അഡ്മിൻ പ്രവേശനം";
-
-  get("aboutTitle").textContent = english
-    ? "About OYES"
-    : "OYES-നെ കുറിച്ച്";
-
-  get("aboutDescription").textContent = english
-    ? "OYES is an expandable digital platform. New services and sections can be added step by step."
-    : "OYES ഒരു വിപുലീകരിക്കാവുന്ന ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോമാണ്. പുതിയ സേവനങ്ങളും വിഭാഗങ്ങളും ഘട്ടംഘട്ടമായി ചേർക്കാം.";
-
-  renderCards();
+function bubble(w,t){
+let e=document.createElement('div');
+e.className='bubble '+w;
+e.textContent=t;
+$('chatlog').append(e);
+$('chatlog').scrollTop=$('chatlog').scrollHeight;
 }
 
-get("languageButton").onclick = () => {
-  english = !english;
-  renderLanguage();
+function open(id){
+current=D.find(d=>d.id===id);
+$('detail').classList.remove('hidden');
+$('sections').classList.add('hidden');
+$('notice').classList.add('hidden');
+$('settings').classList.add('hidden');
+$('detailTitle').textContent=name(current);
+$('detailDesc').textContent=description(current);
+
+$('subs').innerHTML=current.s.map(s=>`
+<article class="card">
+<div class="emoji">${s[0]}</div>
+<h3>${ml?s[2]:s[1]}</h3>
+<p>${ml?'ഈ ഉപവിഭാഗത്തിലെ യഥാർത്ഥ ഉള്ളടക്കം പിന്നീട് ചേർക്കാം.':'Content for this category can be added later.'}</p>
+<span class="tag">CONTENT MODULE — NOT CONNECTED</span>
+</article>`).join('');
+
+$('chatlog').innerHTML='';
+bubble('bot',ml?`നമസ്കാരം! ${current.ml} വിഭാഗത്തിനുള്ള ഡെമോ സഹായി. നിലവിൽ യഥാർത്ഥ വിഭാഗ ഡാറ്റയോ live AI-യോ ബന്ധിപ്പിച്ചിട്ടില്ല.`:`Hello! Demo assistant for ${current.en}. Real section data and live AI are not connected yet.`);
+$('detail').scrollIntoView({behavior:'smooth'});
+}
+
+$('search').oninput=render;
+$('filter').onchange=render;
+
+$('backBtn').onclick=()=>{
+$('detail').classList.add('hidden');
+$('sections').classList.remove('hidden');
+$('notice').classList.remove('hidden');
+current=null;
 };
 
-get("themeButton").onclick = () => {
-  const dark = document.documentElement.getAttribute("data-theme") === "dark";
-  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+$('sendBtn').onclick=()=>{
+let v=$('chatInput').value.trim();
+if(!v||!current)return;
+bubble('user',v);
+$('chatInput').value='';
+bubble('bot',ml?`ഈ ഡെമോയ്ക്ക് ${current.ml} വിഭാഗത്തിലെ പരിശോധിച്ച ഉള്ളടക്കം ലഭ്യമല്ല. യഥാർത്ഥ ഡാറ്റയും സുരക്ഷിത AI സേവനവും ബന്ധിപ്പിച്ചശേഷം മാത്രമേ വിശ്വസനീയമായ മറുപടി നൽകാനാകൂ.`:`This demo has no verified content for ${current.en}. Connect real section data and a secure AI service for reliable answers.`);
 };
 
-get("adminButton").onclick = () => {
-  get("adminPanel").classList.toggle("hidden");
-  get("adminPanel").scrollIntoView({ behavior: "smooth" });
+$('chatInput').onkeydown=e=>{
+if(e.key==='Enter')$('sendBtn').click();
 };
 
-get("closeAdminButton").onclick = () => {
-  get("adminPanel").classList.add("hidden");
+$('micBtn').onclick=()=>{
+let SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR){alert('ഈ ബ്രൗസറിൽ speech input ലഭ്യമല്ല.');return;}
+let r=new SR();
+r.lang=ml?'ml-IN':'en-IN';
+r.onresult=e=>$('chatInput').value=e.results[0][0].transcript;
+r.start();
 };
 
-get("viewButton").onclick = () => {
-  listView = !listView;
-  renderCards();
+$('themeBtn').onclick=()=>document.body.classList.toggle('dark');
+$('viewBtn').onclick=()=>{list=!list;render();};
+
+$('exploreBtn').onclick=()=>$('sectionsTitle').scrollIntoView({behavior:'smooth'});
+
+$('helpBtn').onclick=()=>alert('ഒരു വിഭാഗം തിരഞ്ഞെടുക്കുക. Settings-ൽ Supabase project URL/key ചേർത്ത് endpoint test ചെയ്യാം. ഇത് ഇപ്പോൾ prototype ആണ്.');
+
+$('langBtn').onclick=()=>{
+ml=!ml;
+$('heroTitle').textContent=ml?'നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ ജോലി. നിങ്ങളുടെ OYES.':'Your world. Your work. Your OYES.';
+$('heroText').textContent=ml?'അറിവ്, നിർമ്മാണം, വിനോദം, പൊതുസേവനം, ഷോപ്പിംഗും ഡെലിവറിയും — എല്ലാം ഒരിടത്ത്.':'Knowledge, construction, entertainment, public care, shopping and delivery — one accessible hub.';
+$('sectionsTitle').textContent=ml?'OYES ലോകം കണ്ടെത്തൂ':'Explore the OYES world';
+$('search').placeholder=ml?'വിഭാഗങ്ങൾ തിരയുക…':'Search sections…';
+render();
+if(current)open(current.id);
 };
 
-get("exploreButton").onclick = () => {
-  get("sections").scrollIntoView({ behavior: "smooth" });
+$('settingsBtn').onclick=()=>{
+$('settings').classList.toggle('hidden');
+$('detail').classList.add('hidden');
+$('settings').scrollIntoView({behavior:'smooth'});
 };
 
-get("cards").addEventListener("click", event => {
-  const button = event.target.closest("[data-section]");
-  if (!button) return;
+$('closeSettings').onclick=()=>$('settings').classList.add('hidden');
 
-  const section = sections[Number(button.dataset.section)];
-  alert(
-    (english ? section.en : section.ml) + "\n\n" +
-    (english ? section.enDesc : section.mlDesc) + "\n\n" +
-    (english
-      ? "This section will be developed in the next stage."
-      : "ഈ വിഭാഗത്തിന്റെ പ്രവർത്തനങ്ങൾ അടുത്ത ഘട്ടത്തിൽ നിർമ്മിക്കും.")
-  );
-});
-
-get("loginButton").onclick = () => {
-  get("loginMessage").textContent = english
-    ? "Authentication is not connected yet. Secure authentication must be configured before admin access can work."
-    : "പ്രവേശന സംവിധാനം ഇനിയും ബന്ധിപ്പിച്ചിട്ടില്ല. സുരക്ഷിതമായ അക്കൗണ്ട് സംവിധാനം ചേർത്തശേഷമേ അഡ്മിൻ പ്രവേശനം പ്രവർത്തിക്കൂ.";
+$('saveSb').onclick=()=>{
+let u=$('sbUrl').value.trim();
+let k=$('sbKey').value.trim();
+if(!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(u)||!k){
+$('sbStatus').textContent='ശരിയായ URL-ഉം publishable/anon key-ഉം നൽകുക.';
+return;
+}
+window.oyesConfig={url:u.replace(/\/$/,''),key:k};
+$('sbStatus').textContent='ഈ പേജ് സെഷനിൽ മാത്രം ക്രമീകരണം സൂക്ഷിച്ചു. Test connection അമർത്തുക.';
 };
 
-get("year").textContent = new Date().getFullYear();
+$('testSb').onclick=async()=>{
+let c=window.oyesConfig;
+if(!c){$('sbStatus').textContent='ആദ്യം URL/key save ചെയ്യുക.';return;}
+$('sbStatus').textContent='Testing…';
+try{
+let r=await fetch(c.url+'/rest/v1/',{headers:{apikey:c.key,Authorization:'Bearer '+c.key}});
+$('sbStatus').textContent=r.ok?'Endpoint പ്രതികരിച്ചു. Tables, RLS, login എന്നിവ വേറെയും ക്രമീകരിക്കണം.':'HTTP '+r.status+' — key/project പരിശോധിക്കുക.';
+}catch(e){
+$('sbStatus').textContent='ബന്ധപ്പെടാനായില്ല. URL, key, network പരിശോധിക്കുക.';
+}
+};
 
-renderLanguage();
+render();
 </script>
 </body>
 </html>
