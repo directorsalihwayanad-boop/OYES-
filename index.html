@@ -1,320 +1,376 @@
 HTML
 
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#071426">
-<title>OYES Global Hub</title>
-<style>
-:root{--bg:#071426;--panel:#102541;--gold:#e8bd58;--text:#fff;--muted:#c5d0df;--line:#6e5b31}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#193354,var(--bg) 70%);color:var(--text);font:16px Arial,"Noto Sans Malayalam",sans-serif;min-height:100vh}
-header{padding:22px 14px;text-align:center;border-bottom:1px solid var(--line)}
-.logo{margin:auto;border:2px solid var(--gold);border-radius:50%;width:68px;height:68px;display:grid;place-items:center;font-size:30px}
-h1{color:var(--gold);letter-spacing:4px;margin:8px}
-.sub{color:var(--muted)}
-nav{position:sticky;top:0;z-index:5;background:#071426ed;padding:10px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;border-bottom:1px solid var(--line)}
-button,a.btn{background:var(--panel);color:var(--gold);border:1px solid var(--gold);padding:10px 13px;border-radius:9px;cursor:pointer;text-decoration:none;font-size:14px}
-button:hover,a.btn:hover{background:var(--gold);color:var(--bg)}
-main{max-width:1150px;margin:auto;padding:16px}
-.hero{text-align:center;padding:25px 8px}
-.hero h2{color:var(--gold);font-size:clamp(24px,5vw,36px)}
-input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #65758a;background:#071426;color:white;margin:5px 0 12px}
-label{display:block;color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:15px}
-.card{background:linear-gradient(145deg,#142b47,#0b192b);border:1px solid #92753b;border-radius:14px;padding:18px;box-shadow:0 7px 20px #0003}
-.card h3,.gold{color:var(--gold)}
-.card p,.muted{color:var(--muted);line-height:1.7}
-.page{display:none}.page.active{display:block}
-.subnav{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
-.item{padding:12px 0;border-bottom:1px solid #35465b;overflow-wrap:anywhere}
-.item:last-child{border-bottom:0}
-.item h4{margin:4px 0;color:var(--gold)}
-.small{font-size:12px;color:var(--muted)}
-.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-footer{margin-top:28px;padding:24px;text-align:center;border-top:1px solid var(--line);color:var(--muted);line-height:1.8}
-.notice{border:1px solid #53657b;padding:13px;border-radius:10px;color:var(--muted);line-height:1.7;margin:12px 0}
-#toast{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);background:var(--gold);color:#071426;padding:12px 18px;border-radius:10px;display:none;z-index:20;max-width:90vw}
-@media(max-width:480px){main{padding:10px}.card{padding:14px}nav button{padding:9px;font-size:13px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <title>OYES | Salih &amp; Saleem Studio Hub</title>
+
+  <style>
+    :root {
+      --navy: #071426;
+      --gold: #ffdc70;
+      --orange: #ff9900;
+      --white: #ffffff;
+      --muted: #d3dbe7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      background: radial-gradient(ellipse at top, #263b59, var(--navy) 75%);
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 12px 20px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      background: #102541;
+      font-size: 32px;
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+      color: var(--gold);
+      letter-spacing: 5px;
+      font-size: 42px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    main {
+      width: min(1050px, 100%);
+      margin: auto;
+      padding: 15px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      height: 275px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--gold);
+      border-radius: 23px;
+      background: #102541;
+      box-shadow: 0 0 16px #ffb32630;
+      isolation: isolate;
+    }
+
+    .card.wide {
+      grid-column: 1 / -1;
+      height: 245px;
+    }
+
+    .card img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.04);
+    }
+
+    .shade {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        to top,
+        rgba(2, 10, 24, .98),
+        rgba(2, 10, 24, .12) 85%
+      );
+    }
+
+    .content {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 17px;
+      text-align: center;
+    }
+
+    .content h2 {
+      color: var(--gold);
+      font-size: clamp(13px, 2.1vw, 22px);
+      line-height: 1.25;
+      margin: 0 0 15px;
+      text-shadow: 0 2px 6px #000;
+    }
+
+    .open-button {
+      display: inline-block;
+      min-width: 145px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 30px;
+      background: linear-gradient(#ffc13e, var(--orange));
+      color: #160f03;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .open-button:hover {
+      filter: brightness(1.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    footer strong { color: var(--gold); }
+
+    .dialog {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      padding: 18px;
+      align-items: center;
+      justify-content: center;
+      background: #000b;
+    }
+
+    .dialog.visible { display: flex; }
+
+    .dialog-box {
+      width: min(520px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px;
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      background: #0c2039;
+    }
+
+    .dialog-box h2 { color: var(--gold); }
+
+    .dialog-box li,
+    .dialog-box p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .close-button {
+      float: right;
+      padding: 8px 12px;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      color: var(--gold);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    @media (min-width: 760px) {
+      .card { height: 310px; }
+      .card.wide { height: 260px; }
+    }
+
+    @media (max-width: 440px) {
+      main { padding: 10px; }
+      .cards { gap: 10px; }
+      .card { height: 225px; border-radius: 17px; }
+      .card.wide { height: 205px; }
+      .content { bottom: 12px; }
+      .content h2 { font-size: 12px; margin-bottom: 11px; }
+      .open-button { min-width: 105px; padding: 10px 13px; font-size: 14px; }
+    }
+  </style>
 </head>
+
 <body>
-<header>
- <div class="logo">🌍🦅</div>
- <h1>OYES</h1>
- <div class="sub">SALIH &amp; SALEEM STUDIO HUB</div>
- <p class="sub">Knowledge • Services • Entertainment • Shopping • Travel</p>
-</header>
+  <header>
+    <div class="logo" aria-label="OYES logo">🌍🦅</div>
+    <h1>OYES</h1>
+    <div class="subtitle">SALIH &amp; SALEEM STUDIO HUB</div>
+  </header>
 
-<nav>
- <button onclick="showPage('home')" data-ml="ഹോം" data-en="Home">ഹോം</button>
- <button onclick="showPage('knowledge')" data-ml="അറിവ്" data-en="Knowledge">അറിവ്</button>
- <button onclick="showPage('construction')" data-ml="നിർമാണം" data-en="Construction">നിർമാണം</button>
- <button onclick="showPage('entertainment')" data-ml="വിനോദം" data-en="Entertainment">വിനോദം</button>
- <button onclick="showPage('jobs')" data-ml="പൊതുസേവനം / ജോലി" data-en="Public Care / Jobs">പൊതുസേവനം / ജോലി</button>
- <button onclick="showPage('shopping')" data-ml="ഷോപ്പിങ്" data-en="Shopping">ഷോപ്പിങ്</button>
- <button onclick="showPage('travel')" data-ml="യാത്ര" data-en="Travel">യാത്ര</button>
- <button onclick="showPage('studio')" data-ml="സ്റ്റുഡിയോ" data-en="Studio">സ്റ്റുഡിയോ</button>
- <button onclick="toggleLanguage()" id="langButton">English</button>
-</nav>
+  <main>
+    <section class="cards" aria-label="OYES main sections">
 
-<main>
-<section id="home" class="page active">
- <div class="hero">
-  <h2 data-ml="ഒരു ലോകം, അനവധി സാധ്യതകൾ" data-en="One World, Endless Possibilities">ഒരു ലോകം, അനവധി സാധ്യതകൾ</h2>
-  <p class="sub" data-ml="അറിവും തൊഴിലും വിനോദവും വ്യാപാരവും യാത്രയും ഒരിടത്ത്." data-en="Knowledge, jobs, entertainment, commerce and travel in one place.">അറിവും തൊഴിലും വിനോദവും വ്യാപാരവും യാത്രയും ഒരിടത്ത്.</p>
-  <input id="globalSearch" placeholder="എല്ലാ വിഭാഗങ്ങളിലും തിരയുക..." oninput="searchAll(this.value)">
- </div>
- <div class="grid" id="homeCards"></div>
- <div class="notice">ഈ പതിപ്പിൽ ഫോമുകളും ഉള്ളടക്ക നിയന്ത്രണങ്ങളും ബ്രൗസറിൽ പ്രവർത്തിക്കുന്നു. വിവിധ ഉപകരണങ്ങളിൽ ഡാറ്റ പങ്കിടാനും സുരക്ഷിതമായി അക്കൗണ്ടുകൾ കൈകാര്യം ചെയ്യാനും Supabase ബന്ധിപ്പിക്കണം.</div>
- <div id="searchResults" class="card" style="display:none"><h3 class="gold">തിരച്ചിൽ ഫലങ്ങൾ</h3><div id="searchOutput"></div></div>
-</section>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Library and knowledge">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>WORLD OF KNOWLEDGE</h2>
+          <button class="open-button" data-section="0">Open →</button>
+        </div>
+      </article>
 
-<section id="knowledge" class="page">
- <h2 class="gold">01. World of Knowledge</h2>
- <p class="muted">പുസ്തകങ്ങൾ, പഠനം, ഗവേഷണം, ശാസ്ത്രം, സാങ്കേതികവിദ്യ.</p>
- <div class="subnav" id="knowledgeNav"></div>
- <div id="knowledgeContent" class="card"></div>
-</section>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Professional services">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>JOB VACANCIES &amp; CLEANING</h2>
+          <button class="open-button" data-section="1">Open →</button>
+        </div>
+      </article>
 
-<section id="construction" class="page">
- <h2 class="gold">02. Ultimate Construction Solution</h2>
- <p class="muted">നിർമാണ സാമഗ്രികൾ, മാർബിൾ, ഗ്രാനൈറ്റ്, ഹാർഡ്‌വെയർ, ഫർണിച്ചർ.</p>
- <div class="subnav" id="constructionNav"></div>
- <div class="row">
-  <div class="card">
-   <h3>ഉൽപ്പന്നം ചേർക്കുക</h3>
-   <form id="productForm">
-    <label>ഉൽപ്പന്നത്തിന്റെ പേര്<input name="title" required></label>
-    <label>വിഭാഗം<select name="category" id="productCategory"></select></label>
-    <label>കോഡ് / മോഡൽ<input name="code"></label>
-    <label>വില (ഐച്ഛികം)<input name="price" type="number" min="0"></label>
-    <label>അളവ് / ഫിനിഷ് / വിവരങ്ങൾ<textarea name="description" rows="3"></textarea></label>
-    <button>ഉൽപ്പന്നം ചേർക്കുക</button>
-   </form>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Home construction">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>ULTIMATE HOME<br>CONSTRUCTION SOLUTION</h2>
+          <button class="open-button" data-section="2">Open →</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Hotel and resort">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>STAYS &amp; HOTELS</h2>
+          <button class="open-button" data-section="3">Open →</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo- shopping?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Shopping market">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>BUY &amp; SELL<br>MARKET HUB</h2>
+          <button class="open-button" data-section="4">Open →</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Events and advertisements">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>EVENTS &amp;<br>ADVERTISEMENTS</h2>
+          <button class="open-button" data-section="5">Open →</button>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Cinema and film production">
+        <div class="shade"></div>
+        <div class="content">
+          <h2>OYES CINEMA &amp; STUDIO</h2>
+          <button class="open-button" data-section="6">Open →</button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer>
+    <strong>OYES — SALIH &amp; SALEEM STUDIO HUB</strong>
+    <p>Knowledge • Jobs • Construction • Hotels • Shopping • Events • Cinema</p>
+  </footer>
+
+  <div class="dialog" id="sectionDialog" role="dialog" aria-modal="true">
+    <div class="dialog-box">
+      <button class="close-button" id="closeDialog">Close ✕</button>
+      <h2 id="dialogTitle"></h2>
+      <div id="dialogContent"></div>
+    </div>
   </div>
-  <div class="card"><h3>ഉൽപ്പന്നങ്ങളുടെ പട്ടിക</h3><div id="productList"></div></div>
- </div>
-</section>
 
-<section id="entertainment" class="page">
- <h2 class="gold">03. OYES Entertainment / OYES Infinity</h2>
- <p class="muted">സിനിമ, ഹ്രസ്വചിത്രം, ഡോക്യുമെന്ററി, വെബ് സീരീസ്, സംഗീതം, ഗെയിമുകൾ.</p>
- <div class="subnav" id="entertainmentNav"></div>
- <div class="row">
-  <div class="card">
-   <h3>ഉള്ളടക്കം ചേർക്കുക</h3>
-   <form id="mediaForm">
-    <label>പേര്<input name="title" required></label>
-    <label>തരം<select name="category" id="mediaCategory"></select></label>
-    <label>ഭാഷ<input name="language" placeholder="മലയാളം / English"></label>
-    <label>വിവരണം<textarea name="description"></textarea></label>
-    <label>പോസ്റ്റർ / വീഡിയോ URL (ഐച്ഛികം)<input name="url" type="url"></label>
-    <button>ചേർക്കുക</button>
-   </form>
-  </div>
-  <div class="card"><h3>വിനോദ ഉള്ളടക്കം</h3><div id="mediaList"></div></div>
- </div>
- <div class="notice">വീഡിയോയും സിനിമയും പ്രസിദ്ധീകരിക്കുമ്പോൾ ആവശ്യമായ പകർപ്പവകാശവും അനുമതിയും ഉറപ്പാക്കണം. യഥാർഥ ടിക്കറ്റ് വിൽപ്പനയ്ക്ക് അംഗീകൃത സേവനം ബന്ധിപ്പിക്കണം.</div>
-</section>
+  <script>
+    const sections = [
+      {
+        title: "WORLD OF KNOWLEDGE",
+        items: ["Books and learning resources", "Religious and cultural texts", "Science and technology", "AI and programming", "School and college education"]
+      },
+      {
+        title: "JOB VACANCIES & CLEANING",
+        items: ["I NEED A JOB", "I NEED WORKERS", "Full-time and part-time jobs", "Daily-wage and contract jobs", "Cleaning services"]
+      },
+      {
+        title: "ULTIMATE HOME CONSTRUCTION SOLUTION",
+        items: ["Marble and granite", "Hardware and screws", "Construction materials", "Furniture and interiors", "Product catalogue"]
+      },
+      {
+        title: "STAYS & HOTELS",
+        items: ["Hotels and resorts", "Accommodation listings", "Facilities and locations", "Availability enquiries"]
+      },
+      {
+        title: "BUY & SELL MARKET HUB",
+        items: ["Browse products", "Sell products", "Product categories", "Orders and delivery"]
+      },
+      {
+        title: "EVENTS & ADVERTISEMENTS",
+        items: ["Events and announcements", "Advertising listings", "Event ticket information", "Organiser enquiries"]
+      },
+      {
+        title: "OYES CINEMA & STUDIO",
+        items: ["Movies and short films", "Documentaries and web series", "Acting and film production", "Camera, editing, sound and music", "Games and entertainment"]
+      }
+    ];
 
-<section id="jobs" class="page">
- <h2 class="gold">04. OYES Public Care</h2>
- <div class="subnav" id="jobsNav"></div>
- <div class="row">
-  <div class="card">
-   <h3>ജോലി / തൊഴിലാളി ആവശ്യം ചേർക്കുക</h3>
-   <form id="jobForm">
-    <label>തരം<select name="kind"><option>എനിക്ക് ജോലി വേണം</option><option>എനിക്ക് തൊഴിലാളികളെ വേണം</option></select></label>
-    <label>ജോലി / തൊഴിൽ പേര്<input name="title" required></label>
-    <label>സ്ഥലം<input name="location" required></label>
-    <label>ശമ്പളം / വേതനം<input name="salary"></label>
-    <label>ജോലി സമയം / പരിചയം<input name="hours"></label>
-    <label>വിശദാംശങ്ങൾ<textarea name="description"></textarea></label>
-    <button>വിവരം ചേർക്കുക</button>
-   </form>
-  </div>
-  <div class="card"><h3>തൊഴിൽ വിവരങ്ങൾ</h3><div id="jobList"></div></div>
- </div>
-</section>
+    const dialog = document.getElementById("sectionDialog");
+    const title = document.getElementById("dialogTitle");
+    const content = document.getElementById("dialogContent");
 
-<section id="shopping" class="page">
- <h2 class="gold">05. OYES Shopping &amp; Delivery</h2>
- <div class="subnav" id="shoppingNav"></div>
- <div class="row">
-  <div class="card">
-   <h3>വിൽപ്പനയ്ക്കുള്ള ഉൽപ്പന്നം ചേർക്കുക</h3>
-   <form id="shopForm">
-    <label>ഉൽപ്പന്നം<input name="title" required></label>
-    <label>വില<input name="price" type="number" min="0" required></label>
-    <label>വിവരണം<textarea name="description"></textarea></label>
-    <button>ഉൽപ്പന്നം ചേർക്കുക</button>
-   </form>
-  </div>
-  <div class="card"><h3>വിൽപ്പന പട്ടിക</h3><div id="shopList"></div></div>
- </div>
-</section>
+    document.querySelectorAll("[data-section]").forEach(button => {
+      button.addEventListener("click", () => {
+        const section = sections[Number(button.dataset.section)];
+        title.textContent = section.title;
 
-<section id="travel" class="page">
- <h2 class="gold">06. OYES Travel Hub</h2>
- <div class="subnav" id="travelNav"></div>
- <div class="card">
-  <h3>യാത്രാ തിരച്ചിൽ ഫോം</h3>
-  <form id="travelForm">
-   <div class="row">
-    <label>യാത്രാ രീതി<select name="mode"><option>ബസ്</option><option>ട്രെയിൻ</option></select></label>
-    <label>പുറപ്പെടുന്ന സ്ഥലം<input name="origin" required></label>
-    <label>ലക്ഷ്യസ്ഥാനം<input name="destination" required></label>
-    <label>യാത്രാ തീയതി<input name="date" type="date" required></label>
-   </div>
-   <button>തിരച്ചിൽ വിവരങ്ങൾ സൂക്ഷിക്കുക</button>
-  </form>
-  <div id="travelList"></div>
-  <div class="notice">இந்தத் தேடல் படிவம் பயண விவரங்களை மட்டும் சேமிக்கிறது; நேரடி பேருந்து/ரயில் அட்டவணை, இருக்கை இருப்பு, கட்டணம் அல்லது டிக்கெட் உறுதிப்படுத்தலை வழங்காது. அவற்றிற்கு அங்கீகரிக்கப்பட்ட முன்பதிவு சேவை தேவை.</div>
- </div>
-</section>
+        const list = document.createElement("ul");
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
 
-<section id="studio" class="page">
- <h2 class="gold">OYES Studio</h2>
- <p class="muted">ഈ ബ്രൗസറിൽ സൃഷ്ടിച്ച ഉള്ളടക്കം നിയന്ത്രിക്കുക. ഇത് സുരക്ഷിത അഡ്മിൻ ലോഗിൻ അല്ല; പ്രസിദ്ധീകരണത്തിന് മുമ്പ് അനുമതി സംവിധാനം ബന്ധിപ്പിക്കണം.</p>
- <div class="row">
-  <div class="card">
-   <h3>പേജ് ഉള്ളടക്കം ചേർക്കുക</h3>
-   <form id="studioForm">
-    <label>തലക്കെട്ട്<input name="title" required></label>
-    <label>വിഭാഗം<select name="category"><option>അറിയിപ്പ്</option><option>പൊതുവിവരം</option><option>പരിപാടി</option></select></label>
-    <label>വിവരം<textarea name="description" rows="4" required></textarea></label>
-    <button>ഉള്ളടക്കം സംരക്ഷിക്കുക</button>
-   </form>
-  </div>
-  <div class="card">
-   <h3>സംരക്ഷിച്ച ഉള്ളടക്കം</h3>
-   <div id="studioList"></div>
-   <button onclick="exportData()">தரவைப் பதிவிறக்கு (JSON)</button>
-   <button onclick="clearData()">இந்த உலாவித் தரவை அழி</button>
-  </div>
- </div>
- <div class="notice">ഇവിടെ അഡ്മിൻ പാസ്‌വേഡ് സജ്ജീകരിച്ചിട്ടില്ല. യഥാർഥ അഡ്മിൻ സുരക്ഷയ്ക്കായി സെർവർ ഭാഗത്തുള്ള അനുമതി പരിശോധനയും Supabase RLS-ഉം വേണം.</div>
-</section>
-</main>
+        content.replaceChildren(list);
 
-<footer>
- <strong class="gold">OYES — Salih &amp; Saleem Studio Hub</strong>
- <p>Directors: Salih Wayanad &amp; OYES Saleem</p>
- <p>അറിവിനും സേവനങ്ങൾക്കും വ്യാപാരത്തിനും യാത്രയ്ക്കുമായി ഒരൊറ്റ വേദി.</p>
-</footer>
-<div id="toast"></div>
+        const note = document.createElement("p");
+        note.textContent = "ഈ വിഭാഗത്തിന്റെ പൂർണ ഉപപേജുകളും ഡാറ്റാ പ്രവർത്തനങ്ങളും വേർതിരിച്ച് ബന്ധിപ്പിക്കേണ്ടതാണ്.";
+        content.appendChild(note);
 
-<script>
-const $=id=>document.getElementById(id);
-const categories={
- knowledge:["പുസ്തകങ്ങൾ","മതഗ്രന്ഥങ്ങൾ","സ്കൂൾ പഠനം","കോളേജ് പഠനം","ശാസ്ത്രം","സാങ്കേതികവിദ്യ","AI / പ്രോഗ്രാമിങ്","ഭാഷകൾ","ഗവേഷണം"],
- construction:["ഹാർഡ്‌വെയർ","സ്ക്രൂകളും ഫാസ്റ്റനറുകളും","മാർബിൾ","ഗ്രാനൈറ്റ്","പ്രകൃതികല്ലുകൾ","ഫർണിച്ചർ","ടൈൽസ്","സിമന്റ്","നിർമാണ സാമഗ്രികൾ","ഇന്റീരിയർ ഡിസൈൻ"],
- entertainment:["മലയാളം","മറ്റ് ഇന്ത്യൻ ഭാഷകൾ","അന്താരാഷ്ട്രം","സിനിമ","ഹ്രസ്വചിത്രം","ഡോക്യുമെന്ററി","വെബ് സീരീസ്","സംഗീതം","ഗെയിമുകൾ","പരിപാടികൾ","സിനിമാ ടിക്കറ്റ്"],
- jobs:["എനിക്ക് ജോലി വേണം","എനിക്ക് തൊഴിലാളികളെ വേണം","പൂർണസമയം","ഭാഗികസമയം","ദിവസവേതനം","കരാർ ജോലി","താൽക്കാലിക ജോലി","ഫ്രീലാൻസ്","വിദേശ ജോലി"],
- shopping:["എല്ലാ ഉൽപ്പന്നങ്ങളും","വീട്","നിർമാണം","വസ്ത്രം","ഇലക്ട്രോണിക്സ്","ഭക്ഷണം","ഡെലിവറി"],
- travel:["ബസ്","ട്രെയിൻ","യാത്രാ വിവരങ്ങൾ","ബുക്കിങ് ചരിത്രം","റദ്ദാക്കൽ / റീഫണ്ട്"]
-};
-const storeKey="oyes_global_hub_v1";
-let db;
-try{db=JSON.parse(localStorage.getItem(storeKey)||"{}")}catch(e){db={}}
-["products","media","jobs","shop","travel","studio"].forEach(k=>{if(!Array.isArray(db[k]))db[k]=[]});
-function save(){try{localStorage.setItem(storeKey,JSON.stringify(db))}catch(e){toast("സംരക്ഷിക്കാൻ കഴിഞ്ഞില്ല. ബ്രൗസർ സംഭരണം പരിശോധിക്കുക.")}}
-function toast(s){$("toast").textContent=s;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2600)}
-function showPage(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- if($(id))$(id).classList.add("active");
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function cardLink(id,title,desc){return `<article class="card"><h3>${esc(title)}</h3><p>${esc(desc)}</p><button onclick="showPage('${id}')">തുറക്കുക / Open</button></article>`}
-$("homeCards").innerHTML=[
-["knowledge","01. World of Knowledge","പുസ്തകങ്ങൾ, പഠനം, ശാസ്ത്രം, AI."],
-["construction","02. Construction Solution","മാർബിൾ, ഹാർഡ്‌വെയർ, നിർമാണ സാമഗ്രികൾ."],
-["entertainment","03. OYES Entertainment","സിനിമ, സംഗീതം, ഗെയിമുകൾ."],
-["jobs","04. OYES Public Care","തൊഴിൽ, തൊഴിലാളികൾ, പൊതുസേവനം."],
-["shopping","05. Shopping & Delivery","ഉൽപ്പന്നങ്ങൾ, ഓർഡർ വിവരങ്ങൾ."],
-["travel","06. OYES Travel Hub","ബസ്, ട്രെയിൻ യാത്രാ വിവരങ്ങൾ."]
-].map(x=>cardLink(...x)).join("");
-function makeNav(key,element,contentId){
- $(element).innerHTML=categories[key].map(c=>`<button type="button" onclick="pickCategory('${key}',${JSON.stringify(c)},'${contentId}')">${esc(c)}</button>`).join("");
-}
-function pickCategory(key,c,id){
- $(id).innerHTML=`<h3 class="gold">${esc(c)}</h3><p>ഈ ഉപവിഭാഗത്തിൽ ബന്ധപ്പെട്ട വിവരങ്ങൾ ചേർക്കാം. ലഭ്യമായ ഉള്ളടക്കം താഴെ കാണാം.</p>`;
- if(key==="construction"){$("productCategory").value=c;renderProducts()}
- if(key==="entertainment"){$("mediaCategory").value=c;renderMedia()}
- if(key==="jobs"){$("jobForm").elements.kind.value=c;renderJobs()}
- if(key==="shopping")renderShop();
- if(key==="travel"){$("travelForm").elements.mode.value=c==="ട്രെയിൻ"?"ട്രെയിൻ":"ബസ്";renderTravel()}
-}
-makeNav("knowledge","knowledgeNav","knowledgeContent");
-makeNav("construction","constructionNav","construction");
-makeNav("entertainment","entertainmentNav","entertainment");
-makeNav("jobs","jobsNav","jobs");
-makeNav("shopping","shoppingNav","shopping");
-makeNav("travel","travelNav","travel");
-$("productCategory").innerHTML=categories.construction.map(c=>`<option>${esc(c)}</option>`).join("");
-$("mediaCategory").innerHTML=categories.entertainment.map(c=>`<option>${esc(c)}</option>`).join("");
-function listHTML(items,removeFn){
- if(!items.length)return '<p class="muted">ഇതുവരെ വിവരങ്ങളൊന്നുമില്ല.</p>';
- return items.map((x,i)=>`<div class="item"><h4>${esc(x.title||x.kind||x.mode||"വിവരം")}</h4><p>${esc(x.description||"")}</p>${x.category?`<p class="small">വിഭാഗം: ${esc(x.category)}</p>`:""}${x.location?`<p>സ്ഥലം: ${esc(x.location)}</p>`:""}${x.salary?`<p>വേതനം: ${esc(x.salary)}</p>`:""}${x.price!==undefined&&x.price!==""?`<p>വില: ₹${esc(x.price)}</p>`:""}${x.origin?`<p>${esc(x.origin)} → ${esc(x.destination)} · ${esc(x.date)} · ${esc(x.mode)}</p>`:""}${x.url&&/^https?:\/\//i.test(x.url)?`<p><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">ലിങ്ക് തുറക്കുക</a></p>`:""}<button onclick="${removeFn}(${i})">നീക്കം ചെയ്യുക</button></div>`).join("");
-}
-function renderProducts(){$("productList").innerHTML=listHTML(db.products,"removeProduct")}
-function renderMedia(){$("mediaList").innerHTML=listHTML(db.media,"removeMedia")}
-function renderJobs(){$("jobList").innerHTML=listHTML(db.jobs,"removeJob")}
-function renderShop(){$("shopList").innerHTML=listHTML(db.shop,"removeShop")}
-function renderTravel(){$("travelList").innerHTML=listHTML(db.travel,"removeTravel")}
-function renderStudio(){$("studioList").innerHTML=listHTML(db.studio,"removeStudio")}
-function addForm(id,key,extra={}){
- $(id).addEventListener("submit",e=>{
-  e.preventDefault();
-  const f=new FormData(e.target),obj=Object.fromEntries(f.entries());
-  db[key].unshift({...obj,...extra,createdAt:new Date().toISOString()});
-  save();e.target.reset();refresh();toast("വിവരങ്ങൾ ഈ ബ്രൗസറിൽ സംരക്ഷിച്ചു.");
- });
-}
-addForm("productForm","products");
-addForm("mediaForm","media");
-addForm("jobForm","jobs");
-addForm("shopForm","shop");
-addForm("travelForm","travel");
-addForm("studioForm","studio");
-function removeAt(key,i){if(!confirm("ഈ വിവരം നീക്കം ചെയ്യണോ?"))return;db[key].splice(i,1);save();refresh();toast("വിവരം നീക്കം ചെയ്തു.")}
-function removeProduct(i){removeAt("products",i)}
-function removeMedia(i){removeAt("media",i)}
-function removeJob(i){removeAt("jobs",i)}
-function removeShop(i){removeAt("shop",i)}
-function removeTravel(i){removeAt("travel",i)}
-function removeStudio(i){removeAt("studio",i)}
-function refresh(){renderProducts();renderMedia();renderJobs();renderShop();renderTravel();renderStudio()}
-function searchAll(q){
- q=q.trim().toLowerCase();
- const out=$("searchResults");if(!q){out.style.display="none";return}
- const found=[];
- Object.entries({products:db.products,media:db.media,jobs:db.jobs,shop:db.shop,travel:db.travel,studio:db.studio}).forEach(([k,arr])=>arr.forEach(x=>{
-  if(JSON.stringify(x).toLowerCase().includes(q))found.push({...x,_kind:k});
- }));
- out.style.display="block";
- $("searchOutput").innerHTML=found.length?found.map(x=>`<div class="item"><h4>${esc(x.title||x.kind||x.mode||x._kind)}</h4><p>${esc(x.description||x.location||"")}</p></div>`).join(""):"<p>ഈ തിരച്ചിലിന് പൊരുത്തമുള്ള സംരക്ഷിച്ച വിവരങ്ങളില്ല.</p>";
-}
-let english=false;
-function toggleLanguage(){
- english=!english;
- document.querySelectorAll("[data-ml][data-en]").forEach(el=>el.textContent=english?el.dataset.en:el.dataset.ml);
- $("langButton").textContent=english?"മലയാളം":"English";
-}
-function exportData(){
- const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob);const a=document.createElement("a");
- a.href=url;a.download="oyes-local-data.json";a.click();URL.revokeObjectURL(url);
-}
-function clearData(){
- if(!confirm("ഈ ബ്രൗസറിൽ OYES-നായി സംരക്ഷിച്ച എല്ലാ വിവരങ്ങളും മായ്ക്കണോ?"))return;
- db={products:[],media:[],jobs:[],shop:[],travel:[],studio:[]};save();refresh();toast("ബ്രൗസറിലെ OYES വിവരങ്ങൾ മായ്ച്ചു.");
-}
-refresh();
-</script>
+        dialog.classList.add("visible");
+      });
+    });
+
+    function closeDialog() {
+      dialog.classList.remove("visible");
+    }
+
+    document.getElementById("closeDialog").addEventListener("click", closeDialog);
+
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog) closeDialog();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeDialog();
+    });
+  </script>
 </body>
 </html>
