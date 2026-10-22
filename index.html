@@ -1,31 +1,192 @@
-JavaScript
-{
-  title: "Bhagavad Gita – பகவத்கீதை",
-  category: "Indian Spiritual Texts",
-  language: "Sanskrit, English, Hindi",
-  url: "https://heritage.iitk.ac.in/"
-},
-{
-  title: "Upanishads – உபநிடதங்கள்",
-  category: "Indian Spiritual Texts",
-  language: "Sanskrit, English, Hindi",
-  url: "https://vedicheritage.gov.in/upanishads/"
-},
-{
-  title: "Mahabharata – மகாபாரதம்",
-  category: "Indian Epics",
-  language: "Sanskrit",
-  url: "https://bombay.indology.info/mahabharata/welcome.html"
-},
-{
-  title: "Jain Sacred Literature – ஜைன சமய நூல்கள்",
-  category: "Jainism",
-  language: "English",
-  url: "https://www.jaina.org/page/FundamentalsLit"
-},
-{
-  title: "Guru Granth Sahib – குரு கிரந்த் சாஹிப்",
-  category: "Sikhism",
-  language: "Punjabi, English",
-  url: "https://www.srigranth.org/"
+HTML
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OYES | Salih & Saleem Studio Hub</title>
+<style>
+:root{--navy:#0b1530;--gold:#e2bd69;--panel:#182541;--text:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--text);font-family:Arial,"Noto Sans Malayalam",sans-serif;line-height:1.6}
+header{padding:20px;background:#070d1c;border-bottom:2px solid var(--gold);text-align:center}
+.logo{font-size:38px}
+h1,h2{color:var(--gold)}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:12px}
+button,a.btn{background:var(--gold);color:#10182a;border:0;border-radius:9px;padding:10px 14px;font-weight:bold;cursor:pointer;text-decoration:none}
+main{max-width:1000px;margin:auto;padding:14px}
+.hero,.panel,.card{background:var(--panel);border:1px solid #58617a;border-radius:14px;padding:18px;margin:12px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+input,textarea,select{width:100%;padding:11px;margin:5px 0 12px;border-radius:8px;border:1px solid #8d96aa;background:#0b1530;color:white}
+.item{border:1px solid #65708a;padding:12px;margin:8px 0;border-radius:9px;overflow-wrap:anywhere}
+.hidden{display:none}
+small{color:#cbd3e5}
+footer{text-align:center;padding:25px;color:#d8dced}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🌍🦅</div>
+<h1>OYES</h1>
+<strong>SALIH & SALEEM STUDIO HUB</strong>
+<p>നിങ്ങളുടെ ലോകം. നിങ്ങളുടെ അവസരങ്ങൾ.</p>
+</header>
+
+<nav>
+<button onclick="show('home')">ഹോം</button>
+<button onclick="show('knowledge')">അറിവ്</button>
+<button onclick="show('jobs')">ജോലി</button>
+<button onclick="show('market')">മാർക്കറ്റ്</button>
+<button onclick="show('infinity')">സിനിമ</button>
+<button onclick="show('services')">മറ്റ് സേവനങ്ങൾ</button>
+</nav>
+
+<main>
+<section id="home" class="panel">
+<div class="hero">
+<h2>OYES — ഒരിടത്ത് അനവധി സാധ്യതകൾ</h2>
+<p>അറിവ്, ജോലി, വ്യാപാരം, സിനിമ, നിർമ്മാണം, താമസം, പൊതുസേവനം എന്നിവയ്ക്കുള്ള നിങ്ങളുടെ ഡിജിറ്റൽ കേന്ദ്രം.</p>
+<button onclick="show('jobs')">ജോലി വിഭാഗത്തിലേക്ക് പോകുക</button>
+</div>
+<div class="cards">
+<div class="card"><h3>📚 അറിവിന്റെ ലോകം</h3><p>പഠനവിഭവങ്ങളും ഗ്രന്ഥ ലിങ്കുകളും.</p><button onclick="show('knowledge')">തുറക്കുക</button></div>
+<div class="card"><h3>🧰 NEED & URGENT</h3><p>ജോലി അന്വേഷിക്കാനും തൊഴിലാളികളെ കണ്ടെത്താനും.</p><button onclick="show('jobs')">തുറക്കുക</button></div>
+<div class="card"><h3>🛒 മാർക്കറ്റ്</h3><p>ഉൽപ്പന്നങ്ങളും സേവനങ്ങളും ലിസ്റ്റ് ചെയ്യുക.</p><button onclick="show('market')">തുറക്കുക</button></div>
+<div class="card"><h3>🎬 OYES INFINITY</h3><p>സിനിമ, ഷോർട്ട് ഫിലിം, ഓഡിഷൻ വിവരങ്ങൾ.</p><button onclick="show('infinity')">തുറക്കുക</button></div>
+<div class="card"><h3>🏗️ നിർമ്മാണം</h3><p>നിർമ്മാണ സേവനങ്ങളുടെ വിവരങ്ങൾ.</p></div>
+<div class="card"><h3>🏨 താമസവും സേവനങ്ങളും</h3><p>താമസം, ഇവന്റുകൾ, ഡെലിവറി തുടങ്ങിയവ.</p></div>
+</div>
+</section>
+
+<section id="knowledge" class="panel hidden">
+<h2>📚 അറിവിന്റെ ലോകം</h2>
+<p>താഴെയുള്ളത് ഗ്രന്ഥങ്ങൾ വായിക്കാനുള്ള പുറംലിങ്കുകൾ ചേർക്കാനുള്ള മാതൃകയാണ്.</p>
+<div class="item">ഖുർആൻ — <a href="https://quran.com/" target="_blank" rel="noopener">വായിക്കുക</a></div>
+<div class="item">ബൈബിൾ — <a href="https://www.bible.com/" target="_blank" rel="noopener">വായിക്കുക</a></div>
+<div class="item">രാമായണം — <a href="https://www.wisdomlib.org/hinduism/book/the-ramayana-of-valmiki" target="_blank" rel="noopener">വായിക്കുക</a></div>
+</section>
+
+<section id="jobs" class="panel hidden">
+<h2>🧰 NEED & URGENT</h2>
+<p><small>ഇവിടെ ചേർക്കുന്ന വിവരങ്ങൾ ഈ ബ്രൗസറിൽ മാത്രമാണ് സൂക്ഷിക്കുന്നത്.</small></p>
+<h3>ജോലി അന്വേഷിക്കുന്നയാൾ</h3>
+<label>പേര്<input id="jname" placeholder="നിങ്ങളുടെ പേര്"></label>
+<label>തൊഴിൽ / കഴിവ്<input id="jskill" placeholder="ഉദാ: ഇലക്ട്രീഷ്യൻ"></label>
+<label>സ്ഥലം<input id="jplace" placeholder="നഗരം / ജില്ല / രാജ്യം"></label>
+<label>ഫോൺ നമ്പർ<input id="jphone" placeholder="ബന്ധപ്പെടാനുള്ള നമ്പർ"></label>
+<button onclick="addJob('ജോലി അന്വേഷിക്കുന്നു')">പ്രൊഫൈൽ ചേർക്കുക</button>
+
+<hr>
+<h3>തൊഴിലാളികളെ ആവശ്യമുള്ളവർ</h3>
+<label>ജോലി<input id="wtitle" placeholder="ഉദാ: മേസൺ"></label>
+<label>സ്ഥലം<input id="wplace" placeholder="ജോലി സ്ഥലം"></label>
+<label>ശമ്പളം<input id="wsalary" placeholder="ഉദാ: ₹900 / ദിവസം"></label>
+<label>ഫോൺ നമ്പർ<input id="wphone" placeholder="ബന്ധപ്പെടാനുള്ള നമ്പർ"></label>
+<button onclick="addJob('തൊഴിലാളികൾ ആവശ്യം')">ജോലി പോസ്റ്റ് ചെയ്യുക</button>
+<h3>ജോലി പോസ്റ്റുകൾ</h3>
+<div id="joblist"></div>
+</section>
+
+<section id="market" class="panel hidden">
+<h2>🛒 OYES MARKET</h2>
+<label>ഉൽപ്പന്നം / സേവനം<input id="mtitle" placeholder="ഉൽപ്പന്നത്തിന്റെ പേര്"></label>
+<label>വില<input id="mprice" placeholder="വില"></label>
+<label>സ്ഥലം<input id="mplace" placeholder="സ്ഥലം"></label>
+<label>ഫോൺ നമ്പർ<input id="mphone" placeholder="ബന്ധപ്പെടാനുള്ള നമ്പർ"></label>
+<button onclick="addMarket()">വിവരം ചേർക്കുക</button>
+<div id="marketlist"></div>
+</section>
+
+<section id="infinity" class="panel hidden">
+<h2>🎬 OYES INFINITY</h2>
+<label>സൃഷ്ടിയുടെ പേര്<input id="ftitle" placeholder="സിനിമ / ഷോർട്ട് ഫിലിം / ഓഡിഷൻ"></label>
+<label>വിഭാഗം<select id="ftype"><option>സിനിമ</option><option>ഷോർട്ട് ഫിലിം</option><option>ഡോക്യുമെന്ററി</option><option>ഓഡിഷൻ</option><option>അഭിനയം</option><option>സംവിധാനം</option><option>എഡിറ്റിംഗ്</option></select></label>
+<label>വിവരം അല്ലെങ്കിൽ ഔദ്യോഗിക ലിങ്ക്<input id="furl" placeholder="https://..."></label>
+<button onclick="addFilm()">വിവരം ചേർക്കുക</button>
+<div id="filmlist"></div>
+<p><small>പകർപ്പവകാശമുള്ള സിനിമകൾ അനുമതിയുള്ള ലിങ്കുകളിലൂടെ മാത്രം പങ്കിടുക.</small></p>
+</section>
+
+<section id="services" class="panel hidden">
+<h2>മറ്റ് സേവനങ്ങൾ</h2>
+<div class="cards">
+<div class="card">🏗️ നിർമ്മാണ സേവനങ്ങൾ</div>
+<div class="card">🏨 താമസവും ഹോട്ടലുകളും</div>
+<div class="card">📅 ഇവന്റുകളും പരസ്യങ്ങളും</div>
+<div class="card">🚚 ഡെലിവറി സേവനങ്ങൾ</div>
+<div class="card">🤝 പൊതുസേവനങ്ങൾ</div>
+<div class="card">🎮 ഗെയിമുകൾ — കൂടുതൽ വികസിപ്പിക്കാം</div>
+</div>
+</section>
+</main>
+
+<footer>
+<strong>OYES — Salih & Saleem Studio Hub</strong>
+<p>ഓൺലൈൻ ഡാറ്റാബേസും ഉപയോക്തൃ അക്കൗണ്ടുകളും ഈ മാതൃകയിൽ ബന്ധിപ്പിച്ചിട്ടില്ല.</p>
+</footer>
+
+<script>
+function show(id){
+ document.querySelectorAll('main > section').forEach(s=>s.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ window.scrollTo({top:0,behavior:'smooth'});
 }
+function getData(key){
+ try{return JSON.parse(localStorage.getItem('oyes_demo_'+key)||'[]')}
+ catch(e){return []}
+}
+function saveData(key,data){
+ localStorage.setItem('oyes_demo_'+key,JSON.stringify(data));
+}
+function esc(s){
+ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function addJob(kind){
+ let seeker=kind==='ജോലി അന്വേഷിക്കുന്നു';
+ let title=seeker?document.getElementById('jskill').value:document.getElementById('wtitle').value;
+ let place=document.getElementById(seeker?'jplace':'wplace').value;
+ let phone=document.getElementById(seeker?'jphone':'wphone').value;
+ let name=seeker?document.getElementById('jname').value:'';
+ let salary=seeker?'':document.getElementById('wsalary').value;
+ if(!title.trim()||!place.trim()){alert('തൊഴിലും സ്ഥലവും നൽകുക.');return}
+ let data=getData('jobs');
+ data.unshift({kind,title,place,phone,name,salary,date:new Date().toLocaleString()});
+ saveData('jobs',data);renderJobs();
+}
+function renderJobs(){
+ document.getElementById('joblist').innerHTML=getData('jobs').map(j=>
+ `<div class="item"><strong>${esc(j.kind)}: ${esc(j.title)}</strong><p>${esc(j.place)} ${esc(j.salary)}</p><small>${esc(j.name)} · ${esc(j.date)}</small><p>${j.phone?'<a class="btn" href="https://wa.me/'+esc(j.phone.replace(/\D/g,''))+'" target="_blank" rel="noopener">WhatsApp ബന്ധപ്പെടുക</a>':''}</p></div>`
+ ).join('')||'<p>ഇതുവരെ പോസ്റ്റുകളില്ല.</p>';
+}
+function addMarket(){
+ let title=document.getElementById('mtitle').value;
+ let price=document.getElementById('mprice').value;
+ let place=document.getElementById('mplace').value;
+ let phone=document.getElementById('mphone').value;
+ if(!title.trim()){alert('ഉൽപ്പന്നത്തിന്റെ പേര് നൽകുക.');return}
+ let data=getData('market');data.unshift({title,price,place,phone});
+ saveData('market',data);renderMarket();
+}
+function renderMarket(){
+ document.getElementById('marketlist').innerHTML=getData('market').map(m=>
+ `<div class="item"><strong>${esc(m.title)}</strong><p>${esc(m.price)} · ${esc(m.place)}</p>${m.phone?'<a class="btn" href="https://wa.me/'+esc(m.phone.replace(/\D/g,''))+'" target="_blank" rel="noopener">വിൽപ്പനക്കാരനെ ബന്ധപ്പെടുക</a>':''}</div>`
+ ).join('')||'<p>ഇതുവരെ ഉൽപ്പന്നങ്ങളില്ല.</p>';
+}
+function addFilm(){
+ let title=document.getElementById('ftitle').value;
+ let type=document.getElementById('ftype').value;
+ let url=document.getElementById('furl').value;
+ if(!title.trim()){alert('പേര് നൽകുക.');return}
+ if(url&&!/^https?:\/\//i.test(url)){alert('ശരിയായ http അല്ലെങ്കിൽ https ലിങ്ക് നൽകുക.');return}
+ let data=getData('films');data.unshift({title,type,url});
+ saveData('films',data);renderFilms();
+}
+function renderFilms(){
+ document.getElementById('filmlist').innerHTML=getData('films').map(f=>
+ `<div class="item"><strong>${esc(f.title)}</strong><p>${esc(f.type)}</p>${f.url?'<a class="btn" href="'+esc(f.url)+'" target="_blank" rel="noopener">ലിങ്ക് തുറക്കുക</a>':''}</div>`
+ ).join('')||'<p>ഇതുവരെ വിവരങ്ങളില്ല.</p>';
+}
+renderJobs();renderMarket();renderFilms();
+</script>
+</body>
+</html>
