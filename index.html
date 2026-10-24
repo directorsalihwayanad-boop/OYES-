@@ -42,61 +42,85 @@
             padding: 8px 12px;
             cursor: pointer;
             border-radius: 5px;
+            font-weight: bold;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 20px auto;
         }
-        .folder-card {
+        .section-title {
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .grid-card {
             background-color: #172A45;
             border: 1px solid #FFD700;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 12px;
+            padding: 20px;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
-        .folder-card:hover {
+        .grid-card:hover {
             background-color: #1e355c;
+            transform: translateY(-3px);
         }
-        .folder-title {
+        .card-title {
             color: #FFD700;
             font-size: 14px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
-        .folder-desc {
+        .card-desc {
             color: #A0AEC0;
             font-size: 11px;
+        }
+        .back-btn {
+            background: #FFD700;
+            color: #0A192F;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 20px;
         }
         /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             justify-content: center;
             align-items: center;
         }
         .modal-content {
             background: #172A45;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             border: 1px solid #FFD700;
             width: 80%;
-            max-width: 400px;
+            max-width: 350px;
             text-align: center;
         }
         .modal-content input {
             width: 90%;
-            padding: 8px;
+            padding: 10px;
             margin: 10px 0;
             background: #0A192F;
             border: 1px solid #FFD700;
             color: white;
             border-radius: 4px;
         }
-        .modal-content button {
+        .modal-content button, .admin-action-btn {
             background: #FFD700;
             color: #0A192F;
             border: none;
@@ -105,6 +129,9 @@
             cursor: pointer;
             border-radius: 4px;
             margin: 5px;
+        }
+        .sub-view, .admin-panel-view {
+            display: none;
         }
     </style>
 </head>
@@ -117,37 +144,68 @@
     <div class="email">Email: platformoyes@gmail.com</div>
 </header>
 
-<div class="container">
-    <div style="color: #FFD700; font-weight: bold; margin-bottom: 10px;">6 പ്രധാന ഫോൾഡറുകൾ (Main Folders)</div>
-
-    <div class="folder-card" onclick="alert('01. World of Knowledge: Books & Scriptures (9) & Technology & Learning (9)')">
-        <div class="folder-title">01. WORLD OF KNOWLEDGE</div>
-        <div class="folder-desc">Books & Scriptures (9) & Technology & Learning (9)</div>
+<!-- DASHBOARD (MAIN GRID VIEW) -->
+<div class="container" id="mainView">
+    <div class="section-title">6 പ്രധാന ഫോൾഡറുകൾ (Main Folders)</div>
+    
+    <div class="grid-container">
+        <div class="grid-card" onclick="openFolder('folder1')">
+            <div class="card-title">01. WORLD OF KNOWLEDGE</div>
+            <div class="card-desc">Books & Scriptures (9) & Tech & Learning (9)</div>
+        </div>
+        <div class="grid-card" onclick="openFolder('folder2')">
+            <div class="card-title">02. CONSTRUCTION SOLUTION</div>
+            <div class="card-desc">Hardware (31), Marble, Granite, Furniture (+91 94472 76504)</div>
+        </div>
+        <div class="grid-card" onclick="openFolder('folder3')">
+            <div class="card-title">03. OYES PUBLIC CARE</div>
+            <div class="card-desc">Gov, Bus, Train, Private, Emergency (112), AI Help</div>
+        </div>
+        <div class="grid-card" onclick="openFolder('folder4')">
+            <div class="card-title">04. OYES ENTERTAINMENT</div>
+            <div class="card-desc">Cinema, Studio, Games, Amusement, OTT, Casting (95)</div>
+        </div>
+        <div class="grid-card" onclick="openFolder('folder5')">
+            <div class="card-title">05. MARKET & DELIVERY</div>
+            <div class="card-desc">Buy & Sell, Wholesale, Shop Hub, Business, Delivery (106)</div>
+        </div>
+        <div class="grid-card" onclick="openFolder('folder6')">
+            <div class="card-title">06. EVENTS • ADS • JOBS</div>
+            <div class="card-desc">Events, Advertisements, Jobs & Workers</div>
+        </div>
     </div>
+</div>
 
-    <div class="folder-card" onclick="alert('02. Ultimate Construction Solution: Hardware (31), Marble & Granite, Furniture, Other Materials (+91 94472 76504)')">
-        <div class="folder-title">02. ULTIMATE CONSTRUCTION SOLUTION</div>
-        <div class="folder-desc">Hardware (31), Marble & Granite, Furniture, Other Materials (+91 94472 76504)</div>
-    </div>
+<!-- SUB-FOLDER GRID VIEW -->
+<div class="container sub-view" id="subView">
+    <button class="back-btn" onclick="goBack()">⬅ Back to Dashboard</button>
+    <div id="subViewContent"></div>
+</div>
 
-    <div class="folder-card" onclick="alert('03. OYES Public Care: Government, Bus, Train, Private, Emergency (112), AI Help')">
-        <div class="folder-title">03. OYES PUBLIC CARE</div>
-        <div class="folder-desc">Government, Bus, Train, Private, Emergency (112), AI Help & Expert Support</div>
-    </div>
-
-    <div class="folder-card" onclick="alert('04. OYES Entertainment: Cinema, Studio, Games, Amusement, OTT, Casting (95 Sub-segments)')">
-        <div class="folder-title">04. OYES ENTERTAINMENT</div>
-        <div class="folder-desc">Cinema, Studio, Games, Amusement, OTT, Casting & Careers (95 Sub-segments)</div>
-    </div>
-
-    <div class="folder-card" onclick="alert('05. OYES Market and Delivery: Buy & Sell, Wholesale & Retail, Shop Hub, Business, Delivery (106 Sub-segments)')">
-        <div class="folder-title">05. OYES MARKET AND DELIVERY</div>
-        <div class="folder-desc">Buy & Sell, Wholesale & Retail, Shop Hub, Business, Delivery, Orders, Ads (106)</div>
-    </div>
-
-    <div class="folder-card" onclick="alert('06. OYES Events • Advertisements • Jobs: Events & Management, Advertisements, Jobs & Workers')">
-        <div class="folder-title">06. OYES EVENTS • ADVERTISEMENTS • JOBS</div>
-        <div class="folder-desc">Events & Management, Advertisements & Promotions, Jobs & Workers</div>
+<!-- ADMIN CONTROL PANEL GRID VIEW -->
+<div class="container admin-panel-view" id="adminPanelView">
+    <button class="back-btn" onclick="goBack()">⬅ Exit Admin Panel</button>
+    <div class="section-title">🔐 Admin Control Panel (Salih & Saleem Hub)</div>
+    
+    <div class="grid-container">
+        <div class="grid-card">
+            <div class="card-title">📁 File Management</div>
+            <div class="card-desc">Manage app files, assets, and database backups.</div>
+            <br>
+            <button class="admin-action-btn" onclick="alert('File Manager: Storage is active and secure.')">Open Files</button>
+        </div>
+        <div class="grid-card">
+            <div class="card-title">🎬 Studio Controls</div>
+            <div class="card-desc">Salih & Saleem Studio Hub settings and media controls.</div>
+            <br>
+            <button class="admin-action-btn" onclick="alert('Studio Controls: Hub settings updated.')">Studio Settings</button>
+        </div>
+        <div class="grid-card">
+            <div class="card-title">🤖 AI System Controls</div>
+            <div class="card-desc">Configure AI assistant parameters and smart prompts.</div>
+            <br>
+            <button class="admin-action-btn" onclick="alert('AI System: Engine is fully online.')">Configure AI</button>
+        </div>
     </div>
 </div>
 
@@ -164,19 +222,98 @@
 </div>
 
 <script>
+    // ഫോൾഡറുകൾക്കുള്ളിലെ ഗ്രില്ലഡ് സബ്-വിഭാഗങ്ങൾ
+    const subFolderData = {
+        'folder1': `
+            <div class="section-title">01. World of Knowledge</div>
+            <div class="grid-container">
+                <div class="grid-card"><div class="card-title">Books & Scriptures (9 Items)</div><div class="card-desc">Quran, Bible, Hindu Scriptures, Buddhist, Jain, Sikh, Jewish, Other Religious & Books</div></div>
+                <div class="grid-card"><div class="card-title">Technology & Learning (9 Items)</div><div class="card-desc">Technology, AI, Software, Programming, Computers, Science, Engineering, Education</div></div>
+            </div>
+        `,
+        'folder2': `
+            <div class="section-title">02. Ultimate Construction Solution (+91 94472 76504)</div>
+            <div class="grid-container">
+                <div class="grid-card"><div class="card-title">Hardware (31 Sub-categories)</div><div class="card-desc">Nails, Screws, Bolts, Washers, Hinges, Locks, Plumbing, Electrical, Tools, Safety, Misc</div></div>
+                <div class="grid-card"><div class="card-title">Marble & Granite</div><div class="card-desc">Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding, Outdoor Stone</div></div>
+                <div class="grid-card"><div class="card-title">Furniture & Materials</div><div class="card-desc">Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware, Roofing</div></div>
+            </div>
+        `,
+        'folder3': `
+            <div class="section-title">03. OYES Public Care</div>
+            <div class="grid-container">
+                <div class="grid-card"><div class="card-title">Government Services</div><div class="card-desc">Official departments, certificates & online portals</div></div>
+                <div class="grid-card"><div class="card-title">Bus Travel</div><div class="card-desc">KSRTC & Private bus timings and bookings</div></div>
+                <div class="grid-card"><div class="card-title">Train Travel</div><div class="card-desc">IRCTC schedules and live train status</div></div>
+                <div class="grid-card"><div class="card-title">Private Services</div><div class="card-desc">Utilities, courier services & payments</div></div>
+                <div class="grid-card"><div class="card-title">Emergency Support (112)</div><div class="card-desc">Police, Fire Force, Ambulance & Disaster support</div></div>
+                <div class="grid-card"><div class="card-title">AI Help & Expert Support</div><div class="card-desc">Instant AI assistance and expert guidance</div></div>
+            </div>
+        `,
+        'folder4': `
+            <div class="section-title">04. OYES Entertainment (95 Sub-segments)</div>
+            <div class="grid-container">
+                <div class="grid-card"><div class="card-title">Cinema</div><div class="card-desc">Trailers, reviews, box office & updates</div></div>
+                <div class="grid-card"><div class="card-title">Cinema Studio Hub</div><div class="card-desc">Salih & Saleem Studio production & editing controls</div></div>
+                <div class="grid-card"><div class="card-title">Games</div><div class="card-desc">Online games & gaming community updates</div></div>
+                <div class="grid-card"><div class="card-title">Amusement & Tourism</div><div class="card-desc">Parks, resorts & travel guides</div></div>
+                <div class="grid-card"><div class="card-title">OTT & Originals</div><div class="card-desc">Web series, short films & OYES originals</div></div>
+                <div class="grid-card"><div class="card-title">Casting & Careers</div><div class="card-desc">Auditions, casting calls & media jobs</div></div>
+            </div>
+        `,
+        'folder5': `
+            <div class="section-title">05. OYES Market and Delivery (106 Sub-segments)</div>
+            <div class="grid-container">
+                <div class="grid-card"><div class="card-title">Buy & Sell</div><div class="card-desc">Classifieds for new and used goods</div></div>
+                <div class="grid-card"><div class="card-title">Wholesale & Retail</div><div class="card-desc">Market prices and store listings</div></div>
+                <div class="grid-card"><div class="card-title">Shop Hub</div><div class="card-desc">Unified shopping market center</div></div>
+                <div class="grid-card"><div class="card-title">Business & Suppliers</div><div class="card-desc">B2B connections and supplier networks</div></div>
+                <div class="grid-card"><div class="card-title">Delivery Services</div><div class="card-desc">Fast and secure local delivery systems</div></div>
+                <div class="grid-card"><div class="card-title">Orders & Payments</div><div class="card-desc">Secure online checkout and order tracking</div></div>
+                <div class="grid-card"><div class="card-title">Advertisements</div><div class="card-desc">Promotional banners and store ads</div></div>
+                <div class="grid-card"><div class="card-title">Seller Hub</div><div class="card-desc">Merchant dashboard for stock & pricing</div></div>
+            </div>
+        `,
+        'folder6': `
+            <div class="section-title">06. OYES Events • Advertisements • Jobs</div>
+            <div class="grid-container">
+                <div class="grid-card"><div class="card-title">Events & Management</div><div class="card-desc">Weddings, shows, openings & event coordination</div></div>
+                <div class="grid-card"><div class="card-title">Advertisements & Promotions</div><div class="card-desc">Digital promotions and brand marketing</div></div>
+                <div class="grid-card"><div class="card-title">Jobs & Workers</div><div class="card-desc">I Need a Job / I Need Workers matching portal</div></div>
+            </div>
+        `
+    };
+
+    function openFolder(folderId) {
+        document.getElementById('mainView').style.display = 'none';
+        document.getElementById('adminPanelView').style.display = 'none';
+        document.getElementById('subView').style.display = 'block';
+        document.getElementById('subViewContent').innerHTML = subFolderData[folderId];
+    }
+
+    function goBack() {
+        document.getElementById('subView').style.display = 'none';
+        document.getElementById('adminPanelView').style.display = 'none';
+        document.getElementById('mainView').style.display = 'block';
+    }
+
     function openAdminModal() {
         document.getElementById('adminModal').style.display = 'flex';
     }
+
     function closeAdminModal() {
         document.getElementById('adminModal').style.display = 'none';
     }
+
     function checkAdminPassword() {
         var pass = document.getElementById('adminPass').value;
         if(pass === 'admin123') {
-            alert('Admin Login Successful! File Management, Studio Controls & AI Controls unlocked.');
             closeAdminModal();
+            document.getElementById('mainView').style.display = 'none';
+            document.getElementById('subView').style.display = 'none';
+            document.getElementById('adminPanelView').style.display = 'block';
         } else {
-            alert('Incorrect Password!');
+            alert('Incorrect Password! Please use admin123');
         }
     }
 </script>
