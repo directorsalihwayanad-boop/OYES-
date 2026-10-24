@@ -1,334 +1,185 @@
-import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OYES — Salih & Saleem Studio Hub</title>
+    <style>
+        body {
+            background-color: #0A192F;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #172A45;
+            position: relative;
+        }
+        h1 {
+            color: #FFD700;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .subtitle {
+            color: #A0AEC0;
+            font-size: 12px;
+        }
+        .email {
+            color: #FFD700;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .admin-btn {
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            background: #172A45;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .folder-card {
+            background-color: #172A45;
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .folder-card:hover {
+            background-color: #1e355c;
+        }
+        .folder-title {
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .folder-desc {
+            color: #A0AEC0;
+            font-size: 11px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #172A45;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #FFD700;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+            background: #0A192F;
+            border: 1px solid #FFD700;
+            color: white;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            background: #FFD700;
+            color: #0A192F;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  try {
-    await Supabase.initialize(
-      url: 'YOUR_SUPABASE_URL', // നിങ്ങളുടെ Supabase URL ഇവിടെ നൽകുക
-      anonKey: 'YOUR_SUPABASE_ANON_KEY', // നിങ്ങളുടെ Supabase Anon Key ഇവിടെ നൽകുക
-    );
-  } catch (e) {
-    debugPrint('Supabase initialization error: $e');
-  }
+<header>
+    <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
+    <h1>OYES — SALIH & SALEEM STUDIO HUB</h1>
+    <div class="subtitle">One Platform. Endless Opportunities. Global Connections.</div>
+    <div class="email">Email: platformoyes@gmail.com</div>
+</header>
 
-  runApp(const OyesApp());
-}
+<div class="container">
+    <div style="color: #FFD700; font-weight: bold; margin-bottom: 10px;">6 പ്രധാന ഫോൾഡറുകൾ (Main Folders)</div>
 
-class OyesApp extends StatelessWidget {
-  const OyesApp({Key? key}) : super(key: key);
+    <div class="folder-card" onclick="alert('01. World of Knowledge: Books & Scriptures (9) & Technology & Learning (9)')">
+        <div class="folder-title">01. WORLD OF KNOWLEDGE</div>
+        <div class="folder-desc">Books & Scriptures (9) & Technology & Learning (9)</div>
+    </div>
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'OYES — Salih & Saleem Studio Hub',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFF0A192F),
-        scaffoldBackgroundColor: const Color(0xFF0A192F),
-      ),
-      home: const OyesDashboardScreen(),
-    );
-  }
-}
+    <div class="folder-card" onclick="alert('02. Ultimate Construction Solution: Hardware (31), Marble & Granite, Furniture, Other Materials (+91 94472 76504)')">
+        <div class="folder-title">02. ULTIMATE CONSTRUCTION SOLUTION</div>
+        <div class="folder-desc">Hardware (31), Marble & Granite, Furniture, Other Materials (+91 94472 76504)</div>
+    </div>
 
-class OyesDashboardScreen extends StatelessWidget {
-  const OyesDashboardScreen({Key? key}) : super(key: key);
+    <div class="folder-card" onclick="alert('03. OYES Public Care: Government, Bus, Train, Private, Emergency (112), AI Help')">
+        <div class="folder-title">03. OYES PUBLIC CARE</div>
+        <div class="folder-desc">Government, Bus, Train, Private, Emergency (112), AI Help & Expert Support</div>
+    </div>
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF0A192F),
-        title: const Text(
-          'OYES — SALIH & SALEEM STUDIO HUB',
-          style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontSize: 13),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.admin_panel_settings, color: Color(0xFFFFD700)),
-            onPressed: () => _showAdminLoginDialog(context),
-            tooltip: 'Admin Settings',
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Center(
-              child: Column(
-                children: [
-                  Icon(Icons.shield, size: 45, color: Color(0xFFFFD700)),
-                  SizedBox(height: 4),
-                  Text(
-                    'One Platform. Endless Opportunities. Global Connections.',
-                    style: TextStyle(color: Colors.white70, fontSize: 10),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'Email: platformoyes@gmail.com',
-                    style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              '6 പ്രധാന ഫോൾഡറുകൾ (Main Folders)',
-              style: TextStyle(color: Color(0xFFFFD700), fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            _buildFolderCard(context, '01. WORLD OF KNOWLEDGE', 'Books & Scriptures (9) & Technology & Learning (9)', Icons.book, const WorldOfKnowledgeScreen()),
-            const SizedBox(height: 10),
-            _buildFolderCard(context, '02. ULTIMATE CONSTRUCTION SOLUTION', 'Hardware (31), Marble & Granite, Furniture (+91 94472 76504)', Icons.build, const ConstructionSolutionScreen()),
-            const SizedBox(height: 10),
-            _buildFolderCard(context, '03. OYES PUBLIC CARE', 'Government, Bus, Train, Private, Emergency (112), AI Help', Icons.public, const PublicCareScreen()),
-            const SizedBox(height: 10),
-            _buildFolderCard(context, '04. OYES ENTERTAINMENT', 'Cinema, Studio, Games, Amusement, OTT, Casting (95 Sub-segments)', Icons.movie, const EntertainmentScreen()),
-            const SizedBox(height: 10),
-            _buildFolderCard(context, '05. OYES MARKET AND DELIVERY', 'Buy & Sell, Wholesale & Retail, Shop Hub, Business, Delivery (106)', Icons.shopping_cart, const MarketDeliveryScreen()),
-            const SizedBox(height: 10),
-            _buildFolderCard(context, '06. OYES EVENTS • ADVERTISEMENTS • JOBS', 'Events & Management, Advertisements & Promotions, Jobs & Workers', Icons.event, const EventsAdsJobsScreen()),
-          ],
-        ),
-      ),
-    );
-  }
+    <div class="folder-card" onclick="alert('04. OYES Entertainment: Cinema, Studio, Games, Amusement, OTT, Casting (95 Sub-segments)')">
+        <div class="folder-title">04. OYES ENTERTAINMENT</div>
+        <div class="folder-desc">Cinema, Studio, Games, Amusement, OTT, Casting & Careers (95 Sub-segments)</div>
+    </div>
 
-  Widget _buildFolderCard(BuildContext context, String title, String subtitle, IconData icon, Widget targetScreen) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF172A45),
-        border: Border.all(color: const Color(0xFFFFD700), width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ListTile(
-        leading: Icon(icon, color: const Color(0xFFFFD700), size: 30),
-        title: Text(title, style: const TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontSize: 12)),
-        subtitle: Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 9)),
-        trailing: const Icon(Icons.arrow_forward_ios, color: Color(0xFFFFD700), size: 12),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => targetScreen));
-        },
-      ),
-    );
-  }
+    <div class="folder-card" onclick="alert('05. OYES Market and Delivery: Buy & Sell, Wholesale & Retail, Shop Hub, Business, Delivery (106 Sub-segments)')">
+        <div class="folder-title">05. OYES MARKET AND DELIVERY</div>
+        <div class="folder-desc">Buy & Sell, Wholesale & Retail, Shop Hub, Business, Delivery, Orders, Ads (106)</div>
+    </div>
 
-  void _showAdminLoginDialog(BuildContext context) {
-    TextEditingController passController = TextEditingController();
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: const Color(0xFF172A45),
-          title: const Text('Admin Settings & Control', style: TextStyle(color: Color(0xFFFFD700))),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'അഡ്മിന് മാത്രമുള്ള സുരക്ഷിത പാസ്‌വേർഡ് നൽകുക. (Default: admin123)',
-                style: TextStyle(color: Colors.white70, fontSize: 11),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: passController,
-                obscureText: true,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  hintText: 'Enter Admin Password',
-                  hintStyle: TextStyle(color: Colors.white54),
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel', style: TextStyle(color: Colors.redAccent)),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFFFD700)),
-              onPressed: () async {
-                bool isAuthenticated = false;
-                try {
-                  final response = await Supabase.instance.client
-                      .from('admin_settings')
-                      .select('password')
-                      .single();
+    <div class="folder-card" onclick="alert('06. OYES Events • Advertisements • Jobs: Events & Management, Advertisements, Jobs & Workers')">
+        <div class="folder-title">06. OYES EVENTS • ADVERTISEMENTS • JOBS</div>
+        <div class="folder-desc">Events & Management, Advertisements & Promotions, Jobs & Workers</div>
+    </div>
+</div>
 
-                  if (response['password'] == passController.text) {
-                    isAuthenticated = true;
-                  }
-                } catch (e) {
-                  if (passController.text == 'admin123') {
-                    isAuthenticated = true;
-                  }
-                }
+<!-- Admin Login Modal -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color: #FFD700; margin-top: 0;">Admin Settings</h3>
+        <p style="font-size: 11px; color: #A0AEC0;">അഡ്മിൻ പാസ്‌വേർഡ് നൽകുക (Default: admin123)</p>
+        <input type="password" id="adminPass" placeholder="Enter Password">
+        <br>
+        <button onclick="checkAdminPassword()">Login</button>
+        <button onclick="closeAdminModal()" style="background: #e53e3e; color: white;">Cancel</button>
+    </div>
+</div>
 
-                Navigator.pop(context);
-                if (isAuthenticated) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminSettingsScreen()));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Incorrect Password!')));
-                }
-              },
-              child: const Text('Login', style: TextStyle(color: Color(0xFF0A192F))),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
+<script>
+    function openAdminModal() {
+        document.getElementById('adminModal').style.display = 'flex';
+    }
+    function closeAdminModal() {
+        document.getElementById('adminModal').style.display = 'none';
+    }
+    function checkAdminPassword() {
+        var pass = document.getElementById('adminPass').value;
+        if(pass === 'admin123') {
+            alert('Admin Login Successful! File Management, Studio Controls & AI Controls unlocked.');
+            closeAdminModal();
+        } else {
+            alert('Incorrect Password!');
+        }
+    }
+</script>
 
-class WorldOfKnowledgeScreen extends StatelessWidget {
-  const WorldOfKnowledgeScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('01. World of Knowledge', style: TextStyle(color: Color(0xFFFFD700)))),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(title: Text('1. Books & Scriptures (9 items: Quran, Bible, Hindu, Buddhist, Jain, Sikh, Jewish)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('2. Technology & Learning (9 items: AI, Software, Programming, Computers, Science)', style: TextStyle(color: Colors.white, fontSize: 12))),
-        ],
-      ),
-    );
-  }
-}
-
-class ConstructionSolutionScreen extends StatelessWidget {
-  const ConstructionSolutionScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('02. Construction Solution (+91 94472 76504)', style: TextStyle(color: Color(0xFFFFD700), fontSize: 11))),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(title: Text('1. Hardware (31 sub-categories including Screws, Nails, Tools, Plumbing)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('2. Marble & Granite (9 items)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('3. Furniture (Home, Office, Kitchen, Bedroom)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('4. Other Materials (Cement, Steel, Bricks, Paint, Glass)', style: TextStyle(color: Colors.white, fontSize: 12))),
-        ],
-      ),
-    );
-  }
-}
-
-class PublicCareScreen extends StatelessWidget {
-  const PublicCareScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('03. OYES Public Care', style: TextStyle(color: Color(0xFFFFD700)))),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(title: Text('1. Government Services', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('2. Bus Travel (KSRTC & Private)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('3. Train Travel (IRCTC & Schedules)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('4. Private Services', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('5. Emergency Support (112)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('6. AI Help & Expert Support', style: TextStyle(color: Colors.white, fontSize: 12))),
-        ],
-      ),
-    );
-  }
-}
-
-class EntertainmentScreen extends StatelessWidget {
-  const EntertainmentScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('04. OYES Entertainment (95 Sub-segments)', style: TextStyle(color: Color(0xFFFFD700), fontSize: 12))),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(title: Text('1. Cinema (Reviews, Trailers, Updates)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('2. Cinema Studio (Salih & Saleem Studio Hub)', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('3. Games', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('4. Amusement & Tourism', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('5. OTT & Originals', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('6. Casting & Careers', style: TextStyle(color: Colors.white, fontSize: 12))),
-        ],
-      ),
-    );
-  }
-}
-
-class MarketDeliveryScreen extends StatelessWidget {
-  const MarketDeliveryScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('05. Market & Delivery (106 Sub-segments)', style: TextStyle(color: Color(0xFFFFD700), fontSize: 12))),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(title: Text('1. Buy & Sell', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('2. Wholesale & Retail', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('3. Shop Hub', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('4. Business & Suppliers', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('5. Delivery Services', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('6. Orders & Payments', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('7. Advertisements', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('8. Seller Hub', style: TextStyle(color: Colors.white, fontSize: 12))),
-        ],
-      ),
-    );
-  }
-}
-
-class EventsAdsJobsScreen extends StatelessWidget {
-  const EventsAdsJobsScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('06. Events, Ads & Jobs', style: TextStyle(color: Color(0xFFFFD700)))),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(title: Text('1. Events & Management', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('2. Advertisements & Promotions', style: TextStyle(color: Colors.white, fontSize: 12))),
-          ListTile(title: Text('3. Jobs & Workers (I Need a Job / Workers)', style: TextStyle(color: Colors.white, fontSize: 12))),
-        ],
-      ),
-    );
-  }
-}
-
-class AdminSettingsScreen extends StatelessWidget {
-  const AdminSettingsScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF0A192F), title: const Text('Admin Panel (Salih & Saleem)', style: TextStyle(color: Color(0xFFFFD700), fontSize: 13))),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: const [
-          ListTile(
-            leading: Icon(Icons.folder, color: Color(0xFFFFD700)),
-            title: Text('File Management', style: TextStyle(color: Colors.white)),
-            subtitle: Text('Manage app files & Supabase storage', style: TextStyle(color: Colors.white70, fontSize: 10)),
-          ),
-          ListTile(
-            leading: Icon(Icons.video_library, color: Color(0xFFFFD700)),
-            title: Text('Studio Controls', style: TextStyle(color: Colors.white)),
-            subtitle: Text('Salih & Saleem Studio Hub controls', style: TextStyle(color: Colors.white70, fontSize: 10)),
-          ),
-          ListTile:
-            leading: Icon(Icons.psychology, color: Color(0xFFFFD700)),
-            title: Text('AI System Controls', style: TextStyle(color: Colors.white)),
-            subtitle: Text('Manage AI integrations', style: TextStyle(color: Colors.white70, fontSize: 10)),
-          ),
-        ],
-      ),
-    );
-  }
-}
+</body>
+</html>
