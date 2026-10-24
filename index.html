@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OYES — Salih & Saleem Studio Hub</title>
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
             background-color: #1a1500;
@@ -20,6 +22,7 @@
             background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 8px;
             color: #1a1500;
+            position: relative;
         }
         h1 {
             font-size: 18px;
@@ -58,7 +61,6 @@
             margin-bottom: 12px;
             font-size: 14px;
         }
-        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -108,7 +110,27 @@
             margin-bottom: 15px;
             font-size: 12px;
         }
-        /* Modal Styles */
+        .admin-form-group {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .admin-form-group label {
+            color: #FFD700;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .admin-form-group input, .admin-form-group textarea, .admin-form-group select {
+            width: 100%;
+            padding: 8px;
+            background: #1a1500;
+            border: 1px solid #FFD700;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+        /* Modal - Hidden by default */
         .modal {
             display: none;
             position: fixed;
@@ -128,7 +150,7 @@
             text-align: center;
             color: #FFF;
         }
-        .modal-content input {
+        .modal-content input[type="password"] {
             width: 90%;
             padding: 10px;
             margin: 10px 0;
@@ -215,37 +237,46 @@
     <div id="subViewContent"></div>
 </div>
 
-<!-- ADMIN CONTROL PANEL VIEW -->
+<!-- ADMIN CONTROL PANEL VIEW (Protected) -->
 <div class="view-section" id="adminPanelView">
     <button class="back-btn" onclick="goBack()">⬅ Exit Admin Panel</button>
-    <div class="section-title">🔐 Admin Control Panel (Salih & Saleem)</div>
+    <div class="section-title">🔐 Studio Admin Control Panel (Salih & Saleem)</div>
     
     <div class="grid-container single-grid">
-        <div class="grid-card" style="cursor:default;">
-            <div class="card-title">📁 File Management</div>
-            <div class="card-desc">Manage app files, assets, and database storage.</div>
-            <br>
-            <button class="modal-btn" onclick="alert('File Management: Storage active.')">Open Files</button>
-        </div>
-        <div class="grid-card" style="cursor:default;">
-            <div class="card-title">🎬 Studio Controls</div>
-            <div class="card-desc">Salih & Saleem Studio Hub settings and media controls.</div>
-            <br>
-            <button class="modal-btn" onclick="alert('Studio Controls: Updated successfully.')">Studio Settings</button>
-        </div>
-        <div class="grid-card" style="cursor:default;">
-            <div class="card-title">🤖 AI System Controls</div>
-            <div class="card-desc">Configure AI assistant parameters and smart prompts.</div>
-            <br>
-            <button class="modal-btn" onclick="alert('AI System: Engine is fully online.')">Configure AI</button>
+        <div class="grid-card" style="cursor:default; text-align:left;">
+            <div class="card-title">📁 Supabase Database File Management</div>
+            <div class="admin-form-group">
+                <label>ഫോൾഡർ തിരഞ്ഞെടുക്കുക:</label>
+                <select id="targetFolder">
+                    <option value="folder1">01. World of Knowledge</option>
+                    <option value="folder2">02. Construction Solution</option>
+                    <option value="folder3">03. Public Care</option>
+                    <option value="folder4">04. Entertainment</option>
+                    <option value="folder5">05. Market & Delivery</option>
+                    <option value="folder6">06. Events, Ads & Jobs</option>
+                </select>
+            </div>
+            <div class="admin-form-group">
+                <label>ഫയലിന്റെ / ഗ്രന്ഥത്തിന്റെ പേര്:</label>
+                <input type="text" id="newFileName" placeholder="Eg: Quran / Hardware Item">
+            </div>
+            <div class="admin-form-group">
+                <label>വിവരണം (Description):</label>
+                <input type="text" id="newFileDesc" placeholder="Short description">
+            </div>
+            <div class="admin-form-group">
+                <label>വെബ് ലിങ്ക് / URL:</label>
+                <input type="text" id="newFileUrl" placeholder="https://example.com">
+            </div>
+            <button class="modal-btn" onclick="addRecordToSupabase()">Save to Supabase</button>
         </div>
     </div>
 </div>
 
-<!-- Admin Login Modal -->
+<!-- Admin Login Modal (Hidden by default, opens only on button click) -->
 <div id="adminModal" class="modal">
     <div class="modal-content">
-        <h3 style="color: #FFD700; margin-top: 0;">Admin Settings</h3>
+        <h3 style="color: #FFD700; margin-top: 0;">Admin Authentication</h3>
         <p style="font-size: 11px; color: #FFD700;">അഡ്മിൻ പാസ്‌വേർഡ് നൽകുക (Default: admin123)</p>
         <input type="password" id="adminPass" placeholder="Enter Password">
         <br>
@@ -255,128 +286,100 @@
 </div>
 
 <script>
-    // കണക്റ്റ് ചെയ്ത യഥാർത്ഥ സബ്‌ഫോൾഡറുകളും ഗ്രന്ഥ ഡാറ്റയും
-    const subFolderData = {
-        'folder1': `
-            <div class="section-title">01. World of Knowledge - സബ്‌വിഭാഗങ്ങൾ</div>
-            <div class="grid-container">
-                <div class="grid-card" onclick="openScripturesList()">
-                    <div class="card-title">Books & Scriptures (9 Items)</div>
-                    <div class="card-desc">ഖുർആൻ, ബൈബിൾ, ഹിന്ദു ഗ്രന്ഥങ്ങൾ, ബുദ്ധ, ജൈന, സിഖ്, യഹൂദ ഗ്രന്ഥങ്ങൾ</div>
-                </div>
-                <div class="grid-card" onclick="alert('Technology & Learning: AI, Software, Programming, Computers, Science, Engineering, Education')">
-                    <div class="card-title">Technology & Learning (9 Items)</div>
-                    <div class="card-desc">Technology, AI, Software, Programming, Computers, Science, Education</div>
-                </div>
-            </div>
-        `,
-        'folder2': `
-            <div class="section-title">02. Ultimate Construction Solution (+91 94472 76504)</div>
-            <div class="grid-container">
-                <div class="grid-card" onclick="alert('Hardware (31 Sub-categories): Nails, Screws, Bolts, Washers, Hinges, Locks, Plumbing, Electrical, Tools, Safety')">
-                    <div class="card-title">Hardware (31 Sub-categories)</div>
-                    <div class="card-desc">Nails, Screws, Bolts, Plumbing, Electrical, Tools, Safety & more</div>
-                </div>
-                <div class="grid-card" onclick="alert('Marble & Granite: Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding')">
-                    <div class="card-title">Marble & Granite</div>
-                    <div class="card-desc">Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding</div>
-                </div>
-                <div class="grid-card" onclick="alert('Furniture & Materials: Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware')">
-                    <div class="card-title">Furniture & Materials</div>
-                    <div class="card-desc">Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware</div>
-                </div>
-            </div>
-        `,
-        'folder3': `
-            <div class="section-title">03. OYES Public Care</div>
-            <div class="grid-container">
-                <div class="grid-card" onclick="alert('Government Services & Offices')"><div class="card-title">Government Services</div><div class="card-desc">Official departments & portals</div></div>
-                <div class="grid-card" onclick="alert('Bus Travel: KSRTC & Private')"><div class="card-title">Bus Travel</div><div class="card-desc">KSRTC & Private bus timings</div></div>
-                <div class="grid-card" onclick="alert('Train Travel: IRCTC & Schedules')"><div class="card-title">Train Travel</div><div class="card-desc">IRCTC schedules & status</div></div>
-                <div class="grid-card" onclick="alert('Private Services & Utilities')"><div class="card-title">Private Services</div><div class="card-desc">Utilities & courier services</div></div>
-                <div class="grid-card" onclick="alert('Emergency Support: 112 - Police, Fire, Ambulance')"><div class="card-title">Emergency (112)</div><div class="card-desc">Police, Fire Force, Ambulance</div></div>
-                <div class="grid-card" onclick="alert('AI Help & Expert Support')"><div class="card-title">AI Help</div><div class="card-desc">Instant AI assistance</div></div>
-            </div>
-        `,
-        'folder4': `
-            <div class="section-title">04. OYES Entertainment (95 Sub-segments)</div>
-            <div class="grid-container">
-                <div class="grid-card" onclick="alert('Cinema: Trailers, Reviews, Updates')"><div class="card-title">Cinema</div><div class="card-desc">Trailers, reviews & box office</div></div>
-                <div class="grid-card" onclick="alert('Cinema Studio Hub: Salih & Saleem Studio')"><div class="card-title">Cinema Studio Hub</div><div class="card-desc">Salih & Saleem production</div></div>
-                <div class="grid-card" onclick="alert('Games & Online Play')"><div class="card-title">Games</div><div class="card-desc">Online games & community</div></div>
-                <div class="grid-card" onclick="alert('Amusement & Tourism Parks')"><div class="card-title">Amusement & Tourism</div><div class="card-desc">Parks, resorts & travel guides</div></div>
-                <div class="grid-card" onclick="alert('OTT & Originals')"><div class="card-title">OTT & Originals</div><div class="card-desc">Web series & short films</div></div>
-                <div class="grid-card" onclick="alert('Casting & Careers: Auditions')"><div class="card-title">Casting & Careers</div><div class="card-desc">Auditions & media jobs</div></div>
-            </div>
-        `,
-        'folder5': `
-            <div class="section-title">05. OYES Market and Delivery (106 Sub-segments)</div>
-            <div class="grid-container">
-                <div class="grid-card" onclick="alert('Buy & Sell')"><div class="card-title">Buy & Sell</div><div class="card-desc">Classifieds for goods</div></div>
-                <div class="grid-card" onclick="alert('Wholesale & Retail')"><div class="card-title">Wholesale & Retail</div><div class="card-desc">Market prices & stores</div></div>
-                <div class="grid-card" onclick="alert('Shop Hub')"><div class="card-title">Shop Hub</div><div class="card-desc">Unified shopping center</div></div>
-                <div class="grid-card" onclick="alert('Business & Suppliers')"><div class="card-title">Business & Suppliers</div><div class="card-desc">B2B connections</div></div>
-                <div class="grid-card" onclick="alert('Delivery Services')"><div class="card-title">Delivery Services</div><div class="card-desc">Local delivery systems</div></div>
-                <div class="grid-card" onclick="alert('Orders & Payments')"><div class="card-title">Orders & Payments</div><div class="card-desc">Secure online checkout</div></div>
-                <div class="grid-card" onclick="alert('Advertisements')"><div class="card-title">Advertisements</div><div class="card-desc">Promotional banners</div></div>
-                <div class="grid-card" onclick="alert('Seller Hub')"><div class="card-title">Seller Hub</div><div class="card-desc">Merchant dashboard</div></div>
-            </div>
-        `,
-        'folder6': `
-            <div class="section-title">06. OYES Events • Advertisements • Jobs</div>
-            <div class="grid-container">
-                <div class="grid-card" onclick="alert('Events & Management: Weddings, Shows')"><div class="card-title">Events & Management</div><div class="card-desc">Weddings & shows coordination</div></div>
-                <div class="grid-card" onclick="alert('Advertisements & Promotions')"><div class="card-title">Advertisements</div><div class="card-desc">Digital promotions & marketing</div></div>
-                <div class="grid-card" onclick="alert('Jobs & Workers: I Need a Job / Workers')"><div class="card-title">Jobs & Workers</div><div class="card-desc">Job matching portal</div></div>
-            </div>
-        `
+    // -------------------------------------------------------------
+    // നിങ്ങളുടെ Supabase ക്രെഡൻഷ്യലുകൾ ഇവിടെ നൽകുക
+    // -------------------------------------------------------------
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ഡിഫോൾട്ട് ഡാറ്റ (Fallback)
+    const fallbackData = {
+        'folder1': [
+            {title: '1. ഖുർആൻ (Quran)', desc: 'Open Online Quran Reader', url: 'https://quran.com'},
+            {title: '2. ബൈബിൾ (Bible)', desc: 'Open Online Bible Reader', url: 'https://www.bible.com'},
+            {title: '3. ഹിന്ദു ഗ്രന്ഥങ്ങൾ', desc: 'Vedas & Scriptures', url: 'https://archive.org'}
+        ],
+        'folder2': [
+            {title: 'Hardware (31 Sub-categories)', desc: 'Nails, Screws, Bolts, Plumbing', url: '#'}
+        ],
+        'folder3': [
+            {title: 'Emergency Support (112)', desc: 'Police, Fire Force, Ambulance', url: '#'}
+        ],
+        'folder4': [
+            {title: 'Cinema Studio Hub', desc: 'Salih & Saleem production', url: '#'}
+        ],
+        'folder5': [
+            {title: 'Buy & Sell', desc: 'Classifieds for goods', url: '#'}
+        ],
+        'folder6': [
+            {title: 'Jobs & Workers', desc: 'Job matching portal', url: '#'}
+        ]
     };
 
-    // ഖുർആൻ, ബൈബിൾ തുടങ്ങിയ ഗ്രന്ഥങ്ങളുടെ ലിസ്റ്റും ഡയറക്ട് ലിങ്കുകളും
-    function openScripturesList() {
-        document.getElementById('subViewContent').innerHTML = `
-            <div class="section-title">Books & Scriptures (9 ഗ്രന്ഥങ്ങൾ & പുസ്തകങ്ങൾ)</div>
-            <div class="grid-container">
-                <a class="grid-card" href="https://quran.com" target="_blank">
-                    <div class="card-title">1. ഖുർആൻ (Quran)</div>
-                    <div class="card-desc">Open Online Quran Reader ↗</div>
+    async function openFolder(folderId) {
+        let folderItems = [];
+        try {
+            let { data, error } = await _supabase
+                .from('oyes_files')
+                .select('*')
+                .eq('folder_id', folderId);
+
+            if (error) throw error;
+
+            if (data && data.length > 0) {
+                folderItems = data;
+            } else {
+                folderItems = fallbackData[folderId] || [];
+            }
+        } catch (err) {
+            folderItems = fallbackData[folderId] || [];
+        }
+
+        let html = `<div class="section-title">ഫോൾഡർ ഉള്ളടക്കം (${folderId})</div><div class="grid-container">`;
+        
+        folderItems.forEach(item => {
+            let linkAttr = item.url && item.url !== '#' ? `href="${item.url}" target="_blank"` : `onclick="alert('${item.title}')"`;
+            html += `
+                <a class="grid-card" ${linkAttr}>
+                    <div class="card-title">${item.title}</div>
+                    <div class="card-desc">${item.desc || ''} ${item.url && item.url !== '#' ? '↗' : ''}</div>
                 </a>
-                <a class="grid-card" href="https://www.bible.com" target="_blank">
-                    <div class="card-title">2. ബൈബിൾ (Bible)</div>
-                    <div class="card-desc">Open Online Bible Reader ↗</div>
-                </a>
-                <a class="grid-card" href="https://archive.org" target="_blank">
-                    <div class="card-title">3. ഹിന്ദു ഗ്രന്ഥങ്ങൾ</div>
-                    <div class="card-desc">Vedas, Upanishads & Epics ↗</div>
-                </a>
-                <a class="grid-card" href="https://archive.org" target="_blank">
-                    <div class="card-title">4. ബുദ്ധ ഗ്രന്ഥങ്ങൾ</div>
-                    <div class="card-desc">Buddhist Scriptures ↗</div>
-                </a>
-                <a class="grid-card" href="https://archive.org" target="_blank">
-                    <div class="card-title">5. ജൈന ഗ്രന്ഥങ്ങൾ</div>
-                    <div class="card-desc">Jain Texts & Agamas ↗</div>
-                </a>
-                <a class="grid-card" href="https://sriganth Sahib" onclick="alert('Sikh Scriptures: Guru Granth Sahib')" href="javascript:void(0)">
-                    <div class="card-title">6. സിഖ് ഗ്രന്ഥങ്ങൾ</div>
-                    <div class="card-desc">Guru Granth Sahib</div>
-                </a>
-                <a class="grid-card" onclick="alert('Jewish Scriptures: Torah & Hebrew Bible')" href="javascript:void(0)">
-                    <div class="card-title">7. യഹൂദ ഗ്രന്ഥങ്ങൾ</div>
-                    <div class="card-desc">Torah Texts</div>
-                </a>
-                <a class="grid-card" onclick="alert('Other Religious Texts')" href="javascript:void(0)">
-                    <div class="card-title">8. മറ്റ് മതഗ്രന്ഥങ്ങൾ</div>
-                    <div class="card-desc">Other Faith Scriptures</div>
-                </a>
-                <a class="grid-card" onclick="alert('Other General Books & Literature')" href="javascript:void(0)">
-                    <div class="card-title">9. മറ്റ് പുസ്തകങ്ങൾ</div>
-                    <div class="card-desc">General Library Books</div>
-                </a>
-            </div>
-            <br>
-            <button class="back-btn" onclick="openFolder('folder1')">⬅ Back to Knowledge Menu</button>
-        `;
+            `;
+        });
+
+        html += `</div><br><button class="back-btn" onclick="goBack()">⬅ Back to Dashboard</button>`;
+        
+        document.getElementById('subViewContent').innerHTML = html;
+        switchView('subView');
+    }
+
+    async function addRecordToSupabase() {
+        let folderId = document.getElementById('targetFolder').value;
+        let title = document.getElementById('newFileName').value;
+        let desc = document.getElementById('newFileDesc').value;
+        let url = document.getElementById('newFileUrl').value;
+
+        if (!title) {
+            alert('ദയവായി ഫയലിന്റെ പേര് നൽകുക!');
+            return;
+        }
+
+        try {
+            const { data, error } = await _supabase
+                .from('oyes_files')
+                .insert([{ folder_id: folderId, title: title, desc: desc, url: url || '#' }]);
+
+            if (error) throw error;
+
+            alert('Supabase-ലേക്ക് വിജയകരമായി സേവ് ചെയ്തു!');
+            document.getElementById('newFileName').value = '';
+            document.getElementById('newFileDesc').value = '';
+            document.getElementById('newFileUrl').value = '';
+        } catch (err) {
+            alert('സേവ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു: ' + err.message);
+        }
     }
 
     function switchView(viewId) {
@@ -388,15 +391,11 @@
         window.scrollTo(0, 0);
     }
 
-    function openFolder(folderId) {
-        document.getElementById('subViewContent').innerHTML = subFolderData[folderId];
-        switchView('subView');
-    }
-
     function goBack() {
         switchView('mainView');
     }
 
+    // Admin Modal Controls - Hidden initially, opens only on button click
     function openAdminModal() {
         document.getElementById('adminModal').style.display = 'flex';
     }
