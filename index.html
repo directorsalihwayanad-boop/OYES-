@@ -1,376 +1,237 @@
-HTML
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#071426">
-  <title>OYES | Salih &amp; Saleem Studio Hub</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OYES Global Hub</title>
+  <meta name="description" content="OYES Global Hub - Opportunities, Jobs, Education & Support" />
   <style>
-    :root {
-      --navy: #071426;
-      --gold: #ffdc70;
-      --orange: #ff9900;
-      --white: #ffffff;
-      --muted: #d3dbe7;
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --soft:#1b264a;
+      --text:#eaf0ff;
+      --muted:#b8c3e0;
+      --brand:#4f7cff;
+      --brand2:#7c4dff;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#0c1530 40%,#0b1020);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:auto;padding:20px}
+    .nav{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(10px);
+      background:rgba(11,16,32,.7);
+      border-bottom:1px solid rgba(255,255,255,.08)
+    }
+    .nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:42px;height:42px;border-radius:10px;object-fit:cover;background:#fff}
+    .brand h1{font-size:18px;margin:0}
+    .menu{display:flex;gap:14px;flex-wrap:wrap}
+    .menu a{padding:8px 12px;border-radius:10px;color:var(--muted)}
+    .menu a:hover{background:var(--soft);color:var(--text)}
+
+    .hero{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch;
+      margin-top:18px
+    }
+    .card{
+      background:linear-gradient(180deg,var(--card),#101831);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    .hero h2{font-size:34px;line-height:1.15;margin:0 0 10px}
+    .hero p{color:var(--muted);margin:0 0 16px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      padding:11px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:600
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--text)}
+
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .stat{background:var(--soft);border-radius:14px;padding:14px}
+    .stat h3{margin:0;font-size:20px}
+    .stat p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    .section{margin-top:20px}
+    .section h3{margin:0 0 12px;font-size:22px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px
+    }
+    .item{
+      background:linear-gradient(180deg,#121a33,#10162c);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:14px
+    }
+    .item h4{margin:0 0 6px}
+    .item p{margin:0;color:var(--muted);font-size:14px}
+    .tag{display:inline-block;margin-top:10px;padding:5px 10px;border-radius:999px;background:#1f2d5f;color:#c9d6ff;font-size:12px}
+
+    .footer{
+      margin:28px 0 10px;
+      color:var(--muted);
+      text-align:center;
+      font-size:13px
     }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      color: var(--white);
-      font-family: Arial, sans-serif;
-      background: radial-gradient(ellipse at top, #263b59, var(--navy) 75%);
-      min-height: 100vh;
+    .notice{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:10px;
+      font-size:13px;
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.35);
+      color:#bff3cd;
+      display:none;
     }
 
-    header {
-      text-align: center;
-      padding: 25px 12px 20px;
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .hero h2{font-size:28px}
     }
-
-    .logo {
-      width: 70px;
-      height: 70px;
-      margin: auto;
-      display: grid;
-      place-items: center;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      background: #102541;
-      font-size: 32px;
-    }
-
-    h1 {
-      margin: 10px 0 5px;
-      color: var(--gold);
-      letter-spacing: 5px;
-      font-size: 42px;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    main {
-      width: min(1050px, 100%);
-      margin: auto;
-      padding: 15px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      height: 275px;
-      position: relative;
-      overflow: hidden;
-      border: 2px solid var(--gold);
-      border-radius: 23px;
-      background: #102541;
-      box-shadow: 0 0 16px #ffb32630;
-      isolation: isolate;
-    }
-
-    .card.wide {
-      grid-column: 1 / -1;
-      height: 245px;
-    }
-
-    .card img {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.04);
-    }
-
-    .shade {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(
-        to top,
-        rgba(2, 10, 24, .98),
-        rgba(2, 10, 24, .12) 85%
-      );
-    }
-
-    .content {
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      bottom: 17px;
-      text-align: center;
-    }
-
-    .content h2 {
-      color: var(--gold);
-      font-size: clamp(13px, 2.1vw, 22px);
-      line-height: 1.25;
-      margin: 0 0 15px;
-      text-shadow: 0 2px 6px #000;
-    }
-
-    .open-button {
-      display: inline-block;
-      min-width: 145px;
-      padding: 12px 20px;
-      border: 0;
-      border-radius: 30px;
-      background: linear-gradient(#ffc13e, var(--orange));
-      color: #160f03;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .open-button:hover {
-      filter: brightness(1.1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    footer strong { color: var(--gold); }
-
-    .dialog {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      padding: 18px;
-      align-items: center;
-      justify-content: center;
-      background: #000b;
-    }
-
-    .dialog.visible { display: flex; }
-
-    .dialog-box {
-      width: min(520px, 100%);
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 22px;
-      border: 2px solid var(--gold);
-      border-radius: 18px;
-      background: #0c2039;
-    }
-
-    .dialog-box h2 { color: var(--gold); }
-
-    .dialog-box li,
-    .dialog-box p {
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .close-button {
-      float: right;
-      padding: 8px 12px;
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      color: var(--gold);
-      background: transparent;
-      cursor: pointer;
-    }
-
-    @media (min-width: 760px) {
-      .card { height: 310px; }
-      .card.wide { height: 260px; }
-    }
-
-    @media (max-width: 440px) {
-      main { padding: 10px; }
-      .cards { gap: 10px; }
-      .card { height: 225px; border-radius: 17px; }
-      .card.wide { height: 205px; }
-      .content { bottom: 12px; }
-      .content h2 { font-size: 12px; margin-bottom: 11px; }
-      .open-button { min-width: 105px; padding: 10px 13px; font-size: 14px; }
+    @media (max-width:600px){
+      .grid{grid-template-columns:1fr}
+      .menu{display:none}
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <div class="logo" aria-label="OYES logo">🌍🦅</div>
-    <h1>OYES</h1>
-    <div class="subtitle">SALIH &amp; SALEEM STUDIO HUB</div>
-  </header>
+  <nav class="nav">
+    <div class="nav-wrap container">
+      <div class="brand">
+        <img id="logo" src="https://gnxmiqmfwrwnivlkvspy.supabase.co/storage/v1/object/public/app-assets/OYES_Official_Logo.png" alt="OYES Logo" />
+        <h1>OYES Global Hub</h1>
+      </div>
+      <div class="menu">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#programs">Programs</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-  <main>
-    <section class="cards" aria-label="OYES main sections">
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Library and knowledge">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>WORLD OF KNOWLEDGE</h2>
-          <button class="open-button" data-section="0">Open →</button>
+  <main class="container" id="home">
+    <section class="hero">
+      <div class="card">
+        <h2>Welcome to OYES Global Hub</h2>
+        <p>
+          One platform for youth empowerment, opportunities, training, support services, and digital growth.
+        </p>
+        <div class="btns">
+          <button class="btn btn-primary">Get Started</button>
+          <button class="btn btn-ghost">Learn More</button>
         </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Professional services">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>JOB VACANCIES &amp; CLEANING</h2>
-          <button class="open-button" data-section="1">Open →</button>
+        <div id="logoNotice" class="notice">Logo loaded from Supabase app_settings ✅</div>
+      </div>
+      <div class="card">
+        <div class="stats">
+          <div class="stat"><h3>10K+</h3><p>Community Members</p></div>
+          <div class="stat"><h3>250+</h3><p>Programs Conducted</p></div>
+          <div class="stat"><h3>120+</h3><p>Partner Networks</p></div>
+          <div class="stat"><h3>24/7</h3><p>Digital Support</p></div>
         </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Home construction">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>ULTIMATE HOME<br>CONSTRUCTION SOLUTION</h2>
-          <button class="open-button" data-section="2">Open →</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Hotel and resort">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>STAYS &amp; HOTELS</h2>
-          <button class="open-button" data-section="3">Open →</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo- shopping?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Shopping market">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>BUY &amp; SELL<br>MARKET HUB</h2>
-          <button class="open-button" data-section="4">Open →</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Events and advertisements">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>EVENTS &amp;<br>ADVERTISEMENTS</h2>
-          <button class="open-button" data-section="5">Open →</button>
-        </div>
-      </article>
-
-      <article class="card wide">
-        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Cinema and film production">
-        <div class="shade"></div>
-        <div class="content">
-          <h2>OYES CINEMA &amp; STUDIO</h2>
-          <button class="open-button" data-section="6">Open →</button>
-        </div>
-      </article>
-
+      </div>
     </section>
+
+    <section class="section" id="services">
+      <h3>Our Services</h3>
+      <div class="grid">
+        <article class="item">
+          <h4>Career Guidance</h4>
+          <p>Mentorship, placement support, and skill roadmap for students and job seekers.</p>
+          <span class="tag">Career</span>
+        </article>
+        <article class="item">
+          <h4>Training & Workshops</h4>
+          <p>Practical programs in digital tools, communication, leadership, and entrepreneurship.</p>
+          <span class="tag">Training</span>
+        </article>
+        <article class="item">
+          <h4>Community Support</h4>
+          <p>Access to trusted services, opportunities, and resource connections near you.</p>
+          <span class="tag">Support</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="programs">
+      <h3>Featured Programs</h3>
+      <div class="grid">
+        <article class="item">
+          <h4>Youth Skill Mission</h4>
+          <p>Hands-on upskilling for high-demand jobs with certification pathways.</p>
+        </article>
+        <article class="item">
+          <h4>Women Forward</h4>
+          <p>Focused support for women-led growth initiatives and enterprise opportunities.</p>
+        </article>
+        <article class="item">
+          <h4>Startup Bridge</h4>
+          <p>Idea validation, mentoring, and ecosystem connections for new founders.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h3>Contact</h3>
+      <div class="item">
+        <p>Email: support@oyesglobalhub.org</p>
+        <p>Phone: +91 00000 00000</p>
+        <p>Location: Wayanad, Kerala</p>
+      </div>
+    </section>
+
+    <p class="footer">© <span id="year"></span> OYES Global Hub. All rights reserved.</p>
   </main>
 
-  <footer>
-    <strong>OYES — SALIH &amp; SALEEM STUDIO HUB</strong>
-    <p>Knowledge • Jobs • Construction • Hotels • Shopping • Events • Cinema</p>
-  </footer>
-
-  <div class="dialog" id="sectionDialog" role="dialog" aria-modal="true">
-    <div class="dialog-box">
-      <button class="close-button" id="closeDialog">Close ✕</button>
-      <h2 id="dialogTitle"></h2>
-      <div id="dialogContent"></div>
-    </div>
-  </div>
-
   <script>
-    const sections = [
-      {
-        title: "WORLD OF KNOWLEDGE",
-        items: ["Books and learning resources", "Religious and cultural texts", "Science and technology", "AI and programming", "School and college education"]
-      },
-      {
-        title: "JOB VACANCIES & CLEANING",
-        items: ["I NEED A JOB", "I NEED WORKERS", "Full-time and part-time jobs", "Daily-wage and contract jobs", "Cleaning services"]
-      },
-      {
-        title: "ULTIMATE HOME CONSTRUCTION SOLUTION",
-        items: ["Marble and granite", "Hardware and screws", "Construction materials", "Furniture and interiors", "Product catalogue"]
-      },
-      {
-        title: "STAYS & HOTELS",
-        items: ["Hotels and resorts", "Accommodation listings", "Facilities and locations", "Availability enquiries"]
-      },
-      {
-        title: "BUY & SELL MARKET HUB",
-        items: ["Browse products", "Sell products", "Product categories", "Orders and delivery"]
-      },
-      {
-        title: "EVENTS & ADVERTISEMENTS",
-        items: ["Events and announcements", "Advertising listings", "Event ticket information", "Organiser enquiries"]
-      },
-      {
-        title: "OYES CINEMA & STUDIO",
-        items: ["Movies and short films", "Documentaries and web series", "Acting and film production", "Camera, editing, sound and music", "Games and entertainment"]
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Optional: load logo_url from Supabase app_settings table (public read needed)
+    // If not configured, fallback logo remains visible.
+    (async function loadLogoFromDB(){
+      const SUPABASE_URL = "https://gnxmiqmfwrwnivlkvspy.supabase.co";
+      const SUPABASE_ANON_KEY = "REPLACE_WITH_YOUR_SUPABASE_ANON_KEY"; // <- replace this
+      const logoEl = document.getElementById("logo");
+      const notice = document.getElementById("logoNotice");
+
+      if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.includes("REPLACE_WITH")) return;
+
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/app_settings?select=logo_url&id=eq.1&limit=1`,
+          {
+            headers: {
+              "apikey": SUPABASE_ANON_KEY,
+              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          }
+        );
+        if (!res.ok) throw new Error("Failed to fetch app_settings");
+        const data = await res.json();
+        const logo = data?.[0]?.logo_url;
+        if (logo) {
+          logoEl.src = logo;
+          notice.style.display = "block";
+        }
+      } catch (e) {
+        console.log("Logo DB fetch skipped:", e.message);
       }
-    ];
-
-    const dialog = document.getElementById("sectionDialog");
-    const title = document.getElementById("dialogTitle");
-    const content = document.getElementById("dialogContent");
-
-    document.querySelectorAll("[data-section]").forEach(button => {
-      button.addEventListener("click", () => {
-        const section = sections[Number(button.dataset.section)];
-        title.textContent = section.title;
-
-        const list = document.createElement("ul");
-        section.items.forEach(item => {
-          const li = document.createElement("li");
-          li.textContent = item;
-          list.appendChild(li);
-        });
-
-        content.replaceChildren(list);
-
-        const note = document.createElement("p");
-        note.textContent = "ഈ വിഭാഗത്തിന്റെ പൂർണ ഉപപേജുകളും ഡാറ്റാ പ്രവർത്തനങ്ങളും വേർതിരിച്ച് ബന്ധിപ്പിക്കേണ്ടതാണ്.";
-        content.appendChild(note);
-
-        dialog.classList.add("visible");
-      });
-    });
-
-    function closeDialog() {
-      dialog.classList.remove("visible");
-    }
-
-    document.getElementById("closeDialog").addEventListener("click", closeDialog);
-
-    dialog.addEventListener("click", event => {
-      if (event.target === dialog) closeDialog();
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeDialog();
-    });
+    })();
   </script>
 </body>
 </html>
