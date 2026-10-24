@@ -6,123 +6,138 @@
     <title>OYES — Salih & Saleem Studio Hub</title>
     <style>
         body {
-            background-color: #0A192F;
-            color: #FFFFFF;
+            background-color: #1a1500; /* റിച്ച് ഗോൾഡന് അനുയോജ്യമായ ഡാർക്ക് ബാക്ക്‌ഗ്രൗണ്ട് */
+            color: #2b2b2b;
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 16px;
+            padding: 12px;
         }
         header {
             text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #172A45;
-            position: relative;
+            padding: 15px 0 10px 0;
+            border-bottom: 2px solid #FFD700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 8px;
+            padding: 20px;
+            color: #1a1500;
         }
         h1 {
-            color: #FFD700;
             font-size: 18px;
             margin: 5px 0;
-        }
-        .subtitle {
-            color: #A0AEC0;
-            font-size: 12px;
-        }
-        .email {
-            color: #FFD700;
-            font-size: 12px;
             font-weight: bold;
         }
+        .subtitle {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .email {
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+        .admin-bar {
+            text-align: right;
+            margin-bottom: 10px;
+        }
         .admin-btn {
-            position: absolute;
-            right: 10px;
-            top: 20px;
-            background: #172A45;
+            background: #1a1500;
             color: #FFD700;
             border: 1px solid #FFD700;
-            padding: 8px 12px;
+            padding: 8px 15px;
             cursor: pointer;
             border-radius: 5px;
             font-weight: bold;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+            font-size: 12px;
         }
         .section-title {
             color: #FFD700;
             font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 16px;
+            margin-bottom: 12px;
+            font-size: 14px;
         }
-        /* Grid Layout */
+        /* Grid Layout for Boxes */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .single-grid {
+            grid-template-columns: 1fr;
         }
         .grid-card {
-            background-color: #172A45;
-            border: 1px solid #FFD700;
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            border: 1px solid #FFF;
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .grid-card:hover {
-            background-color: #1e355c;
-            transform: translateY(-3px);
+        .grid-card:active {
+            opacity: 0.9;
+            transform: scale(0.98);
         }
         .card-title {
-            color: #FFD700;
-            font-size: 14px;
+            color: #1a1500;
+            font-size: 13px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .card-desc {
-            color: #A0AEC0;
-            font-size: 11px;
+            color: #333333;
+            font-size: 10px;
+            line-height: 1.3;
+            font-weight: 500;
         }
         .back-btn {
             background: #FFD700;
-            color: #0A192F;
+            color: #1a1500;
             border: none;
             padding: 8px 15px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 12px;
         }
         /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
         .modal-content {
-            background: #172A45;
-            padding: 25px;
+            background: #2b2300;
+            padding: 20px;
             border-radius: 8px;
             border: 1px solid #FFD700;
-            width: 80%;
-            max-width: 350px;
+            width: 85%;
+            max-width: 320px;
             text-align: center;
+            color: #FFF;
         }
         .modal-content input {
             width: 90%;
             padding: 10px;
             margin: 10px 0;
-            background: #0A192F;
+            background: #1a1500;
             border: 1px solid #FFD700;
             color: white;
             border-radius: 4px;
+            font-size: 14px;
         }
-        .modal-content button, .admin-action-btn {
+        .modal-btn {
             background: #FFD700;
-            color: #0A192F;
+            color: #1a1500;
             border: none;
             padding: 8px 15px;
             font-weight: bold;
@@ -130,44 +145,59 @@
             border-radius: 4px;
             margin: 5px;
         }
-        .sub-view, .admin-panel-view {
+        .close-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 5px;
+        }
+        .view-section {
             display: none;
+        }
+        .active-view {
+            display: block;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
+    <div class="admin-bar">
+        <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin Settings</button>
+    </div>
     <h1>OYES — SALIH & SALEEM STUDIO HUB</h1>
     <div class="subtitle">One Platform. Endless Opportunities. Global Connections.</div>
     <div class="email">Email: platformoyes@gmail.com</div>
 </header>
 
 <!-- DASHBOARD (MAIN GRID VIEW) -->
-<div class="container" id="mainView">
+<div class="view-section active-view" id="mainView">
     <div class="section-title">6 പ്രധാന ഫോൾഡറുകൾ (Main Folders)</div>
     
     <div class="grid-container">
         <div class="grid-card" onclick="openFolder('folder1')">
             <div class="card-title">01. WORLD OF KNOWLEDGE</div>
-            <div class="card-desc">Books & Scriptures (9) & Tech & Learning (9)</div>
+            <div class="card-desc">Books, Scriptures & Tech Learning</div>
         </div>
         <div class="grid-card" onclick="openFolder('folder2')">
             <div class="card-title">02. CONSTRUCTION SOLUTION</div>
-            <div class="card-desc">Hardware (31), Marble, Granite, Furniture (+91 94472 76504)</div>
+            <div class="card-desc">Hardware (31), Marble, Furniture (+91 94472 76504)</div>
         </div>
         <div class="grid-card" onclick="openFolder('folder3')">
             <div class="card-title">03. OYES PUBLIC CARE</div>
-            <div class="card-desc">Gov, Bus, Train, Private, Emergency (112), AI Help</div>
+            <div class="card-desc">Gov, Bus, Train, Emergency (112), AI</div>
         </div>
         <div class="grid-card" onclick="openFolder('folder4')">
             <div class="card-title">04. OYES ENTERTAINMENT</div>
-            <div class="card-desc">Cinema, Studio, Games, Amusement, OTT, Casting (95)</div>
+            <div class="card-desc">Cinema, Studio, Games, OTT, Casting (95)</div>
         </div>
         <div class="grid-card" onclick="openFolder('folder5')">
             <div class="card-title">05. MARKET & DELIVERY</div>
-            <div class="card-desc">Buy & Sell, Wholesale, Shop Hub, Business, Delivery (106)</div>
+            <div class="card-desc">Buy & Sell, Wholesale, Shop Hub, Delivery (106)</div>
         </div>
         <div class="grid-card" onclick="openFolder('folder6')">
             <div class="card-title">06. EVENTS • ADS • JOBS</div>
@@ -177,34 +207,34 @@
 </div>
 
 <!-- SUB-FOLDER GRID VIEW -->
-<div class="container sub-view" id="subView">
+<div class="view-section" id="subView">
     <button class="back-btn" onclick="goBack()">⬅ Back to Dashboard</button>
     <div id="subViewContent"></div>
 </div>
 
-<!-- ADMIN CONTROL PANEL GRID VIEW -->
-<div class="container admin-panel-view" id="adminPanelView">
+<!-- ADMIN CONTROL PANEL VIEW -->
+<div class="view-section" id="adminPanelView">
     <button class="back-btn" onclick="goBack()">⬅ Exit Admin Panel</button>
-    <div class="section-title">🔐 Admin Control Panel (Salih & Saleem Hub)</div>
+    <div class="section-title">🔐 Admin Control Panel (Salih & Saleem)</div>
     
-    <div class="grid-container">
+    <div class="grid-container single-grid">
         <div class="grid-card">
             <div class="card-title">📁 File Management</div>
-            <div class="card-desc">Manage app files, assets, and database backups.</div>
+            <div class="card-desc">Manage app files, assets, and database storage.</div>
             <br>
-            <button class="admin-action-btn" onclick="alert('File Manager: Storage is active and secure.')">Open Files</button>
+            <button class="modal-btn" onclick="alert('File Management: Storage active.')">Open Files</button>
         </div>
         <div class="grid-card">
             <div class="card-title">🎬 Studio Controls</div>
             <div class="card-desc">Salih & Saleem Studio Hub settings and media controls.</div>
             <br>
-            <button class="admin-action-btn" onclick="alert('Studio Controls: Hub settings updated.')">Studio Settings</button>
+            <button class="modal-btn" onclick="alert('Studio Controls: Updated successfully.')">Studio Settings</button>
         </div>
         <div class="grid-card">
             <div class="card-title">🤖 AI System Controls</div>
             <div class="card-desc">Configure AI assistant parameters and smart prompts.</div>
             <br>
-            <button class="admin-action-btn" onclick="alert('AI System: Engine is fully online.')">Configure AI</button>
+            <button class="modal-btn" onclick="alert('AI System: Engine is fully online.')">Configure AI</button>
         </div>
     </div>
 </div>
@@ -213,28 +243,27 @@
 <div id="adminModal" class="modal">
     <div class="modal-content">
         <h3 style="color: #FFD700; margin-top: 0;">Admin Settings</h3>
-        <p style="font-size: 11px; color: #A0AEC0;">അഡ്മിൻ പാസ്‌വേർഡ് നൽകുക (Default: admin123)</p>
+        <p style="font-size: 11px; color: #FFD700;">അഡ്മിൻ പാസ്‌വേർഡ് നൽകുക (Default: admin123)</p>
         <input type="password" id="adminPass" placeholder="Enter Password">
         <br>
-        <button onclick="checkAdminPassword()">Login</button>
-        <button onclick="closeAdminModal()" style="background: #e53e3e; color: white;">Cancel</button>
+        <button class="modal-btn" onclick="checkAdminPassword()">Login</button>
+        <button class="close-btn" onclick="closeAdminModal()">Cancel</button>
     </div>
 </div>
 
 <script>
-    // ഫോൾഡറുകൾക്കുള്ളിലെ ഗ്രില്ലഡ് സബ്-വിഭാഗങ്ങൾ
     const subFolderData = {
         'folder1': `
             <div class="section-title">01. World of Knowledge</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Books & Scriptures (9 Items)</div><div class="card-desc">Quran, Bible, Hindu Scriptures, Buddhist, Jain, Sikh, Jewish, Other Religious & Books</div></div>
+                <div class="grid-card"><div class="card-title">Books & Scriptures (9 Items)</div><div class="card-desc">Quran, Bible, Hindu Scriptures, Buddhist, Jain, Sikh, Jewish & Other Books</div></div>
                 <div class="grid-card"><div class="card-title">Technology & Learning (9 Items)</div><div class="card-desc">Technology, AI, Software, Programming, Computers, Science, Engineering, Education</div></div>
             </div>
         `,
         'folder2': `
             <div class="section-title">02. Ultimate Construction Solution (+91 94472 76504)</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Hardware (31 Sub-categories)</div><div class="card-desc">Nails, Screws, Bolts, Washers, Hinges, Locks, Plumbing, Electrical, Tools, Safety, Misc</div></div>
+                <div class="grid-card"><div class="card-title">Hardware (31 Sub-categories)</div><div class="card-desc">Nails, Screws, Bolts, Washers, Hinges, Locks, Plumbing, Electrical, Tools, Safety</div></div>
                 <div class="grid-card"><div class="card-title">Marble & Granite</div><div class="card-desc">Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding, Outdoor Stone</div></div>
                 <div class="grid-card"><div class="card-title">Furniture & Materials</div><div class="card-desc">Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware, Roofing</div></div>
             </div>
@@ -284,17 +313,22 @@
         `
     };
 
+    function switchView(viewId) {
+        document.getElementById('mainView').classList.remove('active-view');
+        document.getElementById('subView').classList.remove('active-view');
+        document.getElementById('adminPanelView').classList.remove('active-view');
+        
+        document.getElementById(viewId).classList.add('active-view');
+        window.scrollTo(0, 0);
+    }
+
     function openFolder(folderId) {
-        document.getElementById('mainView').style.display = 'none';
-        document.getElementById('adminPanelView').style.display = 'none';
-        document.getElementById('subView').style.display = 'block';
         document.getElementById('subViewContent').innerHTML = subFolderData[folderId];
+        switchView('subView');
     }
 
     function goBack() {
-        document.getElementById('subView').style.display = 'none';
-        document.getElementById('adminPanelView').style.display = 'none';
-        document.getElementById('mainView').style.display = 'block';
+        switchView('mainView');
     }
 
     function openAdminModal() {
@@ -303,17 +337,16 @@
 
     function closeAdminModal() {
         document.getElementById('adminModal').style.display = 'none';
+        document.getElementById('adminPass').value = '';
     }
 
     function checkAdminPassword() {
         var pass = document.getElementById('adminPass').value;
         if(pass === 'admin123') {
             closeAdminModal();
-            document.getElementById('mainView').style.display = 'none';
-            document.getElementById('subView').style.display = 'none';
-            document.getElementById('adminPanelView').style.display = 'block';
+            switchView('adminPanelView');
         } else {
-            alert('Incorrect Password! Please use admin123');
+            alert('തെറ്റായ പാസ്‌വേർഡ്! (Default: admin123 നൽകുക)');
         }
     }
 </script>
