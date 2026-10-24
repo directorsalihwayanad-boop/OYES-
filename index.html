@@ -6,7 +6,7 @@
     <title>OYES — Salih & Saleem Studio Hub</title>
     <style>
         body {
-            background-color: #1a1500; /* റിച്ച് ഗോൾഡന് അനുയോജ്യമായ ഡാർക്ക് ബാക്ക്‌ഗ്രൗണ്ട് */
+            background-color: #1a1500;
             color: #2b2b2b;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,27 +14,29 @@
         }
         header {
             text-align: center;
-            padding: 15px 0 10px 0;
+            padding: 20px;
             border-bottom: 2px solid #FFD700;
             margin-bottom: 15px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 8px;
-            padding: 20px;
             color: #1a1500;
         }
         h1 {
             font-size: 18px;
             margin: 5px 0;
             font-weight: bold;
+            color: #1a1500;
         }
         .subtitle {
             font-size: 11px;
             font-weight: 600;
+            color: #333333;
         }
         .email {
             font-size: 11px;
             font-weight: bold;
             margin-top: 3px;
+            color: #1a1500;
         }
         .admin-bar {
             text-align: right;
@@ -56,7 +58,7 @@
             margin-bottom: 12px;
             font-size: 14px;
         }
-        /* Grid Layout for Boxes */
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -77,6 +79,7 @@
             flex-direction: column;
             justify-content: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-decoration: none;
         }
         .grid-card:active {
             opacity: 0.9;
@@ -218,19 +221,19 @@
     <div class="section-title">🔐 Admin Control Panel (Salih & Saleem)</div>
     
     <div class="grid-container single-grid">
-        <div class="grid-card">
+        <div class="grid-card" style="cursor:default;">
             <div class="card-title">📁 File Management</div>
             <div class="card-desc">Manage app files, assets, and database storage.</div>
             <br>
             <button class="modal-btn" onclick="alert('File Management: Storage active.')">Open Files</button>
         </div>
-        <div class="grid-card">
+        <div class="grid-card" style="cursor:default;">
             <div class="card-title">🎬 Studio Controls</div>
             <div class="card-desc">Salih & Saleem Studio Hub settings and media controls.</div>
             <br>
             <button class="modal-btn" onclick="alert('Studio Controls: Updated successfully.')">Studio Settings</button>
         </div>
-        <div class="grid-card">
+        <div class="grid-card" style="cursor:default;">
             <div class="card-title">🤖 AI System Controls</div>
             <div class="card-desc">Configure AI assistant parameters and smart prompts.</div>
             <br>
@@ -252,66 +255,129 @@
 </div>
 
 <script>
+    // കണക്റ്റ് ചെയ്ത യഥാർത്ഥ സബ്‌ഫോൾഡറുകളും ഗ്രന്ഥ ഡാറ്റയും
     const subFolderData = {
         'folder1': `
-            <div class="section-title">01. World of Knowledge</div>
+            <div class="section-title">01. World of Knowledge - സബ്‌വിഭാഗങ്ങൾ</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Books & Scriptures (9 Items)</div><div class="card-desc">Quran, Bible, Hindu Scriptures, Buddhist, Jain, Sikh, Jewish & Other Books</div></div>
-                <div class="grid-card"><div class="card-title">Technology & Learning (9 Items)</div><div class="card-desc">Technology, AI, Software, Programming, Computers, Science, Engineering, Education</div></div>
+                <div class="grid-card" onclick="openScripturesList()">
+                    <div class="card-title">Books & Scriptures (9 Items)</div>
+                    <div class="card-desc">ഖുർആൻ, ബൈബിൾ, ഹിന്ദു ഗ്രന്ഥങ്ങൾ, ബുദ്ധ, ജൈന, സിഖ്, യഹൂദ ഗ്രന്ഥങ്ങൾ</div>
+                </div>
+                <div class="grid-card" onclick="alert('Technology & Learning: AI, Software, Programming, Computers, Science, Engineering, Education')">
+                    <div class="card-title">Technology & Learning (9 Items)</div>
+                    <div class="card-desc">Technology, AI, Software, Programming, Computers, Science, Education</div>
+                </div>
             </div>
         `,
         'folder2': `
             <div class="section-title">02. Ultimate Construction Solution (+91 94472 76504)</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Hardware (31 Sub-categories)</div><div class="card-desc">Nails, Screws, Bolts, Washers, Hinges, Locks, Plumbing, Electrical, Tools, Safety</div></div>
-                <div class="grid-card"><div class="card-title">Marble & Granite</div><div class="card-desc">Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding, Outdoor Stone</div></div>
-                <div class="grid-card"><div class="card-title">Furniture & Materials</div><div class="card-desc">Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware, Roofing</div></div>
+                <div class="grid-card" onclick="alert('Hardware (31 Sub-categories): Nails, Screws, Bolts, Washers, Hinges, Locks, Plumbing, Electrical, Tools, Safety')">
+                    <div class="card-title">Hardware (31 Sub-categories)</div>
+                    <div class="card-desc">Nails, Screws, Bolts, Plumbing, Electrical, Tools, Safety & more</div>
+                </div>
+                <div class="grid-card" onclick="alert('Marble & Granite: Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding')">
+                    <div class="card-title">Marble & Granite</div>
+                    <div class="card-desc">Marble, Granite, Tiles, Slabs, Flooring, Wall Cladding</div>
+                </div>
+                <div class="grid-card" onclick="alert('Furniture & Materials: Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware')">
+                    <div class="card-title">Furniture & Materials</div>
+                    <div class="card-desc">Cement, Steel, Bricks, Wood, Paint, Glass, Sanitary Ware</div>
+                </div>
             </div>
         `,
         'folder3': `
             <div class="section-title">03. OYES Public Care</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Government Services</div><div class="card-desc">Official departments, certificates & online portals</div></div>
-                <div class="grid-card"><div class="card-title">Bus Travel</div><div class="card-desc">KSRTC & Private bus timings and bookings</div></div>
-                <div class="grid-card"><div class="card-title">Train Travel</div><div class="card-desc">IRCTC schedules and live train status</div></div>
-                <div class="grid-card"><div class="card-title">Private Services</div><div class="card-desc">Utilities, courier services & payments</div></div>
-                <div class="grid-card"><div class="card-title">Emergency Support (112)</div><div class="card-desc">Police, Fire Force, Ambulance & Disaster support</div></div>
-                <div class="grid-card"><div class="card-title">AI Help & Expert Support</div><div class="card-desc">Instant AI assistance and expert guidance</div></div>
+                <div class="grid-card" onclick="alert('Government Services & Offices')"><div class="card-title">Government Services</div><div class="card-desc">Official departments & portals</div></div>
+                <div class="grid-card" onclick="alert('Bus Travel: KSRTC & Private')"><div class="card-title">Bus Travel</div><div class="card-desc">KSRTC & Private bus timings</div></div>
+                <div class="grid-card" onclick="alert('Train Travel: IRCTC & Schedules')"><div class="card-title">Train Travel</div><div class="card-desc">IRCTC schedules & status</div></div>
+                <div class="grid-card" onclick="alert('Private Services & Utilities')"><div class="card-title">Private Services</div><div class="card-desc">Utilities & courier services</div></div>
+                <div class="grid-card" onclick="alert('Emergency Support: 112 - Police, Fire, Ambulance')"><div class="card-title">Emergency (112)</div><div class="card-desc">Police, Fire Force, Ambulance</div></div>
+                <div class="grid-card" onclick="alert('AI Help & Expert Support')"><div class="card-title">AI Help</div><div class="card-desc">Instant AI assistance</div></div>
             </div>
         `,
         'folder4': `
             <div class="section-title">04. OYES Entertainment (95 Sub-segments)</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Cinema</div><div class="card-desc">Trailers, reviews, box office & updates</div></div>
-                <div class="grid-card"><div class="card-title">Cinema Studio Hub</div><div class="card-desc">Salih & Saleem Studio production & editing controls</div></div>
-                <div class="grid-card"><div class="card-title">Games</div><div class="card-desc">Online games & gaming community updates</div></div>
-                <div class="grid-card"><div class="card-title">Amusement & Tourism</div><div class="card-desc">Parks, resorts & travel guides</div></div>
-                <div class="grid-card"><div class="card-title">OTT & Originals</div><div class="card-desc">Web series, short films & OYES originals</div></div>
-                <div class="grid-card"><div class="card-title">Casting & Careers</div><div class="card-desc">Auditions, casting calls & media jobs</div></div>
+                <div class="grid-card" onclick="alert('Cinema: Trailers, Reviews, Updates')"><div class="card-title">Cinema</div><div class="card-desc">Trailers, reviews & box office</div></div>
+                <div class="grid-card" onclick="alert('Cinema Studio Hub: Salih & Saleem Studio')"><div class="card-title">Cinema Studio Hub</div><div class="card-desc">Salih & Saleem production</div></div>
+                <div class="grid-card" onclick="alert('Games & Online Play')"><div class="card-title">Games</div><div class="card-desc">Online games & community</div></div>
+                <div class="grid-card" onclick="alert('Amusement & Tourism Parks')"><div class="card-title">Amusement & Tourism</div><div class="card-desc">Parks, resorts & travel guides</div></div>
+                <div class="grid-card" onclick="alert('OTT & Originals')"><div class="card-title">OTT & Originals</div><div class="card-desc">Web series & short films</div></div>
+                <div class="grid-card" onclick="alert('Casting & Careers: Auditions')"><div class="card-title">Casting & Careers</div><div class="card-desc">Auditions & media jobs</div></div>
             </div>
         `,
         'folder5': `
             <div class="section-title">05. OYES Market and Delivery (106 Sub-segments)</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Buy & Sell</div><div class="card-desc">Classifieds for new and used goods</div></div>
-                <div class="grid-card"><div class="card-title">Wholesale & Retail</div><div class="card-desc">Market prices and store listings</div></div>
-                <div class="grid-card"><div class="card-title">Shop Hub</div><div class="card-desc">Unified shopping market center</div></div>
-                <div class="grid-card"><div class="card-title">Business & Suppliers</div><div class="card-desc">B2B connections and supplier networks</div></div>
-                <div class="grid-card"><div class="card-title">Delivery Services</div><div class="card-desc">Fast and secure local delivery systems</div></div>
-                <div class="grid-card"><div class="card-title">Orders & Payments</div><div class="card-desc">Secure online checkout and order tracking</div></div>
-                <div class="grid-card"><div class="card-title">Advertisements</div><div class="card-desc">Promotional banners and store ads</div></div>
-                <div class="grid-card"><div class="card-title">Seller Hub</div><div class="card-desc">Merchant dashboard for stock & pricing</div></div>
+                <div class="grid-card" onclick="alert('Buy & Sell')"><div class="card-title">Buy & Sell</div><div class="card-desc">Classifieds for goods</div></div>
+                <div class="grid-card" onclick="alert('Wholesale & Retail')"><div class="card-title">Wholesale & Retail</div><div class="card-desc">Market prices & stores</div></div>
+                <div class="grid-card" onclick="alert('Shop Hub')"><div class="card-title">Shop Hub</div><div class="card-desc">Unified shopping center</div></div>
+                <div class="grid-card" onclick="alert('Business & Suppliers')"><div class="card-title">Business & Suppliers</div><div class="card-desc">B2B connections</div></div>
+                <div class="grid-card" onclick="alert('Delivery Services')"><div class="card-title">Delivery Services</div><div class="card-desc">Local delivery systems</div></div>
+                <div class="grid-card" onclick="alert('Orders & Payments')"><div class="card-title">Orders & Payments</div><div class="card-desc">Secure online checkout</div></div>
+                <div class="grid-card" onclick="alert('Advertisements')"><div class="card-title">Advertisements</div><div class="card-desc">Promotional banners</div></div>
+                <div class="grid-card" onclick="alert('Seller Hub')"><div class="card-title">Seller Hub</div><div class="card-desc">Merchant dashboard</div></div>
             </div>
         `,
         'folder6': `
             <div class="section-title">06. OYES Events • Advertisements • Jobs</div>
             <div class="grid-container">
-                <div class="grid-card"><div class="card-title">Events & Management</div><div class="card-desc">Weddings, shows, openings & event coordination</div></div>
-                <div class="grid-card"><div class="card-title">Advertisements & Promotions</div><div class="card-desc">Digital promotions and brand marketing</div></div>
-                <div class="grid-card"><div class="card-title">Jobs & Workers</div><div class="card-desc">I Need a Job / I Need Workers matching portal</div></div>
+                <div class="grid-card" onclick="alert('Events & Management: Weddings, Shows')"><div class="card-title">Events & Management</div><div class="card-desc">Weddings & shows coordination</div></div>
+                <div class="grid-card" onclick="alert('Advertisements & Promotions')"><div class="card-title">Advertisements</div><div class="card-desc">Digital promotions & marketing</div></div>
+                <div class="grid-card" onclick="alert('Jobs & Workers: I Need a Job / Workers')"><div class="card-title">Jobs & Workers</div><div class="card-desc">Job matching portal</div></div>
             </div>
         `
     };
+
+    // ഖുർആൻ, ബൈബിൾ തുടങ്ങിയ ഗ്രന്ഥങ്ങളുടെ ലിസ്റ്റും ഡയറക്ട് ലിങ്കുകളും
+    function openScripturesList() {
+        document.getElementById('subViewContent').innerHTML = `
+            <div class="section-title">Books & Scriptures (9 ഗ്രന്ഥങ്ങൾ & പുസ്തകങ്ങൾ)</div>
+            <div class="grid-container">
+                <a class="grid-card" href="https://quran.com" target="_blank">
+                    <div class="card-title">1. ഖുർആൻ (Quran)</div>
+                    <div class="card-desc">Open Online Quran Reader ↗</div>
+                </a>
+                <a class="grid-card" href="https://www.bible.com" target="_blank">
+                    <div class="card-title">2. ബൈബിൾ (Bible)</div>
+                    <div class="card-desc">Open Online Bible Reader ↗</div>
+                </a>
+                <a class="grid-card" href="https://archive.org" target="_blank">
+                    <div class="card-title">3. ഹിന്ദു ഗ്രന്ഥങ്ങൾ</div>
+                    <div class="card-desc">Vedas, Upanishads & Epics ↗</div>
+                </a>
+                <a class="grid-card" href="https://archive.org" target="_blank">
+                    <div class="card-title">4. ബുദ്ധ ഗ്രന്ഥങ്ങൾ</div>
+                    <div class="card-desc">Buddhist Scriptures ↗</div>
+                </a>
+                <a class="grid-card" href="https://archive.org" target="_blank">
+                    <div class="card-title">5. ജൈന ഗ്രന്ഥങ്ങൾ</div>
+                    <div class="card-desc">Jain Texts & Agamas ↗</div>
+                </a>
+                <a class="grid-card" href="https://sriganth Sahib" onclick="alert('Sikh Scriptures: Guru Granth Sahib')" href="javascript:void(0)">
+                    <div class="card-title">6. സിഖ് ഗ്രന്ഥങ്ങൾ</div>
+                    <div class="card-desc">Guru Granth Sahib</div>
+                </a>
+                <a class="grid-card" onclick="alert('Jewish Scriptures: Torah & Hebrew Bible')" href="javascript:void(0)">
+                    <div class="card-title">7. യഹൂദ ഗ്രന്ഥങ്ങൾ</div>
+                    <div class="card-desc">Torah Texts</div>
+                </a>
+                <a class="grid-card" onclick="alert('Other Religious Texts')" href="javascript:void(0)">
+                    <div class="card-title">8. മറ്റ് മതഗ്രന്ഥങ്ങൾ</div>
+                    <div class="card-desc">Other Faith Scriptures</div>
+                </a>
+                <a class="grid-card" onclick="alert('Other General Books & Literature')" href="javascript:void(0)">
+                    <div class="card-title">9. മറ്റ് പുസ്തകങ്ങൾ</div>
+                    <div class="card-desc">General Library Books</div>
+                </a>
+            </div>
+            <br>
+            <button class="back-btn" onclick="openFolder('folder1')">⬅ Back to Knowledge Menu</button>
+        `;
+    }
 
     function switchView(viewId) {
         document.getElementById('mainView').classList.remove('active-view');
