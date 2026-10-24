@@ -3,235 +3,257 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OYES Global Hub</title>
-  <meta name="description" content="OYES Global Hub - Opportunities, Jobs, Education & Support" />
+
+  <title>OYES Global Hub | Youth Empowerment & Opportunities</title>
+  <meta name="description" content="OYES Global Hub connects youth to opportunities, skill development, mentorship, and community support." />
+  <meta name="keywords" content="OYES, Youth, Jobs, Training, Skill Development, Community, Kerala, Wayanad" />
+  <meta name="author" content="OYES Global Hub" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="OYES Global Hub" />
+  <meta property="og:description" content="Youth empowerment, opportunities, training and support in one platform." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://directorsalihwayanad-boop.github.io/OYES-/" />
+  <meta property="og:image" content="https://gnxmiqmfwrwnivlkvspy.supabase.co/storage/v1/object/public/app-assets/OYES_Official_Logo.png" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#0b1020" />
+
   <style>
     :root{
       --bg:#0b1020;
-      --card:#121a33;
-      --soft:#1b264a;
-      --text:#eaf0ff;
-      --muted:#b8c3e0;
+      --bg-soft:#0f1730;
+      --card:#131d3b;
+      --soft:#1c2953;
+      --text:#edf2ff;
+      --muted:#b7c4e5;
       --brand:#4f7cff;
-      --brand2:#7c4dff;
+      --brand2:#7b4dff;
       --ok:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --radius:18px;
+      --line:rgba(255,255,255,.10);
+      --radius:16px;
+      --shadow:0 12px 30px rgba(0,0,0,.28);
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#0c1530 40%,#0b1020);color:var(--text)}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:auto;padding:20px}
-    .nav{
-      position:sticky;top:0;z-index:20;
-      backdrop-filter: blur(10px);
-      background:rgba(11,16,32,.7);
-      border-bottom:1px solid rgba(255,255,255,.08)
+    html,body{
+      margin:0;padding:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),var(--bg-soft) 45%,var(--bg));
+      color:var(--text);
+      scroll-behavior:smooth;
     }
-    .nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px}
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    .container{max-width:1120px;margin:auto;padding:0 18px}
+
+    /* NAVBAR */
+    .nav{
+      position:sticky; top:0; z-index:99;
+      background:rgba(11,16,32,.75);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-wrap{
+      min-height:70px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:42px;height:42px;border-radius:10px;object-fit:cover;background:#fff}
-    .brand h1{font-size:18px;margin:0}
-    .menu{display:flex;gap:14px;flex-wrap:wrap}
-    .menu a{padding:8px 12px;border-radius:10px;color:var(--muted)}
+    .brand-logo{
+      width:42px;height:42px;border-radius:11px;object-fit:cover;background:#fff;
+      border:1px solid rgba(255,255,255,.25);
+    }
+    .brand-name{margin:0;font-size:18px;letter-spacing:.2px}
+    .menu{display:flex;gap:8px;flex-wrap:wrap}
+    .menu a{
+      color:var(--muted);
+      padding:8px 12px;border-radius:10px;font-size:14px;
+      transition:.25s ease;
+    }
     .menu a:hover{background:var(--soft);color:var(--text)}
 
+    /* HERO */
     .hero{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch;
-      margin-top:18px
+      padding:34px 0 14px;
+      display:grid;grid-template-columns:1.25fr .75fr;gap:14px;
     }
     .card{
-      background:linear-gradient(180deg,var(--card),#101831);
-      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,var(--card),#101a36);
+      border:1px solid var(--line);
       border-radius:var(--radius);
+      box-shadow:var(--shadow);
       padding:22px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
     }
-    .hero h2{font-size:34px;line-height:1.15;margin:0 0 10px}
-    .hero p{color:var(--muted);margin:0 0 16px}
-    .btns{display:flex;gap:10px;flex-wrap:wrap}
+    .hero h1{
+      margin:0 0 10px;
+      font-size:36px;line-height:1.15;
+    }
+    .hero p{
+      margin:0;color:var(--muted);font-size:15.5px;line-height:1.7;
+    }
+    .hero-actions{
+      margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;
+    }
     .btn{
-      padding:11px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:600
+      border:none;cursor:pointer;border-radius:12px;
+      padding:11px 16px;font-weight:600;font-size:14px;
+      transition:transform .15s ease, opacity .2s ease;
     }
-    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--text)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(90deg,var(--brand),var(--brand2));
+    }
+    .btn-ghost{
+      color:var(--text);
+      background:transparent;
+      border:1px solid rgba(255,255,255,.25);
+    }
 
-    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .stat{background:var(--soft);border-radius:14px;padding:14px}
+    .stats{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+    }
+    .stat{
+      background:var(--soft);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;padding:13px;
+    }
     .stat h3{margin:0;font-size:20px}
     .stat p{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-    .section{margin-top:20px}
-    .section h3{margin:0 0 12px;font-size:22px}
+    /* SECTION */
+    section.block{padding:10px 0}
+    .section-title{
+      margin:16px 0 12px;font-size:24px;
+    }
     .grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
     }
     .item{
-      background:linear-gradient(180deg,#121a33,#10162c);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;
-      padding:14px
+      background:linear-gradient(180deg,#121c39,#0f1833);
+      border:1px solid var(--line);
+      border-radius:14px;padding:15px;
+      transition:.25s ease;
     }
-    .item h4{margin:0 0 6px}
-    .item p{margin:0;color:var(--muted);font-size:14px}
-    .tag{display:inline-block;margin-top:10px;padding:5px 10px;border-radius:999px;background:#1f2d5f;color:#c9d6ff;font-size:12px}
+    .item:hover{
+      transform:translateY(-2px);
+      border-color:rgba(123,77,255,.45);
+    }
+    .item h3{margin:0 0 8px;font-size:18px}
+    .item p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+    .tag{
+      display:inline-block;margin-top:10px;
+      font-size:12px;padding:5px 10px;border-radius:999px;
+      background:#213267;color:#cfdaff;
+    }
 
-    .footer{
-      margin:28px 0 10px;
+    /* CONTACT */
+    .contact-box p{margin:8px 0;color:var(--muted)}
+    .contact-box strong{color:var(--text)}
+
+    /* FOOTER */
+    footer{
+      margin:26px 0 16px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
       color:var(--muted);
       text-align:center;
-      font-size:13px
-    }
-
-    .notice{
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:10px;
       font-size:13px;
-      background:rgba(34,197,94,.12);
-      border:1px solid rgba(34,197,94,.35);
-      color:#bff3cd;
-      display:none;
     }
 
-    @media (max-width:900px){
+    /* Floating WhatsApp */
+    .wa{
+      position:fixed;right:16px;bottom:18px;z-index:98;
+      width:54px;height:54px;border-radius:50%;
+      display:grid;place-items:center;
+      background:#25D366;color:#062d15;font-size:26px;font-weight:800;
+      box-shadow:0 10px 25px rgba(0,0,0,.35);
+      border:2px solid rgba(255,255,255,.5);
+    }
+
+    /* Reveal animation */
+    .reveal{opacity:0;transform:translateY(10px);transition:.5s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    /* Responsive */
+    @media (max-width:930px){
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr 1fr}
-      .hero h2{font-size:28px}
+      .hero h1{font-size:30px}
     }
-    @media (max-width:600px){
-      .grid{grid-template-columns:1fr}
+    @media (max-width:640px){
       .menu{display:none}
+      .grid{grid-template-columns:1fr}
+      .hero{padding-top:24px}
+      .hero h1{font-size:27px}
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-wrap container">
-      <div class="brand">
-        <img id="logo" src="https://gnxmiqmfwrwnivlkvspy.supabase.co/storage/v1/object/public/app-assets/OYES_Official_Logo.png" alt="OYES Logo" />
-        <h1>OYES Global Hub</h1>
-      </div>
-      <div class="menu">
+
+  <header class="nav">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="OYES Home">
+        <img
+          id="logo"
+          class="brand-logo"
+          src="https://gnxmiqmfwrwnivlkvspy.supabase.co/storage/v1/object/public/app-assets/OYES_Official_Logo.png"
+          alt="OYES Logo"
+        />
+        <h2 class="brand-name">OYES Global Hub</h2>
+      </a>
+
+      <nav class="menu" aria-label="Main Navigation">
         <a href="#home">Home</a>
         <a href="#services">Services</a>
         <a href="#programs">Programs</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
-      </div>
+      </nav>
     </div>
-  </nav>
+  </header>
 
   <main class="container" id="home">
+
     <section class="hero">
-      <div class="card">
-        <h2>Welcome to OYES Global Hub</h2>
+      <article class="card reveal">
+        <h1>Empowering Youth Through Opportunities & Action</h1>
         <p>
-          One platform for youth empowerment, opportunities, training, support services, and digital growth.
+          OYES Global Hub is a unified platform for guidance, upskilling, mentorship,
+          and real community impact. We bridge people with the right support at the right time.
         </p>
-        <div class="btns">
-          <button class="btn btn-primary">Get Started</button>
-          <button class="btn btn-ghost">Learn More</button>
+        <div class="hero-actions">
+          <a href="#services"><button class="btn btn-primary">Explore Services</button></a>
+          <a href="#contact"><button class="btn btn-ghost">Get in Touch</button></a>
         </div>
-        <div id="logoNotice" class="notice">Logo loaded from Supabase app_settings ✅</div>
-      </div>
-      <div class="card">
+      </article>
+
+      <aside class="card reveal">
         <div class="stats">
-          <div class="stat"><h3>10K+</h3><p>Community Members</p></div>
-          <div class="stat"><h3>250+</h3><p>Programs Conducted</p></div>
-          <div class="stat"><h3>120+</h3><p>Partner Networks</p></div>
-          <div class="stat"><h3>24/7</h3><p>Digital Support</p></div>
+          <div class="stat"><h3>10K+</h3><p>Active Community</p></div>
+          <div class="stat"><h3>250+</h3><p>Programs Completed</p></div>
+          <div class="stat"><h3>120+</h3><p>Partner Network</p></div>
+          <div class="stat"><h3>24/7</h3><p>Digital Access</p></div>
         </div>
-      </div>
+      </aside>
     </section>
 
-    <section class="section" id="services">
-      <h3>Our Services</h3>
+    <section class="block" id="services">
+      <h2 class="section-title">Our Services</h2>
       <div class="grid">
-        <article class="item">
-          <h4>Career Guidance</h4>
-          <p>Mentorship, placement support, and skill roadmap for students and job seekers.</p>
+        <article class="item reveal">
+          <h3>Career Guidance</h3>
+          <p>Career planning, placement support, interview preparation and mentoring for youth.</p>
           <span class="tag">Career</span>
         </article>
-        <article class="item">
-          <h4>Training & Workshops</h4>
-          <p>Practical programs in digital tools, communication, leadership, and entrepreneurship.</p>
+        <article class="item reveal">
+          <h3>Skill Development</h3>
+          <p>Workshops and practical training in digital tools, communication and leadership.</p>
           <span class="tag">Training</span>
         </article>
-        <article class="item">
-          <h4>Community Support</h4>
-          <p>Access to trusted services, opportunities, and resource connections near you.</p>
-          <span class="tag">Support</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="programs">
-      <h3>Featured Programs</h3>
-      <div class="grid">
-        <article class="item">
-          <h4>Youth Skill Mission</h4>
-          <p>Hands-on upskilling for high-demand jobs with certification pathways.</p>
-        </article>
-        <article class="item">
-          <h4>Women Forward</h4>
-          <p>Focused support for women-led growth initiatives and enterprise opportunities.</p>
-        </article>
-        <article class="item">
-          <h4>Startup Bridge</h4>
-          <p>Idea validation, mentoring, and ecosystem connections for new founders.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <h3>Contact</h3>
-      <div class="item">
-        <p>Email: support@oyesglobalhub.org</p>
-        <p>Phone: +91 00000 00000</p>
-        <p>Location: Wayanad, Kerala</p>
-      </div>
-    </section>
-
-    <p class="footer">© <span id="year"></span> OYES Global Hub. All rights reserved.</p>
-  </main>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Optional: load logo_url from Supabase app_settings table (public read needed)
-    // If not configured, fallback logo remains visible.
-    (async function loadLogoFromDB(){
-      const SUPABASE_URL = "https://gnxmiqmfwrwnivlkvspy.supabase.co";
-      const SUPABASE_ANON_KEY = "REPLACE_WITH_YOUR_SUPABASE_ANON_KEY"; // <- replace this
-      const logoEl = document.getElementById("logo");
-      const notice = document.getElementById("logoNotice");
-
-      if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.includes("REPLACE_WITH")) return;
-
-      try {
-        const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/app_settings?select=logo_url&id=eq.1&limit=1`,
-          {
-            headers: {
-              "apikey": SUPABASE_ANON_KEY,
-              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-            }
-          }
-        );
-        if (!res.ok) throw new Error("Failed to fetch app_settings");
-        const data = await res.json();
-        const logo = data?.[0]?.logo_url;
-        if (logo) {
-          logoEl.src = logo;
-          notice.style.display = "block";
-        }
-      } catch (e) {
-        console.log("Logo DB fetch skipped:", e.message);
-      }
-    })();
-  </script>
-</body>
-</html>
+        <article class="item reveal">
+          <h3>Community Support</h3>
+          <p>Trusted local support links and opportunities for social and economic growth.</p>
+          <span class="tag">Support</span
