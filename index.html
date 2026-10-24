@@ -256,4 +256,104 @@
         <article class="item reveal">
           <h3>Community Support</h3>
           <p>Trusted local support links and opportunities for social and economic growth.</p>
-          <span class="tag">Support</span
+          <span class="tag">Support</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="programs">
+      <h2 class="section-title">Featured Programs</h2>
+      <div class="grid">
+        <article class="item reveal">
+          <h3>Youth Skill Mission</h3>
+          <p>Certification-focused programs aligned with modern job market needs.</p>
+        </article>
+        <article class="item reveal">
+          <h3>Women Forward</h3>
+          <p>Support and growth pathways for women-led learning and enterprise development.</p>
+        </article>
+        <article class="item reveal">
+          <h3>Startup Bridge</h3>
+          <p>From idea to execution—guidance, mentorship and ecosystem connect.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="about">
+      <h2 class="section-title">About OYES</h2>
+      <article class="item reveal">
+        <p>
+          OYES Global Hub is focused on inclusive empowerment. We connect youth, learners,
+          and communities with opportunity channels that are practical, accessible, and result-oriented.
+        </p>
+      </article>
+    </section>
+
+    <section class="block" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <article class="item contact-box reveal">
+        <p><strong>Email:</strong> support@oyesglobalhub.org</p>
+        <p><strong>Phone:</strong> +91 00000 00000</p>
+        <p><strong>Location:</strong> Wayanad, Kerala, India</p>
+      </article>
+    </section>
+
+    <footer>
+      © <span id="year"></span> OYES Global Hub. All rights reserved.
+    </footer>
+  </main>
+
+  <!-- WhatsApp quick button -->
+  <a
+    class="wa"
+    href="https://wa.me/910000000000"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+    title="WhatsApp"
+  >✆</a>
+
+  <script>
+    // Auto year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Smooth reveal animation
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    els.forEach(el=>io.observe(el));
+
+    // Optional dynamic logo loader from Supabase app_settings
+    // Keep fallback src if DB/API not configured
+    (async function loadDynamicLogo(){
+      const SUPABASE_URL = "https://gnxmiqmfwrwnivlkvspy.supabase.co";
+      const SUPABASE_ANON_KEY = "REPLACE_WITH_YOUR_SUPABASE_ANON_KEY"; // optional
+      if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.includes("REPLACE_WITH")) return;
+
+      try{
+        const r = await fetch(
+          `${SUPABASE_URL}/rest/v1/app_settings?select=logo_url&id=eq.1&limit=1`,
+          {
+            headers:{
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          }
+        );
+        if(!r.ok) return;
+        const data = await r.json();
+        const logo = data?.[0]?.logo_url;
+        if(logo) document.getElementById("logo").src = logo;
+      }catch(e){
+        console.log("Dynamic logo skipped:", e.message);
+      }
+    })();
+  </script>
+</body>
+</html>
