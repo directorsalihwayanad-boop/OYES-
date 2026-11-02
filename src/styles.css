@@ -1,0 +1,24 @@
+:root { --navy:#0a1f44; --navy2:#12306a; --gold:#d4af37; --text:#f3ead0; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: system-ui, 'Noto Sans Malayalam', sans-serif; background: var(--navy); color: var(--text); }
+a { color: var(--gold); }
+.app { min-height:100vh; display:flex; flex-direction:column; max-width:960px; margin:0 auto; }
+.top { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:2px solid var(--gold); }
+.brand { display:flex; gap:10px; align-items:center; text-decoration:none; color:var(--gold); }
+.brand b { display:block; font-size:1.4rem; letter-spacing:.2em; }
+.brand small { color: var(--text); }
+.logo { font-size:2rem; }
+main { flex:1; padding:16px; display:flex; flex-direction:column; gap:14px; }
+footer { padding:12px; text-align:center; border-top:1px solid var(--gold); font-size:.85rem; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.card { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; min-height:110px; padding:12px; text-align:center; text-decoration:none; color:var(--text); background:var(--navy2); border:1.5px solid var(--gold); border-radius:16px; }
+.card:hover { box-shadow:0 0 12px var(--gold); }
+.ico { font-size:2rem; }
+.row { display:flex; flex-wrap:wrap; gap:10px; }
+button, .btn { background:var(--gold); color:var(--navy); border:0; padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; align-self:flex-start; }
+button.link { background:none; color:var(--gold); text-decoration:underline; padding:0; }
+button:disabled { opacity:.6; }
+select, input { padding:10px; border-radius:10px; border:1px solid var(--gold); background:#06142e; color:var(--text); }
+.contact { display:flex; flex-direction:column; gap:4px; padding:12px; border:1px solid var(--gold); border-radius:12px; background:var(--navy2); }
+.form { display:flex; flex-direction:column; gap:10px; max-width:340px; }
+.muted { opacity:.8; } .warn { color:#ffb4a8; } .h { margin:4px 0; }

@@ -1,0 +1,9 @@
+{
+  "name": "OYES — Salih & Saleem Studio Hub",
+  "short_name": "OYES",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a1f44",
+  "theme_color": "#0a1f44",
+  "icons": []
+}
